@@ -1,0 +1,21 @@
+{
+  "name": "Zila’s World",
+  "short_name": "Zila & Febri",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#09070d",
+  "theme_color": "#2b1934",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

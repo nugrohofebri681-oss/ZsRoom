@@ -1,0 +1,218 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#ffd9df"><title>A Random Note For You</title>
+<style>
+:root{--ink:#4c3541;--sky1:#ffe9c7;--sky2:#f8b8c5;--glow:rgba(255,205,145,.75)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:Georgia,"Times New Roman",serif;background:linear-gradient(var(--sky1),var(--sky2));transition:background 1.2s,color 1.2s;min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;background:radial-gradient(circle at 78% 12%,var(--glow) 0 5%,transparent 18%),radial-gradient(circle at 20% 20%,rgba(255,255,255,.45),transparent 25%);transition:1.2s}
+body.sunset{--sky1:#e9a58f;--sky2:#8c6385;--glow:rgba(255,161,109,.55)}body.night{--sky1:#171a32;--sky2:#382746;--glow:rgba(231,184,207,.12);--ink:#ddd0d9}
+.stars{position:fixed;inset:0;pointer-events:none;opacity:0;transition:opacity 1.5s;z-index:-1;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:47px 47px}body.night .stars{opacity:.42}
+.progress{position:fixed;top:0;left:0;height:4px;width:0;background:#fff;box-shadow:0 0 12px #fff;z-index:30}
+.cover{min-height:100svh;display:grid;place-items:center;padding:28px 18px;text-align:center}.envelope{width:min(560px,94vw);background:rgba(255,249,242,.94);border:1px solid rgba(91,50,68,.15);box-shadow:0 30px 90px rgba(64,34,50,.22);padding:46px 28px 36px;position:relative}
+.envelope:before,.envelope:after{content:"";position:absolute;width:42px;height:42px;border:1px solid #dba0ad;opacity:.5}.envelope:before{left:14px;top:14px;border-right:0;border-bottom:0}.envelope:after{right:14px;bottom:14px;border-left:0;border-top:0}
+.seal{width:70px;height:70px;border-radius:50%;display:grid;place-items:center;margin:-82px auto 22px;background:#b94d6b;color:white;border:5px double #f7c3cf;box-shadow:0 7px 20px #a64a6460;font-size:28px}.kicker{font:600 12px/1.4 ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#a54f68}
+h1{font-size:clamp(32px,8vw,62px);line-height:1;margin:16px 0 12px;font-weight:500}.cover p{font-style:italic;opacity:.75}button{border:0;background:#66374a;color:#fff;padding:13px 22px;font:700 13px ui-monospace,monospace;cursor:pointer;box-shadow:5px 5px 0 #d990a4}
+main{width:min(760px,92vw);margin:auto;padding-bottom:15vh}.chapter{background:rgba(255,249,242,.95);margin:0 0 24vh;padding:clamp(30px,7vw,62px);border:1px solid rgba(99,57,73,.12);box-shadow:0 24px 70px rgba(46,26,37,.15);position:relative;transition:background 1s,color 1s,box-shadow 1s}.chapter:before{content:"♡";position:absolute;top:18px;right:22px;opacity:.22;font-size:25px}.chapter p{font-size:clamp(17px,2.5vw,20px);line-height:1.85;margin:0 0 1.15em}.chapter strong{color:#9d405e}.chapter.sunset{background:rgba(255,243,235,.95)}.chapter.night{background:rgba(31,27,45,.95);color:#eee4ea;border-color:#74566d;box-shadow:0 25px 80px #0e0c1b80}.chapter.night strong{color:#f1a5bd}.chapter:last-child{margin-bottom:8vh}footer{text-align:center;padding:0 20px 12vh;color:#f6eaf0;font-style:italic}
+@media(max-width:560px){.chapter{margin-bottom:17vh;padding:30px 24px}}
+
+/* v2 — moving day→sunset→night atmosphere */
+body{
+  background:
+    linear-gradient(155deg,var(--sky1) 0%,var(--sky2) 58%,#d68fa7 100%);
+  background-attachment:fixed;
+}
+body:before{
+  animation:skyDrift 18s ease-in-out infinite alternate;
+  will-change:transform,opacity;
+}
+.ambient{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:-1}
+.orb{position:absolute;border-radius:50%;filter:blur(2px);opacity:.28;
+  background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.9),rgba(255,189,207,.4) 45%,transparent 72%);
+  animation:floatOrb 18s ease-in-out infinite alternate;transition:opacity 1.2s,filter 1.2s}
+.o1{width:32vw;height:32vw;min-width:260px;min-height:260px;left:-8vw;top:12vh}
+.o2{width:24vw;height:24vw;min-width:210px;min-height:210px;right:-4vw;top:38vh;animation-duration:24s;animation-delay:-7s}
+.o3{width:18vw;height:18vw;min-width:160px;min-height:160px;left:45vw;bottom:-7vh;animation-duration:20s;animation-delay:-11s}
+.cloud{position:absolute;width:260px;height:70px;border-radius:50%;
+ background:radial-gradient(ellipse at center,rgba(255,255,255,.26),transparent 70%);
+ filter:blur(10px);opacity:.55;animation:cloudMove 38s linear infinite;transition:opacity 1s}
+.c1{top:18vh;left:-300px}.c2{top:63vh;left:-360px;animation-duration:52s;animation-delay:-18s;transform:scale(.75)}
+.petal{position:absolute;top:-10vh;color:rgba(255,255,255,.5);font-size:18px;
+ animation:fall 15s linear infinite;opacity:.65;transition:opacity 1s}
+.p1{left:18%;animation-delay:-2s}.p2{left:64%;animation-delay:-8s;font-size:13px}.p3{left:84%;animation-delay:-12s}
+body.sunset .orb{opacity:.18;filter:blur(7px)}
+body.night .orb{opacity:.08;filter:blur(12px)}
+body.night .cloud{opacity:.12} body.night .petal{opacity:.25}
+.chapter{
+  background:rgba(255,249,242,.78)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(125%);
+  backdrop-filter:blur(18px) saturate(125%);
+  border:1px solid rgba(255,255,255,.48);
+  box-shadow:0 28px 80px rgba(50,27,40,.18),inset 0 1px rgba(255,255,255,.65);
+}
+.chapter.sunset{background:rgba(255,242,235,.74)!important}
+.chapter.night{
+  background:rgba(28,24,43,.76)!important;
+  color:#fff7fb;
+  border-color:rgba(236,187,213,.22);
+  text-shadow:0 1px 1px rgba(0,0,0,.28);
+}
+.envelope{
+  background:rgba(255,249,242,.79)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(125%);
+  backdrop-filter:blur(18px) saturate(125%);
+  border-color:rgba(255,255,255,.55)!important;
+}
+.chapter p{letter-spacing:.004em}
+@keyframes skyDrift{from{transform:scale(1.02) translate3d(-1%,0,0)}to{transform:scale(1.08) translate3d(2%,-1%,0)}}
+@keyframes floatOrb{0%{transform:translate3d(-2vw,-2vh,0) scale(.92)}100%{transform:translate3d(6vw,5vh,0) scale(1.12)}}
+@keyframes cloudMove{from{transform:translateX(0)}to{transform:translateX(calc(100vw + 700px))}}
+@keyframes fall{0%{transform:translate3d(0,-10vh,0) rotate(0deg)}50%{transform:translate3d(35px,55vh,0) rotate(150deg)}100%{transform:translate3d(-20px,115vh,0) rotate(330deg)}}
+@media (prefers-reduced-motion:reduce){
+ .orb,.cloud,.petal,body:before{animation:none!important}
+}
+
+
+/* v3 — translucent real-letter treatment */
+.chapter{
+  background:
+    linear-gradient(100deg,rgba(255,255,255,.38),rgba(255,248,239,.49) 48%,rgba(255,255,255,.34))!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  border-radius:2px;
+  -webkit-backdrop-filter:blur(10px) saturate(112%);
+  backdrop-filter:blur(10px) saturate(112%);
+  box-shadow:0 24px 60px rgba(52,28,40,.17),inset 0 0 50px rgba(255,248,233,.20);
+  position:relative;
+}
+.chapter.sunset{
+  background:linear-gradient(100deg,rgba(255,244,233,.34),rgba(255,238,229,.47),rgba(255,245,237,.31))!important;
+}
+.chapter.night{
+  background:linear-gradient(100deg,rgba(31,26,44,.47),rgba(39,31,52,.57),rgba(28,24,42,.43))!important;
+  -webkit-backdrop-filter:blur(11px) saturate(110%);
+  backdrop-filter:blur(11px) saturate(110%);
+}
+.chapter:after{
+  content:"";position:absolute;inset:12px;pointer-events:none;opacity:.20;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 31px,rgba(128,83,97,.08) 31px 32px);
+  mix-blend-mode:multiply;
+}
+.chapter p{position:relative;z-index:1;text-shadow:0 1px rgba(255,255,255,.65)}
+.chapter.night p{text-shadow:0 1px 2px rgba(0,0,0,.48)}
+.chapter:first-of-type:before{content:"💌";opacity:.38;font-size:23px}
+.chapter p:first-child:first-letter{
+  font-size:1.75em;line-height:.8;font-weight:600;color:#9d405e;
+}
+.envelope{
+ background:linear-gradient(135deg,rgba(255,251,243,.48),rgba(255,241,230,.58))!important;
+ -webkit-backdrop-filter:blur(10px) saturate(110%);
+ backdrop-filter:blur(10px) saturate(110%);
+ box-shadow:0 28px 80px rgba(61,31,47,.19),inset 0 0 55px rgba(255,255,255,.28)!important;
+}
+main:before{
+ content:"";display:block;width:88px;height:2px;margin:0 auto 12vh;
+ background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);
+}
+@media(max-width:560px){
+ .chapter{background:linear-gradient(100deg,rgba(255,255,255,.43),rgba(255,248,239,.54),rgba(255,255,255,.40))!important}
+ .chapter.night{background:linear-gradient(100deg,rgba(31,26,44,.54),rgba(39,31,52,.64),rgba(28,24,42,.50))!important}
+}
+
+
+/* v4 — real envelope opening */
+.cover{perspective:1200px;overflow:hidden}
+.mail-scene{width:min(560px,92vw);display:flex;flex-direction:column;align-items:center;transition:opacity .7s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.mail-title{font:italic clamp(16px,3.7vw,20px) Georgia,serif;margin-bottom:28px;color:#6f4352;text-shadow:0 1px rgba(255,255,255,.55);transition:.5s}
+.real-envelope{width:min(430px,86vw);aspect-ratio:1.52;position:relative;filter:drop-shadow(0 28px 28px rgba(74,38,55,.22));transform-style:preserve-3d}
+.env-back{position:absolute;inset:0;background:linear-gradient(145deg,rgba(255,244,230,.94),rgba(237,190,191,.95));border:1px solid rgba(113,68,80,.16);border-radius:5px;z-index:1}
+.letter-peek{position:absolute;left:7%;right:7%;top:8%;height:78%;padding:30px 25px;text-align:center;background:linear-gradient(100deg,rgba(255,255,255,.93),rgba(255,247,237,.96));border:1px solid rgba(126,84,91,.13);box-shadow:0 -4px 18px rgba(71,40,53,.10);z-index:2;transform:translateY(16%);transition:transform 1.05s cubic-bezier(.18,.8,.18,1),opacity .7s}
+.peek-kicker{font:700 9px ui-monospace,monospace;letter-spacing:.2em;color:#aa6277}
+.peek-name{font:italic 24px Georgia,serif;color:#704454;margin-top:22px;line-height:1.35}
+.env-flap{position:absolute;left:0;right:0;top:0;height:57%;z-index:6;transform-origin:top center;transform:rotateX(0deg);transition:transform .9s cubic-bezier(.3,.05,.2,1);backface-visibility:hidden;background:linear-gradient(155deg,#f8d7d5,#e8afb9);clip-path:polygon(0 0,100% 0,50% 100%)}
+.env-front-left,.env-front-right,.env-front-bottom{position:absolute;inset:0;z-index:4;pointer-events:none}
+.env-front-left{background:linear-gradient(135deg,#f4c9cb,#eab6be);clip-path:polygon(0 0,52% 53%,0 100%)}
+.env-front-right{background:linear-gradient(225deg,#f6d0cf,#e7acb8);clip-path:polygon(100% 0,48% 53%,100% 100%)}
+.env-front-bottom{background:linear-gradient(0deg,#f7d6d1,#edbec2);clip-path:polygon(0 100%,50% 48%,100% 100%)}
+.wax-seal{position:absolute;z-index:9;left:50%;top:46%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;padding:0;background:radial-gradient(circle at 35% 30%,#d46b85,#a83e5c 70%);border:4px double #f4b2c3;box-shadow:0 8px 18px rgba(97,40,59,.32);font:28px Georgia,serif;color:white;cursor:pointer;animation:sealPulse 2.2s ease-in-out infinite}
+.tap-hint{margin-top:28px;font:600 11px ui-monospace,monospace;letter-spacing:.08em;color:#805064;opacity:.72;animation:hint 1.8s ease-in-out infinite}
+.mail-scene.opening .wax-seal{animation:none;transform:translate(-50%,-50%) scale(.86);opacity:0;transition:.4s}
+.mail-scene.opening .env-flap{transform:rotateX(178deg);z-index:0}
+.mail-scene.opening .letter-peek{transform:translateY(-48%);z-index:7}
+.mail-scene.leaving{opacity:0;transform:translateY(12vh) scale(.92)}
+.opened-letter{position:absolute;width:min(570px,92vw);opacity:0;pointer-events:none;transform:translateY(80px) scale(.88) rotateX(8deg);transition:opacity .8s ease,transform 1s cubic-bezier(.18,.8,.18,1)}
+.opened-letter.show{opacity:1;pointer-events:auto;transform:translateY(0) scale(1) rotateX(0)}
+.opened-inner{position:relative;padding:clamp(42px,8vw,70px) clamp(28px,7vw,58px);background:linear-gradient(105deg,rgba(255,255,255,.55),rgba(255,247,236,.69),rgba(255,255,255,.48));border:1px solid rgba(255,255,255,.66);box-shadow:0 30px 90px rgba(65,32,49,.22),inset 0 0 60px rgba(255,255,255,.2);backdrop-filter:blur(11px) saturate(112%);-webkit-backdrop-filter:blur(11px) saturate(112%);text-align:center}
+.opened-inner:before,.opened-inner:after{content:"";position:absolute;left:20px;right:20px;height:1px;background:linear-gradient(90deg,transparent,rgba(151,92,108,.25),transparent)}
+.opened-inner:before{top:20px}.opened-inner:after{bottom:20px}
+.tiny-hand{font:italic 14px Georgia,serif;opacity:.56;margin-top:10px}
+.start-reading{margin-top:14px}
+@keyframes sealPulse{50%{transform:translate(-50%,-50%) scale(1.06);box-shadow:0 8px 25px rgba(140,52,79,.42)}}
+@keyframes hint{50%{opacity:.4;transform:translateY(3px)}}
+@media(max-width:520px){.real-envelope{width:88vw}.wax-seal{width:61px;height:61px}.letter-peek{padding-top:24px}.peek-name{font-size:20px}}
+
+</style></head><body><div class="ambient" aria-hidden="true">
+      <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span>
+      <span class="cloud c1"></span><span class="cloud c2"></span>
+      <span class="petal p1">♡</span><span class="petal p2">✦</span><span class="petal p3">♡</span>
+    </div>
+    <div class="stars"></div><div class="progress" id="progress"></div>
+<header class="cover" id="cover">
+  <div class="mail-scene" id="mailScene">
+    <div class="mail-title">ada surat kecil buat kamu... 🤏🏻</div>
+    <div class="real-envelope" id="realEnvelope">
+      <div class="letter-peek">
+        <div class="peek-kicker">A RANDOM NOTE FOR YOU</div>
+        <div class="peek-name">Untuk kamu,<br>sayanggg 🤍</div>
+      </div>
+      <div class="env-back"></div>
+      <div class="env-letter-shadow"></div>
+      <div class="env-front-left"></div>
+      <div class="env-front-right"></div>
+      <div class="env-front-bottom"></div>
+      <div class="env-flap"></div>
+      <button class="wax-seal" id="openLetter" aria-label="Buka surat">♡</button>
+    </div>
+    <div class="tap-hint" id="tapHint">tap segelnya buat buka 💌</div>
+  </div>
+
+  <div class="opened-letter" id="openedLetter">
+    <div class="opened-inner">
+      <div class="kicker">a random note for you</div>
+      <div class="tiny-hand">— sebuah surat kecil yang ga direncanain —</div>
+      <h1>Untuk kamu,<br>sayanggg 🤏🏻</h1>
+      <p>ga ada hari spesial... aku cuma tiba tiba pengen nulis ini hehe.</p>
+      <button class="start-reading" id="startReading">MULAI BACA 🤍</button>
+    </div>
+  </div>
+</header>
+<main><section class="chapter day" data-stage="day"><p><strong>A RANDOM NOTE FOR YOU 🤏🏻</strong></p><p>Alooo sayangggg 🫵🏻🤏🏻</p><p>Mmm.. ga tau kenapa aku tiba tiba pengen nulis ini aja buat kamu wkwk.. ga ada hari spesial, ga ada apa apa, kamu juga ga habis menang penghargaan atau melakukan sesuatu yang luar biasa 😭</p><p>Jadi jangan geer dulu ya sayang..</p><p>Ini cuma.. mmm.. catatan random yang tiba tiba pengen aku tulis buat kamu aja hehe 🤏🏻</p><p>Tapi sebelum mulai, seperti biasa ada pemeriksaan wajib dulu..</p><p><strong>KAMU UDAH MAKAN BELUM? 😠</strong></p><p>Dan makan ya makan sayang.. bukan makan 3 suap terus bilang “udah kok” 😭 makan yang cukup, jangan telat telat juga.</p><p>Terus minum air putih yang banyaaakk.. jangan nunggu haus banget baru minum. Aku tau kamu suka lupa, terus kalo udah sibuk keknya badan sendiri ditinggal 😭</p><p>Dan satu lagi..</p><p><strong>kalo sakit jangan diremehin.</strong></p><p>Kepala sakit: <em>gapapa</em><br>Pinggang sakit: <em>gapapa</em><br>Tenggorokan sakit: <em>gapapa</em><br>Badan ga enak: <em>gapapa</em></p><p>Lama lama kepala kamu copot juga keknya bakal bilang..</p><p><strong>“gapapa sayang, cuma copot dikit 🤏🏻”</strong></p><p>WKWKWKWK 😭</p><p>Ga boleeehhh..</p><p>Jaga kesehatan ya sayang. Makan yang cukup, minum air yang banyak, istirahat kalo cape.. please, sayangi diri kamu juga.</p><p>Iyaa aku cerewet..</p><p><strong>biarin 😠🤏🏻</strong></p><p>Hehe..</p></section>
+<section class="chapter day" data-stage="day"><p>Mmm.. tapi tau ga sih..</p><p>Aku kadang bingung sama kamu.</p><p>Kamu tu kadang seneng banget, excited cerita sesuatu sampe panjang.. kadang kerjaannya ngeluh 😭 kadang marah marah sama sesuatu, kadang ngomong random, kadang ketawa ga jelas sampe aku ikut ketawa padahal aku sendiri bingung apanya yang lucu wkwk..</p><p>Terus kadang ada aja anomali yang datang di kehidupan kamu 😭</p><p>Tapi..</p><p><strong>ga tau kenapa kamu selalu menyenangkan.</strong></p><p>Beneran sayang.</p><p>Entah ketika kamu lagi seneng, ketika kamu excited banget cerita sesuatu, ketika kamu ngeluh, ketika kamu kesel, ketika kamu marah marah, bahkan ketika kamu cuma diem di call..</p><p>aku nyaman.</p><p>Aku suka dengerin kamu.</p><p>Bahkan cerita yang menurut kamu sendiri ga penting atau “ga ada manfaatnya buat didengar” itu.. aku tetep seneng dengernya.</p><p>Mungkin emang bukan tentang seberapa menarik ceritanya ya..</p><p><strong>karena yang cerita kamu.</strong></p><p>Hehe 🤏🏻</p><p>Jadi.. makasih ya sayang.</p><p>Makasih udah mau bagi bagian bagian kecil dari hari kamu ke aku. Cerita yang penting, ga penting, hal random, keluhan kamu, marah kamu, sesuatu yang bikin kamu excited, sesuatu yang bikin kamu sedih..</p><p>Aku seneng bisa denger semuanya.</p><p>Bahkan beberapa hari ini kita lebih sering call.. kadang ngobrol banyak, kadang sibuk sendiri sendiri, kadang cuma denger suara satu sama lain..</p><p>tapi aku tetep seneng.</p><p>Mmm..</p><p><strong>makasih ya, kamu.</strong></p><p>Ga tau kenapa kamu selalu terasa menyenangkan dan nyaman buat aku.</p></section>
+<section class="chapter sunset" data-stage="sunset"><p>Tapi mmm..</p><p>aku juga mau minta maaf untuk beberapa hal.</p><p>Salah satunya..</p><p>Kadang kamu bilang,</p><p><strong>“cerita dong.”</strong></p><p>terus aku:</p><p>...</p><p>🧍🏻</p><p><strong>“mmm.. cerita apa ya?”</strong></p><p>WKWKWKWK 😭😭</p><p>Maaf ya sayang..</p><p>Kadang aku kepikiran, mungkin ada saatnya kamu ngerasa <strong>kamu yang excited sendirian</strong>.</p><p>Kamu cerita banyak hal ke aku, cerita hari kamu, apa yang terjadi, apa yang kamu pikirin.. tapi pas kamu minta aku cerita, aku malah ga banyak cerita.</p><p>Bahkan ketika kamu udah nyuruh aku cerita pun aku masih:</p><p><em>“apa yaa..”</em> 😭</p><p>Maaf ya sayang.</p><p>Bukan karena aku ga mau cerita sama kamu. Bukan karena aku ga nyaman atau ga mau kamu tau tentang hidupku.</p><p>Aku cuma emang ga tau bagaimana cara bercerita 😭</p><p>Aku kadang bingung harus mulai dari mana.</p><p>Aku ga tau topik apa yang bikin kamu seneng dengernya, apa yang bisa bikin kamu ketawa, apa yang bikin kamu excited, atau sekadar apa yang nyaman buat kamu denger.</p><p>Jadi isi kepalaku setiap kamu bilang <em>“cerita dong”</em> tu kek..</p><p><strong>loading...</strong></p><p>████████░░ 80%</p><p><strong>topik tidak ditemukan.</strong></p><p>😭😭😭</p><p>Hehe..</p><p>Tapi beneran, maaf ya sayang.</p><p>Kalo pernah ada saat kamu excited pengen ngobrol sama aku, tapi aku malah bikin kamu ngerasa kek kamu harus membawa obrolannya sendirian.. <strong>im sorry.</strong></p><p>Aku ga pernah bermaksud bikin kamu ngerasa gitu.</p><p>Aku justru seneng ketika kamu pengen tau sesuatu tentang aku.</p><p>Aku juga pengen bisa cerita banyak ke kamu.. mungkin aku cuma masih harus belajar gimana caranya <strong>bagi dunia kecilku ke kamu</strong>, seperti kamu yang selama ini banyak bagi dunia kecil kamu ke aku.</p><p>Jadi aku bakal coba yaa..</p><p>Ga harus nunggu punya cerita besar.</p><p>Mungkin cerita hal kecil yang terjadi hari itu, sesuatu yang aku pikirin, hal random yang aku lihat, sesuatu yang bikin aku kesel, seneng, atau bahkan sesuatu yang ga penting sama sekali.</p><p>Karena mungkin selama ini aku lupa..</p><p>ketika kamu bilang <strong>“cerita dong”</strong>, kamu juga mungkin ga butuh cerita yang luar biasa.</p><p>Kamu cuma pengen denger aku cerita.</p><p>Sama seperti aku yang ga butuh cerita luar biasa dari kamu untuk seneng dengerinnya.</p><p>Mmm.. hehe 🤏🏻</p></section>
+<section class="chapter sunset" data-stage="sunset"><p>Terus..</p><p>ada lagi 😭</p><p>Maaf juga kalo kadang caraku peduli ke kamu malah bikin kamu cape.</p><p>Kadang aku terlalu khawatir, terlalu banyak nanya, salah nangkep suasana, salah milih waktu buat bercanda, atau mungkin terlalu excited sampai ga sadar kamu sebenarnya lagi cape.</p><p>Aku masih belajar mengenal kamu sayang..</p><p>Belajar kapan harus banyak ngomong, kapan harus diem, kapan harus bercanda, kapan cukup dengerin kamu, kapan harus nemenin, dan kapan kamu butuh ruang buat diri kamu sendiri.</p><p>Kalo pernah ada hari kamu yang sebenarnya udah cukup berat, terus aku malah tanpa sadar ikut nambah sedikit beratnya..</p><p><strong>maaf ya sayang.</strong></p><p>Aku ga pernah pengen jadi alasan hari kamu terasa lebih susah.</p><p>Aku pengennya kalo nama aku muncul di hp kamu, minimal kamu kek..</p><p><strong>“ahh bocil ini lagi 😭”</strong></p><p>terus senyum dikit.</p><p>Dikit aja..</p><p>Jangan banyak banyak, nanti aku geer 😌</p></section>
+<section class="chapter night" data-stage="night"><p>Mmm..</p><p>terus ada satu hal lagi yang kayaknya aku ga bisa pura pura ga tau 😭</p><p><strong>AKU SUKA CEMBURU.</strong></p><p>IYAAA AKU TAU 😭</p><p>Ga usah senyum senyum kamu 🫵🏻😠</p><p>Kadang baru bahas <em>sesuatu</em> dikit aja..</p><p>aku udah:</p><p><strong>“ga boleh 😠”</strong></p><p><strong>“jangan 😠”</strong></p><p><strong>“aku ga suka 😠”</strong></p><p>WKWKWKWK 😭😭</p><p>Maaf ya sayang kalo kadang aku terlalu cemburu sampe jadi larang ini itu, terlalu banyak nanya, atau reaksiku jadi lebih besar dari yang seharusnya.</p><p>Aku bisa aja bilang..</p><p><em>“hehe cuma bercanda kok.”</em></p><p>Tapi mmm..</p><p><strong>boong 😭</strong></p><p>Aku emang cemburu sayang.</p><p>Hehe..</p><p><strong>beneran cemburu. 🤏🏻</strong></p><p>Kadang luarnya masih bisa ketawa dan becanda, tapi di dalem aku udah manyun:</p><p><strong>“mmm.. aku ga suka 😠”</strong></p><p>WKWKWK 😭</p><p>Tapi aku juga tau ya sayang..</p><p>Cemburuku bukan berarti aku boleh ngatur semuanya tentang kamu.</p><p>Kamu tetep punya kehidupan kamu sendiri, temen temen kamu, kegiatan kamu, pilihan kamu, dan hal hal yang kamu suka.</p><p>Jadi kalo kadang aku terlalu cepet bilang <em>“jangan”</em>, terlalu banyak larang ini itu, atau bikin sesuatu yang sebenarnya sederhana malah jadi ribet..</p><p><strong>maafin aku yaa 🤏🏻</strong></p><p>Aku masih belajar juga gimana menyampaikan rasa itu dengan lebih baik.</p><p>Bukan pura pura ga cemburu..</p><p><strong>karena ya itu boong 😭</strong></p><p>tapi juga bukan sampai bikin kamu ngerasa aku ngekang kamu.</p><p>Tapi ya..</p><p>kalo kamu sengaja bikin aku cemburu terus kamu malah ketawa..</p><p><strong>jahat kamu 🫵🏻😠</strong></p><p>...</p><p>hehe.</p><p><strong>tapi tetep sayang. 🤏🏻</strong></p></section>
+<section class="chapter night" data-stage="night"><p>Mmm.. panjang juga ya.</p><p>Padahal awalnya katanya cuma mau seru seruan 😭</p><p>Tapi dari semua ocehanku tadi, ada satu hal yang paling pengen aku bilang..</p><p><strong>terima kasih, kamu.</strong></p><p>Makasih untuk semua hal kecil yang kamu bagi ke aku.</p><p>Makasih untuk cerita kamu.</p><p>Makasih untuk keluhan kamu.</p><p>Makasih untuk ketawa kamu.</p><p>Makasih untuk marah marah random kamu 😭</p><p>Makasih ketika kamu excited banget cerita sesuatu.</p><p>Makasih ketika kamu ngajak call.</p><p>Bahkan makasih untuk saat saat kita cuma ada di call tanpa harus melakukan sesuatu yang spesial.</p><p>Aku nyaman.</p><p>Dan aku seneng bisa mengenal kamu dengan segala versi kecil kamu.</p><p>Kamu ga harus selalu seneng supaya aku nyaman sama kamu.</p><p>Lagi seneng? Cerita.</p><p>Lagi kesel? Ngeluh.</p><p>Lagi marah? Ya marah dulu 😭</p><p>Lagi cape? Istirahat.</p><p>Lagi pengen diem? Yaudah diem dulu.</p><p>Tapi..</p><p><strong>MAKAN TETEP HARUS. 😠</strong></p><p><strong>MINUM AIR PUTIH YANG BANYAK. 😠</strong></p><p><strong>KALO SAKIT JANGAN DIREMEHIN. 😠</strong></p><p>Itu ga bisa dinego.</p><p>WKWKWKWK 😭🤏🏻</p><p>Dan mmm..</p><p>seperti yang pernah aku bilang ke kamu..</p><p><strong>aku selalu berharap hal hal baik datang ke kamu.</strong></p><p>Masih.</p><p>Selalu.</p><p>Aku berharap ada banyak hal kecil yang bikin kamu senyum, banyak orang baik di sekitar kamu, semua yang lagi kamu usahain pelan pelan menemukan jalannya, revisian kamu selesai, kegiatan kamu lancar, badan kamu sehat, kamu bisa tidur dengan nyenyak..</p><p>dan semoga ada lebih banyak hari ketika aku denger kamu ketawa daripada:</p><p><strong>“sayang aku kesel 😠”</strong></p><p>Walaupun jujur..</p><p>kamu kalo lagi ngeluh juga lucu si.</p><p><strong>WKWKWK MAAF 😭</strong></p><p>Udah ahh..</p><p>Jangan dianalisis.</p><p>Jangan dicari cari maksudnya.</p><p>Dan <strong>JANGAN DIREVISI KEK PROPOSAL KAMU.</strong> 😭</p><p>Ini bukan proposal sayang.</p><p>Kalo ada typo, biarin.</p><p>Kalo bahasa Inggrisnya salah, pura pura ga liat.</p><p>Kalo kamu senyum..</p><p>hehe.</p><p>berarti berhasil. 🤏🏻</p><p>Kalo kamu terharu..</p><p>boleh.</p><p>Kalo kamu nangis..</p><p><strong>HAHA CENGENG 🫵🏻😭</strong></p><p>...</p><p>bercanda sayang hehe 🤏🏻</p><p>Mmm.. sekali lagi..</p><p>makasih yaa, kamu.</p><p><strong>For being you.</strong></p><p>Yang seneng, yang suka ngeluh, yang random, yang kadang ngeselin, yang cerewet, yang cape, yang semangat, yang marah marah, yang ketawa..</p><p>semuanya.</p><p>Dan please ya sayang..</p><p>jaga diri kamu.</p><p>Makan yang cukup.</p><p>Minum air yang banyak.</p><p>Jangan remehin sakit sekecil apa pun.</p><p>Istirahat kalo cape.</p><p>Dan coba sedikit lebih sayang sama diri kamu sendiri yaa.</p><p>Karena ada satu manusia di sini yang bakal tetep cerewet kalo kamu bandel soal kesehatan 😠🤏🏻</p><p>Udah.</p><p>Beneran selesai.</p><p>Dari,</p><p><strong>bocil kecil kamu 🤏🏻🤍</strong></p><p><em>yang cemburuan dikit...</em></p><p><strong>mmm.. dikit lah pokoknya 😭</strong></p></section></main><footer>dibaca pelan-pelan aja yaa... 🤍</footer>
+<script>
+const c=[...document.querySelectorAll('.chapter')],p=document.getElementById('progress');
+function u(){const m=document.documentElement.scrollHeight-innerHeight;p.style.width=(m?scrollY/m*100:0)+'%';let t='day',b=1e9;c.forEach(s=>{const d=Math.abs(s.getBoundingClientRect().top-innerHeight*.32);if(d<b){b=d;t=s.dataset.stage}});document.body.classList.toggle('sunset',t==='sunset');document.body.classList.toggle('night',t==='night')}function ambientScroll(){
+ const max=document.documentElement.scrollHeight-innerHeight;
+ const q=max?Math.min(1,Math.max(0,scrollY/max)):0;
+ document.documentElement.style.setProperty('--scrollGlow',(0.12+q*.18).toFixed(2));
+}
+addEventListener('scroll',()=>{u();ambientScroll()},{passive:true});u();ambientScroll();
+
+const mailScene=document.getElementById('mailScene');
+const openedLetter=document.getElementById('openedLetter');
+const openLetter=document.getElementById('openLetter');
+const startReading=document.getElementById('startReading');
+let envelopeOpened=false;
+openLetter.addEventListener('click',()=>{
+  if(envelopeOpened)return;
+  envelopeOpened=true;
+  mailScene.classList.add('opening');
+  document.getElementById('tapHint').textContent='buat kamu... 🤍';
+  setTimeout(()=>mailScene.classList.add('leaving'),1250);
+  setTimeout(()=>openedLetter.classList.add('show'),1750);
+});
+startReading.addEventListener('click',()=>{
+  document.querySelector('main').scrollIntoView({behavior:'smooth'});
+});
+
+</script></body></html>

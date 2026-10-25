@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Untuk Sayang — dari Febri 🤍</title>
+<style>
+:root{--bg:#fff7fa;--paper:#fffdfd;--ink:#4b3440;--muted:#8c6c7c;--pink:#e9a9bd;--pink2:#f7d8e2;--deep:#9d5f78;--line:#efd2dc;--shadow:0 18px 50px rgba(120,72,92,.16)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:ui-rounded,"SF Pro Rounded","Segoe UI",system-ui,sans-serif;color:var(--ink);background:radial-gradient(circle at 20% 10%,#ffe9f0 0 12%,transparent 32%),radial-gradient(circle at 80% 0%,#f6e9ff 0 10%,transparent 30%),linear-gradient(180deg,#fff9fb 0%,#fff5f8 100%)}
+.wrap{width:min(720px,100%);margin:auto;padding:24px 16px 60px}.tiny{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:center}.hero{text-align:center;padding:28px 10px 18px}.hero h1{font-size:clamp(27px,8vw,46px);line-height:1.05;margin:10px 0 12px}.hero p{margin:0;color:var(--muted);font-size:15px}
+.envelope{margin:20px auto 28px;width:min(420px,100%);aspect-ratio:1.45/1;position:relative;border-radius:18px;background:linear-gradient(145deg,#f7c9d7,#e9a9bd);box-shadow:var(--shadow);overflow:hidden;cursor:pointer;user-select:none;border:1px solid rgba(255,255,255,.65)}
+.envelope:before,.envelope:after{content:"";position:absolute;inset:auto 0 0;height:68%;background:#f5c1d1;clip-path:polygon(0 100%,50% 22%,100% 100%)}.envelope:after{background:#eeb4c6;clip-path:polygon(0 0,50% 63%,100% 0)}.seal{position:absolute;z-index:3;left:50%;top:51%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:#fff8fa;border:2px solid #fff;color:#b26f87;font-size:29px;box-shadow:0 8px 24px rgba(92,47,66,.15)}.tap{position:absolute;z-index:4;bottom:15px;width:100%;text-align:center;color:#75495b;font-size:13px;font-weight:700}
+.letter{display:none;background:rgba(255,253,253,.96);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:24px;padding:clamp(20px,5vw,38px);position:relative;overflow:hidden}.letter.show{display:block;animation:rise .55s ease both}@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}.letter:before{content:"♡";position:absolute;right:20px;top:10px;font-size:70px;color:#f8dde6;transform:rotate(10deg)}.letter h2{font-size:clamp(22px,5.5vw,32px);line-height:1.2;margin:4px 0 22px;max-width:560px}.chunk{display:none;font-size:17px;line-height:1.85;margin:0 0 22px}.chunk.show{display:block;animation:fade .45s ease both}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}.quote{padding:13px 15px;border-left:3px solid var(--pink);background:#fff7fa;border-radius:0 12px 12px 0;font-style:italic}.bigline{text-align:center;font-size:clamp(23px,6vw,34px);font-weight:850;color:var(--deep);padding:18px 6px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}button{appearance:none;border:0;border-radius:999px;padding:13px 18px;min-height:46px;font:inherit;font-weight:750;cursor:pointer}.primary{background:var(--deep);color:white}.soft{background:var(--pink2);color:#744758}.ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}.translation{display:none;margin-top:22px;padding:18px;background:#fff8fa;border:1px dashed #dba9b9;border-radius:16px;color:#614654;font-size:15px;line-height:1.72}.translation.show{display:block;animation:fade .35s ease both}.ending{display:none;text-align:center;padding:30px 12px 8px}.ending.show{display:block;animation:fade .5s ease both}.ending .heart{font-size:52px;animation:pulse 1.3s infinite ease-in-out}@keyframes pulse{50%{transform:scale(1.12)}}.signature{margin-top:28px;text-align:right;font-weight:800}.progress{height:6px;background:#f7e7ed;border-radius:999px;overflow:hidden;margin:0 0 22px}.bar{height:100%;width:0;background:linear-gradient(90deg,#e7a0b7,#a76a82);transition:width .35s ease}.note{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<div class="hero"><div class="tiny">a tiny letter from febri</div><h1>Buat sayang yang<br>akhir-akhir ini sering lewat di kepala... 🤍</h1><p>Isinya nggak penting-penting banget kok... katanya 😭</p></div>
+<div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Buka surat"><div class="seal">♡</div><div class="tap">tap buat buka pelan-pelan 🤏🏻</div></div>
+<article class="letter" id="letter">
+<div class="progress"><div class="bar" id="bar"></div></div>
+<h2>Keu sayang nyang entah pakon, akhe-akhe nyoe sabe mantong na lam pikiran lon... 🤍</h2>
+<section class="chunk"><p>Haiii sayangg hehe...</p><p>Mmm.. seubetoi jih lon cuma keuneuk peugah saboh hai nyang hana penting-penting that sih 😭 tapi entah pakon, keuneuk mantong lon tuléh...</p><p>Akhe-akhe nyoe na sidroe ureung nyang agak sering that teuka lam pikiran lon yaa... watee lon teungoh hana peugot peu-peu, kadang teuka.. watee lon teungoh peugot sesuatu pih, tiba-tiba teuingat lom.</p><div class="quote">“Zila teungoh peugot peu yaa jinoe?”</div><p>Aneh kan...</p><p>Soe yaa ureung nyan? 🤔<br>Mmm... kayak jih sayang turi deh.</p><p class="bigline">Sayang soalnya 😭</p></section>
+<section class="chunk"><p>Hehe.. iyaa sayangg, seubetoi jih lon cuma teungoh <b>kangen keu sayang</b> 🤏🏻<br>Bacut mantong kok... bacuttt that.</p><p>...</p><p>Ya bek tanyong seubacut peu lah 😭</p><p>Tapi lucu cit yaa.. ternyata rasa kangen nyan hana harus karena sesuatu nyang rayeuk.</p><p>Kadang lon cuma keuneuk deungoe sayang peugah haba random lom.. keuneuk teupeue uroe sayang pakriban.. keuneuk deungoe sayang ngoceh tentang sesuatu nyang mungkin menurut sayang hana penting...</p><p>Atawa kadang yaa... cuma keuneuk teupeue sayang teungoh peugot peu mantong hehe.</p></section>
+<section class="chunk"><p>Bahkan kadang na hai ubit nyang terjadi bak uroe lon, terus langsung teuka lam pikiran...</p><div class="quote">“Ehh... nyoe kayak jih seru kalau lon peugah bak Zila...”</div><p>Mmm.. ternyata sayang ka na teumpat keudroe lam pikiran lon yaa 😭</p><p><b>Tapiii...</b> nyoe kon surat keu tagih-tagih sayang yaa wkwk. Sayang hana perlu bagah-bagah muncul, hana perlu langsung peugah haba jai, apalagi sampai rasa harus teumani lon.</p><p><b>No no no 🤏🏻</b></p><p>Lon cuma keuneuk titip saboh rasa ubit mantong dari sinoe...</p><p class="bigline">Lon kangen keu sayang. 🤍</p></section>
+<section class="chunk"><p>Kangen deungoe haba random sayang.. kangen tingkah sayang.. kangen deungoe hai-hai ubit dari uroe sayang...</p><p>Bahkan mungkin kangen bak beberapa hai nyang sayang keudroe hana sadar kalau lon galak hehe.</p><p>Jadi meunyo uroe nyoe tiba-tiba sayang rasa lagee na sidroe ureung dari jioh nyang teungoh teuingat sayang...</p><p>Mmm...</p><p>Mungkén lon.</p><p><b>MUNGKÉN yaa 😭</b></p><p>...</p><p><b>Yaudah deh iyaa lon 😭😭</b></p></section>
+<section class="chunk"><p>Semoga uroe-uroe sayang sabe lembut keu sayang yaa.. meunyo hek, reuhat yang cukup.. meunyo jai that nyang na lam pikiran, pelan-pelan mantong yaa..</p><p>Dan meunyo uroe nyoe na sesuatu nyang peujeuet sayang seunang, semoga rasa seunang nyan treb mantong tinggai hehe.</p><p>Oh iyaa... saboh lom.</p><p>Meunyo saboh watee sayang tiba-tiba <b>kangen keu lon</b> cit...</p><p>Bek panik yaa 😭</p><p>Nyan normal kok...</p><p>Kayak jih cuma <b>efek samping ka turi Febri</b> 😌🤏🏻</p><p><b>WKWKWK 😭</b></p><p>Ka ahh.. nanti malah teupham kalau lon <b>kangen beneran</b>.</p><p>Padahal kan cuma bacut...</p><p class="bigline">bacuttttt that 🤏🏻</p><p>hehe...</p><div class="signature">— Febri 🤍</div></section>
+<div class="actions"><button class="primary" id="nextBtn" type="button">lanjut baca 🤏🏻</button><button class="soft" id="indoBtn" type="button">arti Indonesianya</button></div>
+<div class="translation" id="translation"><b>Versi Indonesianya, kalau sayang curang dan mau ngintip 😭</b><br><br>Intinya... akhir-akhir ini sayang sering muncul di kepala aku. Kadang aku cuma tiba-tiba mikir “Zila lagi apa yaa sekarang?”, kadang ada hal kecil di hariku yang bikin aku kepikiran pengen cerita ke sayang. Dan ternyata yaa... aku cuma lagi kangen aja 🤏🏻<br><br>Bukan surat penagihan kok. Sayang nggak harus buru-buru muncul, nggak harus cerita banyak, dan nggak harus merasa perlu nemenin aku. Aku cuma mau nitip satu hal kecil: <b>aku kangen sayang.</b> 🤍<br><br>Kalau suatu waktu sayang kangen aku juga, jangan panik. Itu normal... mungkin cuma efek samping kenal Febri 😌🤏🏻</div>
+<div class="ending" id="ending">
+<div class="heart">🤍</div>
+<h3>udah selesai...</h3>
+<p>tapi kangennya belum 😭🤏🏻</p>
+<p style="margin:22px auto 18px;max-width:520px;line-height:1.75">
+Gimana sayang? Ga ada yang salah atau kemasukan bahasa kasar kan? 😭🤏🏻<br>
+Lon ka usaha peugot nyoe selembut mungkin hehe...
+</p>
+<div class="actions" style="justify-content:center">
+<button class="primary" id="doneBtn" type="button">udah selesai baca nih 🤍</button>
+<button class="ghost" id="againBtn" type="button">baca lagi dari awal</button>
+</div>
+</div>
+</article>
+<div class="note">dibuat dengan kadar kangen “dikittt banget” — katanya.</div>
+</main>
+<script>
+(()=>{const env=document.getElementById('envelope'),letter=document.getElementById('letter'),chunks=[...document.querySelectorAll('.chunk')],nextBtn=document.getElementById('nextBtn'),indoBtn=document.getElementById('indoBtn'),translation=document.getElementById('translation'),ending=document.getElementById('ending'),againBtn=document.getElementById('againBtn'),bar=document.getElementById('bar');let idx=0;function progress(){bar.style.width=(Math.min(idx,chunks.length)/chunks.length*100)+'%'}function openLetter(){env.style.display='none';letter.classList.add('show');idx=1;chunks[0].classList.add('show');progress();setTimeout(()=>letter.scrollIntoView({behavior:'smooth',block:'start'}),80)}function next(){if(idx<chunks.length){chunks[idx].classList.add('show');idx++;progress();if(idx===chunks.length)nextBtn.textContent='satu hal terakhir... 👀';const t=chunks[idx-1];setTimeout(()=>t.scrollIntoView({behavior:'smooth',block:'center'}),80)}else{ending.classList.add('show');nextBtn.style.display='none';bar.style.width='100%';setTimeout(()=>ending.scrollIntoView({behavior:'smooth',block:'center'}),80)}}function toggle(){translation.classList.toggle('show');indoBtn.textContent=translation.classList.contains('show')?'sembunyikan arti hehe':'arti Indonesianya'}function reset(){chunks.forEach(c=>c.classList.remove('show'));ending.classList.remove('show');translation.classList.remove('show');nextBtn.style.display='';nextBtn.textContent='lanjut baca 🤏🏻';indoBtn.textContent='arti Indonesianya';idx=1;chunks[0].classList.add('show');progress();letter.scrollIntoView({behavior:'smooth',block:'start'})}env.addEventListener('click',openLetter);env.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLetter()}});nextBtn.addEventListener('click',next);indoBtn.addEventListener('click',toggle);againBtn.addEventListener('click',reset);
+const doneBtn=document.getElementById('doneBtn');
+doneBtn.addEventListener('click',()=>{
+  const appUrl='hellotalk://';
+  const webUrl='https://www.hellotalk.com/';
+  let timer=null;
+  const cancel=()=>{if(document.hidden&&timer){clearTimeout(timer);timer=null}};
+  document.addEventListener('visibilitychange',cancel,{once:true});
+  window.location.href=appUrl;
+  timer=setTimeout(()=>{if(!document.hidden)window.location.href=webUrl},1300);
+});
+})();
+</script>
+</body>
+</html>

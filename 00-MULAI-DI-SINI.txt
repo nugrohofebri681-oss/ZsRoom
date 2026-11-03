@@ -1,0 +1,79 @@
+ZILA'S WORLD — PAKET FINAL LENGKAP
+Kamar / Mixue / D'mentai / Jogja / Sabang / Bromo / Bali
+Termasuk 10 surat/aplikasi komputer dan 17 ilustrasi spot liburan.
+
+PAKET INI MANDIRI. TIDAK PERLU ZIP LAMA.
+Ekstrak ZIP. File index.html langsung ada di hasil ekstrak, bukan di dalam
+folder pembungkus lain. Unggah isi hasil ekstrak, bukan file ZIP-nya.
+
+SUSUNAN FINAL
+- index.html         : halaman game utama
+- bali.html          : perjalanan dan tiga map Bali
+- bromo.js           : fitur map Bromo
+- bromo.css          : tampilan fitur Bromo
+- cek-file.html      : pemeriksa kelengkapan unggahan
+- sw.js, manifest.webmanifest, icon-192.png, icon-512.png, .nojekyll
+- assets/            : gambar/video, dikelompokkan per bagian
+- surat/             : 10 HALAMAN HTML yang dibuka lewat komputer
+- 00-MULAI-DI-SINI.txt: panduan ini; boleh ikut diunggah
+
+ISI ASSETS (jumlah di luar .gitkeep)
+- assets/bali/ : 41 file
+- assets/bersama/ : 36 file
+- assets/bromo/ : 36 file
+- assets/dimsum/ : 2 file
+- assets/jogja/ : 10 file
+- assets/kamar/ : 46 file
+- assets/media-surat/ : 1 file
+- assets/mixue/ : 4 file
+- assets/sabang/ : 28 file
+
+assets/media-surat berisi VIDEO pendukung, bukan halaman surat.
+Halaman surat ada di surat/, sejajar dengan index.html.
+Aset bersama berisi karakter yang digunakan lebih dari satu map.
+
+URUTAN UPLOAD DARI KOSONG
+1. Simpan cadangan repository lama dahulu jika masih diperlukan.
+2. Tetap gunakan repository dan pengaturan GitHub Pages yang sama.
+   Jika ingin bersih, hapus FILE GAME lama dari lokasi publikasinya.
+   Pertahankan .github, CNAME (jika ada), dan pengaturan Pages.
+   Jangan hapus repository.
+3. Buat/unggah folder-folder assets dan isi semuanya sesuai paket ini.
+4. Buat/unggah folder surat dan seluruh 10 HTML di dalamnya.
+5. Unggah file-file utama (bali.html, bromo.js, bromo.css, cek-file.html,
+   sw.js, manifest.webmanifest, kedua ikon, .nojekyll).
+6. Unggah index.html PALING AKHIR. Semua file utama harus sejajar dengan
+   folder assets dan surat, di lokasi publikasi Pages yang benar.
+   Jika pengaturan Pages memakai /docs, semua ini diletakkan dalam /docs.
+7. Setelah deployment selesai, muat ulang game dengan Ctrl+Shift+R.
+   Website dapat sementara tidak tampil selama file belum lengkap.
+
+CARA FOLDER MANUAL (JIKA TIDAK BISA UNGGAH FOLDER)
+Contoh untuk kamar:
+1. Dari lokasi index.html: Add file > Create new file.
+2. Isi nama file: assets/kamar/.gitkeep
+3. Commit changes. Kini folder assets/kamar tersedia.
+4. Buka assets/kamar di GitHub, pilih Add file > Upload files.
+5. Di komputer, buka assets/kamar hasil ekstrak dan pilih semua FILE-nya.
+6. Commit changes.
+Ulangi untuk setiap folder assets di daftar di atas.
+Untuk surat, buat surat/.gitkeep, lalu unggah 10 file HTML ke surat.
+Setiap subfolder di paket ini berisi kurang dari 100 file; bisa diunggah
+satu folder per giliran. Jangan masukkan folder kamar ke dalam kamar lagi.
+README.md atau .gitkeep hanya penanda; gambar dan HTML tetap harus ikut.
+Jangan menamai folder assets.md atau surat.md.
+
+JIKA MASIH ADA SISA FILE LAMA
+Boleh ditimpa jika nama dan lokasinya sama. Tidak perlu menggabungkan
+isi kode secara manual. Gunakan semua file paket ini sebagai satu versi.
+Tidak ada file yang harus diambil dari paket sebelumnya.
+Perubahan buatanmu sendiri di luar paket game ini tidak otomatis ikut.
+
+PERIKSA SETELAH UPLOAD
+Buka cek-file.html di alamat website yang sama, lalu tekan Periksa kelengkapan.
+Contoh: https://nugrohofebri681-oss.github.io/ZsRoom/cek-file.html
+Jika ada file belum terbaca, halaman itu menyebutkan lokasinya.
+Kemudian buka index.html: mulai di kamar, buka surat di komputer, lalu
+pintu perjalanan untuk Jogja, Sabang, Bromo, atau Bali.
+Ilustrasi spot muncul langsung saat interaksi, kamera tetap terpisah.
+Progres disimpan pada browser/perangkat yang sama, bukan sinkron bersama.

@@ -1,3 +1,19 @@
+EDISI LANGKAH KARAKTER & KLIK SERAGAM
+Tambahan: 13 atlas berisi 152 pose langkah baru.
+Semua outfit kamar tambahan, tiga set Bromo dan tiga set couple Bali,
+serta Febri di Jogja/Sabang punya pose langkah. Frame jalan asli yang
+sudah tersedia tetap digunakan untuk pakaian bawaan dan pantai.
+Klik/sentuh tanah untuk berjalan. Klik objek/papan untuk mendekat lalu
+berinteraksi. E / A, WASD, panah dan joystick yang sudah ada tetap ada.
+Bali memakai jejak langkah untuk Febri dan kamera mengikuti lebih lembut.
+
+Paket ini lengkap, tidak membutuhkan ZIP sebelumnya.
+Unggah seluruh isi hasil ekstrak, termasuk file baru motion.js,
+motion.json dan navigation.js. File atlas walk-*.webp sudah diletakkan
+di folder aset masing-masing, tidak ada folder tambahan yang perlu dibuat.
+Ganti index.html paling akhir. Simpan cadangan sebelum mengganti unggahan.
+Jangan menghapus repository atau pengaturan Pages.
+
 ZILA'S WORLD — PAKET FINAL LENGKAP
 Kamar / Mixue / D'mentai / Jogja / Sabang / Bromo / Bali
 Termasuk 10 surat/aplikasi komputer dan 17 ilustrasi spot liburan.

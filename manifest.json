@@ -1,0 +1,11 @@
+{
+  "build": "poc01-playtest-2026-11-05-r1",
+  "archive": "zsroom-poc01-preview.zip",
+  "sha256": "02ff939305d5098270922190303cca2a46929f7c1d6fb7c3f0441059488c1abd",
+  "archiveBytes": 409756,
+  "uncompressedBytes": 1661267,
+  "fileCount": 41,
+  "entry": "index.html",
+  "scope": "Only remake/dist; no legacy game, source, node_modules, or personal media",
+  "deployment": "Not deployed; upload extracted folder as a NEW static site"
+}

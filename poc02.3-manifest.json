@@ -1,0 +1,11 @@
+{
+  "build": "poc02.3-humanoid-foundation-2026-11-06-r1",
+  "archive": "zsroom-poc02.3-preview.zip",
+  "sha256": "a4737aa5de5a8a5ef5791da2765b8d07cec7d1f18d8bef5592f06f375010e633",
+  "archiveBytes": 694314,
+  "uncompressedBytes": 2796509,
+  "fileCount": 86,
+  "entry": "index.html",
+  "scope": "Only remake/dist; no legacy game, source, node_modules, or personal media",
+  "deployment": "Not deployed; upload extracted folder as a NEW static site"
+}

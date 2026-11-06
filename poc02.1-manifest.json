@@ -1,0 +1,11 @@
+{
+  "build": "poc02.1-animation-polish-2026-11-06-r1",
+  "archive": "zsroom-poc02.1-preview.zip",
+  "sha256": "629b7f66147135eacf1fbbcb02bcedc2286d25b10db2bdd85e542f20fb9f5226",
+  "archiveBytes": 580863,
+  "uncompressedBytes": 2311886,
+  "fileCount": 85,
+  "entry": "index.html",
+  "scope": "Only remake/dist; no legacy game, source, node_modules, or personal media",
+  "deployment": "Not deployed; upload extracted folder as a NEW static site"
+}

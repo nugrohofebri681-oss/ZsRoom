@@ -1,0 +1,11 @@
+{
+  "build": "poc02-visual-character-2026-11-06-r1",
+  "archive": "zsroom-poc02-preview.zip",
+  "sha256": "dad333f4c20a4d78a22c3609a6079ea405b2b7841451013853a8a767cda81903",
+  "archiveBytes": 580622,
+  "uncompressedBytes": 2311121,
+  "fileCount": 85,
+  "entry": "index.html",
+  "scope": "Only remake/dist; no legacy game, source, node_modules, or personal media",
+  "deployment": "Not deployed; upload extracted folder as a NEW static site"
+}

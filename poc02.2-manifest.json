@@ -1,0 +1,11 @@
+{
+  "build": "poc02.2-natural-bed-2026-11-06-r1",
+  "archive": "zsroom-poc02.2-preview.zip",
+  "sha256": "83caee62931b61d84728e90a2464973f9e5dfd2e1b32051d2f03649a052ba2b7",
+  "archiveBytes": 583205,
+  "uncompressedBytes": 2318856,
+  "fileCount": 85,
+  "entry": "index.html",
+  "scope": "Only remake/dist; no legacy game, source, node_modules, or personal media",
+  "deployment": "Not deployed; upload extracted folder as a NEW static site"
+}

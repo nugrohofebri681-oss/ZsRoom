@@ -1,0 +1,282 @@
+{
+  "package": "ZsRoom PoC-03 Visual Review R1",
+  "status": "prepared locally; upload requires separate permission; model remains unapproved as final",
+  "branchProposal": "poc03-visual-review-export",
+  "archive": "zsroom-poc03-visual-review-r1.zip",
+  "archiveBytes": 8932178,
+  "sha256": "45eecfcce0b978dde9c4fa1fce4af01a45c58ad446ccd8f133996676dbc97bcf",
+  "archiveEntries": 38,
+  "pngCount": 31,
+  "mp4Count": 2,
+  "modelSha256": "e1c952336d373075c7fdf54e0e8dc0b808070f79181d38debf3dd916af51b5b0",
+  "modelUnchanged": true,
+  "videos": [
+    {
+      "path": "videos/01-idle-walk.mp4",
+      "stream": {
+        "codec_name": "h264",
+        "profile": "Main",
+        "width": 960,
+        "height": 720,
+        "pix_fmt": "yuv420p",
+        "level": 31,
+        "r_frame_rate": "30/1",
+        "duration": "8.000000",
+        "nb_frames": "240",
+        "side_data_list": [
+          {}
+        ]
+      },
+      "sha256": "ba35243cbc2e4327baa1ad13cc85b531c12736ae77c0ba41ebe3d7d516b389a7"
+    },
+    {
+      "path": "videos/02-seat-lie-wake.mp4",
+      "stream": {
+        "codec_name": "h264",
+        "profile": "Main",
+        "width": 960,
+        "height": 720,
+        "pix_fmt": "yuv420p",
+        "level": 31,
+        "r_frame_rate": "30/1",
+        "duration": "14.800000",
+        "nb_frames": "444",
+        "side_data_list": [
+          {}
+        ]
+      },
+      "sha256": "e63779df019cd92922c46e59f8d9388620c606cd8460228c95dc39684a282d9f"
+    }
+  ],
+  "exportedMedia": [
+    {
+      "path": "images/01-comparison.png",
+      "bytes": 441924,
+      "sha256": "b501de2e8c689ad99e0017567d5fb8554bc5b1c657e55728b3605be5b80c7d5a"
+    },
+    {
+      "path": "images/27-four-views.png",
+      "bytes": 194615,
+      "sha256": "662e98ccc50be7c21a30c21966ef48217be6a15f8601c36e3fcdae8deae4f7a1"
+    },
+    {
+      "path": "images/28-poses.png",
+      "bytes": 308506,
+      "sha256": "824d56f55f5cc8a6da23e8de9ffbb1f2346267e19b82c1c96e4a1e29ac4f69a3"
+    },
+    {
+      "path": "images/29-closeups.png",
+      "bytes": 481657,
+      "sha256": "017cacde288783dbb89cb59414fa5336ba3aedc87e9bd0c410195e6dcf78a7f1"
+    },
+    {
+      "path": "images/30-deformation.png",
+      "bytes": 376989,
+      "sha256": "6e243a1fa15553b9fa83eef4dfc4bf2d69fec6d3f2022e3e7d699e717f4b96b0"
+    },
+    {
+      "path": "videos/01-idle-walk.mp4",
+      "bytes": 467225,
+      "sha256": "ba35243cbc2e4327baa1ad13cc85b531c12736ae77c0ba41ebe3d7d516b389a7"
+    },
+    {
+      "path": "videos/02-seat-lie-wake.mp4",
+      "bytes": 941205,
+      "sha256": "e63779df019cd92922c46e59f8d9388620c606cd8460228c95dc39684a282d9f"
+    }
+  ],
+  "readmeSha256": "e29fb4936549fb28eb4e845ff57d22ef22843040c6469b6c977b77fc369d374d",
+  "noSourceModelOrGameIncluded": true,
+  "filesInZip": [
+    {
+      "path": "DIFFERENCES.md",
+      "bytes": 5394,
+      "sha256": "6124558fcfbf02d0325202f7e59e73f7b834b7685f2105fc6d9e91499fe76477"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2976,
+      "sha256": "00f7e25f599131cd44ecd342196306f88ed30b7fe545ce01c8e1834adce096e7"
+    },
+    {
+      "path": "REVIEW_NOTES.md",
+      "bytes": 699,
+      "sha256": "39a1afc57d108ccdf90bb30e5ab9b61130d53d8a3d0bce5e3971aa693bde454a"
+    },
+    {
+      "path": "images/00-concept-approved.png",
+      "bytes": 1681920,
+      "sha256": "e34b8e1f4b84724324a4dd9a4b2d64b5729bed95ae55102d3b2c640445a5d15d"
+    },
+    {
+      "path": "images/01-comparison.png",
+      "bytes": 441924,
+      "sha256": "b501de2e8c689ad99e0017567d5fb8554bc5b1c657e55728b3605be5b80c7d5a"
+    },
+    {
+      "path": "images/02-front.png",
+      "bytes": 100268,
+      "sha256": "3ef7efa2c352e24bc3f2faaa175a4b238f7a9bcbe9103f532922b61ddeda8121"
+    },
+    {
+      "path": "images/03-side.png",
+      "bytes": 79266,
+      "sha256": "6d8ed89ad413b0195efe35820657095dc5851472e4752f371398a303ea08a8d8"
+    },
+    {
+      "path": "images/04-three-quarter.png",
+      "bytes": 121014,
+      "sha256": "d2fc91b6db760a340d862dfea35e0c2fca9fa85572fb1cd6f0f23b3e30795702"
+    },
+    {
+      "path": "images/05-back.png",
+      "bytes": 85790,
+      "sha256": "44428d622d5dedbc49d87d9d3d7774572055c38b72b255e8a539d028c9f9f344"
+    },
+    {
+      "path": "images/06-idle.png",
+      "bytes": 130953,
+      "sha256": "1f50661ab0c9a4efb87992be7ae569a83590f84bd3ccb515dd4c3afe134ce9e2"
+    },
+    {
+      "path": "images/07-walk.png",
+      "bytes": 126969,
+      "sha256": "41152f80fe0d260f5cdaab6f3176986bc25522c94766c066035bc80cd6e3ebb9"
+    },
+    {
+      "path": "images/08-seat.png",
+      "bytes": 141502,
+      "sha256": "a803d69ba7e8d7309195d4b7f5333cc739851589710a9f35a78c76798487a87c"
+    },
+    {
+      "path": "images/09-supine.png",
+      "bytes": 300287,
+      "sha256": "27653de6d92f2178e680476976f3319339d3171cad99ecfdeae04797d6fd0010"
+    },
+    {
+      "path": "images/10-face-front.png",
+      "bytes": 222628,
+      "sha256": "c396934161673ae846bff2a6a3d56210e956506824fde01345e0683c4853504b"
+    },
+    {
+      "path": "images/11-face-three-quarter.png",
+      "bytes": 229669,
+      "sha256": "8bf512c7c268a0c47351994e0b560d5e298b8de618ed9c08d5fb8a755c0fd702"
+    },
+    {
+      "path": "images/12-hair-back.png",
+      "bytes": 131372,
+      "sha256": "e74ceb6473591e45227f9ee6a383812bf398cbf52d211677b6067300d0b6799a"
+    },
+    {
+      "path": "images/13-hair-side.png",
+      "bytes": 134166,
+      "sha256": "6140d55e31db463eedb3de3b2e245ac281380a49c9cc045abd66da0be02a3d76"
+    },
+    {
+      "path": "images/14-outfit-upper.png",
+      "bytes": 154408,
+      "sha256": "b913e1844fe2d64dda6310678c3233750c9852f50ee78f09fbde825e4f5653c5"
+    },
+    {
+      "path": "images/15-outfit-hem.png",
+      "bytes": 106089,
+      "sha256": "e55989b82742c3f28a097cc31dc812b71c6404e15d288bca8546b7671497181b"
+    },
+    {
+      "path": "images/16-socks-shoes.png",
+      "bytes": 170350,
+      "sha256": "374f5a57b4ffdcce5688a7f5f636d14e4c17257cd558bcef928e19c862a76d08"
+    },
+    {
+      "path": "images/17-seat-hair-dress.png",
+      "bytes": 144599,
+      "sha256": "28761234581948cd762028c071b77992df054b831a73fdfa2144b9b81cde26a0"
+    },
+    {
+      "path": "images/18-supine-hair-dress-side.png",
+      "bytes": 203112,
+      "sha256": "edd8e5f5c7b0ea13839ad8c2bd4670d6344f62ddf99e79a03dd2b897e362a000"
+    },
+    {
+      "path": "images/19-supine-hair-dress-top.png",
+      "bytes": 368652,
+      "sha256": "4d4c15671f4d4d59c595177f81b6f37295961b6ac0346fd0e5e9b038288f3666"
+    },
+    {
+      "path": "images/20-seat-corrective-on.png",
+      "bytes": 130242,
+      "sha256": "2952f03094576b6609a514947f4f29dfa28bdb3ba0e5bc17808e4b8c0fde6566"
+    },
+    {
+      "path": "images/21-seat-corrective-off.png",
+      "bytes": 134171,
+      "sha256": "3d49cdebc2d4af9ae1d0da81ec9ba49f348637a577b02e26ebd7cca1abcf551f"
+    },
+    {
+      "path": "images/22-supine-corrective-on.png",
+      "bytes": 203112,
+      "sha256": "edd8e5f5c7b0ea13839ad8c2bd4670d6344f62ddf99e79a03dd2b897e362a000"
+    },
+    {
+      "path": "images/23-supine-corrective-off.png",
+      "bytes": 205625,
+      "sha256": "8a18db8c44910d3cff69a1e9a61d8743377b8b0562aed51871bc3f4d1ff97826"
+    },
+    {
+      "path": "images/24-hand-support-detail.png",
+      "bytes": 183054,
+      "sha256": "51d74edbd384f0be34faa041d110af36e73cd88723cc144826a29992d7e66c64"
+    },
+    {
+      "path": "images/25-head-pillow-detail.png",
+      "bytes": 356932,
+      "sha256": "c9a9ca9ea433068146c63533b899b9f232d742f1bdcd797aa866cee062185d0f"
+    },
+    {
+      "path": "images/26-wake.png",
+      "bytes": 293537,
+      "sha256": "278c8fdb08eef0a5c0bc220d85343289bb56fb999ff0ba38cbb5386b601fd354"
+    },
+    {
+      "path": "images/27-four-views.png",
+      "bytes": 194615,
+      "sha256": "662e98ccc50be7c21a30c21966ef48217be6a15f8601c36e3fcdae8deae4f7a1"
+    },
+    {
+      "path": "images/28-poses.png",
+      "bytes": 308506,
+      "sha256": "824d56f55f5cc8a6da23e8de9ffbb1f2346267e19b82c1c96e4a1e29ac4f69a3"
+    },
+    {
+      "path": "images/29-closeups.png",
+      "bytes": 481657,
+      "sha256": "017cacde288783dbb89cb59414fa5336ba3aedc87e9bd0c410195e6dcf78a7f1"
+    },
+    {
+      "path": "images/30-deformation.png",
+      "bytes": 376989,
+      "sha256": "6e243a1fa15553b9fa83eef4dfc4bf2d69fec6d3f2022e3e7d699e717f4b96b0"
+    },
+    {
+      "path": "index.html",
+      "bytes": 8857,
+      "sha256": "7fe7348f7ef9304d055c666e85e9889a4ab21148d47429040621ddae41d09011"
+    },
+    {
+      "path": "review-manifest.json",
+      "bytes": 9325,
+      "sha256": "1073937f9636c54e6f0f6e7962554a22835d97db35618f2101f62d2a40b7f3a7"
+    },
+    {
+      "path": "videos/01-idle-walk.mp4",
+      "bytes": 467225,
+      "sha256": "ba35243cbc2e4327baa1ad13cc85b531c12736ae77c0ba41ebe3d7d516b389a7"
+    },
+    {
+      "path": "videos/02-seat-lie-wake.mp4",
+      "bytes": 941205,
+      "sha256": "e63779df019cd92922c46e59f8d9388620c606cd8460228c95dc39684a282d9f"
+    }
+  ]
+}

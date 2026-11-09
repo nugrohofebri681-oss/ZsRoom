@@ -1,0 +1,1438 @@
+{
+  "package": "ZsRoom PoC-03 R2 visual review",
+  "status": "prepared locally; awaiting separate commit/push authorization; not model final approval",
+  "branchProposal": "poc03-r2-review-export",
+  "packagedDate": "2026-11-09",
+  "checkpointDate": "2026-11-07",
+  "archive": "zsroom-poc03-r2-review.zip",
+  "archiveBytes": 8833294,
+  "archiveSHA256": "c83cf1ef17b181748f29b8906153850bdf42a31a6de0ef7321a949557151bf4a",
+  "archiveEntries": 36,
+  "pngCount": 30,
+  "originalPNGBytesPreserved": true,
+  "modelSHA256": "01ba78e10bb78ca730a74c4e5d250a660381d82124a273b42b95ca1f77db4292",
+  "modelUnchanged": true,
+  "triangleAudit": {
+    "method": "Read-only triangle index count, assigned to part vertex ranges. Every triangle has all 3 vertices in exactly one part; totals reconciled with metadata. No remesh/decimation/render or Blender rerun.",
+    "r1": {
+      "path": "remake/character-lab/public/model/zila-model.json",
+      "sha256": "e1c952336d373075c7fdf54e0e8dc0b808070f79181d38debf3dd916af51b5b0",
+      "triangles": 9972,
+      "vertices": 5310,
+      "materials": [
+        {
+          "material": "skin",
+          "triangles": 1932,
+          "vertices": 1010,
+          "parts": [
+            {
+              "name": "face",
+              "triangles": 520,
+              "vertices": 262
+            },
+            {
+              "name": "neck",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "ear.L",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "ear-inner.L",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "ear.R",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "ear-inner.R",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "nose",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "mouth",
+              "triangles": 132,
+              "vertices": 68
+            },
+            {
+              "name": "leg.L",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "palm.L",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "finger.L0",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "finger.L1",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "finger.L2",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "finger.L3",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "thumb.L",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "leg.R",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "palm.R",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "finger.R0",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "finger.R1",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "finger.R2",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "finger.R3",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "thumb.R",
+              "triangles": 64,
+              "vertices": 34
+            }
+          ]
+        },
+        {
+          "material": "hair",
+          "triangles": 3136,
+          "vertices": 1686,
+          "parts": [
+            {
+              "name": "upper-lash.L",
+              "triangles": 132,
+              "vertices": 68
+            },
+            {
+              "name": "brow.L",
+              "triangles": 108,
+              "vertices": 56
+            },
+            {
+              "name": "upper-lash.R",
+              "triangles": 132,
+              "vertices": 68
+            },
+            {
+              "name": "brow.R",
+              "triangles": 108,
+              "vertices": 56
+            },
+            {
+              "name": "hair-cap",
+              "triangles": 320,
+              "vertices": 180
+            },
+            {
+              "name": "hair-drape",
+              "triangles": 640,
+              "vertices": 363
+            },
+            {
+              "name": "long-hair-0",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "long-hair-1",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "long-hair-2",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "long-hair-3",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "long-hair-4",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "bangs",
+              "triangles": 288,
+              "vertices": 175
+            },
+            {
+              "name": "face-lock-1",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "face-lock1",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "crown-tuft",
+              "triangles": 176,
+              "vertices": 90
+            }
+          ]
+        },
+        {
+          "material": "cloth",
+          "triangles": 3776,
+          "vertices": 2030,
+          "parts": [
+            {
+              "name": "sock.L",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "shoe.L",
+              "triangles": 120,
+              "vertices": 62
+            },
+            {
+              "name": "sole.L",
+              "triangles": 120,
+              "vertices": 62
+            },
+            {
+              "name": "shoe-strap.L",
+              "triangles": 108,
+              "vertices": 56
+            },
+            {
+              "name": "shoe-button.L",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "shoulder-cloth.L",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "sleeve.L",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "cuff.L",
+              "triangles": 80,
+              "vertices": 42
+            },
+            {
+              "name": "sock.R",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "shoe.R",
+              "triangles": 120,
+              "vertices": 62
+            },
+            {
+              "name": "sole.R",
+              "triangles": 120,
+              "vertices": 62
+            },
+            {
+              "name": "shoe-strap.R",
+              "triangles": 108,
+              "vertices": 54
+            },
+            {
+              "name": "shoe-button.R",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "shoulder-cloth.R",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "sleeve.R",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "cuff.R",
+              "triangles": 80,
+              "vertices": 42
+            },
+            {
+              "name": "dress",
+              "triangles": 672,
+              "vertices": 360
+            },
+            {
+              "name": "hem",
+              "triangles": 288,
+              "vertices": 192
+            },
+            {
+              "name": "collar-1",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "bow-1",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "bow-tail-1",
+              "triangles": 84,
+              "vertices": 44
+            },
+            {
+              "name": "collar1",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "bow1",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "bow-tail1",
+              "triangles": 84,
+              "vertices": 44
+            },
+            {
+              "name": "bow-knot",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "placket",
+              "triangles": 132,
+              "vertices": 68
+            },
+            {
+              "name": "button1.105",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "button1.015",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "button0.925",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "button0.835",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "ornament--1-0",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "ornament--1-1",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "ornament--1-2",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "ribbon-1",
+              "triangles": 108,
+              "vertices": 56
+            },
+            {
+              "name": "ornament-1-0",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "ornament-1-1",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "ornament-1-2",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "ribbon1",
+              "triangles": 108,
+              "vertices": 56
+            }
+          ]
+        },
+        {
+          "material": "eyes",
+          "triangles": 1128,
+          "vertices": 584,
+          "parts": [
+            {
+              "name": "eye-white.L",
+              "triangles": 168,
+              "vertices": 86
+            },
+            {
+              "name": "iris.L",
+              "triangles": 168,
+              "vertices": 86
+            },
+            {
+              "name": "pupil.L",
+              "triangles": 100,
+              "vertices": 52
+            },
+            {
+              "name": "eye-shine.L",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "eye-shine-small.L",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "eye-white.R",
+              "triangles": 168,
+              "vertices": 86
+            },
+            {
+              "name": "iris.R",
+              "triangles": 168,
+              "vertices": 86
+            },
+            {
+              "name": "pupil.R",
+              "triangles": 100,
+              "vertices": 52
+            },
+            {
+              "name": "eye-shine.R",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "eye-shine-small.R",
+              "triangles": 64,
+              "vertices": 34
+            }
+          ]
+        }
+      ]
+    },
+    "r2": {
+      "path": "remake/character-lab/public/model/r2/zila-model.json",
+      "sha256": "01ba78e10bb78ca730a74c4e5d250a660381d82124a273b42b95ca1f77db4292",
+      "triangles": 17276,
+      "vertices": 8906,
+      "materials": [
+        {
+          "material": "skin",
+          "triangles": 1216,
+          "vertices": 646,
+          "parts": [
+            {
+              "name": "neck",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "ear.-1",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "ear-inner.-1",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "ear.1",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "ear-inner.1",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "leg.L",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "palm.L",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "finger.L0",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "finger.L1",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "finger.L2",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "finger.L3",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "thumb.L",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "leg.R",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "palm.R",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "finger.R0",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "finger.R1",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "finger.R2",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "finger.R3",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "thumb.R",
+              "triangles": 64,
+              "vertices": 34
+            }
+          ]
+        },
+        {
+          "material": "hair",
+          "triangles": 8592,
+          "vertices": 4382,
+          "parts": [
+            {
+              "name": "r2-scalp",
+              "triangles": 640,
+              "vertices": 352
+            },
+            {
+              "name": "r2-under-volume",
+              "triangles": 1156,
+              "vertices": 580
+            },
+            {
+              "name": "r2-long-clump-0",
+              "triangles": 286,
+              "vertices": 145
+            },
+            {
+              "name": "r2-long-clump-1",
+              "triangles": 286,
+              "vertices": 145
+            },
+            {
+              "name": "r2-long-clump-2",
+              "triangles": 286,
+              "vertices": 145
+            },
+            {
+              "name": "r2-long-clump-3",
+              "triangles": 286,
+              "vertices": 145
+            },
+            {
+              "name": "r2-long-clump-4",
+              "triangles": 286,
+              "vertices": 145
+            },
+            {
+              "name": "r2-long-clump-5",
+              "triangles": 286,
+              "vertices": 145
+            },
+            {
+              "name": "r2-long-clump-6",
+              "triangles": 286,
+              "vertices": 145
+            },
+            {
+              "name": "r2-long-clump-7",
+              "triangles": 286,
+              "vertices": 145
+            },
+            {
+              "name": "r2-long-clump-8",
+              "triangles": 286,
+              "vertices": 145
+            },
+            {
+              "name": "r2-long-clump-9",
+              "triangles": 286,
+              "vertices": 145
+            },
+            {
+              "name": "r2-long-clump-10",
+              "triangles": 286,
+              "vertices": 145
+            },
+            {
+              "name": "r2-layer-0",
+              "triangles": 254,
+              "vertices": 129
+            },
+            {
+              "name": "r2-layer-1",
+              "triangles": 254,
+              "vertices": 129
+            },
+            {
+              "name": "r2-layer-2",
+              "triangles": 254,
+              "vertices": 129
+            },
+            {
+              "name": "r2-layer-3",
+              "triangles": 254,
+              "vertices": 129
+            },
+            {
+              "name": "r2-layer-4",
+              "triangles": 254,
+              "vertices": 129
+            },
+            {
+              "name": "r2-bang-0",
+              "triangles": 222,
+              "vertices": 113
+            },
+            {
+              "name": "r2-bang-1",
+              "triangles": 222,
+              "vertices": 113
+            },
+            {
+              "name": "r2-bang-2",
+              "triangles": 222,
+              "vertices": 113
+            },
+            {
+              "name": "r2-bang-3",
+              "triangles": 222,
+              "vertices": 113
+            },
+            {
+              "name": "r2-bang-4",
+              "triangles": 222,
+              "vertices": 113
+            },
+            {
+              "name": "r2-bang-5",
+              "triangles": 222,
+              "vertices": 113
+            },
+            {
+              "name": "r2-bang-6",
+              "triangles": 222,
+              "vertices": 113
+            },
+            {
+              "name": "r2-face-frame--1",
+              "triangles": 318,
+              "vertices": 161
+            },
+            {
+              "name": "r2-face-frame-1",
+              "triangles": 318,
+              "vertices": 161
+            },
+            {
+              "name": "r2-tuft",
+              "triangles": 190,
+              "vertices": 97
+            }
+          ]
+        },
+        {
+          "material": "cloth",
+          "triangles": 4668,
+          "vertices": 2476,
+          "parts": [
+            {
+              "name": "sock.L",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "shoe.L",
+              "triangles": 120,
+              "vertices": 62
+            },
+            {
+              "name": "sole.L",
+              "triangles": 120,
+              "vertices": 62
+            },
+            {
+              "name": "shoe-strap.L",
+              "triangles": 108,
+              "vertices": 56
+            },
+            {
+              "name": "shoe-button.L",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "shoulder-cloth.L",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "sleeve.L",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "cuff.L",
+              "triangles": 80,
+              "vertices": 42
+            },
+            {
+              "name": "sock.R",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "shoe.R",
+              "triangles": 120,
+              "vertices": 62
+            },
+            {
+              "name": "sole.R",
+              "triangles": 120,
+              "vertices": 62
+            },
+            {
+              "name": "shoe-strap.R",
+              "triangles": 108,
+              "vertices": 54
+            },
+            {
+              "name": "shoe-button.R",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "shoulder-cloth.R",
+              "triangles": 64,
+              "vertices": 34
+            },
+            {
+              "name": "sleeve.R",
+              "triangles": 176,
+              "vertices": 90
+            },
+            {
+              "name": "cuff.R",
+              "triangles": 80,
+              "vertices": 42
+            },
+            {
+              "name": "dress",
+              "triangles": 672,
+              "vertices": 360
+            },
+            {
+              "name": "hem",
+              "triangles": 288,
+              "vertices": 192
+            },
+            {
+              "name": "collar-1",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "bow-1",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "bow-tail-1",
+              "triangles": 84,
+              "vertices": 44
+            },
+            {
+              "name": "collar1",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "bow1",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "bow-tail1",
+              "triangles": 84,
+              "vertices": 44
+            },
+            {
+              "name": "bow-knot",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "placket",
+              "triangles": 132,
+              "vertices": 68
+            },
+            {
+              "name": "button1.105",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "button1.015",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "button0.925",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "button0.835",
+              "triangles": 36,
+              "vertices": 20
+            },
+            {
+              "name": "r2-ornament--1-0",
+              "triangles": 168,
+              "vertices": 86
+            },
+            {
+              "name": "r2-ornament--1-1",
+              "triangles": 168,
+              "vertices": 86
+            },
+            {
+              "name": "r2-ornament--1-2",
+              "triangles": 168,
+              "vertices": 86
+            },
+            {
+              "name": "r2-ribbon--1",
+              "triangles": 158,
+              "vertices": 81
+            },
+            {
+              "name": "r2-ornament-1-0",
+              "triangles": 168,
+              "vertices": 86
+            },
+            {
+              "name": "r2-ornament-1-1",
+              "triangles": 168,
+              "vertices": 86
+            },
+            {
+              "name": "r2-ornament-1-2",
+              "triangles": 168,
+              "vertices": 86
+            },
+            {
+              "name": "r2-ribbon-1",
+              "triangles": 158,
+              "vertices": 81
+            }
+          ]
+        },
+        {
+          "material": "face",
+          "triangles": 2800,
+          "vertices": 1402,
+          "parts": [
+            {
+              "name": "face",
+              "triangles": 2800,
+              "vertices": 1402
+            }
+          ]
+        }
+      ]
+    },
+    "hairGroups": [
+      {
+        "key": "scalp",
+        "label": "Scalp",
+        "partCount": 1,
+        "triangles": 640,
+        "parts": [
+          {
+            "name": "r2-scalp",
+            "triangles": 640,
+            "vertices": 352
+          }
+        ]
+      },
+      {
+        "key": "under-volume",
+        "label": "Volume penghubung",
+        "partCount": 1,
+        "triangles": 1156,
+        "parts": [
+          {
+            "name": "r2-under-volume",
+            "triangles": 1156,
+            "vertices": 580
+          }
+        ]
+      },
+      {
+        "key": "long",
+        "label": "11 helai panjang",
+        "partCount": 11,
+        "triangles": 3146,
+        "parts": [
+          {
+            "name": "r2-long-clump-0",
+            "triangles": 286,
+            "vertices": 145
+          },
+          {
+            "name": "r2-long-clump-1",
+            "triangles": 286,
+            "vertices": 145
+          },
+          {
+            "name": "r2-long-clump-2",
+            "triangles": 286,
+            "vertices": 145
+          },
+          {
+            "name": "r2-long-clump-3",
+            "triangles": 286,
+            "vertices": 145
+          },
+          {
+            "name": "r2-long-clump-4",
+            "triangles": 286,
+            "vertices": 145
+          },
+          {
+            "name": "r2-long-clump-5",
+            "triangles": 286,
+            "vertices": 145
+          },
+          {
+            "name": "r2-long-clump-6",
+            "triangles": 286,
+            "vertices": 145
+          },
+          {
+            "name": "r2-long-clump-7",
+            "triangles": 286,
+            "vertices": 145
+          },
+          {
+            "name": "r2-long-clump-8",
+            "triangles": 286,
+            "vertices": 145
+          },
+          {
+            "name": "r2-long-clump-9",
+            "triangles": 286,
+            "vertices": 145
+          },
+          {
+            "name": "r2-long-clump-10",
+            "triangles": 286,
+            "vertices": 145
+          }
+        ]
+      },
+      {
+        "key": "layers",
+        "label": "5 layer pendek",
+        "partCount": 5,
+        "triangles": 1270,
+        "parts": [
+          {
+            "name": "r2-layer-0",
+            "triangles": 254,
+            "vertices": 129
+          },
+          {
+            "name": "r2-layer-1",
+            "triangles": 254,
+            "vertices": 129
+          },
+          {
+            "name": "r2-layer-2",
+            "triangles": 254,
+            "vertices": 129
+          },
+          {
+            "name": "r2-layer-3",
+            "triangles": 254,
+            "vertices": 129
+          },
+          {
+            "name": "r2-layer-4",
+            "triangles": 254,
+            "vertices": 129
+          }
+        ]
+      },
+      {
+        "key": "bangs",
+        "label": "7 poni",
+        "partCount": 7,
+        "triangles": 1554,
+        "parts": [
+          {
+            "name": "r2-bang-0",
+            "triangles": 222,
+            "vertices": 113
+          },
+          {
+            "name": "r2-bang-1",
+            "triangles": 222,
+            "vertices": 113
+          },
+          {
+            "name": "r2-bang-2",
+            "triangles": 222,
+            "vertices": 113
+          },
+          {
+            "name": "r2-bang-3",
+            "triangles": 222,
+            "vertices": 113
+          },
+          {
+            "name": "r2-bang-4",
+            "triangles": 222,
+            "vertices": 113
+          },
+          {
+            "name": "r2-bang-5",
+            "triangles": 222,
+            "vertices": 113
+          },
+          {
+            "name": "r2-bang-6",
+            "triangles": 222,
+            "vertices": 113
+          }
+        ]
+      },
+      {
+        "key": "face-frame",
+        "label": "2 pembingkai wajah",
+        "partCount": 2,
+        "triangles": 636,
+        "parts": [
+          {
+            "name": "r2-face-frame--1",
+            "triangles": 318,
+            "vertices": 161
+          },
+          {
+            "name": "r2-face-frame-1",
+            "triangles": 318,
+            "vertices": 161
+          }
+        ]
+      },
+      {
+        "key": "tuft",
+        "label": "Tuft",
+        "partCount": 1,
+        "triangles": 190,
+        "parts": [
+          {
+            "name": "r2-tuft",
+            "triangles": 190,
+            "vertices": 97
+          }
+        ]
+      }
+    ],
+    "hairSharePercent": 49.73373466080111,
+    "hairAssociatedCloth": {
+      "triangles": 1324,
+      "parts": [
+        {
+          "name": "r2-ornament--1-0",
+          "triangles": 168,
+          "vertices": 86
+        },
+        {
+          "name": "r2-ornament--1-1",
+          "triangles": 168,
+          "vertices": 86
+        },
+        {
+          "name": "r2-ornament--1-2",
+          "triangles": 168,
+          "vertices": 86
+        },
+        {
+          "name": "r2-ribbon--1",
+          "triangles": 158,
+          "vertices": 81
+        },
+        {
+          "name": "r2-ornament-1-0",
+          "triangles": 168,
+          "vertices": 86
+        },
+        {
+          "name": "r2-ornament-1-1",
+          "triangles": 168,
+          "vertices": 86
+        },
+        {
+          "name": "r2-ornament-1-2",
+          "triangles": 168,
+          "vertices": 86
+        },
+        {
+          "name": "r2-ribbon-1",
+          "triangles": 158,
+          "vertices": 81
+        }
+      ]
+    },
+    "optimizationPerformed": false,
+    "theoreticalCandidates": [
+      {
+        "name": "11 long locks, 18 to 14 path segments, 8 radial sides",
+        "saving": 704
+      },
+      {
+        "name": "Scalp 32 to 24 columns, 10 rows",
+        "saving": 160
+      },
+      {
+        "name": "Under-volume 28 to 24 columns, 9 rows, closed two shells",
+        "saving": 160
+      }
+    ],
+    "limits": "Topology arithmetic is not an optimized asset or proof of unchanged silhouette/deformation. No physical A05 measurement."
+  },
+  "exportedPNGs": [
+    {
+      "path": "images/00-r1-vs-r2.png",
+      "width": 1600,
+      "height": 2093,
+      "mode": "RGB",
+      "bytes": 432509,
+      "sha256": "6f4ab624e01b984c32c95d8a3437c3bac417dea6e092478562f0054a0489a279",
+      "matchesOriginalPNG": true
+    },
+    {
+      "path": "images/01-four-views.png",
+      "width": 1600,
+      "height": 1463,
+      "mode": "RGB",
+      "bytes": 199193,
+      "sha256": "66f196819e68877c8056ecabdcae64eac0f5ba731b939df50055052ae0b9bce4",
+      "matchesOriginalPNG": true
+    },
+    {
+      "path": "images/02-face-hair-closeups.png",
+      "width": 1600,
+      "height": 1462,
+      "mode": "RGB",
+      "bytes": 404953,
+      "sha256": "2b2a9d3e108b06c8e01040ed2c454bd143af4fcb25f3c63dcce8a9cffa475828",
+      "matchesOriginalPNG": true
+    },
+    {
+      "path": "images/03-expressions.png",
+      "width": 1600,
+      "height": 1463,
+      "mode": "RGB",
+      "bytes": 289018,
+      "sha256": "090c0fb378cc29162f95152ddd413897f6c456b412fe689ca55b0e4bf9d4f5ca",
+      "matchesOriginalPNG": true
+    },
+    {
+      "path": "images/04-animation-checks.png",
+      "width": 1600,
+      "height": 2093,
+      "mode": "RGB",
+      "bytes": 473697,
+      "sha256": "2910ac414b6f48938d2485fa18ba85be0bcdc24c1f4802b901eb5a9d85d7d6f3",
+      "matchesOriginalPNG": true
+    }
+  ],
+  "readmeSHA256": "4bc23e7ba92efc0c930f6abe5d11a7ddf81a38f11acb79b84fd3a16e15c65ab3",
+  "filesInZip": [
+    {
+      "path": "AUDIT.md",
+      "bytes": 3511,
+      "sha256": "b871a4abe4bd37c3217cf8d25587ca284a9f84d00737776d0a7f5d70ce62f701"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1280,
+      "sha256": "a607bd4d0bbda86483df9ee1930482110cf2cd45cfae9019a15265ba11096404"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 6007,
+      "sha256": "2ed9f6291a73c59415b547037a5a81c86789cda76562c86763edf8af25d72519"
+    },
+    {
+      "path": "TRIANGLE_AUDIT.md",
+      "bytes": 5077,
+      "sha256": "df438d1bab52d62c61212169e52b6ee4e03ddea7d4dff4a72e61a91f61d78cb4"
+    },
+    {
+      "path": "images/00-r1-vs-r2.png",
+      "bytes": 432509,
+      "sha256": "6f4ab624e01b984c32c95d8a3437c3bac417dea6e092478562f0054a0489a279"
+    },
+    {
+      "path": "images/01-four-views.png",
+      "bytes": 199193,
+      "sha256": "66f196819e68877c8056ecabdcae64eac0f5ba731b939df50055052ae0b9bce4"
+    },
+    {
+      "path": "images/02-face-hair-closeups.png",
+      "bytes": 404953,
+      "sha256": "2b2a9d3e108b06c8e01040ed2c454bd143af4fcb25f3c63dcce8a9cffa475828"
+    },
+    {
+      "path": "images/03-expressions.png",
+      "bytes": 289018,
+      "sha256": "090c0fb378cc29162f95152ddd413897f6c456b412fe689ca55b0e4bf9d4f5ca"
+    },
+    {
+      "path": "images/04-animation-checks.png",
+      "bytes": 473697,
+      "sha256": "2910ac414b6f48938d2485fa18ba85be0bcdc24c1f4802b901eb5a9d85d7d6f3"
+    },
+    {
+      "path": "images/r1-back.png",
+      "bytes": 155539,
+      "sha256": "d911f3039d10c75faac6dfd12e96ceb0233dc1b51ee6d5956c62dc78baa01567"
+    },
+    {
+      "path": "images/r1-face-front.png",
+      "bytes": 394700,
+      "sha256": "d5e39787375323b6a727901e18e3243bd983f3f5e44984aef1501ef370d13ec0"
+    },
+    {
+      "path": "images/r1-face-three-quarter.png",
+      "bytes": 397106,
+      "sha256": "4959209de7d021eee098c5bd565d31a1df21823d19de8b7305c3a2bd0fa74aa0"
+    },
+    {
+      "path": "images/r1-front.png",
+      "bytes": 178203,
+      "sha256": "458b5cbec4c08ba5fa2fd136e48c2358b10ffac13d3ffee4bfb050fbb65c0c5c"
+    },
+    {
+      "path": "images/r1-hair-back.png",
+      "bytes": 229224,
+      "sha256": "bed5da33eb64d636875deba0cc1fd08765fa679cbbb4ce83c2566553e1dd6f7f"
+    },
+    {
+      "path": "images/r1-hair-side.png",
+      "bytes": 237069,
+      "sha256": "c5a707b5d46fabd22dfa1de9a0e092605620cb670bb068ea385d5caa80b65450"
+    },
+    {
+      "path": "images/r1-side.png",
+      "bytes": 143371,
+      "sha256": "7ea946559a0e3253c893f8d0dabce2ec7e1d3f9b0b0162925aad9a06571a19b1"
+    },
+    {
+      "path": "images/r1-three-quarter.png",
+      "bytes": 198571,
+      "sha256": "9f1783398afbd04a29673554afc278395970363c872e54eda5027ea1cc6db05e"
+    },
+    {
+      "path": "images/r2-back.png",
+      "bytes": 192178,
+      "sha256": "8ee87084f752fa88f38e4518b75f9920a01e2c9e9d1e77d6b6d00fe39656ea44"
+    },
+    {
+      "path": "images/r2-bed-seat.png",
+      "bytes": 244824,
+      "sha256": "dc270637d31ab800168f0203e9671f05df2b40688c810c737bb1dbb1d4cbfe4c"
+    },
+    {
+      "path": "images/r2-bed-supine-side.png",
+      "bytes": 229404,
+      "sha256": "fcc6a1c829214effbe4a0f502ed74773d8eed9a90f66e6f2f7ffc0bc7358aa62"
+    },
+    {
+      "path": "images/r2-bed-supine-top.png",
+      "bytes": 409751,
+      "sha256": "df1f04bdaa88a68f763f0c37ef0e9417aa7c1b89b79bb1031527b9dedbc265d4"
+    },
+    {
+      "path": "images/r2-bed-wake.png",
+      "bytes": 319345,
+      "sha256": "64fe782e12e19c72c7a74fe2d512cc8184904582f54b99f321f375d14799f490"
+    },
+    {
+      "path": "images/r2-expression-blink.png",
+      "bytes": 463872,
+      "sha256": "7a85556613c860f663d0f4bddcb941b93723995c88e249349bedd249447bcd78"
+    },
+    {
+      "path": "images/r2-expression-sleepy.png",
+      "bytes": 476013,
+      "sha256": "48e8e33cc161c321bb0819ccc7caa232d73497e79f9e35731a014418e8c51c47"
+    },
+    {
+      "path": "images/r2-expression-smile.png",
+      "bytes": 496556,
+      "sha256": "08ea551bd7d7e5daf64082c03c6d6660591e9ee992cdde56f85d7ac58514c99d"
+    },
+    {
+      "path": "images/r2-face-front.png",
+      "bytes": 497743,
+      "sha256": "846b824affa7d42c19ac30ac9a0a82a45200297b11450d7c5d661b160c0e702d"
+    },
+    {
+      "path": "images/r2-face-three-quarter.png",
+      "bytes": 500971,
+      "sha256": "d7f76609da20a4732b5b2bdce947a8c18671a772152d178e87a14908d0844898"
+    },
+    {
+      "path": "images/r2-front.png",
+      "bytes": 207379,
+      "sha256": "89eeec2f4a768177126b8ebd05d6df190046fdd8aa4f92a272a97be8763d0a6e"
+    },
+    {
+      "path": "images/r2-hair-back.png",
+      "bytes": 344898,
+      "sha256": "eecd4abe18473ebea2251aeea980df32be02017dd5ea12006ffdf8eb7851e881"
+    },
+    {
+      "path": "images/r2-hair-side.png",
+      "bytes": 285201,
+      "sha256": "081856b18d42a91968aa6a087ba73d4a7565233f42959792219142da6258c58f"
+    },
+    {
+      "path": "images/r2-idle.png",
+      "bytes": 237097,
+      "sha256": "ade344cb68b5131affb25f1194b75245664e8ebd850b6b53b3224e9f964abbc9"
+    },
+    {
+      "path": "images/r2-side.png",
+      "bytes": 159472,
+      "sha256": "4e3f90f323fd9e115566df15355b61dfc5195d49662548ae3f2fe7574f27933f"
+    },
+    {
+      "path": "images/r2-three-quarter.png",
+      "bytes": 222794,
+      "sha256": "d8cb9c6c9fe5cc1e33956889e951fee263a4b5f9a8b096047653ea09deb1c7eb"
+    },
+    {
+      "path": "images/r2-walk.png",
+      "bytes": 231266,
+      "sha256": "3265726e011c983cc85e5b276a98e617703217c1a3f8c4369319736ef4623f3e"
+    },
+    {
+      "path": "index.html",
+      "bytes": 6689,
+      "sha256": "aa4e66dfceec64b3523f2ccecd5e96f5cd6105d3bce05c4d64e51cbceefbd32a"
+    },
+    {
+      "path": "review-manifest.json",
+      "bytes": 38108,
+      "sha256": "d8af38521da8b93e4ebcce9401e392ba6687776b52ffe5a71122008e2b79714b"
+    }
+  ],
+  "privateDataCredentialsSourceOrModelIncluded": false,
+  "githubHTTP200Verified": false,
+  "githubVerificationStatus": "Not uploaded; HTTP checks only possible after authorized upload"
+}

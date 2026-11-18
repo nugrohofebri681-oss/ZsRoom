@@ -1,4 +1,4 @@
-# ZsRoom Art Bible — v1.2
+# ZsRoom Art Bible — v1.3
 
 **Style name:** ZsRoom OG Enhanced — Premium HD Illustrated 2D
 **Status:** v1.0 technical standard (Claude Code). Characters §8 are **draft — pending Creative Director approval**.
@@ -141,6 +141,14 @@ Character sheet canvas: 256 × 400 px @ 2 px/cm, pivot (128, 376) between the fe
 
 Each prop spec defines: `footprint` (true floor size), `collision` rectangles relative to the pivot (may add up to `maxSideOverhangCm` on the sides to cover overhanging fabric), and `artBounds` (the box every opaque pixel must stay inside). Art may overhang the footprint sideways by at most `maxSideOverhangCm`; it must never extend below the pivot line except for a ≤ 10 px contact-occlusion fade.
 
+### Painted-geometry tolerance
+Generators don't hit template lines exactly. Painted surface edges (a tabletop's front edge, a mattress top, a headboard top) must land within **±10 % of the designed height, or ±6 px at master density, whichever is larger**, of their template guide line. Submissions report the measured rows in `metadata.selfReview.knownIssues`.
+
+- Within tolerance: no revision. Collision, sorting, shadows and interactions are spec-driven and unaffected.
+- Outside tolerance: the Creative Director decides whether to accept it or request a narrowly targeted revision.
+- Neighbouring furniture should not drift in **opposite** directions. Reviews compare the implied camera pitch against approved neighbours.
+- Where props will later carry other props (lamps, books), the approved asset records its measured surface height so placement follows the painted art, not the nominal spec.
+
 ## 12. Occlusion & depth sorting
 
 - Depth = ground y of the pivot (front edge of the footprint). Characters standing **beside** a deep object sort in front of it.
@@ -194,6 +202,8 @@ Approved assets become **style references** for their own category. They are not
 - Known gaps in the current furniture reference, to improve gradually in new assets **without regenerating approved ones**: a more visible upper-left key light, and slightly crisper coloured contours.
 
 ## Changelog
+
+- **v1.3 (2026-11-18)** — §11 painted-geometry tolerance (from the `prop_nightstand_zila` v001 review).
 
 - **v1.2 (2026-11-18)** — Character draft: Zila 165 / Febri 170 cm (3–6 cm difference rule, equal head size). §16 style references: `prop_bed_zila` v001 (VISUAL PASS) is the furniture reference, without locking other categories.
 

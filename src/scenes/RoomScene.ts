@@ -157,6 +157,13 @@ export class RoomScene extends Phaser.Scene {
       g.lineStyle(1, 0xff3d7f, 1).strokeRect(...rect(p.sortable.footprint));
       const pv = groundToRender(p.x, p.y);
       g.lineStyle(2, 0x000000, 1).lineBetween(pv.x - 6, pv.y, pv.x + 6, pv.y).lineBetween(pv.x, pv.y - 6, pv.x, pv.y + 6);
+      // designed main surface height (mattressTop / top) on the front face — compare against the painted edge
+      const hs = p.spec.heightsCm;
+      const main = hs.mattressTop ?? hs.top;
+      if (main !== undefined) {
+        const hw = p.spec.footprint.widthCm / 2;
+        g.lineStyle(1.5, 0xffa31a, 1).lineBetween(pv.x - hw, pv.y - main, pv.x + hw, pv.y - main);
+      }
     }
     for (const a of this.room.anchors) {
       const c = groundToRender(a.x, a.y);

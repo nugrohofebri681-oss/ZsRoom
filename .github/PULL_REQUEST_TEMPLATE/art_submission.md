@@ -16,7 +16,7 @@
 ### Self-review (Art Bible v1)
 - [ ] Premium HD illustration — not pixel art / 3D / generic anime
 - [ ] ZsRoom oblique perspective (no side faces, no convergence)
-- [ ] True scale vs Zila 158 cm / Febri 170 cm (gallery scale view)
+- [ ] True scale vs Zila 165 cm / Febri 170 cm (gallery scale view; values from specs/characters)
 - [ ] Upper-left light, coloured lines, no pure black
 - [ ] No baked floor shadow / background; clean alpha on light & dark floors
 - [ ] Identity details from the request present

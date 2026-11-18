@@ -1,0 +1,51 @@
+{
+  "assetId": "prop_nightstand_zila",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art-bible/perspective/prop_nightstand_zila_template.png",
+      "art-bible/perspective/projection_cube.png"
+    ]
+  },
+  "createdAt": "2026-11-18T09:30:46.235278+00:00",
+  "files": {
+    "master": {
+      "path": "prop_nightstand_zila_v001.png",
+      "sha256": "13473053a483cd4db2813cb66d9f539098ec545f56d3c4dc42e5f454cef93f79"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_nightstand_zila/v001/candidate-a.png",
+        "sha256": "5c585cc402dd80a0e1ae4907cef2e61124f1ac2182576fae12406a9d7d22dd18"
+      },
+      {
+        "path": "art/source/prop_nightstand_zila/v001/candidate-b.png",
+        "sha256": "33fb0acae3c86cf49bf535554fdf87e6cb48f7fc9c0b3c5d2e9271c04203d055"
+      },
+      {
+        "path": "art/source/prop_nightstand_zila/v001/candidate-c.png",
+        "sha256": "2fb660bf53d5d51fbba01fe9dddbe8870669e50f87ee338f277a9b6079d2f568"
+      }
+    ]
+  },
+  "provenance": "Original built-in AI-generated illustration for ZsRoom request002 conditioned on approved ZsRoom bed artwork and official geometry templates. No external stock artwork.",
+  "postProcessing": [
+    "Selected candidate C; all original PNG outputs retained byte-identically.",
+    "Unmodified official fit-to-spec.mjs: snap alpha>=250 to255, native-alpha trim, proportional Lanczos3 downsample, pivot alignment and sRGB metadata. No keying, repainting or distortion."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Top plane front edge is approximately y78-80 instead of y90, while back edge is approximately y33 vs y34: visible top depth is too shallow by roughly 10-12px. Automated bounds tests do not certify this internal geometry.",
+      "Walnut reads slightly brighter and more orange than the approved bed frame; sheen is a little stronger. Requires Creative Director consistency review.",
+      "Only two front legs are visible; rear legs are occluded, so four-leg construction cannot be independently verified in this single sprite.",
+      "Small doily details and thin pink trim simplify at SD scale; no in-game integration or gameplay test performed."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services used."
+}

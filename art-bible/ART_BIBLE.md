@@ -1,4 +1,4 @@
-# ZsRoom Art Bible — v1.4
+# ZsRoom Art Bible — v1.5
 
 **Style name:** ZsRoom OG Enhanced — Premium HD Illustrated 2D
 **Status:** v1.0 technical standard (Claude Code). Characters §8 are **draft — pending Creative Director approval**.
@@ -46,7 +46,7 @@ Formula (cm → render units): `screenX = x`, `screenY = y × 0.7 − z × 1.0`.
 - **Master density = 2 px per cm** (render units). A 120 cm wide bed is 240 px wide in the master file.
 - **Runtime densities:** HD = 2 px/cm, SD = 1 px/cm (generated automatically from the master by `scripts/approve-asset.mjs`). Draw so the asset still reads at SD.
 - **Canvas** and **pivot** are fixed per asset by its spec. Never resize a canvas to fit the art — fit the art to the canvas (`scripts/fit-to-spec.mjs`).
-- **Pivot** = front-centre floor contact point of the footprint (props) or midpoint between the feet (characters). The engine places the pivot at the object's ground position and depth-sorts by it.
+- **Pivot** = front-centre floor contact point of the footprint (floor props), **centre of the base where it touches the host surface (surface props, e.g. a lamp on a nightstand)**, or the midpoint between the feet (characters). Surface props attach to the host's measured surface anchors (§11). The engine places the pivot at the object's ground position and depth-sorts by it.
 - World coordinates never depend on image pixels; changing density never moves gameplay.
 
 ## 4. Scale reference (true scale)
@@ -104,7 +104,7 @@ Rules: **floors and furniture must separate in value** — floors use lighter ho
 - *Metal*: thin, warm-tinted, minimal.
 - *Plants*: clustered leaf masses with 2–3 tone steps, a few individually readable leaves.
 
-**Lighting.** Key light from the **upper-left** (north-west, slightly toward the viewer). Neutral-warm "daylight interior" (≈ 5000–5500 K). Top planes are brightest, front planes mid, undersides darkest. Assets are painted in this neutral light; the engine adds time-of-day and lamp lighting on top, so **do not bake night lighting or coloured lamp glow into props**.
+**Lighting.** Key light from the **upper-left** (north-west, slightly toward the viewer). Neutral-warm "daylight interior" (≈ 5000–5500 K). Top planes are brightest, front planes mid, undersides darkest. Assets are painted in this neutral light; the engine adds time-of-day and lamp lighting on top, so **do not bake night lighting or coloured lamp glow into props**. Light-emitting props (lamps, fairy lights, screens) are painted **switched off**. Their emission is declared in the spec (`light`) and rendered by the engine (glow, floor pool, on/off).
 
 **Shadows.**
 - Form shading and self-shadows (e.g. pillow onto duvet): **baked**.
@@ -210,6 +210,8 @@ Approved assets become **style references** for their own category. They are not
 - Known gaps in the current furniture reference, to improve gradually in new assets **without regenerating approved ones**: a more visible upper-left key light, and slightly crisper coloured contours.
 
 ## Changelog
+
+- **v1.5 (2026-11-18)** — §3 surface-prop pivots (base centre on a measured host anchor); §7 light-emitting props are painted unlit, with emission rendered by the engine.
 
 - **v1.4 (2026-11-18)** — §11 separates front-face height (±10 %) from top-plane depth (±25 %); geometry exceptions and measured surfaces. §16: nightstand v001 joins the furniture references.
 

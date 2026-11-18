@@ -1,0 +1,41 @@
+{
+  "id": "prop_lamp_zila",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Zila's Bedside Lamp",
+  "density": 2,
+  "canvas": { "width": 96, "height": 152 },
+  "pivot": { "x": 48, "y": 124, "meaning": "CENTRE of the lamp base where it touches the host surface (not the front edge — surface props pivot at their base centre)" },
+  "footprint": { "widthCm": 16, "depthCm": 16 },
+  "heightsCm": { "base": 4, "body": 22, "shadeBottom": 22, "top": 42 },
+  "profile": [
+    { "part": "base", "fromCm": 0, "toCm": 4, "diameterCm": 16 },
+    { "part": "body", "fromCm": 4, "toCm": 22, "diameterCm": 12, "bulgeDiameterCm": 14 },
+    { "part": "shade", "fromCm": 22, "toCm": 42, "diameterCm": 24, "topDiameterCm": 18 }
+  ],
+  "artBounds": { "x": 16, "y": 16, "width": 64, "height": 122, "$comment": "every opaque pixel must lie inside this box (canvas px)" },
+  "baseLine": { "y": 135, "tolerancePx": 4, "$comment": "lowest solid row = front of the round base (pivot + 8 cm × 0.7 × 2 px)" },
+  "maxSideOverhangCm": 4,
+  "collision": [],
+  "placement": { "type": "surface", "hostAsset": "prop_nightstand_zila", "surface": "top", "anchor": "lamp" },
+  "sort": { "mode": "footprint" },
+  "occluder": false,
+  "interactionAnchors": [
+    { "id": "toggle", "label": "Switch the lamp", "x": 8, "y": 50, "facing": "up", "radiusCm": 26 }
+  ],
+  "light": {
+    "$comment": "Rendered by the engine (src/systems/lighting.ts). The artwork is painted UNLIT — no glow, no light pool, no rays.",
+    "emitter": { "x": 0, "y": 0, "z": 32 },
+    "color": "#FFC872",
+    "radiusCm": 240,
+    "intensity": 0.42,
+    "defaultOn": false
+  },
+  "transparency": { "edgePaddingPx": 8, "minOpaqueRatio": 0.12, "maxOpaqueRatio": 0.6 },
+  "export": { "format": "png", "bitDepth": 8, "channels": 4, "colorSpace": "sRGB", "alpha": "straight (unpremultiplied)", "maxBytes": 600000 },
+  "styleReferences": ["art/approved/prop_bed_zila/prop_bed_zila_v001.png", "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"],
+  "submissionPath": "art/submissions/prop_lamp_zila/<version>/",
+  "artRequest": "docs/art-requests/003-prop_lamp_zila.md"
+}

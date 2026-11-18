@@ -30,6 +30,16 @@ export interface PropSpec {
   interactionAnchors: InteractionAnchorSpec[];
   surfaces?: SurfaceSpec[];
   placement?: { type: 'surface'; hostAsset: string; surface: string; anchor: string };
+  light?: LightSpec;
+}
+
+/** Engine-rendered light. Art is always painted UNLIT; the engine adds glow and illumination. */
+export interface LightSpec {
+  emitter: { x: number; y: number; z: number };   // cm, relative to the prop's ground position and base height
+  color: string;
+  radiusCm: number;
+  intensity: number;                               // 0..1 alpha of the room pool
+  defaultOn: boolean;
 }
 
 export interface CharacterSpec {

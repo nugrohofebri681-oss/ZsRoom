@@ -7,9 +7,10 @@ import { actorSortDepth, occludingProps, type SortableActor } from '../world/dep
 import { vectorToDirection, type Direction } from '../actors/direction';
 import { nearestAnchor, type WorldAnchor } from '../interaction/anchors';
 import { InputState, KeyboardInput } from '../systems/input';
-import { saveGame, safeStorage } from '../systems/save';
+import { loadGame, saveGame, safeStorage } from '../systems/save';
 import { textureKey, type AssetManifest } from '../systems/manifest';
 import { drawGreyboxCharacter, drawGreyboxProp } from '../ui/greybox';
+import { PropLight } from '../systems/lighting';
 
 export interface RoomSceneData { roomId: string; spawn?: string; at?: { x: number; y: number; facing: string } }
 
@@ -31,6 +32,8 @@ export class RoomScene extends Phaser.Scene {
   private nearest: WorldAnchor | null = null;
   private occluded: string[] = [];
   private transitioning = false;
+  private propLights = new Map<string, PropLight>();
+  private flags: Record<string, boolean> = {};
 
   constructor() { super('Room'); }
 
@@ -38,6 +41,8 @@ export class RoomScene extends Phaser.Scene {
     this.transitioning = false;
     this.debugActor = undefined;
     this.propViews.clear();
+    this.propLights.clear();
+    this.flags = { ...(loadGame(safeStorage())?.flags ?? {}) };
     this.room = compileRoom(getRoom(data.roomId));
     this.character = getCharacterSpec('char_zila');
     const spawn = data.at ?? this.room.data.spawns[data.spawn ?? 'default'] ?? this.room.data.spawns.default!;
@@ -127,19 +132,25 @@ export class RoomScene extends Phaser.Scene {
     for (const p of this.room.props) {
       const entry = manifest.assets[p.spec.id];
       const key = textureKey(p.spec.id);
-      const pivot = groundToRender(p.x, p.y);
+      const pivot = groundToRender(p.x, p.y, p.z);
       let view;
       if (entry?.status === 'approved' && this.textures.exists(key)) {
         const density = densities[p.spec.id] ?? p.spec.density;
-        this.drawPropShadow(p.spec, p.x, p.y);
+        if (p.z === 0) this.drawPropShadow(p.spec, p.x, p.y);
         view = this.add.image(pivot.x, pivot.y, key)
           .setOrigin(p.spec.pivot.x / p.spec.canvas.width, p.spec.pivot.y / p.spec.canvas.height)
           .setScale(1 / density);
       } else {
-        view = drawGreyboxProp(this, p.spec, p.x, p.y, `${p.spec.id}\n(${entry?.status ?? 'unlisted'})`);
+        // Surface props pivot at their base centre; the grey-box helper expects a front-edge pivot.
+        const gy = p.z > 0 ? p.y + p.spec.footprint.depthCm / 2 : p.y;
+        view = drawGreyboxProp(this, p.spec, p.x, gy, `${p.spec.id}\n(${entry?.status ?? 'unlisted'})`, p.z);
       }
-      view.setDepth(p.y);
+      view.setDepth(p.sortable.pivotY);
       this.propViews.set(p.key, view);
+      if (p.spec.light) {
+        const flag = `light:${this.room.data.id}:${p.key}`;
+        this.propLights.set(p.key, new PropLight(this, p.key, p.spec.light, p.x, p.y, p.z, this.flags[flag]));
+      }
     }
   }
 
@@ -155,7 +166,7 @@ export class RoomScene extends Phaser.Scene {
     for (const s of this.room.solids) g.strokeRect(...rect(s));
     for (const p of this.room.props) {
       g.lineStyle(1, 0xff3d7f, 1).strokeRect(...rect(p.sortable.footprint));
-      const pv = groundToRender(p.x, p.y);
+      const pv = groundToRender(p.x, p.y, p.z);
       g.lineStyle(2, 0x000000, 1).lineBetween(pv.x - 6, pv.y, pv.x + 6, pv.y).lineBetween(pv.x, pv.y - 6, pv.x, pv.y + 6);
       // designed main surface height (mattressTop / top) on the front face — compare against the painted edge
       const hs = p.spec.heightsCm;
@@ -247,7 +258,15 @@ export class RoomScene extends Phaser.Scene {
       this.goTo(to.room, to.spawn);
       return;
     }
-    this.game.events.emit('toast', `${a.label} — interaction placeholder (milestone 2)`);
+    const light = this.propLights.get(a.ownerId);
+    if (light) {
+      const on = light.toggle();
+      this.flags[`light:${this.room.data.id}:${a.ownerId}`] = on;
+      this.persist();
+      this.game.events.emit('toast', on ? 'Lamp on' : 'Lamp off');
+    } else {
+      this.game.events.emit('toast', `${a.label} — interaction placeholder (milestone 2)`);
+    }
     this.game.events.emit('interacted', a.key);
   }
 
@@ -262,7 +281,7 @@ export class RoomScene extends Phaser.Scene {
     saveGame(safeStorage(), {
       roomId: this.room.data.id,
       player: { characterId: this.character.id, x: this.pos.x, y: this.pos.y, facing: this.facingDir, outfit: 'default' },
-      flags: {},
+      flags: { ...this.flags },
     });
   }
 
@@ -277,6 +296,7 @@ export class RoomScene extends Phaser.Scene {
         props: this.room.props.map((p) => ({ key: p.key, depth: this.propViews.get(p.key)?.depth, alpha: this.propViews.get(p.key)?.alpha })),
         fps: Math.round(this.game.loop.actualFps),
         transitioning: this.transitioning,
+        lights: [...this.propLights.values()].map((l) => ({ key: l.key, on: l.on })),
       }),
       teleport: (x: number, y: number) => { this.pos = { x, y }; this.syncActor(); },
       save: () => this.persist(),

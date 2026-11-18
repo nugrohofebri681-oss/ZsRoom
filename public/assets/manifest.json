@@ -88,6 +88,11 @@
           "decision": "Accepted by Creative Director on in-game evidence (PR #3); surface placement uses measured values (spec surfaces.top)."
         }
       }
+    },
+    "prop_lamp_zila": {
+      "status": "requested",
+      "spec": "specs/props/prop_lamp_zila.json",
+      "request": "docs/art-requests/003-prop_lamp_zila.md"
     }
   }
 }

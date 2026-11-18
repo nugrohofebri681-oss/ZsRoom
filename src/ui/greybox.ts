@@ -7,8 +7,8 @@ import { propTopCm, type CharacterSpec, type PropSpec } from '../core/specs';
  * collision/sorting can be tested before artwork exists. They are deliberately plain and labelled,
  * and are never shipped as artwork (see ART_BIBLE §0).
  */
-export function drawGreyboxProp(scene: Phaser.Scene, spec: PropSpec, x: number, y: number, label: string): Phaser.GameObjects.Container {
-  const c = scene.add.container(0, 0);
+export function drawGreyboxProp(scene: Phaser.Scene, spec: PropSpec, x: number, y: number, label: string, z = 0): Phaser.GameObjects.Container {
+  const c = scene.add.container(0, -z); // surface props are lifted by their height above the floor
   const g = scene.add.graphics();
   const w = spec.footprint.widthCm;
   const d = spec.footprint.depthCm;
@@ -19,7 +19,7 @@ export function drawGreyboxProp(scene: Phaser.Scene, spec: PropSpec, x: number, 
   const front = groundToRender(x, y).y;
   const back = groundToRender(x, y - d).y;
   // footprint on the floor
-  g.fillStyle(0x000000, 0.18).fillRect(x0 - 2, back, w + 4, front - back + 3);
+  if (z === 0) g.fillStyle(0x000000, 0.18).fillRect(x0 - 2, back, w + 4, front - back + 3);
   // body: top face at `top` height + front face
   const topFront = front - top;
   const topBack = back - top;

@@ -69,8 +69,10 @@ test.describe('desktop gameplay', () => {
   test('door transition to the hall and back, with save', async ({ page }) => {
     await boot(page);
     await teleport(page, 285, 400);
-    await hold(page, 'ArrowDown', 900);
-    await page.waitForFunction(() => (window as any).__ZS.state().roomId === 'upper_hall', null, { timeout: 5000 });
+    // Hold until the transition fires (frame-rate independent: CI runners can be several times slower).
+    await page.keyboard.down('ArrowDown');
+    await page.waitForFunction(() => (window as any).__ZS.state().roomId === 'upper_hall', null, { timeout: 15000 });
+    await page.keyboard.up('ArrowDown');
     await page.waitForTimeout(400);
     await page.screenshot({ path: `${SHOTS}/desktop-05-hall.png` });
     await teleport(page, 285, 60);

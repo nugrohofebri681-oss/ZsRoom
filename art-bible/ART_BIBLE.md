@@ -1,4 +1,4 @@
-# ZsRoom Art Bible — v1.3
+# ZsRoom Art Bible — v1.4
 
 **Style name:** ZsRoom OG Enhanced — Premium HD Illustrated 2D
 **Status:** v1.0 technical standard (Claude Code). Characters §8 are **draft — pending Creative Director approval**.
@@ -141,13 +141,21 @@ Character sheet canvas: 256 × 400 px @ 2 px/cm, pivot (128, 376) between the fe
 
 Each prop spec defines: `footprint` (true floor size), `collision` rectangles relative to the pivot (may add up to `maxSideOverhangCm` on the sides to cover overhanging fabric), and `artBounds` (the box every opaque pixel must stay inside). Art may overhang the footprint sideways by at most `maxSideOverhangCm`; it must never extend below the pivot line except for a ≤ 10 px contact-occlusion fade.
 
-### Painted-geometry tolerance
-Generators don't hit template lines exactly. Painted surface edges (a tabletop's front edge, a mattress top, a headboard top) must land within **±10 % of the designed height, or ±6 px at master density, whichever is larger**, of their template guide line. Submissions report the measured rows in `metadata.selfReview.knownIssues`.
+### Painted-geometry tolerance (v1.4: two separate measurements)
+Generators don't hit template lines exactly. Two quantities are measured **separately**, because they fail differently and matter for different reasons:
 
-- Within tolerance: no revision. Collision, sorting, shadows and interactions are spec-driven and unaffected.
-- Outside tolerance: the Creative Director decides whether to accept it or request a narrowly targeted revision.
-- Neighbouring furniture should not drift in **opposite** directions. Reviews compare the implied camera pitch against approved neighbours.
-- Where props will later carry other props (lamps, books), the approved asset records its measured surface height so placement follows the painted art, not the nominal spec.
+| Measurement | How it is measured (master px) | Tolerance | Why it matters |
+|---|---|---|---|
+| **Front-face height**: floor line → front edge of the main top plane | `pivot.y − frontEdgeY`, where the front edge is the plane's highlight rim, **not** the lip or board thickness below it | **±10 %** of the designed height, min ±6 px | Perceived object height; where props placed on top sit; the relationship with characters and neighbouring furniture |
+| **Top-plane depth**: back edge → front edge of the visible top plane | `frontEdgeY − backEdgeY`, compared with `depthCm × 0.7 × density` | **±25 %**, min ±8 px | Implied camera pitch: too shallow reads "seen from lower", too deep reads "seen from above" |
+
+- Submissions report the measured rows (`backEdgeY`, `frontEdgeY`) in `metadata.selfReview.knownIssues`. Reviewers re-measure with a row-luminance profile.
+- **Within both tolerances:** no revision.
+- **Outside either tolerance:** the Creative Director decides whether to accept it as a recorded **geometry exception** (`approval.geometryException` in the manifest) or request a narrow revision.
+- **Neighbour pitch check:** the implied pitch (top-plane depth ÷ front-face height, normalised by the designed values) of furniture that stands together should not drift in opposite directions.
+- **Surfaces that carry props:** the approved asset records its **measured painted surface** and attachment anchors in the spec (`surfaces[]`, tied to the master's SHA-256 via `measuredFrom`). Props placed on it use those values, never the nominal height. `validate-manifest` fails if the art changes without re-measuring.
+
+Current records: `prop_bed_zila` v001 is within both tolerances. `prop_nightstand_zila` v001 is a CD exception: front face +15 %, top plane −28 %; surface `top` measured.
 
 ## 12. Occlusion & depth sorting
 
@@ -191,7 +199,7 @@ Approved assets become **style references** for their own category. They are not
 
 | Category | Current reference | Approved |
 |---|---|---|
-| Painted furniture (interior props) | `art/approved/prop_bed_zila/prop_bed_zila_v001.png` | 2026-11-18 |
+| Painted furniture (interior props) | `art/approved/prop_bed_zila/prop_bed_zila_v001.png`, `art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png` (reference for finish and materials, **not** for its tabletop geometry) | 2026-11-18 |
 | Characters | — (proportions draft, §8) | — |
 | Architecture / walls / floors | — | — |
 | Exterior / city / travel | — | — |
@@ -202,6 +210,8 @@ Approved assets become **style references** for their own category. They are not
 - Known gaps in the current furniture reference, to improve gradually in new assets **without regenerating approved ones**: a more visible upper-left key light, and slightly crisper coloured contours.
 
 ## Changelog
+
+- **v1.4 (2026-11-18)** — §11 separates front-face height (±10 %) from top-plane depth (±25 %); geometry exceptions and measured surfaces. §16: nightstand v001 joins the furniture references.
 
 - **v1.3 (2026-11-18)** — §11 painted-geometry tolerance (from the `prop_nightstand_zila` v001 review).
 

@@ -4,6 +4,15 @@ export interface InteractionAnchorSpec {
   id: string; label: string; x: number; y: number; facing: string; radiusCm: number;
 }
 
+export interface SurfaceAnchorSpec { id: string; x: number; y: number; z: number; canvas?: { x: number; y: number } }
+export interface SurfaceSpec {
+  id: string;
+  nominalHeightCm: number;
+  painted: { backEdgeY: number; frontEdgeY: number; leftX: number; rightX: number; frontEdgeHeightCm: number; planeDepthCm: number };
+  anchors: SurfaceAnchorSpec[];
+  measuredFrom: { version: string; sha256: string };
+}
+
 export interface PropSpec {
   id: string;
   specVersion: string;
@@ -19,6 +28,8 @@ export interface PropSpec {
   sort: { mode: 'footprint' | 'pivot' };
   occluder: boolean;
   interactionAnchors: InteractionAnchorSpec[];
+  surfaces?: SurfaceSpec[];
+  placement?: { type: 'surface'; hostAsset: string; surface: string; anchor: string };
 }
 
 export interface CharacterSpec {

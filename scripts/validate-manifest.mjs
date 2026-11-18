@@ -23,6 +23,11 @@ for (const [id, e] of Object.entries(manifest.assets ?? {})) {
   if (!ap?.approvedBy || !ap?.approvedAt || !ap?.master?.path || !ap?.master?.sha256) { errors.push(`${id}: approved entry lacks a complete approval record`); continue; }
   if (!existsSync(join(ROOT, ap.master.path))) errors.push(`${id}: approved master ${ap.master.path} missing`);
   else if (sha256File(ap.master.path) !== ap.master.sha256) errors.push(`${id}: CHECKSUM MISMATCH on approved master ${ap.master.path}`);
+  for (const surf of s.spec.surfaces ?? []) {
+    const mf = surf.measuredFrom;
+    if (!mf) errors.push(`${id}: surface ${surf.id} has no measuredFrom record`);
+    else if (mf.version !== e.version || mf.sha256 !== ap.master.sha256) errors.push(`${id}: surface ${surf.id} was measured on ${mf.version}/${mf.sha256.slice(0, 8)} but approved master is ${e.version}/${ap.master.sha256.slice(0, 8)} — re-measure`);
+  }
   for (const [variant, f] of Object.entries(e.runtime ?? {})) {
     const p = `public/${f.path}`;
     referenced.add(p);

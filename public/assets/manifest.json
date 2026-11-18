@@ -50,9 +50,44 @@
       "spec": "specs/characters/char_febri.json"
     },
     "prop_nightstand_zila": {
-      "status": "requested",
+      "status": "approved",
       "spec": "specs/props/prop_nightstand_zila.json",
-      "request": "docs/art-requests/002-prop_nightstand_zila.md"
+      "request": "docs/art-requests/002-prop_nightstand_zila.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_nightstand_zila_v001@hd.webp",
+          "sha256": "2736fea7f8dfc00c0e93b33cc1d6a6186f628b19b13e1f612befe0c3c218ab3d",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_nightstand_zila_v001@sd.webp",
+          "sha256": "29cc9055956bc6b5cb63d49729fd7eed710fd25e2b50cde17b48a3a13bfe2e3a",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-18T09:59:06.182Z",
+        "review": "docs/reviews/prop_nightstand_zila-v001.md",
+        "master": {
+          "path": "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+          "sha256": "13473053a483cd4db2813cb66d9f539098ec545f56d3c4dc42e5f454cef93f79"
+        },
+        "geometryException": {
+          "frontFaceHeight": {
+            "designedCm": 55,
+            "paintedCm": 63.25,
+            "deviationPct": 15
+          },
+          "topPlaneDepth": {
+            "designedCm": 40,
+            "paintedCm": 28.9,
+            "deviationPct": -28
+          },
+          "decision": "Accepted by Creative Director on in-game evidence (PR #3); surface placement uses measured values (spec surfaces.top)."
+        }
+      }
     }
   }
 }

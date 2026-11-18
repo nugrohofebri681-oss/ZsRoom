@@ -1,27 +1,109 @@
 {
   "id": "prop_nightstand_zila",
   "specVersion": "1.0.0",
-  "status": "open-request",
+  "status": "approved",
   "category": "prop",
   "room": "zila_bedroom",
   "displayName": "Zila's Nightstand",
   "density": 2,
-  "canvas": { "width": 160, "height": 224 },
-  "pivot": { "x": 80, "y": 200, "meaning": "front-centre floor contact point of the footprint" },
-  "footprint": { "widthCm": 45, "depthCm": 40 },
-  "heightsCm": { "top": 55 },
-  "artBounds": { "x": 24, "y": 20, "width": 112, "height": 188, "$comment": "every opaque pixel must lie inside this box (canvas px)" },
-  "baseLine": { "y": 200, "tolerancePx": 8 },
+  "canvas": {
+    "width": 160,
+    "height": 224
+  },
+  "pivot": {
+    "x": 80,
+    "y": 200,
+    "meaning": "front-centre floor contact point of the footprint"
+  },
+  "footprint": {
+    "widthCm": 45,
+    "depthCm": 40
+  },
+  "heightsCm": {
+    "top": 55
+  },
+  "artBounds": {
+    "x": 24,
+    "y": 20,
+    "width": 112,
+    "height": 188,
+    "$comment": "every opaque pixel must lie inside this box (canvas px)"
+  },
+  "baseLine": {
+    "y": 200,
+    "tolerancePx": 8
+  },
   "maxSideOverhangCm": 2,
-  "collision": [ { "x": -24, "y": -40, "w": 48, "h": 40 } ],
-  "sort": { "mode": "footprint" },
+  "collision": [
+    {
+      "x": -24,
+      "y": -40,
+      "w": 48,
+      "h": 40
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
   "occluder": true,
   "interactionAnchors": [
-    { "id": "nightstand", "label": "Open the nightstand", "x": 0, "y": 28, "facing": "up", "radiusCm": 32 }
+    {
+      "id": "nightstand",
+      "label": "Open the nightstand",
+      "x": 0,
+      "y": 28,
+      "facing": "up",
+      "radiusCm": 32
+    }
   ],
-  "transparency": { "edgePaddingPx": 8, "minOpaqueRatio": 0.2, "maxOpaqueRatio": 0.75 },
-  "export": { "format": "png", "bitDepth": 8, "channels": 4, "colorSpace": "sRGB", "alpha": "straight (unpremultiplied)", "maxBytes": 1000000 },
-  "styleReferences": ["art/approved/prop_bed_zila/prop_bed_zila_v001.png"],
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.2,
+    "maxOpaqueRatio": 0.75
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 1000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png"
+  ],
   "submissionPath": "art/submissions/prop_nightstand_zila/<version>/",
-  "artRequest": "docs/art-requests/002-prop_nightstand_zila.md"
+  "artRequest": "docs/art-requests/002-prop_nightstand_zila.md",
+  "surfaces": [
+    {
+      "id": "top",
+      "$comment": "Measured from the APPROVED painted master. Engine placement of props on this surface uses these values, not nominal heightsCm.top.",
+      "nominalHeightCm": 55,
+      "painted": {
+        "backEdgeY": 33,
+        "frontEdgeY": 73.5,
+        "leftX": 34,
+        "rightX": 126,
+        "frontEdgeHeightCm": 63.25,
+        "planeDepthCm": 28.9
+      },
+      "anchors": [
+        {
+          "id": "lamp",
+          "x": 10,
+          "y": -20,
+          "z": 60,
+          "canvas": {
+            "x": 100,
+            "y": 52
+          },
+          "$comment": "right of the doily, mid-depth of the painted top plane; ground offset from pivot (cm) + height z (cm)"
+        }
+      ],
+      "measuredFrom": {
+        "version": "v001",
+        "sha256": "13473053a483cd4db2813cb66d9f539098ec545f56d3c4dc42e5f454cef93f79"
+      }
+    }
+  ]
 }

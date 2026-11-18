@@ -54,3 +54,17 @@ PR: https://github.com/nugrohofebri681-oss/ZsRoom/pull/3 (head `ea4ed3f`). Not m
 Grant VISUAL PASS to candidate C v001 once the Creative Director agrees. The priority this request set — the bed's walnut colour and painted finish — is met by measurement and by eye. A v002 would only chase a 5 cm geometric deviation with no gameplay consequence.
 
 If the Creative Director prefers a v002 anyway, keep it narrow: *same design and wood; tabletop front edge on y 90 (top depth 56 px); front face 110 px; nothing else changes.*
+
+## Creative Director decision — 2026-11-18
+> **VISUAL PASS — `prop_nightstand_zila` v001, candidate C.** No v002. Approval applies only to this nightstand v001. It is not blanket approval of future assets and not a whole-game style lock. (Recorded on PR #3.)
+
+## Integration measurement (correction to the review above)
+Precise row-luminance profiling of the approved master during integration found the **top-plane front edge at y 73–74** (its highlight rim), not y 78–80. Rows 75–79 are the front lip of the tabletop board. Corrected figures:
+
+| Measure | Designed | Painted | Deviation |
+|---|---|---|---|
+| Top-plane back edge | y 34 | y 33 | −1 px |
+| Top-plane front edge → front-face height | y 90 → 55 cm | y 73.5 → **63.3 cm** | **+15 %** |
+| Top-plane depth | 56 px → 40 cm | 40.5 px → **28.9 cm** | **−28 %** |
+
+Both values are outside the Art Bible §11 tolerances (front face ±10 %, top plane ±25 %). The asset is therefore integrated as a **Creative Director geometry exception**, approved on the in-game evidence above. The gameplay findings are unchanged, because collision, sorting, shadow and interaction are spec-driven. Props placed on the nightstand use the **measured painted surface** (`surfaces.top` in the spec), not the nominal 55 cm.

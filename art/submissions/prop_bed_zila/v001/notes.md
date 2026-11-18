@@ -31,7 +31,7 @@ The master uses centered top/front-only projection, two cream pillows, pink hear
 
 ## Technical evidence
 
-- Official npm run validate:art: all 25 checks passed; 384x576 RGBA8 sRGB; 251044 bytes; coverage 0.540; bbox (67,34) 250x511; lowest solid row 543 vs pivot544±10; zero transparent-padding violations.
+- Official npm run validate:art: all 23 checks passed; 384x576 RGBA8 sRGB; 251044 bytes; coverage 0.540; bbox (67,34) 250x511; lowest solid row 543 vs pivot544±10; zero transparent-padding violations.
 - SHA-256: d41d329432175add32b33c6d98589d289152f3188dac408d231e5fbf1bbe6acc.
 - npm run validate:privacy passed before submission.
 - npm run gallery generated review-gallery/index.html. Chromium inspected checker/overlay, light, dark, nominal character scale and SD-size views; all 14 gallery images loaded after activating lazy images.

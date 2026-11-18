@@ -1,0 +1,17 @@
+{
+  "id": "greybox_wardrobe",
+  "specVersion": "1.0.0",
+  "status": "greybox-only",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Wardrobe (grey-box blocker, tall occluder test)",
+  "density": 2,
+  "canvas": { "width": 320, "height": 560 },
+  "pivot": { "x": 160, "y": 536, "meaning": "front-centre floor contact" },
+  "footprint": { "widthCm": 110, "depthCm": 60 },
+  "heightsCm": { "top": 210 },
+  "collision": [ { "x": -55, "y": -60, "w": 110, "h": 60 } ],
+  "sort": { "mode": "footprint" },
+  "occluder": true,
+  "interactionAnchors": [ { "id": "outfit", "label": "Change outfit", "x": 0, "y": 30, "facing": "up", "radiusCm": 45 } ]
+}

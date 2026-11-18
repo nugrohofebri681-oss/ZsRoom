@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZsRoom art submission metadata",
+  "type": "object",
+  "required": ["assetId", "version", "specVersion", "author", "generator", "createdAt", "files", "provenance", "postProcessing", "selfReview"],
+  "additionalProperties": true,
+  "properties": {
+    "assetId": { "type": "string", "pattern": "^[a-z][a-z0-9_]+$" },
+    "version": { "type": "string", "pattern": "^v[0-9]{3}$" },
+    "specVersion": { "type": "string" },
+    "author": { "type": "string", "enum": ["codex", "human", "claude"] },
+    "generator": {
+      "type": "object",
+      "required": ["tool"],
+      "properties": {
+        "tool": { "type": "string", "minLength": 2 },
+        "model": { "type": "string" },
+        "referencesUsed": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "files": {
+      "type": "object",
+      "required": ["master"],
+      "properties": {
+        "master": {
+          "type": "object",
+          "required": ["path", "sha256"],
+          "properties": { "path": { "type": "string" }, "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" } }
+        }
+      }
+    },
+    "provenance": { "type": "string", "minLength": 10 },
+    "postProcessing": { "type": "array", "items": { "type": "string" } },
+    "selfReview": {
+      "type": "object",
+      "required": ["checklistComplete", "knownIssues"],
+      "properties": { "checklistComplete": { "type": "boolean" }, "knownIssues": { "type": "array", "items": { "type": "string" } } }
+    },
+    "cost": { "type": "string", "description": "Must state that no paid API/credits were used, e.g. 'included in existing ChatGPT subscription'." }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$comment": "Runtime asset manifest. Only entries with status 'approved' may ship real artwork. Edited by scripts/approve-asset.mjs — never by hand for approved entries.",
+  "manifestVersion": 1,
+  "assets": {
+    "prop_bed_zila": { "status": "requested", "spec": "specs/props/prop_bed_zila.json", "request": "docs/art-requests/001-prop_bed_zila.md" },
+    "greybox_desk": { "status": "greybox", "spec": "specs/props/greybox_desk.json" },
+    "greybox_wardrobe": { "status": "greybox", "spec": "specs/props/greybox_wardrobe.json" },
+    "greybox_plant_tall": { "status": "greybox", "spec": "specs/props/greybox_plant_tall.json" },
+    "char_zila": { "status": "greybox", "spec": "specs/characters/char_zila.json" },
+    "char_febri": { "status": "greybox", "spec": "specs/characters/char_febri.json" }
+  }
+}

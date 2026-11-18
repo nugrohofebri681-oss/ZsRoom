@@ -1,0 +1,35 @@
+name: Art submission
+
+# Technical validation of Codex art PRs. TECHNICAL PASS here is NOT visual approval.
+on:
+  pull_request:
+    branches: ['reboot/foundation']
+    paths: ['art/**']
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Ownership + technical art checks + review gallery
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: Validate ownership and artwork
+        run: node scripts/validate-art.mjs --base "origin/${{ github.base_ref }}" --branch "${{ github.head_ref }}" --report art-report.json
+      - name: Build review gallery
+        if: always()
+        run: npm run gallery
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: art-review-gallery
+          path: |
+            review-gallery/
+            art-report.json
+          retention-days: 30

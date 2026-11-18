@@ -1,0 +1,11 @@
+{
+  "$comment": "ZsRoom world projection. Single source of truth for code, validators, templates and artists. See art-bible/ART_BIBLE.md §2.",
+  "version": "1.0.0",
+  "worldUnit": "cm",
+  "depthScale": 0.7,
+  "heightScale": 1.0,
+  "masterDensityPxPerCm": 2,
+  "runtimeDensities": { "hd": 2, "sd": 1 },
+  "lightDirection": "upper-left (from north-west, slightly toward the viewer)",
+  "notes": "screenX = x; screenY = y * depthScale - z * heightScale. Orthographic oblique: no vanishing points, verticals stay vertical, front faces are seen square-on."
+}

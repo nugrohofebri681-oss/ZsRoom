@@ -1,0 +1,37 @@
+{
+  "name": "zsroom",
+  "private": true,
+  "version": "0.1.0",
+  "description": "ZsRoom — A Living World of Memories. Premium HD illustrated 2D exploration/life-sim (clean rebuild).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test --trace off",
+    "templates": "node scripts/generate-templates.mjs",
+    "validate:manifest": "node scripts/validate-manifest.mjs",
+    "validate:art": "node scripts/validate-art.mjs",
+    "validate:privacy": "node scripts/privacy-scan.mjs",
+    "gallery": "node scripts/build-gallery.mjs",
+    "approve": "node scripts/approve-asset.mjs",
+    "qa": "npm run validate:privacy && npm run validate:manifest && npm run validate:art && npm run typecheck && npm test && npm run build && npm run test:e2e && npm run gallery"
+  },
+  "dependencies": {
+    "phaser": "4.2.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/node": "^22.20.5",
+    "ajv": "^8.20.0",
+    "sharp": "^0.35.5",
+    "typescript": "~5.9",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
+  }
+}

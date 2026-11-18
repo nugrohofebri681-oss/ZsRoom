@@ -1,0 +1,22 @@
+{
+  "id": "char_febri",
+  "specVersion": "0.9.0",
+  "status": "draft-pending-creative-director",
+  "category": "character",
+  "displayName": "Febri",
+  "heightCm": 170,
+  "headsTall": 4.75,
+  "density": 2,
+  "canvas": { "width": 256, "height": 400 },
+  "pivot": { "x": 128, "y": 376, "meaning": "midpoint between the feet at floor contact" },
+  "collision": { "radiusCm": 18 },
+  "directions": ["S", "SE", "E", "NE", "N", "NW", "W", "SW"],
+  "authoredDirections": ["S", "SE", "E", "NE", "N"],
+  "mirroringNote": "The crossbody bag strap is asymmetric: never mirror the bag layer. Author W-facing bag layers separately.",
+  "identity": [
+    "short textured dark hair with a side-swept fringe",
+    "cream jacket over a blue shirt",
+    "dark trousers",
+    "crossbody bag (strap over the left shoulder, bag at right hip)"
+  ]
+}

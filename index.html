@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#1d1418" />
+    <title>ZsRoom — Foundation Proof</title>
+    <style>
+      html, body { margin: 0; height: 100%; background: #1d1418; overflow: hidden; touch-action: none; }
+      #game { position: fixed; inset: 0; }
+      #boot { position: fixed; inset: 0; display: grid; place-items: center; color: #f3d9e1; font: 14px system-ui, sans-serif; }
+    </style>
+  </head>
+  <body>
+    <div id="boot">Loading ZsRoom…</div>
+    <div id="game"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "id": "char_zila",
+  "specVersion": "0.9.0",
+  "status": "draft-pending-creative-director",
+  "category": "character",
+  "displayName": "Zila",
+  "heightCm": 158,
+  "headsTall": 4.5,
+  "density": 2,
+  "canvas": { "width": 256, "height": 400 },
+  "pivot": { "x": 128, "y": 376, "meaning": "midpoint between the feet at floor contact" },
+  "collision": { "radiusCm": 16 },
+  "directions": ["S", "SE", "E", "NE", "N", "NW", "W", "SW"],
+  "authoredDirections": ["S", "SE", "E", "NE", "N"],
+  "mirroringNote": "W/SW/NW may be mirrored from E/SE/NE ONLY after asymmetric details are split into separate layers (hair ornaments are symmetric pair; bag/side-part are not). See ART_BIBLE §9.",
+  "identity": [
+    "long layered brown hair reaching mid-back, with bangs and face-framing strands",
+    "two pink hair ornaments, one on each side of the head, symmetric",
+    "large warm-brown eyes, soft rounded face, gentle expression",
+    "default outfit: pink and white (soft pink top, white/cream skirt or trousers)"
+  ]
+}

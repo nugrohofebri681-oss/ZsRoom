@@ -1,0 +1,7 @@
+# Takes effect as a merge gate only if branch protection on reboot/foundation enables
+# "Require review from Code Owners" (not verified as of M1 — see docs/architecture/WORKFLOW.md).
+/art/approved/            @nugrohofebri681-oss
+/public/assets/           @nugrohofebri681-oss
+/specs/                   @nugrohofebri681-oss
+/art-bible/               @nugrohofebri681-oss
+/.github/                 @nugrohofebri681-oss

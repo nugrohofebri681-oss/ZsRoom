@@ -1,0 +1,22 @@
+{
+  "id": "zila_bedroom",
+  "displayName": "Zila's Bedroom",
+  "world": "dream_home",
+  "floor": "upper",
+  "sizeCm": { "w": 560, "h": 440 },
+  "wallHeightCm": 270,
+  "palette": { "floor": "#8a5a3c", "wall": "#e8c9cf", "trim": "#5b3a29" },
+  "spawns": {
+    "default": { "x": 300, "y": 360, "facing": "N" },
+    "from_hall": { "x": 280, "y": 400, "facing": "N" }
+  },
+  "props": [
+    { "assetId": "prop_bed_zila", "x": 110, "y": 212 },
+    { "assetId": "greybox_desk", "x": 120, "y": 420 },
+    { "assetId": "greybox_wardrobe", "x": 470, "y": 62 },
+    { "assetId": "greybox_plant_tall", "x": 400, "y": 250 }
+  ],
+  "doors": [
+    { "id": "door_to_hall", "label": "Go to the upstairs hall", "x": 240, "y": 430, "w": 90, "h": 10, "to": { "room": "upper_hall", "spawn": "from_bedroom" } }
+  ]
+}

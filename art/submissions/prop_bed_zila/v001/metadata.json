@@ -1,0 +1,51 @@
+{
+  "assetId": "prop_bed_zila",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by the tool",
+    "referencesUsed": [
+      "art-bible/perspective/prop_bed_zila_template.png",
+      "art-bible/perspective/projection_cube.png"
+    ]
+  },
+  "createdAt": "2026-11-18T03:32:21.302119+00:00",
+  "files": {
+    "master": {
+      "path": "prop_bed_zila_v001.png",
+      "sha256": "d41d329432175add32b33c6d98589d289152f3188dac408d231e5fbf1bbe6acc"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_bed_zila/v001/candidate-a.png",
+        "sha256": "dbd5d1f384eb53ef5487b080d03305bcc063e83f26e282ddcf171fab8766e537"
+      },
+      {
+        "path": "art/source/prop_bed_zila/v001/candidate-b.png",
+        "sha256": "a6b07f16da6275800452bd092aa921235ca32fea7d5d9c2200500dd45a18e21e"
+      },
+      {
+        "path": "art/source/prop_bed_zila/v001/candidate-c.png",
+        "sha256": "e31558c5deee7d854a4d3921f43a9b1caf8d357eab9c0b42fa49b4670060fcc8"
+      }
+    ]
+  },
+  "provenance": "Original AI-generated artwork created for ZsRoom from official Art Bible, request 001 and project geometry templates. No third-party art incorporated.",
+  "postProcessing": [
+    "Selected candidate C; preserved all three original outputs byte-identically.",
+    "Unmodified scripts/fit-to-spec.mjs: native-alpha trim, proportional Lanczos3 resampling, baseline alignment and sRGB PNG export; no keying."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Height-limited official fitting: 250x512 content rather than nominal 272px overhang width; no anisotropic stretching applied.",
+      "Headboard top approximately y35 rather than guide y44; top/front bedding transition approximately y445 rather than y434. Pillow and fold placement do not exactly match the vertical guides.",
+      "Surface rendering remains more softly textured and less contour-led than the proposed Art Bible line-weight hierarchy.",
+      "Raw alpha has maximum 254, with most solid pixels 253: slight translucency remains. Inspect night-floor appearance before approval.",
+      "No room integration or gameplay scale validation performed; this is a single-asset visual submission."
+    ]
+  },
+  "cost": "Built-in image generation included in existing ChatGPT subscription; no paid API credits or external paid services used."
+}

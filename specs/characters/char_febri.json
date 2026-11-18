@@ -1,10 +1,11 @@
 {
   "id": "char_febri",
-  "specVersion": "0.9.0",
+  "specVersion": "0.10.0",
   "status": "draft-pending-creative-director",
   "category": "character",
   "displayName": "Febri",
   "heightCm": 170,
+  "heightDifferenceCm": { "vs": "char_zila", "target": "3–6", "current": 5 },
   "headsTall": 4.75,
   "density": 2,
   "canvas": { "width": 256, "height": 400 },

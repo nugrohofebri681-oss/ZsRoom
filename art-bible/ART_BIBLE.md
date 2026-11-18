@@ -24,7 +24,7 @@ The OG bedroom (on `main`) defines the emotional identity — not the rendering 
 | Night-time coziness: warm lamp pools, fairy lights, city window | Pixel-art rendering → HD painterly illustration |
 | Rose/blush pinks against warm walnut wood | Low-res sprites → 2 px/cm masters |
 | Personal props: heart cushion, teddy, plants, photos, neon "good vibes" | Ad-hoc scale → true-scale world in cm |
-| Zila & Febri as recognisable people | Chibi 2.5–3 head proportions → 4.5–4.75 heads (draft, §8) |
+| Zila & Febri as recognisable people | Chibi 2.5–3 head proportions → ≈ 4.6–4.75 heads (draft, §8) |
 
 ## 2. Perspective — "top-down three-quarter" (ZsRoom oblique)
 
@@ -55,8 +55,8 @@ See `art-bible/perspective/scale_lineup.png`.
 
 | Thing | Size |
 |---|---|
-| Zila | 158 cm tall |
-| Febri | 170 cm tall (12 cm taller — subtle, believable) |
+| Zila | 165 cm tall (draft) |
+| Febri | 170 cm tall (draft) — the visible difference stays within **3–6 cm** (Creative Director rule); currently 5 cm |
 | Interior wall / ceiling | 270 cm |
 | Interior door | 90 × 210 cm |
 | Bed (Zila) | 120 × 200 cm, mattress top 55 cm, headboard 110 cm |
@@ -64,7 +64,7 @@ See `art-bible/perspective/scale_lineup.png`.
 | Chair seat | 45 cm |
 | Wardrobe | 110 × 60 cm, 210 cm tall |
 
-Furniture is **not** enlarged for "cuteness". Characters must be able to sit on a 45 cm seat and lie on a 55 cm mattress without cheating.
+Characters and furniture are both drawn at true scale. Furniture is **not** enlarged for "cuteness". Characters must be able to sit on a 45 cm seat and lie on a 55 cm mattress without cheating.
 
 ## 5. Silhouette & shape language
 
@@ -115,7 +115,7 @@ Rules: **floors and furniture must separate in value** — floors use lighter ho
 
 Specs: `specs/characters/char_zila.json`, `specs/characters/char_febri.json`.
 
-Proposed proportion: **"storybook"** — Zila ≈ 4.5 heads, Febri ≈ 4.75 heads. More mature and expressive than the OG chibi sprites, still warm and soft, never realistic-gritty and never generic anime. **This is a major artistic decision and needs the Creative Director's approval before any character art is generated.**
+Proposed proportion: **"storybook"** — Zila ≈ 4.6 heads (165 cm), Febri ≈ 4.75 heads (170 cm). **Both heads are the same size (≈ 36 cm)**, so the 5 cm difference comes from neck, torso and leg length, not head scale. Keep the height difference at 3–6 cm in every pose: shoes, hair volume and hair ornaments must not push the visible difference outside that range. More mature and expressive than the OG chibi sprites, still warm and soft, never realistic-gritty and never generic anime. **This is a major artistic decision and needs the Creative Director's approval before any character art is generated.**
 
 **Zila (identity locks):** long layered brown hair to mid-back, bangs, face-framing strands; **two pink hair ornaments** (one each side, symmetric); large warm-brown eyes; soft round face; gentle expression; default outfit pink & white.
 
@@ -195,7 +195,7 @@ Approved assets become **style references** for their own category. They are not
 
 ## Changelog
 
-- **v1.2 (2026-11-18)** — §16 style references: `prop_bed_zila` v001 (VISUAL PASS) is the furniture reference, without locking other categories.
+- **v1.2 (2026-11-18)** — Character draft: Zila 165 / Febri 170 cm (3–6 cm difference rule, equal head size). §16 style references: `prop_bed_zila` v001 (VISUAL PASS) is the furniture reference, without locking other categories.
 
 - **v1.1 (2026-11-18)** — From the `prop_bed_zila` v001 gameplay review: occlusion fades only when the head is hidden (§12); floor/furniture value separation (§6); near-opaque alpha (≥ 250) is snapped to 255 by `fit-to-spec.mjs` and in runtime textures (§13).
 - **v1.0 (2026-11-18)** — Clean-rebuild Art Bible. Projection, units, scale, palette, materials, lighting, export, review gates. Characters drafted for CD approval.

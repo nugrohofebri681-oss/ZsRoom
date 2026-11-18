@@ -35,6 +35,8 @@ const SECRET_PATTERNS = [
 ];
 const EMAIL = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
 const EMAIL_ALLOW = /@(example\.(com|org)|users\.noreply\.github\.com|anthropic\.com)$/i;
+// Asset density variants such as `prop_bed_zila_v001@hd.webp` are file names, not e-mail addresses.
+const ASSET_VARIANT = /@(hd|sd|[1-4]x)\.(webp|png|jpe?g|avif)$/i;
 const TEXT_EXT = /\.(md|json|ts|js|mjs|cjs|html|css|ya?ml|txt|svg|toml)$/i;
 const MAX_BYTES = 6_000_000;
 
@@ -47,7 +49,7 @@ for (const f of files) {
   if (!TEXT_EXT.test(f) || f === 'package-lock.json' || f === 'scripts/privacy-scan.mjs') continue;
   const text = readFileSync(join(ROOT, f), 'utf8');
   for (const [re, why] of SECRET_PATTERNS) if (re.test(text)) problems.push(`${f}: possible ${why}`);
-  for (const m of text.match(EMAIL) ?? []) if (!EMAIL_ALLOW.test(m)) problems.push(`${f}: personal e-mail address "${m.replace(/(.{2}).*@/, '$1…@')}"`);
+  for (const m of text.match(EMAIL) ?? []) if (!EMAIL_ALLOW.test(m) && !ASSET_VARIANT.test(m)) problems.push(`${f}: personal e-mail address "${m.replace(/(.{2}).*@/, '$1…@')}"`);
 }
 if (problems.length) { console.error('Privacy scan FAILED:\n' + problems.map((p) => ` - ${p}`).join('\n')); process.exit(1); }
 console.log(`Privacy scan OK — ${files.length} files checked.`);

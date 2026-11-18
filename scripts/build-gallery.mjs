@@ -53,6 +53,7 @@ for (const s of listSubmissions()) {
       <figure class="stage light"><img src="${img}" width="${spec.canvas.width}" height="${spec.canvas.height}" alt=""><figcaption>light floor</figcaption></figure>
       <figure class="stage dark"><img src="${img}" width="${spec.canvas.width}" height="${spec.canvas.height}" alt=""><figcaption>night floor</figcaption></figure>
       <figure class="stage light scale"><img src="${img}" width="${spec.canvas.width}" height="${spec.canvas.height}" alt="">${silhouettes(spec)}<figcaption>true scale vs characters</figcaption></figure>
+      ${(spec.styleReferences ?? []).filter((r) => existsSync(join(ROOT, r))).map((r) => { const rs = [...specs.values()].find((e) => r.includes(`/${e.spec.id}/`))?.spec; const padA = spec.canvas.height - spec.pivot.y, padB = rs ? rs.canvas.height - rs.pivot.y : padA, pad = Math.max(padA, padB); return `<figure class="stage light pair"><img style="margin-bottom:${pad - padA}px" src="${img}" width="${spec.canvas.width}" height="${spec.canvas.height}" alt=""><img style="margin-bottom:${pad - padB}px" src="${copy(join(ROOT, r))}" width="${rs?.canvas.width ?? ''}" height="${rs?.canvas.height ?? ''}" alt=""><figcaption>side by side with style reference ${esc(r.split('/').pop())} (same scale)</figcaption></figure>`; }).join('')}
       <figure class="stage dark"><img class="small" src="${img}" width="${spec.canvas.width / 2}" height="${spec.canvas.height / 2}" alt=""><figcaption>SD runtime size (1px/cm)</figcaption></figure>
     </div>` : '<p class="bad">master image missing</p>'}
     <details open><summary>Technical checks</summary><ul>${r.checks.map((c) => `<li class="${c.pass ? 'good' : 'bad'}">${c.pass ? '✔' : '✘'} ${esc(c.name)} <small>${esc(c.detail)}</small></li>`).join('')}${r.warnings.map((w) => `<li class="warn">⚠ ${esc(w)}</li>`).join('')}</ul></details>
@@ -82,7 +83,7 @@ h1{margin:0 0 4px}.sub{color:var(--muted);margin:0 0 16px}
 .row{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px}
 .stage{position:relative;margin:0;border-radius:8px;flex:none;padding:0 0 22px}
 .stage img,.stage svg{display:block}.stage .ov{position:absolute;left:0;top:0;pointer-events:none}
-.stage.scale{display:flex;align-items:flex-start}
+.stage.scale{display:flex;align-items:flex-start}.stage.pair{display:flex;align-items:flex-end;gap:0}
 figcaption{position:absolute;bottom:2px;left:6px;font-size:11px;color:var(--muted)}
 .checker{background:repeating-conic-gradient(#ddd 0 25%,#fff 0 50%) 0 0/16px 16px}
 .light{background:#c9a27e}.dark{background:#2a1c22}.light figcaption{color:#3a2530}.dark figcaption{color:#e8c9cf}

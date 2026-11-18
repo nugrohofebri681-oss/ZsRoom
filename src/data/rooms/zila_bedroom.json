@@ -12,6 +12,7 @@
   },
   "props": [
     { "assetId": "prop_bed_zila", "x": 110, "y": 212 },
+    { "assetId": "prop_nightstand_zila", "x": 202, "y": 52 },
     { "assetId": "greybox_desk", "x": 120, "y": 420 },
     { "assetId": "greybox_wardrobe", "x": 470, "y": 62 },
     { "assetId": "greybox_plant_tall", "x": 400, "y": 250 }

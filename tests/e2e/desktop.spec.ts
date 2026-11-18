@@ -32,7 +32,7 @@ test.describe('desktop gameplay', () => {
   test('bed collision blocks the player and they slide along it', async ({ page }) => {
     await boot(page);
     await teleport(page, 240, 120);          // right of the bed (collision x ≤ 174)
-    await hold(page, 'ArrowLeft', 900);
+    await hold(page, 'ArrowLeft', 2000);     // generous: must stop at the bed regardless of frame rate
     const s = await state(page);
     expect(s.player.x).toBeGreaterThanOrEqual(174 + 16 - 0.5);
     expect(s.player.x).toBeLessThan(195);
@@ -43,12 +43,15 @@ test.describe('desktop gameplay', () => {
   test('walking behind a tall prop fades it (occlusion)', async ({ page }) => {
     await boot(page);
     await teleport(page, 400, 150);
-    await hold(page, 'ArrowDown', 350);     // approach from behind
-    await page.waitForTimeout(400);
+    await page.waitForTimeout(200);
+    expect((await state(page)).occluded, 'well behind and above: head not hidden yet').toEqual([]);
+    await teleport(page, 400, 190);          // directly behind the 165 cm plant (its collision starts at y 210)
+    await page.waitForTimeout(500);
     const s = await state(page);
     expect(s.player.y).toBeLessThan(210);
-    expect(s.occluded).toContain('greybox_plant_tall#3');
-    const plant = s.props.find((p) => p.key === 'greybox_plant_tall#3')!;
+    const plantKey = s.props.find((p) => p.key.startsWith('greybox_plant_tall#'))!.key; // index-independent
+    expect(s.occluded).toContain(plantKey);
+    const plant = s.props.find((p) => p.key === plantKey)!;
     expect(plant.alpha).toBeLessThan(0.8);
     await page.screenshot({ path: `${SHOTS}/desktop-03-occlusion.png` });
   });

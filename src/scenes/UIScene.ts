@@ -68,7 +68,7 @@ export class UIScene extends Phaser.Scene {
     this.actBtn.setPosition(width - 64, height - 70);
   }
 
-  private onRoom(room: RoomData): void { this.title.setText(`${room.displayName}  ·  Foundation Proof (grey-box)`); }
+  private onRoom(room: RoomData): void { this.title.setText(`${room.displayName}  ·  Foundation Proof`); }
   private onPrompt(label: string | null): void {
     const txt = label ? `${this.sys.game.device.input.touch ? 'Tap E' : 'E'} — ${label}` : '';
     if (this.prompt.text !== txt) this.prompt.setText(txt);

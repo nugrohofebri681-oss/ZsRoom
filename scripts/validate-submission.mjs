@@ -42,6 +42,9 @@ export async function validateSubmission({ assetId, version, dir }, specs) {
     ok('metadata.specVersion matches spec', meta.specVersion === spec.specVersion, `${meta.specVersion} vs ${spec.specVersion}`);
     ok('createdAt is a date', !Number.isNaN(Date.parse(meta.createdAt ?? '')));
     if (meta.files?.master?.path && meta.files.master.path !== masterName) ok('metadata master path', false, meta.files.master.path);
+    for (const ref of spec.styleReferences ?? []) {
+      if (!(meta.generator?.referencesUsed ?? []).includes(ref)) warnings.push(`style reference ${ref} not listed in generator.referencesUsed — consistency with approved art is unverified`);
+    }
     if (!meta.cost) warnings.push('metadata.cost missing — state that no paid API/credits were used');
     if (meta.selfReview && meta.selfReview.checklistComplete !== true) warnings.push('self-review checklist not marked complete');
   }

@@ -1,5 +1,5 @@
 {
-  "$comment": "Runtime asset manifest. Only entries with status 'approved' may ship real artwork. Edited by scripts/approve-asset.mjs — never by hand for approved entries.",
+  "$comment": "Runtime asset manifest. Only entries with status 'approved' may ship real artwork. Edited by scripts/approve-asset.mjs \u2014 never by hand for approved entries.",
   "manifestVersion": 1,
   "assets": {
     "prop_bed_zila": {
@@ -48,6 +48,11 @@
     "char_febri": {
       "status": "greybox",
       "spec": "specs/characters/char_febri.json"
+    },
+    "prop_nightstand_zila": {
+      "status": "requested",
+      "spec": "specs/props/prop_nightstand_zila.json",
+      "request": "docs/art-requests/002-prop_nightstand_zila.md"
     }
   }
 }

@@ -6,7 +6,8 @@
 //   --report <file.json>  write machine-readable results (used by the gallery / CI summary)
 import { execFileSync } from 'node:child_process';
 import { writeFileSync, appendFileSync } from 'node:fs';
-import { listSubmissions, loadSpecs, ownershipViolations } from './lib.mjs';
+import { listSubmissions, loadSpecs, ownershipViolations, readJson } from './lib.mjs';
+const manifestAssets = readJson('public/assets/manifest.json').assets ?? {};
 import { validateSubmission } from './validate-submission.mjs';
 
 const args = process.argv.slice(2);
@@ -33,7 +34,9 @@ if (changed) lines.push(`Branch \`${branch || '(unknown)'}\`, ${changed.length} 
 if (errors.length) lines.push('### Ownership', ...errors.map((e) => `- ❌ ${e}`), '');
 if (!results.length) lines.push('_No art submissions to validate._');
 for (const r of results) {
-  lines.push(`### ${r.assetId} ${r.version} — ${r.errors.length ? '❌ TECHNICAL FAIL' : '✅ TECHNICAL PASS'} · VISUAL: pending Creative Director review`, '');
+  const m = manifestAssets[r.assetId];
+  const visual = m?.status === 'approved' && m.version === r.version ? `✅ VISUAL PASS (approved by ${m.approval?.approvedBy ?? 'Creative Director'})` : 'VISUAL: pending Creative Director review';
+  lines.push(`### ${r.assetId} ${r.version} — ${r.errors.length ? '❌ TECHNICAL FAIL' : '✅ TECHNICAL PASS'} · ${visual}`, '');
   for (const c of r.checks) lines.push(`- ${c.pass ? '✅' : '❌'} ${c.name}${c.detail ? ` — ${c.detail}` : ''}`);
   for (const w of r.warnings) lines.push(`- ⚠️ ${w}`);
   lines.push('');

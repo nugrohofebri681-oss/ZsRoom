@@ -62,7 +62,10 @@ async function propTemplate(spec) {
   parts.push(`<line x1="${px - 10}" y1="${py}" x2="${px + 10}" y2="${py}" stroke="#000" stroke-width="2"/><line x1="${px}" y1="${py - 10}" x2="${px}" y2="${py + 10}" stroke="#000" stroke-width="2"/><text x="${px + 12}" y="${py + 14}" font-size="10" fill="#000">PIVOT (${px},${py})</text>`);
   parts.push(`<line x1="0" y1="${py}" x2="${W}" y2="${py}" stroke="#000" stroke-opacity="0.35" stroke-dasharray="2 4"/>`);
   parts.push(`<text x="6" y="${H - 6}" font-size="9" fill="#555">${spec.id} · ${W}×${H}px · ${d}px/cm · depth×${K} · GUIDE ONLY</text>`);
-  await emit(`${spec.id}_template`, svg(W, H, parts.join('')));
+  // Small canvases: shrink label text proportionally so guides stay legible and uncluttered.
+  const f = Math.min(1, W / 300);
+  const body = f < 1 ? parts.join('').replace(/font-size="([\d.]+)"/g, (_, n) => `font-size="${(Number(n) * Math.max(f, 0.55)).toFixed(1)}"`) : parts.join('');
+  await emit(`${spec.id}_template`, svg(W, H, body));
 }
 
 async function scaleLineup() {

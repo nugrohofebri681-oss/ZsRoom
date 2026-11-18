@@ -1,4 +1,4 @@
-# ZsRoom Art Bible — v1.1
+# ZsRoom Art Bible — v1.2
 
 **Style name:** ZsRoom OG Enhanced — Premium HD Illustrated 2D
 **Status:** v1.0 technical standard (Claude Code). Characters §8 are **draft — pending Creative Director approval**.
@@ -177,7 +177,25 @@ Passing step 1 never implies step 2.
 - Record the exact prompt, tool and model in `prompt.md` / `metadata.json`.
 - Zero additional cost: use only capabilities already included in existing subscriptions; never start paid API usage.
 
+## 16. Style references & evolution
+
+Approved assets become **style references** for their own category. They are not a permanent lock on the whole game.
+
+| Category | Current reference | Approved |
+|---|---|---|
+| Painted furniture (interior props) | `art/approved/prop_bed_zila/prop_bed_zila_v001.png` | 2026-11-18 |
+| Characters | — (proportions draft, §8) | — |
+| Architecture / walls / floors | — | — |
+| Exterior / city / travel | — | — |
+
+- New assets in a category are conditioned on that category's references, so they look painted by the same hand: material finish, palette use, edge softness, level of detail.
+- A reference sets **finish and consistency**. It does not set composition, colour schemes for other rooms, or the look of other categories.
+- Only the Creative Director can change the style direction. When that happens, this table and the changelog are updated, and earlier references are marked as superseded rather than deleted.
+- Known gaps in the current furniture reference, to improve gradually in new assets **without regenerating approved ones**: a more visible upper-left key light, and slightly crisper coloured contours.
+
 ## Changelog
+
+- **v1.2 (2026-11-18)** — §16 style references: `prop_bed_zila` v001 (VISUAL PASS) is the furniture reference, without locking other categories.
 
 - **v1.1 (2026-11-18)** — From the `prop_bed_zila` v001 gameplay review: occlusion fades only when the head is hidden (§12); floor/furniture value separation (§6); near-opaque alpha (≥ 250) is snapped to 255 by `fit-to-spec.mjs` and in runtime textures (§13).
 - **v1.0 (2026-11-18)** — Clean-rebuild Art Bible. Projection, units, scale, palette, materials, lighting, export, review gates. Characters drafted for CD approval.

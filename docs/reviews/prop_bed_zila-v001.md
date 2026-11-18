@@ -1,7 +1,7 @@
 # Review — `prop_bed_zila` v001 (PR #1, candidate C)
 
 **Reviewer:** Claude Code (technical + consistency) · **Date:** 2026-11-18
-**Status:** TECHNICAL PASS · VISUAL: **pending Creative Director** · PRODUCTION READY: no
+**Status:** TECHNICAL PASS · **VISUAL PASS (Creative Director, 2026-11-18)** · PRODUCTION READY: yes, after integration QA (see below)
 **Recommendation:** accept candidate C as v001. No v002 regeneration needed.
 
 PR: https://github.com/nugrohofebri681-oss/ZsRoom/pull/1. Not merged, and the manifest is not modified. The gameplay integration below ran in a scratch copy only.
@@ -60,3 +60,10 @@ PR: https://github.com/nugrohofebri681-oss/ZsRoom/pull/1. Not merged, and the ma
 ## Decision requested
 - **Recommended:** grant VISUAL PASS to v001 candidate C. Claude then runs `approve-asset`, merges PR #1 into `reboot/foundation`, and runs gameplay regression.
 - **Alternative:** if you want stronger directional light or crisper contours as a house standard, say so. A v002 brief will target only those two points.
+
+## Creative Director decision — 2026-11-18
+> **VISUAL PASS — prop_bed_zila v001 (candidate C).** I approve the existing bed artwork and its top-down oblique perspective. No v002 is needed for this asset.
+
+Approval recorded with `scripts/approve-asset.mjs`. The approved master is `art/approved/prop_bed_zila/prop_bed_zila_v001.png`, and the master SHA-256 matches the submission metadata. Runtime HD and SD WebP checksums are in `public/assets/manifest.json`.
+
+**Scope of this approval:** the bed is the first **style reference** for painted furniture (finish, material handling, palette use). It does not lock the whole game's visual style. Other categories (characters, environments, buildings, outdoor) set their own references when they are approved, and the Creative Director may evolve the style (Art Bible §16).

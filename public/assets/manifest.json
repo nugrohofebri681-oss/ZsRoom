@@ -2,11 +2,52 @@
   "$comment": "Runtime asset manifest. Only entries with status 'approved' may ship real artwork. Edited by scripts/approve-asset.mjs — never by hand for approved entries.",
   "manifestVersion": 1,
   "assets": {
-    "prop_bed_zila": { "status": "requested", "spec": "specs/props/prop_bed_zila.json", "request": "docs/art-requests/001-prop_bed_zila.md" },
-    "greybox_desk": { "status": "greybox", "spec": "specs/props/greybox_desk.json" },
-    "greybox_wardrobe": { "status": "greybox", "spec": "specs/props/greybox_wardrobe.json" },
-    "greybox_plant_tall": { "status": "greybox", "spec": "specs/props/greybox_plant_tall.json" },
-    "char_zila": { "status": "greybox", "spec": "specs/characters/char_zila.json" },
-    "char_febri": { "status": "greybox", "spec": "specs/characters/char_febri.json" }
+    "prop_bed_zila": {
+      "status": "approved",
+      "spec": "specs/props/prop_bed_zila.json",
+      "request": "docs/art-requests/001-prop_bed_zila.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_bed_zila_v001@hd.webp",
+          "sha256": "d46bf189210242aab6f97a7cb129b039500bb6c8f9bd8a02f57bd4972dc4bc54",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_bed_zila_v001@sd.webp",
+          "sha256": "7b9b6301fe5bfea5366c7ec2494529fb0a85419a209a8bdc2d47dc9db00042d0",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-18T08:49:56.382Z",
+        "review": "docs/reviews/prop_bed_zila-v001.md",
+        "master": {
+          "path": "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+          "sha256": "d41d329432175add32b33c6d98589d289152f3188dac408d231e5fbf1bbe6acc"
+        }
+      }
+    },
+    "greybox_desk": {
+      "status": "greybox",
+      "spec": "specs/props/greybox_desk.json"
+    },
+    "greybox_wardrobe": {
+      "status": "greybox",
+      "spec": "specs/props/greybox_wardrobe.json"
+    },
+    "greybox_plant_tall": {
+      "status": "greybox",
+      "spec": "specs/props/greybox_plant_tall.json"
+    },
+    "char_zila": {
+      "status": "greybox",
+      "spec": "specs/characters/char_zila.json"
+    },
+    "char_febri": {
+      "status": "greybox",
+      "spec": "specs/characters/char_febri.json"
+    }
   }
 }

@@ -44,6 +44,8 @@ if (flag('--key-background')) {
   console.log(`keyed background rgb(${bg.join(',')}), removed ${removed} px (${((removed / (W * H)) * 100).toFixed(1)}%)`);
 }
 
+// Snap near-opaque alpha (250–254, common in generator output) to fully opaque.
+for (let i = 3; i < data.length; i += 4) if (data[i] >= 250) data[i] = 255;
 const keyed = sharp(data, { raw: { width: W, height: H, channels: 4 } }).png();
 const trimmed = await sharp(await keyed.toBuffer()).trim({ background: { r: 0, g: 0, b: 0, alpha: 0 }, threshold: 1 }).toBuffer({ resolveWithObject: true });
 const tw = trimmed.info.width, th = trimmed.info.height;

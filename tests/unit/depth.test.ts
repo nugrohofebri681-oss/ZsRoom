@@ -21,6 +21,12 @@ describe('depth sorting', () => {
     expect(d).toBeLessThan(plant.pivotY);
     expect(occludingProps(a, d, [plant])).toEqual(['plant']);
   });
+  it('a low bed with a 110cm headboard does not fade when the actor stands behind it', () => {
+    // free-standing bed: pivot 350, footprint y 150..350, volume top = 150*0.7 - 110 = -5
+    const freeBed: SortableProp = { id: 'bed', pivotY: 350, footprint: { x: 260, y: 150, w: 120, h: 200 }, renderBounds: { x: 260, y: -5, w: 120, h: 250 }, occluder: true };
+    const a = actor(320, 128);
+    expect(occludingProps(a, actorSortDepth(a, [freeBed]), [freeBed])).toEqual([]);
+  });
   it('actor in front of the occluder does not fade it', () => {
     const a = actor(400, 290);
     expect(occludingProps(a, actorSortDepth(a, [plant]), [plant])).toEqual([]);

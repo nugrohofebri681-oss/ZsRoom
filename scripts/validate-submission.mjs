@@ -18,7 +18,7 @@ export async function validateSubmission({ assetId, version, dir }, specs) {
   ok('asset id format', ASSET_ID_RE.test(assetId), assetId);
   ok('version format (v###)', VERSION_RE.test(version), version);
   const entry = specs.get(assetId);
-  if (!ok('spec exists', !!entry, `no spec for ${assetId}`)) return { assetId, version, dir: rel(dir), errors, warnings, checks };
+  if (!ok('spec exists', !!entry, entry ? entry.path : `no spec for ${assetId}`)) return { assetId, version, dir: rel(dir), errors, warnings, checks };
   const spec = entry.spec;
   if (spec.status === 'greybox-only') errors.push('this asset is grey-box only and does not accept art submissions');
 

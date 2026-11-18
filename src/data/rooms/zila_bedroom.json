@@ -5,7 +5,7 @@
   "floor": "upper",
   "sizeCm": { "w": 560, "h": 440 },
   "wallHeightCm": 270,
-  "palette": { "floor": "#8a5a3c", "wall": "#e8c9cf", "trim": "#5b3a29" },
+  "palette": { "floor": "#b8875c", "wall": "#e8c9cf", "trim": "#5b3a29" },
   "spawns": {
     "default": { "x": 300, "y": 360, "facing": "N" },
     "from_hall": { "x": 280, "y": 400, "facing": "N" }

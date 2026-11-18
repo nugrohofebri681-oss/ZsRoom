@@ -40,12 +40,21 @@ export function rectOverlapArea(a: Rect, b: Rect): number {
   return w > 0 && h > 0 ? w * h : 0;
 }
 
-/** Props drawn in front of the actor that hide a meaningful part of it, and should fade. */
-export function occludingProps(actor: SortableActor, actorDepth: number, props: readonly SortableProp[], minCoverage = 0.15): string[] {
-  const area = actor.renderBounds.w * actor.renderBounds.h;
+/** Fraction of the actor's height (from the top) treated as head & shoulders for occlusion. */
+export const HEAD_BAND = 0.3;
+
+/**
+ * Props drawn in front of the actor that hide its head & shoulders, and should therefore fade.
+ * Low furniture (beds, sofas, desks) that only hides legs or torso does NOT fade — that natural
+ * overlap is what makes the actor read as standing behind it.
+ */
+export function occludingProps(actor: SortableActor, actorDepth: number, props: readonly SortableProp[], minCoverage = 0.25): string[] {
+  const b = actor.renderBounds;
+  const head = { x: b.x, y: b.y, w: b.w, h: b.h * HEAD_BAND };
+  const area = head.w * head.h;
   if (area <= 0) return [];
   return props
     .filter((p) => p.occluder && p.pivotY > actorDepth)
-    .filter((p) => rectOverlapArea(actor.renderBounds, p.renderBounds) / area >= minCoverage)
+    .filter((p) => rectOverlapArea(head, p.renderBounds) / area >= minCoverage)
     .map((p) => p.id);
 }

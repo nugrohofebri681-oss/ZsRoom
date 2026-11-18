@@ -1,6 +1,6 @@
 import * as Phaser from 'phaser';
 import { groundToRender, DEPTH_SCALE } from '../core/projection';
-import { getCharacterSpec, type CharacterSpec } from '../core/specs';
+import { getCharacterSpec, type CharacterSpec, type PropSpec } from '../core/specs';
 import { compileRoom, getRoom, DOOR_DEPTH, type CompiledRoom, type RoomDoor } from '../world/room';
 import { moveWithCollision } from '../world/collision';
 import { actorSortDepth, occludingProps, type SortableActor } from '../world/depth';
@@ -24,6 +24,7 @@ export class RoomScene extends Phaser.Scene {
   private facingDir: Direction = 'S';
   private actorView!: Phaser.GameObjects.Container;
   private facingView!: Phaser.GameObjects.Graphics;
+  private debugActor?: Phaser.GameObjects.Graphics;
   private propViews = new Map<string, Phaser.GameObjects.GameObject & Phaser.GameObjects.Components.AlphaSingle & Phaser.GameObjects.Components.Depth>();
   private keyboard!: KeyboardInput;
   private input$!: InputState;
@@ -35,6 +36,7 @@ export class RoomScene extends Phaser.Scene {
 
   create(data: RoomSceneData): void {
     this.transitioning = false;
+    this.debugActor = undefined;
     this.propViews.clear();
     this.room = compileRoom(getRoom(data.roomId));
     this.character = getCharacterSpec('char_zila');
@@ -59,6 +61,7 @@ export class RoomScene extends Phaser.Scene {
     this.events.once('shutdown', () => this.scale.off('resize', this.fitCamera, this));
     this.cameras.main.fadeIn(220, 29, 20, 24);
 
+    if (new URLSearchParams(location.search).has('debug')) this.drawDebugOverlay();
     this.game.events.emit('room-entered', this.room.data);
     this.persist();
     this.syncActor();
@@ -70,8 +73,11 @@ export class RoomScene extends Phaser.Scene {
     const { w, h } = this.room.data.sizeCm;
     const renderH = h * DEPTH_SCALE + this.room.data.wallHeightCm;
     const fit = Math.min(cam.width / (w + 80), cam.height / (renderH + 60));
-    // Never so far out that a character is shorter than ~22% of the screen height.
-    const minForReadability = (cam.height * 0.22) / this.character.heightCm;
+    // Never so far out that a character is too small to read: ~22% of the screen height on desktop,
+    // ~36% on short phone-landscape screens (CSS height < 500), where whole-room framing is too small.
+    const dpr = (this.registry.get('dpr') as number | undefined) ?? 1;
+    const share = cam.height / dpr < 500 ? 0.36 : 0.22;
+    const minForReadability = (cam.height * share) / this.character.heightCm;
     const zoom = Math.max(fit, minForReadability);
     cam.setZoom(zoom);
     // Bounds are at least one view in size and centred on the room, so small rooms sit centred on screen.
@@ -125,6 +131,7 @@ export class RoomScene extends Phaser.Scene {
       let view;
       if (entry?.status === 'approved' && this.textures.exists(key)) {
         const density = densities[p.spec.id] ?? p.spec.density;
+        this.drawPropShadow(p.spec, p.x, p.y);
         view = this.add.image(pivot.x, pivot.y, key)
           .setOrigin(p.spec.pivot.x / p.spec.canvas.width, p.spec.pivot.y / p.spec.canvas.height)
           .setScale(1 / density);
@@ -133,6 +140,44 @@ export class RoomScene extends Phaser.Scene {
       }
       view.setDepth(p.y);
       this.propViews.set(p.key, view);
+    }
+  }
+
+  /** ?debug — collision solids (red), footprints (pink), pivots (black +), anchors (green), actor radius (cyan). */
+  private drawDebugOverlay(): void {
+    const g = this.add.graphics().setDepth(1e6);
+    const rect = (r: { x: number; y: number; w: number; h: number }) => {
+      const a = groundToRender(r.x, r.y);
+      const b = groundToRender(r.x + r.w, r.y + r.h);
+      return [a.x, a.y, b.x - a.x, b.y - a.y] as const;
+    };
+    g.lineStyle(1.5, 0xff2d2d, 0.9);
+    for (const s of this.room.solids) g.strokeRect(...rect(s));
+    for (const p of this.room.props) {
+      g.lineStyle(1, 0xff3d7f, 1).strokeRect(...rect(p.sortable.footprint));
+      const pv = groundToRender(p.x, p.y);
+      g.lineStyle(2, 0x000000, 1).lineBetween(pv.x - 6, pv.y, pv.x + 6, pv.y).lineBetween(pv.x, pv.y - 6, pv.x, pv.y + 6);
+    }
+    for (const a of this.room.anchors) {
+      const c = groundToRender(a.x, a.y);
+      g.lineStyle(1, 0x2fd07a, 0.9).strokeEllipse(c.x, c.y, a.radiusCm * 2, a.radiusCm * 2 * DEPTH_SCALE);
+    }
+    this.debugActor = this.add.graphics().setDepth(1e6 + 1);
+  }
+
+  /**
+   * Engine-rendered soft cast shadow (Art Bible §7: cast shadows are never baked into art).
+   * Light from the upper-left → shadow falls slightly right and toward the viewer, on the floor plane.
+   */
+  private drawPropShadow(spec: PropSpec, x: number, y: number): void {
+    const g = this.add.graphics().setDepth(-50000);
+    const w = spec.footprint.widthCm;
+    const d = spec.footprint.depthCm * DEPTH_SCALE;
+    const front = groundToRender(x, y).y;
+    const ox = 5, oy = 3;
+    const steps = [{ grow: 10, a: 0.05 }, { grow: 6, a: 0.07 }, { grow: 2, a: 0.1 }];
+    for (const s of steps) {
+      g.fillStyle(0x2a1620, s.a).fillRoundedRect(x - w / 2 - s.grow / 2 + ox, front - d - s.grow / 2 + oy, w + s.grow, d + s.grow, Math.min(12, (d + s.grow) / 2));
     }
   }
 
@@ -159,6 +204,10 @@ export class RoomScene extends Phaser.Scene {
     this.actorView.setPosition(r.x, r.y);
     const v = DIR_VEC[this.facingDir];
     this.facingView.setRotation(Math.atan2(v.y * DEPTH_SCALE, v.x));
+    if (this.debugActor) {
+      const rad = this.character.collision.radiusCm;
+      this.debugActor.clear().lineStyle(1.5, 0x00e5ff, 1).strokeEllipse(r.x, r.y, rad * 2, rad * 2 * DEPTH_SCALE);
+    }
     const actor: SortableActor = {
       x: this.pos.x, y: this.pos.y, radius: this.character.collision.radiusCm,
       renderBounds: { x: r.x - this.character.collision.radiusCm, y: r.y - this.character.heightCm, w: this.character.collision.radiusCm * 2, h: this.character.heightCm },

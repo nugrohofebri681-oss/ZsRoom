@@ -7,6 +7,7 @@ import sharp from 'sharp';
 import { loadSpecs, readJson, ROOT, sha256File } from './lib.mjs';
 import { validateSubmission } from './validate-submission.mjs';
 
+const ALPHA_SNAP = 250;
 const [, , assetId, version, ...rest] = process.argv;
 const val = (n) => { const i = rest.indexOf(n); return i >= 0 ? rest[i + 1] : undefined; };
 const approvedBy = val('--approved-by');
@@ -30,6 +31,12 @@ const current = manifest.assets[assetId];
 if (current?.status === 'approved' && current.version === version) { console.error(`${assetId} ${version} is already approved`); process.exit(1); }
 
 const spec = entry.spec;
+/** Generators often emit "opaque" pixels at alpha 250–254; snap those to 255 so floors never bleed through. */
+async function solidified(path) {
+  const { data, info } = await sharp(path).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  for (let i = 3; i < data.length; i += 4) if (data[i] >= ALPHA_SNAP) data[i] = 255;
+  return sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } });
+}
 const master = `art/approved/${assetId}/${assetId}_${version}.png`;
 mkdirSync(join(ROOT, 'art', 'approved', assetId), { recursive: true });
 copyFileSync(join(dir, `${assetId}_${version}.png`), join(ROOT, master));
@@ -42,7 +49,7 @@ for (const [name, density] of Object.entries(variants)) {
   const f = `assets/${cat}/${assetId}_${version}@${name}.webp`;
   const w = Math.round(spec.canvas.width * (density / spec.density));
   const h = Math.round(spec.canvas.height * (density / spec.density));
-  await sharp(join(ROOT, master)).resize(w, h, { kernel: 'lanczos3' }).webp({ lossless: true, effort: 6 }).toFile(join(ROOT, 'public', f));
+  await solidified(join(ROOT, master)).then((img) => img.resize(w, h, { kernel: 'lanczos3' }).webp({ lossless: true, effort: 6 }).toFile(join(ROOT, 'public', f)));
   runtime[name] = { path: f, sha256: sha256File(`public/${f}`), density };
 }
 manifest.assets[assetId] = {

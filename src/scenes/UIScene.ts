@@ -62,7 +62,8 @@ export class UIScene extends Phaser.Scene {
     const width = this.scale.width / this.dpr;
     const height = this.scale.height / this.dpr;
     this.fps.setPosition(width - 10, 10);
-    this.prompt.setPosition(width / 2, height - 24);
+    const touch = this.sys.game.device.input.touch;
+    this.prompt.setPosition(touch ? Math.min(width / 2, width - 150) : width / 2, height - (touch && width < 600 ? 120 : 24));
     this.toast.setPosition(width / 2, 52);
     this.actBtn.setPosition(width - 64, height - 70);
   }

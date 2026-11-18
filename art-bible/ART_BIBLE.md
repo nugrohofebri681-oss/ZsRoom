@@ -1,4 +1,4 @@
-# ZsRoom Art Bible — v1.0
+# ZsRoom Art Bible — v1.1
 
 **Style name:** ZsRoom OG Enhanced — Premium HD Illustrated 2D
 **Status:** v1.0 technical standard (Claude Code). Characters §8 are **draft — pending Creative Director approval**.
@@ -91,7 +91,7 @@ Master palette (anchor swatches — local colours may shift around them, but sta
 | leaf | `#6E9B5A` | Plants |
 | febri-blue | `#5B7FB5` | Febri's shirt |
 
-Rules: no pure `#000000`; no fully saturated primaries; shadows shift **toward plum/warm**, highlights toward **warm cream**. Saturation is highest in mid-tones.
+Rules: **floors and furniture must separate in value** — floors use lighter honey/oak woods or tile (≈ 15 %+ lighter than `walnut`), so walnut furniture legs and frames stay readable where they meet the floor. No pure `#000000`; no fully saturated primaries; shadows shift **toward plum/warm**, highlights toward **warm cream**. Saturation is highest in mid-tones.
 
 ## 7. Line work, materials, lighting, shadows
 
@@ -143,7 +143,8 @@ Each prop spec defines: `footprint` (true floor size), `collision` rectangles re
 
 ## 12. Occlusion & depth sorting
 
-- Depth = ground y of the pivot (front edge of the footprint). Characters standing **beside** a deep object sort in front of it; standing **behind** a tall object (`occluder: true`) fades the object to ≈ 42 % opacity.
+- Depth = ground y of the pivot (front edge of the footprint). Characters standing **beside** a deep object sort in front of it.
+- A character **behind** an object is simply overlapped by it. The object fades to ≈ 42 % opacity **only when it hides the character's head and shoulders** (top 30 % of their height) — tall wardrobes, plants, shelves. Low furniture (beds, sofas, desks) never fades; the overlap is what tells the player where they stand.
 - Therefore every prop must be **one clean piece** whose silhouette matches its true volume — no floating decorations far outside the footprint.
 - Tall back-wall objects (wardrobes, shelves) are authored as single sprites; very large structures (buildings) will be split into base + roof layers (future spec).
 
@@ -152,7 +153,7 @@ Each prop spec defines: `footprint` (true floor size), `collision` rectangles re
 | Property | Requirement |
 |---|---|
 | Format | PNG, 8-bit per channel, RGBA, sRGB |
-| Alpha | Straight (unpremultiplied); real transparency, never a baked checkerboard or white |
+| Alpha | Straight (unpremultiplied); real transparency, never a baked checkerboard or white. Solid areas fully opaque (alpha ≥ 250 is snapped to 255 by the pipeline) |
 | Canvas | Exactly the spec canvas; transparent edge padding as specified |
 | Base | Lowest solid row on the spec `baseLine` ± tolerance |
 | Name | `<asset_id>_<v###>.png` in `art/submissions/<asset_id>/<v###>/` |
@@ -178,4 +179,5 @@ Passing step 1 never implies step 2.
 
 ## Changelog
 
+- **v1.1 (2026-11-18)** — From the `prop_bed_zila` v001 gameplay review: occlusion fades only when the head is hidden (§12); floor/furniture value separation (§6); near-opaque alpha (≥ 250) is snapped to 255 by `fit-to-spec.mjs` and in runtime textures (§13).
 - **v1.0 (2026-11-18)** — Clean-rebuild Art Bible. Projection, units, scale, palette, materials, lighting, export, review gates. Characters drafted for CD approval.

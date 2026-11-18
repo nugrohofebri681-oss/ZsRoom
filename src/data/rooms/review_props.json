@@ -1,0 +1,17 @@
+{
+  "id": "review_props",
+  "displayName": "Asset Review Room (dev)",
+  "world": "dev",
+  "floor": "ground",
+  "sizeCm": { "w": 640, "h": 520 },
+  "wallHeightCm": 270,
+  "palette": { "floor": "#b8875c", "wall": "#e8c9cf", "trim": "#5b3a29" },
+  "spawns": {
+    "default": { "x": 320, "y": 470, "facing": "N" }
+  },
+  "props": [
+    { "assetId": "prop_bed_zila", "x": 320, "y": 350 },
+    { "assetId": "greybox_plant_tall", "x": 520, "y": 200 }
+  ],
+  "doors": []
+}

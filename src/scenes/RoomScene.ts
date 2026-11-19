@@ -246,7 +246,8 @@ export class RoomScene extends Phaser.Scene {
 
   private applyWorldVars(): void {
     const look = PHASE_LOOK[this.phase()];
-    this.ambient?.setFillStyle(Phaser.Display.Color.HexStringToColor(look.overlay.color).color, look.overlay.alpha);
+    // Skip the full-screen tint entirely when it would be invisible (saves one full-screen blend pass on mobile GPUs).
+    this.ambient?.setFillStyle(Phaser.Display.Color.HexStringToColor(look.overlay.color).color, look.overlay.alpha).setVisible(look.overlay.alpha > 0.01);
     for (const l of this.propLights.values()) l.setBoost(look.lightBoost);
     const sky = this.skyTexture();
     for (const s of this.skies) { s.img.setTexture(sky); s.curtains.setVisible(!!this.vars.curtainsClosed); }

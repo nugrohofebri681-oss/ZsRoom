@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { boot, SHOTS, state } from './helpers';
+import { boot, SHOTS, state, until } from './helpers';
 
 test.describe('mobile browser (emulated budget Android, touch)', () => {
   test.skip(({ isMobile }) => !isMobile, 'mobile only');
@@ -14,7 +14,7 @@ test.describe('mobile browser (emulated budget Android, touch)', () => {
       await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: pt(150 + i * 10, 250) });
       await page.waitForTimeout(30);
     }
-    await page.waitForTimeout(700);
+    await until(page, `s.player.x > ${before.player.x + 30}`);   // frame-rate independent
     const moving = await state(page);
     await page.screenshot({ path: `${SHOTS}/mobile-01-joystick.png` });
     await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });

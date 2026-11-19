@@ -44,3 +44,9 @@ export const press = async (page: Page, isMobile: boolean) => {
 export async function until(page: Page, fn: string, timeout = 8000): Promise<void> {
   await page.waitForFunction(`(() => { const s = window.__ZS.state(); return ${fn}; })()`, null, { timeout });
 }
+
+/** Hold a key until the state predicate holds (or timeout): frame-rate independent movement for slow CI runners. */
+export async function holdUntil(page: Page, key: string, fn: string, timeout = 12000): Promise<void> {
+  await page.keyboard.down(key);
+  try { await until(page, fn, timeout); } finally { await page.keyboard.up(key); }
+}

@@ -51,8 +51,8 @@
       "z": 12
     },
     "color": "#FFC872",
-    "radiusCm": 330,
-    "intensity": 0.18,
+    "radiusCm": 220,
+    "intensity": 0.2,
     "defaultOn": true,
     "coreSizeCm": 0
   },

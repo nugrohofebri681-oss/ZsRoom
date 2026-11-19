@@ -34,6 +34,33 @@ test.describe('approved asset regression', () => {
     expect(errors).toEqual([]);
   });
 
+  test('approved wardrobe renders, collides and still changes outfits', async ({ page, isMobile }) => {
+    const errors = await boot(page);
+    const w = await page.evaluate(() => {
+      const g = (window as any).__ZS_GAME;
+      if (!g.textures.exists('asset:prop_wardrobe_zila')) return null;
+      const img = g.textures.get('asset:prop_wardrobe_zila').getSourceImage();
+      return { w: img.width, h: img.height };
+    });
+    expect(w, 'approved wardrobe texture loaded').not.toBeNull();
+    expect(w!.h / w!.w).toBeCloseTo(544 / 272, 2);
+    const s: any = await state(page);
+    expect(s.props.find((p: any) => p.key.startsWith('prop_wardrobe_zila#')).art).toBe('approved');
+    for (const id of ['prop_desk_zila', 'prop_chair_desk', 'prop_vanity_zila', 'prop_stool_vanity', 'prop_lamp_zila'])
+      expect(s.props.find((p: any) => p.key.startsWith(id + '#')).art, `${id} must stay TEMP`).toBe('temp');
+    await teleport(page, 640, 94);                                   // wardrobe interaction spot
+    await page.waitForTimeout(200);
+    expect((await state(page)).nearest).toMatch(/^prop_wardrobe_zila#\d+:outfit$/);
+    if (!isMobile) {
+      await page.keyboard.down('ArrowUp'); await page.waitForTimeout(600); await page.keyboard.up('ArrowUp');
+      expect((await state(page)).player.y).toBeGreaterThanOrEqual(64 + 16 - 0.5);   // stops at the wardrobe front
+    }
+    await teleport(page, 560, 260);
+    await page.waitForTimeout(500);
+    await page.screenshot({ path: `${SHOTS}/${isMobile ? 'mobile' : 'desktop'}-09-approved-wardrobe.png` });
+    expect(errors).toEqual([]);
+  });
+
   test('nightstand blocks movement and has its own interaction', async ({ page, isMobile }) => {
     test.skip(isMobile, 'desktop only');
     await boot(page);

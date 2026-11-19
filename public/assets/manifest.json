@@ -93,9 +93,45 @@
       "request": "docs/art-requests/004-batch-b-furniture.md"
     },
     "prop_wardrobe_zila": {
-      "status": "requested",
+      "status": "approved",
       "spec": "specs/props/prop_wardrobe_zila.json",
-      "request": "docs/art-requests/004-batch-b-furniture.md"
+      "request": "docs/art-requests/004-batch-b-furniture.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_wardrobe_zila_v001@hd.webp",
+          "sha256": "7eb43a46be3c7936064a166140465152b4b177e2c583e001513b3db27ad298a6",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_wardrobe_zila_v001@sd.webp",
+          "sha256": "f91389295edf4bedb9266376c33f779d024761ee10fffc61346e8e8763c75f60",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-19T06:44:45.131Z",
+        "review": "docs/reviews/prop_wardrobe_zila-v001.md",
+        "master": {
+          "path": "art/approved/prop_wardrobe_zila/prop_wardrobe_zila_v001.png",
+          "sha256": "c54e419819766daf4fe7d8edb6ca6bac0dc946236e9b5d256fd198c06dcbea00"
+        },
+        "geometryException": {
+          "frontFaceHeight": {
+            "designedCm": 210,
+            "paintedCm": 206.3,
+            "deviationPct": -1.8
+          },
+          "topPlaneDepth": {
+            "designedCm": 60,
+            "paintedCm": 40.4,
+            "deviationPct": -33
+          },
+          "topConvergence": "front of top ≈12% wider than back",
+          "decision": "Shallow tabletop explicitly accepted by the Creative Director (VISUAL PASS wardrobe v001 only)."
+        }
+      }
     },
     "prop_vanity_zila": {
       "status": "requested",

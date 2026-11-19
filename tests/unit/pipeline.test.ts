@@ -80,6 +80,14 @@ describe('ownership policy', () => {
     expect(ownershipViolations('codex/art/batch-b-r1', ['src/main.ts'])).toHaveLength(1);
     expect(ownershipViolations('codex/art/batch-z-r1', [])).toHaveLength(1);
   });
+  it('an integration branch may carry the submission of an asset it approves — and nothing else', () => {
+    const wardrobe = ['art/submissions/prop_wardrobe_zila/v001/prop_wardrobe_zila_v001.png', 'art/source/prop_wardrobe_zila/v001/candidate-a.png', 'art/approved/prop_wardrobe_zila/prop_wardrobe_zila_v001.png'];
+    expect(ownershipViolations('claude/integrate-wardrobe-v001', wardrobe)).toEqual([]);
+    // the desk is NOT approved: carrying its submission must be refused
+    expect(ownershipViolations('claude/integrate-wardrobe-v001', [...wardrobe, 'art/submissions/prop_desk_zila/v001/prop_desk_zila_v001.png'])).toHaveLength(1);
+    // without the approved master in the same diff it is not an integration
+    expect(ownershipViolations('claude/x', ['art/submissions/prop_wardrobe_zila/v001/metadata.json'])).toHaveLength(1);
+  });
   it('rejects malformed codex branch names and non-codex submission edits', () => {
     expect(ownershipViolations('codex/bed', [])).toHaveLength(1);
     expect(ownershipViolations('claude/feature', ['art/submissions/prop_bed_zila/v001/x.png'])).toHaveLength(1);

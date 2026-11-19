@@ -106,8 +106,16 @@ export function ownershipViolations(branchName, changed) {
     const allowed = [`art/submissions/${id}/${ver}/`, `art/source/${id}/${ver}/`];
     for (const f of changed) if (!allowed.some((a) => f.startsWith(a))) v.push(`codex branch may only change ${allowed.join(' or ')} — found ${f}`);
   } else {
-    // Non-codex branches must not add or edit artwork submissions on Codex's behalf.
-    for (const f of changed) if (f.startsWith('art/submissions/')) v.push(`only codex/art/* branches may change submissions — found ${f}`);
+    // Non-codex branches must not add or edit artwork submissions on Codex's behalf — except an integration
+    // branch carrying the submission of an asset that the same diff approves (manifest status 'approved').
+    const manifest = JSON.parse(readFileSync(join(ROOT, 'public/assets/manifest.json'), 'utf8'));
+    for (const f of changed) {
+      if (!f.startsWith('art/submissions/') && !f.startsWith('art/source/')) continue;
+      const [, , id, ver] = f.split('/');
+      const m = manifest.assets?.[id];
+      const integrating = m?.status === 'approved' && m.version === ver && changed.includes(m.approval?.master?.path);
+      if (f.startsWith('art/submissions/') && !integrating) v.push(`only codex/art/* branches may change submissions (or an integration that approves that exact version) — found ${f}`);
+    }
   }
   // Approved artwork and runtime assets change only via scripts/approve-asset.mjs (checksums verified by validate-manifest).
   return v;

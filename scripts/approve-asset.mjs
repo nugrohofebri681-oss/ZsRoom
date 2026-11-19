@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Promotes a validated submission to approved artwork. Run ONLY after the Creative Director has approved it.
 //   node scripts/approve-asset.mjs <assetId> <version> --approved-by "<name>" --review <docs/reviews/...md> --creative-director-approved
+//        [--geometry-exception '<json>']   record a CD-accepted deviation from the Art Bible §11 tolerances
 import { copyFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import sharp from 'sharp';
@@ -12,6 +13,11 @@ const [, , assetId, version, ...rest] = process.argv;
 const val = (n) => { const i = rest.indexOf(n); return i >= 0 ? rest[i + 1] : undefined; };
 const approvedBy = val('--approved-by');
 const review = val('--review');
+let geometryException;
+if (rest.includes('--geometry-exception')) {
+  try { geometryException = JSON.parse(val('--geometry-exception')); } catch (e) { console.error(`--geometry-exception must be JSON: ${e.message}`); process.exit(2); }
+  if (!geometryException.decision) { console.error('--geometry-exception needs a "decision" field stating what the Creative Director accepted'); process.exit(2); }
+}
 if (!assetId || !version || !approvedBy || !review || !rest.includes('--creative-director-approved')) {
   console.error('usage: approve-asset.mjs <assetId> <version> --approved-by "<name>" --review <review.md> --creative-director-approved');
   console.error('Passing technical validation is NOT approval. The Creative Director must approve the artwork first.');
@@ -54,7 +60,7 @@ for (const [name, density] of Object.entries(variants)) {
 }
 manifest.assets[assetId] = {
   ...current, status: 'approved', version, spec: entry.path, runtime,
-  approval: { approvedBy, approvedAt: new Date().toISOString(), review, master: { path: master, sha256: sha256File(master) } },
+  approval: { approvedBy, approvedAt: new Date().toISOString(), review, master: { path: master, sha256: sha256File(master) }, ...(geometryException ? { geometryException } : {}) },
 };
 writeFileSync(join(ROOT, manifestPath), JSON.stringify(manifest, null, 2) + '\n');
 console.log(`Approved ${assetId} ${version}. Master: ${master}. Runtime: ${Object.values(runtime).map((r) => r.path).join(', ')}`);

@@ -22,7 +22,11 @@ test.describe('bedroom vertical slice', () => {
     const errors = await boot(page);
     const s: any = await state(page);
     expect(s.props.filter((p: any) => p.art === 'greybox').map((p: any) => p.key)).toEqual([]);
-    expect(s.props.filter((p: any) => p.art === 'approved').map((p: any) => p.key.split('#')[0]).sort()).toEqual(['prop_bed_zila', 'prop_nightstand_zila']);
+    // exactly the manifest's approved assets render as approved art; everything else is labelled TEMP
+    const manifest = JSON.parse(readFileSync('public/assets/manifest.json', 'utf8'));
+    const approved = Object.entries(manifest.assets).filter(([, e]: any) => e.status === 'approved').map(([id]) => id);
+    const inRoom = [...new Set(s.props.map((p: any) => p.key.split('#')[0]))];
+    expect(s.props.filter((p: any) => p.art === 'approved').map((p: any) => p.key.split('#')[0]).sort()).toEqual(approved.filter((id) => inRoom.includes(id)).sort());
     expect(s.displayObjects).toBeLessThan(150);
     await teleport(page, 365, 300);
     await page.waitForTimeout(500);

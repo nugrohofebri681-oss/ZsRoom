@@ -1,0 +1,46 @@
+{
+  "assetId": "prop_wardrobe_zila",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/prop_wardrobe_zila_template.png",
+      "art-bible/perspective/projection_cube.png"
+    ]
+  },
+  "createdAt": "2026-11-19T05:20:58.298369+00:00",
+  "files": {
+    "master": {
+      "path": "prop_wardrobe_zila_v001.png",
+      "sha256": "c54e419819766daf4fe7d8edb6ca6bac0dc946236e9b5d256fd198c06dcbea00"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_wardrobe_zila/v001/candidate-a.png",
+        "sha256": "328356f84af79df1bb759f1dd9511128a3c1b9af45d53381b1b909f6bb166c4e"
+      }
+    ]
+  },
+  "provenance": "Original built-in AI-generated artwork for ZsRoom, conditioned on official approved furniture and project templates. No third-party stock art.",
+  "postProcessing": [
+    "Raw PNG outputs preserved byte-identically.",
+    "Unmodified official fit-to-spec.mjs: alpha snap >=250, native-alpha trim, proportional Lanczos3 downsample, pivot alignment, sRGB. No repainting or nonuniform scaling."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Measured approximate top-plane backEdgeY50, frontEdgeY111, floor520. Front height409 vs420 (-2.6%, within10%); depth61 vs84 (-27.4%, just outside25%). Slight trapezoid convergence remains; crown lip is not counted as top plane.",
+      "Walnut and blush closely match approved furniture; large panel looks upholstered rather than unequivocally painted wood. Knob placement and crown thickness need visual review."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services used.",
+  "batch": "B",
+  "notes": {
+    "batch": "B"
+  }
+}

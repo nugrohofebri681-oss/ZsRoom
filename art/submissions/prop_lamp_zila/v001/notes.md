@@ -24,3 +24,5 @@ VISUAL PENDING. NOT PRODUCTION READY. Candidate B is the strongest of three impe
 Run npm ci, npm run validate:art and npm run gallery. The generated gallery is ignored, not committed; official PR CI uploads it when available. Existing gameplay screenshots are baseline evidence, not integration tests of this asset. Metadata records checksums and all references. No engine or approved asset changes.
 
 Local result: TECHNICAL PASS (23 checks). Official gallery inspected in Chromium: 78 images loaded, none failed. Pairings show coherent cream/pink/walnut materials but insufficient lamp height and shallow ellipses; not ready for visual approval.
+
+Static browser host proof placed lamp pivot(48,124) at approved nightstand canvas(100,52), with no scaling. Base fits on the painted tabletop to the right of the doily; contact reads supported, although actual ellipse centre is a few pixels below pivot. Lamp remains shorter than design. Screenshot: review-gallery/lamp-host-proof.png (local generated evidence only). No engine integration.

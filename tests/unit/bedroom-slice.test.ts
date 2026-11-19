@@ -41,8 +41,18 @@ describe('bedroom vertical slice — layout', () => {
   });
 
   it('every interaction anchor can be reached on foot from the spawn', () => {
-    const unreachable = room.anchors.filter((a) => !canReach(a.x, a.y, a.radiusCm)).map((a) => a.key);
+    const unreachable = room.anchors.filter((a) => !a.whileSeatedOn && !canReach(a.x, a.y, a.radiusCm)).map((a) => a.key);
     expect(unreachable).toEqual([]);
+  });
+
+  it('seated-only interactions (laptop) are in reach of their seat, and the seat itself is reachable', () => {
+    for (const a of room.anchors.filter((x) => x.whileSeatedOn)) {
+      const seatProp = room.props.find((p) => p.spec.id === a.whileSeatedOn)!;
+      const sit = seatProp.spec.interactionAnchors.find((x) => x.action?.type === 'sit')!;
+      const seat = (sit.action as { seat: { x: number; y: number } }).seat;
+      expect(Math.hypot(seatProp.x + seat.x - a.x, seatProp.y + seat.y - a.y), a.key).toBeLessThanOrEqual(a.radiusCm);
+      expect(canReach(seatProp.x + sit.x, seatProp.y + sit.y, sit.radiusCm), `${seatProp.key} sit spot`).toBe(true);
+    }
   });
 
   it('every prop has a spec, a manifest entry, and either approved art or temp art', () => {

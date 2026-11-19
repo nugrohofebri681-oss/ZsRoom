@@ -157,7 +157,7 @@ export function compileRoom(data: RoomData): CompiledRoom {
   for (const p of props) {
     for (const a of p.spec.interactionAnchors) {
       const ay = p.layer === 'wall' ? a.y : p.y + a.y; // wall-item anchors are measured from the wall plane
-      anchors.push({ key: `${p.key}:${a.id}`, ownerId: p.key, label: a.label, x: p.x + a.x, y: ay, radiusCm: a.radiusCm, kind: 'prop', payload: { anchorId: a.id, action: a.action } });
+      anchors.push({ key: `${p.key}:${a.id}`, ownerId: p.key, label: a.label, x: p.x + a.x, y: ay, radiusCm: a.radiusCm, kind: 'prop', payload: { anchorId: a.id, action: a.action }, ...(a.whileSeatedOn ? { whileSeatedOn: a.whileSeatedOn } : {}) });
     }
   }
   for (const d of data.doors) {

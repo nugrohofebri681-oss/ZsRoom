@@ -166,6 +166,16 @@
       "status": "requested",
       "spec": "specs/environments/env_wall_bedroom.json",
       "request": "docs/art-requests/007-batch-e-room-shell.md"
+    },
+    "prop_laptop_zila": {
+      "status": "requested",
+      "spec": "specs/props/prop_laptop_zila.json",
+      "request": "docs/art-requests/004-batch-b-furniture.md"
+    },
+    "prop_mug_zila": {
+      "status": "requested",
+      "spec": "specs/props/prop_mug_zila.json",
+      "request": "docs/art-requests/004-batch-b-furniture.md"
     }
   }
 }

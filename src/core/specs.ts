@@ -12,6 +12,7 @@ export type ActionSpec =
 export interface InteractionAnchorSpec {
   id: string; label: string; x: number; y: number; facing: string; radiusCm: number;
   action?: ActionSpec;
+  whileSeatedOn?: string;
 }
 
 /** Temporary in-engine artwork drawn from the spec until approved art exists (src/ui/placeholders.ts). */
@@ -21,9 +22,9 @@ export interface SurfaceAnchorSpec { id: string; x: number; y: number; z: number
 export interface SurfaceSpec {
   id: string;
   nominalHeightCm: number;
-  painted: { backEdgeY: number; frontEdgeY: number; leftX: number; rightX: number; frontEdgeHeightCm: number; planeDepthCm: number };
+  painted: { backEdgeY: number; frontEdgeY: number; leftX: number; rightX: number; frontEdgeHeightCm: number; planeDepthCm: number } | null;
   anchors: SurfaceAnchorSpec[];
-  measuredFrom: { version: string; sha256: string };
+  measuredFrom: { version: string; sha256: string } | null;  // null = nominal (art not approved/measured yet)
 }
 
 export interface PropSpec {

@@ -47,29 +47,12 @@
     "mode": "footprint"
   },
   "occluder": true,
-  "interactionAnchors": [
-    {
-      "id": "laptop",
-      "label": "Open the laptop",
-      "x": 45,
-      "y": 82,
-      "facing": "N",
-      "radiusCm": 30,
-      "action": {
-        "type": "message",
-        "lines": [
-          "The laptop wakes up to a folder called “us”.",
-          "So many little moments saved here."
-        ]
-      }
-    }
-  ],
+  "interactionAnchors": [],
   "temp": {
     "shape": "table",
     "wood": "#8A5A3C",
     "top": "#A06B47",
-    "drawers": 1,
-    "laptop": true
+    "drawers": 2
   },
   "transparency": {
     "edgePaddingPx": 8,
@@ -89,5 +72,29 @@
     "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
   ],
   "submissionPath": "art/submissions/prop_desk_zila/<version>/",
-  "artRequest": "docs/art-requests/004-batch-b-furniture.md"
+  "artRequest": "docs/art-requests/004-batch-b-furniture.md",
+  "designNotes": "CLEAN desk: no laptop, mug, books or objects on the top. Objects are separate surface props placed on the measured top surface (laptop, mug). Zila sits on the SOUTH side (the chair is south of the desk, facing north).",
+  "surfaces": [
+    {
+      "id": "top",
+      "$comment": "NOMINAL until the desk art is approved and re-measured (Art Bible §11). Anchors: ground offset from the desk pivot (front-centre), z = top height.",
+      "nominalHeightCm": 75,
+      "painted": null,
+      "anchors": [
+        {
+          "id": "laptop",
+          "x": 0,
+          "y": -30,
+          "z": 75
+        },
+        {
+          "id": "mug",
+          "x": 38,
+          "y": -36,
+          "z": 75
+        }
+      ],
+      "measuredFrom": null
+    }
+  ]
 }

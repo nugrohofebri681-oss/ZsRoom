@@ -1,0 +1,53 @@
+{
+  "assetId": "prop_lamp_zila",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/prop_lamp_zila_on_host_template.png",
+      "art-bible/perspective/prop_lamp_zila_template.png",
+      "art-bible/perspective/projection_cube.png"
+    ]
+  },
+  "createdAt": "2026-11-19T05:14:19.336335+00:00",
+  "files": {
+    "master": {
+      "path": "prop_lamp_zila_v001.png",
+      "sha256": "c6fee7cfad0472b7ee76c36be696b4d853a2c1669990e06e1d2b50cb1a98a21b"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_lamp_zila/v001/candidate-a.png",
+        "sha256": "522f0bb0ae6c5cd132376d539bb1dd30fd70d46d5f8929080ace32c672e62235"
+      },
+      {
+        "path": "art/source/prop_lamp_zila/v001/candidate-b.png",
+        "sha256": "ef7ceefac6b0491d19d8f4456e04b4b8193121f35b7715e01bb370ba12f4d183"
+      },
+      {
+        "path": "art/source/prop_lamp_zila/v001/candidate-c.png",
+        "sha256": "495b96b780216686248e006f6766df36c9931db86559730d2f9ca4fe97196cc7"
+      }
+    ]
+  },
+  "provenance": "Original built-in AI-generated artwork for ZsRoom, conditioned on official approved furniture and project templates. No third-party stock art.",
+  "postProcessing": [
+    "Raw PNG outputs preserved byte-identically.",
+    "Unmodified official fit-to-spec.mjs: alpha snap >=250, native-alpha trim, proportional Lanczos3 downsample, pivot alignment, sRGB. No repainting or nonuniform scaling."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Measured fitted base front row135 (target135); shade bottom rim approximately101 (target80); shade top opening centre approximately62 (target40). Both shade rows exceed the requested tolerance. Selected candidate is too short after width-based fitting; no nonuniform stretching used.",
+      "Upper opening ellipse approximately32x10px (ratio~0.31), shallower than target0.7; base also shallower/narrower than32x22px. Host contact is provisional, not certified.",
+      "B selected for deeper visible opening than A/C. A has an exposed wooden neck; C has a smoother ceramic silhouette but shallower opening.",
+      "Unlit warm cream can still read bright; no painted glow or bulb present. Linen texture and glaze highlights are stronger than reference contours. No gameplay integration or lit-state test."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services used."
+}

@@ -19,7 +19,10 @@
 | 6 | Outfit sets (wardrobe cycle: default, cream, blue, maroon, cocoa, night out) as swappable outfit layers | Codex | per outfit |
 | 7 | Poses for interactions: sit (desk, stool, pouf), sleep/rest on the bed, look in the mirror | Codex + Claude anchors | CD |
 
-## Engine work that can start now (Claude)
+## Engine work (Claude) — done in the sprint after PR #5
+Layered rig (`src/animation/rig.ts`, `character.ts`), distance-synced walk (`strideCm` 112, 8 frames → 14 cm per frame: the slide-free contract for animators), 8 facings from 5 authored + mirroring rules, outfit layer swap, idle and sit poses, TEMP figure. Remaining: frame-atlas loading for approved layers, foot-contact markers in the gallery.
+
+## Engine work originally planned
 - Layered character rig: draw order per facing, a shared pivot, and outfit layer swapping (replaces the TEMP figure).
 - Animation player: frame timing, foot-contact markers, and facing selection from the 8-direction vector.
 - Character spec v1.0: frame canvas, layer list, anchors (hand, head, seat contact), validator checks for layer alignment.

@@ -19,6 +19,18 @@ const game = new Phaser.Game({
 
 window.addEventListener('resize', () => game.scale.resize(window.innerWidth * DPR, window.innerHeight * DPR));
 game.registry.set('dpr', DPR);
+game.registry.set('safeArea', readSafeArea());
+
+/** CSS safe-area insets (notches, rounded corners, gesture bars) in CSS px. */
+function readSafeArea(): { top: number; right: number; bottom: number; left: number } {
+  const probe = document.createElement('div');
+  probe.style.cssText = 'position:fixed;visibility:hidden;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';
+  document.body.appendChild(probe);
+  const cs = getComputedStyle(probe);
+  const v = { top: parseFloat(cs.paddingTop) || 0, right: parseFloat(cs.paddingRight) || 0, bottom: parseFloat(cs.paddingBottom) || 0, left: parseFloat(cs.paddingLeft) || 0 };
+  probe.remove();
+  return v;
+}
 
 window.addEventListener('visibilitychange', () => {
   if (!document.hidden) return;

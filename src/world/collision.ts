@@ -25,8 +25,16 @@ export function moveWithCollision(pos: Vec2, delta: Vec2, radius: number, solids
   const sx = delta.x / steps;
   const sy = delta.y / steps;
   for (let i = 0; i < steps; i++) {
-    if (sx !== 0 && !blocked(x + sx, y, radius, solids)) x += sx;
-    if (sy !== 0 && !blocked(x, y + sy, radius, solids)) y += sy;
+    if (sx !== 0) x = advance(x, sx, (v) => blocked(v, y, radius, solids));
+    if (sy !== 0) y = advance(y, sy, (v) => blocked(x, v, radius, solids));
   }
   return { x, y };
+}
+
+/** Move by `step` on one axis; if blocked, binary-search the largest free fraction so the actor ends flush with the obstacle. */
+function advance(v: number, step: number, isBlocked: (v: number) => boolean): number {
+  if (!isBlocked(v + step)) return v + step;
+  let lo = 0, hi = 1;
+  for (let i = 0; i < 6; i++) { const mid = (lo + hi) / 2; if (isBlocked(v + step * mid)) hi = mid; else lo = mid; }
+  return v + step * lo;
 }

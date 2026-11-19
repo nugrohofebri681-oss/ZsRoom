@@ -9,7 +9,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 // @ts-expect-error — plain ESM pipeline modules
 import { loadSpecs, ownershipViolations, sha256File } from '../../scripts/lib.mjs';
 // @ts-expect-error — plain ESM pipeline modules
-import { validateSubmission } from '../../scripts/validate-submission.mjs';
+import { seamDelta, validateSubmission } from '../../scripts/validate-submission.mjs';
 
 const tmp = mkdtempSync(join(tmpdir(), 'zs-pipeline-'));
 const specs = loadSpecs();
@@ -83,5 +83,28 @@ describe('ownership policy', () => {
   it('rejects malformed codex branch names and non-codex submission edits', () => {
     expect(ownershipViolations('codex/bed', [])).toHaveLength(1);
     expect(ownershipViolations('claude/feature', ['art/submissions/prop_bed_zila/v001/x.png'])).toHaveLength(1);
+  });
+});
+
+describe('environment tiles', () => {
+  it('seam check passes a wrap-continuous tile and fails a gradient tile', async () => {
+    const W = 64, H = 32;
+    const smooth = Buffer.alloc(W * H * 3), ramp = Buffer.alloc(W * H * 3);
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) for (let c = 0; c < 3; c++) {
+      smooth[(y * W + x) * 3 + c] = 128 + Math.round(40 * Math.sin((2 * Math.PI * x) / W) * Math.cos((2 * Math.PI * y) / H));
+      ramp[(y * W + x) * 3 + c] = Math.round((x / W) * 255);
+    }
+    const a = join(tmp, 'seam-ok.png'), b = join(tmp, 'seam-bad.png');
+    await sharp(smooth, { raw: { width: W, height: H, channels: 3 } }).png().toFile(a);
+    await sharp(ramp, { raw: { width: W, height: H, channels: 3 } }).png().toFile(b);
+    expect((await seamDelta(a, 'xy')).x).toBeLessThan(14);
+    expect((await seamDelta(b, 'xy')).x).toBeGreaterThan(100);
+  });
+  it('tile specs are geometrically consistent', () => {
+    const floor = specs.get('env_floor_planks_honey').spec, wall = specs.get('env_wall_bedroom').spec;
+    expect(floor.canvas.width).toBe(floor.tile.widthCm * floor.density);
+    expect(floor.canvas.height).toBe(Math.round(floor.tile.groundDepthCm * 0.7 * floor.density));
+    expect(wall.canvas.height).toBe(wall.tile.heightCm * wall.density);
+    expect(Math.max(...Object.values(wall.bandsCm as Record<string, number[]>).map((b) => b[1]!))).toBe(wall.tile.heightCm);
   });
 });

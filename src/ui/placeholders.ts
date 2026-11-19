@@ -16,20 +16,25 @@ const LINE = 'rgba(58,37,48,0.55)';
 
 export function tempTextureKey(id: string): string { return `temp:${id}`; }
 
-export function ensureTempTexture(scene: Phaser.Scene, spec: PropSpec): string | null {
-  const key = tempTextureKey(spec.id);
+/**
+ * `density` = runtime px per cm (HD 2 / SD 1, the same variant choice approved art gets), so TEMP art
+ * is never minified on low-res screens. Shapes are authored at the spec density and scaled.
+ */
+export function ensureTempTexture(scene: Phaser.Scene, spec: PropSpec, density = spec.density): string | null {
+  const key = `${tempTextureKey(spec.id)}@${density}`;
   if (scene.textures.exists(key)) return key;
   const t = spec.temp;
   if (!t) return null;
-  const tex = scene.textures.createCanvas(key, spec.canvas.width, spec.canvas.height);
-  if (!tex) return null;
-  const ctx = tex.getContext();
-  const g = geom(spec);
   const draw = SHAPES[t.shape];
   if (!draw) return null;
+  const k = density / spec.density;
+  const tex = scene.textures.createCanvas(key, Math.ceil(spec.canvas.width * k), Math.ceil(spec.canvas.height * k));
+  if (!tex) return null;
+  const ctx = tex.getContext();
+  ctx.scale(k, k);
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
-  draw(ctx, g, t);
+  draw(ctx, geom(spec), t);
   tex.refresh();
   return key;
 }

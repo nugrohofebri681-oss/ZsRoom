@@ -1,0 +1,20 @@
+{
+  "id": "env_wall_bedroom",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "environment",
+  "kind": "wall-strip",
+  "displayName": "Bedroom wall strip: wallpaper, wainscot, rails (tile)",
+  "batch": "E",
+  "density": 2,
+  "canvas": { "width": 120, "height": 540 },
+  "tile": { "repeat": "x", "widthCm": 60, "heightCm": 270, "$comment": "Full wall height, repeats horizontally every 60 cm. Bands (cm from floor): skirting 0–12, wainscot panels 12–90, chair rail 88–92, wallpaper 92–264, crown 264–270" },
+  "bandsCm": { "skirting": [0, 12], "wainscot": [12, 90], "chairRail": [88, 92], "wallpaper": [92, 264], "crown": [264, 270] },
+  "seamless": { "maxEdgeDelta": 14 },
+  "transparency": { "edgePaddingPx": 0, "minOpaqueRatio": 0.999, "maxOpaqueRatio": 1 },
+  "export": { "format": "png", "bitDepth": 8, "channels": 4, "colorSpace": "sRGB", "alpha": "opaque", "maxBytes": 600000 },
+  "temp": { "shape": "wall", "wall": "#EBCBD2", "wainscot": "#F6EBDD", "trim": "#5B3A29" },
+  "styleReferences": ["art/approved/prop_bed_zila/prop_bed_zila_v001.png", "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"],
+  "submissionPath": "art/submissions/env_wall_bedroom/<version>/",
+  "artRequest": "docs/art-requests/007-batch-e-room-shell.md"
+}

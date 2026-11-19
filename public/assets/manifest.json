@@ -156,6 +156,16 @@
       "status": "requested",
       "spec": "specs/props/prop_pouf_floor.json",
       "request": "docs/art-requests/006-batch-d-living-details.md"
+    },
+    "env_floor_planks_honey": {
+      "status": "requested",
+      "spec": "specs/environments/env_floor_planks_honey.json",
+      "request": "docs/art-requests/007-batch-e-room-shell.md"
+    },
+    "env_wall_bedroom": {
+      "status": "requested",
+      "spec": "specs/environments/env_wall_bedroom.json",
+      "request": "docs/art-requests/007-batch-e-room-shell.md"
     }
   }
 }

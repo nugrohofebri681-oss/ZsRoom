@@ -75,15 +75,35 @@ export interface CharacterSpec {
   collision: { radiusCm: number };
 }
 
-export type AssetSpec = PropSpec | CharacterSpec;
+/** Tileable environment art (room shell): floor tiles repeat in x and y, wall strips repeat in x. */
+export interface EnvironmentSpec {
+  id: string;
+  status: string;
+  category: 'environment';
+  kind: 'floor-tile' | 'wall-strip';
+  displayName: string;
+  density: number;
+  canvas: { width: number; height: number };
+  tile: { repeat: 'x' | 'xy'; widthCm: number; renderDepthCm?: number; heightCm?: number };
+  bandsCm?: Record<string, [number, number]>;
+  temp?: TempArtSpec;
+}
 
-const modules = import.meta.glob('../../specs/{props,characters}/*.json', { eager: true, import: 'default' }) as Record<string, AssetSpec>;
+export type AssetSpec = PropSpec | CharacterSpec | EnvironmentSpec;
+
+const modules = import.meta.glob('../../specs/{props,characters,environments}/*.json', { eager: true, import: 'default' }) as Record<string, AssetSpec>;
 
 export const SPECS: ReadonlyMap<string, AssetSpec> = new Map(Object.values(modules).map((s) => [s.id, s]));
 
 export function getPropSpec(id: string): PropSpec {
   const s = SPECS.get(id);
   if (!s || s.category !== 'prop') throw new Error(`Unknown prop spec: ${id}`);
+  return s;
+}
+
+export function getEnvironmentSpec(id: string): EnvironmentSpec {
+  const s = SPECS.get(id);
+  if (!s || s.category !== 'environment') throw new Error(`Unknown environment spec: ${id}`);
   return s;
 }
 

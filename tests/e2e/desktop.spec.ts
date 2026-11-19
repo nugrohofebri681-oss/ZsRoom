@@ -18,13 +18,16 @@ test.describe('desktop gameplay', () => {
     const a = await state(page);
     await page.keyboard.down('KeyD');
     await page.keyboard.down('KeyW');
-    await page.waitForFunction((y0) => (window as any).__ZS.state().player.y < y0 - 25, a.player.y, { timeout: 4000 });
+    // measure only once both keys are held (the first frame may move on x alone)
+    await page.waitForFunction((y0) => (window as any).__ZS.state().player.y < y0 - 5, a.player.y, { timeout: 4000 });
+    const start = await state(page);
+    await page.waitForFunction((y0) => (window as any).__ZS.state().player.y < y0 - 25, start.player.y, { timeout: 4000 });
     const mid = await state(page);
     await page.keyboard.up('KeyD');
     await page.keyboard.up('KeyW');
     expect(mid.player.facing).toBe('NE');
     // equal x/y displacement ⇒ true diagonal, not two sequential axes
-    const ratio = (mid.player.x - a.player.x) / (a.player.y - mid.player.y);
+    const ratio = (mid.player.x - start.player.x) / (start.player.y - mid.player.y);
     expect(ratio).toBeGreaterThan(0.8);
     expect(ratio).toBeLessThan(1.25);
   });

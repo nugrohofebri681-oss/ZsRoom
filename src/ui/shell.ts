@@ -1,104 +1,150 @@
 import * as Phaser from 'phaser';
 import { DEPTH_SCALE as K } from '../core/projection';
+import { getEnvironmentSpec, type EnvironmentSpec } from '../core/specs';
+import { textureKey, type AssetManifest } from '../systems/manifest';
 import type { RoomData } from '../world/room';
 
 /**
- * TEMPORARY room shell (floor, back wall, trims, wall caps, doorway) drawn once into a texture.
- * Replaced by environment tiles (Batch E) when approved. Coordinates: render units (cm) × `scale`.
+ * Room shell from ENVIRONMENT TILES (Batch E): one TileSprite for the back wall, one for the floor.
+ * Approved tile art is used when present; otherwise a seamless TEMP tile with the exact spec canvas is
+ * generated, so the render path is identical. Memory: two small tiles (~0.2 MB) instead of a
+ * room-sized canvas (~7.8 MB at HD). Overlays (ambient occlusion, cut-away wall caps, doorway) are
+ * cheap vector shapes.
  */
-export const SHELL_MARGIN = 20;   // cm of dark wall cap around the room
-const WALL_CAP = '#3A2530';
+export const SHELL_MARGIN = 20;
+const WALL_CAP = 0x3a2530;
 
-export interface ShellTexture { key: string; scale: number; originX: number; originY: number; widthCm: number; heightCm: number }
+export interface ShellInfo { floor: { id: string; art: 'approved' | 'temp' }; wall: { id: string; art: 'approved' | 'temp' } }
 
-function hex(c: string): [number, number, number] { const n = parseInt(c.replace('#', ''), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
-function tone(c: string, f: number, a = 1): string {
-  const [r, g, b] = hex(c);
-  const m = (v: number) => Math.round(f >= 1 ? v + (255 - v) * (f - 1) : v * f);
-  return `rgba(${m(r)},${m(g)},${m(b)},${a})`;
-}
-
-export function buildShellTexture(scene: Phaser.Scene, room: RoomData, scale: number): ShellTexture {
-  const key = `shell:${room.id}@${scale}`;
+export function buildShell(scene: Phaser.Scene, room: RoomData, manifest: AssetManifest, density = 2): ShellInfo {
   const { w, h } = room.sizeCm;
   const wallH = room.wallHeightCm;
   const floorH = h * K;
-  const widthCm = w + SHELL_MARGIN * 2;
-  const heightCm = wallH + floorH + SHELL_MARGIN * 2;
-  const tex: ShellTexture = { key, scale, originX: -SHELL_MARGIN, originY: -wallH - SHELL_MARGIN, widthCm, heightCm };
-  if (scene.textures.exists(key)) return tex;
-  const canvas = scene.textures.createCanvas(key, Math.ceil(widthCm * scale), Math.ceil(heightCm * scale))!;
-  const ctx = canvas.getContext();
-  ctx.scale(scale, scale);
-  ctx.translate(SHELL_MARGIN, wallH + SHELL_MARGIN); // origin = room's north-west floor corner (render y = 0 at the wall base)
-  const pal = room.palette as RoomData['palette'] & { wainscot?: string };
+  const ids = room.shell ?? { floor: 'env_floor_planks_honey', wall: 'env_wall_bedroom' };
+  const wallTile = resolveTile(scene, getEnvironmentSpec(ids.wall), manifest, room, density);
+  const floorTile = resolveTile(scene, getEnvironmentSpec(ids.floor), manifest, room, density);
 
-  // ---- back wall: wallpaper above a wainscot ----
-  const wainscot = 90;
-  const wg = ctx.createLinearGradient(0, -wallH, 0, -wainscot);
-  wg.addColorStop(0, tone(pal.wall, 1.06)); wg.addColorStop(1, tone(pal.wall, 0.97));
-  ctx.fillStyle = wg; ctx.fillRect(0, -wallH, w, wallH - wainscot);
-  ctx.fillStyle = tone(pal.wall, 0.93, 0.55);
-  for (let x = 6; x < w; x += 24) ctx.fillRect(x, -wallH, 3, wallH - wainscot);            // soft stripes
-  ctx.fillStyle = tone(pal.wall, 1.12, 0.6);
-  for (let x = 18; x < w; x += 24) for (let y = -wallH + 14; y < -wainscot - 6; y += 28) {   // tiny dotted motif
-    ctx.beginPath(); ctx.arc(x, y + ((x / 24) % 2) * 14, 1.1, 0, Math.PI * 2); ctx.fill();
+  // Tiles are laid as plain quads (batched into one draw, cheapest fragment path on mobile GPUs: no
+  // repeat shader). Edge tiles are cropped, so nothing spills outside the room.
+  tileQuads(scene, wallTile.key, wallTile.w, wallTile.h, 0, -wallH, w, wallH, wallH / wallTile.h);
+  tileQuads(scene, floorTile.key, floorTile.w, floorTile.h, 0, 0, w, floorH, 1 / floorTile.density);
+
+  const g = scene.add.graphics().setDepth(-99990);
+  // ambient occlusion where the floor meets the walls
+  g.fillGradientStyle(0x3a2530, 0x3a2530, 0x3a2530, 0x3a2530, 0.28, 0.28, 0, 0).fillRect(0, 0, w, 24);
+  g.fillGradientStyle(0x3a2530, 0x3a2530, 0x3a2530, 0x3a2530, 0.22, 0, 0.22, 0).fillRect(0, -wallH, 18, wallH + floorH);
+  g.fillGradientStyle(0x3a2530, 0x3a2530, 0x3a2530, 0x3a2530, 0, 0.22, 0, 0.22).fillRect(w - 18, -wallH, 18, wallH + floorH);
+  g.fillGradientStyle(0x3a2530, 0x3a2530, 0x3a2530, 0x3a2530, 0.14, 0.14, 0, 0).fillRect(0, -wallH, w, 70);   // ceiling falloff
+  // cut-away wall caps
+  g.fillStyle(WALL_CAP, 1)
+    .fillRect(-SHELL_MARGIN, -wallH - SHELL_MARGIN, SHELL_MARGIN, wallH + floorH + SHELL_MARGIN * 2)
+    .fillRect(w, -wallH - SHELL_MARGIN, SHELL_MARGIN, wallH + floorH + SHELL_MARGIN * 2)
+    .fillRect(-SHELL_MARGIN, -wallH - SHELL_MARGIN, w + SHELL_MARGIN * 2, SHELL_MARGIN)
+    .fillRect(-SHELL_MARGIN, floorH, w + SHELL_MARGIN * 2, SHELL_MARGIN);
+  g.fillStyle(0xfff0f5, 0.18).fillRect(-3, -wallH, 3, wallH + floorH).fillRect(w, -wallH, 3, wallH + floorH).fillRect(0, floorH, w, 2.5);
+  for (const d of room.doors) {
+    if (d.y <= 10) continue;
+    g.fillStyle(0xb98a5e, 1).fillRect(d.x, floorH - 1, d.w, SHELL_MARGIN + 1);
+    g.fillStyle(0x5b3a29, 1).fillRect(d.x - 4, floorH, 4, SHELL_MARGIN).fillRect(d.x + d.w, floorH, 4, SHELL_MARGIN);
+    g.fillStyle(0xc0607e, 1).fillRoundedRect(d.x + 12, floorH - 26, d.w - 24, 20, 4);
+    g.lineStyle(1, 0xfff0f5, 0.6).strokeRoundedRect(d.x + 15, floorH - 23.5, d.w - 30, 15, 3);
   }
-  const wc = pal.wainscot ?? '#F6EBDD';
-  ctx.fillStyle = tone(wc, 0.98); ctx.fillRect(0, -wainscot, w, wainscot);
-  ctx.strokeStyle = tone(wc, 0.86); ctx.lineWidth = 1;
-  for (let x = 10; x + 60 < w; x += 70) { ctx.strokeRect(x, -wainscot + 14, 60, wainscot - 32); }
-  ctx.fillStyle = tone(pal.trim, 1.05); ctx.fillRect(0, -wainscot - 3, w, 4);                  // chair rail
-  ctx.fillStyle = tone(pal.trim, 0.95); ctx.fillRect(0, -12, w, 12);                             // skirting
-  ctx.fillStyle = tone(pal.trim, 1.3); ctx.fillRect(0, -12, w, 1.5);
-  ctx.fillStyle = tone(pal.trim, 0.9); ctx.fillRect(0, -wallH, w, 6);                            // crown
-  const wallShade = ctx.createLinearGradient(0, -wallH, 0, 0);                                   // ceiling falloff
-  wallShade.addColorStop(0, 'rgba(58,37,48,0.12)'); wallShade.addColorStop(0.3, 'rgba(58,37,48,0)');
-  ctx.fillStyle = wallShade; ctx.fillRect(0, -wallH, w, wallH);
+  return { floor: { id: ids.floor, art: floorTile.art }, wall: { id: ids.wall, art: wallTile.art } };
+}
 
-  // ---- floor: honey planks running east–west ----
-  const plankDepth = 15 * K, plankLen = 120;
+/**
+ * Fill a w×h render-unit rectangle with tile quads. Plain Images sharing one texture are batched by the
+ * renderer into a single draw; edge tiles are cropped so nothing spills past the room.
+ * (Not a Blitter: Phaser 4's Blitter ignores the object's scale when rendering, which broke HD tiles.)
+ */
+function tileQuads(scene: Phaser.Scene, key: string, tw: number, th: number, x: number, y: number, w: number, h: number, scale: number): number {
+  const wPx = w / scale, hPx = h / scale;
+  let n = 0;
+  for (let py = 0; py < hPx - 0.01; py += th) {
+    for (let px = 0; px < wPx - 0.01; px += tw) {
+      const img = scene.add.image(x + px * scale, y + py * scale, key).setOrigin(0, 0).setScale(scale).setDepth(-100000).setName('shell-tile');
+      const fw = Math.min(tw, wPx - px), fh = Math.min(th, hPx - py);
+      if (fw < tw || fh < th) img.setCrop(0, 0, Math.ceil(fw), Math.ceil(fh));
+      n++;
+    }
+  }
+  return n;
+}
+
+interface TileTex { key: string; art: 'approved' | 'temp'; w: number; h: number; density: number }
+
+function resolveTile(scene: Phaser.Scene, spec: EnvironmentSpec, manifest: AssetManifest, room: RoomData, density: number): TileTex {
+  const approved = textureKey(spec.id);
+  if (manifest.assets[spec.id]?.status === 'approved' && scene.textures.exists(approved)) {
+    const src = scene.textures.get(approved).getSourceImage() as { width: number; height: number };
+    return { key: approved, art: 'approved', w: src.width, h: src.height, density: (src.width / spec.canvas.width) * spec.density };
+  }
+  // TEMP tile at the device's runtime density (no minification on low-res screens).
+  const k = density / spec.density;
+  const w = Math.round(spec.canvas.width * k), h = Math.round(spec.canvas.height * k);
+  const key = `temp:${spec.id}@${density}`;
+  if (!scene.textures.exists(key)) {
+    const c = scene.textures.createCanvas(key, w, h)!;
+    const ctx = c.getContext();
+    ctx.scale(w / spec.canvas.width, h / spec.canvas.height);
+    if (spec.kind === 'floor-tile') drawPlanks(ctx, spec, room); else drawWallStrip(ctx, spec, room);
+    c.refresh();
+  }
+  return { key, art: 'temp', w, h, density };
+}
+
+// ---------- TEMP seamless tiles (drawn in tile pixels at spec density) ----------
+function tone(hex: string, f: number, a = 1): string {
+  const n = parseInt(hex.replace('#', ''), 16), r = (n >> 16) & 255, gg = (n >> 8) & 255, b = n & 255;
+  const m = (v: number) => Math.round(f >= 1 ? v + (255 - v) * (f - 1) : v * f);
+  return `rgba(${m(r)},${m(gg)},${m(b)},${a})`;
+}
+
+/** Seamless planks: every joint and grain mark is drawn with horizontal wrap-around. */
+export function drawPlanks(ctx: CanvasRenderingContext2D, spec: EnvironmentSpec, room: RoomData): void {
+  const W = spec.canvas.width, H = spec.canvas.height, d = spec.density;
+  const base = String(spec.temp?.base ?? room.palette.floor);
+  const rowH = Number(spec.temp?.plankCm ?? 15) * K * d;
+  const rows = Math.round(H / rowH);
   let seed = 11;
   const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
-  for (let row = 0, y = 0; y < floorH; row++, y += plankDepth) {
-    let x = -((row * 47) % plankLen);
-    while (x < w) {
-      const f = 0.94 + rnd() * 0.1;
-      ctx.fillStyle = tone(pal.floor, f);
-      ctx.fillRect(x, y, plankLen, plankDepth);
-      ctx.fillStyle = tone(pal.floor, f * 0.97, 0.5);                                              // grain
-      for (let g = 0; g < 2; g++) ctx.fillRect(x + 8 + rnd() * 90, y + 2 + rnd() * (plankDepth - 4), 14 + rnd() * 22, 0.6);
-      ctx.fillStyle = tone(pal.floor, 0.78, 0.8); ctx.fillRect(x, y, 0.8, plankDepth);              // butt joint
-      x += plankLen;
-    }
-    ctx.fillStyle = tone(pal.floor, 0.8, 0.7); ctx.fillRect(0, y, w, 0.8);                         // seam
+  const wrapRect = (x: number, y: number, w: number, h: number) => { ctx.fillRect(x, y, w, h); if (x + w > W) ctx.fillRect(x - W, y, w, h); if (x < 0) ctx.fillRect(x + W, y, w, h); };
+  for (let r = 0; r < rows; r++) {
+    const y = r * rowH, joint = Math.floor(rnd() * W);
+    // two plank segments per row (one joint inside the tile, plus the wrap): distinct tones
+    const f1 = 0.94 + rnd() * 0.1, f2 = 0.94 + rnd() * 0.1;
+    ctx.fillStyle = tone(base, f1); wrapRect(joint, y, W / 2, rowH + 0.5);
+    ctx.fillStyle = tone(base, f2); wrapRect(joint + W / 2, y, W / 2, rowH + 0.5);
+    for (let g = 0; g < 5; g++) { ctx.fillStyle = tone(base, 0.9, 0.45); wrapRect(Math.floor(rnd() * W), y + 2 + rnd() * (rowH - 4), 20 + rnd() * 40, 1.2); }
+    ctx.fillStyle = tone(base, 0.75, 0.8);
+    wrapRect(joint, y, 1.5, rowH); wrapRect(joint + W / 2, y, 1.5, rowH);
+    ctx.fillRect(0, y, W, 1.5);                                         // seam between rows
   }
-  // ambient occlusion where the floor meets the walls
-  const ao = ctx.createLinearGradient(0, 0, 0, 24);
-  ao.addColorStop(0, 'rgba(58,37,48,0.28)'); ao.addColorStop(1, 'rgba(58,37,48,0)');
-  ctx.fillStyle = ao; ctx.fillRect(0, 0, w, 24);
-  for (const side of [0, 1]) {
-    const g = ctx.createLinearGradient(side ? w : 0, 0, side ? w - 18 : 18, 0);
-    g.addColorStop(0, 'rgba(58,37,48,0.22)'); g.addColorStop(1, 'rgba(58,37,48,0)');
-    ctx.fillStyle = g; ctx.fillRect(side ? w - 18 : 0, -wallH, 18, wallH + floorH);
-  }
+}
 
-  // ---- wall caps (cut-away walls) and doorway ----
-  ctx.fillStyle = WALL_CAP;
-  ctx.fillRect(-SHELL_MARGIN, -wallH - SHELL_MARGIN, SHELL_MARGIN, wallH + floorH + SHELL_MARGIN * 2);
-  ctx.fillRect(w, -wallH - SHELL_MARGIN, SHELL_MARGIN, wallH + floorH + SHELL_MARGIN * 2);
-  ctx.fillRect(-SHELL_MARGIN, -wallH - SHELL_MARGIN, w + SHELL_MARGIN * 2, SHELL_MARGIN);
-  ctx.fillRect(-SHELL_MARGIN, floorH, w + SHELL_MARGIN * 2, SHELL_MARGIN);
-  ctx.fillStyle = 'rgba(255,240,245,0.18)';
-  ctx.fillRect(-3, -wallH, 3, wallH + floorH); ctx.fillRect(w, -wallH, 3, wallH + floorH); ctx.fillRect(0, floorH, w, 2.5);
-  for (const d of room.doors) {
-    if (d.y <= 10) continue; // north doors are drawn as wall doors by the scene
-    ctx.fillStyle = tone(pal.floor, 0.9); ctx.fillRect(d.x, floorH - 1, d.w, SHELL_MARGIN + 1);       // threshold
-    ctx.fillStyle = tone(pal.trim, 0.9); ctx.fillRect(d.x - 4, floorH, 4, SHELL_MARGIN); ctx.fillRect(d.x + d.w, floorH, 4, SHELL_MARGIN);
-    const mx = d.x + 12, my = floorH - 26, mw = d.w - 24, mh = 20;                                      // doormat
-    ctx.fillStyle = '#C0607E'; ctx.beginPath(); ctx.roundRect(mx, my, mw, mh, 4); ctx.fill();
-    ctx.strokeStyle = 'rgba(255,240,245,0.6)'; ctx.setLineDash([2, 2]); ctx.beginPath(); ctx.roundRect(mx + 3, my + 2.5, mw - 6, mh - 5, 3); ctx.stroke(); ctx.setLineDash([]);
-  }
-  canvas.refresh();
-  return tex;
+/** Seamless wall strip (repeats in x): wallpaper stripes/dots, wainscot panel, rails, skirting, crown. */
+export function drawWallStrip(ctx: CanvasRenderingContext2D, spec: EnvironmentSpec, room: RoomData): void {
+  const W = spec.canvas.width, H = spec.canvas.height, s = H / (spec.tile.heightCm ?? 270);
+  const pal = room.palette as RoomData['palette'] & { wainscot?: string };
+  const wall = String(spec.temp?.wall ?? pal.wall), wc = String(spec.temp?.wainscot ?? pal.wainscot ?? '#F6EBDD'), trim = String(spec.temp?.trim ?? pal.trim);
+  const yAt = (cm: number) => H - cm * s;
+  const b = spec.bandsCm ?? { skirting: [0, 12], wainscot: [12, 90], chairRail: [88, 92], wallpaper: [92, 264], crown: [264, 270] };
+  // wallpaper
+  const gr = ctx.createLinearGradient(0, yAt(270), 0, yAt(92)); gr.addColorStop(0, tone(wall, 1.06)); gr.addColorStop(1, tone(wall, 0.97));
+  ctx.fillStyle = gr; ctx.fillRect(0, yAt(b.wallpaper![1]), W, (b.wallpaper![1] - b.wallpaper![0]) * s);
+  const period = W / 3;                                                  // 3 stripes per strip → seamless
+  ctx.fillStyle = tone(wall, 0.93, 0.55);
+  for (let i = 0; i < 3; i++) ctx.fillRect(i * period + period * 0.1, yAt(264), 3 * s, (264 - 92) * s);
+  ctx.fillStyle = tone(wall, 1.12, 0.6);
+  for (let i = 0; i < 3; i++) for (let cm = 100, k = 0; cm < 258; cm += 14, k++) { ctx.beginPath(); ctx.arc(i * period + period * 0.6, yAt(cm + (k % 2) * 7), 1.1 * s, 0, Math.PI * 2); ctx.fill(); }
+  // wainscot with one centred panel per strip
+  ctx.fillStyle = tone(wc, 0.98); ctx.fillRect(0, yAt(b.wainscot![1]), W, (b.wainscot![1] - b.wainscot![0]) * s);
+  ctx.strokeStyle = tone(wc, 0.86); ctx.lineWidth = 1 * s;
+  ctx.strokeRect(5 * s, yAt(76), W - 10 * s, 54 * s);
+  ctx.fillStyle = tone(wc, 1.06, 0.6); ctx.fillRect(5 * s, yAt(76), W - 10 * s, 1 * s);
+  // rails, skirting, crown
+  ctx.fillStyle = tone(trim, 1.05); ctx.fillRect(0, yAt(b.chairRail![1]), W, (b.chairRail![1] - b.chairRail![0]) * s);
+  ctx.fillStyle = tone(trim, 0.95); ctx.fillRect(0, yAt(b.skirting![1]), W, (b.skirting![1] - b.skirting![0]) * s);
+  ctx.fillStyle = tone(trim, 1.3); ctx.fillRect(0, yAt(b.skirting![1]), W, 1.5 * s);
+  ctx.fillStyle = tone(trim, 0.9); ctx.fillRect(0, yAt(b.crown![1]), W, (b.crown![1] - b.crown![0]) * s);
 }

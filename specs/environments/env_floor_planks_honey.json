@@ -1,0 +1,19 @@
+{
+  "id": "env_floor_planks_honey",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "environment",
+  "kind": "floor-tile",
+  "displayName": "Honey-oak floor planks (tile)",
+  "batch": "E",
+  "density": 2,
+  "canvas": { "width": 256, "height": 126 },
+  "tile": { "repeat": "xy", "widthCm": 128, "renderDepthCm": 63, "groundDepthCm": 90, "$comment": "128 cm wide × 90 cm deep floor area; 6 planks of 15 cm running east–west; seen at ×0.7 → 63 render cm = 126 px" },
+  "seamless": { "maxEdgeDelta": 14 },
+  "transparency": { "edgePaddingPx": 0, "minOpaqueRatio": 0.999, "maxOpaqueRatio": 1 },
+  "export": { "format": "png", "bitDepth": 8, "channels": 4, "colorSpace": "sRGB", "alpha": "opaque", "maxBytes": 600000 },
+  "temp": { "shape": "planks", "base": "#C99A6A", "plankCm": 15 },
+  "styleReferences": ["art/approved/prop_bed_zila/prop_bed_zila_v001.png", "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"],
+  "submissionPath": "art/submissions/env_floor_planks_honey/<version>/",
+  "artRequest": "docs/art-requests/007-batch-e-room-shell.md"
+}

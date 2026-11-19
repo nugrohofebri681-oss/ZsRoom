@@ -5,19 +5,106 @@
   "category": "character",
   "displayName": "Febri",
   "heightCm": 170,
-  "heightDifferenceCm": { "vs": "char_zila", "target": "3–6", "current": 5 },
+  "heightDifferenceCm": {
+    "vs": "char_zila",
+    "target": "3–6",
+    "current": 5
+  },
   "headsTall": 4.75,
   "density": 2,
-  "canvas": { "width": 256, "height": 400 },
-  "pivot": { "x": 128, "y": 376, "meaning": "midpoint between the feet at floor contact" },
-  "collision": { "radiusCm": 18 },
-  "directions": ["S", "SE", "E", "NE", "N", "NW", "W", "SW"],
-  "authoredDirections": ["S", "SE", "E", "NE", "N"],
+  "canvas": {
+    "width": 256,
+    "height": 400
+  },
+  "pivot": {
+    "x": 128,
+    "y": 376,
+    "meaning": "midpoint between the feet at floor contact"
+  },
+  "collision": {
+    "radiusCm": 18
+  },
+  "directions": [
+    "S",
+    "SE",
+    "E",
+    "NE",
+    "N",
+    "NW",
+    "W",
+    "SW"
+  ],
+  "authoredDirections": [
+    "S",
+    "SE",
+    "E",
+    "NE",
+    "N"
+  ],
   "mirroringNote": "The crossbody bag strap is asymmetric: never mirror the bag layer. Author W-facing bag layers separately.",
   "identity": [
     "short textured dark hair with a side-swept fringe",
     "cream jacket over a blue shirt",
     "dark trousers",
     "crossbody bag (strap over the left shoulder, bag at right hip)"
-  ]
+  ],
+  "rig": {
+    "$comment": "Animation rig (draft, engine architecture). Final frames come from Codex after the character gates in docs/production/CHARACTER_PLAN.md.",
+    "layers": [
+      "shadow",
+      "hairBack",
+      "legs",
+      "outfitBottom",
+      "body",
+      "outfitTop",
+      "arms",
+      "head",
+      "face",
+      "hairFront",
+      "accessory"
+    ],
+    "authoredFacings": [
+      "S",
+      "SE",
+      "E",
+      "NE",
+      "N"
+    ],
+    "mirror": {
+      "SW": "SE",
+      "W": "E",
+      "NW": "NE"
+    },
+    "anims": {
+      "idle": {
+        "frames": 4,
+        "fps": 3
+      },
+      "walk": {
+        "frames": 8,
+        "strideCm": 112,
+        "contactFrames": [
+          0,
+          4
+        ],
+        "$comment": "frames advance by distance: 8 frames per 112 cm (two 56 cm steps), so feet never slide"
+      },
+      "sit": {
+        "frames": 1
+      }
+    },
+    "mirrorableLayers": [
+      "shadow",
+      "hairBack",
+      "legs",
+      "outfitBottom",
+      "body",
+      "outfitTop",
+      "arms",
+      "head",
+      "face",
+      "hairFront"
+    ],
+    "$bag": "accessory = crossbody bag: NOT mirrorable, needs its own W-side frames"
+  }
 }

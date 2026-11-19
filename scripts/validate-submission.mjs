@@ -2,7 +2,19 @@
 import Ajv from 'ajv';
 import { existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import sharp from 'sharp';
 import { analyzeImage, readJson, rel, sha256File, ASSET_ID_RE, VERSION_RE } from './lib.mjs';
+
+/** Mean absolute RGB difference between opposite edges (0 = perfectly continuous when tiled). */
+export async function seamDelta(path, repeat = 'xy') {
+  const { data, info } = await sharp(path).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  const { width: W, height: H, channels: C } = info;
+  const px = (x, y, c) => data[(y * W + x) * C + c];
+  let sx = 0, sy = 0;
+  for (let y = 0; y < H; y++) for (let c = 0; c < 3; c++) sx += Math.abs(px(0, y, c) - px(W - 1, y, c));
+  for (let x = 0; x < W; x++) for (let c = 0; c < 3; c++) sy += Math.abs(px(x, 0, c) - px(x, H - 1, c));
+  return { x: sx / (H * 3), y: repeat === 'xy' ? sy / (W * 3) : 0 };
+}
 
 const schema = readJson('specs/schema/submission-metadata.schema.json');
 const ajv = new Ajv({ allErrors: true, strict: false, validateFormats: false });
@@ -72,6 +84,13 @@ export async function validateSubmission({ assetId, version, dir }, specs) {
       ok('art inside artBounds', inside, `bbox ${x.x},${x.y} ${x.width}x${x.height}; allowed ${b.x},${b.y} ${b.width}x${b.height}`);
     }
     if (spec.baseLine) ok('base sits on pivot line', Math.abs(a.baseRow - spec.baseLine.y) <= spec.baseLine.tolerancePx, `lowest solid row ${a.baseRow}, expected ${spec.baseLine.y}±${spec.baseLine.tolerancePx}`);
+    if (spec.tile) {
+      // Seamless tiling: opposite edges must continue into each other (Batch E environment tiles).
+      const sm = await seamDelta(masterPath, spec.tile.repeat);
+      const max = spec.seamless?.maxEdgeDelta ?? 14;
+      ok('seamless horizontally (left↔right edge)', sm.x <= max, `mean edge delta ${sm.x.toFixed(1)} (max ${max})`);
+      if (spec.tile.repeat === 'xy') ok('seamless vertically (top↔bottom edge)', sm.y <= max, `mean edge delta ${sm.y.toFixed(1)} (max ${max})`);
+    }
     if (spec.pivot && a.bbox) {
       const cx = a.bbox.x + a.bbox.width / 2;
       if (Math.abs(cx - spec.pivot.x) > 12) warnings.push(`art is off-centre: bbox centre x=${cx.toFixed(0)}, pivot x=${spec.pivot.x}`);

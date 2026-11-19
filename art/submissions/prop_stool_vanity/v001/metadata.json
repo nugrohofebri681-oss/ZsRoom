@@ -1,0 +1,47 @@
+{
+  "assetId": "prop_stool_vanity",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art/submissions/prop_wardrobe_zila/v001/prop_wardrobe_zila_v001.png",
+      "art-bible/perspective/prop_stool_vanity_template.png",
+      "art-bible/perspective/projection_cube.png"
+    ]
+  },
+  "createdAt": "2026-11-19T05:20:58.412310+00:00",
+  "files": {
+    "master": {
+      "path": "prop_stool_vanity_v001.png",
+      "sha256": "6e3ad45ac71172e7dc90c371fc27d9e8195651aef429563e040b354a3c8b3c22"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_stool_vanity/v001/candidate-a.png",
+        "sha256": "85b980620ac0f815f5a77bdba0700dba9cc9e5b744f567bcf3d479f68e238b99"
+      }
+    ]
+  },
+  "provenance": "Original built-in AI-generated artwork for ZsRoom, conditioned on official approved furniture and project templates. No third-party stock art.",
+  "postProcessing": [
+    "Raw PNG outputs preserved byte-identically.",
+    "Unmodified official fit-to-spec.mjs: alpha snap >=250, native-alpha trim, proportional Lanczos3 downsample, pivot alignment, sRGB. No repainting or nonuniform scaling."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Measured approximate seat top backEdgeY54 and frontEdgeY94, floor168. Front height74 vs90 (-17.8%, outside10%); top depth40 vs56 (-28.6%, outside25%). Seat ellipse ratio~0.45 vs0.7, so it reads too low and too shallow.",
+      "Four legs are visible, blush cushion and walnut match furniture. Raw preview background color is transparent in the fitted export; no large floor shadow observed. Needs geometry revision or explicit CD exception before integration."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services used.",
+  "batch": "B",
+  "notes": {
+    "batch": "B"
+  }
+}

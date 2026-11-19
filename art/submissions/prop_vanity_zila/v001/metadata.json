@@ -1,0 +1,48 @@
+{
+  "assetId": "prop_vanity_zila",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art/submissions/prop_wardrobe_zila/v001/prop_wardrobe_zila_v001.png",
+      "art-bible/perspective/prop_vanity_zila_template.png",
+      "art-bible/perspective/projection_cube.png"
+    ]
+  },
+  "createdAt": "2026-11-19T05:20:58.362211+00:00",
+  "files": {
+    "master": {
+      "path": "prop_vanity_zila_v001.png",
+      "sha256": "58959ed270f38262a9e03257fd1c798ea171da3b2c5afc8845c94d0ca7363ffb"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_vanity_zila/v001/candidate-a.png",
+        "sha256": "4572b143ea67baeddb2f4534b8b43ab4e4c7ab8084b1aa19808712ad5e633dfa"
+      }
+    ]
+  },
+  "provenance": "Original built-in AI-generated artwork for ZsRoom, conditioned on official approved furniture and project templates. No third-party stock art.",
+  "postProcessing": [
+    "Raw PNG outputs preserved byte-identically.",
+    "Unmodified official fit-to-spec.mjs: alpha snap >=250, native-alpha trim, proportional Lanczos3 downsample, pivot alignment, sRGB. No repainting or nonuniform scaling."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Measured approximate tabletop backEdgeY225, frontEdgeY250, floor424. Front height174 vs150 (+16%, outside10%); depth25 vs63 (-60.3%, outside25%). Mirror top approximately25. Height-limited export198x401 vs desired208px width; no distortion applied.",
+      "Several stray semi-transparent colored flecks remain around mirror supports and beneath drawers. These require targeted alpha cleanup before approval; bounding-box tests do not certify clean edges.",
+      "Cream/pink finish is coherent, oval glass has only pale-blue gradient, bulbs have no glow. Oversized mirror relative to tabletop and large front drawers need CD review."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services used.",
+  "batch": "B",
+  "notes": {
+    "batch": "B"
+  }
+}

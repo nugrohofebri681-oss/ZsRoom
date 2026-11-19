@@ -1,0 +1,47 @@
+{
+  "assetId": "prop_desk_zila",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art/submissions/prop_wardrobe_zila/v001/prop_wardrobe_zila_v001.png",
+      "art-bible/perspective/prop_desk_zila_template.png",
+      "art-bible/perspective/projection_cube.png"
+    ]
+  },
+  "createdAt": "2026-11-19T05:20:58.334631+00:00",
+  "files": {
+    "master": {
+      "path": "prop_desk_zila_v001.png",
+      "sha256": "65dc9e34c8f62743c499c2306ec8b25bab222100c8778413fdc0d3b58d8b29e8"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_desk_zila/v001/candidate-a.png",
+        "sha256": "cf0d7b55e8080c77c93759b738fd8780ef18591c3e393aa14587c748be02ff7a"
+      }
+    ]
+  },
+  "provenance": "Original built-in AI-generated artwork for ZsRoom, conditioned on official approved furniture and project templates. No third-party stock art.",
+  "postProcessing": [
+    "Raw PNG outputs preserved byte-identically.",
+    "Unmodified official fit-to-spec.mjs: alpha snap >=250, native-alpha trim, proportional Lanczos3 downsample, pivot alignment, sRGB. No repainting or nonuniform scaling."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Measured approximate tabletop backEdgeY67, frontEdgeY112, floor264. Front height152 vs150 (+1.3%, within10%); depth45 vs84 (-46.4%, outside25%). Top plane is too shallow and slightly tapered.",
+      "Laptop rear lid and keyboard fragments are present, screen unlit; left half stays clear. Added large back panel and two right drawers make the desk heavier than requested slim construction. Need knee-clearance/geometry review before integration."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services used.",
+  "batch": "B",
+  "notes": {
+    "batch": "B"
+  }
+}

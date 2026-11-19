@@ -120,3 +120,27 @@ test.describe('bedroom vertical slice', () => {
     await page.screenshot({ path: tag(true, '02-night-lamp') });
   });
 });
+
+test.describe('desk laptop (CD correction)', () => {
+  test('laptop is used from the chair: seated-only interaction, screen faces Zila', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'keyboard');
+    await boot(page);
+    const sit = anchorAbs('prop_chair_desk', 'sit');
+    await teleport(page, sit.x, sit.y);
+    await page.waitForTimeout(150);
+    expect((await state(page)).nearest).toMatch(/^prop_chair_desk#\d+:sit$/);   // standing: no laptop prompt
+    await page.keyboard.press('KeyE');
+    await until(page, 's.seated !== null');
+    await until(page, "s.nearest && /^prop_laptop_zila#\\d+:use$/.test(s.nearest)");
+    await page.evaluate(() => { for (let i = 0; i < 6; i++) (window as any).__ZS.zoomBy(0.1); });
+    await page.waitForTimeout(600);
+    await page.screenshot({ path: tag(false, '06-seated-laptop-prompt') });
+    await page.keyboard.press('KeyE');
+    await until(page, 's.modal === true');
+    for (let i = 0; i < 4 && (await state(page) as any).modal; i++) { await page.keyboard.press('KeyE'); await page.waitForTimeout(150); } // advance every dialogue line
+    await until(page, 's.modal === false');
+    const s: any = await state(page);
+    expect(s.props.some((p: any) => p.key.startsWith('prop_laptop_zila#') && p.layer === 'surface')).toBe(true);
+    expect(s.props.some((p: any) => p.key.startsWith('prop_mug_zila#') && p.layer === 'surface')).toBe(true);
+  });
+});

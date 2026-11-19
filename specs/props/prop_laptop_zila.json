@@ -1,0 +1,99 @@
+{
+  "id": "prop_laptop_zila",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Zila's Laptop (open)",
+  "batch": "B",
+  "density": 2,
+  "canvas": {
+    "width": 96,
+    "height": 112
+  },
+  "pivot": {
+    "x": 48,
+    "y": 76,
+    "meaning": "CENTRE of the laptop base where it rests on the desk (surface prop)"
+  },
+  "footprint": {
+    "widthCm": 32,
+    "depthCm": 22
+  },
+  "heightsCm": {
+    "base": 2,
+    "top": 22
+  },
+  "orientation": {
+    "user": "SOUTH",
+    "screenFaces": "SOUTH",
+    "hingeAt": "NORTH",
+    "keyboard": "SOUTH half of the base, toward the chair",
+    "$comment": "Zila sits on the chair SOUTH of the desk facing NORTH. Seen by the game camera (from the south, above): the keyboard deck in front, the screen standing up at the back with its DISPLAY facing the viewer and Zila. Never the back of the lid."
+  },
+  "artBounds": {
+    "x": 12,
+    "y": 12,
+    "width": 72,
+    "height": 86
+  },
+  "baseLine": {
+    "y": 91,
+    "tolerancePx": 4,
+    "$comment": "front edge of the base = pivot + 11 cm × 0.7 × 2 px"
+  },
+  "maxSideOverhangCm": 2,
+  "collision": [],
+  "placement": {
+    "type": "surface",
+    "hostAsset": "prop_desk_zila",
+    "surface": "top",
+    "anchor": "laptop"
+  },
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [
+    {
+      "id": "use",
+      "label": "Use the laptop",
+      "x": 0,
+      "y": 62,
+      "facing": "N",
+      "radiusCm": 24,
+      "whileSeatedOn": "prop_chair_desk",
+      "action": {
+        "type": "message",
+        "lines": [
+          "The laptop wakes up to a folder called “us”.",
+          "So many little moments saved here."
+        ]
+      }
+    }
+  ],
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.12,
+    "maxOpaqueRatio": 0.7
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 400000
+  },
+  "temp": {
+    "shape": "laptop",
+    "body": "#E8C7D1",
+    "screen": "#3A3550"
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/prop_laptop_zila/<version>/",
+  "artRequest": "docs/art-requests/004-batch-b-furniture.md"
+}

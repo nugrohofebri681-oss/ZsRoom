@@ -302,7 +302,8 @@ export class RoomScene extends Phaser.Scene {
       const a = this.pendingAnchor; this.pendingAnchor = null;
       if (Math.hypot(a.x - this.pos.x, a.y - this.pos.y) <= a.radiusCm + 4) { this.faceToward(a); this.interact(a); }
     }
-    this.nearest = this.seated ? null : nearestAnchor(this.pos.x, this.pos.y, this.room.anchors);
+    const seatedAsset = this.seated ? this.room.props.find((p) => p.key === this.seated!.propKey)?.spec.id ?? null : null;
+    this.nearest = nearestAnchor(this.pos.x, this.pos.y, this.room.anchors, seatedAsset);
     this.game.events.emit('prompt', this.nearest?.label ?? null);
     if (this.input$.consumeInteract() && this.nearest) this.interact(this.nearest);
     this.checkDoorTriggers();

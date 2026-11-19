@@ -1,0 +1,82 @@
+{
+  "id": "prop_mug_zila",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Cream Mug",
+  "batch": "B",
+  "density": 2,
+  "canvas": {
+    "width": 48,
+    "height": 56
+  },
+  "pivot": {
+    "x": 24,
+    "y": 38,
+    "meaning": "CENTRE of the mug base on the desk (surface prop)"
+  },
+  "footprint": {
+    "widthCm": 9,
+    "depthCm": 9
+  },
+  "heightsCm": {
+    "top": 10
+  },
+  "profile": [
+    {
+      "part": "body",
+      "fromCm": 0,
+      "toCm": 10,
+      "diameterCm": 8,
+      "topDiameterCm": 8.5
+    }
+  ],
+  "artBounds": {
+    "x": 8,
+    "y": 8,
+    "width": 32,
+    "height": 40
+  },
+  "baseLine": {
+    "y": 44,
+    "tolerancePx": 3
+  },
+  "maxSideOverhangCm": 3,
+  "collision": [],
+  "placement": {
+    "type": "surface",
+    "hostAsset": "prop_desk_zila",
+    "surface": "top",
+    "anchor": "mug"
+  },
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.1,
+    "maxOpaqueRatio": 0.7
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 200000
+  },
+  "temp": {
+    "shape": "mug",
+    "body": "#F6EBDD",
+    "handle": "#F6EBDD"
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/prop_mug_zila/<version>/",
+  "artRequest": "docs/art-requests/004-batch-b-furniture.md"
+}

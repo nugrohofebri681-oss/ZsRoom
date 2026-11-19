@@ -5,6 +5,9 @@
 //   node scripts/fit-to-spec.mjs <raw.png> <assetId> <out.png> [--width <px>] [--key-background] [--tolerance 28]
 //
 // --width           opaque content width in canvas px (default: footprint width + full side overhang)
+// --height          opaque content height in canvas px instead (when the painted proportions are wider than the
+//                   spec, width-fitting shrinks the object; fitting the height keeps its true scale)
+// --despeckle <px>  remove isolated alpha islands smaller than <px> pixels (stray generator flecks). Cleanup only.
 // --key-background  remove a flat, edge-connected background (for generators that cannot export alpha).
 //                   Always inspect the result: keying can eat light edges (white pillows!). Prefer native alpha.
 import sharp from 'sharp';
@@ -44,13 +47,33 @@ if (flag('--key-background')) {
   console.log(`keyed background rgb(${bg.join(',')}), removed ${removed} px (${((removed / (W * H)) * 100).toFixed(1)}%)`);
 }
 
+if (rest.includes('--despeckle')) {
+  const minPx = val('--despeckle') || 40;
+  const seen = new Uint8Array(W * H);
+  let removedIslands = 0, removedPx = 0;
+  for (let start = 0; start < W * H; start++) {
+    if (seen[start] || data[start * 4 + 3] <= 8) continue;
+    const comp = [start]; seen[start] = 1;
+    for (let k = 0; k < comp.length; k++) {
+      const i = comp[k], x = i % W, y = (i - x) / W;
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const nx = x + dx, ny = y + dy, j = ny * W + nx;
+        if (nx < 0 || ny < 0 || nx >= W || ny >= H || seen[j] || data[j * 4 + 3] <= 8) continue;
+        seen[j] = 1; comp.push(j);
+      }
+    }
+    if (comp.length < minPx) { for (const i of comp) data[i * 4 + 3] = 0; removedIslands++; removedPx += comp.length; }
+  }
+  console.log(`despeckle: removed ${removedIslands} islands (${removedPx} px) smaller than ${minPx} px`);
+}
+
 // Snap near-opaque alpha (250–254, common in generator output) to fully opaque.
 for (let i = 3; i < data.length; i += 4) if (data[i] >= 250) data[i] = 255;
 const keyed = sharp(data, { raw: { width: W, height: H, channels: 4 } }).png();
 const trimmed = await sharp(await keyed.toBuffer()).trim({ background: { r: 0, g: 0, b: 0, alpha: 0 }, threshold: 1 }).toBuffer({ resolveWithObject: true });
 const tw = trimmed.info.width, th = trimmed.info.height;
 const targetW = val('--width') ?? Math.round((spec.footprint.widthCm + 2 * (spec.maxSideOverhangCm ?? 0)) * spec.density);
-let scale = targetW / tw;
+let scale = val('--height') ? val('--height') / th : targetW / tw;
 const maxH = spec.baseLine.y - spec.artBounds.y;
 if (th * scale > maxH) { console.warn(`height-limited: content would be ${Math.round(th * scale)}px tall, max ${maxH}px — check proportions against the template`); scale = maxH / th; }
 const nw = Math.round(tw * scale), nh = Math.round(th * scale);

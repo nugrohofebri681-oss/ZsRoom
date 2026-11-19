@@ -367,6 +367,30 @@ const SHAPES: Record<string, (ctx: Ctx, g: Geom, t: TempArtSpec) => void> = {
     ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(192,96,126,0.6)'; ctx.strokeText(String(t.text ?? 'good vibes'), g.px, y0 + h * 0.5);
   },
 
+  /** Open laptop: keyboard deck toward the chair (south), screen at the back (hinge north), DISPLAY facing south. */
+  laptop(ctx, g, t) {
+    const d = g.d, cx = g.px, w = g.w * d, dep = g.dp * K * d, front = g.py + dep / 2, back = g.py - dep / 2;
+    const body = String(t.body ?? '#E8C7D1');
+    rr(ctx, cx - w / 2, back, w, dep, 2 * d); paint(ctx, body, cx - w / 2, back, cx + w / 2, front, 1.12, 0.92);            // base (top face)
+    rr(ctx, cx - w / 2, front - 1 * d, w, 2 * d, 1 * d); paint(ctx, body, cx - w / 2, front, cx + w / 2, front + 2 * d, 0.95, 0.8); // base front edge
+    ctx.fillStyle = 'rgba(58,37,48,0.35)';
+    for (let r = 0; r < 3; r++) for (let c = 0; c < 10; c++) ctx.fillRect(cx - w * 0.4 + c * w * 0.08, back + dep * 0.12 + r * dep * 0.14, w * 0.065, dep * 0.1); // keys
+    rr(ctx, cx - w * 0.14, back + dep * 0.62, w * 0.28, dep * 0.25, 1); ctx.fillStyle = tone(body, 0.9); ctx.fill();                  // trackpad
+    const sh = (g.h.top ?? 22) * d, sTop = back - sh;
+    rr(ctx, cx - w / 2, sTop, w, sh + 1, 2 * d); paint(ctx, body, cx - w / 2, sTop, cx + w / 2, back, 1.05, 0.88);               // lid
+    rr(ctx, cx - w / 2 + 2 * d, sTop + 2 * d, w - 4 * d, sh - 4 * d, 1 * d);
+    const sc = ctx.createLinearGradient(cx - w / 2, sTop, cx + w / 2, back); sc.addColorStop(0, '#4A4566'); sc.addColorStop(1, String(t.screen ?? '#3A3550'));
+    ctx.fillStyle = sc; ctx.fill();                                                                                                 // display, facing the viewer
+    ctx.fillStyle = 'rgba(255,255,255,0.12)'; ctx.beginPath(); ctx.moveTo(cx - w * 0.3, sTop + 3 * d); ctx.lineTo(cx - w * 0.1, sTop + 3 * d); ctx.lineTo(cx - w * 0.3, back - 3 * d); ctx.closePath(); ctx.fill();
+  },
+
+  mug(ctx, g, t) {
+    const d = g.d, body = String(t.body ?? '#F6EBDD');
+    cylinder(ctx, g.px, g.py, g.py - (g.h.top ?? 10) * d, 4 * d, body, '#6B4434', 4.2 * d);
+    ctx.strokeStyle = tone(body, 0.8); ctx.lineWidth = 1.6 * d / 2 + 1;
+    ctx.beginPath(); ctx.arc(g.px + 4.6 * d, g.py - 5 * d, 2.2 * d, -1.2, 1.2); ctx.stroke();
+  },
+
   lamp(ctx, g, t) {
     const d = g.d, cx = g.px, by = g.py;
     cylinder(ctx, cx, by, by - 4 * d, 8 * d, String(t.base ?? '#8A5A3C'), tone(String(t.base ?? '#8A5A3C'), 1.15));

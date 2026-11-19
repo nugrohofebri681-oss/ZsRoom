@@ -89,7 +89,24 @@
     {
       "assetId": "prop_desk_zila",
       "x": 330,
-      "y": 64
+      "y": 64,
+      "id": "desk"
+    },
+    {
+      "assetId": "prop_laptop_zila",
+      "on": {
+        "prop": "desk",
+        "surface": "top",
+        "anchor": "laptop"
+      }
+    },
+    {
+      "assetId": "prop_mug_zila",
+      "on": {
+        "prop": "desk",
+        "surface": "top",
+        "anchor": "mug"
+      }
     },
     {
       "assetId": "prop_chair_desk",

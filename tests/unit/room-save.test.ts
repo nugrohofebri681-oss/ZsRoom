@@ -38,7 +38,7 @@ describe('rooms (data-driven)', () => {
 describe('versioned save', () => {
   it('round-trips the current version', () => {
     const s = mem();
-    saveGame(s, { roomId: 'zila_bedroom', player: { characterId: 'char_zila', x: 1, y: 2, facing: 'N', outfit: 'default' }, flags: {} });
+    saveGame(s, { roomId: 'zila_bedroom', player: { characterId: 'char_zila', x: 1, y: 2, facing: 'N', outfit: 'default' }, flags: {}, vars: { phase: 'night' } });
     expect(loadGame(s)?.player).toMatchObject({ x: 1, y: 2, facing: 'N' });
     expect(loadGame(s)?.version).toBe(SAVE_VERSION);
   });

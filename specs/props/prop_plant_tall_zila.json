@@ -1,0 +1,107 @@
+{
+  "id": "prop_plant_tall_zila",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Tall Fiddle-Leaf Plant",
+  "batch": "D",
+  "density": 2,
+  "canvas": {
+    "width": 160,
+    "height": 432
+  },
+  "pivot": {
+    "x": 80,
+    "y": 408,
+    "meaning": "front-centre floor contact point of the footprint"
+  },
+  "footprint": {
+    "widthCm": 40,
+    "depthCm": 40
+  },
+  "heightsCm": {
+    "pot": 40,
+    "top": 165
+  },
+  "artBounds": {
+    "x": 12,
+    "y": 14,
+    "width": 136,
+    "height": 402
+  },
+  "baseLine": {
+    "y": 408,
+    "tolerancePx": 8
+  },
+  "maxSideOverhangCm": 12,
+  "collision": [
+    {
+      "x": -20,
+      "y": -40,
+      "w": 40,
+      "h": 40
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": true,
+  "interactionAnchors": [
+    {
+      "id": "water",
+      "label": "Water the plant",
+      "x": 0,
+      "y": 30,
+      "facing": "N",
+      "radiusCm": 30,
+      "action": {
+        "type": "message",
+        "lines": [
+          "A little water. The leaves look happier already."
+        ]
+      }
+    }
+  ],
+  "temp": {
+    "shape": "plant",
+    "pot": "#F6EBDD",
+    "leaf": "#6E9B5A",
+    "potH": 40
+  },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.02,
+    "maxOpaqueRatio": 0.85
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 3000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/prop_plant_tall_zila/<version>/",
+  "artRequest": "docs/art-requests/006-batch-d-living-details.md",
+  "profile": [
+    {
+      "part": "base",
+      "fromCm": 0,
+      "toCm": 40,
+      "diameterCm": 34,
+      "topDiameterCm": 40
+    },
+    {
+      "part": "shade",
+      "fromCm": 40,
+      "toCm": 165,
+      "diameterCm": 40,
+      "topDiameterCm": 64
+    }
+  ]
+}

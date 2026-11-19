@@ -5,6 +5,8 @@ import { normaliseInput } from '../actors/direction';
 export class InputState {
   touchMove = { x: 0, y: 0 };
   interactQueued = false;
+  /** True while a dialogue/panel owns input: the room ignores movement and interaction. */
+  modal = false;
   queueInteract(): void { this.interactQueued = true; }
   consumeInteract(): boolean { const v = this.interactQueued; this.interactQueued = false; return v; }
 }

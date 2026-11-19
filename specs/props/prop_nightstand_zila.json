@@ -53,7 +53,14 @@
       "x": 0,
       "y": 28,
       "facing": "up",
-      "radiusCm": 32
+      "radiusCm": 32,
+      "action": {
+        "type": "message",
+        "lines": [
+          "Hair clips, lip balm and a folded note…",
+          "Some things are just for keeping."
+        ]
+      }
     }
   ],
   "transparency": {

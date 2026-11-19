@@ -1,0 +1,91 @@
+{
+  "id": "prop_catbed_mochi",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Cat Bed with Sleeping Cat",
+  "batch": "D",
+  "density": 2,
+  "canvas": {
+    "width": 160,
+    "height": 176
+  },
+  "pivot": {
+    "x": 80,
+    "y": 152,
+    "meaning": "front-centre floor contact point of the footprint"
+  },
+  "footprint": {
+    "widthCm": 60,
+    "depthCm": 50
+  },
+  "heightsCm": {
+    "rim": 22,
+    "top": 30
+  },
+  "artBounds": {
+    "x": 12,
+    "y": 14,
+    "width": 136,
+    "height": 146
+  },
+  "baseLine": {
+    "y": 152,
+    "tolerancePx": 8
+  },
+  "maxSideOverhangCm": 2,
+  "collision": [
+    {
+      "x": -30.0,
+      "y": -50,
+      "w": 60,
+      "h": 50
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [
+    {
+      "id": "pet",
+      "label": "Pet the cat",
+      "x": 0,
+      "y": 30,
+      "facing": "N",
+      "radiusCm": 34,
+      "action": {
+        "type": "message",
+        "lines": [
+          "Purrrr… the cat stretches and goes back to sleep."
+        ]
+      }
+    }
+  ],
+  "temp": {
+    "shape": "catbed",
+    "body": "#F4C7D3",
+    "rim": "#E8A0B4",
+    "cat": "#4A4A55"
+  },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.02,
+    "maxOpaqueRatio": 0.85
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 3000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/prop_catbed_mochi/<version>/",
+  "artRequest": "docs/art-requests/006-batch-d-living-details.md"
+}

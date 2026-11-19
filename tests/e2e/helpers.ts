@@ -30,3 +30,23 @@ export async function hold(page: Page, key: string, ms: number): Promise<void> {
 }
 
 export const SHOTS = 'docs/reviews/foundation';
+
+import { readFileSync } from 'node:fs';
+/** Room data straight from the game's JSON, so tests follow layout changes instead of hard-coding them. */
+export function roomData(id: string): any { return JSON.parse(readFileSync(`src/data/rooms/${id}.json`, 'utf8')); }
+export function propEntry(roomId: string, assetId: string): any { return roomData(roomId).props.find((p: any) => p.assetId === assetId); }
+export const press = async (page: Page, isMobile: boolean) => {
+  if (isMobile) await page.locator('canvas').tap({ position: { x: 800 - 64, y: 360 - 70 } });
+  else await page.keyboard.press('KeyE');
+};
+
+/** Wait until the game state satisfies a predicate (frame-rate independent). */
+export async function until(page: Page, fn: string, timeout = 8000): Promise<void> {
+  await page.waitForFunction(`(() => { const s = window.__ZS.state(); return ${fn}; })()`, null, { timeout });
+}
+
+/** Hold a key until the state predicate holds (or timeout): frame-rate independent movement for slow CI runners. */
+export async function holdUntil(page: Page, key: string, fn: string, timeout = 12000): Promise<void> {
+  await page.keyboard.down(key);
+  try { await until(page, fn, timeout); } finally { await page.keyboard.up(key); }
+}

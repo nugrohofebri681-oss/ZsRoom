@@ -2,7 +2,7 @@
  * Versioned save data. Every schema change bumps SAVE_VERSION and adds a migration from the previous
  * version, so old saves on players' devices keep loading.
  */
-export const SAVE_VERSION = 1;
+export const SAVE_VERSION = 2;
 export const SAVE_KEY = 'zsroom.save';
 
 export interface SaveDataV1 {
@@ -12,7 +12,12 @@ export interface SaveDataV1 {
   player: { characterId: string; x: number; y: number; facing: string; outfit: string };
   flags: Record<string, boolean>;
 }
-export type SaveData = SaveDataV1;
+/** v2 adds world variables (time of day, curtains, outfit, day counter…). */
+export interface SaveDataV2 extends Omit<SaveDataV1, 'version'> {
+  version: 2;
+  vars: Record<string, string | number | boolean>;
+}
+export type SaveData = SaveDataV2;
 
 export interface KeyValueStorage { getItem(k: string): string | null; setItem(k: string, v: string): void; removeItem(k: string): void }
 
@@ -26,6 +31,7 @@ export const migrations: Record<number, Migration> = {
     player: { characterId: 'char_zila', x: Number(old.x ?? 300), y: Number(old.y ?? 360), facing: 'S', outfit: 'default' },
     flags: {},
   }),
+  1: (old) => ({ ...old, version: 2, vars: { phase: 'evening', day: 1, outfit: (old.player as { outfit?: string } | undefined)?.outfit ?? 'default' } }),
 };
 
 export function migrate(raw: unknown): SaveData | null {
@@ -44,7 +50,7 @@ export function migrate(raw: unknown): SaveData | null {
 
 function isValid(d: Record<string, unknown>): boolean {
   const p = d.player as Record<string, unknown> | undefined;
-  return d.version === SAVE_VERSION && typeof d.roomId === 'string' && !!p &&
+  return d.version === SAVE_VERSION && typeof d.roomId === 'string' && !!p && typeof d.vars === 'object' && d.vars !== null &&
     Number.isFinite(p.x) && Number.isFinite(p.y) && typeof p.facing === 'string';
 }
 

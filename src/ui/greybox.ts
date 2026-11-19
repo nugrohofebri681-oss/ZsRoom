@@ -41,18 +41,18 @@ export function drawGreyboxProp(scene: Phaser.Scene, spec: PropSpec, x: number, 
   return c;
 }
 
-export function drawGreyboxCharacter(scene: Phaser.Scene, spec: CharacterSpec): { root: Phaser.GameObjects.Container; facing: Phaser.GameObjects.Graphics } {
+export function drawGreyboxCharacter(scene: Phaser.Scene, spec: CharacterSpec, bodyColor = '#D9A5B6'): { root: Phaser.GameObjects.Container; facing: Phaser.GameObjects.Graphics } {
   const root = scene.add.container(0, 0);
   const h = spec.heightCm;
   const r = spec.collision.radiusCm;
   const g = scene.add.graphics();
   g.fillStyle(0x000000, 0.22).fillEllipse(0, 0, r * 2.4, r * 2.4 * 0.7);
-  g.fillStyle(0xd9a5b6, 1).fillRoundedRect(-r, -h * 0.78, r * 2, h * 0.78, r * 0.9); // body capsule
+  g.fillStyle(Phaser.Display.Color.HexStringToColor(bodyColor).color, 1).fillRoundedRect(-r, -h * 0.78, r * 2, h * 0.78, r * 0.9); // body capsule
   g.fillStyle(0xf1d2c2, 1).fillCircle(0, -h * 0.86, h * 0.1);                       // head
   g.lineStyle(1.2, 0x3a2530, 1).strokeRoundedRect(-r, -h * 0.78, r * 2, h * 0.78, r * 0.9).strokeCircle(0, -h * 0.86, h * 0.1);
   const facing = scene.add.graphics();
   facing.fillStyle(0xff3d7f, 1).fillTriangle(r * 1.6, 0, r * 0.9, -5, r * 0.9, 5);
-  const t = scene.add.text(0, -h - 8, `${spec.displayName} · grey-box ${h}cm`, {
+  const t = scene.add.text(0, -h - 8, `${spec.displayName} · TEMP figure`, {
     fontFamily: 'system-ui, sans-serif', fontSize: '9px', color: '#fff4f7', backgroundColor: '#3a2530aa', padding: { x: 3, y: 1 },
   }).setOrigin(0.5, 1).setResolution(3);
   root.add([g, facing, t]);

@@ -1,0 +1,92 @@
+{
+  "id": "prop_plant_small",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Small Potted Plant",
+  "batch": "D",
+  "density": 2,
+  "canvas": {
+    "width": 144,
+    "height": 224
+  },
+  "pivot": {
+    "x": 72,
+    "y": 200,
+    "meaning": "front-centre floor contact point of the footprint"
+  },
+  "footprint": {
+    "widthCm": 35,
+    "depthCm": 35
+  },
+  "heightsCm": {
+    "pot": 30,
+    "top": 60
+  },
+  "artBounds": {
+    "x": 17,
+    "y": 23,
+    "width": 110,
+    "height": 185
+  },
+  "baseLine": {
+    "y": 200,
+    "tolerancePx": 8
+  },
+  "maxSideOverhangCm": 8,
+  "collision": [
+    {
+      "x": -17.5,
+      "y": -35,
+      "w": 35,
+      "h": 35
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": true,
+  "interactionAnchors": [],
+  "temp": {
+    "shape": "plant",
+    "pot": "#E8A0B4",
+    "leaf": "#6E9B5A",
+    "potH": 30
+  },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.02,
+    "maxOpaqueRatio": 0.85
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 3000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/prop_plant_small/<version>/",
+  "artRequest": "docs/art-requests/006-batch-d-living-details.md",
+  "profile": [
+    {
+      "part": "base",
+      "fromCm": 0,
+      "toCm": 30,
+      "diameterCm": 28,
+      "topDiameterCm": 35
+    },
+    {
+      "part": "shade",
+      "fromCm": 30,
+      "toCm": 60,
+      "diameterCm": 35,
+      "topDiameterCm": 50
+    }
+  ]
+}

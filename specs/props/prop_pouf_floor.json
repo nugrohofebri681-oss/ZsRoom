@@ -1,0 +1,103 @@
+{
+  "id": "prop_pouf_floor",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Floor Pouf",
+  "batch": "D",
+  "density": 2,
+  "canvas": {
+    "width": 144,
+    "height": 192
+  },
+  "pivot": {
+    "x": 72,
+    "y": 168,
+    "meaning": "front-centre floor contact point of the footprint"
+  },
+  "footprint": {
+    "widthCm": 50,
+    "depthCm": 50
+  },
+  "heightsCm": {
+    "seat": 38,
+    "top": 38
+  },
+  "artBounds": {
+    "x": 14,
+    "y": 14,
+    "width": 116,
+    "height": 162
+  },
+  "baseLine": {
+    "y": 168,
+    "tolerancePx": 8
+  },
+  "maxSideOverhangCm": 2,
+  "collision": [
+    {
+      "x": -25.0,
+      "y": -50,
+      "w": 50,
+      "h": 50
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [
+    {
+      "id": "sit",
+      "label": "Sit on the pouf",
+      "x": 0,
+      "y": 30,
+      "facing": "S",
+      "radiusCm": 30,
+      "action": {
+        "type": "sit",
+        "seat": {
+          "x": 0,
+          "y": -25
+        },
+        "heightCm": 38,
+        "facing": "S"
+      }
+    }
+  ],
+  "temp": {
+    "shape": "round",
+    "body": "#F6EBDD",
+    "top": "#FFF8F0",
+    "legs": null
+  },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.02,
+    "maxOpaqueRatio": 0.85
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 3000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/prop_pouf_floor/<version>/",
+  "artRequest": "docs/art-requests/006-batch-d-living-details.md",
+  "profile": [
+    {
+      "part": "body",
+      "fromCm": 0,
+      "toCm": 38,
+      "diameterCm": 50,
+      "topDiameterCm": 46
+    }
+  ]
+}

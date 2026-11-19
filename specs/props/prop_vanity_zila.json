@@ -1,0 +1,94 @@
+{
+  "id": "prop_vanity_zila",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Zila's Vanity",
+  "batch": "B",
+  "density": 2,
+  "canvas": {
+    "width": 240,
+    "height": 448
+  },
+  "pivot": {
+    "x": 120,
+    "y": 424,
+    "meaning": "front-centre floor contact point of the footprint"
+  },
+  "footprint": {
+    "widthCm": 100,
+    "depthCm": 45
+  },
+  "heightsCm": {
+    "top": 75,
+    "mirrorTop": 165
+  },
+  "artBounds": {
+    "x": 12,
+    "y": 23,
+    "width": 216,
+    "height": 409
+  },
+  "baseLine": {
+    "y": 424,
+    "tolerancePx": 8
+  },
+  "maxSideOverhangCm": 2,
+  "collision": [
+    {
+      "x": -50.0,
+      "y": -45,
+      "w": 100,
+      "h": 45
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": true,
+  "interactionAnchors": [
+    {
+      "id": "mirror",
+      "label": "Look in the mirror",
+      "x": -30,
+      "y": 80,
+      "facing": "N",
+      "radiusCm": 26,
+      "action": {
+        "type": "message",
+        "lines": [
+          "A little lip tint, hair clips straight…",
+          "Ready for today."
+        ]
+      }
+    }
+  ],
+  "temp": {
+    "shape": "table",
+    "wood": "#F6EBDD",
+    "top": "#FFF8F0",
+    "drawers": 2,
+    "mirror": true,
+    "accent": "#E8A0B4"
+  },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.02,
+    "maxOpaqueRatio": 0.85
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 3000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/prop_vanity_zila/<version>/",
+  "artRequest": "docs/art-requests/004-batch-b-furniture.md"
+}

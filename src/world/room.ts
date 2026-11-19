@@ -19,6 +19,8 @@ export interface RoomData {
   spawns: Record<string, RoomSpawn>;
   props: RoomPropEntry[];
   doors: RoomDoor[];
+  /** Environment tiles for the room shell (spec ids). */
+  shell?: { floor: string; wall: string };
 }
 
 /**

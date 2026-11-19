@@ -10,18 +10,23 @@ import { applyAction, isPhase, OUTFITS, PHASE_LOOK, type Phase, type Vars } from
 import { InputState, KeyboardInput } from '../systems/input';
 import { loadGame, saveGame, safeStorage } from '../systems/save';
 import { textureKey, type AssetManifest } from '../systems/manifest';
-import { drawGreyboxCharacter, drawGreyboxProp } from '../ui/greybox';
+import { drawGreyboxProp } from '../ui/greybox';
 import { ensureTempTexture } from '../ui/placeholders';
-import { buildShellTexture } from '../ui/shell';
-import { PropLight } from '../systems/lighting';
+import { buildShell, type ShellInfo } from '../ui/shell';
+import { LightingSystem } from '../systems/lighting';
+import { WalkGrid } from '../world/pathfinding';
+import { LayeredCharacter } from '../animation/character';
+import type { RigSpec } from '../animation/rig';
+import { renderToGround, type Vec2 } from '../core/projection';
 
 export interface RoomSceneData { roomId: string; spawn?: string; at?: { x: number; y: number; facing: string } }
 
 const WALK_CM_S = 150;
 const RUN_CM_S = 270;
 const FADE_ALPHA = 0.42;
-const AMBIENT_DEPTH = 89000;   // above props and actors, below engine lights (90000+)
-const SIT_SCALE_Y = 0.74;
+const SIT_HEIGHT = 0.78;        // seated figure height share (for occlusion bounds)
+const LOOK_AHEAD_S = 0.35;      // camera leads movement by this many seconds
+const ZOOM_MIN = 0.8, ZOOM_MAX = 1.9;
 
 type PropView = Phaser.GameObjects.GameObject & Phaser.GameObjects.Components.AlphaSingle & Phaser.GameObjects.Components.Depth;
 type ArtKind = 'approved' | 'temp' | 'greybox';
@@ -32,8 +37,8 @@ export class RoomScene extends Phaser.Scene {
   private character!: CharacterSpec;
   private pos = { x: 0, y: 0 };
   private facingDir: Direction = 'S';
-  private actorView!: Phaser.GameObjects.Container;
-  private facingView!: Phaser.GameObjects.Graphics;
+  private figure!: LayeredCharacter;
+  private get actorView(): Phaser.GameObjects.Container { return this.figure.root; }
   private debugActor?: Phaser.GameObjects.Graphics;
   private propViews = new Map<string, PropView>();
   private artKinds = new Map<string, ArtKind>();
@@ -43,11 +48,19 @@ export class RoomScene extends Phaser.Scene {
   private nearest: WorldAnchor | null = null;
   private occluded: string[] = [];
   private transitioning = false;
-  private propLights = new Map<string, PropLight>();
+  private lighting!: LightingSystem;
+  private grid!: WalkGrid;
+  private path: Vec2[] = [];
+  private pendingAnchor: WorldAnchor | null = null;
+  private walked = 0;
+  private velocity = { x: 0, y: 0 };
+  private camTarget = { x: 0, y: 0 };
+  private zoomMul = 1;
+  private shellInfo!: ShellInfo;
+  private tapMarker?: Phaser.GameObjects.Graphics;
   private flags: Record<string, boolean> = {};
   private vars: Vars = {};
   private seated: Seated | null = null;
-  private ambient?: Phaser.GameObjects.Rectangle;
   private skies: { img: Phaser.GameObjects.Image; curtains: Phaser.GameObjects.Graphics }[] = [];
 
   constructor() { super('Room'); }
@@ -56,7 +69,9 @@ export class RoomScene extends Phaser.Scene {
     this.transitioning = false;
     this.debugActor = undefined;
     this.seated = null;
-    this.propViews.clear(); this.artKinds.clear(); this.propLights.clear();
+    this.propViews.clear(); this.artKinds.clear();
+    this.path = []; this.pendingAnchor = null; this.walked = 0;
+    this.zoomMul = (this.registry.get('zoomMul') as number | undefined) ?? 1;
     this.tagViews = []; this.skies = [];
     const save = loadGame(safeStorage());
     this.flags = { ...(save?.flags ?? {}) };
@@ -72,15 +87,18 @@ export class RoomScene extends Phaser.Scene {
     this.registry.set('input', this.input$);
     this.keyboard = new KeyboardInput(this, this.input$);
 
+    const { w: rw, h: rh } = this.room.data.sizeCm, wallH = this.room.data.wallHeightCm;
+    this.lighting = new LightingSystem(this, `lightmap:${this.room.data.id}`, { x: -40, y: -wallH - 40, w: rw + 80, h: wallH + rh * DEPTH_SCALE + 80 });
+    this.grid = new WalkGrid(rw, rh, this.room.solids, this.character.collision.radiusCm);
     this.drawShell();
     this.drawProps();
     this.buildActor();
-    this.ambient = this.add.rectangle(-40, -this.room.data.wallHeightCm - 40, this.room.data.sizeCm.w + 80, this.room.data.wallHeightCm + this.room.data.sizeCm.h * DEPTH_SCALE + 80)
-      .setOrigin(0, 0).setDepth(AMBIENT_DEPTH);
     this.applyWorldVars();
 
     this.cameras.main.setBackgroundColor('#1d1418');
-    this.cameras.main.startFollow(this.actorView, true, 0.14, 0.14);
+    const r0 = groundToRender(this.pos.x, this.pos.y);
+    this.camTarget = { x: r0.x, y: r0.y - this.character.heightCm * 0.45 };
+    this.cameras.main.startFollow(this.camTarget, false, 0.12, 0.12);
     this.fitCamera();
     this.scale.on('resize', this.fitCamera, this);
     this.events.once('shutdown', () => this.scale.off('resize', this.fitCamera, this));
@@ -89,6 +107,12 @@ export class RoomScene extends Phaser.Scene {
     const params = new URLSearchParams(location.search);
     if (params.has('debug')) this.drawDebugOverlay();
     this.input.keyboard?.on('keydown-T', () => this.setTagsVisible(!this.tagViews[0]?.visible));
+    this.input.on('wheel', (_p: unknown, _o: unknown, _dx: number, dy: number) => this.zoomBy(dy > 0 ? -0.1 : 0.1));
+    this.input.keyboard?.on('keydown-PLUS', () => this.zoomBy(0.1));
+    this.input.keyboard?.on('keydown-MINUS', () => this.zoomBy(-0.1));
+    this.game.events.on('world-tap', this.onWorldTap, this);
+    this.game.events.on('zoom-by', this.zoomBy, this);
+    this.events.once('shutdown', () => { this.game.events.off('world-tap', this.onWorldTap, this); this.game.events.off('zoom-by', this.zoomBy, this); });
     this.setTagsVisible(params.has('tags'));
     this.game.events.emit('room-entered', this.room.data);
     this.emitArtStatus();
@@ -112,7 +136,7 @@ export class RoomScene extends Phaser.Scene {
     // ~36% on short phone-landscape screens (CSS height < 500), where whole-room framing is too small.
     const dpr = (this.registry.get('dpr') as number | undefined) ?? 1;
     const share = cam.height / dpr < 500 ? 0.36 : 0.22;
-    const zoom = Math.max(fit, (cam.height * share) / this.character.heightCm);
+    const zoom = Math.max(fit, (cam.height * share) / this.character.heightCm) * this.zoomMul;
     cam.setZoom(zoom);
     const top = -this.room.data.wallHeightCm - 30;
     const contentW = w + 120;
@@ -122,10 +146,15 @@ export class RoomScene extends Phaser.Scene {
     cam.setBounds(w / 2 - bw / 2, top + contentH / 2 - bh / 2, bw, bh);
   }
 
+  private zoomBy(d: number): void {
+    this.zoomMul = Phaser.Math.Clamp(Math.round((this.zoomMul + d) * 100) / 100, ZOOM_MIN, ZOOM_MAX);
+    this.registry.set('zoomMul', this.zoomMul);
+    this.fitCamera();
+  }
+
   private drawShell(): void {
-    const s = buildShellTexture(this, this.room.data, this.highDensity() ? 2 : 1);
-    this.add.image(s.originX, s.originY, s.key).setOrigin(0, 0).setScale(1 / s.scale).setDepth(-100000);
-    const g = this.add.graphics().setDepth(-99999);
+    this.shellInfo = buildShell(this, this.room.data, this.registry.get('manifest') as AssetManifest, this.highDensity() ? 2 : 1);
+    const g = this.add.graphics().setDepth(-99989);
     for (const d of this.room.data.doors) this.drawNorthDoor(g, d);
   }
 
@@ -139,17 +168,17 @@ export class RoomScene extends Phaser.Scene {
   private drawProps(): void {
     const manifest = this.registry.get('manifest') as AssetManifest;
     const densities = (this.registry.get('assetDensities') ?? {}) as Record<string, number>;
-    const look = PHASE_LOOK[this.phase()];
     for (const p of this.room.props) {
       const entry = manifest.assets[p.spec.id];
       const approvedKey = textureKey(p.spec.id);
       const pivot = groundToRender(p.x, p.y, p.z);
       let view: PropView;
       let kind: ArtKind;
-      const tex = entry?.status === 'approved' && this.textures.exists(approvedKey) ? approvedKey : ensureTempTexture(this, p.spec);
+      const runtimeDensity = this.highDensity() ? 2 : 1;
+      const tex = entry?.status === 'approved' && this.textures.exists(approvedKey) ? approvedKey : ensureTempTexture(this, p.spec, runtimeDensity);
       if (tex) {
         kind = tex === approvedKey ? 'approved' : 'temp';
-        const density = kind === 'approved' ? densities[p.spec.id] ?? p.spec.density : p.spec.density;
+        const density = kind === 'approved' ? densities[p.spec.id] ?? p.spec.density : runtimeDensity;
         if (p.layer === 'floor') this.drawPropShadow(p.spec, p.x, p.y);
         view = this.add.image(pivot.x, pivot.y, tex)
           .setOrigin(p.spec.pivot.x / p.spec.canvas.width, p.spec.pivot.y / p.spec.canvas.height)
@@ -169,10 +198,7 @@ export class RoomScene extends Phaser.Scene {
           fontFamily: 'system-ui, sans-serif', fontSize: '8px', color: '#fff4f7', backgroundColor: '#c0607ecc', padding: { x: 3, y: 1 },
         }).setOrigin(0.5, 1).setResolution(3).setDepth(95000));
       }
-      if (p.spec.light) {
-        const flag = `light:${this.room.data.id}:${p.key}`;
-        this.propLights.set(p.key, new PropLight(this, p.key, p.spec.light, p.x, p.y, p.z, this.flags[flag], look.lightBoost));
-      }
+      if (p.spec.light) this.lighting.add(p.key, p.spec.light, p.x, p.y, p.z, p.layer === 'wall', this.flags[`light:${this.room.data.id}:${p.key}`]);
     }
   }
 
@@ -222,21 +248,14 @@ export class RoomScene extends Phaser.Scene {
 
   private buildActor(): void {
     const outfit = OUTFITS.find((o) => o.id === this.vars.outfit) ?? OUTFITS[0];
-    const old = this.actorView;
-    const ch = drawGreyboxCharacter(this, this.character, outfit.color);
-    this.actorView = ch.root;
-    this.facingView = ch.facing;
-    if (old) {
-      this.actorView.setScale(old.scaleX, old.scaleY);
-      this.cameras.main.startFollow(this.actorView, true, 0.14, 0.14);
-      old.destroy();
-    }
+    if (!this.figure || !this.figure.root.active) this.figure = new LayeredCharacter(this, this.character as CharacterSpec & { rig?: RigSpec }, outfit);
+    else this.figure.setOutfit(outfit);
   }
 
   private setTagsVisible(v: boolean): void { for (const t of this.tagViews) t.setVisible(v); }
 
   private emitArtStatus(): void {
-    const kinds = [...this.artKinds.values()];
+    const kinds = [...this.artKinds.values(), this.shellInfo.floor.art, this.shellInfo.wall.art];
     this.registry.set('artStatus', { approved: kinds.filter((k) => k === 'approved').length, temp: kinds.filter((k) => k !== 'approved').length });
     this.game.events.emit('art-status', { approved: kinds.filter((k) => k === 'approved').length, temp: kinds.filter((k) => k !== 'approved').length });
   }
@@ -246,9 +265,7 @@ export class RoomScene extends Phaser.Scene {
 
   private applyWorldVars(): void {
     const look = PHASE_LOOK[this.phase()];
-    // Skip the full-screen tint entirely when it would be invisible (saves one full-screen blend pass on mobile GPUs).
-    this.ambient?.setFillStyle(Phaser.Display.Color.HexStringToColor(look.overlay.color).color, look.overlay.alpha).setVisible(look.overlay.alpha > 0.01);
-    for (const l of this.propLights.values()) l.setBoost(look.lightBoost);
+    this.lighting.setLook(look);   // re-bakes the low-res lightmaps once
     const sky = this.skyTexture();
     for (const s of this.skies) { s.img.setTexture(sky); s.curtains.setVisible(!!this.vars.curtainsClosed); }
     this.registry.set('world', { phase: look.label, day: Number(this.vars.day ?? 1) });
@@ -259,33 +276,48 @@ export class RoomScene extends Phaser.Scene {
   override update(_time: number, deltaMs: number): void {
     if (this.transitioning) return;
     if (this.input$.modal) { this.game.events.emit('prompt', null); return; } // dialogue open: UI owns input
-    const dt = Math.min(deltaMs, 66) / 1000;
+    // Real elapsed time, not Phaser's smoothed delta (which under-reports when frames drop and makes the
+    // whole game run in slow motion on slow devices). Capped at 100 ms; collision sub-steps keep it safe.
+    void deltaMs;
+    const dt = Math.min(this.game.loop.rawDelta || deltaMs, 100) / 1000;
     const mv = this.keyboard.read();
-    const dir = vectorToDirection(mv.x, mv.y);
+    let dir = vectorToDirection(mv.x, mv.y);
+    const before = { ...this.pos };
+    if (dir) { this.path = []; this.pendingAnchor = null; }        // manual input cancels tap-to-move
     if (this.seated) {
-      if (dir) this.standUp();
+      if (dir || this.path.length) this.standUp();
     } else if (dir) {
       const speed = mv.run ? RUN_CM_S : WALK_CM_S;
       this.facingDir = dir;
       this.pos = moveWithCollision(this.pos, { x: mv.x * speed * dt, y: mv.y * speed * dt }, this.character.collision.radiusCm, this.room.solids);
+    } else if (this.path.length) {
+      dir = this.followPath(dt);
     }
-    this.syncActor();
+    const moved = Math.hypot(this.pos.x - before.x, this.pos.y - before.y);
+    this.walked += moved;
+    this.velocity = { x: (this.pos.x - before.x) / Math.max(dt, 1e-3), y: (this.pos.y - before.y) / Math.max(dt, 1e-3) };
+    this.syncActor(moved > 0.05, _time);
+    this.updateCamera();
+    if (this.pendingAnchor && !this.path.length) {
+      const a = this.pendingAnchor; this.pendingAnchor = null;
+      if (Math.hypot(a.x - this.pos.x, a.y - this.pos.y) <= a.radiusCm + 4) { this.faceToward(a); this.interact(a); }
+    }
     this.nearest = this.seated ? null : nearestAnchor(this.pos.x, this.pos.y, this.room.anchors);
     this.game.events.emit('prompt', this.nearest?.label ?? null);
     if (this.input$.consumeInteract() && this.nearest) this.interact(this.nearest);
     this.checkDoorTriggers();
   }
 
-  private syncActor(): void {
+  private syncActor(moving = false, timeMs = this.time.now): void {
     const r = groundToRender(this.pos.x, this.pos.y);
     this.actorView.setPosition(r.x, r.y);
-    const v = DIR_VEC[this.facingDir];
-    this.facingView.setRotation(Math.atan2(v.y * DEPTH_SCALE, v.x));
+    const seat = this.seated ? this.room.props.find((p) => p.key === this.seated!.propKey) : undefined;
+    this.figure.update({ facing: this.facingDir, moving, distanceCm: this.walked, timeMs, sitting: !!this.seated, seatCm: seat?.spec.heightsCm.seat ?? 45 });
     if (this.debugActor) {
       const rad = this.character.collision.radiusCm;
       this.debugActor.clear().lineStyle(1.5, 0x00e5ff, 1).strokeEllipse(r.x, r.y, rad * 2, rad * 2 * DEPTH_SCALE);
     }
-    const h = this.character.heightCm * (this.seated ? SIT_SCALE_Y : 1);
+    const h = this.character.heightCm * (this.seated ? SIT_HEIGHT : 1);
     const actor: SortableActor = {
       x: this.pos.x, y: this.pos.y, radius: this.character.collision.radiusCm,
       renderBounds: { x: r.x - this.character.collision.radiusCm, y: r.y - h, w: this.character.collision.radiusCm * 2, h },
@@ -306,11 +338,89 @@ export class RoomScene extends Phaser.Scene {
     const r = this.character.collision.radiusCm;
     for (const d of this.room.data.doors) {
       if (!(this.pos.x > d.x && this.pos.x < d.x + d.w)) continue;
-      const southExit = d.y > 10 && this.pos.y > h + DOOR_DEPTH - r - 2;
+      const southExit = d.y > 10 && this.pos.y >= h + DOOR_DEPTH - r - 6;   // tolerance: stopping a hair short of the stopper still exits
       const northExit = d.y <= 10 && this.pos.y <= r + 0.5 && this.keyboard.read().y < 0;
       if (southExit || northExit) { this.goTo(d.to.room, d.to.spawn); return; }
     }
   }
+
+  // ---------------------------------------------------------------- tap / click to move
+  private onWorldTap(p: { x: number; y: number }): void {
+    if (this.transitioning || this.input$.modal) return;
+    const wp = this.cameras.main.getWorldPoint(p.x, p.y);
+    this.tapAtRender(wp.x, wp.y);
+  }
+
+  /** Tap on furniture → walk to its nearest interaction spot and use it; tap on the floor → walk there. */
+  private tapAtRender(rx: number, ry: number): void {
+    let target: Vec2 | null = null;
+    let anchor: WorldAnchor | null = null;
+    const hits = this.room.props
+      .filter((p) => p.layer !== 'decal' && this.room.anchors.some((a) => a.ownerId === p.key) && this.hitProp(p, rx, ry))
+      .sort((a, b) => (this.propViews.get(b.key)?.depth ?? 0) - (this.propViews.get(a.key)?.depth ?? 0));
+    if (hits.length) {
+      const owned = this.room.anchors.filter((a) => a.ownerId === hits[0]!.key);
+      anchor = owned.sort((a, b) => Math.hypot(a.x - this.pos.x, a.y - this.pos.y) - Math.hypot(b.x - this.pos.x, b.y - this.pos.y))[0]!;
+      target = { x: anchor.x, y: anchor.y };
+    } else if (ry >= 0) {
+      target = renderToGround(rx, ry);
+    }
+    if (!target) return;
+    const path = this.grid.findPath(this.pos, target);
+    if (!path) { this.game.events.emit('toast', "Can't get there"); return; }
+    this.path = path;
+    this.pendingAnchor = anchor;
+    this.showTapMarker(path[path.length - 1]!);
+  }
+
+  private hitProp(p: PropInstance, rx: number, ry: number): boolean {
+    const v = this.propViews.get(p.key) as unknown as { getBounds?: () => Phaser.Geom.Rectangle } | undefined;
+    const b = v?.getBounds?.();
+    return !!b && b.contains(rx, ry) && this.artKinds.get(p.key) !== undefined;
+  }
+
+  private followPath(dt: number): Direction | null {
+    const next = this.path[0]!;
+    const dx = next.x - this.pos.x, dy = next.y - this.pos.y, dist = Math.hypot(dx, dy);
+    const step = WALK_CM_S * dt;
+    if (dist <= Math.max(2, step)) {
+      this.pos = moveWithCollision(this.pos, { x: dx, y: dy }, this.character.collision.radiusCm, this.room.solids);
+      this.path.shift();
+    } else {
+      const before = { ...this.pos };
+      this.pos = moveWithCollision(this.pos, { x: (dx / dist) * step, y: (dy / dist) * step }, this.character.collision.radiusCm, this.room.solids);
+      if (Math.hypot(this.pos.x - before.x, this.pos.y - before.y) < step * 0.05) { this.path = []; this.pendingAnchor = null; } // blocked: give up
+    }
+    const d = vectorToDirection(dx, dy);
+    if (d) this.facingDir = d;
+    return d;
+  }
+
+  private faceToward(a: WorldAnchor): void {
+    const owner = this.room.props.find((p) => p.key === a.ownerId);
+    if (!owner) return;
+    const d = vectorToDirection(owner.x - this.pos.x, (owner.layer === 'wall' ? 0 : owner.y - owner.spec.footprint.depthCm / 2) - this.pos.y);
+    if (d) this.facingDir = d;
+  }
+
+  private showTapMarker(p: Vec2): void {
+    const r = groundToRender(p.x, p.y);
+    this.tapMarker?.destroy();
+    const g = this.tapMarker = this.add.graphics().setDepth(-49000).setPosition(r.x, r.y);
+    g.lineStyle(2, 0xfff4f7, 0.9).strokeEllipse(0, 0, 26, 26 * DEPTH_SCALE).lineStyle(1.5, 0xe8a0b4, 0.9).strokeEllipse(0, 0, 14, 14 * DEPTH_SCALE);
+    this.tweens.add({ targets: g, alpha: 0, scaleX: 1.4, scaleY: 1.4, duration: 600, onComplete: () => g.destroy() });
+  }
+
+  // ---------------------------------------------------------------- camera
+  /** Smooth follow with look-ahead in the walking direction (shows more of where you are going). */
+  private updateCamera(): void {
+    const r = groundToRender(this.pos.x, this.pos.y);
+    const lead = Phaser.Math.Clamp(LOOK_AHEAD_S, 0, 1);
+    const lx = Phaser.Math.Clamp(this.velocity.x * lead, -70, 70), ly = Phaser.Math.Clamp(this.velocity.y * lead * DEPTH_SCALE, -50, 50);
+    this.camTarget.x = r.x + lx;
+    this.camTarget.y = r.y - this.character.heightCm * 0.45 + ly;
+  }
+  private snapCamera(): void { this.updateCamera(); this.cameras.main.centerOn(this.camTarget.x, this.camTarget.y); }
 
   // ---------------------------------------------------------------- interactions
   private interact(a: WorldAnchor): void {
@@ -324,9 +434,8 @@ export class RoomScene extends Phaser.Scene {
     const prevOutfit = this.vars.outfit;
     this.vars = res.vars;
     if (res.toggleLight) {
-      const light = this.propLights.get(a.ownerId);
-      if (light) {
-        const on = light.toggle();
+      if (this.lighting.has(a.ownerId)) {
+        const on = this.lighting.toggle(a.ownerId);
         this.flags[`light:${this.room.data.id}:${a.ownerId}`] = on;
         this.game.events.emit('toast', on ? 'Lamp on' : 'Lamp off');
       }
@@ -354,15 +463,13 @@ export class RoomScene extends Phaser.Scene {
     this.seated = { propKey, exit, depth: p.sortable.pivotY + 0.5 };
     this.pos = { x: p.x + sit.seat.x, y: p.y + sit.seat.y };
     this.facingDir = sit.facing as Direction;
-    this.actorView.setScale(1, SIT_SCALE_Y);
-    this.game.events.emit('toast', 'Move to stand up');
+    this.game.events.emit('toast', 'Move or tap to stand up');
   }
 
   private standUp(): void {
     if (!this.seated) return;
     this.pos = { ...this.seated.exit };
     this.seated = null;
-    this.actorView.setScale(1, 1);
   }
 
   private goTo(roomId: string, spawn: string): void {
@@ -427,14 +534,29 @@ export class RoomScene extends Phaser.Scene {
         props: this.room.props.map((p) => ({ key: p.key, depth: this.propViews.get(p.key)?.depth, alpha: this.propViews.get(p.key)?.alpha, art: this.artKinds.get(p.key), layer: p.layer })),
         fps: Math.round(this.game.loop.actualFps),
         transitioning: this.transitioning,
-        lights: [...this.propLights.values()].map((l) => ({ key: l.key, on: l.on })),
+        lights: this.lighting.states(),
+        lighting: { fullScreenLayers: this.lighting.fullScreenLayers(), bakes: this.lighting.bakes },
+        anim: this.figure.frameInfo(),
+        walked: this.walked,
+        path: this.path.length,
+        pending: this.pendingAnchor?.key ?? null,
+        zoom: this.cameras.main.zoom,
+        zoomMul: this.zoomMul,
+        shell: this.shellInfo,
         vars: { ...this.vars },
         seated: this.seated?.propKey ?? null,
         modal: this.input$.modal,
         displayObjects: this.children.length,
       }),
-      teleport: (x: number, y: number) => { this.seated = null; this.actorView.setScale(1, 1); this.pos = { x, y }; this.syncActor(); },
+      teleport: (x: number, y: number) => { this.seated = null; this.path = []; this.pendingAnchor = null; this.pos = { x, y }; this.syncActor(); this.snapCamera(); },
+      tapWorld: (gx: number, gy: number, z = 0) => { const r = groundToRender(gx, gy, z); this.tapAtRender(r.x, r.y); },
       setVars: (v: Vars) => { this.vars = { ...this.vars, ...v }; this.buildActor(); this.applyWorldVars(); },
+      zoomBy: (d: number) => this.zoomBy(d),
+      /** Ground point → CSS pixel on screen (for tests that click/tap real screen positions). */
+      toScreen: (gx: number, gy: number, z = 0) => {
+        const r = groundToRender(gx, gy, z), cam = this.cameras.main, dpr = (this.registry.get('dpr') as number | undefined) ?? 1;
+        return { x: ((r.x - cam.worldView.x) * cam.zoom) / dpr, y: ((r.y - cam.worldView.y) * cam.zoom) / dpr };
+      },
       save: () => this.persist(),
     };
   }

@@ -11,7 +11,7 @@ describe('collision', () => {
   it('blocks movement into a wall', () => {
     const p = moveWithCollision({ x: 50, y: 50 }, { x: 100, y: 0 }, 16, [wall]);
     expect(p.x).toBeLessThanOrEqual(84);
-    expect(p.x).toBeGreaterThan(80);
+    expect(p.x).toBeGreaterThan(83.5);   // resolves to contact, not to the last whole sub-step
   });
   it('slides along a wall on diagonal input', () => {
     const p = moveWithCollision({ x: 80, y: 50 }, { x: 30, y: 30 }, 16, [wall]);

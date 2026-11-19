@@ -23,12 +23,12 @@ export function isPhase(v: unknown): v is Phase { return typeof v === 'string' &
 
 /** Outfits available from the wardrobe. Final art: one layered outfit set per entry (Art Bible §9). */
 export const OUTFITS = [
-  { id: 'default', name: 'Pink & white', color: '#E8A0B4' },
-  { id: 'cream', name: 'Cream knit', color: '#F1E2CC' },
-  { id: 'blue', name: 'Soft blue', color: '#9DB4D6' },
-  { id: 'maroon', name: 'Maroon', color: '#B0506A' },
-  { id: 'brown', name: 'Cocoa', color: '#9C7258' },
-  { id: 'black', name: 'Night out', color: '#4A4250' },
+  { id: 'default', name: 'Pink & white', color: '#E8A0B4', top: '#E8A0B4', bottom: '#FFF8F0' },
+  { id: 'cream', name: 'Cream knit', color: '#F1E2CC', top: '#F1E2CC', bottom: '#C9A27E' },
+  { id: 'blue', name: 'Soft blue', color: '#9DB4D6', top: '#9DB4D6', bottom: '#F6EBDD' },
+  { id: 'maroon', name: 'Maroon', color: '#B0506A', top: '#B0506A', bottom: '#F6EBDD' },
+  { id: 'brown', name: 'Cocoa', color: '#9C7258', top: '#9C7258', bottom: '#F1E2CC' },
+  { id: 'black', name: 'Night out', color: '#4A4250', top: '#4A4250', bottom: '#3A3440' },
 ] as const;
 export function nextOutfit(id: string): (typeof OUTFITS)[number] {
   const i = OUTFITS.findIndex((o) => o.id === id);

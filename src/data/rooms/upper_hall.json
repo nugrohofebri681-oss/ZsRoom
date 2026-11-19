@@ -39,5 +39,9 @@
         "spawn": "from_hall"
       }
     }
-  ]
+  ],
+  "shell": {
+    "floor": "env_floor_planks_honey",
+    "wall": "env_wall_bedroom"
+  }
 }

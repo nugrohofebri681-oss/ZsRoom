@@ -3,34 +3,151 @@
   "displayName": "Zila's Bedroom",
   "world": "dream_home",
   "floor": "upper",
-  "sizeCm": { "w": 720, "h": 480 },
+  "sizeCm": {
+    "w": 720,
+    "h": 480
+  },
   "wallHeightCm": 270,
-  "palette": { "floor": "#C99A6A", "wall": "#EBCBD2", "trim": "#5B3A29", "wainscot": "#F6EBDD" },
+  "palette": {
+    "floor": "#C99A6A",
+    "wall": "#EBCBD2",
+    "trim": "#5B3A29",
+    "wainscot": "#F6EBDD"
+  },
   "spawns": {
-    "default": { "x": 365, "y": 440, "facing": "N" },
-    "from_hall": { "x": 365, "y": 440, "facing": "N" }
+    "default": {
+      "x": 365,
+      "y": 440,
+      "facing": "N"
+    },
+    "from_hall": {
+      "x": 365,
+      "y": 440,
+      "facing": "N"
+    }
   },
   "props": [
-    { "assetId": "decal_rug_zila", "x": 330, "y": 320 },
-    { "assetId": "wall_fairy_lights", "wall": { "x": 360, "z": 232 } },
-    { "assetId": "wall_shelf_books", "wall": { "x": 100, "z": 156 } },
-    { "assetId": "wall_photos_string", "wall": { "x": 190, "z": 118 } },
-    { "assetId": "wall_window_bedroom", "wall": { "x": 330, "z": 95 } },
-    { "assetId": "wall_neon_goodvibes", "wall": { "x": 500, "z": 178 } },
-    { "assetId": "prop_bed_zila", "x": 110, "y": 212 },
-    { "assetId": "prop_nightstand_zila", "id": "nightstand", "x": 202, "y": 52 },
-    { "assetId": "prop_lamp_zila", "on": { "prop": "nightstand", "surface": "top", "anchor": "lamp" } },
-    { "assetId": "prop_desk_zila", "x": 330, "y": 64 },
-    { "assetId": "prop_chair_desk", "x": 330, "y": 118 },
-    { "assetId": "prop_vanity_zila", "x": 500, "y": 49 },
-    { "assetId": "prop_stool_vanity", "x": 500, "y": 98 },
-    { "assetId": "prop_wardrobe_zila", "x": 640, "y": 64 },
-    { "assetId": "prop_plant_tall_zila", "x": 660, "y": 300 },
-    { "assetId": "prop_pouf_floor", "x": 480, "y": 360 },
-    { "assetId": "prop_catbed_mochi", "x": 150, "y": 420 },
-    { "assetId": "prop_plant_small", "x": 60, "y": 460 }
+    {
+      "assetId": "decal_rug_zila",
+      "x": 330,
+      "y": 320
+    },
+    {
+      "assetId": "wall_fairy_lights",
+      "wall": {
+        "x": 360,
+        "z": 232
+      }
+    },
+    {
+      "assetId": "wall_shelf_books",
+      "wall": {
+        "x": 100,
+        "z": 156
+      }
+    },
+    {
+      "assetId": "wall_photos_string",
+      "wall": {
+        "x": 190,
+        "z": 118
+      }
+    },
+    {
+      "assetId": "wall_window_bedroom",
+      "wall": {
+        "x": 330,
+        "z": 95
+      }
+    },
+    {
+      "assetId": "wall_neon_goodvibes",
+      "wall": {
+        "x": 500,
+        "z": 178
+      }
+    },
+    {
+      "assetId": "prop_bed_zila",
+      "x": 110,
+      "y": 212
+    },
+    {
+      "assetId": "prop_nightstand_zila",
+      "id": "nightstand",
+      "x": 202,
+      "y": 52
+    },
+    {
+      "assetId": "prop_lamp_zila",
+      "on": {
+        "prop": "nightstand",
+        "surface": "top",
+        "anchor": "lamp"
+      }
+    },
+    {
+      "assetId": "prop_desk_zila",
+      "x": 330,
+      "y": 64
+    },
+    {
+      "assetId": "prop_chair_desk",
+      "x": 330,
+      "y": 118
+    },
+    {
+      "assetId": "prop_vanity_zila",
+      "x": 500,
+      "y": 49
+    },
+    {
+      "assetId": "prop_stool_vanity",
+      "x": 500,
+      "y": 98
+    },
+    {
+      "assetId": "prop_wardrobe_zila",
+      "x": 640,
+      "y": 64
+    },
+    {
+      "assetId": "prop_plant_tall_zila",
+      "x": 660,
+      "y": 300
+    },
+    {
+      "assetId": "prop_pouf_floor",
+      "x": 480,
+      "y": 360
+    },
+    {
+      "assetId": "prop_catbed_mochi",
+      "x": 150,
+      "y": 420
+    },
+    {
+      "assetId": "prop_plant_small",
+      "x": 60,
+      "y": 460
+    }
   ],
   "doors": [
-    { "id": "door_to_hall", "label": "Go to the upstairs hall", "x": 320, "y": 470, "w": 90, "h": 10, "to": { "room": "upper_hall", "spawn": "from_bedroom" } }
-  ]
+    {
+      "id": "door_to_hall",
+      "label": "Go to the upstairs hall",
+      "x": 320,
+      "y": 470,
+      "w": 90,
+      "h": 10,
+      "to": {
+        "room": "upper_hall",
+        "spawn": "from_bedroom"
+      }
+    }
+  ],
+  "shell": {
+    "floor": "env_floor_planks_honey",
+    "wall": "env_wall_bedroom"
+  }
 }

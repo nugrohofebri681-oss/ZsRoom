@@ -24,15 +24,16 @@ window + curtains · rug · wall shelf · photo string · fairy lights · neon s
 ## Group D — Living details → [Request 006](../art-requests/006-batch-d-living-details.md)
 tall plant · cat bed with sleeping cat · pouf · small plant — 🟡 requested.
 
-## Group E — Room shell (environment art) ⏳
-Seamless floor planks (honey oak), wallpaper + wainscot strip, skirting/crown trims, south doorway threshold.
-- Engine ⬜: tile-based shell renderer (TileSprite) replacing the TEMP canvas shell; spec type `environment` (tile size in cm, seamless check in the validator).
-- Art ⏳: request after Groups B/C. Seamless tiling is the riskiest generator task; plan for a Krita/Photopea cleanup pass (free tools).
+## Group E — Room shell (environment art) → [Request 007](../art-requests/007-batch-e-room-shell.md)
+- Engine ✅: tile shell (Blitter quads, edge-cropped frames, runtime density), spec type `environment`, seamless-edge check in `validate-art`, and the same render path for TEMP and approved tiles.
+- Art 🟡: requested (floor tile + wall strip). Seamless tiling is the riskiest generator task; plan for a Krita/Photopea cleanup pass (free tools).
 
 ## Group F — Characters ⏳ (see [CHARACTER_PLAN.md](CHARACTER_PLAN.md))
-Blocked on Creative Director approval of proportions and design references. The engine-side layered rig and animation player can start in parallel.
+Art is blocked on Creative Director approval of proportions and design references.
+Engine ✅: layered rig (spec `rig`), facing resolution + mirroring rules (Febri's bag never mirrored), distance-synced walk frames (no foot sliding), idle/sit poses, outfit layer swap, and a TEMP vector figure using the same layer architecture.
 
-## Group G — Polish & systems for the slice ⬜
+## Group G — Polish & systems for the slice
+✅ Tap/click-to-move (A* + path smoothing; tap furniture to walk there and use it) · ✅ camera look-ahead, wheel/pinch/button zoom · ✅ mobile HUD (safe-area insets, contextual E button label, compact badge) · ✅ baked single-quad lighting · ✅ frame-rate-independent movement (real elapsed time) · ✅ contact-resolving collision
 - Sound: room ambience, lamp click, footsteps on wood and rug (free/CC0 sources only).
 - Interaction feedback: highlight outline on the focused prop; sitting and sleeping poses once character art exists.
 - Day-phase transitions with a short animated fade of the lights.
@@ -40,7 +41,7 @@ Blocked on Creative Director approval of proportions and design references. The 
 - Texture atlas packing when the approved art count exceeds ~10 per room.
 
 ## Ordering
-1. **Now, in parallel:** Codex runs Requests 003 → 004 → 005 → 006 (one draft PR per batch). Claude builds Group E engine support and Group G polish.
+1. **Now, in parallel:** Codex runs Requests 003 → 004 → 005 → 006 → 007 (one draft PR per batch). Claude continues Group G (sound, interaction highlight, real-device performance) and character frame loading.
 2. **After each batch:** Claude runs the in-game review (gallery, bed pairing, gameplay screenshots), the CD approves per asset, and Claude integrates the approved ones in a single merge.
 3. **Characters:** start once the CD signs off the proportions sheet (Group F).
 

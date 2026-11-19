@@ -3,15 +3,41 @@
   "displayName": "Upstairs Hall",
   "world": "dream_home",
   "floor": "upper",
-  "sizeCm": { "w": 700, "h": 260 },
+  "sizeCm": {
+    "w": 700,
+    "h": 260
+  },
   "wallHeightCm": 270,
-  "palette": { "floor": "#9b6b48", "wall": "#efe1d0", "trim": "#5b3a29" },
+  "palette": {
+    "floor": "#9b6b48",
+    "wall": "#efe1d0",
+    "trim": "#5b3a29"
+  },
   "spawns": {
-    "default": { "x": 350, "y": 150, "facing": "S" },
-    "from_bedroom": { "x": 285, "y": 40, "facing": "S" }
+    "default": {
+      "x": 350,
+      "y": 150,
+      "facing": "S"
+    },
+    "from_bedroom": {
+      "x": 365,
+      "y": 40,
+      "facing": "S"
+    }
   },
   "props": [],
   "doors": [
-    { "id": "door_to_bedroom", "label": "Enter Zila's bedroom", "x": 240, "y": 0, "w": 90, "h": 10, "to": { "room": "zila_bedroom", "spawn": "from_hall" } }
+    {
+      "id": "door_to_bedroom",
+      "label": "Enter Zila's bedroom",
+      "x": 320,
+      "y": 0,
+      "w": 90,
+      "h": 10,
+      "to": {
+        "room": "zila_bedroom",
+        "spawn": "from_hall"
+      }
+    }
   ]
 }

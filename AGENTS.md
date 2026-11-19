@@ -14,10 +14,11 @@ The integration branch for the rebuild is `reboot/foundation`. The repository is
 ## If you are Codex (art production)
 
 1. Work only on open requests in `docs/art-requests/`. Read, in order: the request, `art-bible/ART_BIBLE.md`, the asset's spec in `specs/`, and its template in `art-bible/perspective/`.
-2. Branch from the latest `reboot/foundation` as `codex/art/<asset_id>-v###` (e.g. `codex/art/prop_bed_zila-v001`).
+2. Branch from the latest `reboot/foundation` as `codex/art/<asset_id>-v###` (e.g. `codex/art/prop_bed_zila-v001`), or, for **batch requests** (004+), as `codex/art/batch-<letter>-r<round>` (e.g. `codex/art/batch-b-r1`). See `docs/art-requests/BATCH_RULES.md`.
 3. You may create/modify **only**:
-   - `art/submissions/<asset_id>/<v###>/` — `<asset_id>_<v###>.png`, `metadata.json`, `prompt.md`, optional `notes.md`
-   - `art/source/<asset_id>/<v###>/` — raw, unprocessed generator outputs
+   - `art/submissions/<asset_id>/<v###>/`: `<asset_id>_<v###>.png`, `metadata.json`, `prompt.md`, optional `notes.md`
+   - `art/source/<asset_id>/<v###>/`: raw, unprocessed generator outputs
+   - (batch branches: the same folders for every asset whose spec has that `batch` letter)
    CI fails the PR if anything else changes.
 4. Generate artwork with your built-in image generation (e.g. `$imagegen`). **First verify it is available. If it is not, stop and report it in a PR comment or issue — never substitute procedural shapes, SVG drawings, rectangles, stock images or third-party assets.**
 5. **Zero additional cost.** Never use paid APIs, API keys, credits, or paid services. Record `"cost"` in `metadata.json`.

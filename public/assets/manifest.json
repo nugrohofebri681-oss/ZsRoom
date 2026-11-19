@@ -1,5 +1,5 @@
 {
-  "$comment": "Runtime asset manifest. Only entries with status 'approved' may ship real artwork. Edited by scripts/approve-asset.mjs \u2014 never by hand for approved entries.",
+  "$comment": "Runtime asset manifest. Only entries with status 'approved' may ship real artwork. Edited by scripts/approve-asset.mjs — never by hand for approved entries.",
   "manifestVersion": 1,
   "assets": {
     "prop_bed_zila": {
@@ -28,18 +28,6 @@
           "sha256": "d41d329432175add32b33c6d98589d289152f3188dac408d231e5fbf1bbe6acc"
         }
       }
-    },
-    "greybox_desk": {
-      "status": "greybox",
-      "spec": "specs/props/greybox_desk.json"
-    },
-    "greybox_wardrobe": {
-      "status": "greybox",
-      "spec": "specs/props/greybox_wardrobe.json"
-    },
-    "greybox_plant_tall": {
-      "status": "greybox",
-      "spec": "specs/props/greybox_plant_tall.json"
     },
     "char_zila": {
       "status": "greybox",
@@ -93,6 +81,81 @@
       "status": "requested",
       "spec": "specs/props/prop_lamp_zila.json",
       "request": "docs/art-requests/003-prop_lamp_zila.md"
+    },
+    "prop_desk_zila": {
+      "status": "requested",
+      "spec": "specs/props/prop_desk_zila.json",
+      "request": "docs/art-requests/004-batch-b-furniture.md"
+    },
+    "prop_chair_desk": {
+      "status": "requested",
+      "spec": "specs/props/prop_chair_desk.json",
+      "request": "docs/art-requests/004-batch-b-furniture.md"
+    },
+    "prop_wardrobe_zila": {
+      "status": "requested",
+      "spec": "specs/props/prop_wardrobe_zila.json",
+      "request": "docs/art-requests/004-batch-b-furniture.md"
+    },
+    "prop_vanity_zila": {
+      "status": "requested",
+      "spec": "specs/props/prop_vanity_zila.json",
+      "request": "docs/art-requests/004-batch-b-furniture.md"
+    },
+    "prop_stool_vanity": {
+      "status": "requested",
+      "spec": "specs/props/prop_stool_vanity.json",
+      "request": "docs/art-requests/004-batch-b-furniture.md"
+    },
+    "decal_rug_zila": {
+      "status": "requested",
+      "spec": "specs/props/decal_rug_zila.json",
+      "request": "docs/art-requests/005-batch-c-soft-wall.md"
+    },
+    "wall_window_bedroom": {
+      "status": "requested",
+      "spec": "specs/props/wall_window_bedroom.json",
+      "request": "docs/art-requests/005-batch-c-soft-wall.md"
+    },
+    "wall_shelf_books": {
+      "status": "requested",
+      "spec": "specs/props/wall_shelf_books.json",
+      "request": "docs/art-requests/005-batch-c-soft-wall.md"
+    },
+    "wall_photos_string": {
+      "status": "requested",
+      "spec": "specs/props/wall_photos_string.json",
+      "request": "docs/art-requests/005-batch-c-soft-wall.md"
+    },
+    "wall_fairy_lights": {
+      "status": "requested",
+      "spec": "specs/props/wall_fairy_lights.json",
+      "request": "docs/art-requests/005-batch-c-soft-wall.md"
+    },
+    "wall_neon_goodvibes": {
+      "status": "requested",
+      "spec": "specs/props/wall_neon_goodvibes.json",
+      "request": "docs/art-requests/005-batch-c-soft-wall.md"
+    },
+    "prop_plant_tall_zila": {
+      "status": "requested",
+      "spec": "specs/props/prop_plant_tall_zila.json",
+      "request": "docs/art-requests/006-batch-d-living-details.md"
+    },
+    "prop_plant_small": {
+      "status": "requested",
+      "spec": "specs/props/prop_plant_small.json",
+      "request": "docs/art-requests/006-batch-d-living-details.md"
+    },
+    "prop_catbed_mochi": {
+      "status": "requested",
+      "spec": "specs/props/prop_catbed_mochi.json",
+      "request": "docs/art-requests/006-batch-d-living-details.md"
+    },
+    "prop_pouf_floor": {
+      "status": "requested",
+      "spec": "specs/props/prop_pouf_floor.json",
+      "request": "docs/art-requests/006-batch-d-living-details.md"
     }
   }
 }

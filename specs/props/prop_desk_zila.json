@@ -1,0 +1,93 @@
+{
+  "id": "prop_desk_zila",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Zila's Desk",
+  "batch": "B",
+  "density": 2,
+  "canvas": {
+    "width": 288,
+    "height": 288
+  },
+  "pivot": {
+    "x": 144,
+    "y": 264,
+    "meaning": "front-centre floor contact point of the footprint"
+  },
+  "footprint": {
+    "widthCm": 120,
+    "depthCm": 60
+  },
+  "heightsCm": {
+    "top": 75,
+    "legs": 70
+  },
+  "artBounds": {
+    "x": 16,
+    "y": 22,
+    "width": 256,
+    "height": 250
+  },
+  "baseLine": {
+    "y": 264,
+    "tolerancePx": 8
+  },
+  "maxSideOverhangCm": 2,
+  "collision": [
+    {
+      "x": -60.0,
+      "y": -60,
+      "w": 120,
+      "h": 60
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": true,
+  "interactionAnchors": [
+    {
+      "id": "laptop",
+      "label": "Open the laptop",
+      "x": 45,
+      "y": 82,
+      "facing": "N",
+      "radiusCm": 30,
+      "action": {
+        "type": "message",
+        "lines": [
+          "The laptop wakes up to a folder called “us”.",
+          "So many little moments saved here."
+        ]
+      }
+    }
+  ],
+  "temp": {
+    "shape": "table",
+    "wood": "#8A5A3C",
+    "top": "#A06B47",
+    "drawers": 1,
+    "laptop": true
+  },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.02,
+    "maxOpaqueRatio": 0.85
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 3000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/prop_desk_zila/<version>/",
+  "artRequest": "docs/art-requests/004-batch-b-furniture.md"
+}

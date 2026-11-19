@@ -1,0 +1,101 @@
+{
+  "id": "wall_window_bedroom",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Bedroom Window with Curtains",
+  "batch": "C",
+  "density": 2,
+  "canvas": {
+    "width": 448,
+    "height": 304
+  },
+  "pivot": {
+    "x": 224,
+    "y": 288,
+    "meaning": "bottom-centre of the FRONT face (wall item); mounted at height z on the north wall"
+  },
+  "footprint": {
+    "widthCm": 140,
+    "depthCm": 8
+  },
+  "heightsCm": {
+    "top": 125
+  },
+  "artBounds": {
+    "x": 16,
+    "y": 22,
+    "width": 416,
+    "height": 269
+  },
+  "baseLine": {
+    "y": 288,
+    "tolerancePx": 8
+  },
+  "maxSideOverhangCm": 32,
+  "collision": [],
+  "placement": {
+    "type": "wall",
+    "wall": "north"
+  },
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [
+    {
+      "id": "curtains",
+      "label": "Open / close the curtains",
+      "x": 95,
+      "y": 85,
+      "facing": "N",
+      "radiusCm": 36,
+      "action": {
+        "type": "toggleVar",
+        "var": "curtainsClosed",
+        "messages": {
+          "true": "Curtains closed.",
+          "false": "Curtains open."
+        }
+      }
+    }
+  ],
+  "temp": {
+    "shape": "window",
+    "frame": "#F6EBDD",
+    "curtain": "#E8A0B4",
+    "glass": {
+      "x": -60,
+      "z": 8,
+      "w": 120,
+      "h": 105
+    }
+  },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.02,
+    "maxOpaqueRatio": 0.85
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 3000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/wall_window_bedroom/<version>/",
+  "artRequest": "docs/art-requests/005-batch-c-soft-wall.md",
+  "glass": {
+    "x": -60,
+    "z": 8,
+    "w": 120,
+    "h": 105,
+    "$comment": "Transparent glass area relative to the pivot (cm). The engine draws the sky (time of day) behind it; the art must leave it fully transparent."
+  }
+}

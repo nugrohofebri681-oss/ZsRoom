@@ -61,6 +61,8 @@ async function propTemplate(spec) {
   parts.push(`<text x="${px}" y="${py - 6}" font-size="9" fill="#ff3d7f" text-anchor="middle">front floor edge</text><text x="${px}" y="${back + 12}" font-size="9" fill="#ff3d7f" text-anchor="middle">back floor edge (wall side)</text>`);
   parts.push(`<line x1="${px - 10}" y1="${py}" x2="${px + 10}" y2="${py}" stroke="#000" stroke-width="2"/><line x1="${px}" y1="${py - 10}" x2="${px}" y2="${py + 10}" stroke="#000" stroke-width="2"/><text x="${px + 12}" y="${py + 14}" font-size="10" fill="#000">PIVOT (${px},${py})</text>`);
   parts.push(`<line x1="0" y1="${py}" x2="${W}" y2="${py}" stroke="#000" stroke-opacity="0.35" stroke-dasharray="2 4"/>`);
+  parts.push(glassGuide(spec));
+  if (spec.placement?.type === 'wall') parts.push(`<text x="6" y="14" font-size="9" fill="#555">WALL ITEM: pivot = bottom-centre of the front face</text>`);
   parts.push(`<text x="6" y="${H - 6}" font-size="9" fill="#555">${spec.id} · ${W}×${H}px · ${d}px/cm · depth×${K} · GUIDE ONLY</text>`);
   // Small canvases: shrink label text proportionally so guides stay legible and uncluttered.
   const f = Math.min(1, W / 300);
@@ -128,6 +130,26 @@ async function onHostTemplate(spec) {
   console.log(`wrote art-bible/perspective/${spec.id}_on_host_template.{svg,png}`);
 }
 
+/** Floor decals (rugs): footprint centred on the pivot. */
+async function decalTemplate(spec) {
+  const { width: W, height: H } = spec.canvas, d = spec.density, px = spec.pivot.x, py = spec.pivot.y;
+  const w = spec.footprint.widthCm * d, h = spec.footprint.depthCm * K * d;
+  const body = `<rect x="${px - w / 2}" y="${py - h / 2}" width="${w}" height="${h}" rx="${12 * d}" fill="#ff3d7f18" stroke="#ff3d7f" stroke-width="2"/>
+    <path d="M${px - 8} ${py}h16M${px} ${py - 8}v16" stroke="#000" stroke-width="2"/>
+    <text x="${px}" y="${py - 12}" font-size="11" fill="#ff3d7f" text-anchor="middle">FLOOR DECAL ${spec.footprint.widthCm}×${spec.footprint.depthCm} cm — flat on the floor, seen at ×${K}</text>
+    <text x="6" y="${H - 6}" font-size="9" fill="#555">${spec.id} · ${W}×${H} · pivot = centre (${px},${py}) · GUIDE ONLY</text>`;
+  await emit(`${spec.id}_template`, svg(W, H, body));
+}
+
+/** Transparent glass area for windows (engine draws the sky behind it). */
+function glassGuide(spec) {
+  if (!spec.glass) return '';
+  const d = spec.density, g = spec.glass;
+  const x = spec.pivot.x + g.x * d, y = spec.pivot.y - (g.z + g.h) * d;
+  return `<rect x="${x}" y="${y}" width="${g.w * d}" height="${g.h * d}" fill="#7d8cff22" stroke="#7d8cff" stroke-width="2" stroke-dasharray="6 3"/>
+    <text x="${x + 6}" y="${y + 16}" font-size="10" fill="#4a59d6">GLASS: leave fully TRANSPARENT (engine sky)</text>`;
+}
+
 async function scaleLineup() {
   const d = 1; // 1 px per cm for an overview sheet
   const W = 720, H = 370, floor = 320;
@@ -169,7 +191,9 @@ async function projectionCube() {
 
 for (const { spec } of specs.values()) {
   if (spec.category !== 'prop' || spec.status === 'greybox-only') continue;
-  if (spec.profile) await roundTemplate(spec); else await propTemplate(spec);
+  if (spec.placement?.type === 'floor') await decalTemplate(spec);
+  else if (spec.profile) await roundTemplate(spec);
+  else await propTemplate(spec);
   if (spec.placement?.type === 'surface') await onHostTemplate(spec);
 }
 await scaleLineup();

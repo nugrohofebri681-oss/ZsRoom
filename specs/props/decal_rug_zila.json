@@ -1,0 +1,67 @@
+{
+  "id": "decal_rug_zila",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Bedroom Rug",
+  "batch": "C",
+  "density": 2,
+  "canvas": {
+    "width": 560,
+    "height": 288
+  },
+  "pivot": {
+    "x": 280,
+    "y": 144,
+    "meaning": "centre of the decal on the floor"
+  },
+  "footprint": {
+    "widthCm": 260,
+    "depthCm": 180
+  },
+  "heightsCm": {
+    "top": 1
+  },
+  "artBounds": {
+    "x": 10,
+    "y": 10,
+    "width": 540,
+    "height": 268
+  },
+  "maxSideOverhangCm": 0,
+  "collision": [],
+  "placement": {
+    "type": "floor"
+  },
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "temp": {
+    "shape": "rug",
+    "body": "#E8A0B4",
+    "border": "#F4C7D3",
+    "pattern": "#C0607E"
+  },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.02,
+    "maxOpaqueRatio": 0.85
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 3000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/decal_rug_zila/<version>/",
+  "artRequest": "docs/art-requests/005-batch-c-soft-wall.md"
+}

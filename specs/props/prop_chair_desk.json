@@ -1,0 +1,93 @@
+{
+  "id": "prop_chair_desk",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Desk Chair",
+  "batch": "B",
+  "density": 2,
+  "canvas": {
+    "width": 144,
+    "height": 288
+  },
+  "pivot": {
+    "x": 72,
+    "y": 264,
+    "meaning": "front-centre floor contact point of the footprint"
+  },
+  "footprint": {
+    "widthCm": 45,
+    "depthCm": 45
+  },
+  "heightsCm": {
+    "seat": 45,
+    "top": 90
+  },
+  "artBounds": {
+    "x": 19,
+    "y": 13,
+    "width": 106,
+    "height": 259
+  },
+  "baseLine": {
+    "y": 264,
+    "tolerancePx": 8
+  },
+  "maxSideOverhangCm": 2,
+  "collision": [
+    {
+      "x": -22.5,
+      "y": -45,
+      "w": 45,
+      "h": 45
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [
+    {
+      "id": "sit",
+      "label": "Sit at the desk",
+      "x": 0,
+      "y": 30,
+      "facing": "N",
+      "radiusCm": 30,
+      "action": {
+        "type": "sit",
+        "seat": {
+          "x": 0,
+          "y": -22
+        },
+        "heightCm": 45,
+        "facing": "N"
+      }
+    }
+  ],
+  "temp": {
+    "shape": "chair",
+    "wood": "#8A5A3C",
+    "cushion": "#E8A0B4"
+  },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.02,
+    "maxOpaqueRatio": 0.85
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 3000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/prop_chair_desk/<version>/",
+  "artRequest": "docs/art-requests/004-batch-b-furniture.md"
+}

@@ -14,6 +14,8 @@ export const PROJECTION = readJson('specs/projection.json');
 export const ASSET_ID_RE = /^[a-z][a-z0-9_]+$/;
 export const VERSION_RE = /^v\d{3}$/;
 export const CODEX_BRANCH_RE = /^codex\/art\/([a-z][a-z0-9_]+)-(v\d{3})$/;
+/** Batch branches: codex/art/batch-<letter>-r<round>, e.g. codex/art/batch-b-r1. */
+export const CODEX_BATCH_RE = /^codex\/art\/batch-([a-z])-r(\d+)$/;
 
 export function walk(dir, out = []) {
   if (!existsSync(dir)) return out;
@@ -88,8 +90,18 @@ export function md(rows) { return rows.join('\n'); }
 export function ownershipViolations(branchName, changed) {
   const v = [];
   const m = CODEX_BRANCH_RE.exec(branchName);
+  const b = CODEX_BATCH_RE.exec(branchName);
+  if (b) {
+    // A batch branch may touch the submission/source folders of every asset whose spec belongs to that batch.
+    const letter = b[1].toUpperCase();
+    const ids = [...loadSpecs().values()].filter((e) => e.spec.batch === letter).map((e) => e.spec.id);
+    if (!ids.length) return [`no specs belong to batch ${letter}`];
+    const re = new RegExp(`^art/(submissions|source)/(${ids.join('|')})/v\\d{3}/`);
+    for (const f of changed) if (!re.test(f)) v.push(`batch ${letter} branch may only change art/submissions|source/<asset>/v###/ for: ${ids.join(', ')} — found ${f}`);
+    return v;
+  }
   if (branchName.startsWith('codex/')) {
-    if (!m) return [`branch "${branchName}" must match codex/art/<asset_id>-v### (e.g. codex/art/prop_bed_zila-v001)`];
+    if (!m) return [`branch "${branchName}" must match codex/art/<asset_id>-v### or codex/art/batch-<letter>-r<n>`];
     const [, id, ver] = m;
     const allowed = [`art/submissions/${id}/${ver}/`, `art/source/${id}/${ver}/`];
     for (const f of changed) if (!allowed.some((a) => f.startsWith(a))) v.push(`codex branch may only change ${allowed.join(' or ')} — found ${f}`);

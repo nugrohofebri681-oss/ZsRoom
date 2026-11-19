@@ -1,0 +1,83 @@
+{
+  "id": "wall_neon_goodvibes",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Neon Sign “good vibes”",
+  "batch": "C",
+  "density": 2,
+  "canvas": {
+    "width": 176,
+    "height": 112
+  },
+  "pivot": {
+    "x": 88,
+    "y": 96,
+    "meaning": "bottom-centre of the FRONT face (wall item); mounted at height z on the north wall"
+  },
+  "footprint": {
+    "widthCm": 70,
+    "depthCm": 4
+  },
+  "heightsCm": {
+    "top": 32
+  },
+  "artBounds": {
+    "x": 14,
+    "y": 22,
+    "width": 148,
+    "height": 77
+  },
+  "baseLine": {
+    "y": 96,
+    "tolerancePx": 8
+  },
+  "maxSideOverhangCm": 0,
+  "collision": [],
+  "placement": {
+    "type": "wall",
+    "wall": "north"
+  },
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "light": {
+    "emitter": {
+      "x": 0,
+      "y": 0,
+      "z": 16
+    },
+    "color": "#FF8FB8",
+    "radiusCm": 150,
+    "intensity": 0.3,
+    "defaultOn": true,
+    "coreSizeCm": 36
+  },
+  "temp": {
+    "shape": "neon",
+    "tube": "#FFD3E2",
+    "text": "good vibes"
+  },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.02,
+    "maxOpaqueRatio": 0.85
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 3000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/wall_neon_goodvibes/<version>/",
+  "artRequest": "docs/art-requests/005-batch-c-soft-wall.md"
+}

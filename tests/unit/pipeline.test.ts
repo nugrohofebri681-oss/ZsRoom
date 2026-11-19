@@ -72,6 +72,14 @@ describe('ownership policy', () => {
     expect(ownershipViolations('codex/art/prop_bed_zila-v001', ['art/approved/prop_bed_zila/x.png'])).toHaveLength(1);
     expect(ownershipViolations('codex/art/prop_bed_zila-v001', ['art/submissions/prop_bed_zila/v002/x.png'])).toHaveLength(1);
   });
+  it('batch branches may touch only their own batch assets, each in its own versioned folder', () => {
+    const ok = ['art/submissions/prop_desk_zila/v001/prop_desk_zila_v001.png', 'art/source/prop_wardrobe_zila/v001/raw-a.png', 'art/submissions/prop_stool_vanity/v002/metadata.json'];
+    expect(ownershipViolations('codex/art/batch-b-r1', ok)).toEqual([]);
+    expect(ownershipViolations('codex/art/batch-b-r1', ['art/submissions/decal_rug_zila/v001/x.png'])).toHaveLength(1); // batch C asset
+    expect(ownershipViolations('codex/art/batch-b-r1', ['art/approved/prop_desk_zila/x.png'])).toHaveLength(1);
+    expect(ownershipViolations('codex/art/batch-b-r1', ['src/main.ts'])).toHaveLength(1);
+    expect(ownershipViolations('codex/art/batch-z-r1', [])).toHaveLength(1);
+  });
   it('rejects malformed codex branch names and non-codex submission edits', () => {
     expect(ownershipViolations('codex/bed', [])).toHaveLength(1);
     expect(ownershipViolations('claude/feature', ['art/submissions/prop_bed_zila/v001/x.png'])).toHaveLength(1);

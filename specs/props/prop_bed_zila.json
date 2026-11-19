@@ -6,22 +6,93 @@
   "room": "zila_bedroom",
   "displayName": "Zila's Bed",
   "density": 2,
-  "canvas": { "width": 384, "height": 576 },
-  "pivot": { "x": 192, "y": 544, "meaning": "front-centre floor contact point of the footprint (front edge of the bed base, at floor level)" },
-  "footprint": { "widthCm": 120, "depthCm": 200 },
-  "heightsCm": { "frameRail": 30, "mattressTop": 55, "pillowTop": 68, "footboardTop": 45, "headboardTop": 110 },
-  "artBounds": { "x": 56, "y": 32, "width": 272, "height": 520, "$comment": "every opaque pixel must lie inside this box (canvas px)" },
-  "baseLine": { "y": 544, "tolerancePx": 10, "$comment": "lowest opaque row (legs/base front edge) must sit on the pivot line ± tolerance" },
+  "canvas": {
+    "width": 384,
+    "height": 576
+  },
+  "pivot": {
+    "x": 192,
+    "y": 544,
+    "meaning": "front-centre floor contact point of the footprint (front edge of the bed base, at floor level)"
+  },
+  "footprint": {
+    "widthCm": 120,
+    "depthCm": 200
+  },
+  "heightsCm": {
+    "frameRail": 30,
+    "mattressTop": 55,
+    "pillowTop": 68,
+    "footboardTop": 45,
+    "headboardTop": 110
+  },
+  "artBounds": {
+    "x": 56,
+    "y": 32,
+    "width": 272,
+    "height": 520,
+    "$comment": "every opaque pixel must lie inside this box (canvas px)"
+  },
+  "baseLine": {
+    "y": 544,
+    "tolerancePx": 10,
+    "$comment": "lowest opaque row (legs/base front edge) must sit on the pivot line ± tolerance"
+  },
   "maxSideOverhangCm": 8,
-  "collision": [ { "x": -64, "y": -200, "w": 128, "h": 200 } ],
-  "sort": { "mode": "footprint", "$comment": "depth = pivot y; actors beside the footprint sort in front (see src/world/depth.ts)" },
+  "collision": [
+    {
+      "x": -64,
+      "y": -200,
+      "w": 128,
+      "h": 200
+    }
+  ],
+  "sort": {
+    "mode": "footprint",
+    "$comment": "depth = pivot y; actors beside the footprint sort in front (see src/world/depth.ts)"
+  },
   "occluder": true,
   "interactionAnchors": [
-    { "id": "rest", "label": "Rest on the bed", "x": 84, "y": -110, "facing": "left", "radiusCm": 55 },
-    { "id": "make_bed", "label": "Tidy the bed", "x": 0, "y": 30, "facing": "up", "radiusCm": 50 }
+    {
+      "id": "rest",
+      "label": "Rest on the bed",
+      "x": 84,
+      "y": -110,
+      "facing": "left",
+      "radiusCm": 55,
+      "action": {
+        "type": "rest"
+      }
+    },
+    {
+      "id": "make_bed",
+      "label": "Tidy the bed",
+      "x": 0,
+      "y": 30,
+      "facing": "up",
+      "radiusCm": 50,
+      "action": {
+        "type": "message",
+        "lines": [
+          "Pillows fluffed, duvet smoothed.",
+          "The heart cushion goes right in the middle."
+        ]
+      }
+    }
   ],
-  "transparency": { "edgePaddingPx": 8, "minOpaqueRatio": 0.25, "maxOpaqueRatio": 0.8 },
-  "export": { "format": "png", "bitDepth": 8, "channels": 4, "colorSpace": "sRGB", "alpha": "straight (unpremultiplied)", "maxBytes": 2500000 },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.25,
+    "maxOpaqueRatio": 0.8
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 2500000
+  },
   "submissionPath": "art/submissions/prop_bed_zila/<version>/",
   "artRequest": "docs/art-requests/001-prop_bed_zila.md"
 }

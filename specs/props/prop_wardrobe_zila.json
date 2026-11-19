@@ -1,0 +1,89 @@
+{
+  "id": "prop_wardrobe_zila",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Zila's Wardrobe",
+  "batch": "B",
+  "density": 2,
+  "canvas": {
+    "width": 272,
+    "height": 544
+  },
+  "pivot": {
+    "x": 136,
+    "y": 520,
+    "meaning": "front-centre floor contact point of the footprint"
+  },
+  "footprint": {
+    "widthCm": 110,
+    "depthCm": 60
+  },
+  "heightsCm": {
+    "top": 210
+  },
+  "artBounds": {
+    "x": 18,
+    "y": 8,
+    "width": 236,
+    "height": 520
+  },
+  "baseLine": {
+    "y": 520,
+    "tolerancePx": 8
+  },
+  "maxSideOverhangCm": 2,
+  "collision": [
+    {
+      "x": -55.0,
+      "y": -60,
+      "w": 110,
+      "h": 60
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": true,
+  "interactionAnchors": [
+    {
+      "id": "outfit",
+      "label": "Change outfit",
+      "x": 0,
+      "y": 30,
+      "facing": "N",
+      "radiusCm": 40,
+      "action": {
+        "type": "outfit"
+      }
+    }
+  ],
+  "temp": {
+    "shape": "cabinet",
+    "wood": "#8A5A3C",
+    "top": "#A06B47",
+    "doors": 2,
+    "drawers": 0,
+    "accent": "#F4C7D3"
+  },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.02,
+    "maxOpaqueRatio": 0.85
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 3000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/prop_wardrobe_zila/<version>/",
+  "artRequest": "docs/art-requests/004-batch-b-furniture.md"
+}

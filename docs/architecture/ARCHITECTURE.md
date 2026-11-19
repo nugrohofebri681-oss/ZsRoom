@@ -28,6 +28,11 @@
 | Surface props on measured host anchors (lamp on nightstand) | ✅ `src/world/room.ts` (`on:`), spec `surfaces[]` / `placement` |
 | Engine-rendered prop lights (glow + floor pool, toggle, saved) | ✅ `src/systems/lighting.ts` |
 | Engine cast shadows for floor props | ✅ RoomScene `drawPropShadow` |
+| Wall-mounted and floor-decal layers | ✅ `src/world/room.ts` (`wall: {x, z}`, spec `placement`) |
+| TEMP art at exact asset geometry (one texture per prop) | ✅ `src/ui/placeholders.ts`, `src/ui/shell.ts` |
+| Time of day, window sky, ambient tint, light boost | ✅ `src/interaction/actions.ts`, RoomScene |
+| Data-driven interactions: dialogue, rest, sit, outfit, toggles | ✅ spec `interactionAnchors[].action` |
+| Save v2 (world vars) with v1 migration | ✅ `src/systems/save.ts` |
 
 ## Planned (not built yet — do not assume they exist)
 Multi-floor interiors & stairs (M2) · NPCs & schedules · dialogue · inventory · outfits (layered character rig) · time of day & weather (lighting overlays, engine-rendered cast shadows) · memory/photo features · Tiled map import (room JSON stays the runtime format; Tiled becomes an authoring source) · texture atlases · physical-device performance validation.

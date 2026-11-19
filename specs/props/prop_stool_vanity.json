@@ -1,0 +1,109 @@
+{
+  "id": "prop_stool_vanity",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Vanity Stool",
+  "batch": "B",
+  "density": 2,
+  "canvas": {
+    "width": 128,
+    "height": 192
+  },
+  "pivot": {
+    "x": 64,
+    "y": 168,
+    "meaning": "front-centre floor contact point of the footprint"
+  },
+  "footprint": {
+    "widthCm": 40,
+    "depthCm": 40
+  },
+  "heightsCm": {
+    "seat": 45,
+    "top": 45
+  },
+  "artBounds": {
+    "x": 16,
+    "y": 14,
+    "width": 96,
+    "height": 162
+  },
+  "baseLine": {
+    "y": 168,
+    "tolerancePx": 8
+  },
+  "maxSideOverhangCm": 2,
+  "collision": [
+    {
+      "x": -20.0,
+      "y": -40,
+      "w": 40,
+      "h": 40
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [
+    {
+      "id": "sit",
+      "label": "Sit at the vanity",
+      "x": 0,
+      "y": 30,
+      "facing": "N",
+      "radiusCm": 26,
+      "action": {
+        "type": "sit",
+        "seat": {
+          "x": 0,
+          "y": -20
+        },
+        "heightCm": 45,
+        "facing": "N"
+      }
+    }
+  ],
+  "temp": {
+    "shape": "round",
+    "body": "#E8A0B4",
+    "top": "#F4C7D3",
+    "legs": "#8A5A3C"
+  },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.02,
+    "maxOpaqueRatio": 0.85
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 3000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/prop_stool_vanity/<version>/",
+  "artRequest": "docs/art-requests/004-batch-b-furniture.md",
+  "profile": [
+    {
+      "part": "base",
+      "fromCm": 0,
+      "toCm": 36,
+      "diameterCm": 34,
+      "topDiameterCm": 36
+    },
+    {
+      "part": "body",
+      "fromCm": 36,
+      "toCm": 45,
+      "diameterCm": 40
+    }
+  ]
+}

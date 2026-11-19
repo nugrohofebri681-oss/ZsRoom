@@ -1,8 +1,21 @@
 export interface Rect { x: number; y: number; w: number; h: number }
 
+/** Data-driven interaction behaviour (src/interaction/actions.ts). */
+export type ActionSpec =
+  | { type: 'message'; lines: string[] }
+  | { type: 'rest' }
+  | { type: 'outfit' }
+  | { type: 'toggleLight' }
+  | { type: 'toggleVar'; var: string; messages?: Record<string, string> }
+  | { type: 'sit'; seat: { x: number; y: number }; heightCm: number; facing: string };
+
 export interface InteractionAnchorSpec {
   id: string; label: string; x: number; y: number; facing: string; radiusCm: number;
+  action?: ActionSpec;
 }
+
+/** Temporary in-engine artwork drawn from the spec until approved art exists (src/ui/placeholders.ts). */
+export interface TempArtSpec { shape: string; [key: string]: unknown }
 
 export interface SurfaceAnchorSpec { id: string; x: number; y: number; z: number; canvas?: { x: number; y: number } }
 export interface SurfaceSpec {
@@ -29,7 +42,14 @@ export interface PropSpec {
   occluder: boolean;
   interactionAnchors: InteractionAnchorSpec[];
   surfaces?: SurfaceSpec[];
-  placement?: { type: 'surface'; hostAsset: string; surface: string; anchor: string };
+  placement?:
+    | { type: 'surface'; hostAsset: string; surface: string; anchor: string }
+    | { type: 'wall'; wall: 'north' }
+    | { type: 'floor' };
+  batch?: string;
+  temp?: TempArtSpec;
+  maxSideOverhangCm?: number;
+  glass?: { x: number; z: number; w: number; h: number };
   light?: LightSpec;
 }
 
@@ -39,6 +59,7 @@ export interface LightSpec {
   color: string;
   radiusCm: number;
   intensity: number;                               // 0..1 alpha of the room pool
+  coreSizeCm?: number;                             // bright core diameter at the emitter (0 = none, e.g. light strings)
   defaultOn: boolean;
 }
 

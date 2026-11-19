@@ -26,14 +26,21 @@ export interface RoomData {
  * (`on`), e.g. a lamp on the nightstand. Instance ids let other entries refer to a prop.
  */
 export type RoomPropEntry =
-  | { assetId: string; id?: string; x: number; y: number; on?: undefined }
-  | { assetId: string; id?: string; on: { prop: string; surface: string; anchor: string }; x?: undefined; y?: undefined };
+  | { assetId: string; id?: string; x: number; y: number; on?: undefined; wall?: undefined }
+  | { assetId: string; id?: string; on: { prop: string; surface: string; anchor: string }; x?: undefined; y?: undefined; wall?: undefined }
+  | { assetId: string; id?: string; wall: { x: number; z: number }; x?: undefined; y?: undefined; on?: undefined };
+
+/** Render layer of a prop instance. */
+export type PropLayer = 'floor' | 'surface' | 'wall' | 'decal';
+/** Floor decals (rugs) draw above the floor shell and engine shadows' floor, below everything standing. */
+export const DECAL_DEPTH = -60000;
 
 export interface PropInstance {
   key: string; spec: PropSpec;
   x: number; y: number;          // ground position (cm)
   z: number;                     // height above floor (0 for floor props; measured surface height for surface props)
   hostKey?: string;
+  layer: PropLayer;
   sortable: SortableProp;
 }
 
@@ -109,21 +116,36 @@ export function compileRoom(data: RoomData): CompiledRoom {
       const surface = host.spec.surfaces?.find((s) => s.id === p.on!.surface);
       const anchor = surface?.anchors.find((a) => a.id === p.on!.anchor);
       if (!surface || !anchor) throw new Error(`${data.id}: ${host.key} has no surface anchor ${p.on.surface}/${p.on.anchor}`);
-      if (spec.placement && spec.placement.hostAsset !== host.spec.id) throw new Error(`${key} must be placed on ${spec.placement.hostAsset}, not ${host.spec.id}`);
+      if (spec.placement?.type === 'surface' && spec.placement.hostAsset !== host.spec.id) throw new Error(`${key} must be placed on ${spec.placement.hostAsset}, not ${host.spec.id}`);
       const x = host.x + anchor.x, y = host.y + anchor.y, z = anchor.z;
       const footprint: Rect = { x: x - spec.footprint.widthCm / 2, y: y - spec.footprint.depthCm / 2, w: spec.footprint.widthCm, h: spec.footprint.depthCm };
       const top = groundToRender(x, y, z + propTopCm(spec)).y;
       const base = groundToRender(x, y, z).y;
       inst = {
-        key, spec, x, y, z, hostKey: host.key,
+        key, spec, x, y, z, hostKey: host.key, layer: 'surface',
         // Sorts with its host: just above it, so anything in front of the host is also in front of the prop.
         sortable: { id: key, pivotY: host.y + SURFACE_DEPTH_EPSILON, footprint, renderBounds: { x: x - spec.footprint.widthCm / 2 - 4, y: top, w: spec.footprint.widthCm + 8, h: base - top }, occluder: spec.occluder },
       };
       // Surface props never add floor collision.
+    } else if (p.wall) {
+      if (spec.placement?.type !== 'wall') throw new Error(`${data.id}: ${key} is not a wall-mounted asset`);
+      // Wall items: pivot = bottom-centre of the front face, i.e. ground y = protrusion depth, z = mount height.
+      const x = p.wall.x, y = spec.footprint.depthCm, z = p.wall.z;
+      const footprint: Rect = { x: x - spec.footprint.widthCm / 2, y: 0, w: spec.footprint.widthCm, h: y };
+      const top = groundToRender(x, 0, z + propTopCm(spec)).y;
+      inst = { key, spec, x, y, z, layer: 'wall', sortable: { id: key, pivotY: y, footprint, renderBounds: { x: footprint.x, y: top, w: footprint.w, h: groundToRender(x, y, z).y - top }, occluder: false } };
     } else {
-      const footprint: Rect = { x: p.x - spec.footprint.widthCm / 2, y: p.y - spec.footprint.depthCm, w: spec.footprint.widthCm, h: spec.footprint.depthCm };
-      for (const c of spec.collision) solids.push({ x: p.x + c.x, y: p.y + c.y, w: c.w, h: c.h });
-      inst = { key, spec, x: p.x, y: p.y, z: 0, sortable: { id: key, pivotY: p.y, footprint, renderBounds: propVolumeRenderBounds(spec, p.x, p.y), occluder: spec.occluder } };
+      if (p.x === undefined || p.y === undefined) throw new Error(`${data.id}: ${key} needs x/y, on, or wall placement`);
+      if (spec.placement?.type === 'wall' || spec.placement?.type === 'surface') throw new Error(`${data.id}: ${key} needs ${spec.placement.type} placement`);
+      if (spec.placement?.type === 'floor') {
+        // Floor decal (rug): pivot = centre; no collision; always below standing things.
+        const footprint: Rect = { x: p.x - spec.footprint.widthCm / 2, y: p.y - spec.footprint.depthCm / 2, w: spec.footprint.widthCm, h: spec.footprint.depthCm };
+        inst = { key, spec, x: p.x, y: p.y, z: 0, layer: 'decal', sortable: { id: key, pivotY: DECAL_DEPTH, footprint, renderBounds: { x: 0, y: 0, w: 0, h: 0 }, occluder: false } };
+      } else {
+        const footprint: Rect = { x: p.x - spec.footprint.widthCm / 2, y: p.y - spec.footprint.depthCm, w: spec.footprint.widthCm, h: spec.footprint.depthCm };
+        for (const c of spec.collision) solids.push({ x: p.x + c.x, y: p.y + c.y, w: c.w, h: c.h });
+        inst = { key, spec, x: p.x, y: p.y, z: 0, layer: 'floor', sortable: { id: key, pivotY: p.y, footprint, renderBounds: propVolumeRenderBounds(spec, p.x, p.y), occluder: spec.occluder } };
+      }
     }
     props.push(inst);
     if (p.id) byId.set(p.id, inst);
@@ -132,7 +154,8 @@ export function compileRoom(data: RoomData): CompiledRoom {
   const anchors: WorldAnchor[] = [];
   for (const p of props) {
     for (const a of p.spec.interactionAnchors) {
-      anchors.push({ key: `${p.key}:${a.id}`, ownerId: p.key, label: a.label, x: p.x + a.x, y: p.y + a.y, radiusCm: a.radiusCm, kind: 'prop', payload: { anchorId: a.id } });
+      const ay = p.layer === 'wall' ? a.y : p.y + a.y; // wall-item anchors are measured from the wall plane
+      anchors.push({ key: `${p.key}:${a.id}`, ownerId: p.key, label: a.label, x: p.x + a.x, y: ay, radiusCm: a.radiusCm, kind: 'prop', payload: { anchorId: a.id, action: a.action } });
     }
   }
   for (const d of data.doors) {

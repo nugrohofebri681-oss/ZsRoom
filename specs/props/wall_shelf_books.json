@@ -1,0 +1,70 @@
+{
+  "id": "wall_shelf_books",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "room": "zila_bedroom",
+  "displayName": "Wall Shelf with Books",
+  "batch": "C",
+  "density": 2,
+  "canvas": {
+    "width": 224,
+    "height": 144
+  },
+  "pivot": {
+    "x": 112,
+    "y": 128,
+    "meaning": "bottom-centre of the FRONT face (wall item); mounted at height z on the north wall"
+  },
+  "footprint": {
+    "widthCm": 90,
+    "depthCm": 24
+  },
+  "heightsCm": {
+    "top": 36
+  },
+  "artBounds": {
+    "x": 18,
+    "y": 18,
+    "width": 188,
+    "height": 113
+  },
+  "baseLine": {
+    "y": 128,
+    "tolerancePx": 8
+  },
+  "maxSideOverhangCm": 0,
+  "collision": [],
+  "placement": {
+    "type": "wall",
+    "wall": "north"
+  },
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "temp": {
+    "shape": "shelf",
+    "wood": "#8A5A3C"
+  },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.02,
+    "maxOpaqueRatio": 0.85
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight (unpremultiplied)",
+    "maxBytes": 3000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/wall_shelf_books/<version>/",
+  "artRequest": "docs/art-requests/005-batch-c-soft-wall.md"
+}

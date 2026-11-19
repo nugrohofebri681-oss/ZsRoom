@@ -101,6 +101,24 @@ test.describe('sprint: tap-to-move, camera, lighting, tiles, animation', () => {
     for (const t of tiles) { expect(t.seam).toBeLessThan(14); expect(t.w * t.h).toBeLessThan(260 * 560); }
   });
 
+  test('shell tiles end exactly at the room edges at both SD and HD density', async ({ page }) => {
+    await boot(page);
+    const r = await page.evaluate(() => {
+      const sc = (window as any).__ZS_GAME.scene.getScene('Room');
+      const tiles = sc.children.list.filter((o: any) => o.name === 'shell-tile');
+      let maxX = -1e9, maxY = -1e9, minY = 1e9;
+      for (const t of tiles) {
+        const w = (t.isCropped ? t._crop.width : t.frame.width) * t.scaleX, h = (t.isCropped ? t._crop.height : t.frame.height) * t.scaleY;
+        maxX = Math.max(maxX, t.x + w); maxY = Math.max(maxY, t.y + h); minY = Math.min(minY, t.y);
+      }
+      return { n: tiles.length, maxX, maxY, minY, density: tiles[0]?.scaleX };
+    });
+    expect(r.n).toBeGreaterThan(10);
+    expect(r.maxX).toBeCloseTo(720, 0);           // room width (cm)
+    expect(r.maxY).toBeCloseTo(480 * 0.7, 0);     // projected floor depth
+    expect(r.minY).toBeCloseTo(-270, 0);          // wall height
+  });
+
   test('mobile: pinch zooms, E button shows the action, compact badge', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'mobile');
     await boot(page);

@@ -24,10 +24,10 @@ export function buildShell(scene: Phaser.Scene, room: RoomData, manifest: AssetM
   const wallTile = resolveTile(scene, getEnvironmentSpec(ids.wall), manifest, room, density);
   const floorTile = resolveTile(scene, getEnvironmentSpec(ids.floor), manifest, room, density);
 
-  // Tiles are laid as plain quads in one Blitter each (single batched draw, cheapest fragment path on
-  // mobile GPUs: no repeat shader). Edge tiles use cropped texture frames, so nothing spills outside.
-  tileBlit(scene, wallTile.key, wallTile.w, wallTile.h, 0, -wallH, w, wallH, wallH / wallTile.h);
-  tileBlit(scene, floorTile.key, floorTile.w, floorTile.h, 0, 0, w, floorH, 1 / floorTile.density);
+  // Tiles are laid as plain quads (batched into one draw, cheapest fragment path on mobile GPUs: no
+  // repeat shader). Edge tiles are cropped, so nothing spills outside the room.
+  tileQuads(scene, wallTile.key, wallTile.w, wallTile.h, 0, -wallH, w, wallH, wallH / wallTile.h);
+  tileQuads(scene, floorTile.key, floorTile.w, floorTile.h, 0, 0, w, floorH, 1 / floorTile.density);
 
   const g = scene.add.graphics().setDepth(-99990);
   // ambient occlusion where the floor meets the walls
@@ -52,23 +52,23 @@ export function buildShell(scene: Phaser.Scene, room: RoomData, manifest: AssetM
   return { floor: { id: ids.floor, art: floorTile.art }, wall: { id: ids.wall, art: wallTile.art } };
 }
 
-/** Fill a w×h render-unit rectangle with a tile texture using a Blitter (one draw call). */
-function tileBlit(scene: Phaser.Scene, key: string, tw: number, th: number, x: number, y: number, w: number, h: number, scale: number): Phaser.GameObjects.Blitter {
-  const tex = scene.textures.get(key);
+/**
+ * Fill a w×h render-unit rectangle with tile quads. Plain Images sharing one texture are batched by the
+ * renderer into a single draw; edge tiles are cropped so nothing spills past the room.
+ * (Not a Blitter: Phaser 4's Blitter ignores the object's scale when rendering, which broke HD tiles.)
+ */
+function tileQuads(scene: Phaser.Scene, key: string, tw: number, th: number, x: number, y: number, w: number, h: number, scale: number): number {
   const wPx = w / scale, hPx = h / scale;
-  const frame = (fw: number, fh: number) => {
-    const name = `crop:${Math.ceil(fw)}x${Math.ceil(fh)}`;
-    if (!tex.has(name)) tex.add(name, 0, 0, 0, Math.ceil(fw), Math.ceil(fh));
-    return name;
-  };
-  const blit = scene.add.blitter(x, y, key).setScale(scale).setDepth(-100000);
+  let n = 0;
   for (let py = 0; py < hPx - 0.01; py += th) {
     for (let px = 0; px < wPx - 0.01; px += tw) {
+      const img = scene.add.image(x + px * scale, y + py * scale, key).setOrigin(0, 0).setScale(scale).setDepth(-100000).setName('shell-tile');
       const fw = Math.min(tw, wPx - px), fh = Math.min(th, hPx - py);
-      blit.create(px, py, fw === tw && fh === th ? undefined : frame(fw, fh));
+      if (fw < tw || fh < th) img.setCrop(0, 0, Math.ceil(fw), Math.ceil(fh));
+      n++;
     }
   }
-  return blit;
+  return n;
 }
 
 interface TileTex { key: string; art: 'approved' | 'temp'; w: number; h: number; density: number }

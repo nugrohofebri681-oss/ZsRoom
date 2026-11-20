@@ -58,3 +58,22 @@ The runtime WebP for all 20 assets total **716 KB (HD) / 256 KB (SD)**, far insi
 1. Merge **PR #13**, then **this review branch**: engine, spec and test changes only, including the pouf's measured seat.
 2. Take **only** the approved assets' files from PR #14 / #15 (`art/submissions/<id>/v001` plus sources) and run `approve-asset` for each. Record a geometry exception for the window (pivot at hem), shelf, photos, tall plant, cat bed, pouf (front 57 px; seat measured 30 cm) and small plant.
 3. Full QA → staging branch with CI green on the exact commit → fast-forward `reboot/foundation`. `main` and Pages are never touched.
+
+## Creative Director decision
+**VISUAL PASS for all ten v001 assets**, recorded in the PR #14 (Batch C) and PR #15 (Batch D) comments on 2026-11-20. Integration was authorized by the World 01 Continuation directive after PRs #13 → #16 → #17 were merged.
+- Integrated by copying **only** `art/submissions/<id>/v001` and `art/source/<id>/v001` for the ten assets. Neither art PR was merged wholesale.
+- Master and source SHA-256 values were verified against each `metadata.json` before approval (10/10 masters, 30/30 candidates).
+- Each geometry exception is recorded **per asset** in the manifest (`approval.geometryException`). None is an Art Bible-wide override.
+
+| Asset | Version | Exception recorded |
+|---|---|---|
+| `wall_window_bedroom` | v001 | Pivot at the curtain hem (+10 cm sill); painted frame 120 vs 140 cm wide |
+| `decal_rug_zila` | v001 | — |
+| `wall_shelf_books` | v001 | Shallow top plane (no surface prop placed on it) |
+| `wall_photos_string` | v001 | Shorter painted height |
+| `wall_fairy_lights` | v001 | — (32 unlit bulbs; per-bulb glow from the engine) |
+| `wall_neon_goodvibes` | v001 | — (unlit tubes; the engine lights them) |
+| `prop_plant_tall_zila` | v001 | Shallow pot top plane |
+| `prop_catbed_mochi` | v001 | Low plush rim (front wall) |
+| `prop_pouf_floor` | v001 | Front body height; **seat measured at 30 cm** (re-check the sit pose with the final character art) |
+| `prop_plant_small` | v001 | Shallow pot top plane; repositioned beside the door |

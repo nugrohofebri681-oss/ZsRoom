@@ -9,14 +9,12 @@ Legend: ✅ done · 🟡 in progress or requested · ⏳ blocked by a dependency
 
 ## Group A — Bedside set ✅ (bed v001, nightstand v001, lamp v002)
 ## Group B — Work & dress furniture ✅ (wardrobe v001, desk v002 + laptop v001 + mug v001, chair v002, vanity v002, stool v002)
-**10 approved assets in the bedroom.**
+**20 approved assets in the bedroom** (only the two shell tiles remain TEMP).
 
-## Group C — Soft furnishings & wall → [Request 005](../art-requests/005-batch-c-soft-wall.md) — **NEXT (highest visual impact: window, rug and wall cover the largest screen area)**
-window + curtains · rug · wall shelf · photo string · fairy lights · neon sign — 🟡 **v001 submitted (PR #14), in-game review done: all six recommended for acceptance** ([review](../reviews/batch-cd-r1.md)); awaiting CD VISUAL PASS. Engine: per-bulb glow, self-lit neon, curtains behind the frame. Engine support done (wall layer, decal layer, sky behind glass, lights).
-⬜ Follow-up: a closed-curtains art state for the window (the engine currently draws simple closed curtains).
+## Group C — Soft furnishings & wall ✅ (window, rug, shelf, photo string, fairy lights, neon — v001, CD VISUAL PASS, integrated with per-asset exceptions; [review](../reviews/batch-cd-r1.md))
+⬜ Follow-up: a painted closed-curtains state for the window (the engine draws curtains behind the frame meanwhile).
 
-## Group D — Living details → [Request 006](../art-requests/006-batch-d-living-details.md) — **NEXT, in parallel with C** (independent assets, separate branch)
-tall plant · cat bed with sleeping cat · pouf · small plant — 🟡 **v001 submitted (PR #15), all four recommended for acceptance**; pouf seat measured at 30 cm; small plant moved beside the door. Awaiting CD VISUAL PASS.
+## Group D — Living details ✅ (tall plant, cat bed Mochi, pouf with measured 30 cm seat, small plant — v001, CD VISUAL PASS, integrated)
 
 ## Group E — Room shell (environment art) → [Request 007](../art-requests/007-batch-e-room-shell.md)
 - Engine ✅: tile shell (Blitter quads, edge-cropped frames, runtime density), spec type `environment`, seamless-edge check in `validate-art`, and the same render path for TEMP and approved tiles.

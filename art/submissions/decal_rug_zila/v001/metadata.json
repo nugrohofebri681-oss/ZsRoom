@@ -1,0 +1,179 @@
+{
+  "assetId": "decal_rug_zila",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "batch": "C",
+  "createdAt": "2026-11-20T07:07:57.528075+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/decal_rug_zila_template.png",
+      "art-bible/perspective/projection_cube.png",
+      "art/submissions/wall_window_bedroom/v001/wall_window_bedroom_v001.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "decal_rug_zila_v001.png",
+      "sha256": "cf53ddfb3c1f8adf8af0c643c2dbd6cffe0423e7916e91566ce80238c03b9bb3"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/decal_rug_zila/v001/candidate-a.png",
+        "sha256": "e6d1b54c996314735ad1baabcce350d681f9a7dce459a86c89303f5df6aee500"
+      },
+      {
+        "path": "art/source/decal_rug_zila/v001/candidate-b.png",
+        "sha256": "a85ee1defd4ff3cffe3893f49a3a9b82be7ec9efbdc6e8f038fc3d263ddf3cf5"
+      },
+      {
+        "path": "art/source/decal_rug_zila/v001/candidate-c.png",
+        "sha256": "180ad86935a52ebb50050f0aae488afd626ab50f0a164712056e9c3afc9952f3"
+      }
+    ]
+  },
+  "provenance": "Three original built-in imagegen outputs, preserved byte-identical. No paid services, stock art or private user imagery. Exact prompts and conditioning inputs in prompt.md.",
+  "postProcessing": [
+    "Official fitter attempted and fails TypeError reading spec.baseLine.y; spec intentionally has centre pivot.",
+    "One-off equivalent alpha normalization and trim; uniform Lanczos3 width520 resulting height236; composite at20,26 on560x288 transparent canvas, sRGB. No repainting, nonuniform scaling or official code/spec modifications."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Painted extent520x236 centred280,144, top26/bottom261. Nominal projected depth252px is16px greater. Border remains subtly shaded but no sidewall/cast shadow. Fitter fails on missing baseLine for centre-pivot spec; equivalent uniform trim/resize/centre fallback documented in prompt.md, no official script changed.",
+      "Pending Creative Director visual review; static artwork only, not integrated or gameplay tested."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services.",
+  "notes": {
+    "batch": "C",
+    "selectedCandidate": "C",
+    "baseCommit": "7e3706dde9a79ee9fd5274e3e72b0b5989f24604",
+    "candidateComparison": "A: raised-looking border; B: regular hearts and double border; C selected: quieter scattered petals and flat single border."
+  },
+  "validation": {
+    "status": "TECHNICAL PASS",
+    "checksPassed": 22,
+    "checksTotal": 22,
+    "checks": [
+      {
+        "name": "asset id format",
+        "pass": true,
+        "detail": "decal_rug_zila"
+      },
+      {
+        "name": "version format (v###)",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "spec exists",
+        "pass": true,
+        "detail": "specs/props/decal_rug_zila.json"
+      },
+      {
+        "name": "master file present",
+        "pass": true,
+        "detail": "decal_rug_zila_v001.png"
+      },
+      {
+        "name": "metadata.json present",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "only png/webp/json/md files",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata schema",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata.assetId matches folder",
+        "pass": true,
+        "detail": "decal_rug_zila"
+      },
+      {
+        "name": "metadata.version matches folder",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "metadata.specVersion matches spec",
+        "pass": true,
+        "detail": "1.0.0 vs 1.0.0"
+      },
+      {
+        "name": "createdAt is a date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "master sha256 matches metadata",
+        "pass": true,
+        "detail": "cf53ddfb3c1f8adf8af0c643c2dbd6cffe0423e7916e91566ce80238c03b9bb3"
+      },
+      {
+        "name": "format PNG",
+        "pass": true,
+        "detail": "png"
+      },
+      {
+        "name": "canvas size",
+        "pass": true,
+        "detail": "560x288, expected 560x288"
+      },
+      {
+        "name": "RGBA (alpha channel)",
+        "pass": true,
+        "detail": "4 channels"
+      },
+      {
+        "name": "8-bit depth",
+        "pass": true,
+        "detail": "uchar"
+      },
+      {
+        "name": "sRGB colour space",
+        "pass": true,
+        "detail": "srgb"
+      },
+      {
+        "name": "file size",
+        "pass": true,
+        "detail": "205022 bytes (max 3000000)"
+      },
+      {
+        "name": "transparent edge padding",
+        "pass": true,
+        "detail": "0 non-transparent px within 8px of the edge"
+      },
+      {
+        "name": "opaque coverage \u2265 min",
+        "pass": true,
+        "detail": "0.748"
+      },
+      {
+        "name": "opaque coverage \u2264 max (no baked background)",
+        "pass": true,
+        "detail": "0.748"
+      },
+      {
+        "name": "art inside artBounds",
+        "pass": true,
+        "detail": "bbox 20,26 520x236; allowed 10,10 540x268"
+      }
+    ],
+    "warnings": [],
+    "gallery": "Official npm run gallery inspected in Chromium: native, SD, light, dark, checker, bed/nightstand at same world scale.",
+    "visualApproval": "Pending Creative Director",
+    "integration": "Not performed"
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "assetId": "prop_plant_small",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "batch": "D",
+  "createdAt": "2026-11-20T07:07:57.677980+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/prop_plant_small_template.png",
+      "art-bible/perspective/projection_cube.png",
+      "art/submissions/prop_plant_tall_zila/v001/prop_plant_tall_zila_v001.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "prop_plant_small_v001.png",
+      "sha256": "f2fc74dff26480c972d05e841b213c29edf72c8a82b18a5913419babc2664741"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_plant_small/v001/candidate-a.png",
+        "sha256": "fead625701ad2656644da1625819293a5a27669acf8d1d2976419218f9863096"
+      },
+      {
+        "path": "art/source/prop_plant_small/v001/candidate-b.png",
+        "sha256": "f341bab3c99b05f3d787a14893564167a4e7b8f3af6ce211813a2eec8604d761"
+      },
+      {
+        "path": "art/source/prop_plant_small/v001/candidate-c.png",
+        "sha256": "3d09a4fd4c7c3b491c37c1885dd7109ee56122938cd77936352c5d67ed2c92ce"
+      }
+    ]
+  },
+  "provenance": "Three original built-in imagegen outputs, preserved byte-identical. No paid services, stock art or private user imagery. Exact prompts and conditioning inputs in prompt.md.",
+  "postProcessing": [
+    "Official fitter: native alpha trim, snap alpha<=8 to0 and >=250 to255, uniform Lanczos3 resize, pivot placement, sRGB. Raw originals untouched.",
+    "node scripts/fit-to-spec.mjs art/source/prop_plant_small/v001/candidate-c.png prop_plant_small art/submissions/prop_plant_small/v001/prop_plant_small_v001.png"
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Top61/base200; pot rim back~127/front highlight~145, base200. Front55px vs60px target within6px tolerance; depth18px versus49px FAIL. Potwidth~77px vs70px nominal, foliage102px vs100px. Base centre~72 at pivot. Leaves obscure rear rim; deeper perspective still needed.",
+      "Pending Creative Director visual review; static artwork only, not integrated or gameplay tested."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services.",
+  "notes": {
+    "batch": "D",
+    "selectedCandidate": "C",
+    "baseCommit": "7e3706dde9a79ee9fd5274e3e72b0b5989f24604",
+    "candidateComparison": "A: broad heart leaves but tall foliage; B: oval leaves and tree-like silhouette; C selected: compact heart leaves, larger pot and cleaner clusters."
+  },
+  "validation": {
+    "status": "TECHNICAL PASS",
+    "checksPassed": 23,
+    "checksTotal": 23,
+    "checks": [
+      {
+        "name": "asset id format",
+        "pass": true,
+        "detail": "prop_plant_small"
+      },
+      {
+        "name": "version format (v###)",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "spec exists",
+        "pass": true,
+        "detail": "specs/props/prop_plant_small.json"
+      },
+      {
+        "name": "master file present",
+        "pass": true,
+        "detail": "prop_plant_small_v001.png"
+      },
+      {
+        "name": "metadata.json present",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "only png/webp/json/md files",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata schema",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata.assetId matches folder",
+        "pass": true,
+        "detail": "prop_plant_small"
+      },
+      {
+        "name": "metadata.version matches folder",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "metadata.specVersion matches spec",
+        "pass": true,
+        "detail": "1.0.0 vs 1.0.0"
+      },
+      {
+        "name": "createdAt is a date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "master sha256 matches metadata",
+        "pass": true,
+        "detail": "f2fc74dff26480c972d05e841b213c29edf72c8a82b18a5913419babc2664741"
+      },
+      {
+        "name": "format PNG",
+        "pass": true,
+        "detail": "png"
+      },
+      {
+        "name": "canvas size",
+        "pass": true,
+        "detail": "144x224, expected 144x224"
+      },
+      {
+        "name": "RGBA (alpha channel)",
+        "pass": true,
+        "detail": "4 channels"
+      },
+      {
+        "name": "8-bit depth",
+        "pass": true,
+        "detail": "uchar"
+      },
+      {
+        "name": "sRGB colour space",
+        "pass": true,
+        "detail": "srgb"
+      },
+      {
+        "name": "file size",
+        "pass": true,
+        "detail": "29785 bytes (max 3000000)"
+      },
+      {
+        "name": "transparent edge padding",
+        "pass": true,
+        "detail": "0 non-transparent px within 8px of the edge"
+      },
+      {
+        "name": "opaque coverage \u2265 min",
+        "pass": true,
+        "detail": "0.322"
+      },
+      {
+        "name": "opaque coverage \u2264 max (no baked background)",
+        "pass": true,
+        "detail": "0.322"
+      },
+      {
+        "name": "art inside artBounds",
+        "pass": true,
+        "detail": "bbox 21,61 102x140; allowed 17,23 110x185"
+      },
+      {
+        "name": "base sits on pivot line",
+        "pass": true,
+        "detail": "lowest solid row 200, expected 200\u00b18"
+      }
+    ],
+    "warnings": [],
+    "gallery": "Official npm run gallery inspected in Chromium: native, SD, light, dark, checker, bed/nightstand at same world scale.",
+    "visualApproval": "Pending Creative Director",
+    "integration": "Not performed"
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "assetId": "prop_pouf_floor",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "batch": "D",
+  "createdAt": "2026-11-20T07:07:57.661002+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/prop_pouf_floor_template.png",
+      "art-bible/perspective/projection_cube.png",
+      "art/submissions/prop_plant_tall_zila/v001/prop_plant_tall_zila_v001.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "prop_pouf_floor_v001.png",
+      "sha256": "c7b68fdb4ef6962559704e6e603bfc92c14ef4b79d628cf83034ffcd6e45a487"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_pouf_floor/v001/candidate-a.png",
+        "sha256": "413e873585ad390cd22e2a99519493febe3fd4c8351b2043045398b9a19451c8"
+      },
+      {
+        "path": "art/source/prop_pouf_floor/v001/candidate-b.png",
+        "sha256": "5cad56c775a90b8886120555ff651eb26287d8f94109f18dc223c5b0d5ebac65"
+      },
+      {
+        "path": "art/source/prop_pouf_floor/v001/candidate-c.png",
+        "sha256": "292a85ada9c9665a02e67ec5aa5988465a97090a7483be68cab108ddd4570cf8"
+      }
+    ]
+  },
+  "provenance": "Three original built-in imagegen outputs, preserved byte-identical. No paid services, stock art or private user imagery. Exact prompts and conditioning inputs in prompt.md.",
+  "postProcessing": [
+    "Official fitter: native alpha trim, snap alpha<=8 to0 and >=250 to255, uniform Lanczos3 resize, pivot placement, sRGB. Raw originals untouched.",
+    "node scripts/fit-to-spec.mjs art/source/prop_pouf_floor/v001/candidate-c.png prop_pouf_floor art/submissions/prop_pouf_floor/v001/prop_pouf_floor_v001.png"
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Top~39/base168; seat front highlight~111, back~40. Top depth~71px versus70px passes. Frontbody~57px versus76px target FAIL. Knit/curved rim makes measurement approximate\u00b13px. Seat centre~76px vs nominal57px: seating anchor not yet visually aligned. Do not integrate for seated interaction without correction.",
+      "Pending Creative Director visual review; static artwork only, not integrated or gameplay tested."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services.",
+  "notes": {
+    "batch": "D",
+    "selectedCandidate": "C",
+    "baseCommit": "7e3706dde9a79ee9fd5274e3e72b0b5989f24604",
+    "candidateComparison": "A: chunky cable stitches but shallow seat; B: finer regular knitting and taller body; C selected: deepest seat plane and large readable stitches."
+  },
+  "validation": {
+    "status": "TECHNICAL PASS",
+    "checksPassed": 23,
+    "checksTotal": 23,
+    "checks": [
+      {
+        "name": "asset id format",
+        "pass": true,
+        "detail": "prop_pouf_floor"
+      },
+      {
+        "name": "version format (v###)",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "spec exists",
+        "pass": true,
+        "detail": "specs/props/prop_pouf_floor.json"
+      },
+      {
+        "name": "master file present",
+        "pass": true,
+        "detail": "prop_pouf_floor_v001.png"
+      },
+      {
+        "name": "metadata.json present",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "only png/webp/json/md files",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata schema",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata.assetId matches folder",
+        "pass": true,
+        "detail": "prop_pouf_floor"
+      },
+      {
+        "name": "metadata.version matches folder",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "metadata.specVersion matches spec",
+        "pass": true,
+        "detail": "1.0.0 vs 1.0.0"
+      },
+      {
+        "name": "createdAt is a date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "master sha256 matches metadata",
+        "pass": true,
+        "detail": "c7b68fdb4ef6962559704e6e603bfc92c14ef4b79d628cf83034ffcd6e45a487"
+      },
+      {
+        "name": "format PNG",
+        "pass": true,
+        "detail": "png"
+      },
+      {
+        "name": "canvas size",
+        "pass": true,
+        "detail": "144x192, expected 144x192"
+      },
+      {
+        "name": "RGBA (alpha channel)",
+        "pass": true,
+        "detail": "4 channels"
+      },
+      {
+        "name": "8-bit depth",
+        "pass": true,
+        "detail": "uchar"
+      },
+      {
+        "name": "sRGB colour space",
+        "pass": true,
+        "detail": "srgb"
+      },
+      {
+        "name": "file size",
+        "pass": true,
+        "detail": "31552 bytes (max 3000000)"
+      },
+      {
+        "name": "transparent edge padding",
+        "pass": true,
+        "detail": "0 non-transparent px within 8px of the edge"
+      },
+      {
+        "name": "opaque coverage \u2265 min",
+        "pass": true,
+        "detail": "0.436"
+      },
+      {
+        "name": "opaque coverage \u2264 max (no baked background)",
+        "pass": true,
+        "detail": "0.436"
+      },
+      {
+        "name": "art inside artBounds",
+        "pass": true,
+        "detail": "bbox 18,39 108x130; allowed 14,14 116x162"
+      },
+      {
+        "name": "base sits on pivot line",
+        "pass": true,
+        "detail": "lowest solid row 168, expected 168\u00b18"
+      }
+    ],
+    "warnings": [],
+    "gallery": "Official npm run gallery inspected in Chromium: native, SD, light, dark, checker, bed/nightstand at same world scale.",
+    "visualApproval": "Pending Creative Director",
+    "integration": "Not performed"
+  }
+}

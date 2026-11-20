@@ -1,0 +1,184 @@
+{
+  "assetId": "prop_catbed_mochi",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "batch": "D",
+  "createdAt": "2026-11-20T07:07:57.640457+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/prop_catbed_mochi_template.png",
+      "art-bible/perspective/projection_cube.png",
+      "art/submissions/prop_plant_tall_zila/v001/prop_plant_tall_zila_v001.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "prop_catbed_mochi_v001.png",
+      "sha256": "244ecc507b71b57d308f35596b0e6796a446eb134859d735a52e22e84d2d5cf3"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_catbed_mochi/v001/candidate-a.png",
+        "sha256": "0ffbe0b48b1eef984be9a17766645ee195643c0046e4573170ed240b2a2f47c2"
+      },
+      {
+        "path": "art/source/prop_catbed_mochi/v001/candidate-b.png",
+        "sha256": "d8c248c8470aa880df728d282995e8ee6972b57ddb6cab094b05b1c5a7a21160"
+      },
+      {
+        "path": "art/source/prop_catbed_mochi/v001/candidate-c.png",
+        "sha256": "80e11d1f72be91b47fa30d3c8ef6ec995d512f5187504b37fcafd9ff89ea1bc2"
+      }
+    ]
+  },
+  "provenance": "Three original built-in imagegen outputs, preserved byte-identical. No paid services, stock art or private user imagery. Exact prompts and conditioning inputs in prompt.md.",
+  "postProcessing": [
+    "Official fitter: native alpha trim, snap alpha<=8 to0 and >=250 to255, uniform Lanczos3 resize, pivot placement, sRGB. Raw originals untouched.",
+    "node scripts/fit-to-spec.mjs art/source/prop_catbed_mochi/v001/candidate-c.png prop_catbed_mochi art/submissions/prop_catbed_mochi/v001/prop_catbed_mochi_v001.png"
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Top52/base152; rim back~54/front highlight~126. Projected top depth~72px versus70px target. Frontwall~26px versus44px target FAIL. Cat pillow and rim overlap anatomically plausibly; ears and closed eyes remain identifiable at SD, whiskers do not. Fur detail may still look more realistic than furniture.",
+      "Pending Creative Director visual review; static artwork only, not integrated or gameplay tested."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services.",
+  "notes": {
+    "batch": "D",
+    "selectedCandidate": "C",
+    "baseCommit": "7e3706dde9a79ee9fd5274e3e72b0b5989f24604",
+    "candidateComparison": "A: thicker plush rim; B: face right and thinner rim; C selected: largest clear sleeping face, medium rim and wrapped tail."
+  },
+  "validation": {
+    "status": "TECHNICAL PASS",
+    "checksPassed": 23,
+    "checksTotal": 23,
+    "checks": [
+      {
+        "name": "asset id format",
+        "pass": true,
+        "detail": "prop_catbed_mochi"
+      },
+      {
+        "name": "version format (v###)",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "spec exists",
+        "pass": true,
+        "detail": "specs/props/prop_catbed_mochi.json"
+      },
+      {
+        "name": "master file present",
+        "pass": true,
+        "detail": "prop_catbed_mochi_v001.png"
+      },
+      {
+        "name": "metadata.json present",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "only png/webp/json/md files",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata schema",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata.assetId matches folder",
+        "pass": true,
+        "detail": "prop_catbed_mochi"
+      },
+      {
+        "name": "metadata.version matches folder",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "metadata.specVersion matches spec",
+        "pass": true,
+        "detail": "1.0.0 vs 1.0.0"
+      },
+      {
+        "name": "createdAt is a date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "master sha256 matches metadata",
+        "pass": true,
+        "detail": "244ecc507b71b57d308f35596b0e6796a446eb134859d735a52e22e84d2d5cf3"
+      },
+      {
+        "name": "format PNG",
+        "pass": true,
+        "detail": "png"
+      },
+      {
+        "name": "canvas size",
+        "pass": true,
+        "detail": "160x176, expected 160x176"
+      },
+      {
+        "name": "RGBA (alpha channel)",
+        "pass": true,
+        "detail": "4 channels"
+      },
+      {
+        "name": "8-bit depth",
+        "pass": true,
+        "detail": "uchar"
+      },
+      {
+        "name": "sRGB colour space",
+        "pass": true,
+        "detail": "srgb"
+      },
+      {
+        "name": "file size",
+        "pass": true,
+        "detail": "29688 bytes (max 3000000)"
+      },
+      {
+        "name": "transparent edge padding",
+        "pass": true,
+        "detail": "0 non-transparent px within 8px of the edge"
+      },
+      {
+        "name": "opaque coverage \u2265 min",
+        "pass": true,
+        "detail": "0.385"
+      },
+      {
+        "name": "opaque coverage \u2264 max (no baked background)",
+        "pass": true,
+        "detail": "0.385"
+      },
+      {
+        "name": "art inside artBounds",
+        "pass": true,
+        "detail": "bbox 16,52 128x101; allowed 12,14 136x146"
+      },
+      {
+        "name": "base sits on pivot line",
+        "pass": true,
+        "detail": "lowest solid row 152, expected 152\u00b18"
+      }
+    ],
+    "warnings": [],
+    "gallery": "Official npm run gallery inspected in Chromium: native, SD, light, dark, checker, bed/nightstand at same world scale.",
+    "visualApproval": "Pending Creative Director",
+    "integration": "Not performed"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "assetId": "prop_desk_zila",
+  "version": "v002",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "batch": "B",
+  "createdAt": "2026-11-20T01:40:06.904430+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/submissions/prop_desk_zila/v001/prop_desk_zila_v001.png",
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art-bible/perspective/prop_desk_zila_template.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "art/source/prop_desk_zila/v002/candidate-b.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "prop_desk_zila_v002.png",
+      "sha256": "8f5f980314fc9ba59731ed3c2330645806651926d7c9c7861dcafe179867ee09"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_desk_zila/v002/candidate-a.png",
+        "sha256": "b03fcf689dbeff7d014427deddfdc0671ccce5495a77a9ce6debcd653b6b4894"
+      },
+      {
+        "path": "art/source/prop_desk_zila/v002/candidate-b.png",
+        "sha256": "733dec544ddc4653141b35ef46109a9550867f10c4f22cf32cac4cdfc62b587f"
+      },
+      {
+        "path": "art/source/prop_desk_zila/v002/candidate-c.png",
+        "sha256": "c4d9dd6e8873690d1166bf5c5c7430664c0a3e86e2c225a6e50bff7bfdb120df"
+      },
+      {
+        "path": "art/source/prop_desk_zila/v002/candidate-d.png",
+        "sha256": "85ed2bb97bfc68650384af35f50476aefd77826b9ddb4889c1cc0ff8beb7993b"
+      },
+      {
+        "path": "art/source/prop_desk_zila/v002/candidate-e.png",
+        "sha256": "fc571a271055b7de9470827227e8fb670f8f563407c6baa6c0c144308a6e6a1c"
+      }
+    ]
+  },
+  "provenance": "Original built-in generation and targeted edits; raw PNGs byte-identical to tool outputs. No stock or paid API. Full per-candidate references in prompt.md.",
+  "postProcessing": [
+    "Unmodified official fitter only: native-alpha trim, near-opaque alpha snap, uniform Lanczos3 resize, pivot/baseline placement, sRGB. No manual repainting/nonuniform warp.",
+    "node scripts/fit-to-spec.mjs art/source/prop_desk_zila/v002/candidate-e.png prop_desk_zila art/submissions/prop_desk_zila/v002/prop_desk_zila_v002.png"
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Estimated painted top back y27, front y118: depth91 vs84 target (within25%); front height146 vs150 (within10%). Floor264. Nominal target rows30/114. Estimates allow about2px edge ambiguity.",
+      "Top retains slight trapezoidal taper (~10px each side), contrary to strict parallel depth edges. No external side face, but projection is not mathematically exact. Review required; no automatic visual approval.",
+      "Clean empty desktop. No laptop/mug baked in. Static proposed laptop/mug anchors checked separately; integration remains Claude's task."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services.",
+  "notes": {
+    "batch": "B",
+    "selectedCandidate": "E",
+    "baseCommit": "06bb4593acc0456238b9a9a2be18084c7950e7a8",
+    "candidateComparison": "A: too squat. B: front height close but shallow top. C: wider/shorter with convergence. D: fully conditioned references but shallow top. E SELECTED: targeted B edit, deep top and near-square overall geometry; minor taper remains."
+  },
+  "referenceProvenance": [
+    {
+      "path": "art/submissions/prop_desk_zila/v001/prop_desk_zila_v001.png",
+      "branch": "codex/art/batch-b-r1",
+      "commit": "48bce5bd7304c705590c071d8322ba634d60ec07",
+      "sha256": "65dc9e34c8f62743c499c2306ec8b25bab222100c8778413fdc0d3b58d8b29e8"
+    }
+  ],
+  "validation": {
+    "status": "TECHNICAL PASS",
+    "checksPassed": 23,
+    "checksTotal": 23,
+    "command": "npm run validate:art",
+    "visualApproval": "pending Creative Director",
+    "gallery": "npm run gallery; actual Chromium inspection on light/dark/checker and same-scale bed/nightstand",
+    "integration": "Not performed; static host composition only"
+  }
+}

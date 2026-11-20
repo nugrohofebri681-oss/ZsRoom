@@ -78,19 +78,85 @@
       }
     },
     "prop_lamp_zila": {
-      "status": "requested",
+      "status": "approved",
       "spec": "specs/props/prop_lamp_zila.json",
-      "request": "docs/art-requests/003-prop_lamp_zila.md"
+      "request": "docs/art-requests/003-prop_lamp_zila.md",
+      "version": "v002",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_lamp_zila_v002@hd.webp",
+          "sha256": "a54f72b37d4d83e78c76c37ee91c61c1d3db01d84882b0db68a6ff7d1bf9bbb2",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_lamp_zila_v002@sd.webp",
+          "sha256": "8fa3a138a596a750c51b3b8dabb4effaf4391dfcbd8b693bab19befae30419ea",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-20T02:48:02.931Z",
+        "review": "docs/reviews/batch-b-r2-lamp-v002.md",
+        "master": {
+          "path": "art/approved/prop_lamp_zila/prop_lamp_zila_v002.png",
+          "sha256": "26f3411d0b49abd4efa1b6047184799814ba3488ac75ec3822d06abdacc8dc11"
+        }
+      }
     },
     "prop_desk_zila": {
-      "status": "requested",
+      "status": "approved",
       "spec": "specs/props/prop_desk_zila.json",
-      "request": "docs/art-requests/004-batch-b-furniture.md"
+      "request": "docs/art-requests/004-batch-b-furniture.md",
+      "version": "v002",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_desk_zila_v002@hd.webp",
+          "sha256": "f10585818e8fa1e0d38009944769c310fbdf96687329a451b51f14e79d955419",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_desk_zila_v002@sd.webp",
+          "sha256": "7728582f95e365f96f97ebe12bf6040b7056b202e050e8e6f1938d000704a3ee",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-20T02:48:03.372Z",
+        "review": "docs/reviews/batch-b-r2-lamp-v002.md",
+        "master": {
+          "path": "art/approved/prop_desk_zila/prop_desk_zila_v002.png",
+          "sha256": "8f5f980314fc9ba59731ed3c2330645806651926d7c9c7861dcafe179867ee09"
+        }
+      }
     },
     "prop_chair_desk": {
-      "status": "requested",
+      "status": "approved",
       "spec": "specs/props/prop_chair_desk.json",
-      "request": "docs/art-requests/004-batch-b-furniture.md"
+      "request": "docs/art-requests/004-batch-b-furniture.md",
+      "version": "v002",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_chair_desk_v002@hd.webp",
+          "sha256": "b141dbe668662b44dfe8aded3a9ab60664c7628a3d3e18a73df60afec956732f",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_chair_desk_v002@sd.webp",
+          "sha256": "ad2db65bdf1f34d2cc0f5fd66d5c1704535f5bd7e4f6230164d02ac71382bfeb",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-20T02:48:03.951Z",
+        "review": "docs/reviews/batch-b-r2-lamp-v002.md",
+        "master": {
+          "path": "art/approved/prop_chair_desk/prop_chair_desk_v002.png",
+          "sha256": "edf3cf3307c705d994914f8fa6a0354d529691e3e04f68c9fb443e303521bfe6"
+        }
+      }
     },
     "prop_wardrobe_zila": {
       "status": "approved",
@@ -134,14 +200,58 @@
       }
     },
     "prop_vanity_zila": {
-      "status": "requested",
+      "status": "approved",
       "spec": "specs/props/prop_vanity_zila.json",
-      "request": "docs/art-requests/004-batch-b-furniture.md"
+      "request": "docs/art-requests/004-batch-b-furniture.md",
+      "version": "v002",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_vanity_zila_v002@hd.webp",
+          "sha256": "a3d5c2b05537619535c5af0f44c49a9c25d8295133e46c269a05924c6aa8897e",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_vanity_zila_v002@sd.webp",
+          "sha256": "341bec77201efe708387f3154112049ae013401e582be5df55c48f0a191cd542",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-20T02:48:04.478Z",
+        "review": "docs/reviews/batch-b-r2-lamp-v002.md",
+        "master": {
+          "path": "art/approved/prop_vanity_zila/prop_vanity_zila_v002.png",
+          "sha256": "8fd6f800d8e1f2bc69a638c6940297417535844dcccd0bfda1d314ea6cb2220e"
+        }
+      }
     },
     "prop_stool_vanity": {
-      "status": "requested",
+      "status": "approved",
       "spec": "specs/props/prop_stool_vanity.json",
-      "request": "docs/art-requests/004-batch-b-furniture.md"
+      "request": "docs/art-requests/004-batch-b-furniture.md",
+      "version": "v002",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_stool_vanity_v002@hd.webp",
+          "sha256": "392a885bd1d56dd7a0b246739746d02592b836f7214dc8fbcb71d581e7cc1951",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_stool_vanity_v002@sd.webp",
+          "sha256": "1c391a2764e7675c6cf647bb7ee208284ab9402bb3073ea5179ea54802eeac07",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-20T02:48:04.692Z",
+        "review": "docs/reviews/batch-b-r2-lamp-v002.md",
+        "master": {
+          "path": "art/approved/prop_stool_vanity/prop_stool_vanity_v002.png",
+          "sha256": "2a43385401f8a107ed51f5e15ad433b7811753e453d8c94dcbbafcf6424599ae"
+        }
+      }
     },
     "decal_rug_zila": {
       "status": "requested",
@@ -204,14 +314,58 @@
       "request": "docs/art-requests/007-batch-e-room-shell.md"
     },
     "prop_laptop_zila": {
-      "status": "requested",
+      "status": "approved",
       "spec": "specs/props/prop_laptop_zila.json",
-      "request": "docs/art-requests/004-batch-b-furniture.md"
+      "request": "docs/art-requests/004-batch-b-furniture.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_laptop_zila_v001@hd.webp",
+          "sha256": "e8cc3c664faad02c4a494c8b5d29fc8cdc307e78dd45b8ec291fc01d1f8ac923",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_laptop_zila_v001@sd.webp",
+          "sha256": "b945e7790c2ce2492937eb3c9bed33657d8218e723a017c6efe3edb7927999d7",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-20T02:48:03.538Z",
+        "review": "docs/reviews/batch-b-r2-lamp-v002.md",
+        "master": {
+          "path": "art/approved/prop_laptop_zila/prop_laptop_zila_v001.png",
+          "sha256": "57cf84f653e779e9b7cf8de4c74851be54a7dd51c31c6ac22ab1ae3d61a7d05c"
+        }
+      }
     },
     "prop_mug_zila": {
-      "status": "requested",
+      "status": "approved",
       "spec": "specs/props/prop_mug_zila.json",
-      "request": "docs/art-requests/004-batch-b-furniture.md"
+      "request": "docs/art-requests/004-batch-b-furniture.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_mug_zila_v001@hd.webp",
+          "sha256": "e147df71cdf57ab55734204ff845f8425c870b8b047dffc0dbf8cf340ff699d7",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_mug_zila_v001@sd.webp",
+          "sha256": "a2f974d415b6a105c011e7912e2c4fbae4dba5c069410dcfdbac0fb7f35e5a39",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-20T02:48:03.670Z",
+        "review": "docs/reviews/batch-b-r2-lamp-v002.md",
+        "master": {
+          "path": "art/approved/prop_mug_zila/prop_mug_zila_v001.png",
+          "sha256": "cc28e6cdc1b884e354baa89b891e2d050d013d92e268bc9dcc14c38c43bd745e"
+        }
+      }
     }
   }
 }

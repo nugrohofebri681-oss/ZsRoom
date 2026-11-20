@@ -38,3 +38,20 @@ Nothing is approved and the production manifest is unchanged. In-game integratio
 
 ## Integration plan (after VISUAL PASS)
 For each approved asset, take only its files from PR #10 / PR #11, then run `approve-asset` (the desk needs no exception: its geometry is within tolerance). Then run full QA, the staging CI gate, and a fast-forward of `reboot/foundation`, as for the wardrobe. Merge this review branch first, so the `seatBehind` and alpha-floor changes are in place before approval.
+
+## Creative Director decision
+**VISUAL PASS** for all seven, recorded in the PR #10 and PR #11 comments:
+
+| Asset | Version |
+|---|---|
+| `prop_lamp_zila` | v002 |
+| `prop_desk_zila` | v002 |
+| `prop_laptop_zila` | v001 |
+| `prop_mug_zila` | v001 |
+| `prop_chair_desk` | v002 |
+| `prop_vanity_zila` | v002 |
+| `prop_stool_vanity` | v002 |
+
+- Integrated by taking **only** these versions' files from the two PRs; neither PR was merged.
+- Masters are unchanged. Runtime WebP use the alpha clean-up (snap ≥ 250, clear ≤ 8, before and after SD resampling).
+- No geometry exceptions are needed: every §11 measurement is within tolerance. The stool's slightly side-on seat ellipse is noted as a perspective remark only.

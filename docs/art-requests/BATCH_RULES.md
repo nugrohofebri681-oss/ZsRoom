@@ -25,3 +25,11 @@ These rules apply to every batch request (004+). Each batch request lists only w
 - Built-in image generation in the existing ChatGPT subscription only. No paid APIs or credits.
 - If image generation is unavailable, stop and report. Never substitute procedural, SVG or stock art.
 - Run `npm run validate:art` and `npm run gallery`, and look at every asset beside the approved references before opening the PR.
+
+## Lessons from Batch B (apply from Batch C on)
+- **3 candidates per asset**, chosen in `notes.md`. Batch B r1 had one each, which cost a full revision round.
+- **Report measured rows** for every asset (Art Bible §11): front-face top rim, top-plane back edge, base line, and for wall items the bottom and top rows. Measure the top plane to its **highlight rim**, not to the lip below it.
+- **Orientation sentences are literal.** If a request says what faces where (screen, backrest, curtains), the in-game camera looks from the south and from above. Ask in the PR if anything is ambiguous rather than guessing.
+- **Objects that could be separate props are separate props.** Keep furniture surfaces clean unless the request says otherwise.
+- **Alpha:** keep native transparency. Near-opaque (≥ 250) and near-invisible (≤ 8) alpha are normalised automatically at approval, so don't hand-paint over haze; just avoid detached shadows.
+- **Wall items (Batch C):** the pivot is the bottom-centre of the **front face**. The window glass must be fully transparent (the engine draws the sky). Light sources are painted **off** (the engine draws glow).

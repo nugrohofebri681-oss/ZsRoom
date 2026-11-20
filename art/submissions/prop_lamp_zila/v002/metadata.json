@@ -1,0 +1,50 @@
+{
+  "assetId": "prop_lamp_zila",
+  "version": "v002",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/prop_lamp_zila_on_host_template.png",
+      "art-bible/perspective/prop_lamp_zila_template.png",
+      "art-bible/perspective/projection_cube.png"
+    ]
+  },
+  "createdAt": "2026-11-19T06:48:20.785192+00:00",
+  "files": {
+    "master": {
+      "path": "prop_lamp_zila_v002.png",
+      "sha256": "26f3411d0b49abd4efa1b6047184799814ba3488ac75ec3822d06abdacc8dc11"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_lamp_zila/v002/candidate-b.png",
+        "sha256": "ef7ceefac6b0491d19d8f4456e04b4b8193121f35b7715e01bb370ba12f4d183"
+      }
+    ]
+  },
+  "provenance": "Original built-in AI-generated artwork for ZsRoom, conditioned on official approved furniture and project templates. No third-party stock art.",
+  "postProcessing": [
+    "No regeneration. Raw candidate B copied byte-identically from v001.",
+    "Official fit-to-spec.mjs --height 106: uniform scaling, native alpha trim/snap, sRGB export. Content63x106 at17,30."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Base front row135 matches target135; shade top ellipse centre~37 vs40, bottom rim centre~85 (front curve~91) vs80. Row estimates within height tolerance.",
+      "Shallow ellipse persists from original candidate B; this limitation is explicitly accepted for game-scale evaluation in the authoritative PR9 review, not independently approved by Codex.",
+      "Shade width~63 exceeds nominal48 while staying inside artBounds. Host contact and glow location checked statically; no new gameplay or lit-state regression claimed."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services used.",
+  "sourceRevision": {
+    "branch": "codex/art/prop_lamp_zila-v001",
+    "commit": "fb6acb4cb3fe25a487be670baf75ae9e7fa2202b",
+    "candidate": "B",
+    "sha256": "ef7ceefac6b0491d19d8f4456e04b4b8193121f35b7715e01bb370ba12f4d183"
+  }
+}

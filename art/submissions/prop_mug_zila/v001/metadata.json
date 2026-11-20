@@ -1,0 +1,73 @@
+{
+  "assetId": "prop_mug_zila",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "batch": "B",
+  "createdAt": "2026-11-20T01:40:06.971639+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art-bible/perspective/prop_mug_zila_template.png",
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "art/submissions/prop_wardrobe_zila/v001/prop_wardrobe_zila_v001.png",
+      "art/source/prop_mug_zila/v001/candidate-a.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "prop_mug_zila_v001.png",
+      "sha256": "cc28e6cdc1b884e354baa89b891e2d050d013d92e268bc9dcc14c38c43bd745e"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_mug_zila/v001/candidate-a.png",
+        "sha256": "72fe8f0f4431c7b4fc6ce074fb17a5f0f580c948befd04f5b8f1734a30b002aa"
+      },
+      {
+        "path": "art/source/prop_mug_zila/v001/candidate-b.png",
+        "sha256": "af28cdaf8c14ce4c5e5761465d9868d32b0808de27545ea2354911e8d821b15d"
+      }
+    ]
+  },
+  "provenance": "Original built-in generation and targeted edits; raw PNGs byte-identical to tool outputs. No stock or paid API. Full per-candidate references in prompt.md.",
+  "postProcessing": [
+    "Unmodified official fitter only: native-alpha trim, near-opaque alpha snap, uniform Lanczos3 resize, pivot/baseline placement, sRGB. No manual repainting/nonuniform warp.",
+    "node scripts/fit-to-spec.mjs art/source/prop_mug_zila/v001/candidate-b.png prop_mug_zila art/submissions/prop_mug_zila/v001/prop_mug_zila_v001.png --width 26"
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "--width26 including handle; basefront44. Rimtop~20/front34, centre27; bodywidth~20, ellipse~14/20=0.70. Nominal rimcentre18 is not achieved; illustrated vertical body is shorter than the10cm profile implies.",
+      "Body base centre visually~21 vs declaredpivot24 because fitter centres handle-inclusive bounds. Host review exposes this3px offset; do not silently change spec/engine anchor.",
+      "A was taller but rim too shallow; B selected for corrected rim perspective. Only two candidates for this new prop. Final size/readability and pivot need technical director review."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services.",
+  "notes": {
+    "batch": "B",
+    "selectedCandidate": "B",
+    "baseCommit": "06bb4593acc0456238b9a9a2be18084c7950e7a8",
+    "candidateComparison": "A: taller profile, shallow rim. B SELECTED: targeted edit yields correct deep rim but shorter body; retain this limitation for review."
+  },
+  "referenceProvenance": [
+    {
+      "path": "art/submissions/prop_wardrobe_zila/v001/prop_wardrobe_zila_v001.png",
+      "branch": "codex/art/batch-b-r1",
+      "commit": "48bce5bd7304c705590c071d8322ba634d60ec07",
+      "sha256": "c54e419819766daf4fe7d8edb6ca6bac0dc946236e9b5d256fd198c06dcbea00"
+    }
+  ],
+  "validation": {
+    "status": "TECHNICAL PASS",
+    "checksPassed": 23,
+    "checksTotal": 23,
+    "command": "npm run validate:art",
+    "visualApproval": "pending Creative Director",
+    "gallery": "npm run gallery; actual Chromium inspection on light/dark/checker and same-scale bed/nightstand",
+    "integration": "Not performed; static host composition only"
+  }
+}

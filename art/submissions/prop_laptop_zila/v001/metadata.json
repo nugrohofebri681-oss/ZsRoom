@@ -1,0 +1,68 @@
+{
+  "assetId": "prop_laptop_zila",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "batch": "B",
+  "createdAt": "2026-11-20T01:40:06.966001+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art-bible/perspective/prop_laptop_zila_template.png",
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "art/submissions/prop_wardrobe_zila/v001/prop_wardrobe_zila_v001.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "prop_laptop_zila_v001.png",
+      "sha256": "57cf84f653e779e9b7cf8de4c74851be54a7dd51c31c6ac22ab1ae3d61a7d05c"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_laptop_zila/v001/candidate-a.png",
+        "sha256": "706ac4386935cc1ba451632c21a4e6e353557f2a583618a01163ba6b8620c68c"
+      }
+    ]
+  },
+  "provenance": "Original built-in generation and targeted edits; raw PNGs byte-identical to tool outputs. No stock or paid API. Full per-candidate references in prompt.md.",
+  "postProcessing": [
+    "Unmodified official fitter only: native-alpha trim, near-opaque alpha snap, uniform Lanczos3 resize, pivot/baseline placement, sRGB. No manual repainting/nonuniform warp.",
+    "node scripts/fit-to-spec.mjs art/source/prop_laptop_zila/v001/candidate-a.png prop_laptop_zila art/submissions/prop_laptop_zila/v001/prop_laptop_zila_v001.png"
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Base front91, hinge~54, screen top14. Keyboard/base depth~37 vs31 target; pivot basecentre at76 is ~3px south of visualcentre72.5. Screen upperedge14 vs~17 nominal.",
+      "Display and keyboard face SOUTH toward seated Zila, hinge NORTH. Screen OFF, no logo/text. Some keyboard detail softens at native70px painted width.",
+      "Slight side-edge convergence persists; static host placement only, no use/screen-glow gameplay check. Single new candidate; no claim of three-way selection for this newly specified prop."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services.",
+  "notes": {
+    "batch": "B",
+    "selectedCandidate": "A",
+    "baseCommit": "06bb4593acc0456238b9a9a2be18084c7950e7a8",
+    "candidateComparison": "A SELECTED: screen faces viewer correctly, independent surface prop. One new original candidate."
+  },
+  "referenceProvenance": [
+    {
+      "path": "art/submissions/prop_wardrobe_zila/v001/prop_wardrobe_zila_v001.png",
+      "branch": "codex/art/batch-b-r1",
+      "commit": "48bce5bd7304c705590c071d8322ba634d60ec07",
+      "sha256": "c54e419819766daf4fe7d8edb6ca6bac0dc946236e9b5d256fd198c06dcbea00"
+    }
+  ],
+  "validation": {
+    "status": "TECHNICAL PASS",
+    "checksPassed": 23,
+    "checksTotal": 23,
+    "command": "npm run validate:art",
+    "visualApproval": "pending Creative Director",
+    "gallery": "npm run gallery; actual Chromium inspection on light/dark/checker and same-scale bed/nightstand",
+    "integration": "Not performed; static host composition only"
+  }
+}

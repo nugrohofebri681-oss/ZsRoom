@@ -1,0 +1,80 @@
+{
+  "assetId": "prop_chair_desk",
+  "version": "v002",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "batch": "B",
+  "createdAt": "2026-11-20T01:40:06.938906+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/submissions/prop_chair_desk/v001/prop_chair_desk_v001.png",
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art-bible/perspective/prop_chair_desk_template.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "prop_chair_desk_v002.png",
+      "sha256": "edf3cf3307c705d994914f8fa6a0354d529691e3e04f68c9fb443e303521bfe6"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_chair_desk/v002/candidate-a.png",
+        "sha256": "90b876cceed932ec60dfa73ca9e0378e2c96a6f352472f30b4cc9fe69bdd28da"
+      },
+      {
+        "path": "art/source/prop_chair_desk/v002/candidate-b.png",
+        "sha256": "ea0c2c0722dd1038e4c4ce8d1fc37a2974bee190bd5f0a86ec44d4f5576b5207"
+      },
+      {
+        "path": "art/source/prop_chair_desk/v002/candidate-c.png",
+        "sha256": "aa6bb6e74575307eae94681a8a6aa44a2b8c0cfdedcd56dff2d9d2519aaa7813"
+      },
+      {
+        "path": "art/source/prop_chair_desk/v002/candidate-d.png",
+        "sha256": "0b1d7618bde52ab41d9dfec19a67035657c1d6280b03352ce507c18d900b0364"
+      }
+    ]
+  },
+  "provenance": "Original built-in generation and targeted edits; raw PNGs byte-identical to tool outputs. No stock or paid API. Full per-candidate references in prompt.md.",
+  "postProcessing": [
+    "Unmodified official fitter only: native-alpha trim, near-opaque alpha snap, uniform Lanczos3 resize, pivot/baseline placement, sRGB. No manual repainting/nonuniform warp.",
+    "node scripts/fit-to-spec.mjs art/source/prop_chair_desk/v002/candidate-d.png prop_chair_desk art/submissions/prop_chair_desk/v002/prop_chair_desk_v002.png"
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Backrest top y81 vs84 target; front floor264 =>183px vs180 nominal. Width98 includes overhang.",
+      "Rear orientation: backrest occludes seat; only side tips show. Visible cushion side region roughlyy149\u2013161; full near seat edge at nominal174 is hidden, so exact45cm seat contact cannot be verified from artwork alone. Requires seated-character integration check.",
+      "Rear appearance is materially improved vsR1. Broad upholstered rear changes visible backrest proportions slightly. No character/engine integration performed."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services.",
+  "notes": {
+    "batch": "B",
+    "selectedCandidate": "D",
+    "baseCommit": "06bb4593acc0456238b9a9a2be18084c7950e7a8",
+    "candidateComparison": "A: rear view, tall backrest. B: wider upholstered frame. C: shorter/narrower back silhouette. D SELECTED: strongest rear reading with both approved finish references and near nominal back height."
+  },
+  "referenceProvenance": [
+    {
+      "path": "art/submissions/prop_chair_desk/v001/prop_chair_desk_v001.png",
+      "branch": "codex/art/batch-b-r1",
+      "commit": "48bce5bd7304c705590c071d8322ba634d60ec07",
+      "sha256": "b9a42d8cec5fbc244c35251f3203697fb0eb317e9072e89f58757c472a9bceaa"
+    }
+  ],
+  "validation": {
+    "status": "TECHNICAL PASS",
+    "checksPassed": 23,
+    "checksTotal": 23,
+    "command": "npm run validate:art",
+    "visualApproval": "pending Creative Director",
+    "gallery": "npm run gallery; actual Chromium inspection on light/dark/checker and same-scale bed/nightstand",
+    "integration": "Not performed; static host composition only"
+  }
+}

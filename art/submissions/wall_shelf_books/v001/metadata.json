@@ -1,0 +1,184 @@
+{
+  "assetId": "wall_shelf_books",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "batch": "C",
+  "createdAt": "2026-11-20T07:07:57.546981+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/wall_shelf_books_template.png",
+      "art-bible/perspective/projection_cube.png",
+      "art/submissions/wall_window_bedroom/v001/wall_window_bedroom_v001.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "wall_shelf_books_v001.png",
+      "sha256": "2a837ae56694adf1c4615a506808aa4d390c6b7ec78bd46e3125cebfb95f1372"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/wall_shelf_books/v001/candidate-a.png",
+        "sha256": "45e1880a8a0b4bb4163f286d65df25e4dd6d9808b4908dfcf3dd2084ad201b43"
+      },
+      {
+        "path": "art/source/wall_shelf_books/v001/candidate-b.png",
+        "sha256": "7b986214ded6035e2e98994526620ddebfe132df1dbe85c00d10fcd23db46e94"
+      },
+      {
+        "path": "art/source/wall_shelf_books/v001/candidate-c.png",
+        "sha256": "b6d9e424af2e27f69e5b97e345d125836aa3d60cae414a81b967b3b01d455e3c"
+      }
+    ]
+  },
+  "provenance": "Three original built-in imagegen outputs, preserved byte-identical. No paid services, stock art or private user imagery. Exact prompts and conditioning inputs in prompt.md.",
+  "postProcessing": [
+    "Official fitter: native alpha trim, snap alpha<=8 to0 and >=250 to255, uniform Lanczos3 resize, pivot placement, sRGB. Raw originals untouched.",
+    "node scripts/fit-to-spec.mjs art/source/wall_shelf_books/v001/candidate-c.png wall_shelf_books art/submissions/wall_shelf_books/v001/wall_shelf_books_v001.png"
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Top~42/bottom128 (brackets). Shelf back~92, highlight front~107, board bottom~113. Top depth~15px vs33.6px target: FAIL geometric depth tolerance. Bracket bottom defines pivot; books have readable front/top. Slight trapezoid convergence remains; needs directed perspective revision before integration.",
+      "Pending Creative Director visual review; static artwork only, not integrated or gameplay tested."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services.",
+  "notes": {
+    "batch": "C",
+    "selectedCandidate": "C",
+    "baseCommit": "7e3706dde9a79ee9fd5274e3e72b0b5989f24604",
+    "candidateComparison": "A: six books, ornate pot; B: reversed arrangement and bow; C selected: simpler pot and calmer four-book grouping."
+  },
+  "validation": {
+    "status": "TECHNICAL PASS",
+    "checksPassed": 23,
+    "checksTotal": 23,
+    "checks": [
+      {
+        "name": "asset id format",
+        "pass": true,
+        "detail": "wall_shelf_books"
+      },
+      {
+        "name": "version format (v###)",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "spec exists",
+        "pass": true,
+        "detail": "specs/props/wall_shelf_books.json"
+      },
+      {
+        "name": "master file present",
+        "pass": true,
+        "detail": "wall_shelf_books_v001.png"
+      },
+      {
+        "name": "metadata.json present",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "only png/webp/json/md files",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata schema",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata.assetId matches folder",
+        "pass": true,
+        "detail": "wall_shelf_books"
+      },
+      {
+        "name": "metadata.version matches folder",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "metadata.specVersion matches spec",
+        "pass": true,
+        "detail": "1.0.0 vs 1.0.0"
+      },
+      {
+        "name": "createdAt is a date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "master sha256 matches metadata",
+        "pass": true,
+        "detail": "2a837ae56694adf1c4615a506808aa4d390c6b7ec78bd46e3125cebfb95f1372"
+      },
+      {
+        "name": "format PNG",
+        "pass": true,
+        "detail": "png"
+      },
+      {
+        "name": "canvas size",
+        "pass": true,
+        "detail": "224x144, expected 224x144"
+      },
+      {
+        "name": "RGBA (alpha channel)",
+        "pass": true,
+        "detail": "4 channels"
+      },
+      {
+        "name": "8-bit depth",
+        "pass": true,
+        "detail": "uchar"
+      },
+      {
+        "name": "sRGB colour space",
+        "pass": true,
+        "detail": "srgb"
+      },
+      {
+        "name": "file size",
+        "pass": true,
+        "detail": "23836 bytes (max 3000000)"
+      },
+      {
+        "name": "transparent edge padding",
+        "pass": true,
+        "detail": "0 non-transparent px within 8px of the edge"
+      },
+      {
+        "name": "opaque coverage \u2265 min",
+        "pass": true,
+        "detail": "0.239"
+      },
+      {
+        "name": "opaque coverage \u2264 max (no baked background)",
+        "pass": true,
+        "detail": "0.239"
+      },
+      {
+        "name": "art inside artBounds",
+        "pass": true,
+        "detail": "bbox 22,42 180x87; allowed 18,18 188x113"
+      },
+      {
+        "name": "base sits on pivot line",
+        "pass": true,
+        "detail": "lowest solid row 128, expected 128\u00b18"
+      }
+    ],
+    "warnings": [],
+    "gallery": "Official npm run gallery inspected in Chromium: native, SD, light, dark, checker, bed/nightstand at same world scale.",
+    "visualApproval": "Pending Creative Director",
+    "integration": "Not performed"
+  }
+}

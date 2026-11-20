@@ -1,0 +1,184 @@
+{
+  "assetId": "wall_neon_goodvibes",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "batch": "C",
+  "createdAt": "2026-11-20T07:07:57.596281+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/wall_neon_goodvibes_template.png",
+      "art-bible/perspective/projection_cube.png",
+      "art/submissions/wall_window_bedroom/v001/wall_window_bedroom_v001.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "wall_neon_goodvibes_v001.png",
+      "sha256": "681a62d0d7e3e78878985b559ce133d19148d0d054fce6f65ed1cdc3c7df3697"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/wall_neon_goodvibes/v001/candidate-a.png",
+        "sha256": "499b0bf3cce7d0999c4070beb730f1405a7add477d806b03eb2d349c49733eae"
+      },
+      {
+        "path": "art/source/wall_neon_goodvibes/v001/candidate-b.png",
+        "sha256": "30589f3faed111bc2132c1e2905e8ba1266ec221535c509f0040c9296a149f5e"
+      },
+      {
+        "path": "art/source/wall_neon_goodvibes/v001/candidate-c.png",
+        "sha256": "e9635c607483b5f583588fa0d00e8cfe6846a1790bba6eb8900e585247d8b85b"
+      }
+    ]
+  },
+  "provenance": "Three original built-in imagegen outputs, preserved byte-identical. No paid services, stock art or private user imagery. Exact prompts and conditioning inputs in prompt.md.",
+  "postProcessing": [
+    "Official fitter: native alpha trim, snap alpha<=8 to0 and >=250 to255, uniform Lanczos3 resize, pivot placement, sRGB. Raw originals untouched.",
+    "node scripts/fit-to-spec.mjs art/source/wall_neon_goodvibes/v001/candidate-c.png wall_neon_goodvibes art/submissions/wall_neon_goodvibes/v001/wall_neon_goodvibes_v001.png"
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Top~38/bottom96;140px width59px height versus64px target. Text reads good vibes. Tubing is off with no bloom; small surface highlights remain. Transparent backing mostly reduces to outline; subtle edge tint may remain, inspect against wall. Long ascender and uneven line spacing remain artistic limitations.",
+      "Pending Creative Director visual review; static artwork only, not integrated or gameplay tested."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services.",
+  "notes": {
+    "batch": "C",
+    "selectedCandidate": "C",
+    "baseCommit": "7e3706dde9a79ee9fd5274e3e72b0b5989f24604",
+    "candidateComparison": "A: opaque white-looking plate and chunky tubes; B: excessively bright central highlights; C selected: matte dusty-pink strokes and clearer backing."
+  },
+  "validation": {
+    "status": "TECHNICAL PASS",
+    "checksPassed": 23,
+    "checksTotal": 23,
+    "checks": [
+      {
+        "name": "asset id format",
+        "pass": true,
+        "detail": "wall_neon_goodvibes"
+      },
+      {
+        "name": "version format (v###)",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "spec exists",
+        "pass": true,
+        "detail": "specs/props/wall_neon_goodvibes.json"
+      },
+      {
+        "name": "master file present",
+        "pass": true,
+        "detail": "wall_neon_goodvibes_v001.png"
+      },
+      {
+        "name": "metadata.json present",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "only png/webp/json/md files",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata schema",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata.assetId matches folder",
+        "pass": true,
+        "detail": "wall_neon_goodvibes"
+      },
+      {
+        "name": "metadata.version matches folder",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "metadata.specVersion matches spec",
+        "pass": true,
+        "detail": "1.0.0 vs 1.0.0"
+      },
+      {
+        "name": "createdAt is a date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "master sha256 matches metadata",
+        "pass": true,
+        "detail": "681a62d0d7e3e78878985b559ce133d19148d0d054fce6f65ed1cdc3c7df3697"
+      },
+      {
+        "name": "format PNG",
+        "pass": true,
+        "detail": "png"
+      },
+      {
+        "name": "canvas size",
+        "pass": true,
+        "detail": "176x112, expected 176x112"
+      },
+      {
+        "name": "RGBA (alpha channel)",
+        "pass": true,
+        "detail": "4 channels"
+      },
+      {
+        "name": "8-bit depth",
+        "pass": true,
+        "detail": "uchar"
+      },
+      {
+        "name": "sRGB colour space",
+        "pass": true,
+        "detail": "srgb"
+      },
+      {
+        "name": "file size",
+        "pass": true,
+        "detail": "16456 bytes (max 3000000)"
+      },
+      {
+        "name": "transparent edge padding",
+        "pass": true,
+        "detail": "0 non-transparent px within 8px of the edge"
+      },
+      {
+        "name": "opaque coverage \u2265 min",
+        "pass": true,
+        "detail": "0.169"
+      },
+      {
+        "name": "opaque coverage \u2264 max (no baked background)",
+        "pass": true,
+        "detail": "0.169"
+      },
+      {
+        "name": "art inside artBounds",
+        "pass": true,
+        "detail": "bbox 18,38 140x59; allowed 14,22 148x77"
+      },
+      {
+        "name": "base sits on pivot line",
+        "pass": true,
+        "detail": "lowest solid row 95, expected 96\u00b18"
+      }
+    ],
+    "warnings": [],
+    "gallery": "Official npm run gallery inspected in Chromium: native, SD, light, dark, checker, bed/nightstand at same world scale.",
+    "visualApproval": "Pending Creative Director",
+    "integration": "Not performed"
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "id": "kitchen",
+  "displayName": "Kitchen",
+  "world": "world01",
+  "floor": "ground",
+  "kind": "interior",
+  "provisional": true,
+  "sizeCm": {
+    "w": 620,
+    "h": 480
+  },
+  "wallHeightCm": 270,
+  "palette": {
+    "floor": "#E6DCCB",
+    "wall": "#EFE6D8",
+    "trim": "#5B3A29"
+  },
+  "shell": {
+    "floor": "env_floor_living",
+    "wall": "env_wall_living"
+  },
+  "spawns": {
+    "default": {
+      "x": 430,
+      "y": 260,
+      "facing": "S"
+    },
+    "from_living": {
+      "x": 560,
+      "y": 240,
+      "facing": "W"
+    }
+  },
+  "props": [
+    {
+      "assetId": "world_window_ext",
+      "wall": {
+        "x": 160,
+        "z": 120
+      }
+    },
+    {
+      "assetId": "world_kitchen_counter",
+      "x": 160,
+      "y": 65,
+      "anchors": [
+        {
+          "id": "tea",
+          "label": "Make a cup of tea",
+          "x": 0,
+          "y": 32,
+          "facing": "N",
+          "radiusCm": 45,
+          "action": {
+            "type": "event",
+            "id": "ev_kitchen_tea"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_stove",
+      "x": 320,
+      "y": 65,
+      "anchors": [
+        {
+          "id": "cook",
+          "label": "Cook breakfast",
+          "x": 0,
+          "y": 32,
+          "facing": "N",
+          "radiusCm": 45,
+          "action": {
+            "type": "event",
+            "id": "ev_kitchen_cook"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_kitchen_counter",
+      "x": 470,
+      "y": 65,
+      "anchors": [
+        {
+          "id": "sink",
+          "label": "Wash up at the sink",
+          "x": 0,
+          "y": 32,
+          "facing": "N",
+          "radiusCm": 45,
+          "action": {
+            "type": "dialogue",
+            "id": "dlg_kitchen_sink"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_fridge_home",
+      "x": 570,
+      "y": 70,
+      "anchors": [
+        {
+          "id": "fridge",
+          "label": "Open the fridge",
+          "x": -10,
+          "y": 34,
+          "facing": "N",
+          "radiusCm": 45,
+          "action": {
+            "type": "event",
+            "id": "ev_kitchen_fridge"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_coffee_table",
+      "x": 260,
+      "y": 330,
+      "anchors": [
+        {
+          "id": "eat",
+          "label": "Have breakfast",
+          "x": -80,
+          "y": -20,
+          "facing": "E",
+          "radiusCm": 45,
+          "action": {
+            "type": "event",
+            "id": "ev_kitchen_eat"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_stool",
+      "x": 200,
+      "y": 380
+    },
+    {
+      "assetId": "world_stool",
+      "x": 320,
+      "y": 380
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 40,
+      "y": 460
+    }
+  ],
+  "doors": [
+    {
+      "id": "to_living",
+      "label": "Back to the living room",
+      "side": "east",
+      "x": 620,
+      "y": 180,
+      "w": 10,
+      "h": 120,
+      "to": {
+        "room": "living_room",
+        "spawn": "from_kitchen"
+      }
+    }
+  ]
+}

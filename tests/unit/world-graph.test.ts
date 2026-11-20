@@ -62,10 +62,14 @@ describe('World 01 graph', () => {
   });
 
   it('locked doors keep their wall solid; unlocking by flag opens the gap', () => {
-    const lr = ROOMS.get('living_room')!, kitchen = lr.doors.find((d) => d.id === 'kitchen')!;
-    expect(doorOpen(kitchen, {})).toBe(false);
-    const solidAt = (flags: Record<string, boolean>) => compileRoom(lr, flags).solids.some((s) => s.x < 0 && s.y <= 280 && s.y + s.h >= 280 && s.x + s.w >= -1);
-    expect(solidAt({})).toBe(true);
+    const st = ROOMS.get('batuphat_street')!, road = st.doors.find((d) => d.id === 'road_east')!;
+    expect(doorOpen(road, {})).toBe(false);
+    const { w } = st.sizeCm;
+    const solidAt = (data: typeof st) => compileRoom(data).solids.some((s) => s.x >= w && s.x <= w + 1 && s.y <= 600 && s.y + s.h >= 600);
+    expect(solidAt(st)).toBe(true);                                    // wall stays closed
+    const unlocked = { ...st, doors: st.doors.map((d) => (d.id === 'road_east' ? { ...d, locked: { ...d.locked!, unlessFlag: 'test:open' } } : d)) };
+    expect(doorOpen(unlocked.doors.find((d) => d.id === 'road_east')!, { 'test:open': true })).toBe(true);
+    expect(compileRoom(unlocked, { 'test:open': true }).solids.some((s) => s.x === w && s.y <= 600 && s.y + s.h >= 600)).toBe(false);   // gap opens
   });
 
   it('every dialogue / event / comms reference in map data exists', () => {
@@ -131,5 +135,20 @@ describe('NPC behaviour (deterministic)', () => {
     expect(Math.max(...a) - Math.min(...a)).toBeGreaterThan(300);
     const s = initNpc(n, 'morning'); stepNpc(n, s, 50, { x: s.x + 30, y: s.y + 30 }, () => false);
     expect(s.moving).toBe(false); expect(s.facing).toBe('SE');
+  });
+});
+
+describe('NPC makes way for the player (bounded)', () => {
+  it('steps off the player route to a free side spot, then resumes', async () => {
+    const { yieldTo } = await import('../../src/world/npc');
+    const n = { id: 't', name: 't', look: { shirt: '#fff', pants: '#000', hair: '#000' }, x: 200, y: 100, behaviour: { type: 'idle' as const } };
+    const s = initNpc(n, 'morning');
+    const player = { x: 160, y: 100 };
+    expect(yieldTo(s, player, { x: 1, y: 0 }, () => true)).toBe(true);
+    for (let i = 0; i < 40; i++) stepNpc(n, s, 50, player, () => false);
+    expect(Math.abs(s.y - 100)).toBeGreaterThanOrEqual(50);          // off the player's horizontal line
+    expect(yieldTo(initNpc(n, 'morning'), player, { x: 1, y: 0 }, () => false)).toBe(false);   // nowhere to go → refuse
+    for (let i = 0; i < 80; i++) stepNpc(n, s, 50, { x: 9999, y: 9999 }, () => false);
+    expect(s.yieldMs).toBeLessThanOrEqual(0);                         // yield ends (bounded)
   });
 });

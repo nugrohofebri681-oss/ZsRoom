@@ -2,7 +2,7 @@ import * as Phaser from 'phaser';
 import { groundToRender, DEPTH_SCALE } from '../core/projection';
 import { getCharacterSpec, type ActionSpec, type CharacterSpec, type PropSpec } from '../core/specs';
 import { compileRoom, getRoom, doorOpen, doorSide, DOOR_DEPTH, type CompiledRoom, type PropInstance, type RoomDoor } from '../world/room';
-import { initNpc, npcPresent, npcSolid, stepNpc, type NpcData, type NpcState } from '../world/npc';
+import { initNpc, npcPresent, npcSolid, stepNpc, yieldTo, NPC_RADIUS, type NpcData, type NpcState } from '../world/npc';
 import { NpcView } from '../actors/npcView';
 import { EVENTS, DIALOGUE, runEvent, type Presentation } from '../story/events';
 import { COMMS, threadAsDialogue } from '../story/comms';
@@ -24,6 +24,7 @@ import { LayeredCharacter } from '../animation/character';
 import type { RigSpec } from '../animation/rig';
 import { renderToGround, type Vec2 } from '../core/projection';
 import { audio } from '../audio/audio';
+import { walkSpeedMultiplier } from '../core/qa';
 import { crossedContacts } from '../audio/synth';
 import { floorAt, floorPatches, type FloorPatch } from '../audio/surface';
 
@@ -35,8 +36,8 @@ const FADE_ALPHA = 0.42;
 const SIT_HEIGHT = 0.78;        // seated figure height share (for occlusion bounds)
 const LOOK_AHEAD_S = 0.35;      // camera leads movement by this many seconds
 const ZOOM_MIN = 0.8, ZOOM_MAX = 1.9;
-/** Test/QA hook: `?fast` walks 3× faster (long World 01 routes in CI). Never skips doors or collision. */
-const SPEED = new URLSearchParams(location.search).has('fast') ? 3 : 1;
+/** Test/QA hook (QA/dev builds only, see core/qa.ts): `?fast` walks 3× faster for long route tests. */
+const SPEED = walkSpeedMultiplier(location.search, import.meta.env);
 
 type PropView = Phaser.GameObjects.GameObject & Phaser.GameObjects.Components.AlphaSingle & Phaser.GameObjects.Components.Depth;
 type ArtKind = 'approved' | 'temp' | 'greybox';
@@ -77,6 +78,8 @@ export class RoomScene extends Phaser.Scene {
   private visited: string[] = [];
   /** Door triggers stay disarmed until the player has stepped away from every doorway after arriving. */
   private doorsArmed = false;
+  /** Bounded recovery when an NPC blocks a tap-to-move route: total time spent blocked on this path. */
+  private blockedMs = 0;
   private stepCount = 0;
   private lastFloor: 'rug' | 'wood' = 'wood';
   /** One reusable silhouette glow behind the prop Zila can use right now (never touches the art itself). */
@@ -167,7 +170,9 @@ export class RoomScene extends Phaser.Scene {
     // Never so far out that a character is too small to read: ~22% of the screen height on desktop,
     // ~36% on short phone-landscape screens (CSS height < 500), where whole-room framing is too small.
     const dpr = (this.registry.get('dpr') as number | undefined) ?? 1;
-    const share = cam.height / dpr < 500 ? 0.36 : 0.22;
+    // Exteriors frame a little wider (shop signs and building tops matter outdoors); characters stay readable.
+    const outdoor = this.room.data.kind === 'exterior' ? 0.78 : 1;
+    const share = (cam.height / dpr < 500 ? 0.36 : 0.22) * outdoor;
     const zoom = Math.max(fit, (cam.height * share) / this.character.heightCm) * this.zoomMul;
     cam.setZoom(zoom);
     const top = -this.room.data.wallHeightCm - 30;
@@ -457,7 +462,16 @@ export class RoomScene extends Phaser.Scene {
     } else {
       const before = { ...this.pos };
       this.pos = moveWithCollision(this.pos, { x: (dx / dist) * step, y: (dy / dist) * step }, this.character.collision.radiusCm, this.solids());
-      if (Math.hypot(this.pos.x - before.x, this.pos.y - before.y) < step * 0.05) { this.path = []; this.pendingAnchor = null; } // blocked: give up
+      const moved = Math.hypot(this.pos.x - before.x, this.pos.y - before.y);
+      // Blocked by an NPC: ask it to make way and keep the route (bounded: give up after 1.5 s blocked).
+      // Blocked by anything static: give up at once (the planner already routes around static things).
+      const npc = moved < step * 0.5 ? this.npcs.find((n) => n.view.sprite.visible && Math.hypot(n.state.x - this.pos.x, n.state.y - this.pos.y) < this.character.collision.radiusCm + NPC_RADIUS + 14) : undefined;
+      if (npc) {
+        this.blockedMs += dt * 1000;
+        if (this.blockedMs > 1500) { this.path = []; this.pendingAnchor = null; this.blockedMs = 0; }
+        else yieldTo(npc.state, this.pos, { x: dx, y: dy }, (x, y) => this.grid.standable({ x, y }) && Math.hypot(x - this.pos.x, y - this.pos.y) > 40);
+      } else if (moved < step * 0.05) { this.path = []; this.pendingAnchor = null; this.blockedMs = 0; }
+      else this.blockedMs = Math.max(0, this.blockedMs - dt * 500);
     }
     const d = vectorToDirection(dx, dy);
     if (d) this.facingDir = d;
@@ -486,7 +500,7 @@ export class RoomScene extends Phaser.Scene {
     const lead = Phaser.Math.Clamp(LOOK_AHEAD_S, 0, 1);
     const lx = Phaser.Math.Clamp(this.velocity.x * lead, -70, 70), ly = Phaser.Math.Clamp(this.velocity.y * lead * DEPTH_SCALE, -50, 50);
     this.camTarget.x = r.x + lx;
-    this.camTarget.y = r.y - this.character.heightCm * 0.45 + ly;
+    this.camTarget.y = r.y - this.character.heightCm * 0.45 + ly - (this.room.data.kind === 'exterior' ? 70 : 0);   // outdoors: show building tops / signs
   }
   private snapCamera(): void { this.updateCamera(); this.cameras.main.centerOn(this.camTarget.x, this.camTarget.y); }
 
@@ -788,6 +802,8 @@ export class RoomScene extends Phaser.Scene {
       }),
       teleport: (x: number, y: number) => { this.seated = null; this.path = []; this.pendingAnchor = null; this.pos = { x, y }; this.syncActor(); this.snapCamera(); },
       tapWorld: (gx: number, gy: number, z = 0) => { const r = groundToRender(gx, gy, z); this.tapAtRender(r.x, r.y); },
+      /** Test hook: put an NPC somewhere (e.g. in Zila's way). */
+      npcAt: (id: string, x: number, y: number) => { const n = this.npcs.find((q) => q.data.id === id); if (n) { n.state.x = x; n.state.y = y; n.state.target = null; n.state.waitMs = 3000; this.drawNpc(n, 0); } },
       setVars: (v: Vars) => { this.vars = { ...this.vars, ...v }; this.buildActor(); this.applyWorldVars(); },
       zoomBy: (d: number) => this.zoomBy(d),
       /** Ground point → CSS pixel on screen (for tests that click/tap real screen positions). */

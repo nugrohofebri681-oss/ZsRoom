@@ -1,0 +1,154 @@
+{
+  "id": "mixue",
+  "displayName": "Mixue",
+  "world": "world01",
+  "floor": "ground",
+  "kind": "interior",
+  "ambience": "shop",
+  "provisional": true,
+  "sizeCm": {
+    "w": 600,
+    "h": 480
+  },
+  "wallHeightCm": 280,
+  "palette": {
+    "floor": "#F4F1EC",
+    "wall": "#FFFFFF",
+    "trim": "#C8102E"
+  },
+  "shell": {
+    "floor": "env_floor_shop",
+    "wall": "env_wall_mixue"
+  },
+  "spawns": {
+    "default": {
+      "x": 300,
+      "y": 400,
+      "facing": "N"
+    },
+    "from_street": {
+      "x": 300,
+      "y": 420,
+      "facing": "N"
+    }
+  },
+  "props": [
+    {
+      "assetId": "world_menu_board",
+      "wall": {
+        "x": 300,
+        "z": 150
+      }
+    },
+    {
+      "assetId": "world_icecream_machine",
+      "x": 150,
+      "y": 60
+    },
+    {
+      "assetId": "world_icecream_machine",
+      "x": 450,
+      "y": 60
+    },
+    {
+      "assetId": "world_counter_mixue",
+      "x": 300,
+      "y": 190,
+      "anchors": [
+        {
+          "id": "order",
+          "label": "Order at the counter",
+          "x": 0,
+          "y": 32,
+          "facing": "N",
+          "radiusCm": 45,
+          "action": {
+            "type": "event",
+            "id": "ev_mixue_order"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_coffee_table",
+      "x": 130,
+      "y": 360,
+      "anchors": [
+        {
+          "id": "sit",
+          "label": "Enjoy your order",
+          "x": 0,
+          "y": 32,
+          "facing": "N",
+          "radiusCm": 45,
+          "action": {
+            "type": "event",
+            "id": "ev_mixue_enjoy"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_stool",
+      "x": 80,
+      "y": 410
+    },
+    {
+      "assetId": "world_stool",
+      "x": 180,
+      "y": 410
+    },
+    {
+      "assetId": "world_coffee_table",
+      "x": 470,
+      "y": 360
+    },
+    {
+      "assetId": "world_stool",
+      "x": 420,
+      "y": 410
+    },
+    {
+      "assetId": "world_stool",
+      "x": 520,
+      "y": 410
+    }
+  ],
+  "npcs": [
+    {
+      "id": "npc_mixue_staff",
+      "name": "Staff",
+      "look": {
+        "shirt": "#C8102E",
+        "pants": "#3A3440",
+        "hair": "#2A1E18",
+        "hijab": "#F4F1EC"
+      },
+      "x": 300,
+      "y": 100,
+      "facing": "S",
+      "behaviour": {
+        "type": "idle"
+      },
+      "interact": {
+        "label": "Talk to the staff",
+        "dialogue": "dlg_mixue_staff"
+      },
+      "radiusCm": 60
+    }
+  ],
+  "doors": [
+    {
+      "id": "exit",
+      "label": "Exit to the street",
+      "x": 250,
+      "y": 480,
+      "w": 100,
+      "h": 10,
+      "to": {
+        "room": "batuphat_west",
+        "spawn": "from_mixue"
+      }
+    }
+  ]
+}

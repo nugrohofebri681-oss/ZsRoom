@@ -1,0 +1,275 @@
+{
+  "id": "batuphat_west",
+  "displayName": "Batuphat · west block",
+  "world": "world01",
+  "floor": "ground",
+  "kind": "exterior",
+  "ambience": "street",
+  "provisional": true,
+  "sizeCm": {
+    "w": 2400,
+    "h": 800
+  },
+  "wallHeightCm": 420,
+  "palette": {
+    "floor": "#B9B3A9",
+    "wall": "#E6DCCB",
+    "trim": "#8A7F75"
+  },
+  "shell": {
+    "floor": "env_ground_street",
+    "wall": "env_wall_street_row",
+    "zones": [
+      {
+        "floor": "env_ground_road",
+        "x": 0,
+        "y": 520,
+        "w": 2400,
+        "h": 260,
+        "markings": "road"
+      },
+      {
+        "floor": "env_ground_yard",
+        "x": 1060,
+        "y": 0,
+        "w": 380,
+        "h": 470
+      }
+    ]
+  },
+  "onEnter": [
+    "ev_west_first_visit"
+  ],
+  "spawns": {
+    "default": {
+      "x": 900,
+      "y": 420,
+      "facing": "S"
+    },
+    "from_street": {
+      "x": 2340,
+      "y": 610,
+      "facing": "W"
+    },
+    "from_mixue": {
+      "x": 2160,
+      "y": 60,
+      "facing": "S"
+    }
+  },
+  "props": [
+    {
+      "assetId": "world_facade_house",
+      "wall": {
+        "x": 290,
+        "z": 0
+      }
+    },
+    {
+      "assetId": "world_facade_warung",
+      "wall": {
+        "x": 790,
+        "z": 0
+      },
+      "anchors": [
+        {
+          "id": "smell",
+          "label": "Warung kopi",
+          "x": 0,
+          "y": 60,
+          "facing": "N",
+          "radiusCm": 60,
+          "action": {
+            "type": "dialogue",
+            "id": "dlg_west_warung"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_facade_house",
+      "wall": {
+        "x": 1690,
+        "z": 0
+      }
+    },
+    {
+      "assetId": "world_storefront_mixue",
+      "wall": {
+        "x": 2160,
+        "z": 0
+      }
+    },
+    {
+      "assetId": "world_tree",
+      "x": 1120,
+      "y": 200
+    },
+    {
+      "assetId": "world_tree",
+      "x": 1400,
+      "y": 300
+    },
+    {
+      "assetId": "world_bench",
+      "x": 1260,
+      "y": 180
+    },
+    {
+      "assetId": "world_becak",
+      "x": 1250,
+      "y": 460
+    },
+    {
+      "assetId": "world_street_sign",
+      "x": 120,
+      "y": 470,
+      "anchors": [
+        {
+          "id": "read",
+          "label": "Read the sign",
+          "x": 0,
+          "y": 30,
+          "facing": "N",
+          "radiusCm": 45,
+          "action": {
+            "type": "dialogue",
+            "id": "dlg_west_sign"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 600,
+      "y": 470
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 1600,
+      "y": 470
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 2300,
+      "y": 470
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 560,
+      "y": 130
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 1960,
+      "y": 120
+    },
+    {
+      "assetId": "world_motorbike",
+      "x": 1880,
+      "y": 420,
+      "anchors": []
+    }
+  ],
+  "npcs": [
+    {
+      "id": "npc_becak_driver",
+      "name": "Becak driver",
+      "look": {
+        "shirt": "#5B6C8F",
+        "pants": "#3A3440",
+        "hair": "#2A1E18"
+      },
+      "x": 1400,
+      "y": 440,
+      "facing": "W",
+      "behaviour": {
+        "type": "idle"
+      },
+      "schedule": {
+        "night": "away"
+      },
+      "interact": {
+        "label": "Talk to the becak driver",
+        "dialogue": "dlg_west_driver"
+      }
+    },
+    {
+      "id": "npc_park_kid",
+      "name": "Child",
+      "look": {
+        "shirt": "#F2CC8F",
+        "pants": "#81B29A",
+        "hair": "#2A1E18"
+      },
+      "x": 1250,
+      "y": 330,
+      "behaviour": {
+        "type": "wander",
+        "area": {
+          "x": 1100,
+          "y": 250,
+          "w": 300,
+          "h": 150
+        },
+        "speed": 55,
+        "pauseMs": [
+          1500,
+          4000
+        ]
+      },
+      "schedule": {
+        "evening": "away",
+        "night": "away"
+      },
+      "interact": {
+        "label": "Say hello",
+        "dialogue": "dlg_west_kid"
+      }
+    }
+  ],
+  "doors": [
+    {
+      "id": "to_street",
+      "label": "Back toward home",
+      "side": "east",
+      "x": 2400,
+      "y": 480,
+      "w": 10,
+      "h": 260,
+      "to": {
+        "room": "batuphat_street",
+        "spawn": "from_west"
+      }
+    },
+    {
+      "id": "mixue_door",
+      "label": "Enter Mixue",
+      "style": "none",
+      "x": 2105,
+      "y": 0,
+      "w": 110,
+      "h": 10,
+      "to": {
+        "room": "mixue",
+        "spawn": "from_street"
+      }
+    },
+    {
+      "id": "road_further",
+      "label": "Road west",
+      "side": "west",
+      "x": 0,
+      "y": 480,
+      "w": 10,
+      "h": 260,
+      "to": {
+        "room": "lhokseumawe_centre",
+        "spawn": "default"
+      },
+      "locked": {
+        "message": "The road continues — not available yet (planned)."
+      }
+    }
+  ]
+}

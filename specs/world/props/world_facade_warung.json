@@ -1,25 +1,25 @@
 {
-  "id": "world_storefront_minimarket",
+  "id": "world_facade_warung",
   "specVersion": "0.1.0",
   "status": "world-temp",
   "category": "prop",
-  "displayName": "Minimarket storefront (TEMP world placeholder)",
+  "displayName": "Warung kopi (coffee stall) front (TEMP world placeholder)",
   "density": 1,
   "canvas": {
-    "width": 656,
-    "height": 424
+    "width": 496,
+    "height": 354
   },
   "pivot": {
-    "x": 328,
-    "y": 412,
+    "x": 248,
+    "y": 342,
     "meaning": "bottom-centre of the front face (wall item)"
   },
   "footprint": {
-    "widthCm": 640,
+    "widthCm": 480,
     "depthCm": 4
   },
   "heightsCm": {
-    "top": 400
+    "top": 330
   },
   "collision": [],
   "sort": {
@@ -34,11 +34,11 @@
   "temp": {
     "shape": "storefront",
     "kind": "shop",
-    "sign": "MINIMARKET",
-    "accent": "#2A9D8F",
-    "awning": "#F4A261",
-    "door": 110,
+    "sign": "WARUNG KOPI",
+    "accent": "#6B4434",
+    "awning": "#9C7258",
+    "wall": "#EADFCF",
     "maxDensity": 1
   },
-  "$comment": "World 01 placeholder (wall-mounted). Stable id and geometry for future Codex art."
+  "$comment": "World 01 placeholder (wall-mounted)."
 }

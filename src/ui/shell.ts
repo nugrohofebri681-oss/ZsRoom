@@ -27,7 +27,29 @@ export function buildShell(scene: Phaser.Scene, room: RoomData, manifest: AssetM
   // Tiles are laid as plain quads (batched into one draw, cheapest fragment path on mobile GPUs: no
   // repeat shader). Edge tiles are cropped, so nothing spills outside the room.
   tileQuads(scene, wallTile.key, wallTile.w, wallTile.h, 0, -wallH, w, wallH, wallH / wallTile.h);
-  tileQuads(scene, floorTile.key, floorTile.w, floorTile.h, 0, 0, w, floorH, 1 / floorTile.density);
+  // Ground zones (road etc.) are tiled in place of the base floor: base tiles fully inside a zone are skipped.
+  const zones = (room.shell?.zones ?? []).map((z) => ({ ...z, rx: z.x, ry: z.y * K, rw: z.w, rh: z.h * K }));
+  // visible vertical span of a base tile after removing zones that cover its full width (null = fully covered)
+  const visibleSpan = (x: number, y: number, tw: number, th: number): [number, number] | null | undefined => {
+    let a = y, b = y + th;
+    for (const z of zones) {
+      if (!(x >= z.rx && x + tw <= z.rx + z.rw)) continue;
+      const z0 = z.ry, z1 = z.ry + z.rh;
+      if (z0 <= a && z1 >= b) return null;
+      if (z0 <= a && z1 > a) a = z1; else if (z1 >= b && z0 < b) b = z0;
+    }
+    return a === y && b === y + th ? undefined : [a, b];
+  };
+  tileQuads(scene, floorTile.key, floorTile.w, floorTile.h, 0, 0, w, floorH, 1 / floorTile.density, visibleSpan);
+  const marks = scene.add.graphics().setDepth(-99995);
+  for (const z of zones) {
+    const t = resolveTile(scene, getEnvironmentSpec(z.floor), manifest, room, density);
+    tileQuads(scene, t.key, t.w, t.h, z.rx, z.ry, z.rw, z.rh, 1 / t.density);
+    if (z.markings === 'road') {
+      marks.fillStyle(0xd9d4c7, 1).fillRect(z.rx, z.ry, z.rw, 5).fillRect(z.rx, z.ry + z.rh - 5, z.rw, 5);      // kerbs
+      for (let x = z.rx + 20; x < z.rx + z.rw; x += 100) marks.fillStyle(0xf2e9c9, 1).fillRect(x, z.ry + z.rh / 2 - 2, 50, 4);   // centre line
+    }
+  }
 
   const g = scene.add.graphics().setDepth(-99990);
   // ambient occlusion where the floor meets the walls
@@ -78,14 +100,20 @@ export function buildShell(scene: Phaser.Scene, room: RoomData, manifest: AssetM
  * renderer into a single draw; edge tiles are cropped so nothing spills past the room.
  * (Not a Blitter: Phaser 4's Blitter ignores the object's scale when rendering, which broke HD tiles.)
  */
-function tileQuads(scene: Phaser.Scene, key: string, tw: number, th: number, x: number, y: number, w: number, h: number, scale: number): number {
+function tileQuads(scene: Phaser.Scene, key: string, tw: number, th: number, x: number, y: number, w: number, h: number, scale: number,
+  span?: (x: number, y: number, w: number, h: number) => [number, number] | null | undefined): number {
   const wPx = w / scale, hPx = h / scale;
   let n = 0;
   for (let py = 0; py < hPx - 0.01; py += th) {
     for (let px = 0; px < wPx - 0.01; px += tw) {
+      const vis = span?.(x + px * scale, y + py * scale, tw * scale, th * scale);
+      if (vis === null) continue;                                         // fully covered by a ground zone
       const img = scene.add.image(x + px * scale, y + py * scale, key).setOrigin(0, 0).setScale(scale).setDepth(-100000).setName('shell-tile');
       const fw = Math.min(tw, wPx - px), fh = Math.min(th, hPx - py);
-      if (fw < tw || fh < th) img.setCrop(0, 0, Math.ceil(fw), Math.ceil(fh));
+      if (vis) {                                                          // partly under a zone: keep only the uncovered rows
+        const top = (vis[0] - (y + py * scale)) / scale, bot = (vis[1] - (y + py * scale)) / scale;
+        img.setCrop(0, Math.floor(top), Math.ceil(fw), Math.ceil(Math.min(fh, bot) - Math.floor(top)));
+      } else if (fw < tw || fh < th) img.setCrop(0, 0, Math.ceil(fw), Math.ceil(fh));
       n++;
     }
   }
@@ -109,7 +137,7 @@ function resolveTile(scene: Phaser.Scene, spec: EnvironmentSpec, manifest: Asset
     const ctx = c.getContext();
     ctx.scale(w / spec.canvas.width, h / spec.canvas.height);
     const shape = String(spec.temp?.shape ?? '');
-    if (spec.kind === 'floor-tile') (shape === 'tiles' ? drawFloorTiles : shape === 'paving' ? drawPaving : shape === 'grass' ? drawGrass : drawPlanks)(ctx, spec, room);
+    if (spec.kind === 'floor-tile') (shape === 'tiles' ? drawFloorTiles : shape === 'paving' ? drawPaving : shape === 'grass' ? drawGrass : shape === 'asphalt' ? drawAsphalt : drawPlanks)(ctx, spec, room);
     else (shape === 'plain' ? drawPlainWall : drawWallStrip)(ctx, spec, room);
     c.refresh();
   }
@@ -215,4 +243,10 @@ export function drawPlainWall(ctx: CanvasRenderingContext2D, spec: EnvironmentSp
   if (spec.temp?.joints) { ctx.fillStyle = tone(wall, 0.9, 0.6); ctx.fillRect(0, 0, 1.5 * s, H); }
   ctx.fillStyle = base; ctx.fillRect(0, H - Number(spec.temp?.baseCm ?? 15) * s, W, Number(spec.temp?.baseCm ?? 15) * s);
   ctx.fillStyle = trim; ctx.fillRect(0, 0, W, 5 * s);
+}
+
+export function drawAsphalt(ctx: CanvasRenderingContext2D, spec: EnvironmentSpec): void {
+  const W = spec.canvas.width, H = spec.canvas.height, base = String(spec.temp?.base ?? '#6B6870'), r = rnd(41);
+  ctx.fillStyle = base; ctx.fillRect(0, 0, W, H);
+  for (let i = 0; i < 180; i++) { ctx.fillStyle = tone(base, 0.85 + r() * 0.35, 0.6); const x = r() * W, y = r() * H; ctx.fillRect(x, y, 2, 1.5); if (x + 2 > W) ctx.fillRect(x - W, y, 2, 1.5); }
 }

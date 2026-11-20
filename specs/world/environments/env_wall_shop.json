@@ -18,8 +18,8 @@
   "temp": {
     "shape": "plain",
     "wall": "#F4F4F2",
-    "base": "#2A9D8F",
-    "trim": "#D7DEE3",
+    "base": "#0B5CAB",
+    "trim": "#E31E24",
     "baseCm": 20
   },
   "$comment": "World 01 placeholder tile."

@@ -427,6 +427,7 @@ Object.assign(SHAPES, {
     const body = String(t.body ?? '#C9B8A8'), topC = String(t.top ?? tone(body, 1.12)), top = g.h.top ?? 90, d = g.d;
     box(ctx, g, g.L, g.R, 0, top, topC, body, 4 * d, g.py - g.back);
     if (t.stripe) { ctx.fillStyle = String(t.stripe); ctx.fillRect(g.L + 2, g.zy(top) + 6 * d, g.R - g.L - 4, 8 * d); }
+    if (t.stripe2) { ctx.fillStyle = String(t.stripe2); ctx.fillRect(g.L + 2, g.zy(top) + 14 * d, g.R - g.L - 4, 5 * d); }
     if (t.text) label(ctx, String(t.text), g.px, g.zy(top * 0.45), 9 * d, String(t.textColor ?? '#FFFFFF'));
     if (t.register) { const rx = g.R - 30 * d, ry = g.zy(top) - (g.py - g.back) * 0.5; rr(ctx, rx - 12 * d, ry - 18 * d, 24 * d, 18 * d, 3 * d); paint(ctx, '#4A4566', rx - 12 * d, ry - 18 * d, rx + 12 * d, ry, 1.2, 0.85); }
     if (t.shoes) for (let i = 0; i < 4; i++) { const x = g.L + (10 + i * 20) * d; rr(ctx, x, g.zy(top) - 5 * d - (g.py - g.back) * 0.5, 14 * d, 6 * d, 3 * d); ctx.fillStyle = ['#9C7258', '#E8A0B4', '#4A4250', '#F6EBDD'][i]!; ctx.fill(); }
@@ -483,7 +484,7 @@ Object.assign(SHAPES, {
     if (t.sign) { const sh = 46 * d; rr(ctx, g.L + 20 * d, y0 + 22 * d, W - 40 * d, sh, 4 * d); paint(ctx, accent, g.L, y0 + 22 * d, g.R, y0 + 22 * d + sh, 1.15, 0.85); label(ctx, String(t.sign), g.px, y0 + 22 * d + sh / 2, 26 * d); }
     if (kind === 'shop') {
       const ay = y0 + 80 * d; ctx.fillStyle = String(t.awning ?? '#F4A261'); ctx.beginPath(); ctx.moveTo(g.L + 10 * d, ay); ctx.lineTo(g.R - 10 * d, ay); ctx.lineTo(g.R - 4 * d, ay + 26 * d); ctx.lineTo(g.L + 4 * d, ay + 26 * d); ctx.closePath(); ctx.fill();
-      for (let x = g.L + 10 * d; x < g.R - 10 * d; x += 40 * d) { ctx.fillStyle = 'rgba(255,255,255,0.35)'; ctx.fillRect(x, ay, 20 * d, 26 * d); }
+      for (let x = g.L + 10 * d; x < g.R - 10 * d; x += 40 * d) { ctx.fillStyle = t.awningStripe ? String(t.awningStripe) : 'rgba(255,255,255,0.35)'; ctx.fillRect(x, ay, 20 * d, 26 * d); }
       const gy = ay + 34 * d; ctx.fillStyle = 'rgba(170,215,235,0.85)'; ctx.fillRect(g.L + 20 * d, gy, W - 40 * d, y1 - gy - 6 * d);
       ctx.strokeStyle = tone(wall, 0.55); ctx.lineWidth = 3 * d; for (let x = g.L + 20 * d; x <= g.R - 20 * d + 1; x += (W - 40 * d) / 6) { ctx.beginPath(); ctx.moveTo(x, gy); ctx.lineTo(x, y1 - 6 * d); ctx.stroke(); }
       for (let i = 0; i < 9; i++) { ctx.fillStyle = ['#E07A5F', '#F2CC8F', '#81B29A', '#3D85C6'][i % 4]!; ctx.fillRect(g.L + (30 + i * ((W / d - 60) / 9)) * d, y1 - 70 * d, 18 * d, 50 * d); }
@@ -506,6 +507,18 @@ Object.assign(SHAPES, {
     for (const x of [g.px - gap / 2 - 12 * d, g.px + gap / 2 - 12 * d]) { rr(ctx, x, g.zy(top), 24 * d, top * d, 3 * d); paint(ctx, tone(c, 0.95), x, g.zy(top), x + 24 * d, g.py, 1.15, 0.8); }
     ctx.strokeStyle = metal; ctx.lineWidth = 2.5 * d;                                                          // opened gate leaves, folded against the wall
     for (const s of [-1, 1]) { const x = g.px + s * (gap / 2 + 20 * d); for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.moveTo(x + s * i * 8 * d, g.zy(160)); ctx.lineTo(x + s * i * 8 * d, g.py - 4 * d); ctx.stroke(); } }
+  },
+  /** Becak motor (Aceh motorcycle with a covered side-car), side view. */
+  becak(ctx: Ctx, g: Geom, t: TempArtSpec) {
+    const body = String(t.body ?? '#2E7D5B'), hood = String(t.hood ?? '#3A3440'), d = g.d, cy = g.py - (g.py - g.back) / 2, r = 24 * d;
+    const bx0 = g.L + 10 * d, bx1 = g.L + 120 * d;                                  // side-car on the left, motorbike on the right
+    for (const x of [g.L + 40 * d, g.L + 110 * d, g.R - 30 * d]) { ellipse(ctx, x, cy - r, r, r); ctx.fillStyle = '#2E2A30'; ctx.fill(); ellipse(ctx, x, cy - r, r * 0.45, r * 0.45); ctx.fillStyle = '#9AA0A8'; ctx.fill(); }
+    rr(ctx, bx0, cy - 95 * d, bx1 - bx0, 60 * d, 8 * d); paint(ctx, body, bx0, cy - 95 * d, bx1, cy - 35 * d, 1.15, 0.8);           // cab
+    ctx.beginPath(); ctx.moveTo(bx0 - 4 * d, cy - 92 * d); ctx.quadraticCurveTo((bx0 + bx1) / 2, cy - 150 * d, bx1 + 6 * d, cy - 92 * d); ctx.closePath(); paint(ctx, hood, bx0, cy - 150 * d, bx1, cy - 90 * d, 1.25, 0.85);   // hood
+    rr(ctx, bx0 + 12 * d, cy - 82 * d, bx1 - bx0 - 24 * d, 22 * d, 6 * d); ctx.fillStyle = tone(body, 0.7); ctx.fill();                // seat inside
+    ctx.beginPath(); ctx.moveTo(bx1, cy - 40 * d); ctx.quadraticCurveTo((bx1 + g.R) / 2, cy - 30 * d, g.R - 40 * d, cy - 60 * d); ctx.lineTo(g.R - 25 * d, cy - 85 * d); ctx.lineTo(bx1 + 20 * d, cy - 80 * d); ctx.closePath();
+    paint(ctx, tone(body, 1.1), bx1, cy - 90 * d, g.R, cy - 30 * d, 1.2, 0.8);
+    ctx.strokeStyle = '#4A4250'; ctx.lineWidth = 4 * d; ctx.beginPath(); ctx.moveTo(g.R - 30 * d, cy - 85 * d); ctx.lineTo(g.R - 22 * d, cy - 110 * d); ctx.stroke();
   },
   /** Road surface decal: asphalt with a dashed centre line and kerbs. */
   road(ctx: Ctx, g: Geom, t: TempArtSpec) {

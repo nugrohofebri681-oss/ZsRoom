@@ -1,0 +1,46 @@
+{
+  "id": "world_stove",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Gas stove on counter (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 176,
+    "height": 298
+  },
+  "pivot": {
+    "x": 88,
+    "y": 286,
+    "meaning": "front-centre floor contact point"
+  },
+  "footprint": {
+    "widthCm": 80,
+    "depthCm": 60
+  },
+  "heightsCm": {
+    "top": 95
+  },
+  "collision": [
+    {
+      "x": -40.0,
+      "y": -60,
+      "w": 80,
+      "h": 60
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "maxSideOverhangCm": 0,
+  "temp": {
+    "shape": "block",
+    "body": "#F1E2CC",
+    "top": "#4A4250",
+    "text": "STOVE",
+    "textColor": "#5B3A29"
+  },
+  "$comment": "World 01 placeholder geometry (stable id, footprint, pivot, collision)."
+}

@@ -1,0 +1,45 @@
+{
+  "id": "world_kitchen_counter",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Kitchen counter (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 456,
+    "height": 288
+  },
+  "pivot": {
+    "x": 228,
+    "y": 276,
+    "meaning": "front-centre floor contact point"
+  },
+  "footprint": {
+    "widthCm": 220,
+    "depthCm": 60
+  },
+  "heightsCm": {
+    "top": 90
+  },
+  "collision": [
+    {
+      "x": -110.0,
+      "y": -60,
+      "w": 220,
+      "h": 60
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "maxSideOverhangCm": 0,
+  "temp": {
+    "shape": "block",
+    "body": "#F1E2CC",
+    "top": "#C9CED4",
+    "stripe": "#B98A6A"
+  },
+  "$comment": "World 01 placeholder geometry (stable id, footprint, pivot, collision)."
+}

@@ -1,0 +1,45 @@
+{
+  "id": "world_fridge_home",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Kitchen fridge (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 156,
+    "height": 472
+  },
+  "pivot": {
+    "x": 78,
+    "y": 460,
+    "meaning": "front-centre floor contact point"
+  },
+  "footprint": {
+    "widthCm": 70,
+    "depthCm": 70
+  },
+  "heightsCm": {
+    "top": 175
+  },
+  "collision": [
+    {
+      "x": -35.0,
+      "y": -70,
+      "w": 70,
+      "h": 70
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": true,
+  "interactionAnchors": [],
+  "maxSideOverhangCm": 0,
+  "temp": {
+    "shape": "block",
+    "body": "#EEF0F0",
+    "top": "#F7F7F5",
+    "stripe": "#C9CED4"
+  },
+  "$comment": "World 01 placeholder geometry (stable id, footprint, pivot, collision)."
+}

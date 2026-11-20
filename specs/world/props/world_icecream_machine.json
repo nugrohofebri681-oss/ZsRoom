@@ -1,0 +1,46 @@
+{
+  "id": "world_icecream_machine",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Ice-cream machine (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 136,
+    "height": 354
+  },
+  "pivot": {
+    "x": 68,
+    "y": 342,
+    "meaning": "front-centre floor contact point"
+  },
+  "footprint": {
+    "widthCm": 60,
+    "depthCm": 50
+  },
+  "heightsCm": {
+    "top": 130
+  },
+  "collision": [
+    {
+      "x": -30.0,
+      "y": -50,
+      "w": 60,
+      "h": 50
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": true,
+  "interactionAnchors": [],
+  "maxSideOverhangCm": 0,
+  "temp": {
+    "shape": "block",
+    "body": "#D9D4C7",
+    "top": "#F2EFE9",
+    "text": "SOFT",
+    "textColor": "#C8102E"
+  },
+  "$comment": "World 01 placeholder geometry (stable id, footprint, pivot, collision)."
+}

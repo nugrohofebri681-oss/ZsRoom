@@ -50,3 +50,34 @@ export async function holdUntil(page: Page, key: string, fn: string, timeout = 1
   await page.keyboard.down(key);
   try { await until(page, fn, timeout); } finally { await page.keyboard.up(key); }
 }
+
+// ---------------------------------------------------------------- World 01 route helpers
+export async function closeDialogue(page: Page, isMobile: boolean): Promise<void> {
+  for (let i = 0; i < 12 && ((await state(page)) as any).modal; i++) { await press(page, isMobile); await page.waitForTimeout(120); }
+  await until(page, 's.modal === false');
+}
+
+export function doorAnchor(roomId: string, doorId: string): { x: number; y: number } {
+  const r = roomData(roomId), d = r.doors.find((x: any) => x.id === doorId), { w, h } = r.sizeCm;
+  const side = d.side ?? (d.y <= 10 ? 'north' : d.y >= h - 20 ? 'south' : d.x <= 10 ? 'west' : 'east');
+  return side === 'north' ? { x: d.x + d.w / 2, y: 25 } : side === 'south' ? { x: d.x + d.w / 2, y: h - 15 } : side === 'west' ? { x: 15, y: d.y + d.h / 2 } : { x: w - 15, y: d.y + d.h / 2 };
+}
+
+/** Walk (tap-to-move) to a door's spot, then use it with E / the touch button. */
+export async function useDoor(page: Page, isMobile: boolean, doorId: string, expectRoom: string): Promise<void> {
+  const from = ((await state(page)) as any).roomId, a = doorAnchor(from, doorId);
+  await page.evaluate(([x, y]) => (window as any).__ZS.tapWorld(x, y), [a.x, a.y]);
+  await until(page, 's.path === 0', 20000);
+  await until(page, `s.nearest === 'door:${doorId}'`);
+  await press(page, isMobile);
+  await until(page, `s.roomId === '${expectRoom}' && !s.transitioning`, 8000);
+  await page.waitForTimeout(250);
+}
+
+/** Tap the visible part of an object (ground x/y + height z): Zila walks to its interaction spot and uses it. */
+export async function tapObject(page: Page, x: number, y: number, z: number, used: string): Promise<void> {
+  await page.evaluate(([gx, gy, gz]) => (window as any).__ZS.tapWorld(gx, gy, gz), [x, y, z]);
+  await until(page, `s.path === 0 && s.pending === null && (${used})`, 20000);
+  await page.waitForTimeout(150);
+}
+

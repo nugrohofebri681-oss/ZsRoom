@@ -30,6 +30,8 @@ export function doorOpen(d: RoomDoor, flags: Record<string, boolean>): boolean {
   return !d.locked || (!!d.locked.unlessFlag && !!flags[d.locked.unlessFlag]);
 }
 export type MapKind = 'interior' | 'exterior';
+/** A ground area (cm) tiled with its own floor tile; `markings` adds cheap vector details (road kerbs, centre line). */
+export interface GroundZone { floor: string; x: number; y: number; w: number; h: number; markings?: 'road' }
 export interface RoomData {
   id: string;
   displayName: string;
@@ -50,8 +52,9 @@ export interface RoomData {
   spawns: Record<string, RoomSpawn>;
   props: RoomPropEntry[];
   doors: RoomDoor[];
-  /** Environment tiles for the room shell (spec ids). */
-  shell?: { floor: string; wall: string };
+  /** Environment tiles for the room shell (spec ids). `zones` re-tile ground areas (road, path, grass) in place of
+   *  the base floor — drawn once, never as a decal over the floor (no overdraw on fill-bound GPUs). */
+  shell?: { floor: string; wall: string; zones?: GroundZone[] };
 }
 
 /**

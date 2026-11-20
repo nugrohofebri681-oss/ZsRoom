@@ -1,0 +1,47 @@
+{
+  "id": "world_storefront_mixue",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Mixue storefront (reference: real store) (TEMP world placeholder)",
+  "density": 1,
+  "canvas": {
+    "width": 456,
+    "height": 404
+  },
+  "pivot": {
+    "x": 228,
+    "y": 392,
+    "meaning": "bottom-centre of the front face (wall item)"
+  },
+  "footprint": {
+    "widthCm": 440,
+    "depthCm": 4
+  },
+  "heightsCm": {
+    "top": 380
+  },
+  "collision": [],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "placement": {
+    "type": "wall",
+    "wall": "north"
+  },
+  "temp": {
+    "shape": "storefront",
+    "kind": "shop",
+    "sign": "MIXUE",
+    "accent": "#C8102E",
+    "awning": "#C8102E",
+    "awningStripe": "#FFFFFF",
+    "wall": "#FFFFFF",
+    "door": 110,
+    "maxDensity": 1
+  },
+  "$comment": "World 01 placeholder (wall-mounted).",
+  "brandReview": "Real-world brand name and colours used only to signal the intended location. ZsRoom is not affiliated with or endorsed by the brand. Logo, wordmark and trade-dress use must be reviewed before any public release."
+}

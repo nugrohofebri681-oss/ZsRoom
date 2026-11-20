@@ -1,0 +1,46 @@
+{
+  "id": "world_counter_mixue",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Mixue-style order counter (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 356,
+    "height": 322
+  },
+  "pivot": {
+    "x": 178,
+    "y": 310,
+    "meaning": "front-centre floor contact point"
+  },
+  "footprint": {
+    "widthCm": 170,
+    "depthCm": 70
+  },
+  "heightsCm": {
+    "top": 100
+  },
+  "collision": [
+    {
+      "x": -85.0,
+      "y": -70,
+      "w": 170,
+      "h": 70
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": true,
+  "interactionAnchors": [],
+  "maxSideOverhangCm": 0,
+  "temp": {
+    "shape": "block",
+    "body": "#FFFFFF",
+    "top": "#F4F1EC",
+    "stripe": "#C8102E",
+    "register": true
+  },
+  "$comment": "World 01 placeholder geometry. Not an art request yet: when Codex art is commissioned, this spec moves to specs/props with full art fields. Stable id, footprint, pivot and collision."
+}

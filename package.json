@@ -2,7 +2,7 @@
   "name": "zsroom",
   "private": true,
   "version": "0.1.0",
-  "description": "ZsRoom — A Living World of Memories. Premium HD illustrated 2D exploration/life-sim (clean rebuild).",
+  "description": "ZsRoom \u2014 A Living World of Memories. Premium HD illustrated 2D exploration/life-sim (clean rebuild).",
   "type": "module",
   "engines": {
     "node": ">=20"
@@ -20,7 +20,9 @@
     "validate:privacy": "node scripts/privacy-scan.mjs",
     "gallery": "node scripts/build-gallery.mjs",
     "approve": "node scripts/approve-asset.mjs",
-    "qa": "npm run validate:privacy && npm run validate:manifest && npm run validate:art && npm run typecheck && npm test && npm run build && npm run test:e2e && npm run gallery"
+    "qa": "npm run validate:privacy && npm run validate:manifest && npm run validate:art && npm run typecheck && npm test && npm run build && npm run test:e2e && npm run gallery",
+    "build:qa": "tsc --noEmit && vite build --mode qa --outDir dist-qa",
+    "preview:qa": "vite preview --port 4173 --strictPort --outDir dist-qa"
   },
   "dependencies": {
     "phaser": "4.2.1"

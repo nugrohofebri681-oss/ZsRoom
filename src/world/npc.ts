@@ -27,6 +27,8 @@ export interface NpcData {
 export interface NpcState {
   id: string; x: number; y: number; facing: string; moving: boolean;
   target: { x: number; y: number } | null; waitMs: number; leg: number; seed: number; walked: number;
+  /** >0 while stepping aside for the player (ignores the "stop and look" rule until done). */
+  yieldMs?: number;
 }
 
 export const NPC_RADIUS = 16;
@@ -56,6 +58,16 @@ export function dirFrom(dx: number, dy: number): string {
 
 /** Advance one NPC. `blocked(x, y)` says whether the NPC may stand there (static solids + the player). */
 export function stepNpc(n: NpcData, s: NpcState, dtMs: number, player: { x: number; y: number }, blocked: (x: number, y: number) => boolean): void {
+  if (s.yieldMs && s.yieldMs > 0) {                // stepping aside: walk to the side spot, then pause briefly
+    s.yieldMs -= dtMs;
+    const t = s.target;
+    if (t) {
+      const dx = t.x - s.x, dy = t.y - s.y, d = Math.hypot(dx, dy), step = 90 * (dtMs / 1000);
+      if (d <= step) { s.x = t.x; s.y = t.y; s.target = null; s.moving = false; s.waitMs = 1500; }
+      else { s.x += (dx / d) * step; s.y += (dy / d) * step; s.moving = true; s.walked += step; s.facing = dirFrom(dx, dy); }
+    } else { s.moving = false; s.facing = dirFrom(player.x - s.x, player.y - s.y); }
+    return;
+  }
   const near = Math.hypot(player.x - s.x, player.y - s.y) < NOTICE_CM;
   if (near) { s.moving = false; s.facing = dirFrom(player.x - s.x, player.y - s.y); return; }
   const b = n.behaviour;
@@ -79,3 +91,19 @@ export function stepNpc(n: NpcData, s: NpcState, dtMs: number, player: { x: numb
 
 /** Collision box an NPC adds for the player. */
 export function npcSolid(s: NpcState, r = NPC_RADIUS): Rect { return { x: s.x - r, y: s.y - r * 0.6, w: r * 2, h: r * 1.2 }; }
+
+/**
+ * Make way: the player's route is blocked by this NPC. The NPC steps ~60 cm to the side of the player's
+ * direction of travel (the side that is free and farther from the route), once, for a bounded time.
+ * Returns false if neither side is free (the player's path-following then gives up after its timeout).
+ */
+export function yieldTo(s: NpcState, player: { x: number; y: number }, dir: { x: number; y: number }, standable: (x: number, y: number) => boolean, durationMs = 2500): boolean {
+  if (s.yieldMs && s.yieldMs > 0) return true;
+  const len = Math.hypot(dir.x, dir.y) || 1, ux = dir.x / len, uy = dir.y / len;
+  const sides = [{ x: -uy, y: ux }, { x: uy, y: -ux }].map((n) => ({ x: s.x + n.x * 60 + ux * 20, y: s.y + n.y * 60 + uy * 20 }))
+    .filter((p) => standable(p.x, p.y))
+    .sort((a, b) => Math.abs((b.x - player.x) * uy - (b.y - player.y) * ux) - Math.abs((a.x - player.x) * uy - (a.y - player.y) * ux));
+  if (!sides.length) return false;
+  s.target = sides[0]!; s.yieldMs = durationMs; s.waitMs = 0;
+  return true;
+}

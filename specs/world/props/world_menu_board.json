@@ -1,0 +1,43 @@
+{
+  "id": "world_menu_board",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Menu board (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 416,
+    "height": 184
+  },
+  "pivot": {
+    "x": 208,
+    "y": 172,
+    "meaning": "bottom-centre of the front face (wall item)"
+  },
+  "footprint": {
+    "widthCm": 200,
+    "depthCm": 4
+  },
+  "heightsCm": {
+    "top": 80
+  },
+  "collision": [],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "placement": {
+    "type": "wall",
+    "wall": "north"
+  },
+  "temp": {
+    "shape": "panel",
+    "frame": "#C8102E",
+    "face": "#FFF4F0",
+    "lines": 3,
+    "text": "MENU",
+    "textColor": "#C8102E"
+  },
+  "$comment": "World 01 placeholder (wall-mounted)."
+}

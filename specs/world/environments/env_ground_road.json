@@ -1,0 +1,24 @@
+{
+  "id": "env_ground_road",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "environment",
+  "kind": "floor-tile",
+  "displayName": "Asphalt road (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 256,
+    "height": 126
+  },
+  "tile": {
+    "repeat": "xy",
+    "widthCm": 128,
+    "renderDepthCm": 63,
+    "groundDepthCm": 90
+  },
+  "temp": {
+    "shape": "asphalt",
+    "base": "#6B6870"
+  },
+  "$comment": "World 01 placeholder ground zone tile (roads)."
+}

@@ -12,3 +12,4 @@ playwright-report/
 # Never publish private material from the original game into this public branch
 surat/
 **/private/
+dist-qa

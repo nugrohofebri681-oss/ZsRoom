@@ -39,6 +39,8 @@ Engine ✅: layered rig (spec `rig`), facing resolution + mirroring rules (Febri
 - NPCs with schedules; comms contract (placeholder content); save v3.
 - Route e2e test through real doors.
 
+✅ **P1:** kitchen (breakfast loop), Batuphat west block (park, becak motor, warung), Mixue (order loop), Indomaret TEMP identity, NPC yielding, test-only `?fast`, ground zones. **10 connected maps, 6 NPCs.**
+
 All new locations are TEMP and **provisional** pending the Creative Director's world-map and story review.
 
 ## Ordering

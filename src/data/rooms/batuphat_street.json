@@ -18,7 +18,17 @@
   },
   "shell": {
     "floor": "env_ground_street",
-    "wall": "env_wall_street_row"
+    "wall": "env_wall_street_row",
+    "zones": [
+      {
+        "floor": "env_ground_road",
+        "x": 0,
+        "y": 520,
+        "w": 2800,
+        "h": 260,
+        "markings": "road"
+      }
+    ]
   },
   "onEnter": [
     "ev_street_first_visit"
@@ -43,44 +53,14 @@
       "x": 2250,
       "y": 60,
       "facing": "S"
+    },
+    "from_west": {
+      "x": 60,
+      "y": 610,
+      "facing": "E"
     }
   },
   "props": [
-    {
-      "assetId": "world_road",
-      "x": 200,
-      "y": 650
-    },
-    {
-      "assetId": "world_road",
-      "x": 600,
-      "y": 650
-    },
-    {
-      "assetId": "world_road",
-      "x": 1000,
-      "y": 650
-    },
-    {
-      "assetId": "world_road",
-      "x": 1400,
-      "y": 650
-    },
-    {
-      "assetId": "world_road",
-      "x": 1800,
-      "y": 650
-    },
-    {
-      "assetId": "world_road",
-      "x": 2200,
-      "y": 650
-    },
-    {
-      "assetId": "world_road",
-      "x": 2600,
-      "y": 650
-    },
     {
       "assetId": "world_gate_home",
       "wall": {
@@ -96,7 +76,7 @@
       }
     },
     {
-      "assetId": "world_storefront_minimarket",
+      "assetId": "world_storefront_indomaret",
       "wall": {
         "x": 1420,
         "z": 0
@@ -208,7 +188,7 @@
     },
     {
       "id": "minimarket_door",
-      "label": "Enter the minimarket",
+      "label": "Enter Indomaret",
       "style": "none",
       "x": 1365,
       "y": 0,
@@ -250,18 +230,15 @@
     },
     {
       "id": "road_west",
-      "label": "Road west",
+      "label": "Walk west",
       "side": "west",
       "x": 0,
       "y": 480,
       "w": 10,
       "h": 260,
       "to": {
-        "room": "batuphat_more_shops",
-        "spawn": "default"
-      },
-      "locked": {
-        "message": "More of Batuphat lies this way — not available yet (planned)."
+        "room": "batuphat_west",
+        "spawn": "from_street"
       }
     }
   ]

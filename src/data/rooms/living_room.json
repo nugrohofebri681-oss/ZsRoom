@@ -34,6 +34,11 @@
       "x": 450,
       "y": 545,
       "facing": "N"
+    },
+    "from_kitchen": {
+      "x": 60,
+      "y": 280,
+      "facing": "E"
     }
   },
   "props": [
@@ -158,7 +163,7 @@
     },
     {
       "id": "kitchen",
-      "label": "Kitchen",
+      "label": "Go to the kitchen",
       "side": "west",
       "x": 0,
       "y": 220,
@@ -166,10 +171,7 @@
       "h": 120,
       "to": {
         "room": "kitchen",
-        "spawn": "default"
-      },
-      "locked": {
-        "message": "The kitchen isn't built yet (planned location)."
+        "spawn": "from_living"
       }
     }
   ]

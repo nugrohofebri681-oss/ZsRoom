@@ -1,28 +1,361 @@
 {
   "$comment": "Provisional World 01 events (placeholder content). Conditions: flag, notFlag, varEq, varNe, varGte, varLt. Effects: dialogue, say, toast, setFlag, clearFlag, setVar, incVar, comms.",
   "events": [
-    { "id": "ev_street_first_visit", "once": true, "effects": [{ "toast": "Batuphat · provisional neighbourhood" }, { "comms": "comms_placeholder_hello" }] },
-
-    { "id": "ev_shop_pick_drink",
-      "requires": [{ "varEq": ["cart", ""] }],
-      "effects": [{ "setVar": ["cart", "cold tea"] }, { "toast": "Picked up a cold tea" }],
-      "otherwise": [{ "toast": "You already have {cart}" }] },
-    { "id": "ev_shop_pay",
-      "requires": [{ "varNe": ["cart", ""] }],
-      "effects": [{ "setVar": ["cart", ""] }, { "incVar": ["purchases", 1] }, { "setFlag": "shop:first_purchase" }, { "dialogue": "dlg_shop_paid" }],
-      "otherwise": [{ "dialogue": "dlg_shop_nothing" }] },
-
-    { "id": "ev_work_clock",
-      "requires": [{ "varNe": ["shift", "in_progress"] }],
-      "effects": [{ "setVar": ["shift", "in_progress"] }, { "setVar": ["tasksDone", 0] }, { "toast": "Clocked in · 3 tasks today" }],
-      "otherwise": [{ "toast": "Already clocked in ({tasksDone}/3)" }] },
-    { "id": "ev_work_task",
-      "requires": [{ "varEq": ["shift", "in_progress"] }, { "varLt": ["tasksDone", 3] }],
-      "effects": [{ "incVar": ["tasksDone", 1] }, { "toast": "Task done ({tasksDone}/3)" }],
-      "otherwise": [{ "dialogue": "dlg_work_not_started" }] },
-    { "id": "ev_work_clock_out",
-      "requires": [{ "varEq": ["shift", "in_progress"] }, { "varGte": ["tasksDone", 3] }],
-      "effects": [{ "setVar": ["shift", "done"] }, { "incVar": ["workDays", 1] }, { "setFlag": "work:first_shift" }, { "dialogue": "dlg_work_shift_done" }],
-      "otherwise": [{ "dialogue": "dlg_work_unfinished" }] }
+    {
+      "id": "ev_street_first_visit",
+      "once": true,
+      "effects": [
+        {
+          "toast": "Batuphat · provisional neighbourhood"
+        },
+        {
+          "comms": "comms_placeholder_hello"
+        }
+      ]
+    },
+    {
+      "id": "ev_shop_pick_drink",
+      "requires": [
+        {
+          "varEq": [
+            "cart",
+            ""
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "setVar": [
+            "cart",
+            "cold tea"
+          ]
+        },
+        {
+          "toast": "Picked up a cold tea"
+        }
+      ],
+      "otherwise": [
+        {
+          "toast": "You already have {cart}"
+        }
+      ]
+    },
+    {
+      "id": "ev_shop_pay",
+      "requires": [
+        {
+          "varNe": [
+            "cart",
+            ""
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "setVar": [
+            "cart",
+            ""
+          ]
+        },
+        {
+          "incVar": [
+            "purchases",
+            1
+          ]
+        },
+        {
+          "setFlag": "shop:first_purchase"
+        },
+        {
+          "dialogue": "dlg_shop_paid"
+        }
+      ],
+      "otherwise": [
+        {
+          "dialogue": "dlg_shop_nothing"
+        }
+      ]
+    },
+    {
+      "id": "ev_work_clock",
+      "requires": [
+        {
+          "varNe": [
+            "shift",
+            "in_progress"
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "setVar": [
+            "shift",
+            "in_progress"
+          ]
+        },
+        {
+          "setVar": [
+            "tasksDone",
+            0
+          ]
+        },
+        {
+          "toast": "Clocked in · 3 tasks today"
+        }
+      ],
+      "otherwise": [
+        {
+          "toast": "Already clocked in ({tasksDone}/3)"
+        }
+      ]
+    },
+    {
+      "id": "ev_work_task",
+      "requires": [
+        {
+          "varEq": [
+            "shift",
+            "in_progress"
+          ]
+        },
+        {
+          "varLt": [
+            "tasksDone",
+            3
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "incVar": [
+            "tasksDone",
+            1
+          ]
+        },
+        {
+          "toast": "Task done ({tasksDone}/3)"
+        }
+      ],
+      "otherwise": [
+        {
+          "dialogue": "dlg_work_not_started"
+        }
+      ]
+    },
+    {
+      "id": "ev_work_clock_out",
+      "requires": [
+        {
+          "varEq": [
+            "shift",
+            "in_progress"
+          ]
+        },
+        {
+          "varGte": [
+            "tasksDone",
+            3
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "setVar": [
+            "shift",
+            "done"
+          ]
+        },
+        {
+          "incVar": [
+            "workDays",
+            1
+          ]
+        },
+        {
+          "setFlag": "work:first_shift"
+        },
+        {
+          "dialogue": "dlg_work_shift_done"
+        }
+      ],
+      "otherwise": [
+        {
+          "dialogue": "dlg_work_unfinished"
+        }
+      ]
+    },
+    {
+      "id": "ev_kitchen_tea",
+      "effects": [
+        {
+          "incVar": [
+            "teaMade",
+            1
+          ]
+        },
+        {
+          "toast": "Made a cup of tea"
+        }
+      ]
+    },
+    {
+      "id": "ev_kitchen_fridge",
+      "requires": [
+        {
+          "varNe": [
+            "ingredients",
+            "eggs"
+          ]
+        },
+        {
+          "notFlag": "kitchen:breakfast_ready"
+        }
+      ],
+      "effects": [
+        {
+          "setVar": [
+            "ingredients",
+            "eggs"
+          ]
+        },
+        {
+          "toast": "Took eggs from the fridge"
+        }
+      ],
+      "otherwise": [
+        {
+          "toast": "Nothing else needed from the fridge"
+        }
+      ]
+    },
+    {
+      "id": "ev_kitchen_cook",
+      "requires": [
+        {
+          "varEq": [
+            "ingredients",
+            "eggs"
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "setVar": [
+            "ingredients",
+            ""
+          ]
+        },
+        {
+          "setFlag": "kitchen:breakfast_ready"
+        },
+        {
+          "dialogue": "dlg_kitchen_cooked"
+        }
+      ],
+      "otherwise": [
+        {
+          "dialogue": "dlg_kitchen_nothing"
+        }
+      ]
+    },
+    {
+      "id": "ev_kitchen_eat",
+      "requires": [
+        {
+          "flag": "kitchen:breakfast_ready"
+        }
+      ],
+      "effects": [
+        {
+          "clearFlag": "kitchen:breakfast_ready"
+        },
+        {
+          "incVar": [
+            "mealsEaten",
+            1
+          ]
+        },
+        {
+          "dialogue": "dlg_kitchen_ate"
+        }
+      ],
+      "otherwise": [
+        {
+          "toast": "Nothing on the table yet"
+        }
+      ]
+    },
+    {
+      "id": "ev_west_first_visit",
+      "once": true,
+      "effects": [
+        {
+          "toast": "Batuphat · west block (provisional)"
+        }
+      ]
+    },
+    {
+      "id": "ev_mixue_order",
+      "requires": [
+        {
+          "varEq": [
+            "mixueOrder",
+            ""
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "setVar": [
+            "mixueOrder",
+            "ice cream cone"
+          ]
+        },
+        {
+          "incVar": [
+            "mixueVisits",
+            1
+          ]
+        },
+        {
+          "toast": "Ordered an ice cream cone"
+        }
+      ],
+      "otherwise": [
+        {
+          "toast": "Your {mixueOrder} is ready"
+        }
+      ]
+    },
+    {
+      "id": "ev_mixue_enjoy",
+      "requires": [
+        {
+          "varNe": [
+            "mixueOrder",
+            ""
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "setVar": [
+            "mixueOrder",
+            ""
+          ]
+        },
+        {
+          "setFlag": "mixue:first_treat"
+        },
+        {
+          "dialogue": "dlg_mixue_enjoy"
+        }
+      ],
+      "otherwise": [
+        {
+          "dialogue": "dlg_mixue_nothing"
+        }
+      ]
+    }
   ]
 }

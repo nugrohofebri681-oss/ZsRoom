@@ -15,10 +15,11 @@ export default defineConfig({
     launchOptions: executablePath ? { executablePath } : {},
   },
   webServer: {
-    command: 'npm run preview',
+    // Tests run against the QA build (test-only switches such as ?fast); `npm run build` stays production-clean.
+    command: 'npm run build:qa && npm run preview:qa',
     url: 'http://localhost:4173',
     reuseExistingServer: !process.env.CI,
-    timeout: 60_000,
+    timeout: 120_000,
   },
   projects: [
     { name: 'desktop-chromium', use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 720 } } },

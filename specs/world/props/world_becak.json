@@ -1,0 +1,57 @@
+{
+  "id": "world_becak",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Becak motor (Aceh motor rickshaw) (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 456,
+    "height": 478
+  },
+  "pivot": {
+    "x": 228,
+    "y": 466,
+    "meaning": "front-centre floor contact point"
+  },
+  "footprint": {
+    "widthCm": 220,
+    "depthCm": 110
+  },
+  "heightsCm": {
+    "top": 150
+  },
+  "collision": [
+    {
+      "x": -110.0,
+      "y": -110,
+      "w": 220,
+      "h": 110
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": true,
+  "interactionAnchors": [
+    {
+      "id": "look",
+      "label": "Look at the becak",
+      "x": 0,
+      "y": 30,
+      "facing": "N",
+      "radiusCm": 55,
+      "action": {
+        "type": "dialogue",
+        "id": "dlg_west_becak"
+      }
+    }
+  ],
+  "maxSideOverhangCm": 0,
+  "temp": {
+    "shape": "becak",
+    "body": "#2E7D5B",
+    "hood": "#3A3440"
+  },
+  "$comment": "World 01 placeholder geometry (stable id, footprint, pivot, collision)."
+}

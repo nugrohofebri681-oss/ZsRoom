@@ -1,0 +1,26 @@
+{
+  "id": "env_wall_mixue",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "environment",
+  "kind": "wall-strip",
+  "displayName": "Mixue-style shop wall (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 120,
+    "height": 540
+  },
+  "tile": {
+    "repeat": "x",
+    "widthCm": 60,
+    "heightCm": 270
+  },
+  "temp": {
+    "shape": "plain",
+    "wall": "#FFFFFF",
+    "base": "#C8102E",
+    "trim": "#C8102E",
+    "baseCm": 25
+  },
+  "$comment": "World 01 placeholder tile."
+}

@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { boot, press, roomData, state, until, SHOTS } from './helpers';
+import { boot, closeDialogue, press, roomData, state, tapObject, until, useDoor, SHOTS } from './helpers';
 
 /**
  * World 01 P0 route, walked for real: every map change goes through a door (walk to it, use it).
@@ -7,35 +7,6 @@ import { boot, press, roomData, state, until, SHOTS } from './helpers';
  * street → workplace → street → yard → living room → stairs → hall → bedroom, with save/reload.
  */
 const S = (p: Page): Promise<any> => state(p);
-
-async function closeDialogue(page: Page, isMobile: boolean): Promise<void> {
-  for (let i = 0; i < 12 && (await S(page)).modal; i++) { await press(page, isMobile); await page.waitForTimeout(120); }
-  await until(page, 's.modal === false');
-}
-
-function doorAnchor(roomId: string, doorId: string): { x: number; y: number } {
-  const r = roomData(roomId), d = r.doors.find((x: any) => x.id === doorId), { w, h } = r.sizeCm;
-  const side = d.side ?? (d.y <= 10 ? 'north' : d.y >= h - 20 ? 'south' : d.x <= 10 ? 'west' : 'east');
-  return side === 'north' ? { x: d.x + d.w / 2, y: 25 } : side === 'south' ? { x: d.x + d.w / 2, y: h - 15 } : side === 'west' ? { x: 15, y: d.y + d.h / 2 } : { x: w - 15, y: d.y + d.h / 2 };
-}
-
-/** Walk (tap-to-move) to a door's spot, then use it with E / the touch button. */
-async function useDoor(page: Page, isMobile: boolean, doorId: string, expectRoom: string): Promise<void> {
-  const from = (await S(page)).roomId, a = doorAnchor(from, doorId);
-  await page.evaluate(([x, y]) => (window as any).__ZS.tapWorld(x, y), [a.x, a.y]);
-  await until(page, 's.path === 0', 20000);
-  await until(page, `s.nearest === 'door:${doorId}'`);
-  await press(page, isMobile);
-  await until(page, `s.roomId === '${expectRoom}' && !s.transitioning`, 8000);
-  await page.waitForTimeout(250);
-}
-
-/** Tap the visible part of an object (ground x/y + height z): Zila walks to its interaction spot and uses it. */
-async function tapObject(page: Page, x: number, y: number, z: number, used: string): Promise<void> {
-  await page.evaluate(([gx, gy, gz]) => (window as any).__ZS.tapWorld(gx, gy, gz), [x, y, z]);
-  await until(page, `s.path === 0 && s.pending === null && (${used})`, 20000);
-  await page.waitForTimeout(150);
-}
 
 test.describe('World 01 P0 route', () => {
   test.setTimeout(300_000);
@@ -127,11 +98,16 @@ test.describe('World 01 P0 route', () => {
     await page.keyboard.down('ArrowRight'); await until(page, "s.roomId === 'living_room'", 8000); await page.keyboard.up('ArrowRight');
     const s = await S(page);
     expect(s.player).toMatchObject({ x: roomData('living_room').spawns.from_stairs.x, y: roomData('living_room').spawns.from_stairs.y });
-    // locked kitchen: walking into it is blocked by the wall
+    // west doorway (kitchen, opened in World 01 P1): walking west through it changes map
     await page.evaluate(() => (window as any).__ZS.teleport(60, 280));
-    await page.keyboard.down('ArrowLeft'); await page.waitForTimeout(800); await page.keyboard.up('ArrowLeft');
-    expect((await S(page)).roomId).toBe('living_room');
-    expect((await S(page)).player.x).toBeGreaterThanOrEqual(15);
+    await page.keyboard.down('ArrowLeft'); await until(page, "s.roomId === 'kitchen'", 8000); await page.keyboard.up('ArrowLeft');
+    // locked road end on the street: walking into it is blocked by the wall
+    await page.goto('/?fresh&room=batuphat_street'); await page.waitForFunction(() => (window as any).__ZS?.state?.());
+    for (let i = 0; i < 6 && (await S(page)).modal; i++) await page.keyboard.press('KeyE');
+    await page.evaluate(() => (window as any).__ZS.teleport(2760, 610));
+    await page.keyboard.down('ArrowRight'); await page.waitForTimeout(800); await page.keyboard.up('ArrowRight');
+    expect((await S(page)).roomId).toBe('batuphat_street');
+    expect((await S(page)).player.x).toBeLessThanOrEqual(2800 - 15);
     expect(errors).toEqual([]);
   });
 

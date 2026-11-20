@@ -21,8 +21,8 @@
     "depthCm": 50
   },
   "heightsCm": {
-    "seat": 38,
-    "top": 38
+    "seat": 30,
+    "top": 30
   },
   "artBounds": {
     "x": 14,
@@ -61,7 +61,7 @@
           "x": 0,
           "y": -25
         },
-        "heightCm": 38,
+        "heightCm": 30,
         "facing": "S"
       }
     }
@@ -99,5 +99,6 @@
       "diameterCm": 50,
       "topDiameterCm": 46
     }
-  ]
+  ],
+  "$seatMeasurement": "Seat 30 cm measured on prop_pouf_floor v001 master (seat-plane centre at canvas y≈75 → 93 px above the pivot = 25 cm depth × 0.7 + 30 cm). Was nominal 38 cm; changed so a seated character neither floats nor sinks. Pending Creative Director decision."
 }

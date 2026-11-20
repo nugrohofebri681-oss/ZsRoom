@@ -54,7 +54,9 @@
     "radiusCm": 150,
     "intensity": 0.3,
     "defaultOn": true,
-    "coreSizeCm": 36
+    "coreSizeCm": 0,
+    "selfLit": 0.75,
+    "$selfLitComment": "No bright core (it covered the lettering). The engine lights the painted tubes instead: an additive, light-coloured copy of the art over itself, scaled by the night boost."
   },
   "temp": {
     "shape": "neon",

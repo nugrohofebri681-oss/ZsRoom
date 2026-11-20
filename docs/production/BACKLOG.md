@@ -12,11 +12,11 @@ Legend: ✅ done · 🟡 in progress or requested · ⏳ blocked by a dependency
 **10 approved assets in the bedroom.**
 
 ## Group C — Soft furnishings & wall → [Request 005](../art-requests/005-batch-c-soft-wall.md) — **NEXT (highest visual impact: window, rug and wall cover the largest screen area)**
-window + curtains · rug · wall shelf · photo string · fairy lights · neon sign — 🟡 requested. Engine support done (wall layer, decal layer, sky behind glass, lights).
+window + curtains · rug · wall shelf · photo string · fairy lights · neon sign — 🟡 **v001 submitted (PR #14), in-game review done: all six recommended for acceptance** ([review](../reviews/batch-cd-r1.md)); awaiting CD VISUAL PASS. Engine: per-bulb glow, self-lit neon, curtains behind the frame. Engine support done (wall layer, decal layer, sky behind glass, lights).
 ⬜ Follow-up: a closed-curtains art state for the window (the engine currently draws simple closed curtains).
 
 ## Group D — Living details → [Request 006](../art-requests/006-batch-d-living-details.md) — **NEXT, in parallel with C** (independent assets, separate branch)
-tall plant · cat bed with sleeping cat · pouf · small plant — 🟡 requested.
+tall plant · cat bed with sleeping cat · pouf · small plant — 🟡 **v001 submitted (PR #15), all four recommended for acceptance**; pouf seat measured at 30 cm; small plant moved beside the door. Awaiting CD VISUAL PASS.
 
 ## Group E — Room shell (environment art) → [Request 007](../art-requests/007-batch-e-room-shell.md)
 - Engine ✅: tile shell (Blitter quads, edge-cropped frames, runtime density), spec type `environment`, seamless-edge check in `validate-art`, and the same render path for TEMP and approved tiles.

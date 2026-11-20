@@ -210,7 +210,7 @@ export class RoomScene extends Phaser.Scene {
           fontFamily: 'system-ui, sans-serif', fontSize: '8px', color: '#fff4f7', backgroundColor: '#c0607ecc', padding: { x: 3, y: 1 },
         }).setOrigin(0.5, 1).setResolution(3).setDepth(95000));
       }
-      if (p.spec.light) this.lighting.add(p.key, p.spec.light, p.x, p.y, p.z, p.layer === 'wall', this.flags[`light:${this.room.data.id}:${p.key}`]);
+      if (p.spec.light) this.lighting.add(p.key, p.spec.light, p.x, p.y, p.z, p.layer === 'wall', this.flags[`light:${this.room.data.id}:${p.key}`], view instanceof Phaser.GameObjects.Image ? view : undefined);
     }
   }
 
@@ -219,10 +219,16 @@ export class RoomScene extends Phaser.Scene {
     const gl = p.spec.glass!;
     const tl = groundToRender(p.x + gl.x, 0, p.z + gl.z + gl.h);
     const img = this.add.image(tl.x, tl.y, this.skyTexture()).setOrigin(0, 0).setDisplaySize(gl.w, gl.h).setDepth(propDepth - 0.01);
-    const curtains = this.add.graphics().setDepth(propDepth + 0.01);
-    curtains.fillStyle(0xe8a0b4, 1).fillRoundedRect(tl.x - 2, tl.y - 2, gl.w / 2 + 2, gl.h + 4, 3).fillRoundedRect(tl.x + gl.w / 2, tl.y - 2, gl.w / 2 + 2, gl.h + 4, 3);
-    curtains.lineStyle(1.2, 0xc0607e, 0.7);
-    for (let i = 1; i < 6; i++) curtains.lineBetween(tl.x + (gl.w / 6) * i, tl.y, tl.x + (gl.w / 6) * i, tl.y + gl.h);
+    // Closed curtains: drawn BEHIND the window art (between sky and art), so the painted frame, glazing bars
+    // and tie-back curtains stay on top; soft vertical folds instead of a flat slab over the painting.
+    const curtains = this.add.graphics().setDepth(propDepth - 0.005);
+    const folds = 14, fw = gl.w / folds;
+    for (let i = 0; i < folds; i++) {
+      const shade = 0.5 + 0.5 * Math.cos((i / folds) * Math.PI * 2 * 3.5);
+      const c = Phaser.Display.Color.Interpolate.ColorWithColor(Phaser.Display.Color.ValueToColor(0xd88aa0), Phaser.Display.Color.ValueToColor(0xf3c3cf), 1, shade);
+      curtains.fillStyle(Phaser.Display.Color.GetColor(c.r, c.g, c.b), 1).fillRect(tl.x + i * fw, tl.y, fw + 0.5, gl.h);
+    }
+    curtains.fillStyle(0x9a5a6c, 0.18).fillRect(tl.x + gl.w / 2 - 0.6, tl.y, 1.2, gl.h);   // the meeting edge
     this.skies.push({ img, curtains });
   }
 
@@ -623,6 +629,7 @@ export class RoomScene extends Phaser.Scene {
         displayObjects: this.children.length,
         highlight: { target: this.glowTarget, visible: !!(this.glow?.visible || this.doorGlow?.visible), depth: this.glow?.visible ? this.glow.depth : null },
         floor: this.lastFloor,
+        windows: this.skies.map((w) => ({ skyDepth: w.img.depth, curtainDepth: w.curtains.depth, curtainsVisible: w.curtains.visible })),
         audio: { state: audio().state, muted: audio().prefs.muted, prefs: { ...audio().prefs }, played: { ...audio().stats.played }, unlocks: audio().stats.unlocks, ambience: audio().ambience, wantedAmbience: audio().wanted, bufferBytes: audio().bufferBytes() },
       }),
       teleport: (x: number, y: number) => { this.seated = null; this.path = []; this.pendingAnchor = null; this.pos = { x, y }; this.syncActor(); this.snapCamera(); },

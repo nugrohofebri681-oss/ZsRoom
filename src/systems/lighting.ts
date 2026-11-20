@@ -20,7 +20,7 @@ const HOLE_STRENGTH = 0.75;
 const WARM_TINT = 1.1;
 const GLOW_DEPTH = 90000;
 
-interface LightEntry { key: string; spec: LightSpec; ex: number; ey: number; fx: number; fy: number; wall: boolean; on: boolean; core?: Phaser.GameObjects.Image }
+interface LightEntry { key: string; spec: LightSpec; ex: number; ey: number; fx: number; fy: number; wall: boolean; on: boolean; core?: Phaser.GameObjects.Image; bulbs: { x: number; y: number }[]; glows: { img: Phaser.GameObjects.Image; k: number }[] }
 export interface LightLook { overlay: { color: string; alpha: number }; lightBoost: number }
 
 export class LightingSystem {
@@ -41,10 +41,28 @@ export class LightingSystem {
     ensureCore(scene);
   }
 
-  add(key: string, spec: LightSpec, x: number, y: number, z: number, wall: boolean, on?: boolean): void {
+  /**
+   * @param art the prop's own image: needed for `selfLit` (neon) and to place bulb glows just above the art
+   *            (so a character standing in front of the wall still covers them).
+   */
+  add(key: string, spec: LightSpec, x: number, y: number, z: number, wall: boolean, on?: boolean, art?: Phaser.GameObjects.Image): void {
     const e = groundToRender(x + spec.emitter.x, y + spec.emitter.y, z + spec.emitter.z);
     const f = groundToRender(x + spec.emitter.x, y + spec.emitter.y + 40, 0);
-    const entry: LightEntry = { key, spec, ex: e.x, ey: e.y, fx: f.x, fy: f.y, wall, on: on ?? spec.defaultOn };
+    const bulbs = (spec.points ?? []).map((p) => groundToRender(x + p.x, y, z + p.z));
+    const entry: LightEntry = { key, spec, ex: e.x, ey: e.y, fx: f.x, fy: f.y, wall, on: on ?? spec.defaultOn, bulbs, glows: [] };
+    const artDepth = (art?.depth ?? GLOW_DEPTH) + 0.02;
+    const tint = Phaser.Display.Color.HexStringToColor(spec.color).color;
+    if (bulbs.length) {
+      // all bulb glows of one string baked into ONE small additive texture (one quad, no per-bulb sprites)
+      const tex = bulbStrip(this.scene, `fx:bulbs:${key}`, bulbs, spec.color);
+      entry.glows.push({ img: this.scene.add.image(tex.x, tex.y, tex.key).setOrigin(0, 0).setScale(BULB_CM_PER_PX).setBlendMode(Phaser.BlendModes.ADD).setDepth(artDepth), k: 1 });
+    }
+    if (spec.selfLit && art) {
+      // lit tubes: the painted strokes themselves brighten in the light colour (plus a slightly larger soft copy)
+      const copy = (grow: number, k: number) => entry.glows.push({ k, img: this.scene.add.image(art.x, art.y, art.texture.key).setOrigin(art.originX, art.originY)
+        .setScale(art.scaleX * grow, art.scaleY * grow).setTint(tint).setBlendMode(Phaser.BlendModes.ADD).setDepth(artDepth) });
+      copy(1, spec.selfLit); copy(1.04, spec.selfLit * 0.35);
+    }
     const coreSize = spec.coreSizeCm ?? 60;
     if (coreSize > 0) {
       entry.core = this.scene.add.image(e.x, e.y, CORE_TEX).setTint(Phaser.Display.Color.HexStringToColor(spec.color).color)
@@ -57,7 +75,9 @@ export class LightingSystem {
   isOn(key: string): boolean { return !!this.lights.get(key)?.on; }
   toggle(key: string): boolean { const l = this.lights.get(key); if (!l) return false; l.on = !l.on; this.bake(); return l.on; }
   setLook(look: LightLook): void { this.look = look; this.bake(); }
-  states(): { key: string; on: boolean }[] { return [...this.lights.values()].map((l) => ({ key: l.key, on: l.on })); }
+  states(): { key: string; on: boolean; core: boolean; glows: number; glowAlpha: number; glowDepth: number | null }[] {
+    return [...this.lights.values()].map((l) => ({ key: l.key, on: l.on, core: !!l.core, glows: l.glows.length, glowAlpha: l.glows[0]?.img.visible ? l.glows[0].img.alpha : 0, glowDepth: l.glows[0]?.img.depth ?? null }));
+  }
   /** Full-screen blended layers drawn per frame by lighting (0 or 1; a cropped quad counts by coverage). */
   fullScreenLayers(): number { return this.img.visible ? Math.round(this.coverage * 100) / 100 : 0; }
 
@@ -97,7 +117,12 @@ export class LightingSystem {
       this.coverage = (cw * ch) / (W * H);
     } else this.coverage = 0;
     this.img.setVisible(this.coverage > 0);
-    for (const l of this.lights.values()) l.core?.setVisible(l.on).setAlpha(0.45 + 0.4 * boost);
+    for (const l of this.lights.values()) {
+      l.core?.setVisible(l.on).setAlpha(0.45 + 0.4 * boost);
+      // glows read strongly at night and only faintly by day (boost rises as the room darkens)
+      const level = Phaser.Math.Clamp((boost - 0.3) / 0.7, 0, 1);   // 0 afternoon … 1 night
+      for (const g of l.glows) g.img.setVisible(l.on).setAlpha(Math.min(1, g.k * (0.12 + 0.88 * level)));
+    }
   }
 }
 
@@ -117,8 +142,27 @@ function radial(ctx: CanvasRenderingContext2D, c: { x: number; y: number }, rx: 
 function shapes(l: LightEntry): { x: number; y: number; rx: number; ry: number; strength: number }[] {
   const r = l.spec.radiusCm;
   const halo = { x: l.ex, y: l.ey, rx: r * 0.5, ry: r * 0.5, strength: 0.8 };
-  if (l.wall) return [halo, { x: l.ex, y: l.ey + r * 0.35, rx: r, ry: r * 0.55, strength: 0.6 }];
+  const bulbs = l.bulbs.map((b) => ({ x: b.x, y: b.y + 6, rx: 22, ry: 22, strength: 0.7 }));   // each bulb lifts the darkness locally
+  if (l.wall) return [halo, { x: l.ex, y: l.ey + r * 0.35, rx: r, ry: r * 0.55, strength: 0.6 }, ...bulbs];
   return [halo, { x: l.fx, y: l.fy, rx: r, ry: r * DEPTH_SCALE * 1.15, strength: 1 }];
+}
+
+const BULB_CM_PER_PX = 0.5;
+/** Soft glow dots for every bulb of a string, drawn once into a canvas covering just the string. */
+function bulbStrip(scene: Phaser.Scene, key: string, bulbs: { x: number; y: number }[], color: string): { key: string; x: number; y: number } {
+  const R = 9, x0 = Math.min(...bulbs.map((b) => b.x)) - R, y0 = Math.min(...bulbs.map((b) => b.y)) - R;
+  const w = Math.ceil((Math.max(...bulbs.map((b) => b.x)) + R - x0) / BULB_CM_PER_PX), h = Math.ceil((Math.max(...bulbs.map((b) => b.y)) + R - y0) / BULB_CM_PER_PX);
+  if (scene.textures.exists(key)) scene.textures.remove(key);
+  const tex = scene.textures.createCanvas(key, w, h)!, ctx = tex.getContext(), [r, g, b] = rgb(color);
+  for (const p of bulbs) {
+    const cx = (p.x - x0) / BULB_CM_PER_PX, cy = (p.y - y0) / BULB_CM_PER_PX, rr = R / BULB_CM_PER_PX;
+    const gr = ctx.createRadialGradient(cx, cy, 0, cx, cy, rr);
+    gr.addColorStop(0, 'rgba(255,248,225,0.95)'); gr.addColorStop(0.18, `rgba(${r},${g},${b},0.75)`);
+    gr.addColorStop(0.5, `rgba(${r},${g},${b},0.22)`); gr.addColorStop(1, `rgba(${r},${g},${b},0)`);
+    ctx.fillStyle = gr; ctx.fillRect(cx - rr, cy - rr, rr * 2, rr * 2);
+  }
+  tex.refresh();
+  return { key, x: x0, y: y0 };
 }
 
 function rgb(hex: string): [number, number, number] { const n = parseInt(hex.replace('#', ''), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }

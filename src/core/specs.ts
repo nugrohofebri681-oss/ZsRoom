@@ -61,6 +61,10 @@ export interface LightSpec {
   radiusCm: number;
   intensity: number;                               // 0..1 alpha of the room pool
   coreSizeCm?: number;                             // bright core diameter at the emitter (0 = none, e.g. light strings)
+  /** Light strings: bulb centres (cm, x along the wall / z up, relative to the prop pivot). One soft glow each. */
+  points?: { x: number; z: number }[];
+  /** 0..1: the engine lights the painted art itself (additive light-coloured copy), e.g. neon tubes. */
+  selfLit?: number;
   defaultOn: boolean;
 }
 

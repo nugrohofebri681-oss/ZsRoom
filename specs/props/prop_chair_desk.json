@@ -62,7 +62,8 @@
           "y": -22
         },
         "heightCm": 45,
-        "facing": "N"
+        "facing": "N",
+        "seatBehind": true
       }
     }
   ],
@@ -89,5 +90,6 @@
     "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
   ],
   "submissionPath": "art/submissions/prop_chair_desk/<version>/",
-  "artRequest": "docs/art-requests/004-batch-b-furniture.md"
+  "artRequest": "docs/art-requests/004-batch-b-furniture.md",
+  "designNotes": "Rear view (r2): seated Zila is drawn BEHIND the chair so the backrest overlaps her hips and lower back."
 }

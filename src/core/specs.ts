@@ -7,7 +7,7 @@ export type ActionSpec =
   | { type: 'outfit' }
   | { type: 'toggleLight' }
   | { type: 'toggleVar'; var: string; messages?: Record<string, string> }
-  | { type: 'sit'; seat: { x: number; y: number }; heightCm: number; facing: string };
+  | { type: 'sit'; seat: { x: number; y: number }; heightCm: number; facing: string; seatBehind?: boolean };
 
 export interface InteractionAnchorSpec {
   id: string; label: string; x: number; y: number; facing: string; radiusCm: number;

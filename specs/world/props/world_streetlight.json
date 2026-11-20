@@ -1,0 +1,56 @@
+{
+  "id": "world_streetlight",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Street light (TEMP world placeholder)",
+  "density": 1,
+  "canvas": {
+    "width": 106,
+    "height": 525
+  },
+  "pivot": {
+    "x": 53,
+    "y": 513,
+    "meaning": "front-centre floor contact point"
+  },
+  "footprint": {
+    "widthCm": 30,
+    "depthCm": 30
+  },
+  "heightsCm": {
+    "top": 480
+  },
+  "collision": [
+    {
+      "x": -10,
+      "y": -20,
+      "w": 20,
+      "h": 20
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": true,
+  "interactionAnchors": [],
+  "maxSideOverhangCm": 30,
+  "temp": {
+    "shape": "pole",
+    "color": "#5E6670",
+    "maxDensity": 1
+  },
+  "$comment": "World 01 placeholder geometry. Not an art request yet: when Codex art is commissioned, this spec moves to specs/props with full art fields. Stable id, footprint, pivot and collision.",
+  "light": {
+    "emitter": {
+      "x": 34,
+      "y": 0,
+      "z": 470
+    },
+    "color": "#FFD9A0",
+    "radiusCm": 320,
+    "intensity": 0.35,
+    "defaultOn": true,
+    "coreSizeCm": 36
+  }
+}

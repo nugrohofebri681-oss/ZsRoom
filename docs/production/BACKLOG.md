@@ -34,6 +34,15 @@ Engine ✅: layered rig (spec `rig`), facing resolution + mirroring rules (Febri
 - Physical Android performance check (Galaxy A05 class): record fps and memory in `docs/reviews/`.
 - Texture atlas packing when the approved art count exceeds ~10 per room.
 
+## World 01 — Batuphat–Lhokseumawe → [WORLD_01_ROADMAP.md](WORLD_01_ROADMAP.md)
+✅ **P0 checkpoint 1:**
+- 7 connected maps (bedroom → hall → stairs → living room → yard → street → minimarket / workplace).
+- Four-side, locked and story-gated doors; exterior maps; story events and dialogue data.
+- NPCs with schedules; comms contract (placeholder content); save v3.
+- Route e2e test through real doors.
+
+All new locations are TEMP and **provisional** pending the Creative Director's world-map and story review.
+
 ## Ordering
 1. **Now, in parallel:** Codex runs Batch C (`codex/art/batch-c-r1`) and Batch D (`codex/art/batch-d-r1`). Claude continues Group G (sound, interaction highlight, real-device performance) and character frame loading.
 2. **After each batch:** Claude runs the in-game review (gallery, bed pairing, gameplay screenshots), the CD approves per asset, and Claude integrates the approved ones in a single merge.

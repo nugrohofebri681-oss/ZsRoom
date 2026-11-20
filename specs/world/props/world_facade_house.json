@@ -1,0 +1,41 @@
+{
+  "id": "world_facade_house",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Neighbour house facade (TEMP world placeholder)",
+  "density": 1,
+  "canvas": {
+    "width": 496,
+    "height": 384
+  },
+  "pivot": {
+    "x": 248,
+    "y": 372,
+    "meaning": "bottom-centre of the front face (wall item)"
+  },
+  "footprint": {
+    "widthCm": 480,
+    "depthCm": 4
+  },
+  "heightsCm": {
+    "top": 360
+  },
+  "collision": [],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "placement": {
+    "type": "wall",
+    "wall": "north"
+  },
+  "temp": {
+    "shape": "storefront",
+    "kind": "house",
+    "wall": "#F1E2CC",
+    "maxDensity": 1
+  },
+  "$comment": "World 01 placeholder (wall-mounted). Stable id and geometry for future Codex art."
+}

@@ -1,0 +1,28 @@
+{
+  "$comment": "Provisional World 01 events (placeholder content). Conditions: flag, notFlag, varEq, varNe, varGte, varLt. Effects: dialogue, say, toast, setFlag, clearFlag, setVar, incVar, comms.",
+  "events": [
+    { "id": "ev_street_first_visit", "once": true, "effects": [{ "toast": "Batuphat · provisional neighbourhood" }, { "comms": "comms_placeholder_hello" }] },
+
+    { "id": "ev_shop_pick_drink",
+      "requires": [{ "varEq": ["cart", ""] }],
+      "effects": [{ "setVar": ["cart", "cold tea"] }, { "toast": "Picked up a cold tea" }],
+      "otherwise": [{ "toast": "You already have {cart}" }] },
+    { "id": "ev_shop_pay",
+      "requires": [{ "varNe": ["cart", ""] }],
+      "effects": [{ "setVar": ["cart", ""] }, { "incVar": ["purchases", 1] }, { "setFlag": "shop:first_purchase" }, { "dialogue": "dlg_shop_paid" }],
+      "otherwise": [{ "dialogue": "dlg_shop_nothing" }] },
+
+    { "id": "ev_work_clock",
+      "requires": [{ "varNe": ["shift", "in_progress"] }],
+      "effects": [{ "setVar": ["shift", "in_progress"] }, { "setVar": ["tasksDone", 0] }, { "toast": "Clocked in · 3 tasks today" }],
+      "otherwise": [{ "toast": "Already clocked in ({tasksDone}/3)" }] },
+    { "id": "ev_work_task",
+      "requires": [{ "varEq": ["shift", "in_progress"] }, { "varLt": ["tasksDone", 3] }],
+      "effects": [{ "incVar": ["tasksDone", 1] }, { "toast": "Task done ({tasksDone}/3)" }],
+      "otherwise": [{ "dialogue": "dlg_work_not_started" }] },
+    { "id": "ev_work_clock_out",
+      "requires": [{ "varEq": ["shift", "in_progress"] }, { "varGte": ["tasksDone", 3] }],
+      "effects": [{ "setVar": ["shift", "done"] }, { "incVar": ["workDays", 1] }, { "setFlag": "work:first_shift" }, { "dialogue": "dlg_work_shift_done" }],
+      "otherwise": [{ "dialogue": "dlg_work_unfinished" }] }
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "id": "workplace",
+  "displayName": "Workplace (placeholder)",
+  "world": "world01",
+  "floor": "ground",
+  "kind": "interior",
+  "provisional": true,
+  "storyConfig": "workplace",
+  "sizeCm": {
+    "w": 800,
+    "h": 560
+  },
+  "wallHeightCm": 280,
+  "palette": {
+    "floor": "#D5D2CC",
+    "wall": "#E9EDF1",
+    "trim": "#C9CED4"
+  },
+  "shell": {
+    "floor": "env_floor_office",
+    "wall": "env_wall_office"
+  },
+  "spawns": {
+    "default": {
+      "x": 400,
+      "y": 480,
+      "facing": "N"
+    },
+    "from_street": {
+      "x": 400,
+      "y": 500,
+      "facing": "N"
+    }
+  },
+  "props": [
+    {
+      "assetId": "world_whiteboard",
+      "wall": {
+        "x": 400,
+        "z": 110
+      },
+      "anchors": [
+        {
+          "id": "read",
+          "label": "Read the task board",
+          "x": 0,
+          "y": 45,
+          "facing": "N",
+          "radiusCm": 45,
+          "action": {
+            "type": "dialogue",
+            "id": "dlg_work_board"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_timeclock",
+      "wall": {
+        "x": 640,
+        "z": 120
+      },
+      "anchors": [
+        {
+          "id": "in",
+          "label": "Clock in",
+          "x": 0,
+          "y": 40,
+          "facing": "N",
+          "radiusCm": 35,
+          "action": {
+            "type": "event",
+            "id": "ev_work_clock"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_timeclock",
+      "wall": {
+        "x": 730,
+        "z": 120
+      },
+      "anchors": [
+        {
+          "id": "out",
+          "label": "Clock out",
+          "x": 0,
+          "y": 40,
+          "facing": "N",
+          "radiusCm": 35,
+          "action": {
+            "type": "event",
+            "id": "ev_work_clock_out"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_office_desk",
+      "x": 180,
+      "y": 200,
+      "anchors": [
+        {
+          "id": "task",
+          "label": "Work on a task",
+          "x": 60,
+          "y": 32,
+          "facing": "N",
+          "radiusCm": 45,
+          "action": {
+            "type": "event",
+            "id": "ev_work_task"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_office_chair",
+      "x": 150,
+      "y": 255
+    },
+    {
+      "assetId": "world_office_desk",
+      "x": 180,
+      "y": 390,
+      "anchors": [
+        {
+          "id": "task",
+          "label": "Work on a task",
+          "x": 60,
+          "y": 32,
+          "facing": "N",
+          "radiusCm": 45,
+          "action": {
+            "type": "event",
+            "id": "ev_work_task"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_office_chair",
+      "x": 150,
+      "y": 445
+    },
+    {
+      "assetId": "world_office_desk",
+      "x": 560,
+      "y": 330,
+      "anchors": [
+        {
+          "id": "task",
+          "label": "Work on a task",
+          "x": 60,
+          "y": 32,
+          "facing": "N",
+          "radiusCm": 45,
+          "action": {
+            "type": "event",
+            "id": "ev_work_task"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_office_chair",
+      "x": 530,
+      "y": 385
+    },
+    {
+      "assetId": "world_filing_cabinet",
+      "x": 760,
+      "y": 260
+    },
+    {
+      "assetId": "world_filing_cabinet",
+      "x": 760,
+      "y": 330
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 50,
+      "y": 540
+    }
+  ],
+  "npcs": [
+    {
+      "id": "npc_coworker",
+      "name": "Coworker",
+      "look": {
+        "shirt": "#B0506A",
+        "pants": "#3A3440",
+        "hair": "#2A1E18",
+        "hijab": "#5B6C8F"
+      },
+      "x": 300,
+      "y": 130,
+      "behaviour": {
+        "type": "wander",
+        "area": {
+          "x": 260,
+          "y": 110,
+          "w": 120,
+          "h": 60
+        },
+        "speed": 45,
+        "pauseMs": [
+          2000,
+          5000
+        ]
+      },
+      "schedule": {
+        "night": "away"
+      },
+      "interact": {
+        "label": "Talk to your coworker",
+        "dialogue": "dlg_work_coworker"
+      }
+    }
+  ],
+  "doors": [
+    {
+      "id": "exit",
+      "label": "Exit to the street",
+      "x": 350,
+      "y": 560,
+      "w": 100,
+      "h": 10,
+      "to": {
+        "room": "batuphat_street",
+        "spawn": "from_workplace"
+      }
+    }
+  ]
+}

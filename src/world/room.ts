@@ -1,18 +1,49 @@
-import { getPropSpec, propTopCm, type PropSpec, type Rect } from '../core/specs';
+import { getPropSpec, propTopCm, type InteractionAnchorSpec, type PropSpec, type Rect } from '../core/specs';
 import { groundToRender } from '../core/projection';
 import type { WorldAnchor } from '../interaction/anchors';
 import type { SortableProp } from './depth';
 
 export interface RoomSpawn { x: number; y: number; facing: string }
+export type DoorSide = 'north' | 'south' | 'east' | 'west';
+/** How the engine draws the opening. 'none' = the prop art (e.g. a shopfront) paints the door itself. */
+export type DoorStyle = 'door' | 'stairs' | 'gate' | 'open' | 'none';
 export interface RoomDoor {
-  id: string; label: string; x: number; y: number; w: number; h: number;
+  id: string; label: string;
+  /** North/south doors: x..x+w along the wall (y 0 / h). East/west doors: y..y+h along the wall (x 0 / w). */
+  x: number; y: number; w: number; h: number;
+  side?: DoorSide;
+  style?: DoorStyle;
   to: { room: string; spawn: string };
+  /** Locked or story-gated: the wall stays solid; using it shows the message. Opens when `unlessFlag` is set. */
+  locked?: { message: string; unlessFlag?: string };
 }
+
+/** Which wall a door sits in (explicit `side`, else derived from its position). */
+export function doorSide(d: RoomDoor, size: { w: number; h: number }): DoorSide {
+  if (d.side) return d.side;
+  if (d.y <= 10 && d.w >= d.h) return 'north';
+  if (d.y >= size.h - 20 && d.w >= d.h) return 'south';
+  return d.x <= 10 ? 'west' : 'east';
+}
+/** A locked door is open when its unlock flag is set. */
+export function doorOpen(d: RoomDoor, flags: Record<string, boolean>): boolean {
+  return !d.locked || (!!d.locked.unlessFlag && !!flags[d.locked.unlessFlag]);
+}
+export type MapKind = 'interior' | 'exterior';
 export interface RoomData {
   id: string;
   displayName: string;
   world: string;
   floor: string;
+  /** interior (default): walls + ceiling light; exterior: open ground, building row as the back wall. */
+  kind?: MapKind;
+  /** Ambience bed: 'room' (default, day/night), 'street', 'shop'. */
+  ambience?: 'room' | 'street' | 'shop';
+  /** Provisional layout awaiting Creative Director review (shown in the HUD). */
+  provisional?: boolean;
+  npcs?: import('./npc').NpcData[];
+  /** Event ids fired once when the map is entered (src/data/story/events.json). */
+  onEnter?: string[];
   sizeCm: { w: number; h: number };
   wallHeightCm: number;
   palette: { floor: string; wall: string; trim: string };
@@ -27,10 +58,14 @@ export interface RoomData {
  * A prop either stands on the floor at (x, y), or sits ON another prop's measured surface anchor
  * (`on`), e.g. a lamp on the nightstand. Instance ids let other entries refer to a prop.
  */
-export type RoomPropEntry =
+export type RoomPropEntry = (
   | { assetId: string; id?: string; x: number; y: number; on?: undefined; wall?: undefined }
   | { assetId: string; id?: string; on: { prop: string; surface: string; anchor: string }; x?: undefined; y?: undefined; wall?: undefined }
-  | { assetId: string; id?: string; wall: { x: number; z: number }; x?: undefined; y?: undefined; on?: undefined };
+  | { assetId: string; id?: string; wall: { x: number; z: number }; x?: undefined; y?: undefined; on?: undefined }
+) & {
+  /** Per-placement interactions replacing the spec's (generic world props: one counter spec, many uses). */
+  anchors?: InteractionAnchorSpec[];
+};
 
 /** Render layer of a prop instance. */
 export type PropLayer = 'floor' | 'surface' | 'wall' | 'decal';
@@ -43,6 +78,8 @@ export interface PropInstance {
   z: number;                     // height above floor (0 for floor props; measured surface height for surface props)
   hostKey?: string;
   layer: PropLayer;
+  /** Interaction anchors of this placement (room override, else the spec's). */
+  anchors?: InteractionAnchorSpec[];
   sortable: SortableProp;
 }
 
@@ -85,24 +122,25 @@ export function propVolumeRenderBounds(spec: PropSpec, x: number, y: number): Re
   return { x: x - spec.footprint.widthCm / 2, y: backTop.y, w: spec.footprint.widthCm, h: front.y - backTop.y };
 }
 
-export function compileRoom(data: RoomData): CompiledRoom {
+export function compileRoom(data: RoomData, flags: Record<string, boolean> = {}): CompiledRoom {
   const { w, h } = data.sizeCm;
-  const doorGaps = data.doors;
-  const solids: Rect[] = [
-    { x: -WALL, y: -WALL, w: w + 2 * WALL, h: WALL },      // north
-    { x: -WALL, y: 0, w: WALL, h },                         // west
-    { x: w, y: 0, w: WALL, h },                              // east
-  ];
-  // South wall, split around door gaps that sit on the south edge.
-  const southDoors = doorGaps.filter((d) => d.y >= h - 20).sort((a, b) => a.x - b.x);
-  let cursor = -WALL;
-  for (const d of southDoors) {
-    if (d.x > cursor) solids.push({ x: cursor, y: h, w: d.x - cursor, h: WALL });
-    solids.push({ x: d.x, y: h + DOOR_DEPTH, w: d.w, h: WALL }); // stopper: the doorway is a short threshold, not an exit into the void
-    cursor = d.x + d.w;
-  }
-  solids.push({ x: cursor, y: h, w: w + WALL - cursor, h: WALL });
-  // North-wall doors are recesses: the north wall stays solid, the door anchor sits just inside.
+  const open = data.doors.filter((d) => doorOpen(d, flags));
+  const solids: Rect[] = [{ x: -WALL, y: -WALL, w: w + 2 * WALL, h: WALL }];   // north (north doors are recesses)
+  // South / east / west walls are split around open doorways. Each doorway is a short threshold ending in a
+  // stopper, not an exit into the void: crossing the threshold fires the transition.
+  const split = (side: DoorSide, along: (d: RoomDoor) => [number, number], wallRect: (a: number, b: number) => Rect, stopper: (a: number, b: number) => Rect, len: number) => {
+    let cursor = -WALL;
+    for (const d of open.filter((x) => doorSide(x, data.sizeCm) === side).sort((a, b) => along(a)[0] - along(b)[0])) {
+      const [a, b] = along(d);
+      if (a > cursor) solids.push(wallRect(cursor, a));
+      solids.push(stopper(a, b));
+      cursor = b;
+    }
+    solids.push(wallRect(cursor, len + WALL));
+  };
+  split('south', (d) => [d.x, d.x + d.w], (a, b) => ({ x: a, y: h, w: b - a, h: WALL }), (a, b) => ({ x: a, y: h + DOOR_DEPTH, w: b - a, h: WALL }), w);
+  split('west', (d) => [d.y, d.y + d.h], (a, b) => ({ x: -WALL, y: a, w: WALL, h: b - a }), (a, b) => ({ x: -DOOR_DEPTH - WALL, y: a, w: WALL, h: b - a }), h);
+  split('east', (d) => [d.y, d.y + d.h], (a, b) => ({ x: w, y: a, w: WALL, h: b - a }), (a, b) => ({ x: w + DOOR_DEPTH, y: a, w: WALL, h: b - a }), h);
 
   const props: PropInstance[] = [];
   const byId = new Map<string, PropInstance>();
@@ -149,22 +187,25 @@ export function compileRoom(data: RoomData): CompiledRoom {
         inst = { key, spec, x: p.x, y: p.y, z: 0, layer: 'floor', sortable: { id: key, pivotY: p.y, footprint, renderBounds: propVolumeRenderBounds(spec, p.x, p.y), occluder: spec.occluder } };
       }
     }
+    if (p.anchors) inst.anchors = p.anchors;
     props.push(inst);
     if (p.id) byId.set(p.id, inst);
   }
 
   const anchors: WorldAnchor[] = [];
   for (const p of props) {
-    for (const a of p.spec.interactionAnchors) {
+    for (const a of p.anchors ?? p.spec.interactionAnchors) {
       const ay = p.layer === 'wall' ? a.y : p.y + a.y; // wall-item anchors are measured from the wall plane
       anchors.push({ key: `${p.key}:${a.id}`, ownerId: p.key, label: a.label, x: p.x + a.x, y: ay, radiusCm: a.radiusCm, kind: 'prop', payload: { anchorId: a.id, action: a.action }, ...(a.whileSeatedOn ? { whileSeatedOn: a.whileSeatedOn } : {}) });
     }
   }
   for (const d of data.doors) {
-    const onNorth = d.y <= 10;
+    const side = doorSide(d, data.sizeCm), isOpen = doorOpen(d, flags);
+    const pos = side === 'north' ? { x: d.x + d.w / 2, y: 25 } : side === 'south' ? { x: d.x + d.w / 2, y: h - 15 }
+      : side === 'west' ? { x: 15, y: d.y + d.h / 2 } : { x: w - 15, y: d.y + d.h / 2 };
     anchors.push({
-      key: `door:${d.id}`, ownerId: d.id, label: d.label,
-      x: d.x + d.w / 2, y: onNorth ? 25 : h - 15, radiusCm: 50, kind: 'door', payload: d.to,
+      key: `door:${d.id}`, ownerId: d.id, label: d.label, ...pos, radiusCm: 50, kind: 'door',
+      payload: isOpen ? d.to : { locked: d.locked!.message },
     });
   }
   return { data, solids, props, anchors };

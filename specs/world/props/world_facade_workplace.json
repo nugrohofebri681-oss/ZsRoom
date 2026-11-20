@@ -1,0 +1,44 @@
+{
+  "id": "world_facade_workplace",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Workplace facade (TEMP world placeholder)",
+  "density": 1,
+  "canvas": {
+    "width": 576,
+    "height": 444
+  },
+  "pivot": {
+    "x": 288,
+    "y": 432,
+    "meaning": "bottom-centre of the front face (wall item)"
+  },
+  "footprint": {
+    "widthCm": 560,
+    "depthCm": 4
+  },
+  "heightsCm": {
+    "top": 420
+  },
+  "collision": [],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "placement": {
+    "type": "wall",
+    "wall": "north"
+  },
+  "temp": {
+    "shape": "storefront",
+    "kind": "office",
+    "sign": "WORKPLACE \u00b7 placeholder",
+    "accent": "#5B6C8F",
+    "wall": "#E6E2DA",
+    "door": 110,
+    "maxDensity": 1
+  },
+  "$comment": "World 01 placeholder (wall-mounted). Stable id and geometry for future Codex art."
+}

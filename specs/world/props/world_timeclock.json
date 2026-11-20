@@ -1,0 +1,41 @@
+{
+  "id": "world_timeclock",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Time clock (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 104,
+    "height": 136
+  },
+  "pivot": {
+    "x": 52,
+    "y": 124,
+    "meaning": "bottom-centre of the front face (wall item)"
+  },
+  "footprint": {
+    "widthCm": 44,
+    "depthCm": 4
+  },
+  "heightsCm": {
+    "top": 56
+  },
+  "collision": [],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "placement": {
+    "type": "wall",
+    "wall": "north"
+  },
+  "temp": {
+    "shape": "panel",
+    "frame": "#4A4250",
+    "face": "#DDE6EE",
+    "text": "CLOCK"
+  },
+  "$comment": "World 01 placeholder (wall-mounted). Stable id and geometry for future Codex art."
+}

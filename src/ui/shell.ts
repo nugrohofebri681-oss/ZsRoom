@@ -2,7 +2,7 @@ import * as Phaser from 'phaser';
 import { DEPTH_SCALE as K } from '../core/projection';
 import { getEnvironmentSpec, type EnvironmentSpec } from '../core/specs';
 import { textureKey, type AssetManifest } from '../systems/manifest';
-import type { RoomData } from '../world/room';
+import { doorSide, type RoomData } from '../world/room';
 
 /**
  * Room shell from ENVIRONMENT TILES (Batch E): one TileSprite for the back wall, one for the floor.
@@ -43,11 +43,32 @@ export function buildShell(scene: Phaser.Scene, room: RoomData, manifest: AssetM
     .fillRect(-SHELL_MARGIN, floorH, w + SHELL_MARGIN * 2, SHELL_MARGIN);
   g.fillStyle(0xfff0f5, 0.18).fillRect(-3, -wallH, 3, wallH + floorH).fillRect(w, -wallH, 3, wallH + floorH).fillRect(0, floorH, w, 2.5);
   for (const d of room.doors) {
-    if (d.y <= 10) continue;
-    g.fillStyle(0xb98a5e, 1).fillRect(d.x, floorH - 1, d.w, SHELL_MARGIN + 1);
-    g.fillStyle(0x5b3a29, 1).fillRect(d.x - 4, floorH, 4, SHELL_MARGIN).fillRect(d.x + d.w, floorH, 4, SHELL_MARGIN);
-    g.fillStyle(0xc0607e, 1).fillRoundedRect(d.x + 12, floorH - 26, d.w - 24, 20, 4);
-    g.lineStyle(1, 0xfff0f5, 0.6).strokeRoundedRect(d.x + 15, floorH - 23.5, d.w - 30, 15, 3);
+    const side = doorSide(d, room.sizeCm), locked = !!d.locked;
+    if (side === 'north') continue;                                       // drawn by the room scene (recess / stairs / art)
+    if (side === 'south') {
+      if (locked) { g.fillStyle(0x6b4a3a, 1).fillRect(d.x, floorH - 2, d.w, 4); continue; }
+      g.fillStyle(room.kind === 'exterior' ? 0x9a948a : 0xb98a5e, 1).fillRect(d.x, floorH - 1, d.w, SHELL_MARGIN + 1);
+      g.fillStyle(0x5b3a29, 1).fillRect(d.x - 4, floorH, 4, SHELL_MARGIN).fillRect(d.x + d.w, floorH, 4, SHELL_MARGIN);
+      if (d.style === 'gate') {
+        g.fillStyle(0xefe6d8, 1).fillRect(d.x - 14, floorH - 30, 12, 50).fillRect(d.x + d.w + 2, floorH - 30, 12, 50);   // gate pillars
+        g.lineStyle(2, 0x4a4250, 0.9); for (let i = 0; i < 4; i++) { g.lineBetween(d.x + 4 + i * 6, floorH - 24, d.x + 4 + i * 6, floorH + 4); g.lineBetween(d.x + d.w - 4 - i * 6, floorH - 24, d.x + d.w - 4 - i * 6, floorH + 4); }
+      } else if (d.style !== 'open') {
+        g.fillStyle(0xc0607e, 1).fillRoundedRect(d.x + 12, floorH - 26, d.w - 24, 20, 4);
+        g.lineStyle(1, 0xfff0f5, 0.6).strokeRoundedRect(d.x + 15, floorH - 23.5, d.w - 30, 15, 3);
+      }
+      continue;
+    }
+    // east / west: an opening in the cut-away side wall (stairs drawn as treads leading out)
+    const x0 = side === 'west' ? -SHELL_MARGIN : w, y0 = d.y * K, y1 = (d.y + d.h) * K;
+    if (locked) { g.fillStyle(0x6b4a3a, 1).fillRect(side === 'west' ? -3 : w, y0, 3, y1 - y0); continue; }
+    g.fillStyle(room.kind === 'exterior' ? 0x9a948a : 0xb98a5e, 1).fillRect(x0, y0, SHELL_MARGIN, y1 - y0);
+    if (d.style === 'stairs') {
+      for (let i = 0; i < 5; i++) {
+        const x = side === 'west' ? -i * 4 : w + i * 4;
+        g.fillStyle(i % 2 ? 0x8a5a3c : 0xa8754c, 1).fillRect(x - (side === 'west' ? 4 : 0), y0, 4, y1 - y0);
+      }
+      g.fillStyle(0x3a2530, 0.35).fillRect(x0, y0, SHELL_MARGIN, 4);
+    }
   }
   return { floor: { id: ids.floor, art: floorTile.art }, wall: { id: ids.wall, art: wallTile.art } };
 }
@@ -87,7 +108,9 @@ function resolveTile(scene: Phaser.Scene, spec: EnvironmentSpec, manifest: Asset
     const c = scene.textures.createCanvas(key, w, h)!;
     const ctx = c.getContext();
     ctx.scale(w / spec.canvas.width, h / spec.canvas.height);
-    if (spec.kind === 'floor-tile') drawPlanks(ctx, spec, room); else drawWallStrip(ctx, spec, room);
+    const shape = String(spec.temp?.shape ?? '');
+    if (spec.kind === 'floor-tile') (shape === 'tiles' ? drawFloorTiles : shape === 'paving' ? drawPaving : shape === 'grass' ? drawGrass : drawPlanks)(ctx, spec, room);
+    else (shape === 'plain' ? drawPlainWall : drawWallStrip)(ctx, spec, room);
     c.refresh();
   }
   return { key, art: 'temp', w, h, density };
@@ -147,4 +170,49 @@ export function drawWallStrip(ctx: CanvasRenderingContext2D, spec: EnvironmentSp
   ctx.fillStyle = tone(trim, 0.95); ctx.fillRect(0, yAt(b.skirting![1]), W, (b.skirting![1] - b.skirting![0]) * s);
   ctx.fillStyle = tone(trim, 1.3); ctx.fillRect(0, yAt(b.skirting![1]), W, 1.5 * s);
   ctx.fillStyle = tone(trim, 0.9); ctx.fillRect(0, yAt(b.crown![1]), W, (b.crown![1] - b.crown![0]) * s);
+}
+
+// ---------- World 01 TEMP tiles: ceramic tiles, street paving, grass, plain (stucco / shop / office) walls ----------
+function rnd(seed: number): () => number { let v = seed; return () => ((v = (v * 9301 + 49297) % 233280) / 233280); }
+
+export function drawFloorTiles(ctx: CanvasRenderingContext2D, spec: EnvironmentSpec): void {
+  const W = spec.canvas.width, H = spec.canvas.height, base = String(spec.temp?.base ?? '#E9E4DA'), n = Number(spec.temp?.tilesX ?? 2), m = Number(spec.temp?.tilesY ?? 2);
+  const r = rnd(5);
+  for (let i = 0; i < n; i++) for (let j = 0; j < m; j++) { ctx.fillStyle = tone(base, 0.97 + r() * 0.06); ctx.fillRect(i * W / n, j * H / m, W / n, H / m); }
+  ctx.fillStyle = tone(base, 0.8, 0.9);
+  for (let i = 0; i < n; i++) ctx.fillRect(i * W / n, 0, 1.5, H);
+  for (let j = 0; j < m; j++) ctx.fillRect(0, j * H / m, W, 1.5);
+}
+
+export function drawPaving(ctx: CanvasRenderingContext2D, spec: EnvironmentSpec): void {
+  const W = spec.canvas.width, H = spec.canvas.height, base = String(spec.temp?.base ?? '#B9B3A9'), rows = 4, r = rnd(17);
+  for (let j = 0; j < rows; j++) {
+    const y = j * H / rows, off = (j % 2) * (W / 6);
+    for (let i = -1; i < 4; i++) {
+      const x = i * W / 3 + off; ctx.fillStyle = tone(base, 0.93 + r() * 0.12);
+      ctx.fillRect(x, y, W / 3, H / rows); if (x + W / 3 > W) ctx.fillRect(x - W, y, W / 3, H / rows);
+    }
+    ctx.fillStyle = tone(base, 0.75, 0.8); ctx.fillRect(0, y, W, 1.5);
+    for (let i = 0; i < 3; i++) ctx.fillRect((i * W / 3 + off) % W, y, 1.5, H / rows);
+  }
+}
+
+export function drawGrass(ctx: CanvasRenderingContext2D, spec: EnvironmentSpec): void {
+  const W = spec.canvas.width, H = spec.canvas.height, base = String(spec.temp?.base ?? '#8DB36B'), r = rnd(23);
+  ctx.fillStyle = base; ctx.fillRect(0, 0, W, H);
+  for (let i = 0; i < 260; i++) {
+    const x = r() * W, y = r() * H, h = 2 + r() * 4; ctx.fillStyle = tone(base, 0.8 + r() * 0.45, 0.8);
+    ctx.fillRect(x, y, 1.2, h); if (x + 2 > W) ctx.fillRect(x - W, y, 1.2, h); if (y + h > H) ctx.fillRect(x, y - H, 1.2, h);
+  }
+}
+
+/** Plain painted wall (stucco exterior, shop, office): base band, wall, top trim; optional vertical joints. */
+export function drawPlainWall(ctx: CanvasRenderingContext2D, spec: EnvironmentSpec, room: RoomData): void {
+  const W = spec.canvas.width, H = spec.canvas.height, s = H / (spec.tile.heightCm ?? 270);
+  const wall = String(spec.temp?.wall ?? room.palette.wall), base = String(spec.temp?.base ?? tone(wall, 0.75)), trim = String(spec.temp?.trim ?? room.palette.trim);
+  const gr = ctx.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, tone(wall, 1.05)); gr.addColorStop(1, tone(wall, 0.95));
+  ctx.fillStyle = gr; ctx.fillRect(0, 0, W, H);
+  if (spec.temp?.joints) { ctx.fillStyle = tone(wall, 0.9, 0.6); ctx.fillRect(0, 0, 1.5 * s, H); }
+  ctx.fillStyle = base; ctx.fillRect(0, H - Number(spec.temp?.baseCm ?? 15) * s, W, Number(spec.temp?.baseCm ?? 15) * s);
+  ctx.fillStyle = trim; ctx.fillRect(0, 0, W, 5 * s);
 }

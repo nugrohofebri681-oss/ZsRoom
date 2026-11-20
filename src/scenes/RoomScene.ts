@@ -1,7 +1,12 @@
 import * as Phaser from 'phaser';
 import { groundToRender, DEPTH_SCALE } from '../core/projection';
 import { getCharacterSpec, type ActionSpec, type CharacterSpec, type PropSpec } from '../core/specs';
-import { compileRoom, getRoom, DOOR_DEPTH, type CompiledRoom, type PropInstance, type RoomDoor } from '../world/room';
+import { compileRoom, getRoom, doorOpen, doorSide, DOOR_DEPTH, type CompiledRoom, type PropInstance, type RoomDoor } from '../world/room';
+import { initNpc, npcPresent, npcSolid, stepNpc, type NpcData, type NpcState } from '../world/npc';
+import { NpcView } from '../actors/npcView';
+import { EVENTS, DIALOGUE, runEvent, type Presentation } from '../story/events';
+import { COMMS, threadAsDialogue } from '../story/comms';
+import type { Rect } from '../core/specs';
 import { moveWithCollision } from '../world/collision';
 import { actorSortDepth, occludingProps, type SortableActor } from '../world/depth';
 import { vectorToDirection, type Direction } from '../actors/direction';
@@ -30,6 +35,8 @@ const FADE_ALPHA = 0.42;
 const SIT_HEIGHT = 0.78;        // seated figure height share (for occlusion bounds)
 const LOOK_AHEAD_S = 0.35;      // camera leads movement by this many seconds
 const ZOOM_MIN = 0.8, ZOOM_MAX = 1.9;
+/** Test/QA hook: `?fast` walks 3× faster (long World 01 routes in CI). Never skips doors or collision. */
+const SPEED = new URLSearchParams(location.search).has('fast') ? 3 : 1;
 
 type PropView = Phaser.GameObjects.GameObject & Phaser.GameObjects.Components.AlphaSingle & Phaser.GameObjects.Components.Depth;
 type ArtKind = 'approved' | 'temp' | 'greybox';
@@ -66,6 +73,10 @@ export class RoomScene extends Phaser.Scene {
   private seated: Seated | null = null;
   private skies: { img: Phaser.GameObjects.Image; curtains: Phaser.GameObjects.Graphics }[] = [];
   private floorPatches: FloorPatch[] = [];
+  private npcs: { data: NpcData; state: NpcState; view: NpcView }[] = [];
+  private visited: string[] = [];
+  /** Door triggers stay disarmed until the player has stepped away from every doorway after arriving. */
+  private doorsArmed = false;
   private stepCount = 0;
   private lastFloor: 'rug' | 'wood' = 'wood';
   /** One reusable silhouette glow behind the prop Zila can use right now (never touches the art itself). */
@@ -76,6 +87,7 @@ export class RoomScene extends Phaser.Scene {
   constructor() { super('Room'); }
 
   create(data: RoomSceneData): void {
+    this.releaseGeneratedTextures();
     this.transitioning = false;
     this.debugActor = undefined;
     this.seated = null;
@@ -86,7 +98,8 @@ export class RoomScene extends Phaser.Scene {
     const save = loadGame(safeStorage());
     this.flags = { ...(save?.flags ?? {}) };
     this.vars = { phase: 'evening', day: 1, outfit: 'default', ...(save?.vars ?? {}) };
-    this.room = compileRoom(getRoom(data.roomId));
+    this.visited = [...new Set([...(save?.visited ?? []), data.roomId])];
+    this.room = compileRoom(getRoom(data.roomId), this.flags);
     this.character = getCharacterSpec('char_zila');
     const spawn = data.at ?? this.room.data.spawns[data.spawn ?? 'default'] ?? this.room.data.spawns.default!;
     this.pos = { x: spawn.x, y: spawn.y };
@@ -100,8 +113,14 @@ export class RoomScene extends Phaser.Scene {
     const { w: rw, h: rh } = this.room.data.sizeCm, wallH = this.room.data.wallHeightCm;
     this.lighting = new LightingSystem(this, `lightmap:${this.room.data.id}`, { x: -40, y: -wallH - 40, w: rw + 80, h: wallH + rh * DEPTH_SCALE + 80 });
     this.grid = new WalkGrid(rw, rh, this.room.solids, this.character.collision.radiusCm);
+    // A resumed position must be standable (layouts change between builds): otherwise use the map's default spawn.
+    const inside = this.pos.x >= 0 && this.pos.y >= 0 && this.pos.x <= rw && this.pos.y <= rh;
+    if (data.at && !(inside && this.grid.standable(this.pos))) { const d = this.room.data.spawns.default!; this.pos = { x: d.x, y: d.y }; }
+    this.doorsArmed = false;
     this.drawShell();
+    if (this.room.data.kind === 'exterior') this.addExteriorSky();
     this.drawProps();
+    this.spawnNpcs();
     this.floorPatches = floorPatches(this.room.props);
     this.glow = undefined; this.doorGlow = undefined; this.glowTarget = null;
     this.buildActor();
@@ -127,6 +146,7 @@ export class RoomScene extends Phaser.Scene {
     this.events.once('shutdown', () => { this.game.events.off('world-tap', this.onWorldTap, this); this.game.events.off('zoom-by', this.zoomBy, this); });
     this.setTagsVisible(params.has('tags'));
     this.game.events.emit('room-entered', this.room.data);
+    for (const id of this.room.data.onEnter ?? []) this.runStoryEvent(id);
     this.emitArtStatus();
     this.persist();
     this.syncActor();
@@ -171,7 +191,18 @@ export class RoomScene extends Phaser.Scene {
   }
 
   private drawNorthDoor(g: Phaser.GameObjects.Graphics, d: RoomDoor): void {
-    if (d.y > 10) return; // south doorways are part of the shell texture
+    if (doorSide(d, this.room.data.sizeCm) !== 'north' || d.style === 'none') return; // other sides: part of the shell
+    if (d.style === 'stairs') {                       // a stairwell going up through the back wall
+      g.fillStyle(0x3a2530, 1).fillRect(d.x, -240, d.w, 240);
+      for (let i = 0; i < 9; i++) { const y = -i * 26; g.fillStyle(i % 2 ? 0x8a5a3c : 0xa8754c, 1).fillRect(d.x + 4, y - 26, d.w - 8, 26); g.fillStyle(0x5b3a29, 0.6).fillRect(d.x + 4, y - 3, d.w - 8, 3); }
+      g.fillStyle(0x5b3a29, 1).fillRect(d.x - 6, -240, 6, 240).fillRect(d.x + d.w, -240, 6, 240);
+      return;
+    }
+    if (d.style === 'gate') {
+      g.fillStyle(0x9a948a, 1).fillRect(d.x, -6, d.w, 6);
+      g.fillStyle(0xefe6d8, 1).fillRect(d.x - 16, -160, 16, 160).fillRect(d.x + d.w, -160, 16, 160);
+      return;
+    }
     g.fillStyle(0x5b3a29, 1).fillRoundedRect(d.x, -210, d.w, 210, { tl: 6, tr: 6, bl: 0, br: 0 });
     g.fillStyle(0x8a5a3c, 1).fillRoundedRect(d.x + 8, -200, d.w - 16, 192, 4);
     g.fillStyle(0xf6ebdd, 1).fillCircle(d.x + d.w - 16, -100, 3);
@@ -186,7 +217,8 @@ export class RoomScene extends Phaser.Scene {
       const pivot = groundToRender(p.x, p.y, p.z);
       let view: PropView;
       let kind: ArtKind;
-      const runtimeDensity = this.highDensity() ? 2 : 1;
+      // big TEMP placeholders (facades, roads, trees) may cap their density to keep texture memory small
+      const runtimeDensity = Math.min(this.highDensity() ? 2 : 1, Number(p.spec.temp?.maxDensity ?? 2));
       const tex = entry?.status === 'approved' && this.textures.exists(approvedKey) ? approvedKey : ensureTempTexture(this, p.spec, runtimeDensity);
       if (tex) {
         kind = tex === approvedKey ? 'approved' : 'temp';
@@ -287,7 +319,9 @@ export class RoomScene extends Phaser.Scene {
     const sky = this.skyTexture();
     for (const s of this.skies) { s.img.setTexture(sky); s.curtains.setVisible(!!this.vars.curtainsClosed); }
     const phase = this.phase();
-    audio().setAmbience(phase === 'evening' || phase === 'night' ? 'night' : 'day');
+    const dark = phase === 'evening' || phase === 'night', amb = this.room.data.ambience ?? 'room';
+    audio().setAmbience(amb === 'street' ? (dark ? 'night' : 'street') : amb === 'shop' ? 'shop' : dark ? 'night' : 'day');
+    for (const n of this.npcs) { if (n.state && (n.state as NpcState & { phase?: string }).phase !== phase) this.placeNpc(n, phase); }
     this.registry.set('world', { phase: look.label, day: Number(this.vars.day ?? 1) });
     this.game.events.emit('world', { phase: look.label, day: Number(this.vars.day ?? 1) });
   }
@@ -307,9 +341,9 @@ export class RoomScene extends Phaser.Scene {
     if (this.seated) {
       if (dir || this.path.length) this.standUp();
     } else if (dir) {
-      const speed = mv.run ? RUN_CM_S : WALK_CM_S;
+      const speed = (mv.run ? RUN_CM_S : WALK_CM_S) * SPEED;
       this.facingDir = dir;
-      this.pos = moveWithCollision(this.pos, { x: mv.x * speed * dt, y: mv.y * speed * dt }, this.character.collision.radiusCm, this.room.solids);
+      this.pos = moveWithCollision(this.pos, { x: mv.x * speed * dt, y: mv.y * speed * dt }, this.character.collision.radiusCm, this.solids());
     } else if (this.path.length) {
       dir = this.followPath(dt);
     }
@@ -325,7 +359,8 @@ export class RoomScene extends Phaser.Scene {
       if (Math.hypot(a.x - this.pos.x, a.y - this.pos.y) <= a.radiusCm + 4) { this.faceToward(a); this.interact(a); }
     }
     const seatedAsset = this.seated ? this.room.props.find((p) => p.key === this.seated!.propKey)?.spec.id ?? null : null;
-    this.nearest = nearestAnchor(this.pos.x, this.pos.y, this.room.anchors, seatedAsset);
+    this.updateNpcs(dt * 1000);
+    this.nearest = nearestAnchor(this.pos.x, this.pos.y, this.npcs.length ? [...this.room.anchors, ...this.npcAnchors()] : this.room.anchors, seatedAsset);
     this.updateHighlight(_time);
     this.game.events.emit('prompt', this.nearest?.label ?? null);
     if (this.input$.consumeInteract() && this.nearest) this.interact(this.nearest);
@@ -358,14 +393,23 @@ export class RoomScene extends Phaser.Scene {
 
   private checkDoorTriggers(): void {
     if (this.seated) return;
-    const { h } = this.room.data.sizeCm;
-    const r = this.character.collision.radiusCm;
+    const { w, h } = this.room.data.sizeCm;
+    const r = this.character.collision.radiusCm, mv = this.keyboard.read(), p = this.pos;
+    let inAnyDoorway = false;
     for (const d of this.room.data.doors) {
-      if (!(this.pos.x > d.x && this.pos.x < d.x + d.w)) continue;
-      const southExit = d.y > 10 && this.pos.y >= h + DOOR_DEPTH - r - 6;   // tolerance: stopping a hair short of the stopper still exits
-      const northExit = d.y <= 10 && this.pos.y <= r + 0.5 && this.keyboard.read().y < 0;
-      if (southExit || northExit) { this.goTo(d.to.room, d.to.spawn); return; }
+      if (!doorOpen(d, this.flags)) continue;
+      const side = doorSide(d, this.room.data.sizeCm);
+      const alongNS = p.x > d.x && p.x < d.x + d.w, alongEW = p.y > d.y && p.y < d.y + d.h;
+      // tolerance: stopping a hair short of the threshold stopper still exits
+      const exit = side === 'south' ? alongNS && p.y >= h + DOOR_DEPTH - r - 6
+        : side === 'north' ? alongNS && p.y <= r + 0.5 && mv.y < 0
+        : side === 'west' ? alongEW && p.x <= -DOOR_DEPTH + r + 6
+        : alongEW && p.x >= w + DOOR_DEPTH - r - 6;
+      const near = side === 'south' ? alongNS && p.y > h - 4 : side === 'west' ? alongEW && p.x < 4 : side === 'east' ? alongEW && p.x > w - 4 : false;
+      if (near || exit) inAnyDoorway = true;
+      if (exit && this.doorsArmed) { this.goTo(d.to.room, d.to.spawn); return; }
     }
+    if (!inAnyDoorway) this.doorsArmed = true;
   }
 
   // ---------------------------------------------------------------- tap / click to move
@@ -406,13 +450,13 @@ export class RoomScene extends Phaser.Scene {
   private followPath(dt: number): Direction | null {
     const next = this.path[0]!;
     const dx = next.x - this.pos.x, dy = next.y - this.pos.y, dist = Math.hypot(dx, dy);
-    const step = WALK_CM_S * dt;
+    const step = WALK_CM_S * SPEED * dt;
     if (dist <= Math.max(2, step)) {
-      this.pos = moveWithCollision(this.pos, { x: dx, y: dy }, this.character.collision.radiusCm, this.room.solids);
+      this.pos = moveWithCollision(this.pos, { x: dx, y: dy }, this.character.collision.radiusCm, this.solids());
       this.path.shift();
     } else {
       const before = { ...this.pos };
-      this.pos = moveWithCollision(this.pos, { x: (dx / dist) * step, y: (dy / dist) * step }, this.character.collision.radiusCm, this.room.solids);
+      this.pos = moveWithCollision(this.pos, { x: (dx / dist) * step, y: (dy / dist) * step }, this.character.collision.radiusCm, this.solids());
       if (Math.hypot(this.pos.x - before.x, this.pos.y - before.y) < step * 0.05) { this.path = []; this.pendingAnchor = null; } // blocked: give up
     }
     const d = vectorToDirection(dx, dy);
@@ -449,8 +493,16 @@ export class RoomScene extends Phaser.Scene {
   // ---------------------------------------------------------------- interactions
   private interact(a: WorldAnchor): void {
     if (a.kind === 'door') {
-      const to = a.payload as { room: string; spawn: string };
+      const to = a.payload as { room: string; spawn: string } | { locked: string };
+      if ('locked' in to) { this.game.events.emit('toast', to.locked); audio().play('ui_tick'); return; }
       this.goTo(to.room, to.spawn);
+      return;
+    }
+    if (a.kind === 'npc') {
+      const n = this.npcs.find((x) => x.data.id === a.ownerId);
+      if (n?.data.interact?.event) this.runStoryEvent(n.data.interact.event);
+      else if (n?.data.interact?.dialogue) this.showDialogue(DIALOGUE[n.data.interact.dialogue]);
+      audio().play('interact', { minGapMs: 250 });
       return;
     }
     const action = (a.payload as { action?: ActionSpec } | undefined)?.action;
@@ -481,6 +533,8 @@ export class RoomScene extends Phaser.Scene {
     }
     if (res.toast) this.game.events.emit('toast', res.toast);
     if (res.dialogue) this.game.events.emit('dialogue', { speaker: 'Zila', lines: res.dialogue });
+    if (res.dialogueId) this.showDialogue(DIALOGUE[res.dialogueId]);
+    if (res.eventId) this.runStoryEvent(res.eventId);
     this.persist();
     this.game.events.emit('interacted', a.key);
   }
@@ -516,6 +570,99 @@ export class RoomScene extends Phaser.Scene {
     this.cameras.main.fade(200, 29, 20, 24, true, (_c: Phaser.Cameras.Scene2D.Camera, progress: number) => {
       if (progress >= 1 && !done) { done = true; this.scene.restart({ roomId, spawn } satisfies RoomSceneData); }
     });
+  }
+
+  /**
+   * Only the active map's generated textures stay in memory: TEMP placeholders, NPC figures, bulb glows and
+   * skies of the previous map are released on every map change (they regenerate in milliseconds).
+   * Approved art is managed by the asset pipeline (loaded per manifest).
+   */
+  private releaseGeneratedTextures(): void {
+    for (const key of this.textures.getTextureKeys()) if (/^(temp:|fx:bulbs:|sky:|lightmap:)/.test(key)) this.textures.remove(key);
+  }
+
+  /** Approximate bytes held by engine-generated canvas textures (TEMP art, glows, skies, lightmap). */
+  private generatedTextureBytes(): number {
+    let n = 0;
+    for (const key of this.textures.getTextureKeys()) {
+      if (!/^(temp:|fx:|sky:|lightmap:)/.test(key)) continue;
+      const src = this.textures.get(key).getSourceImage() as { width: number; height: number };
+      n += src.width * src.height * 4;
+    }
+    return n;
+  }
+
+  // ---------------------------------------------------------------- world: NPCs, story events, exterior sky
+  private solids(): Rect[] {
+    if (!this.npcs.length) return this.room.solids as Rect[];
+    return [...this.room.solids, ...this.npcs.filter((n) => n.view.sprite.visible).map((n) => npcSolid(n.state))];
+  }
+
+  private spawnNpcs(): void {
+    this.npcs = [];
+    const density = this.highDensity() ? 2 : 1;
+    for (const data of this.room.data.npcs ?? []) {
+      const n = { data, state: initNpc(data, this.phase()), view: new NpcView(this, data, density) };
+      this.npcs.push(n);
+      this.placeNpc(n, this.phase());
+    }
+  }
+
+  private placeNpc(n: { data: NpcData; state: NpcState; view: NpcView }, phase: string): void {
+    n.state = Object.assign(initNpc(n.data, phase), { phase });
+    n.view.setVisible(npcPresent(n.data, phase));
+    this.drawNpc(n, 0);
+  }
+
+  private drawNpc(n: { data: NpcData; state: NpcState; view: NpcView }, timeMs: number): void {
+    const r = groundToRender(n.state.x, n.state.y);
+    const bob = n.state.moving ? Math.abs(Math.sin(n.state.walked / 18)) * 2 : Math.sin(timeMs / 700) * 0.4;
+    n.view.place(r.x, r.y, n.state.y, bob, ['W', 'NW', 'SW'].includes(n.state.facing));
+  }
+
+  private updateNpcs(dtMs: number): void {
+    if (!this.npcs.length) return;
+    const blocked = (x: number, y: number) => !this.grid.standable({ x, y }) || Math.hypot(x - this.pos.x, y - this.pos.y) < 40;
+    for (const n of this.npcs) {
+      if (!n.view.sprite.visible) continue;
+      stepNpc(n.data, n.state, dtMs, this.pos, blocked);
+      this.drawNpc(n, this.time.now);
+    }
+  }
+
+  private npcAnchors(): WorldAnchor[] {
+    return this.npcs.filter((n) => n.view.sprite.visible && n.data.interact).map((n) => ({
+      key: `npc:${n.data.id}`, ownerId: n.data.id, label: n.data.interact!.label, x: n.state.x, y: n.state.y + 30, radiusCm: n.data.radiusCm ?? 70, kind: 'npc' as const,
+    }));
+  }
+
+  private showDialogue(d: { speaker: string; lines: string[] } | undefined): void {
+    if (d) this.game.events.emit('dialogue', { speaker: d.speaker, lines: [...d.lines] });
+  }
+
+  /** Run a data-driven story event and present its output (dialogue, toasts, comms threads). */
+  private runStoryEvent(id: string): void {
+    const res = runEvent(EVENTS.get(id), { vars: this.vars, flags: this.flags });
+    this.vars = res.state.vars as Vars; this.flags = res.state.flags;
+    this.present(res.out);
+    this.persist();
+  }
+
+  private present(out: Presentation): void {
+    for (const t of out.toasts) this.game.events.emit('toast', t);
+    const lines: { speaker: string; lines: string[] }[] = [...out.dialogue];
+    for (const c of out.comms) { const t = COMMS.get(c); if (t) { lines.push(threadAsDialogue(t)); audio().play('chime'); } }
+    // the dialogue panel shows one speaker block at a time: queue them in order
+    const queue = [...lines];
+    const next = () => { const d = queue.shift(); if (!d) return; this.showDialogue(d); if (queue.length) this.game.events.once('dialogue-closed', next); };
+    next();
+  }
+
+  /** Exterior maps: the time-of-day sky above the building row (same texture as window skies). */
+  private addExteriorSky(): void {
+    const { w } = this.room.data.sizeCm, wallH = this.room.data.wallHeightCm;
+    const img = this.add.image(-40, -wallH - 260, this.skyTexture()).setOrigin(0, 0).setDisplaySize(w + 80, 262).setDepth(-100001);
+    this.skies.push({ img, curtains: this.add.graphics() });
   }
 
   // ---------------------------------------------------------------- sound + highlight
@@ -571,6 +718,7 @@ export class RoomScene extends Phaser.Scene {
       player: { characterId: this.character.id, x: at.x, y: at.y, facing: this.facingDir, outfit: String(this.vars.outfit ?? 'default') },
       flags: { ...this.flags },
       vars: { ...this.vars },
+      visited: [...this.visited],
     });
   }
 
@@ -629,6 +777,12 @@ export class RoomScene extends Phaser.Scene {
         displayObjects: this.children.length,
         highlight: { target: this.glowTarget, visible: !!(this.glow?.visible || this.doorGlow?.visible), depth: this.glow?.visible ? this.glow.depth : null },
         floor: this.lastFloor,
+        visited: [...this.visited],
+        flagsState: { ...this.flags },
+        npcs: this.npcs.map((n) => ({ id: n.data.id, x: Math.round(n.state.x), y: Math.round(n.state.y), visible: n.view.sprite.visible, moving: n.state.moving })),
+        mapKind: this.room.data.kind ?? 'interior',
+        generatedTextures: { count: this.textures.getTextureKeys().filter((k) => /^(temp:|fx:|sky:|lightmap:)/.test(k)).length, bytes: this.generatedTextureBytes() },
+        doorsArmed: this.doorsArmed,
         windows: this.skies.map((w) => ({ skyDepth: w.img.depth, curtainDepth: w.curtains.depth, curtainsVisible: w.curtains.visible })),
         audio: { state: audio().state, muted: audio().prefs.muted, prefs: { ...audio().prefs }, played: { ...audio().stats.played }, unlocks: audio().stats.unlocks, ambience: audio().ambience, wantedAmbience: audio().wanted, bufferBytes: audio().bufferBytes() },
       }),

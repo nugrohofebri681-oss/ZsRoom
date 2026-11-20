@@ -1,0 +1,44 @@
+{
+  "id": "world_storefront_minimarket",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Minimarket storefront (TEMP world placeholder)",
+  "density": 1,
+  "canvas": {
+    "width": 656,
+    "height": 424
+  },
+  "pivot": {
+    "x": 328,
+    "y": 412,
+    "meaning": "bottom-centre of the front face (wall item)"
+  },
+  "footprint": {
+    "widthCm": 640,
+    "depthCm": 4
+  },
+  "heightsCm": {
+    "top": 400
+  },
+  "collision": [],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "placement": {
+    "type": "wall",
+    "wall": "north"
+  },
+  "temp": {
+    "shape": "storefront",
+    "kind": "shop",
+    "sign": "MINIMARKET",
+    "accent": "#2A9D8F",
+    "awning": "#F4A261",
+    "door": 110,
+    "maxDensity": 1
+  },
+  "$comment": "World 01 placeholder (wall-mounted). Stable id and geometry for future Codex art."
+}

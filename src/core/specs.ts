@@ -7,7 +7,9 @@ export type ActionSpec =
   | { type: 'outfit' }
   | { type: 'toggleLight' }
   | { type: 'toggleVar'; var: string; messages?: Record<string, string> }
-  | { type: 'sit'; seat: { x: number; y: number }; heightCm: number; facing: string; seatBehind?: boolean };
+  | { type: 'sit'; seat: { x: number; y: number }; heightCm: number; facing: string; seatBehind?: boolean }
+  | { type: 'dialogue'; id: string }          // data-driven text (src/data/story/dialogue.json)
+  | { type: 'event'; id: string };            // story event (src/data/story/events.json)
 
 export interface InteractionAnchorSpec {
   id: string; label: string; x: number; y: number; facing: string; radiusCm: number;
@@ -96,7 +98,7 @@ export interface EnvironmentSpec {
 
 export type AssetSpec = PropSpec | CharacterSpec | EnvironmentSpec;
 
-const modules = import.meta.glob('../../specs/{props,characters,environments}/*.json', { eager: true, import: 'default' }) as Record<string, AssetSpec>;
+const modules = import.meta.glob(['../../specs/{props,characters,environments}/*.json', '../../specs/world/*/*.json'], { eager: true, import: 'default' }) as Record<string, AssetSpec>;
 
 export const SPECS: ReadonlyMap<string, AssetSpec> = new Map(Object.values(modules).map((s) => [s.id, s]));
 

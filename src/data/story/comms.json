@@ -1,0 +1,16 @@
+{
+  "$comment": "FICTIONAL PLACEHOLDER threads that exercise the communication contract (src/story/comms.ts). Not real messages. Real story content is supplied privately by the Creative Director and must not be committed to this public repository.",
+  "threads": [
+    {
+      "id": "comms_placeholder_hello",
+      "channel": "chat",
+      "contact": "char_febri",
+      "contactName": "Febri",
+      "placeholder": true,
+      "lines": [
+        { "from": "char_febri", "text": "[placeholder message] Have a good day out!" },
+        { "from": "zila", "text": "[placeholder reply] Thanks!" }
+      ]
+    }
+  ]
+}

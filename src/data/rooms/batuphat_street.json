@@ -1,0 +1,268 @@
+{
+  "id": "batuphat_street",
+  "displayName": "Batuphat Street",
+  "world": "world01",
+  "floor": "ground",
+  "kind": "exterior",
+  "ambience": "street",
+  "provisional": true,
+  "sizeCm": {
+    "w": 2800,
+    "h": 800
+  },
+  "wallHeightCm": 420,
+  "palette": {
+    "floor": "#B9B3A9",
+    "wall": "#E6DCCB",
+    "trim": "#8A7F75"
+  },
+  "shell": {
+    "floor": "env_ground_street",
+    "wall": "env_wall_street_row"
+  },
+  "onEnter": [
+    "ev_street_first_visit"
+  ],
+  "spawns": {
+    "default": {
+      "x": 450,
+      "y": 300,
+      "facing": "S"
+    },
+    "from_home": {
+      "x": 450,
+      "y": 60,
+      "facing": "S"
+    },
+    "from_minimarket": {
+      "x": 1420,
+      "y": 60,
+      "facing": "S"
+    },
+    "from_workplace": {
+      "x": 2250,
+      "y": 60,
+      "facing": "S"
+    }
+  },
+  "props": [
+    {
+      "assetId": "world_road",
+      "x": 200,
+      "y": 650
+    },
+    {
+      "assetId": "world_road",
+      "x": 600,
+      "y": 650
+    },
+    {
+      "assetId": "world_road",
+      "x": 1000,
+      "y": 650
+    },
+    {
+      "assetId": "world_road",
+      "x": 1400,
+      "y": 650
+    },
+    {
+      "assetId": "world_road",
+      "x": 1800,
+      "y": 650
+    },
+    {
+      "assetId": "world_road",
+      "x": 2200,
+      "y": 650
+    },
+    {
+      "assetId": "world_road",
+      "x": 2600,
+      "y": 650
+    },
+    {
+      "assetId": "world_gate_home",
+      "wall": {
+        "x": 450,
+        "z": 0
+      }
+    },
+    {
+      "assetId": "world_facade_house",
+      "wall": {
+        "x": 850,
+        "z": 0
+      }
+    },
+    {
+      "assetId": "world_storefront_minimarket",
+      "wall": {
+        "x": 1420,
+        "z": 0
+      }
+    },
+    {
+      "assetId": "world_facade_workplace",
+      "wall": {
+        "x": 2250,
+        "z": 0
+      }
+    },
+    {
+      "assetId": "world_street_sign",
+      "x": 250,
+      "y": 470
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 700,
+      "y": 470
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 1650,
+      "y": 470
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 2600,
+      "y": 470
+    },
+    {
+      "assetId": "world_motorbike",
+      "x": 1200,
+      "y": 420
+    },
+    {
+      "assetId": "world_motorbike",
+      "x": 1640,
+      "y": 420,
+      "anchors": []
+    },
+    {
+      "assetId": "world_tree",
+      "x": 1860,
+      "y": 300
+    },
+    {
+      "assetId": "world_tree",
+      "x": 120,
+      "y": 300
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 2560,
+      "y": 150
+    }
+  ],
+  "npcs": [
+    {
+      "id": "npc_neighbour",
+      "name": "Neighbour",
+      "look": {
+        "shirt": "#9DB4D6",
+        "pants": "#5E6670",
+        "hair": "#3A2A20",
+        "hijab": "#E8C7A0"
+      },
+      "x": 650,
+      "y": 340,
+      "behaviour": {
+        "type": "patrol",
+        "points": [
+          {
+            "x": 650,
+            "y": 340
+          },
+          {
+            "x": 1150,
+            "y": 340
+          }
+        ],
+        "speed": 60,
+        "pauseMs": 2500
+      },
+      "schedule": {
+        "night": "away"
+      },
+      "interact": {
+        "label": "Talk to the neighbour",
+        "dialogue": "dlg_neighbour"
+      }
+    }
+  ],
+  "doors": [
+    {
+      "id": "home_gate",
+      "label": "Enter home",
+      "style": "gate",
+      "x": 380,
+      "y": 0,
+      "w": 140,
+      "h": 10,
+      "to": {
+        "room": "front_yard",
+        "spawn": "from_street"
+      }
+    },
+    {
+      "id": "minimarket_door",
+      "label": "Enter the minimarket",
+      "style": "none",
+      "x": 1365,
+      "y": 0,
+      "w": 110,
+      "h": 10,
+      "to": {
+        "room": "minimarket",
+        "spawn": "from_street"
+      }
+    },
+    {
+      "id": "workplace_door",
+      "label": "Enter the workplace",
+      "style": "none",
+      "x": 2195,
+      "y": 0,
+      "w": 110,
+      "h": 10,
+      "to": {
+        "room": "workplace",
+        "spawn": "from_street"
+      }
+    },
+    {
+      "id": "road_east",
+      "label": "Road east",
+      "side": "east",
+      "x": 2800,
+      "y": 480,
+      "w": 10,
+      "h": 260,
+      "to": {
+        "room": "lhokseumawe_centre",
+        "spawn": "default"
+      },
+      "locked": {
+        "message": "The road continues toward Lhokseumawe city — not available yet (planned)."
+      }
+    },
+    {
+      "id": "road_west",
+      "label": "Road west",
+      "side": "west",
+      "x": 0,
+      "y": 480,
+      "w": 10,
+      "h": 260,
+      "to": {
+        "room": "batuphat_more_shops",
+        "spawn": "default"
+      },
+      "locked": {
+        "message": "More of Batuphat lies this way — not available yet (planned)."
+      }
+    }
+  ]
+}

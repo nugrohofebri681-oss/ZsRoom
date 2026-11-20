@@ -1,0 +1,27 @@
+{
+  "$comment": "World 01 registry: world → district → building → map. Source of truth for the map registry in docs/production/WORLD_01_ROADMAP.md (kept in sync by tests/unit/world-graph.test.ts). Layout and topology are PROVISIONAL until the Creative Director reviews the world map and story; nothing here claims real-world geography.",
+  "id": "world01",
+  "name": "Batuphat – Lhokseumawe",
+  "start": { "map": "zila_bedroom", "spawn": "default" },
+  "districts": [
+    { "id": "zila_home", "name": "Zila's home", "provisional": true },
+    { "id": "batuphat", "name": "Batuphat neighbourhood", "provisional": true },
+    { "id": "lhokseumawe_city", "name": "Lhokseumawe city", "provisional": true }
+  ],
+  "maps": [
+    { "id": "zila_bedroom", "district": "zila_home", "building": "zila_house", "kind": "interior", "status": "implemented", "note": "Approved HD art (10 assets) + Batch C/D under review" },
+    { "id": "upper_hall", "district": "zila_home", "building": "zila_house", "kind": "interior", "status": "implemented", "note": "TEMP; stairs down at the east end" },
+    { "id": "living_room", "district": "zila_home", "building": "zila_house", "kind": "interior", "status": "implemented", "provisional": true, "note": "Downstairs shared living area. TEMP furniture" },
+    { "id": "front_yard", "district": "zila_home", "building": "zila_house", "kind": "exterior", "status": "implemented", "provisional": true, "note": "House front, yard, gate to the street" },
+    { "id": "batuphat_street", "district": "batuphat", "kind": "exterior", "status": "implemented", "provisional": true, "note": "Provisional street: home gate, minimarket, workplace; both road ends locked" },
+    { "id": "minimarket", "district": "batuphat", "building": "minimarket", "kind": "interior", "status": "implemented", "provisional": true, "note": "Generic Indonesian-style minimarket (no real brand). Pick a drink, pay the cashier" },
+    { "id": "workplace", "district": "batuphat", "building": "workplace", "kind": "interior", "status": "implemented", "provisional": true, "storyConfig": "workplace", "note": "CONFIGURABLE PLACEHOLDER for Zila's real workplace (type/name pending story). Clock-in → 3 tasks → clock-out loop" },
+    { "id": "kitchen", "district": "zila_home", "building": "zila_house", "kind": "interior", "status": "planned", "note": "Locked door in the living room" },
+    { "id": "batuphat_more_shops", "district": "batuphat", "kind": "exterior", "status": "planned", "note": "Further neighbourhood blocks (east/west road ends are locked)" },
+    { "id": "lhokseumawe_centre", "district": "lhokseumawe_city", "kind": "exterior", "status": "story-pending", "note": "Needs Creative Director world map and story" },
+    { "id": "travel_maps", "district": "lhokseumawe_city", "kind": "exterior", "status": "story-pending", "note": "Future Travel chapters with Febri as companion NPC (not in this sprint)" }
+  ],
+  "placeholders": {
+    "workplace": { "displayName": "Workplace (placeholder)", "type": "office", "note": "Replace name, layout and task loop once the story-relevant workplace is defined." }
+  }
+}

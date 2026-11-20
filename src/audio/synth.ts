@@ -7,7 +7,7 @@ export const SFX_RATE = 22050;
 
 export type SoundId = 'step_wood' | 'step_rug' | 'lamp_click' | 'interact' | 'sit' | 'cloth' | 'door' | 'ui_tick' | 'chime';
 export const SOUND_IDS: SoundId[] = ['step_wood', 'step_rug', 'lamp_click', 'interact', 'sit', 'cloth', 'door', 'ui_tick', 'chime'];
-export type AmbienceId = 'day' | 'night';
+export type AmbienceId = 'day' | 'night' | 'street' | 'shop';
 
 /** Small deterministic PRNG (mulberry32). */
 export function rng(seed: number): () => number {
@@ -117,6 +117,7 @@ export function renderAmbience(id: AmbienceId, rate = SFX_RATE, seconds = 8): Fl
   for (let i = 0; i < n; i++) { brown = (brown + (r() * 2 - 1) * 0.02) * 0.996; x[i] = brown; }
   lowpass(x, id === 'day' ? 500 : 350, rate);
   normalize(x, id === 'day' ? 0.05 : 0.04);
+  if (id === 'street' || id === 'shop') return streetOrShop(id, rate, seconds, x, r);
   const events = id === 'day' ? 7 : 26;
   for (let k = 0; k < events; k++) {
     const start = Math.floor(r() * (n - rate * 0.5));
@@ -165,4 +166,34 @@ export function crossedContacts(prevDistance: number, distance: number, strideCm
     count += Math.max(0, b - a);
   }
   return count;
+}
+
+/**
+ * Street: distant traffic rumble + occasional passing motorbike swells (pitch glide) + a few birds.
+ * Shop: steady fridge hum + soft air-con noise. Both loop seamlessly (cross-faded seam).
+ */
+function streetOrShop(id: 'street' | 'shop', rate: number, seconds: number, x: Float32Array, r: () => number): Float32Array {
+  const n = x.length;
+  if (id === 'street') {
+    lowpass(x, 220, rate); normalize(x, 0.05);
+    for (let k = 0; k < 3; k++) {                       // motorbike passes
+      const start = Math.floor(r() * (n - rate * 3)), len = Math.floor(rate * (2 + r())), f0 = 70 + r() * 30;
+      let ph = 0;
+      for (let i = 0; i < len; i++) {
+        const t = i / len, env = Math.sin(Math.PI * t) ** 2, f = f0 * (1.15 - 0.3 * t);   // Doppler-like glide
+        ph += (2 * Math.PI * f) / rate;
+        x[start + i] = x[start + i]! + (Math.sin(ph) + 0.4 * Math.sin(2 * ph) + 0.15 * (r() * 2 - 1)) * env * 0.03;
+      }
+    }
+    for (let k = 0; k < 4; k++) {                       // a few birds
+      const start = Math.floor(r() * (n - rate * 0.3)), f = 2800 + r() * 1200, len = Math.floor(rate * 0.06);
+      for (let i = 0; i < len; i++) x[start + i] = x[start + i]! + Math.sin(2 * Math.PI * f * (1 + 0.3 * i / len) * (i / rate)) * Math.sin(Math.PI * i / len) * 0.025;
+    }
+  } else {
+    lowpass(x, 900, rate); normalize(x, 0.015);
+    for (let i = 0; i < n; i++) x[i] = x[i]! + Math.sin(2 * Math.PI * 100 * (i / rate)) * 0.012 + Math.sin(2 * Math.PI * 200 * (i / rate)) * 0.004;
+  }
+  const fade = Math.floor(rate * 0.5);
+  for (let i = 0; i < fade; i++) { const w = i / fade; x[i] = x[i]! * w + x[n - fade + i]! * (1 - w); }
+  return x.subarray(0, n - fade);
 }

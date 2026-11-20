@@ -1,0 +1,26 @@
+{
+  "id": "env_floor_living",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "environment",
+  "kind": "floor-tile",
+  "displayName": "Living-room floor (tiles) (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 256,
+    "height": 126
+  },
+  "tile": {
+    "repeat": "xy",
+    "widthCm": 128,
+    "renderDepthCm": 63,
+    "groundDepthCm": 90
+  },
+  "temp": {
+    "shape": "tiles",
+    "base": "#E6DCCB",
+    "tilesX": 2,
+    "tilesY": 2
+  },
+  "$comment": "World 01 placeholder tile."
+}

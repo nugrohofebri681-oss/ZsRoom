@@ -1,0 +1,24 @@
+{
+  "id": "env_ground_street",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "environment",
+  "kind": "floor-tile",
+  "displayName": "Street paving (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 256,
+    "height": 126
+  },
+  "tile": {
+    "repeat": "xy",
+    "widthCm": 128,
+    "renderDepthCm": 63,
+    "groundDepthCm": 90
+  },
+  "temp": {
+    "shape": "paving",
+    "base": "#B9B3A9"
+  },
+  "$comment": "World 01 placeholder tile."
+}

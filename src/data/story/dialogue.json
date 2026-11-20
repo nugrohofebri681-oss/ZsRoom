@@ -1,0 +1,23 @@
+{
+  "$comment": "PLACEHOLDER dialogue for the provisional World 01 slice. Fictional, non-personal text; the Creative Director replaces it with story-approved lines. Never put private conversations here (public repository).",
+  "dialogue": {
+    "dlg_living_sofa": { "speaker": "Zila", "lines": ["The living room is quiet this time of day."] },
+    "dlg_living_calendar": { "speaker": "Zila", "lines": ["A family calendar. (Placeholder: story events can be noted here.)"] },
+    "dlg_living_dining": { "speaker": "Zila", "lines": ["The dining table. Breakfast later, maybe."] },
+    "dlg_kitchen_locked": { "speaker": "Zila", "lines": ["The kitchen isn't built yet. (Planned location.)"] },
+    "dlg_yard_motorbike": { "speaker": "Zila", "lines": ["The family motorbike. Riding is not available yet."] },
+    "dlg_yard_bench": { "speaker": "Zila", "lines": ["A nice spot to sit in the shade."] },
+    "dlg_street_sign": { "speaker": "Zila", "lines": ["Batuphat. (Provisional street layout — not the real geography.)"] },
+    "dlg_neighbour": { "speaker": "Neighbour", "lines": ["Good morning, Zila! Off somewhere today?", "Have a nice day."] },
+    "dlg_shop_snacks": { "speaker": "Zila", "lines": ["Shelves of snacks and instant noodles. Nothing I need right now."] },
+    "dlg_shop_cashier": { "speaker": "Cashier", "lines": ["Welcome! Let me know when you're ready to pay."] },
+    "dlg_shop_paid": { "speaker": "Cashier", "lines": ["Thank you! Have a nice day."] },
+    "dlg_shop_nothing": { "speaker": "Cashier", "lines": ["Anything else you'd like to buy?"] },
+    "dlg_work_coworker": { "speaker": "Coworker", "lines": ["Morning! The task list is on the board."] },
+    "dlg_work_board": { "speaker": "Zila", "lines": ["Today's tasks: three items. (Placeholder work loop until the real workplace story is defined.)"] },
+    "dlg_work_not_started": { "speaker": "Zila", "lines": ["I should clock in first."] },
+    "dlg_work_done_tasks": { "speaker": "Zila", "lines": ["All tasks are done for today."] },
+    "dlg_work_shift_done": { "speaker": "Zila", "lines": ["Shift complete. Time to head home."] },
+    "dlg_work_unfinished": { "speaker": "Zila", "lines": ["There's still work to finish ({tasksDone}/3)."] }
+  }
+}

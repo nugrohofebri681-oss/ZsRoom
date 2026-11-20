@@ -29,7 +29,7 @@ describe('procedural sound effects', () => {
 });
 
 describe('ambience loops', () => {
-  for (const id of ['day', 'night'] as const) {
+  for (const id of ['day', 'night', 'street', 'shop'] as const) {
     it(`${id}: quiet bed, seamless at the loop point, small memory`, () => {
       const x = renderAmbience(id);
       expect(rms(x)).toBeLessThan(0.05);                               // subtle, never intrusive

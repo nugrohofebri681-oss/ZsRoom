@@ -1,0 +1,38 @@
+{
+  "id": "world_road",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Road segment (TEMP world placeholder)",
+  "density": 1,
+  "canvas": {
+    "width": 416,
+    "height": 198
+  },
+  "pivot": {
+    "x": 208,
+    "y": 99,
+    "meaning": "centre of the decal"
+  },
+  "footprint": {
+    "widthCm": 400,
+    "depthCm": 260
+  },
+  "heightsCm": {
+    "top": 0
+  },
+  "collision": [],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "placement": {
+    "type": "floor"
+  },
+  "temp": {
+    "shape": "road",
+    "maxDensity": 1
+  },
+  "$comment": "World 01 placeholder floor decal."
+}

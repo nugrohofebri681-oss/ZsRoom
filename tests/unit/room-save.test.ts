@@ -24,6 +24,7 @@ describe('rooms (data-driven)', () => {
   });
   it('every door points at an existing room and spawn', () => {
     for (const room of ROOMS.values()) for (const d of room.doors) {
+      if (d.locked) continue;                       // locked doors point at planned maps (world-graph test)
       const target = ROOMS.get(d.to.room);
       expect(target, `${room.id} → ${d.to.room}`).toBeDefined();
       expect(target!.spawns[d.to.spawn], `${d.to.room}.${d.to.spawn}`).toBeDefined();
@@ -31,14 +32,15 @@ describe('rooms (data-driven)', () => {
   });
   it('every manifest asset has a spec and vice versa', () => {
     for (const id of Object.keys(manifest.assets)) expect(SPECS.has(id), id).toBe(true);
-    for (const id of SPECS.keys()) expect(id in manifest.assets, id).toBe(true);
+    // World 01 placeholders (status world-temp) are engine geometry, not art requests: not in the art manifest
+    for (const [id, spec] of SPECS) if ((spec as { status?: string }).status !== 'world-temp') expect(id in manifest.assets, id).toBe(true);
   });
 });
 
 describe('versioned save', () => {
   it('round-trips the current version', () => {
     const s = mem();
-    saveGame(s, { roomId: 'zila_bedroom', player: { characterId: 'char_zila', x: 1, y: 2, facing: 'N', outfit: 'default' }, flags: {}, vars: { phase: 'night' } });
+    saveGame(s, { roomId: 'zila_bedroom', player: { characterId: 'char_zila', x: 1, y: 2, facing: 'N', outfit: 'default' }, flags: {}, vars: { phase: 'night' }, visited: ['zila_bedroom'] });
     expect(loadGame(s)?.player).toMatchObject({ x: 1, y: 2, facing: 'N' });
     expect(loadGame(s)?.version).toBe(SAVE_VERSION);
   });

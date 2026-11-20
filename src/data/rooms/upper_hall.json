@@ -23,6 +23,11 @@
       "x": 365,
       "y": 40,
       "facing": "S"
+    },
+    "from_stairs": {
+      "x": 640,
+      "y": 135,
+      "facing": "W"
     }
   },
   "props": [],
@@ -37,6 +42,20 @@
       "to": {
         "room": "zila_bedroom",
         "spawn": "from_hall"
+      }
+    },
+    {
+      "id": "stairs_down",
+      "label": "Go downstairs",
+      "side": "east",
+      "style": "stairs",
+      "x": 700,
+      "y": 70,
+      "w": 10,
+      "h": 130,
+      "to": {
+        "room": "living_room",
+        "spawn": "from_stairs"
       }
     }
   ],

@@ -1,0 +1,41 @@
+{
+  "id": "world_rug_living",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Living-room rug (TEMP world placeholder)",
+  "density": 1,
+  "canvas": {
+    "width": 276,
+    "height": 135
+  },
+  "pivot": {
+    "x": 138,
+    "y": 67,
+    "meaning": "centre of the decal"
+  },
+  "footprint": {
+    "widthCm": 260,
+    "depthCm": 170
+  },
+  "heightsCm": {
+    "top": 0
+  },
+  "collision": [],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "placement": {
+    "type": "floor"
+  },
+  "temp": {
+    "shape": "rug",
+    "maxDensity": 2,
+    "body": "#D8C3A5",
+    "border": "#EFE6D8",
+    "pattern": "#9C7258"
+  },
+  "$comment": "World 01 placeholder floor decal."
+}

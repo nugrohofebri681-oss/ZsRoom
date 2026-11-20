@@ -45,6 +45,8 @@ export interface ActionResult {
   fade?: boolean;
   sit?: Extract<ActionSpec, { type: 'sit' }>;
   toggleLight?: boolean;
+  dialogueId?: string;
+  eventId?: string;
 }
 
 export function applyAction(action: ActionSpec | undefined, vars: Vars, label: string): ActionResult {
@@ -53,6 +55,10 @@ export function applyAction(action: ActionSpec | undefined, vars: Vars, label: s
   switch (action.type) {
     case 'message':
       return { vars: v, dialogue: action.lines };
+    case 'dialogue':
+      return { vars: v, dialogueId: action.id };
+    case 'event':
+      return { vars: v, eventId: action.id };
     case 'rest': {
       const cur: Phase = isPhase(v.phase) ? v.phase : 'evening';
       const next = nextPhase(cur);

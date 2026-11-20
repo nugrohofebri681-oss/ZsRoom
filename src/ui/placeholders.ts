@@ -403,4 +403,127 @@ const SHAPES: Record<string, (ctx: Ctx, g: Geom, t: TempArtSpec) => void> = {
   },
 };
 
+
+// ---------- World 01 TEMP shapes (generic placeholders for exterior/interior world maps) ----------
+function label(ctx: Ctx, text: string, x: number, y: number, size: number, color = '#FFFFFF', font = 'bold'): void {
+  ctx.fillStyle = color; ctx.font = `${font} ${size}px system-ui, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, x, y);
+}
+Object.assign(SHAPES, {
+  /** Sofa / bench: seat box + backrest along the NORTH edge (faces south, toward the viewer) + arms. */
+  sofa(ctx: Ctx, g: Geom, t: TempArtSpec) {
+    const body = String(t.body ?? '#B98A9A'), cush = String(t.cushion ?? tone(body, 1.12)), seat = g.h.seat ?? 45, top = g.h.top ?? 85, d = g.d;
+    const backDepth = Math.min(g.dp * 0.3, 25), armW = Number(t.arms ?? 18);
+    if (t.legs) { for (const x of [g.L + 6 * d, g.R - 6 * d]) leg(ctx, x, g.zy(seat - 8), g.py, 4 * d, String(t.legs)); }
+    // backrest (at the back edge, so it is drawn first and higher)
+    const bx0 = g.L, bx1 = g.R, byTop = g.by(top), byBot = g.by(seat - 10) + backDepth * K * d;
+    rr(ctx, bx0, byTop, bx1 - bx0, byBot - byTop, 8 * d); paint(ctx, body, bx0, byTop, bx1, byBot, 1.1, 0.85);
+    box(ctx, g, g.L, g.R, t.legs ? seat - 12 : 0, seat - 6, body, tone(body, 0.92), 6);
+    const n = Math.max(1, Number(t.seats ?? 3)), inner0 = g.L + (armW ? armW * d : 0), inner1 = g.R - (armW ? armW * d : 0), cw = (inner1 - inner0) / n;
+    for (let i = 0; i < n; i++) { const x0 = inner0 + i * cw + 1.5; rr(ctx, x0, g.zy(seat) - (g.py - g.back) * 0.75, cw - 3, (g.py - g.back) * 0.75 + 6 * d, 6 * d); paint(ctx, cush, x0, g.zy(seat) - 20 * d, x0 + cw, g.zy(seat) + 6 * d, 1.15, 0.9); }
+    if (armW) for (const x0 of [g.L, g.R - armW * d]) { rr(ctx, x0, g.zy(seat + 18) - (g.py - g.back) * 0.8, armW * d, (seat + 18) * d * 0.55 + (g.py - g.back) * 0.8, 7 * d); paint(ctx, body, x0, g.zy(seat + 18) - 20 * d, x0 + armW * d, g.zy(4), 1.12, 0.82); }
+  },
+  /** Generic counter / cabinet block with an optional label strip and register. */
+  block(ctx: Ctx, g: Geom, t: TempArtSpec) {
+    const body = String(t.body ?? '#C9B8A8'), topC = String(t.top ?? tone(body, 1.12)), top = g.h.top ?? 90, d = g.d;
+    box(ctx, g, g.L, g.R, 0, top, topC, body, 4 * d, g.py - g.back);
+    if (t.stripe) { ctx.fillStyle = String(t.stripe); ctx.fillRect(g.L + 2, g.zy(top) + 6 * d, g.R - g.L - 4, 8 * d); }
+    if (t.text) label(ctx, String(t.text), g.px, g.zy(top * 0.45), 9 * d, String(t.textColor ?? '#FFFFFF'));
+    if (t.register) { const rx = g.R - 30 * d, ry = g.zy(top) - (g.py - g.back) * 0.5; rr(ctx, rx - 12 * d, ry - 18 * d, 24 * d, 18 * d, 3 * d); paint(ctx, '#4A4566', rx - 12 * d, ry - 18 * d, rx + 12 * d, ry, 1.2, 0.85); }
+    if (t.shoes) for (let i = 0; i < 4; i++) { const x = g.L + (10 + i * 20) * d; rr(ctx, x, g.zy(top) - 5 * d - (g.py - g.back) * 0.5, 14 * d, 6 * d, 3 * d); ctx.fillStyle = ['#9C7258', '#E8A0B4', '#4A4250', '#F6EBDD'][i]!; ctx.fill(); }
+  },
+  /** Store shelving or a glass-door fridge, seen from the front (south). */
+  shelving(ctx: Ctx, g: Geom, t: TempArtSpec) {
+    const frame = String(t.frame ?? '#D7DEE3'), top = g.h.top ?? 160, d = g.d, glass = !!t.glass;
+    box(ctx, g, g.L, g.R, 0, top, tone(frame, 1.08), frame, 3 * d, g.py - g.back);
+    const rows = Number(t.rows ?? 4), y0 = g.zy(top) + 6 * d, y1 = g.zy(8), rh = (y1 - y0) / rows;
+    const palette = ['#E07A5F', '#F2CC8F', '#81B29A', '#3D85C6', '#E8A0B4', '#F4F1DE', '#9C7258'];
+    let seed = (g.spec.id.length * 97) % 233280; const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
+    for (let r = 0; r < rows; r++) {
+      const yb = y0 + (r + 1) * rh - 2 * d;
+      ctx.fillStyle = tone(frame, 0.75); ctx.fillRect(g.L + 3 * d, yb, g.R - g.L - 6 * d, 2 * d);
+      for (let x = g.L + 5 * d; x < g.R - 9 * d;) { const w = (6 + rnd() * 8) * d, h = rh * (0.45 + rnd() * 0.4); ctx.fillStyle = palette[Math.floor(rnd() * palette.length)]!; ctx.fillRect(x, yb - h, w - 1.5 * d, h); x += w; }
+    }
+    if (glass) { ctx.fillStyle = 'rgba(200,230,255,0.28)'; ctx.fillRect(g.L + 3 * d, y0 - 2 * d, g.R - g.L - 6 * d, y1 - y0); ctx.strokeStyle = tone(frame, 0.6); ctx.lineWidth = 2 * d; ctx.strokeRect(g.L + 3 * d, y0 - 2 * d, (g.R - g.L - 6 * d) / 2, y1 - y0); ctx.strokeRect(g.px, y0 - 2 * d, (g.R - g.L - 6 * d) / 2, y1 - y0); }
+    if (t.text) { ctx.fillStyle = String(t.textBg ?? '#3D85C6'); ctx.fillRect(g.L, g.zy(top) - 2 * d, g.R - g.L, 10 * d); label(ctx, String(t.text), g.px, g.zy(top) + 3 * d, 7 * d); }
+  },
+  /** Motorbike, side view (length along x). */
+  motorbike(ctx: Ctx, g: Geom, t: TempArtSpec) {
+    const body = String(t.body ?? '#C0607E'), d = g.d, cy = g.py - (g.py - g.back) / 2, r = 28 * d;
+    for (const x of [g.L + 32 * d, g.R - 32 * d]) { ellipse(ctx, x, cy - r, r, r); ctx.fillStyle = '#2E2A30'; ctx.fill(); ellipse(ctx, x, cy - r, r * 0.45, r * 0.45); ctx.fillStyle = '#9AA0A8'; ctx.fill(); }
+    ctx.beginPath(); ctx.moveTo(g.L + 40 * d, cy - r * 1.4); ctx.quadraticCurveTo(g.px, cy - r * 0.6, g.R - 45 * d, cy - r * 1.3); ctx.lineTo(g.R - 30 * d, cy - r * 2.3); ctx.lineTo(g.L + 60 * d, cy - r * 2.2); ctx.closePath();
+    paint(ctx, body, g.L, cy - r * 2.4, g.R, cy - r * 0.6, 1.2, 0.8);
+    rr(ctx, g.L + 55 * d, cy - r * 2.6, 70 * d, 12 * d, 6 * d); paint(ctx, '#3A3440', g.L, cy - r * 2.7, g.R, cy - r * 2.1, 1.3, 0.9);           // seat
+    ctx.strokeStyle = '#4A4250'; ctx.lineWidth = 4 * d; ctx.beginPath(); ctx.moveTo(g.R - 35 * d, cy - r * 2.2); ctx.lineTo(g.R - 25 * d, cy - r * 3.4); ctx.lineTo(g.R - 40 * d, cy - r * 3.6); ctx.stroke();
+  },
+  /** Tree: trunk + layered canopy (canopy overhangs the footprint; collision is the trunk only). */
+  tree(ctx: Ctx, g: Geom, t: TempArtSpec) {
+    const leaf = String(t.leaf ?? '#6E9B5A'), trunk = String(t.trunk ?? '#7A5238'), top = g.h.top ?? 450, d = g.d, cx = g.px, cy = g.py - (g.py - g.back) / 2;
+    const canopyR = Number(t.canopy ?? 150) * d, canopyY = cy - top * d + canopyR;
+    rr(ctx, cx - 10 * d, canopyY, 20 * d, cy - canopyY, 6 * d); paint(ctx, trunk, cx - 10 * d, canopyY, cx + 10 * d, cy, 1.15, 0.75);
+    let seed = 31; const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
+    for (let i = 0; i < 16; i++) {
+      const a = rnd() * Math.PI * 2, rr2 = canopyR * (0.25 + rnd() * 0.5), x = cx + Math.cos(a) * rr2, y = canopyY + Math.sin(a) * rr2 * 0.75, s = canopyR * (0.35 + rnd() * 0.2);
+      ellipse(ctx, x, y, s, s * 0.85); paint(ctx, tone(leaf, 0.85 + rnd() * 0.3), x - s, y - s, x + s, y + s, 1.2, 0.8, false);
+    }
+  },
+  /** Street light / sign pole. */
+  pole(ctx: Ctx, g: Geom, t: TempArtSpec) {
+    const c = String(t.color ?? '#5E6670'), top = g.h.top ?? 450, d = g.d, cx = g.px, cy = g.py - (g.py - g.back) / 2;
+    ellipse(ctx, cx, cy, 10 * d, 6 * d); ctx.fillStyle = tone(c, 0.7); ctx.fill();
+    rr(ctx, cx - 4 * d, cy - top * d, 8 * d, top * d, 3 * d); paint(ctx, c, cx - 4 * d, cy - top * d, cx + 4 * d, cy, 1.25, 0.75);
+    if (t.sign) { rr(ctx, cx - 30 * d, cy - top * d, 60 * d, 26 * d, 3 * d); paint(ctx, String(t.signColor ?? '#2E7D5B'), cx - 30 * d, cy - top * d, cx + 30 * d, cy - (top - 26) * d, 1.1, 0.85); label(ctx, String(t.sign), cx, cy - (top - 13) * d, 8 * d); }
+    else { rr(ctx, cx - 4 * d, cy - top * d, 40 * d, 6 * d, 3 * d); paint(ctx, c, cx, cy - top * d, cx + 40 * d, cy - top * d + 6 * d); ellipse(ctx, cx + 34 * d, cy - top * d + 8 * d, 9 * d, 4 * d); ctx.fillStyle = '#FFF4D6'; ctx.fill(); }
+  },
+  /** Wall-mounted building front (storefront / office / house), painted flat on the north wall. */
+  storefront(ctx: Ctx, g: Geom, t: TempArtSpec) {
+    const wall = String(t.wall ?? '#EFE6D8'), accent = String(t.accent ?? '#2A9D8F'), top = g.h.top ?? 380, d = g.d, W = g.R - g.L, y0 = g.zy(top), y1 = g.py;
+    rr(ctx, g.L, y0, W, y1 - y0, 4 * d); paint(ctx, wall, g.L, y0, g.R, y1, 1.05, 0.9);
+    ctx.fillStyle = tone(wall, 0.8); ctx.fillRect(g.L, y0, W, 8 * d);                                        // parapet
+    const kind = String(t.kind ?? 'shop');
+    if (t.sign) { const sh = 46 * d; rr(ctx, g.L + 20 * d, y0 + 22 * d, W - 40 * d, sh, 4 * d); paint(ctx, accent, g.L, y0 + 22 * d, g.R, y0 + 22 * d + sh, 1.15, 0.85); label(ctx, String(t.sign), g.px, y0 + 22 * d + sh / 2, 26 * d); }
+    if (kind === 'shop') {
+      const ay = y0 + 80 * d; ctx.fillStyle = String(t.awning ?? '#F4A261'); ctx.beginPath(); ctx.moveTo(g.L + 10 * d, ay); ctx.lineTo(g.R - 10 * d, ay); ctx.lineTo(g.R - 4 * d, ay + 26 * d); ctx.lineTo(g.L + 4 * d, ay + 26 * d); ctx.closePath(); ctx.fill();
+      for (let x = g.L + 10 * d; x < g.R - 10 * d; x += 40 * d) { ctx.fillStyle = 'rgba(255,255,255,0.35)'; ctx.fillRect(x, ay, 20 * d, 26 * d); }
+      const gy = ay + 34 * d; ctx.fillStyle = 'rgba(170,215,235,0.85)'; ctx.fillRect(g.L + 20 * d, gy, W - 40 * d, y1 - gy - 6 * d);
+      ctx.strokeStyle = tone(wall, 0.55); ctx.lineWidth = 3 * d; for (let x = g.L + 20 * d; x <= g.R - 20 * d + 1; x += (W - 40 * d) / 6) { ctx.beginPath(); ctx.moveTo(x, gy); ctx.lineTo(x, y1 - 6 * d); ctx.stroke(); }
+      for (let i = 0; i < 9; i++) { ctx.fillStyle = ['#E07A5F', '#F2CC8F', '#81B29A', '#3D85C6'][i % 4]!; ctx.fillRect(g.L + (30 + i * ((W / d - 60) / 9)) * d, y1 - 70 * d, 18 * d, 50 * d); }
+    } else {
+      const rows = kind === 'office' ? 2 : 1, cols = Math.max(2, Math.floor(W / d / 140));
+      for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+        if (kind === 'house' && c === Math.floor(cols / 2)) continue;
+        const ww = 70 * d, wh = 80 * d, x = g.L + (c + 0.5) * (W / cols) - ww / 2, y = y0 + (kind === 'office' ? 90 + r * 120 : 130) * d;
+        rr(ctx, x, y, ww, wh, 3 * d); ctx.fillStyle = '#A9C7DA'; ctx.fill(); ctx.strokeStyle = tone(wall, 0.6); ctx.lineWidth = 3 * d; ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x + ww / 2, y); ctx.lineTo(x + ww / 2, y + wh); ctx.stroke();
+      }
+      if (kind === 'house') { const dw = 80 * d; rr(ctx, g.px - dw / 2, y1 - 200 * d, dw, 200 * d, 4 * d); paint(ctx, '#8A5A3C', g.px - dw / 2, y1 - 200 * d, g.px + dw / 2, y1, 1.1, 0.85); }
+    }
+    if (t.door) { const dw = Number(t.door) * d; rr(ctx, g.px - dw / 2, y1 - 210 * d, dw, 210 * d, 3 * d); ctx.fillStyle = 'rgba(120,170,195,0.95)'; ctx.fill(); ctx.strokeStyle = '#5E6670'; ctx.lineWidth = 3 * d; ctx.stroke(); ctx.beginPath(); ctx.moveTo(g.px, y1 - 210 * d); ctx.lineTo(g.px, y1); ctx.stroke(); }
+  },
+  /** Low front wall with two pillars and an open gate in the middle (wall-mounted). */
+  gate(ctx: Ctx, g: Geom, t: TempArtSpec) {
+    const c = String(t.wall ?? '#EFE6D8'), metal = String(t.metal ?? '#4A4250'), top = g.h.top ?? 200, d = g.d, gap = Number(t.gap ?? 140) * d, wallTop = g.zy(120);
+    for (const [x0, x1] of [[g.L, g.px - gap / 2], [g.px + gap / 2, g.R]] as const) { rr(ctx, x0, wallTop, x1 - x0, g.py - wallTop, 3 * d); paint(ctx, c, x0, wallTop, x1, g.py, 1.08, 0.88); }
+    for (const x of [g.px - gap / 2 - 12 * d, g.px + gap / 2 - 12 * d]) { rr(ctx, x, g.zy(top), 24 * d, top * d, 3 * d); paint(ctx, tone(c, 0.95), x, g.zy(top), x + 24 * d, g.py, 1.15, 0.8); }
+    ctx.strokeStyle = metal; ctx.lineWidth = 2.5 * d;                                                          // opened gate leaves, folded against the wall
+    for (const s of [-1, 1]) { const x = g.px + s * (gap / 2 + 20 * d); for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.moveTo(x + s * i * 8 * d, g.zy(160)); ctx.lineTo(x + s * i * 8 * d, g.py - 4 * d); ctx.stroke(); } }
+  },
+  /** Road surface decal: asphalt with a dashed centre line and kerbs. */
+  road(ctx: Ctx, g: Geom, t: TempArtSpec) {
+    const d = g.d, w = g.w * d, h = g.dp * K * d, x = g.px - w / 2, y = g.py - h / 2;
+    ctx.fillStyle = String(t.asphalt ?? '#6B6870'); ctx.fillRect(x, y, w, h);
+    ctx.fillStyle = 'rgba(255,255,255,0.05)'; for (let i = 0; i < 60; i++) ctx.fillRect(x + ((i * 53) % w), y + ((i * 29) % h), 3 * d, 1.5 * d);
+    ctx.fillStyle = '#D9D4C7'; ctx.fillRect(x, y, w, 6 * d); ctx.fillRect(x, y + h - 6 * d, w, 6 * d);
+    ctx.fillStyle = '#F2E9C9'; for (let xx = x + 20 * d; xx < x + w; xx += 100 * d) ctx.fillRect(xx, y + h / 2 - 2 * d, 50 * d, 4 * d);
+  },
+  /** Flat wall panel: window, notice board, calendar, whiteboard, time clock (wall-mounted). */
+  panel(ctx: Ctx, g: Geom, t: TempArtSpec) {
+    const top = g.h.top ?? 100, d = g.d, y0 = g.zy(top), y1 = g.py, frame = String(t.frame ?? '#8A5A3C'), face = String(t.face ?? '#F6F1E7');
+    rr(ctx, g.L, y0, g.R - g.L, y1 - y0, 3 * d); paint(ctx, frame, g.L, y0, g.R, y1, 1.1, 0.85);
+    rr(ctx, g.L + 4 * d, y0 + 4 * d, g.R - g.L - 8 * d, y1 - y0 - 8 * d, 2 * d); ctx.fillStyle = face; ctx.fill();
+    if (t.window) { ctx.strokeStyle = frame; ctx.lineWidth = 3 * d; ctx.beginPath(); ctx.moveTo(g.px, y0); ctx.lineTo(g.px, y1); ctx.moveTo(g.L, (y0 + y1) / 2); ctx.lineTo(g.R, (y0 + y1) / 2); ctx.stroke(); }
+    if (t.lines) { ctx.fillStyle = 'rgba(80,80,100,0.35)'; for (let i = 0; i < Number(t.lines); i++) ctx.fillRect(g.L + 10 * d, y0 + (18 + i * 12) * d, (g.R - g.L) * (0.4 + ((i * 37) % 40) / 100), 3 * d); }
+    if (t.text) label(ctx, String(t.text), g.px, y0 + Math.min(14 * d, (y1 - y0) / 2), Math.min(10 * d, (y1 - y0) * 0.35), String(t.textColor ?? '#3A2530'));
+  },
+});
+
 export const TEMP_SHAPES = Object.keys(SHAPES);

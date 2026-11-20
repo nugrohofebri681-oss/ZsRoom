@@ -130,7 +130,7 @@ export class UIScene extends Phaser.Scene {
     if (this.lastArt) this.onArtStatus(this.lastArt);
   }
 
-  private onRoom(room: RoomData): void { this.title.setText(room.displayName); }
+  private onRoom(room: RoomData): void { this.title.setText(room.provisional ? `${room.displayName} · provisional` : room.displayName); }
   private onWorld(w: { phase: string; day: number }): void { this.clock.setText(`Day ${w.day} · ${w.phase}`); }
   private onArtStatus(a: { approved: number; temp: number }): void {
     this.lastArt = a;
@@ -156,7 +156,7 @@ export class UIScene extends Phaser.Scene {
   }
   private advanceDialogue(): void {
     const next = this.dlgLines.shift();
-    if (next === undefined) { this.dlgBox.setVisible(false); this.input$.modal = false; return; }
+    if (next === undefined) { this.dlgBox.setVisible(false); this.input$.modal = false; this.game.events.emit('dialogue-closed'); return; }
     if (this.dlgBox.visible) audio().play('ui_tick', { gain: 0.7 });
     this.dlgText.setText(next);
     this.dlgBox.setVisible(true);

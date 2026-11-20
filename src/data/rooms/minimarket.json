@@ -1,0 +1,132 @@
+{
+  "id": "minimarket",
+  "displayName": "Minimarket",
+  "world": "world01",
+  "floor": "ground",
+  "kind": "interior",
+  "ambience": "shop",
+  "provisional": true,
+  "sizeCm": {
+    "w": 800,
+    "h": 600
+  },
+  "wallHeightCm": 300,
+  "palette": {
+    "floor": "#EEF0F0",
+    "wall": "#F4F4F2",
+    "trim": "#D7DEE3"
+  },
+  "shell": {
+    "floor": "env_floor_shop",
+    "wall": "env_wall_shop"
+  },
+  "spawns": {
+    "default": {
+      "x": 400,
+      "y": 520,
+      "facing": "N"
+    },
+    "from_street": {
+      "x": 400,
+      "y": 540,
+      "facing": "N"
+    }
+  },
+  "props": [
+    {
+      "assetId": "world_store_fridge",
+      "x": 120,
+      "y": 75
+    },
+    {
+      "assetId": "world_store_fridge",
+      "x": 230,
+      "y": 75
+    },
+    {
+      "assetId": "world_store_fridge",
+      "x": 340,
+      "y": 75
+    },
+    {
+      "assetId": "world_store_shelf",
+      "x": 200,
+      "y": 260
+    },
+    {
+      "assetId": "world_store_shelf",
+      "x": 200,
+      "y": 400
+    },
+    {
+      "assetId": "world_store_shelf",
+      "x": 500,
+      "y": 260
+    },
+    {
+      "assetId": "world_store_shelf",
+      "x": 500,
+      "y": 400
+    },
+    {
+      "assetId": "world_counter",
+      "x": 660,
+      "y": 480,
+      "anchors": [
+        {
+          "id": "pay",
+          "label": "Pay at the counter",
+          "x": -30,
+          "y": 32,
+          "facing": "N",
+          "radiusCm": 45,
+          "action": {
+            "type": "event",
+            "id": "ev_shop_pay"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 760,
+      "y": 120
+    }
+  ],
+  "npcs": [
+    {
+      "id": "npc_cashier",
+      "name": "Cashier",
+      "look": {
+        "shirt": "#2A9D8F",
+        "pants": "#3A3440",
+        "hair": "#2A1E18"
+      },
+      "x": 690,
+      "y": 385,
+      "facing": "S",
+      "behaviour": {
+        "type": "idle"
+      },
+      "interact": {
+        "label": "Talk to the cashier",
+        "dialogue": "dlg_shop_cashier"
+      },
+      "radiusCm": 60
+    }
+  ],
+  "doors": [
+    {
+      "id": "exit",
+      "label": "Exit to the street",
+      "x": 350,
+      "y": 600,
+      "w": 100,
+      "h": 10,
+      "to": {
+        "room": "batuphat_street",
+        "spawn": "from_minimarket"
+      }
+    }
+  ]
+}

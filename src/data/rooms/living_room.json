@@ -1,0 +1,176 @@
+{
+  "id": "living_room",
+  "displayName": "Living Room",
+  "world": "world01",
+  "floor": "ground",
+  "kind": "interior",
+  "provisional": true,
+  "sizeCm": {
+    "w": 900,
+    "h": 600
+  },
+  "wallHeightCm": 270,
+  "palette": {
+    "floor": "#E6DCCB",
+    "wall": "#EADFCF",
+    "trim": "#5B3A29"
+  },
+  "shell": {
+    "floor": "env_floor_living",
+    "wall": "env_wall_living"
+  },
+  "spawns": {
+    "default": {
+      "x": 450,
+      "y": 330,
+      "facing": "S"
+    },
+    "from_stairs": {
+      "x": 825,
+      "y": 55,
+      "facing": "S"
+    },
+    "from_yard": {
+      "x": 450,
+      "y": 545,
+      "facing": "N"
+    }
+  },
+  "props": [
+    {
+      "assetId": "world_rug_living",
+      "x": 250,
+      "y": 200
+    },
+    {
+      "assetId": "world_sofa",
+      "x": 250,
+      "y": 95
+    },
+    {
+      "assetId": "world_coffee_table",
+      "x": 250,
+      "y": 215
+    },
+    {
+      "assetId": "world_dining_table",
+      "x": 640,
+      "y": 360,
+      "anchors": [
+        {
+          "id": "look",
+          "label": "Look at the dining table",
+          "x": -115,
+          "y": -45,
+          "facing": "E",
+          "radiusCm": 45,
+          "action": {
+            "type": "dialogue",
+            "id": "dlg_living_dining"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_stool",
+      "x": 600,
+      "y": 410
+    },
+    {
+      "assetId": "world_stool",
+      "x": 680,
+      "y": 410
+    },
+    {
+      "assetId": "world_stool",
+      "x": 600,
+      "y": 265
+    },
+    {
+      "assetId": "world_stool",
+      "x": 680,
+      "y": 265
+    },
+    {
+      "assetId": "world_wall_calendar",
+      "wall": {
+        "x": 560,
+        "z": 120
+      }
+    },
+    {
+      "assetId": "world_window_ext",
+      "wall": {
+        "x": 120,
+        "z": 100
+      }
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 60,
+      "y": 580
+    },
+    {
+      "assetId": "world_cabinet_low",
+      "x": 570,
+      "y": 590,
+      "anchors": [
+        {
+          "id": "shoes",
+          "label": "Shoe rack",
+          "x": -75,
+          "y": -20,
+          "facing": "N",
+          "radiusCm": 45,
+          "action": {
+            "type": "dialogue",
+            "id": "dlg_living_sofa"
+          }
+        }
+      ]
+    }
+  ],
+  "doors": [
+    {
+      "id": "stairs_up",
+      "label": "Go upstairs",
+      "style": "stairs",
+      "x": 780,
+      "y": 0,
+      "w": 90,
+      "h": 10,
+      "to": {
+        "room": "upper_hall",
+        "spawn": "from_stairs"
+      }
+    },
+    {
+      "id": "front_door",
+      "label": "Go outside",
+      "x": 400,
+      "y": 600,
+      "w": 100,
+      "h": 10,
+      "to": {
+        "room": "front_yard",
+        "spawn": "from_house"
+      }
+    },
+    {
+      "id": "kitchen",
+      "label": "Kitchen",
+      "side": "west",
+      "x": 0,
+      "y": 220,
+      "w": 10,
+      "h": 120,
+      "to": {
+        "room": "kitchen",
+        "spawn": "default"
+      },
+      "locked": {
+        "message": "The kitchen isn't built yet (planned location)."
+      }
+    }
+  ]
+}

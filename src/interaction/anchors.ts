@@ -5,7 +5,7 @@ export interface WorldAnchor {
   x: number;
   y: number;
   radiusCm: number;
-  kind: 'prop' | 'door';
+  kind: 'prop' | 'door' | 'npc';
   payload?: unknown;
   /** Only usable while seated on a prop of this asset id (e.g. the laptop from the desk chair). */
   whileSeatedOn?: string;

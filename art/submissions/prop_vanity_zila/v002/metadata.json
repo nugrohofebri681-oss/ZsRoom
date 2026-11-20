@@ -1,0 +1,85 @@
+{
+  "assetId": "prop_vanity_zila",
+  "version": "v002",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "batch": "B",
+  "createdAt": "2026-11-20T01:40:06.886181+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/submissions/prop_vanity_zila/v001/prop_vanity_zila_v001.png",
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art-bible/perspective/prop_vanity_zila_template.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "art/source/prop_vanity_zila/v002/candidate-b.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "prop_vanity_zila_v002.png",
+      "sha256": "8fd6f800d8e1f2bc69a638c6940297417535844dcccd0bfda1d314ea6cb2220e"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_vanity_zila/v002/candidate-a.png",
+        "sha256": "e2151fbc1a57983f1dc4b8e19d71ada2c5247562251477eca5192955050e3409"
+      },
+      {
+        "path": "art/source/prop_vanity_zila/v002/candidate-b.png",
+        "sha256": "8dcc6ed1173dbe7cd8663a7668ae7fbb0fe88c95ce863e4f44e85e9409e56585"
+      },
+      {
+        "path": "art/source/prop_vanity_zila/v002/candidate-c.png",
+        "sha256": "fd7c82c0c636c5dab0581e6e7972e140e201afc85c2a44c7dc5bec6a243226bf"
+      },
+      {
+        "path": "art/source/prop_vanity_zila/v002/candidate-d.png",
+        "sha256": "2c3475bc5b504759543223ed7f884fa0179f57ffdbcf2afebc1c405a6e868465"
+      },
+      {
+        "path": "art/source/prop_vanity_zila/v002/candidate-e.png",
+        "sha256": "e790233362714dfdc322ed9467ce1d090cdfa7cbbabb4e1f4d15b02ce2c83843"
+      }
+    ]
+  },
+  "provenance": "Original built-in generation and targeted edits; raw PNGs byte-identical to tool outputs. No stock or paid API. Full per-candidate references in prompt.md.",
+  "postProcessing": [
+    "Unmodified official fitter only: native-alpha trim, near-opaque alpha snap, uniform Lanczos3 resize, pivot/baseline placement, sRGB. No manual repainting/nonuniform warp.",
+    "node scripts/fit-to-spec.mjs art/source/prop_vanity_zila/v002/candidate-e.png prop_vanity_zila art/submissions/prop_vanity_zila/v002/prop_vanity_zila_v002.png --despeckle 60"
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Estimated top back y212, front y276: depth64 vs63 target; front height148 vs150. Floor424. Within specified height/depth tolerances.",
+      "Centered mirror approximately125x169 vs R1 about144x206: ~13% narrower and18% shorter, close to requested15% reduction, not identical shrink on both axes.",
+      "Official --despeckle60 removed3 islands/4px in raw. No detached flecks visible at native scale; edge alpha still warrants close review on dark floors."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services.",
+  "notes": {
+    "batch": "B",
+    "selectedCandidate": "E",
+    "baseCommit": "06bb4593acc0456238b9a9a2be18084c7950e7a8",
+    "candidateComparison": "A: front too tall. B: deeper top and smaller mirror but front still too tall. C: stronger fringe and shallow top. D: clean silhouette but tall legs/front. E SELECTED: targeted B edit lowers tabletop and preserves smaller centered mirror."
+  },
+  "referenceProvenance": [
+    {
+      "path": "art/submissions/prop_vanity_zila/v001/prop_vanity_zila_v001.png",
+      "branch": "codex/art/batch-b-r1",
+      "commit": "48bce5bd7304c705590c071d8322ba634d60ec07",
+      "sha256": "58959ed270f38262a9e03257fd1c798ea171da3b2c5afc8845c94d0ca7363ffb"
+    }
+  ],
+  "validation": {
+    "status": "TECHNICAL PASS",
+    "checksPassed": 23,
+    "checksTotal": 23,
+    "command": "npm run validate:art",
+    "visualApproval": "pending Creative Director",
+    "gallery": "npm run gallery; actual Chromium inspection on light/dark/checker and same-scale bed/nightstand",
+    "integration": "Not performed; static host composition only"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "assetId": "prop_stool_vanity",
+  "version": "v002",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "batch": "B",
+  "createdAt": "2026-11-20T01:40:06.951279+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed by tool",
+    "referencesUsed": [
+      "art/submissions/prop_stool_vanity/v001/prop_stool_vanity_v001.png",
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art-bible/perspective/prop_stool_vanity_template.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "prop_stool_vanity_v002.png",
+      "sha256": "2a43385401f8a107ed51f5e15ad433b7811753e453d8c94dcbbafcf6424599ae"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/prop_stool_vanity/v002/candidate-a.png",
+        "sha256": "4b292c1e96f1379bb7a689f037fc513104e4e8134c8a8c77767de9caf6a6a571"
+      },
+      {
+        "path": "art/source/prop_stool_vanity/v002/candidate-b.png",
+        "sha256": "9ee66d804cb8d2f040bc7110a63472ca9353202efb1f43826fc557e8d248cec5"
+      },
+      {
+        "path": "art/source/prop_stool_vanity/v002/candidate-c.png",
+        "sha256": "8c39d16da36f756488fd16d2a8a5b2d2aded465cbebcf3bd7701319b601664cc"
+      }
+    ]
+  },
+  "provenance": "Original built-in generation and targeted edits; raw PNGs byte-identical to tool outputs. No stock or paid API. Full per-candidate references in prompt.md.",
+  "postProcessing": [
+    "Unmodified official fitter only: native-alpha trim, near-opaque alpha snap, uniform Lanczos3 resize, pivot/baseline placement, sRGB. No manual repainting/nonuniform warp.",
+    "node scripts/fit-to-spec.mjs art/source/prop_stool_vanity/v002/candidate-c.png prop_stool_vanity art/submissions/prop_stool_vanity/v002/prop_stool_vanity_v002.png"
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Estimated seat top back y24, front y73: depth49 vs56 nominal (within25%); front-to-floor95 vs90 (within10%). Floor168.",
+      "Measured top ellipse ~49/86=0.57, still shallower than0.70 target, though deeper thanR1~0.45. Retain as explicit visual limitation, not exact perspective pass.",
+      "Four legs readable; near/far pair lengths differ with projection. Raw translucent haze is preserved in source; fitted output inspected for edge/background contamination."
+    ]
+  },
+  "cost": "Included in existing ChatGPT subscription; no paid API credits or additional paid services.",
+  "notes": {
+    "batch": "B",
+    "selectedCandidate": "C",
+    "baseCommit": "06bb4593acc0456238b9a9a2be18084c7950e7a8",
+    "candidateComparison": "A: alpha haze causes excessive trim bounds and tiny fitted body. B: deeper ellipse, height-limited fit. C SELECTED: stable scale and clean fitted silhouette, still not exact0.70 ellipse."
+  },
+  "referenceProvenance": [
+    {
+      "path": "art/submissions/prop_stool_vanity/v001/prop_stool_vanity_v001.png",
+      "branch": "codex/art/batch-b-r1",
+      "commit": "48bce5bd7304c705590c071d8322ba634d60ec07",
+      "sha256": "6e3ad45ac71172e7dc90c371fc27d9e8195651aef429563e040b354a3c8b3c22"
+    }
+  ],
+  "validation": {
+    "status": "TECHNICAL PASS",
+    "checksPassed": 23,
+    "checksTotal": 23,
+    "command": "npm run validate:art",
+    "visualApproval": "pending Creative Director",
+    "gallery": "npm run gallery; actual Chromium inspection on light/dark/checker and same-scale bed/nightstand",
+    "integration": "Not performed; static host composition only"
+  }
+}

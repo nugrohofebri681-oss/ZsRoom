@@ -14,6 +14,9 @@ const game = new Phaser.Game({
   render: { antialias: true, pixelArt: false, roundPixels: false, powerPreference: 'high-performance' },
   fps: { target: 60, min: 20 },
   input: { activePointers: 3 },
+  // Phaser's own sound manager would create an AudioContext at boot (before any gesture) and is unused:
+  // ZsRoom's AudioManager owns the single, lazily-created context.
+  audio: { noAudio: true },
   scene: [BootScene, RoomScene, UIScene],
 });
 

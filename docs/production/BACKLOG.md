@@ -28,8 +28,8 @@ Engine ✅: layered rig (spec `rig`), facing resolution + mirroring rules (Febri
 
 ## Group G — Polish & systems for the slice
 ✅ Tap/click-to-move (A* + path smoothing; tap furniture to walk there and use it) · ✅ camera look-ahead, wheel/pinch/button zoom · ✅ mobile HUD (safe-area insets, contextual E button label, compact badge) · ✅ baked single-quad lighting · ✅ frame-rate-independent movement (real elapsed time) · ✅ contact-resolving collision
-- Sound: room ambience, lamp click, footsteps on wood and rug (free/CC0 sources only).
-- Interaction feedback: highlight outline on the focused prop; sitting and sleeping poses once character art exists.
+✅ **Sound** (original procedural synthesis: day/night ambience, contact-frame footsteps on wood and rug, lamp click, sit/cloth/chime/door) · ✅ **audio unlock** on first gesture (Android-safe), suspended when hidden or muted · ✅ **sound panel** (mute, volume, room, effects; saved; M key) · ✅ **interaction highlight** (silhouette halo behind the usable prop, door floor glow) — see [living-bedroom-polish](../reviews/living-bedroom-polish.md)
+- Sitting and sleeping poses once character art exists.
 - Day-phase transitions with a short animated fade of the lights.
 - Physical Android performance check (Galaxy A05 class): record fps and memory in `docs/reviews/`.
 - Texture atlas packing when the approved art count exceeds ~10 per room.

@@ -1,6 +1,8 @@
 import * as Phaser from 'phaser';
 import { InputState } from '../systems/input';
 import type { RoomData } from '../world/room';
+import { AudioPanel } from '../ui/audioPanel';
+import { audio } from '../audio/audio';
 
 const JOY_RADIUS = 56;
 const TAP_SLOP = 12;          // CSS px a tap may wander before it becomes a drag
@@ -34,6 +36,7 @@ export class UIScene extends Phaser.Scene {
   private dlgText!: Phaser.GameObjects.Text;
   private dlgName!: Phaser.GameObjects.Text;
   private dlgLines: string[] = [];
+  private soundUi!: AudioPanel;
 
   constructor() { super('UI'); }
 
@@ -75,6 +78,9 @@ export class UIScene extends Phaser.Scene {
     };
     this.zoomBtns = this.add.container(0, 0, [...zb('−', -0.1, 0), ...zb('+', 0.1, 40)]).setVisible(touch);
     this.safe = (this.registry.get('safeArea') as typeof this.safe | undefined) ?? this.safe;
+    this.soundUi = new AudioPanel(this, this.dpr);
+    this.input.keyboard?.on('keydown-M', () => { const m = audio().toggleMute(); this.soundUi.refresh(); this.onToast(m ? 'Sound off' : 'Sound on'); });
+    (window as unknown as { __ZS_UI?: unknown }).__ZS_UI = { sound: () => this.soundUi.geometry() };
 
     this.input.on('pointerdown', this.onDown, this);
     this.input.on('pointermove', this.onMove, this);
@@ -107,14 +113,16 @@ export class UIScene extends Phaser.Scene {
     const width = this.scale.width / this.dpr;
     const height = this.scale.height / this.dpr;
     const sf = this.safe;
+    const touch = this.sys.game.device.input.touch;
     this.narrow = width < 700;
     this.title.setPosition(12 + sf.left, 10 + sf.top);
     this.artBadge.setPosition(12 + sf.left, 40 + sf.top);
     this.fps.setOrigin(0, 0).setPosition(10 + sf.left, height - 18 - sf.bottom);   // bottom-left: clear of the touch E button
     this.clock.setPosition(width - 10 - sf.right, 10 + sf.top);
     this.zoomBtns.setPosition(width - 74 - sf.right, 58 + sf.top);
+    // speaker: under the clock on desktop; on touch, left of the zoom pair (all ≥ 42 px targets)
+    this.soundUi.layout(touch ? width - 128 - sf.right : width - 32 - sf.right, touch ? 58 + sf.top : 60 + sf.top);
     this.layoutDialogue(width, height - sf.bottom);
-    const touch = this.sys.game.device.input.touch;
     this.prompt.setPosition(touch ? Math.min(width / 2, width - 150 - sf.right) : width / 2, height - sf.bottom - (touch && width < 600 ? 120 : 24));
     this.toast.setPosition(width / 2, 52 + sf.top);
     this.actBtn.setPosition(width - 64 - sf.right, height - 70 - sf.bottom);
@@ -149,6 +157,7 @@ export class UIScene extends Phaser.Scene {
   private advanceDialogue(): void {
     const next = this.dlgLines.shift();
     if (next === undefined) { this.dlgBox.setVisible(false); this.input$.modal = false; return; }
+    if (this.dlgBox.visible) audio().play('ui_tick', { gain: 0.7 });
     this.dlgText.setText(next);
     this.dlgBox.setVisible(true);
   }
@@ -176,8 +185,9 @@ export class UIScene extends Phaser.Scene {
   }
 
   private onDown(p: Phaser.Input.Pointer): void {
-    if (this.input$.modal) { this.input$.queueInteract(); return; }
     const { x, y } = this.css(p);
+    if (this.soundUi.handleDown(x, y)) return;
+    if (this.input$.modal) { this.input$.queueInteract(); return; }
     if (this.overButton(x, y)) return;
     this.touches.set(p.id, { id: p.id, sx: x, sy: y, x, y, t0: this.time.now, mode: 'pending' });
     if (this.touches.size === 2) {                         // second finger: pinch zoom, stop moving
@@ -188,6 +198,7 @@ export class UIScene extends Phaser.Scene {
     }
   }
   private onMove(p: Phaser.Input.Pointer): void {
+    if (this.soundUi.handleMove(this.css(p).x)) return;
     const t = this.touches.get(p.id);
     if (!t) return;
     const { x, y } = this.css(p);
@@ -215,6 +226,7 @@ export class UIScene extends Phaser.Scene {
     this.input$.touchMove = mag < 0.15 ? { x: 0, y: 0 } : { x: (dx / (len || 1)) * mag, y: (dy / (len || 1)) * mag };
   }
   private onUp(p: Phaser.Input.Pointer): void {
+    if (this.soundUi.handleUp(this.css(p).x)) return;
     const t = this.touches.get(p.id);
     if (!t) return;
     this.touches.delete(p.id);

@@ -18,6 +18,9 @@ import { WalkGrid } from '../world/pathfinding';
 import { LayeredCharacter } from '../animation/character';
 import type { RigSpec } from '../animation/rig';
 import { renderToGround, type Vec2 } from '../core/projection';
+import { audio } from '../audio/audio';
+import { crossedContacts } from '../audio/synth';
+import { floorAt, floorPatches, type FloorPatch } from '../audio/surface';
 
 export interface RoomSceneData { roomId: string; spawn?: string; at?: { x: number; y: number; facing: string } }
 
@@ -62,6 +65,13 @@ export class RoomScene extends Phaser.Scene {
   private vars: Vars = {};
   private seated: Seated | null = null;
   private skies: { img: Phaser.GameObjects.Image; curtains: Phaser.GameObjects.Graphics }[] = [];
+  private floorPatches: FloorPatch[] = [];
+  private stepCount = 0;
+  private lastFloor: 'rug' | 'wood' = 'wood';
+  /** One reusable silhouette glow behind the prop Zila can use right now (never touches the art itself). */
+  private glow?: Phaser.GameObjects.Image;
+  private doorGlow?: Phaser.GameObjects.Graphics;
+  private glowTarget: string | null = null;
 
   constructor() { super('Room'); }
 
@@ -92,6 +102,8 @@ export class RoomScene extends Phaser.Scene {
     this.grid = new WalkGrid(rw, rh, this.room.solids, this.character.collision.radiusCm);
     this.drawShell();
     this.drawProps();
+    this.floorPatches = floorPatches(this.room.props);
+    this.glow = undefined; this.doorGlow = undefined; this.glowTarget = null;
     this.buildActor();
     this.applyWorldVars();
 
@@ -268,6 +280,8 @@ export class RoomScene extends Phaser.Scene {
     this.lighting.setLook(look);   // re-bakes the low-res lightmaps once
     const sky = this.skyTexture();
     for (const s of this.skies) { s.img.setTexture(sky); s.curtains.setVisible(!!this.vars.curtainsClosed); }
+    const phase = this.phase();
+    audio().setAmbience(phase === 'evening' || phase === 'night' ? 'night' : 'day');
     this.registry.set('world', { phase: look.label, day: Number(this.vars.day ?? 1) });
     this.game.events.emit('world', { phase: look.label, day: Number(this.vars.day ?? 1) });
   }
@@ -275,7 +289,7 @@ export class RoomScene extends Phaser.Scene {
   // ---------------------------------------------------------------- loop
   override update(_time: number, deltaMs: number): void {
     if (this.transitioning) return;
-    if (this.input$.modal) { this.game.events.emit('prompt', null); return; } // dialogue open: UI owns input
+    if (this.input$.modal) { this.game.events.emit('prompt', null); this.setHighlight(null); return; } // dialogue open: UI owns input
     // Real elapsed time, not Phaser's smoothed delta (which under-reports when frames drop and makes the
     // whole game run in slow motion on slow devices). Capped at 100 ms; collision sub-steps keep it safe.
     void deltaMs;
@@ -294,7 +308,9 @@ export class RoomScene extends Phaser.Scene {
       dir = this.followPath(dt);
     }
     const moved = Math.hypot(this.pos.x - before.x, this.pos.y - before.y);
+    const walkedBefore = this.walked;
     this.walked += moved;
+    this.footsteps(walkedBefore);
     this.velocity = { x: (this.pos.x - before.x) / Math.max(dt, 1e-3), y: (this.pos.y - before.y) / Math.max(dt, 1e-3) };
     this.syncActor(moved > 0.05, _time);
     this.updateCamera();
@@ -304,6 +320,7 @@ export class RoomScene extends Phaser.Scene {
     }
     const seatedAsset = this.seated ? this.room.props.find((p) => p.key === this.seated!.propKey)?.spec.id ?? null : null;
     this.nearest = nearestAnchor(this.pos.x, this.pos.y, this.room.anchors, seatedAsset);
+    this.updateHighlight(_time);
     this.game.events.emit('prompt', this.nearest?.label ?? null);
     if (this.input$.consumeInteract() && this.nearest) this.interact(this.nearest);
     this.checkDoorTriggers();
@@ -432,17 +449,21 @@ export class RoomScene extends Phaser.Scene {
     }
     const action = (a.payload as { action?: ActionSpec } | undefined)?.action;
     const res = applyAction(action, this.vars, a.label);
-    const prevOutfit = this.vars.outfit;
+    const prevOutfit = this.vars.outfit, prevVars = this.vars;
     this.vars = res.vars;
     if (res.toggleLight) {
       if (this.lighting.has(a.ownerId)) {
         const on = this.lighting.toggle(a.ownerId);
+        audio().play('lamp_click', { rate: on ? 1 : 0.92 });
         this.flags[`light:${this.room.data.id}:${a.ownerId}`] = on;
         this.game.events.emit('toast', on ? 'Lamp on' : 'Lamp off');
       }
     }
     if (res.sit) this.sitOn(a.ownerId, res.sit, { x: a.x, y: a.y });
     if (this.vars.outfit !== prevOutfit) this.buildActor();
+    if (this.vars.outfit !== prevOutfit || this.vars.curtainsClosed !== prevVars.curtainsClosed) audio().play('cloth');
+    else if (res.fade) audio().play('chime');
+    else if (!res.toggleLight && !res.sit) audio().play('interact', { minGapMs: 250 });
     if (res.fade) {
       const cam = this.cameras.main;
       let done = false;
@@ -466,6 +487,7 @@ export class RoomScene extends Phaser.Scene {
     this.seated = { propKey, exit, depth: p.sortable.pivotY + (sit.seatBehind ? -0.5 : 0.5) };
     this.pos = { x: p.x + sit.seat.x, y: p.y + sit.seat.y };
     this.facingDir = sit.facing as Direction;
+    audio().play('sit');
     this.game.events.emit('toast', 'Move or tap to stand up');
   }
 
@@ -473,11 +495,14 @@ export class RoomScene extends Phaser.Scene {
     if (!this.seated) return;
     this.pos = { ...this.seated.exit };
     this.seated = null;
+    audio().play('sit', { gain: 0.6, rate: 1.15 });
   }
 
   private goTo(roomId: string, spawn: string): void {
     if (this.transitioning) return;
     this.transitioning = true;
+    audio().play('door');
+    this.setHighlight(null);
     this.persist();
     // force=true: a fade-in still running (player walked straight back out) must not swallow the fade-out,
     // otherwise the completion never fires and the player is stuck mid-transition on slow devices.
@@ -485,6 +510,52 @@ export class RoomScene extends Phaser.Scene {
     this.cameras.main.fade(200, 29, 20, 24, true, (_c: Phaser.Cameras.Scene2D.Camera, progress: number) => {
       if (progress >= 1 && !done) { done = true; this.scene.restart({ roomId, spawn } satisfies RoomSceneData); }
     });
+  }
+
+  // ---------------------------------------------------------------- sound + highlight
+  /** Footsteps on the walk cycle's contact frames; quieter, duller steps on the rug. */
+  private footsteps(walkedBefore: number): void {
+    if (this.seated) return;
+    const w = (this.character as CharacterSpec & { rig?: RigSpec }).rig?.anims?.walk;
+    const n = crossedContacts(walkedBefore, this.walked, w?.strideCm ?? 112, w?.contactFrames ?? [0, 4], w?.frames ?? 8);
+    if (!n) return;
+    this.lastFloor = floorAt(this.pos.x, this.pos.y, this.floorPatches);
+    for (let i = 0; i < Math.min(n, 2); i++) {
+      this.stepCount++;
+      audio().play(this.lastFloor === 'rug' ? 'step_rug' : 'step_wood', { variant: this.stepCount % 4, rate: 0.96 + ((this.stepCount * 7) % 9) / 100, minGapMs: 120 });
+    }
+  }
+
+  private updateHighlight(timeMs: number): void {
+    const target = this.nearest && !this.transitioning ? (this.nearest.kind === 'door' ? `door:${this.nearest.key}` : this.nearest.ownerId) : null;
+    if (target !== this.glowTarget) this.setHighlight(target);
+    // slow, gentle breathing pulse (alpha only; no per-frame allocation)
+    const a = 0.34 + 0.2 * (0.5 + 0.5 * Math.sin(timeMs / 520));
+    if (this.glow?.visible) this.glow.setAlpha(a * (this.propViews.get(this.glowTarget ?? '')?.alpha ?? 1));
+    if (this.doorGlow?.visible) this.doorGlow.setAlpha(a * 2);
+  }
+
+  private setHighlight(target: string | null): void {
+    this.glowTarget = target;
+    this.glow?.setVisible(false);
+    this.doorGlow?.setVisible(false);
+    if (!target) return;
+    if (target.startsWith('door:') && this.nearest) {
+      const r = groundToRender(this.nearest.x, this.nearest.y);
+      this.doorGlow ??= this.add.graphics();
+      this.doorGlow.clear().fillStyle(0xfff0f6, 0.5).fillEllipse(0, 0, 70, 70 * DEPTH_SCALE).fillStyle(0xfff0f6, 0.6).fillEllipse(0, 0, 40, 40 * DEPTH_SCALE)
+        .setPosition(r.x, r.y).setDepth(-49500).setVisible(true);
+      return;
+    }
+    const view = this.propViews.get(target);
+    if (!(view instanceof Phaser.GameObjects.Image)) return;   // greybox placeholders: no silhouette
+    this.glow ??= this.add.image(0, 0, view.texture.key).setTintMode(Phaser.TintModes.FILL);
+    // Silhouette of the prop, filled soft pink-white and grown ~6 px all round, drawn just BEHIND the prop:
+    // reads as a halo around the furniture without altering a pixel of the approved artwork.
+    const grow = 1 + 12 / Math.max(view.displayWidth, 1);
+    this.glow.setTexture(view.texture.key).setOrigin(view.originX, view.originY)
+      .setPosition(view.x, view.y + 1).setScale(view.scaleX * grow, view.scaleY * (1 + 8 / Math.max(view.displayHeight, 1)))
+      .setTint(0xfff0f6).setDepth(view.depth - 0.01).setVisible(true);
   }
 
   private persist(): void {
@@ -550,6 +621,9 @@ export class RoomScene extends Phaser.Scene {
         seated: this.seated?.propKey ?? null,
         modal: this.input$.modal,
         displayObjects: this.children.length,
+        highlight: { target: this.glowTarget, visible: !!(this.glow?.visible || this.doorGlow?.visible), depth: this.glow?.visible ? this.glow.depth : null },
+        floor: this.lastFloor,
+        audio: { state: audio().state, muted: audio().prefs.muted, prefs: { ...audio().prefs }, played: { ...audio().stats.played }, unlocks: audio().stats.unlocks, ambience: audio().ambience, wantedAmbience: audio().wanted, bufferBytes: audio().bufferBytes() },
       }),
       teleport: (x: number, y: number) => { this.seated = null; this.path = []; this.pendingAnchor = null; this.pos = { x, y }; this.syncActor(); this.snapCamera(); },
       tapWorld: (gx: number, gy: number, z = 0) => { const r = groundToRender(gx, gy, z); this.tapAtRender(r.x, r.y); },

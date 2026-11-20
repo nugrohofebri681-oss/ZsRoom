@@ -136,6 +136,9 @@ test.describe('desk laptop (CD correction)', () => {
     await page.keyboard.press('KeyE');
     await until(page, 's.seated !== null');
     await until(page, "s.nearest && /^prop_laptop_zila#\\d+:use$/.test(s.nearest)");
+    const seatedState: any = await state(page);
+    const chairDepth = seatedState.props.find((p: any) => p.key.startsWith('prop_chair_desk#')).depth;
+    expect(seatedState.player.depth, 'rear-view chair: sitter drawn behind it (backrest overlaps)').toBeLessThan(chairDepth);
     await page.evaluate(() => { for (let i = 0; i < 6; i++) (window as any).__ZS.zoomBy(0.1); });
     await page.waitForTimeout(600);
     await page.screenshot({ path: tag(false, '06-seated-laptop-prompt') });

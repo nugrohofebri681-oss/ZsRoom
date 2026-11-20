@@ -461,7 +461,9 @@ export class RoomScene extends Phaser.Scene {
   private sitOn(propKey: string, sit: Extract<ActionSpec, { type: 'sit' }>, exit: { x: number; y: number }): void {
     const p = this.room.props.find((x) => x.key === propKey);
     if (!p) return;
-    this.seated = { propKey, exit, depth: p.sortable.pivotY + 0.5 };
+    // seatBehind: the seat's backrest is nearer the camera than the sitter (rear-view chair), so draw the sitter
+    // just behind the prop and let the painted backrest overlap the hips and lower back.
+    this.seated = { propKey, exit, depth: p.sortable.pivotY + (sit.seatBehind ? -0.5 : 0.5) };
     this.pos = { x: p.x + sit.seat.x, y: p.y + sit.seat.y };
     this.facingDir = sit.facing as Direction;
     this.game.events.emit('toast', 'Move or tap to stand up');

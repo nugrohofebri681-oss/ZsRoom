@@ -169,7 +169,7 @@ Current records: `prop_bed_zila` v001 is within both tolerances. `prop_nightstan
 | Property | Requirement |
 |---|---|
 | Format | PNG, 8-bit per channel, RGBA, sRGB |
-| Alpha | Straight (unpremultiplied); real transparency, never a baked checkerboard or white. Solid areas fully opaque (alpha ≥ 250 is snapped to 255 by the pipeline) |
+| Alpha | Straight (unpremultiplied); real transparency, never a baked checkerboard or white. Solid areas fully opaque (alpha ≥ 250 is snapped to 255 by the pipeline); near-invisible haze (alpha ≤ 8) is cleared |
 | Canvas | Exactly the spec canvas; transparent edge padding as specified |
 | Base | Lowest solid row on the spec `baseLine` ± tolerance |
 | Name | `<asset_id>_<v###>.png` in `art/submissions/<asset_id>/<v###>/` |

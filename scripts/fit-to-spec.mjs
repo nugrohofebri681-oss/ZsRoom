@@ -67,8 +67,8 @@ if (rest.includes('--despeckle')) {
   console.log(`despeckle: removed ${removedIslands} islands (${removedPx} px) smaller than ${minPx} px`);
 }
 
-// Snap near-opaque alpha (250–254, common in generator output) to fully opaque.
-for (let i = 3; i < data.length; i += 4) if (data[i] >= 250) data[i] = 255;
+// Snap near-opaque alpha (250–254) to opaque and clear near-invisible haze (≤8), both common in generator output.
+for (let i = 3; i < data.length; i += 4) { if (data[i] >= 250) data[i] = 255; else if (data[i] <= 8) data[i] = 0; }  // also clear invisible haze
 const keyed = sharp(data, { raw: { width: W, height: H, channels: 4 } }).png();
 const trimmed = await sharp(await keyed.toBuffer()).trim({ background: { r: 0, g: 0, b: 0, alpha: 0 }, threshold: 1 }).toBuffer({ resolveWithObject: true });
 const tw = trimmed.info.width, th = trimmed.info.height;

@@ -29,3 +29,20 @@ describe('measured painted surfaces', () => {
     expect(top.painted!.planeDepthCm).toBeCloseTo((top.painted!.frontEdgeY - top.painted!.backEdgeY) / (ns.density * 0.7), 0);
   });
 });
+
+describe('desk surface (measured on the painted v002 master)', () => {
+  const desk = getPropSpec('prop_desk_zila');
+  const top = desk.surfaces!.find((s) => s.id === 'top')!;
+  it('laptop and mug anchors project inside the painted top plane', () => {
+    for (const a of top.anchors) {
+      const o = pointToCanvasOffset(a.x, a.y, a.z, desk.density);
+      const c = { x: desk.pivot.x + o.x, y: desk.pivot.y + o.y };
+      expect(Math.abs(c.x - a.canvas!.x)).toBeLessThanOrEqual(1);
+      expect(Math.abs(c.y - a.canvas!.y)).toBeLessThanOrEqual(1);
+      expect(c.y).toBeGreaterThan(top.painted!.backEdgeY);
+      expect(c.y).toBeLessThan(top.painted!.frontEdgeY);
+      expect(c.x).toBeGreaterThan(top.painted!.leftX);
+      expect(c.x).toBeLessThan(top.painted!.rightX);
+    }
+  });
+});

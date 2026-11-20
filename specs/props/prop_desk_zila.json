@@ -77,24 +77,42 @@
   "surfaces": [
     {
       "id": "top",
-      "$comment": "NOMINAL until the desk art is approved and re-measured (Art Bible §11). Anchors: ground offset from the desk pivot (front-centre), z = top height.",
+      "$comment": "Measured from the painted v002 master (review of PR #11). Valid only if v002 is the approved version; validate-manifest enforces this.",
       "nominalHeightCm": 75,
-      "painted": null,
+      "painted": {
+        "backEdgeY": 27,
+        "frontEdgeY": 116,
+        "leftX": 31,
+        "rightX": 255,
+        "frontEdgeHeightCm": 74,
+        "planeDepthCm": 63.6
+      },
       "anchors": [
         {
           "id": "laptop",
           "x": 0,
           "y": -30,
-          "z": 75
+          "z": 75,
+          "canvas": {
+            "x": 144,
+            "y": 72
+          }
         },
         {
           "id": "mug",
           "x": 38,
           "y": -36,
-          "z": 75
+          "z": 75,
+          "canvas": {
+            "x": 220,
+            "y": 64
+          }
         }
       ],
-      "measuredFrom": null
+      "measuredFrom": {
+        "version": "v002",
+        "sha256": "8f5f980314fc9ba59731ed3c2330645806651926d7c9c7861dcafe179867ee09"
+      }
     }
   ]
 }

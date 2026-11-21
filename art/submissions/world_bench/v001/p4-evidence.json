@@ -1,0 +1,683 @@
+[
+  {
+    "id": "world_bench",
+    "label": "desktop",
+    "mode": "default-wide",
+    "keys": [
+      "temp:world_bench@1"
+    ],
+    "errors": [],
+    "state": {
+      "roomId": "front_yard",
+      "player": {
+        "x": 500,
+        "y": 350,
+        "facing": "S",
+        "depth": 350
+      },
+      "nearest": null,
+      "occluded": [],
+      "props": [
+        {
+          "key": "world_window_ext#0",
+          "depth": 4,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "world_window_ext#1",
+          "depth": 4,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "world_plant_floor#2",
+          "depth": 120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_plant_floor#3",
+          "depth": 120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_motorbike#4",
+          "depth": 330,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_bench#5",
+          "depth": 220,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_tree#6",
+          "depth": 440,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_plant_floor#7",
+          "depth": 620,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        }
+      ],
+      "fps": 51,
+      "transitioning": false,
+      "lights": [],
+      "lighting": {
+        "fullScreenLayers": 0,
+        "bakes": 2
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 2,
+        "authored": "S",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 0.8484848484848485,
+      "zoomMul": 1,
+      "shell": {
+        "floor": {
+          "id": "env_ground_yard",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_house_front",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "afternoon",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 107,
+      "highlight": {
+        "target": null,
+        "visible": false,
+        "depth": null
+      },
+      "floor": "wood",
+      "visited": [
+        "front_yard"
+      ],
+      "flagsState": {},
+      "npcs": [],
+      "mapKind": "exterior",
+      "zone": "front_yard",
+      "zones": null,
+      "sceneStarts": 1,
+      "camera": {
+        "scrollX": -220,
+        "scrollY": -405,
+        "zoom": 0.8484848484848485,
+        "viewW": 1697,
+        "viewH": 1179
+      },
+      "inspectables": [],
+      "variant": null,
+      "renderScale": {
+        "scale": 1,
+        "mode": "auto",
+        "changes": 0
+      },
+      "generatedTextures": {
+        "count": 11,
+        "bytes": 1335792
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": -100001,
+          "curtainDepth": 0,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "street",
+        "bufferBytes": 0
+      }
+    }
+  },
+  {
+    "id": "world_bench",
+    "label": "desktop",
+    "mode": "near-object-default-zoom",
+    "errors": [],
+    "state": {
+      "roomId": "front_yard",
+      "player": {
+        "x": 800,
+        "y": 285,
+        "facing": "S",
+        "depth": 285
+      },
+      "nearest": "world_bench#5:sit",
+      "occluded": [],
+      "props": [
+        {
+          "key": "world_window_ext#0",
+          "depth": 4,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "world_window_ext#1",
+          "depth": 4,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "world_plant_floor#2",
+          "depth": 120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_plant_floor#3",
+          "depth": 120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_motorbike#4",
+          "depth": 330,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_bench#5",
+          "depth": 220,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_tree#6",
+          "depth": 440,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_plant_floor#7",
+          "depth": 620,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        }
+      ],
+      "fps": 44,
+      "transitioning": false,
+      "lights": [],
+      "lighting": {
+        "fullScreenLayers": 0,
+        "bakes": 2
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 0,
+        "authored": "S",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 0.8484848484848485,
+      "zoomMul": 1,
+      "shell": {
+        "floor": {
+          "id": "env_ground_yard",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_house_front",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "afternoon",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 108,
+      "highlight": {
+        "target": "world_bench#5",
+        "visible": true,
+        "depth": 219.99
+      },
+      "floor": "wood",
+      "visited": [
+        "front_yard"
+      ],
+      "flagsState": {},
+      "npcs": [],
+      "mapKind": "exterior",
+      "zone": "front_yard",
+      "zones": null,
+      "sceneStarts": 1,
+      "camera": {
+        "scrollX": -220,
+        "scrollY": -405,
+        "zoom": 0.8484848484848485,
+        "viewW": 1697,
+        "viewH": 1179
+      },
+      "inspectables": [],
+      "variant": null,
+      "renderScale": {
+        "scale": 1,
+        "mode": "auto",
+        "changes": 0
+      },
+      "generatedTextures": {
+        "count": 11,
+        "bytes": 1335792
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": -100001,
+          "curtainDepth": 0,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "street",
+        "bufferBytes": 0
+      }
+    }
+  },
+  {
+    "id": "world_bench",
+    "label": "android-landscape",
+    "mode": "default-wide",
+    "keys": [
+      "temp:world_bench@2"
+    ],
+    "errors": [],
+    "state": {
+      "roomId": "front_yard",
+      "player": {
+        "x": 500,
+        "y": 350,
+        "facing": "S",
+        "depth": 350
+      },
+      "nearest": null,
+      "occluded": [],
+      "props": [
+        {
+          "key": "world_window_ext#0",
+          "depth": 4,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "world_window_ext#1",
+          "depth": 4,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "world_plant_floor#2",
+          "depth": 120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_plant_floor#3",
+          "depth": 120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_motorbike#4",
+          "depth": 330,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_bench#5",
+          "depth": 220,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_tree#6",
+          "depth": 440,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_plant_floor#7",
+          "depth": 620,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        }
+      ],
+      "fps": 51,
+      "transitioning": false,
+      "lights": [],
+      "lighting": {
+        "fullScreenLayers": 0,
+        "bakes": 2
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 1,
+        "authored": "S",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 0.8290909090909092,
+      "zoomMul": 1,
+      "shell": {
+        "floor": {
+          "id": "env_ground_yard",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_house_front",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "afternoon",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 107,
+      "highlight": {
+        "target": null,
+        "visible": false,
+        "depth": null
+      },
+      "floor": "wood",
+      "visited": [
+        "front_yard"
+      ],
+      "flagsState": {},
+      "npcs": [],
+      "mapKind": "exterior",
+      "zone": "front_yard",
+      "zones": null,
+      "sceneStarts": 1,
+      "camera": {
+        "scrollX": -300,
+        "scrollY": -259,
+        "zoom": 0.8290909090909092,
+        "viewW": 1930,
+        "viewH": 868
+      },
+      "inspectables": [],
+      "variant": null,
+      "renderScale": {
+        "scale": 2,
+        "mode": "auto",
+        "changes": 0
+      },
+      "generatedTextures": {
+        "count": 11,
+        "bytes": 2616248
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": -100001,
+          "curtainDepth": 0,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "street",
+        "bufferBytes": 0
+      }
+    }
+  },
+  {
+    "id": "world_bench",
+    "label": "android-portrait",
+    "mode": "default-wide",
+    "keys": [
+      "temp:world_bench@2"
+    ],
+    "errors": [],
+    "state": {
+      "roomId": "front_yard",
+      "player": {
+        "x": 500,
+        "y": 350,
+        "facing": "S",
+        "depth": 350
+      },
+      "nearest": null,
+      "occluded": [],
+      "props": [
+        {
+          "key": "world_window_ext#0",
+          "depth": 4,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "world_window_ext#1",
+          "depth": 4,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "world_plant_floor#2",
+          "depth": 120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_plant_floor#3",
+          "depth": 120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_motorbike#4",
+          "depth": 330,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_bench#5",
+          "depth": 220,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_tree#6",
+          "depth": 440,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_plant_floor#7",
+          "depth": 620,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        }
+      ],
+      "fps": 50,
+      "transitioning": false,
+      "lights": [],
+      "lighting": {
+        "fullScreenLayers": 0,
+        "bakes": 2
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 2,
+        "authored": "S",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 1.3575757575757577,
+      "zoomMul": 1,
+      "shell": {
+        "floor": {
+          "id": "env_ground_yard",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_house_front",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "afternoon",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 107,
+      "highlight": {
+        "target": null,
+        "visible": false,
+        "depth": null
+      },
+      "floor": "wood",
+      "visited": [
+        "front_yard"
+      ],
+      "flagsState": {},
+      "npcs": [],
+      "mapKind": "exterior",
+      "zone": "front_yard",
+      "zones": null,
+      "sceneStarts": 1,
+      "camera": {
+        "scrollX": 140,
+        "scrollY": -705,
+        "zoom": 1.3575757575757577,
+        "viewW": 530,
+        "viewH": 1179
+      },
+      "inspectables": [],
+      "variant": null,
+      "renderScale": {
+        "scale": 2,
+        "mode": "auto",
+        "changes": 0
+      },
+      "generatedTextures": {
+        "count": 11,
+        "bytes": 2616248
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": -100001,
+          "curtainDepth": 0,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "street",
+        "bufferBytes": 0
+      }
+    }
+  }
+]

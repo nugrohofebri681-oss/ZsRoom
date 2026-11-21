@@ -1,0 +1,56 @@
+{
+  "assetId": "world_cabinet_low",
+  "version": "v001",
+  "specVersion": "0.1.0-art-proposal",
+  "author": "codex",
+  "createdAt": "2026-11-21T07:04:12.254847+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "not exposed",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_cabinet_low_v001.png",
+      "sha256": "9515c07afca37089974caf3db76f13a2e87f5193bc89305f458acb50abe9baf0"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/world_cabinet_low/v001/candidate-a.png",
+        "sha256": "ee710462b33a9acda63a04b158c111d55dfbf99ad868799986fac8f8a83b5648"
+      },
+      {
+        "path": "art/source/world_cabinet_low/v001/candidate-b.png",
+        "sha256": "876ab4033904129a41370c515a034632914ff5a86867a728f4a950a8c1a3a036"
+      },
+      {
+        "path": "art/source/world_cabinet_low/v001/candidate-c.png",
+        "sha256": "4285bf6b2b60b8dc498a864fb2026ba06bb516481ce335c3dda0783610dca4fc"
+      }
+    ]
+  },
+  "provenance": "Three original built-in generated PNGs, preserved byte-identical. Existing approved furniture provided as image-conditioning references. Selected B for review, not production approval.",
+  "postProcessing": [
+    "Official fit-to-spec.mjs from PR21 b8d6b66 in isolated worktree using production-spec.proposed.json; geometry unchanged from P4 world-temp.",
+    "Native alpha normalized <=8 to0 and >=250 to255; --despeckle40; trim, uniform width fit, Lanczos3 and pivot placement. No nonuniform deformation or repainting."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Selected B: approximate top rear42, front70, base168. Front height98px vs100 (-2%, within +/-10%); plane28px vs56 (-50%, FAIL +/-25%). Rows visual estimate +/-2px. Geometry prevents production approval.",
+      "Top narrows towards rear; geometry and projection need targeted correction. B did not follow proposed plain-door/wood-pull design; generated result kept inset panels and round knobs.",
+      "Official foundation loadSpecs excludes specs/world. Proposed contract has not been adopted; standard branch validator will report missing spec. Conditional isolated checks do not equal official production acceptance."
+    ]
+  },
+  "cost": "Existing subscription built-in image generation only; no additional paid APIs or services.",
+  "status": "REVIEW CANDIDATE \u2014 geometry correction and spec adoption required",
+  "selectedCandidate": "b",
+  "baseline": {
+    "foundation": "7796f60",
+    "p4": "2b81591",
+    "tooling": "b8d6b66"
+  }
+}

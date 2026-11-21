@@ -1,0 +1,13 @@
+{
+  "officialFoundationValidation": "FAIL: no production spec for world_cabinet_low",
+  "conditionalExportChecks": {
+    "passed": 24,
+    "failed": 0,
+    "scope": "PR21 validator using unadopted production-spec.proposed.json"
+  },
+  "paintedGeometry": "FAIL: see notes and metadata",
+  "visualApproval": "pending",
+  "productionReady": false,
+  "browserPageErrors": 0,
+  "physicalA05Test": false
+}

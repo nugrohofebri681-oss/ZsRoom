@@ -1,0 +1,51 @@
+name: World 01 P3 isolated playable preview
+
+on:
+  push:
+    branches:
+      - preview-world01-p3-source
+
+permissions:
+  contents: write
+
+concurrency:
+  group: zsroom-p3-static-preview
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout isolated preview source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install and verify
+        run: |
+          npm ci
+          npm run validate:privacy
+          npm run typecheck
+          npm run build
+          test -s dist/index.html
+          test -d dist/assets
+      - name: Publish built HTML and JS to separate static branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/zsroom-p3-static
+          cp -a dist/. /tmp/zsroom-p3-static/
+          touch /tmp/zsroom-p3-static/.nojekyll
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch --orphan preview-world01-p3-static
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -a /tmp/zsroom-p3-static/. .
+          git add -A
+          git commit -m "build(preview): playable World 01 P3 static bundle"
+          git push origin HEAD:refs/heads/preview-world01-p3-static --force

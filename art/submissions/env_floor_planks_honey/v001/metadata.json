@@ -1,0 +1,202 @@
+{
+  "assetId": "env_floor_planks_honey",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "batch": "E",
+  "createdAt": "2026-11-20T09:00:53.393594+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "env_floor_planks_honey_v001.png",
+      "sha256": "30e7d44b1e6fad17cffd9ef3b3925ecf17601139ce43b7089bd2fa016d00e8de"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/env_floor_planks_honey/v001/candidate-a.png",
+        "sha256": "1c6958a1643d6489ece4d520b917fe5bfc5e553d0caa6af2f893d9fadbe48730"
+      },
+      {
+        "path": "art/source/env_floor_planks_honey/v001/candidate-b.png",
+        "sha256": "cd6013aaefe63e648db81317fe68db19f899c50cdb3724231aefe93ee19bad06"
+      },
+      {
+        "path": "art/source/env_floor_planks_honey/v001/candidate-c.png",
+        "sha256": "41672af1bd222d5f7dca9a6b2375df6c88130746b0c00e200f3e6d20c46de8c0"
+      }
+    ]
+  },
+  "provenance": "Three original imagegen candidates; byte-identical raw outputs preserved. No stock or paid API. User-authorized local free image editing for seam correction.",
+  "postProcessing": [
+    "Lanczos resize full original to256x126, no trim. Local symmetric edge-colour correction fading quadratically across8px left/right and2px top/bottom; opposite edge pixels match exactly. Six original plank rows retained.",
+    "Pillow/numpy free local editing; no fit-to-spec used. Exact correction scripts reproduced in prompt.md."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Tile is periodic by definition; faint grain/panel recurrence remains detectable on large empty areas. No claim of mathematically non-repeating texture.",
+      "Generated texture resized to game density; subtle brush detail softens at SD. Pending visual approval and physical Android review."
+    ]
+  },
+  "cost": "Included in existing subscription; no paid APIs or extra services.",
+  "notes": {
+    "batch": "E",
+    "selectedCandidate": "B",
+    "candidateComparison": "A warmer orange and more active grain; B selected for pale honey and quiet joints; C has larger grain movement and more orange colour.",
+    "baseCommit": "7e3706dde9a79ee9fd5274e3e72b0b5989f24604"
+  },
+  "validation": {
+    "status": "TECHNICAL PASS",
+    "checksPassed": 23,
+    "checks": [
+      {
+        "name": "asset id format",
+        "pass": true,
+        "detail": "env_floor_planks_honey"
+      },
+      {
+        "name": "version format (v###)",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "spec exists",
+        "pass": true,
+        "detail": "specs/environments/env_floor_planks_honey.json"
+      },
+      {
+        "name": "master file present",
+        "pass": true,
+        "detail": "env_floor_planks_honey_v001.png"
+      },
+      {
+        "name": "metadata.json present",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "only png/webp/json/md files",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata schema",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata.assetId matches folder",
+        "pass": true,
+        "detail": "env_floor_planks_honey"
+      },
+      {
+        "name": "metadata.version matches folder",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "metadata.specVersion matches spec",
+        "pass": true,
+        "detail": "1.0.0 vs 1.0.0"
+      },
+      {
+        "name": "createdAt is a date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "master sha256 matches metadata",
+        "pass": true,
+        "detail": "30e7d44b1e6fad17cffd9ef3b3925ecf17601139ce43b7089bd2fa016d00e8de"
+      },
+      {
+        "name": "format PNG",
+        "pass": true,
+        "detail": "png"
+      },
+      {
+        "name": "canvas size",
+        "pass": true,
+        "detail": "256x126, expected 256x126"
+      },
+      {
+        "name": "RGBA (alpha channel)",
+        "pass": true,
+        "detail": "4 channels"
+      },
+      {
+        "name": "8-bit depth",
+        "pass": true,
+        "detail": "uchar"
+      },
+      {
+        "name": "sRGB colour space",
+        "pass": true,
+        "detail": "srgb"
+      },
+      {
+        "name": "file size",
+        "pass": true,
+        "detail": "37250 bytes (max 600000)"
+      },
+      {
+        "name": "transparent edge padding",
+        "pass": true,
+        "detail": "0 non-transparent px within 0px of the edge"
+      },
+      {
+        "name": "opaque coverage \u2265 min",
+        "pass": true,
+        "detail": "1.000"
+      },
+      {
+        "name": "opaque coverage \u2264 max (no baked background)",
+        "pass": true,
+        "detail": "1.000"
+      },
+      {
+        "name": "seamless horizontally (left\u2194right edge)",
+        "pass": true,
+        "detail": "mean edge delta 0.0 (max 14)"
+      },
+      {
+        "name": "seamless vertically (top\u2194bottom edge)",
+        "pass": true,
+        "detail": "mean edge delta 0.0 (max 14)"
+      }
+    ],
+    "pixelMetrics": {
+      "alphaMin": 255,
+      "alphaMax": 255,
+      "edgeDeltaX": 0.0,
+      "edgeDeltaY": 0.0
+    },
+    "officialGallery": "FAIL: build-gallery.mjs overlay accesses missing environment spec.pivot; not changed.",
+    "alternativeGallery": "review-gallery/batch-e-review.html inspected; repeated tiles and native candidates.",
+    "browser": {
+      "screenshots": 9,
+      "contexts": [
+        "1440x1000 desktop DPR1",
+        "360x800 Android portrait DPR2/touch",
+        "800x360 Android landscape DPR2/touch"
+      ],
+      "zoomMultipliers": [
+        0.75,
+        1,
+        1.6
+      ],
+      "pageErrors": 0,
+      "method": "Browser-only TEMP canvas texture replacement via __ZS_GAME; no engine or manifest changes.",
+      "hardware": "Emulation only, not physical Samsung A05 performance validation."
+    },
+    "visualApproval": "pending"
+  }
+}

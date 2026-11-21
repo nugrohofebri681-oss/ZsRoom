@@ -1,0 +1,198 @@
+{
+  "assetId": "env_wall_bedroom",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "batch": "E",
+  "createdAt": "2026-11-20T09:00:53.406651+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "review-gallery/candidates/floor-b.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "env_wall_bedroom_v001.png",
+      "sha256": "e955060709eac4ba9fabf786d216aa9876dc0c3e9e946c60f490edbd4ba9031e"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/env_wall_bedroom/v001/candidate-a.png",
+        "sha256": "069dc35dc357a5da5cb8616120f212b4a414c3f0b942a827dcb710ef948d0d4a"
+      },
+      {
+        "path": "art/source/env_wall_bedroom/v001/candidate-b.png",
+        "sha256": "a1d6fe8d5e5015839729074bb566245744a2da442d57eca6be1bfe06ec68b644"
+      },
+      {
+        "path": "art/source/env_wall_bedroom/v001/candidate-c.png",
+        "sha256": "4bbfd22dc3684955dc3e7cc36da544134190f4f79787f32d4fb1b381c0793a65"
+      }
+    ]
+  },
+  "provenance": "Three original imagegen candidates; byte-identical raw outputs preserved. No stock or paid API. User-authorized local free image editing for seam correction.",
+  "postProcessing": [
+    "Band-aware Lanczos export to120x540. Original B source rows0,64,1478,1515,2073,2172 mapped to0,12,356,364,516,540. This adjusts generator proportions, not invented replacement art. Symmetric horizontal edge-colour correction fading across6px. Fully opaque RGBA.",
+    "Pillow/numpy free local editing; no fit-to-spec used. Exact correction scripts reproduced in prompt.md."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Tile is periodic by definition; faint grain/panel recurrence remains detectable on large empty areas. No claim of mathematically non-repeating texture.",
+      "Generated texture resized to game density; subtle brush detail softens at SD. Pending visual approval and physical Android review."
+    ]
+  },
+  "cost": "Included in existing subscription; no paid APIs or extra services.",
+  "notes": {
+    "batch": "E",
+    "selectedCandidate": "B",
+    "candidateComparison": "A fine pinstripes; B selected plain matte paper with lowest pattern noise; C reintroduces thin vertical stripe rhythm.",
+    "baseCommit": "7e3706dde9a79ee9fd5274e3e72b0b5989f24604"
+  },
+  "validation": {
+    "status": "TECHNICAL PASS",
+    "checksPassed": 22,
+    "checks": [
+      {
+        "name": "asset id format",
+        "pass": true,
+        "detail": "env_wall_bedroom"
+      },
+      {
+        "name": "version format (v###)",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "spec exists",
+        "pass": true,
+        "detail": "specs/environments/env_wall_bedroom.json"
+      },
+      {
+        "name": "master file present",
+        "pass": true,
+        "detail": "env_wall_bedroom_v001.png"
+      },
+      {
+        "name": "metadata.json present",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "only png/webp/json/md files",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata schema",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata.assetId matches folder",
+        "pass": true,
+        "detail": "env_wall_bedroom"
+      },
+      {
+        "name": "metadata.version matches folder",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "metadata.specVersion matches spec",
+        "pass": true,
+        "detail": "1.0.0 vs 1.0.0"
+      },
+      {
+        "name": "createdAt is a date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "master sha256 matches metadata",
+        "pass": true,
+        "detail": "e955060709eac4ba9fabf786d216aa9876dc0c3e9e946c60f490edbd4ba9031e"
+      },
+      {
+        "name": "format PNG",
+        "pass": true,
+        "detail": "png"
+      },
+      {
+        "name": "canvas size",
+        "pass": true,
+        "detail": "120x540, expected 120x540"
+      },
+      {
+        "name": "RGBA (alpha channel)",
+        "pass": true,
+        "detail": "4 channels"
+      },
+      {
+        "name": "8-bit depth",
+        "pass": true,
+        "detail": "uchar"
+      },
+      {
+        "name": "sRGB colour space",
+        "pass": true,
+        "detail": "srgb"
+      },
+      {
+        "name": "file size",
+        "pass": true,
+        "detail": "67966 bytes (max 600000)"
+      },
+      {
+        "name": "transparent edge padding",
+        "pass": true,
+        "detail": "0 non-transparent px within 0px of the edge"
+      },
+      {
+        "name": "opaque coverage \u2265 min",
+        "pass": true,
+        "detail": "1.000"
+      },
+      {
+        "name": "opaque coverage \u2264 max (no baked background)",
+        "pass": true,
+        "detail": "1.000"
+      },
+      {
+        "name": "seamless horizontally (left\u2194right edge)",
+        "pass": true,
+        "detail": "mean edge delta 0.0 (max 14)"
+      }
+    ],
+    "pixelMetrics": {
+      "alphaMin": 255,
+      "alphaMax": 255,
+      "edgeDeltaX": 0.0,
+      "edgeDeltaY": 13.583333333333334
+    },
+    "officialGallery": "FAIL: build-gallery.mjs overlay accesses missing environment spec.pivot; not changed.",
+    "alternativeGallery": "review-gallery/batch-e-review.html inspected; repeated tiles and native candidates.",
+    "browser": {
+      "screenshots": 9,
+      "contexts": [
+        "1440x1000 desktop DPR1",
+        "360x800 Android portrait DPR2/touch",
+        "800x360 Android landscape DPR2/touch"
+      ],
+      "zoomMultipliers": [
+        0.75,
+        1,
+        1.6
+      ],
+      "pageErrors": 0,
+      "method": "Browser-only TEMP canvas texture replacement via __ZS_GAME; no engine or manifest changes.",
+      "hardware": "Emulation only, not physical Samsung A05 performance validation."
+    },
+    "visualApproval": "pending"
+  }
+}

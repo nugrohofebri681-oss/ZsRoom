@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { boot, hold, holdUntil, propEntry, roomData, SHOTS, state, teleport } from './helpers';
+import { boot, hold, holdUntil, propEntry, roomData, SHOTS, state, teleport, walkToZone } from './helpers';
 
 test.describe('desktop gameplay', () => {
   test.skip(({ isMobile }) => isMobile, 'desktop only');
@@ -7,7 +7,7 @@ test.describe('desktop gameplay', () => {
   test('boots without errors and renders the bedroom', async ({ page }) => {
     const errors = await boot(page);
     const s = await state(page);
-    expect(s.roomId).toBe('zila_bedroom');
+    expect((s as any).zone).toBe('zila_bedroom');
     expect(s.props.some((p) => p.key.startsWith('prop_bed_zila#'))).toBe(true);
     await page.screenshot({ path: `${SHOTS}/desktop-01-boot.png` });
     expect(errors).toEqual([]);
@@ -71,24 +71,17 @@ test.describe('desktop gameplay', () => {
     await page.screenshot({ path: `${SHOTS}/desktop-04-interaction.png` });
   });
 
-  test('door transition to the hall and back, with save', async ({ page }) => {
+  test('continuous upper floor: walk from the bedroom into the hall and back — no scene change — then save', async ({ page }) => {
     await boot(page);
-    const door = roomData('zila_bedroom').doors[0];
-    await teleport(page, door.x + door.w / 2, roomData('zila_bedroom').sizeCm.h - 40);
-    // Hold until the transition fires (frame-rate independent: CI runners can be several times slower).
-    await page.keyboard.down('ArrowDown');
-    await page.waitForFunction(() => (window as any).__ZS.state().roomId === 'upper_hall', null, { timeout: 15000 });
-    await page.keyboard.up('ArrowDown');
-    await page.waitForTimeout(400);
+    const starts = ((await state(page)) as any).sceneStarts;
+    await walkToZone(page, 'upper_hall');                    // throws if the scene restarted or the framing jumped
+    await page.waitForTimeout(300);
     await page.screenshot({ path: `${SHOTS}/desktop-05-hall.png` });
-    const hallDoor = roomData('upper_hall').doors[0];
-    await teleport(page, hallDoor.x + hallDoor.w / 2, 60);
-    await page.waitForTimeout(100);
-    await page.keyboard.press('KeyE');
-    await page.waitForFunction(() => (window as any).__ZS.state().roomId === 'zila_bedroom', null, { timeout: 5000 });
-    // reload without ?fresh → resumes from the save
-    await page.reload();
-    await page.waitForFunction(() => (window as any).__ZS?.state?.());
-    expect((await state(page)).roomId).toBe('zila_bedroom');
+    await walkToZone(page, 'zila_bedroom');
+    expect(((await state(page)) as any).sceneStarts).toBe(starts);
+    // reload without ?fresh → resumes from the save on the same floor
+    await page.goto('/'); await page.waitForFunction(() => (window as any).__ZS?.state?.());
+    const s = (await state(page)) as any;
+    expect(s.roomId).toBe('home_upper'); expect(s.zone).toBe('zila_bedroom');
   });
 });

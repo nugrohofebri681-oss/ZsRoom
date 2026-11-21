@@ -1,0 +1,15 @@
+{
+  "$comment": "Continuous ground floor of Zila's house (P4): kitchen + living room as one walkable floor. PROVISIONAL geometry.",
+  "id": "home_ground",
+  "displayName": "Zila's house · ground floor",
+  "world": "world01",
+  "primary": "living_room",
+  "provisional": true,
+  "zones": [
+    { "room": "kitchen", "x": 0 },
+    { "room": "living_room", "x": 660 }
+  ],
+  "openings": [
+    { "between": ["kitchen", "living_room"], "y": 200, "h": 120 }
+  ]
+}

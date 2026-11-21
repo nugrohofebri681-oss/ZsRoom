@@ -114,7 +114,9 @@ test.describe('sprint: tap-to-move, camera, lighting, tiles, animation', () => {
       return { n: tiles.length, maxX, maxY, minY, density: tiles[0]?.scaleX };
     });
     expect(r.n).toBeGreaterThan(10);
-    expect(r.maxX).toBeCloseTo(720, 0);           // room width (cm)
+    // P4: the upper floor is one continuous map — tiles end at the floor's east edge (bedroom 0–720 + hall 760–1460)
+    const zones = ((await state(page)) as any).zones as { x: number; w: number }[];
+    expect(r.maxX).toBeCloseTo(Math.max(...zones.map((z) => z.x + z.w)), 0);
     expect(r.maxY).toBeCloseTo(480 * 0.7, 0);     // projected floor depth
     expect(r.minY).toBeCloseTo(-270, 0);          // wall height
   });

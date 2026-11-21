@@ -45,6 +45,60 @@ The source of truth for the registry is [`src/data/world/world01.json`](../../sr
 - Exact logos, wordmarks and trade dress must be **reviewed before any public release** (flagged with `brandReview` in the registry and specs).
 - The map id `minimarket` is kept unchanged for save compatibility.
 
+## P4 — continuous floors and exploration camera (Issue #28)
+**Goal:** a real exploration feel. Same-floor rooms are **one walkable map**: Zila walks through interior doorways with no fade and no scene restart, while the camera keeps following. Stairs, exterior doors, shop doors and separate districts still use transitions.
+
+### How it works (reusable, data-driven)
+- **Floors:** `src/data/floors/<id>.json` lists **zones**, which are the existing room files, placed side by side along X and sharing the north-wall line, plus **openings** between neighbouring zones.
+- **Coordinates:** local room coordinates + the zone's X offset = floor coordinates.
+- **Partition walls:** the two rooms' side walls stay solid, with collision. The opening is a gap with no stopper, no trigger and no transition.
+- **Doors:** interior doors that used to lead to another zone of the same floor are dropped, because they are now openings. Exterior doors and stairs keep their targets.
+- **Legacy room ids stay valid as aliases.** A door, URL or save that names `living_room` resolves to `home_ground`, using spawn `living_room.<spawn>` and the position offset by the zone origin. Stable external ids such as `minimarket` are unchanged.
+- **Zones** still drive the HUD title, ambience, `onEnter` events, the visited list and per-room light flags (`light:<room>:<prop>`), so existing story state and lamp saves keep working.
+- **Prop keys:** the primary zone (bedroom upstairs, living room downstairs) keeps its keys; the other zone's keys are prefixed (`kitchen/…`). Approved bedroom furniture is unchanged and at offset 0.
+
+### Old vs new mapping (provisional geometry; no real floor plan claimed)
+| Old map (P0–P3) | New map (P4) | Zone origin (x, cm) | Notes |
+|---|---|---|---|
+| `zila_bedroom` | `home_upper` | 0 | 20 approved assets, same positions |
+| `upper_hall` | `home_upper` | 760 | opening at y 120–240 in the 40 cm partition; stairs down on the hall's east wall |
+| `kitchen` | `home_ground` | 0 | opening at y 200–320 |
+| `living_room` | `home_ground` | 660 | stairs up (north wall), front door → front yard |
+
+**Saves:** v3 saves need no version bump. A saved `roomId` naming an old room resolves to its floor, and the position is offset by the zone origin (unit + e2e tested). Invalid positions still fall back to the spawn.
+
+### Exploration camera (`src/core/framing.ts`)
+The character is a small share of the screen, and maps are **never squeezed to fit**: small floors sit centred in the dark surround, big areas scroll with smooth follow and look-ahead. Manual zoom (wheel, pinch, ±) multiplies on top.
+
+| | P3 | **P4** |
+|---|---|---|
+| Desktop interior | 22–25 % | **15 %** (target 12–18 %) |
+| Desktop exterior | 17 % | **14 %** |
+| Phone landscape interior | 36 % | **20 %** (target 16–24 %) |
+| Phone landscape exterior | 28 % | **19 %** |
+
+At the default zoom, both rooms of each house floor are visible at once. When zoomed in (or on larger areas), the camera pans with Zila; e2e tests measure the camera scroll and Zila's world position continuously across the doorway. Evidence: `docs/reviews/world01-p4/` (P3 vs P4 at the same character position on desktop and Android).
+
+### Performance (headless software proxy, same positions, interleaved, median of 3, night — NOT device results)
+| Map | Desktop P3 | Desktop P4 |
+|---|---|---|
+| Upper floor | 16.3 fps | 20.3 fps |
+| Ground floor | 16.0 fps | 18.3 fps |
+| Street | 12.7 fps | 14.3 fps |
+| City centre | 12.0 fps | 13.0 fps |
+
+- The emulated phone was equal or slightly better too: 6.0–7.3 fps (both builds were slow on the busy machine).
+- **Why P4 is not slower:** the proxy is fill-bound. The wider camera draws the same number of screen pixels, the dark surround is cheap, and HD textures are minified.
+- **Culling:** off-screen tile culling was already measured in P1 and made no difference, so no chunk culling was added. Revisit with real Galaxy A05 numbers (`?fresh&bench`).
+- Adaptive render resolution and the Display setting are unchanged.
+
+### Limits and next steps
+- Zones are laid out along X only (shared north wall), which covers both house floors. N–S stacking would need wall-top rendering of the room in front, so it is deferred.
+- **Next candidates** for the same model, after Creative Director review:
+  - the Indomaret back room;
+  - any multi-room shop;
+  - joining the front yard with the street into one continuous outdoor area.
+
 ## P3 — Lhokseumawe city, Unimal, inspectable background (Issue #23)
 **Playable first, visual refinement later.** The topology is **fictionalised**: it is not a claim about real streets or distances.
 

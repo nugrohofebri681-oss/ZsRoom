@@ -63,15 +63,39 @@ export function doorAnchor(roomId: string, doorId: string): { x: number; y: numb
   return side === 'north' ? { x: d.x + d.w / 2, y: 25 } : side === 'south' ? { x: d.x + d.w / 2, y: h - 15 } : side === 'west' ? { x: 15, y: d.y + d.h / 2 } : { x: w - 15, y: d.y + d.h / 2 };
 }
 
-/** Walk (tap-to-move) to a door's spot, then use it with E / the touch button. */
+/**
+ * Walk (tap-to-move) to a door's spot and use it with E / the touch button. `expect` may be a map id or a
+ * zone (legacy room id) of a continuous floor, e.g. 'living_room' on 'home_ground'.
+ */
 export async function useDoor(page: Page, isMobile: boolean, doorId: string, expectRoom: string): Promise<void> {
-  const from = ((await state(page)) as any).roomId, a = doorAnchor(from, doorId);
+  const a = await page.evaluate((id) => (window as any).__ZS.doorSpot(id), doorId);
+  if (!a) throw new Error(`door ${doorId} not on this map`);
   await page.evaluate(([x, y]) => (window as any).__ZS.tapWorld(x, y), [a.x, a.y]);
   await until(page, 's.path === 0', 20000);
   await until(page, `s.nearest === 'door:${doorId}'`);
   await press(page, isMobile);
-  await until(page, `s.roomId === '${expectRoom}' && !s.transitioning`, 8000);
+  await until(page, `(s.roomId === '${expectRoom}' || s.zone === '${expectRoom}') && !s.transitioning`, 8000);
   await page.waitForTimeout(250);
+}
+
+/**
+ * Walk across a continuous floor into another zone (room) with tap-to-move: asserts there is NO scene restart
+ * and that the camera really scrolled (world position of the view changes).
+ */
+export async function walkToZone(page: Page, zone: string): Promise<void> {
+  const before = (await state(page)) as any;
+  const sp = await page.evaluate((z) => (window as any).__ZS.zoneSpawn(z), zone);
+  if (!sp) throw new Error(`zone ${zone} not on ${before.roomId}`);
+  await page.evaluate(([x, y]) => (window as any).__ZS.tapWorld(x, y), [sp.x, sp.y]);
+  await until(page, `s.path === 0 && s.zone === '${zone}'`, 20000);
+  const after = (await state(page)) as any;
+  if (after.sceneStarts !== before.sceneStarts || after.roomId !== before.roomId) throw new Error(`scene restarted while walking ${before.zone} → ${zone}`);
+  // The camera follows Zila: it must pan when the floor is wider than the view, and otherwise keep a stable
+  // framing (the whole floor is visible — no hidden re-framing jump at the doorway).
+  const floorW = Math.max(...(after.zones ?? [{ x: 0, w: 0 }]).map((z: any) => z.x + z.w)) + 120;
+  const dx = Math.abs(after.camera.scrollX - before.camera.scrollX);
+  if (after.camera.viewW < floorW - 50 && dx < 40) throw new Error(`camera did not pan (${before.camera.scrollX} → ${after.camera.scrollX})`);
+  if (after.camera.viewW >= floorW + 50 && dx > 2) throw new Error(`framing jumped although the whole floor is visible (${dx})`);
 }
 
 /** Tap the visible part of an object (ground x/y + height z): Zila walks to its interaction spot and uses it. */

@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { boot, closeDialogue, roomData, state, tapObject, until, useDoor } from './helpers';
+import { boot, closeDialogue, roomData, state, tapObject, until, useDoor, walkToZone } from './helpers';
 
 /** World 01 P3: Batuphat → road → Lhokseumawe centre → Unimal → home, inspectable background, save/reload, memory. */
 const S = (p: Page): Promise<any> => state(p);
@@ -13,7 +13,7 @@ test.describe('World 01 P3 — city and Unimal', () => {
   test('bedroom → Batuphat → road → city centre → Unimal → back home to the bedroom, through real doors, with save/reload on campus', async ({ page, isMobile }) => {
     const errors = await boot(page, '?fresh&fast');
     const go = async (door: string, to: string) => { await useDoor(page, isMobile, door, to); await dismiss(page, isMobile); };
-    await go(roomData('zila_bedroom').doors[0].id, 'upper_hall');
+    await walkToZone(page, 'upper_hall');
     await go('stairs_down', 'living_room');
     await go('front_door', 'front_yard');
     await go('gate', 'batuphat_street');
@@ -41,7 +41,7 @@ test.describe('World 01 P3 — city and Unimal', () => {
     await go('home_gate', 'front_yard');
     await go('house_door', 'living_room');
     await go('stairs_up', 'upper_hall');
-    await go('door_to_bedroom', 'zila_bedroom');
+    await walkToZone(page, 'zila_bedroom');
     expect(errors).toEqual([]);
   });
 

@@ -88,6 +88,7 @@ export class UIScene extends Phaser.Scene {
     this.input.on('pointerupoutside', this.onUp, this);
 
     this.game.events.on('room-entered', this.onRoom, this);
+    this.game.events.on('zone-entered', this.onRoom, this);
     this.game.events.on('prompt', this.onPrompt, this);
     this.game.events.on('toast', this.onToast, this);
     this.game.events.on('dialogue', this.onDialogue, this);
@@ -98,6 +99,7 @@ export class UIScene extends Phaser.Scene {
       this.game.events.off('world', this.onWorld, this);
       this.game.events.off('art-status', this.onArtStatus, this);
       this.game.events.off('room-entered', this.onRoom, this);
+      this.game.events.off('zone-entered', this.onRoom, this);
       this.game.events.off('prompt', this.onPrompt, this);
       this.game.events.off('toast', this.onToast, this);
     });

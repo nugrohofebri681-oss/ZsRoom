@@ -1,0 +1,15 @@
+{
+  "$comment": "Continuous upper floor of Zila's house (P4). PROVISIONAL geometry, not a real floor plan. Zones are the existing room files; local coordinates + x offset = floor coordinates. The bedroom keeps offset 0, so all approved furniture keeps its position.",
+  "id": "home_upper",
+  "displayName": "Zila's house · upstairs",
+  "world": "world01",
+  "primary": "zila_bedroom",
+  "provisional": true,
+  "zones": [
+    { "room": "zila_bedroom", "x": 0 },
+    { "room": "upper_hall", "x": 760 }
+  ],
+  "openings": [
+    { "between": ["zila_bedroom", "upper_hall"], "y": 120, "h": 120 }
+  ]
+}

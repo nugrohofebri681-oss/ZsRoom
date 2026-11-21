@@ -32,7 +32,7 @@ test.describe('World 01 P2', () => {
     const scaled = (await S(page)).renderScale.scale;
     // still playable after the change: tap-to-move arrives
     const o = zoneOrigin('batuphat_street');                              // P5: the street is a zone of the outdoor region
-    await page.evaluate(([x0, y0]) => { const z = (window as any).__ZS; z.teleport(x0 + 600, y0 + 300); z.tapWorld(x0 + 900, y0 + 300); }, [o.x, o.y]);
+    await page.evaluate(([x0, y0]) => { const z = (window as any).__ZS; z.teleport(x0 + 600, y0 + 300); z.tapWorld(x0 + 900, y0 + 300); }, [o.x, o.y] as const);
     await until(page, 's.path === 0', 15000);
     expect(Math.abs((await S(page)).player.x - o.x - 900)).toBeLessThan(30);
     // player picks Sharp in the settings panel → full resolution, remembered after reload

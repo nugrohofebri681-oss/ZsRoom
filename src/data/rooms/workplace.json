@@ -1,6 +1,5 @@
 {
   "id": "workplace",
-  "displayName": "Workplace (placeholder)",
   "world": "world01",
   "floor": "ground",
   "kind": "interior",
@@ -11,15 +10,6 @@
     "h": 560
   },
   "wallHeightCm": 280,
-  "palette": {
-    "floor": "#D5D2CC",
-    "wall": "#E9EDF1",
-    "trim": "#C9CED4"
-  },
-  "shell": {
-    "floor": "env_floor_office",
-    "wall": "env_wall_office"
-  },
   "spawns": {
     "default": {
       "x": 400,
@@ -32,193 +22,6 @@
       "facing": "N"
     }
   },
-  "props": [
-    {
-      "assetId": "world_whiteboard",
-      "wall": {
-        "x": 400,
-        "z": 110
-      },
-      "anchors": [
-        {
-          "id": "read",
-          "label": "Read the task board",
-          "x": 0,
-          "y": 45,
-          "facing": "N",
-          "radiusCm": 45,
-          "action": {
-            "type": "dialogue",
-            "id": "dlg_work_board"
-          }
-        }
-      ]
-    },
-    {
-      "assetId": "world_timeclock",
-      "wall": {
-        "x": 640,
-        "z": 120
-      },
-      "anchors": [
-        {
-          "id": "in",
-          "label": "Clock in",
-          "x": 0,
-          "y": 40,
-          "facing": "N",
-          "radiusCm": 35,
-          "action": {
-            "type": "event",
-            "id": "ev_work_clock"
-          }
-        }
-      ]
-    },
-    {
-      "assetId": "world_timeclock",
-      "wall": {
-        "x": 730,
-        "z": 120
-      },
-      "anchors": [
-        {
-          "id": "out",
-          "label": "Clock out",
-          "x": 0,
-          "y": 40,
-          "facing": "N",
-          "radiusCm": 35,
-          "action": {
-            "type": "event",
-            "id": "ev_work_clock_out"
-          }
-        }
-      ]
-    },
-    {
-      "assetId": "world_office_desk",
-      "x": 180,
-      "y": 200,
-      "anchors": [
-        {
-          "id": "task",
-          "label": "Work on a task",
-          "x": 60,
-          "y": 32,
-          "facing": "N",
-          "radiusCm": 45,
-          "action": {
-            "type": "event",
-            "id": "ev_work_task"
-          }
-        }
-      ]
-    },
-    {
-      "assetId": "world_office_chair",
-      "x": 150,
-      "y": 255
-    },
-    {
-      "assetId": "world_office_desk",
-      "x": 180,
-      "y": 390,
-      "anchors": [
-        {
-          "id": "task",
-          "label": "Work on a task",
-          "x": 60,
-          "y": 32,
-          "facing": "N",
-          "radiusCm": 45,
-          "action": {
-            "type": "event",
-            "id": "ev_work_task"
-          }
-        }
-      ]
-    },
-    {
-      "assetId": "world_office_chair",
-      "x": 150,
-      "y": 445
-    },
-    {
-      "assetId": "world_office_desk",
-      "x": 560,
-      "y": 330,
-      "anchors": [
-        {
-          "id": "task",
-          "label": "Work on a task",
-          "x": 60,
-          "y": 32,
-          "facing": "N",
-          "radiusCm": 45,
-          "action": {
-            "type": "event",
-            "id": "ev_work_task"
-          }
-        }
-      ]
-    },
-    {
-      "assetId": "world_office_chair",
-      "x": 530,
-      "y": 385
-    },
-    {
-      "assetId": "world_filing_cabinet",
-      "x": 760,
-      "y": 260
-    },
-    {
-      "assetId": "world_filing_cabinet",
-      "x": 760,
-      "y": 330
-    },
-    {
-      "assetId": "world_plant_floor",
-      "x": 50,
-      "y": 540
-    }
-  ],
-  "npcs": [
-    {
-      "id": "npc_coworker",
-      "name": "Coworker",
-      "look": {
-        "shirt": "#B0506A",
-        "pants": "#3A3440",
-        "hair": "#2A1E18",
-        "hijab": "#5B6C8F"
-      },
-      "x": 300,
-      "y": 130,
-      "behaviour": {
-        "type": "wander",
-        "area": {
-          "x": 260,
-          "y": 110,
-          "w": 120,
-          "h": 60
-        },
-        "speed": 45,
-        "pauseMs": [
-          2000,
-          5000
-        ]
-      },
-      "schedule": {
-        "night": "away"
-      },
-      "interact": {
-        "label": "Talk to your coworker",
-        "dialogue": "dlg_work_coworker"
-      }
-    }
-  ],
   "doors": [
     {
       "id": "exit",
@@ -232,5 +35,452 @@
         "spawn": "from_workplace"
       }
     }
-  ]
+  ],
+  "variantOf": "workplace",
+  "defaultVariant": "office",
+  "variants": {
+    "office": {
+      "displayName": "Workplace (office placeholder)",
+      "palette": {
+        "floor": "#D5D2CC",
+        "wall": "#E9EDF1",
+        "trim": "#C9CED4"
+      },
+      "shell": {
+        "floor": "env_floor_office",
+        "wall": "env_wall_office"
+      },
+      "props": [
+        {
+          "assetId": "world_whiteboard",
+          "wall": {
+            "x": 400,
+            "z": 110
+          },
+          "anchors": [
+            {
+              "id": "read",
+              "label": "Read the task board",
+              "x": 0,
+              "y": 45,
+              "facing": "N",
+              "radiusCm": 45,
+              "action": {
+                "type": "dialogue",
+                "id": "dlg_work_board"
+              }
+            }
+          ]
+        },
+        {
+          "assetId": "world_timeclock",
+          "wall": {
+            "x": 640,
+            "z": 120
+          },
+          "anchors": [
+            {
+              "id": "in",
+              "label": "Clock in",
+              "x": 0,
+              "y": 40,
+              "facing": "N",
+              "radiusCm": 35,
+              "action": {
+                "type": "event",
+                "id": "ev_work_clock"
+              }
+            }
+          ]
+        },
+        {
+          "assetId": "world_timeclock",
+          "wall": {
+            "x": 730,
+            "z": 120
+          },
+          "anchors": [
+            {
+              "id": "out",
+              "label": "Clock out",
+              "x": 0,
+              "y": 40,
+              "facing": "N",
+              "radiusCm": 35,
+              "action": {
+                "type": "event",
+                "id": "ev_work_clock_out"
+              }
+            }
+          ]
+        },
+        {
+          "assetId": "world_office_desk",
+          "x": 180,
+          "y": 200,
+          "anchors": [
+            {
+              "id": "task",
+              "label": "Work on a task",
+              "x": 60,
+              "y": 32,
+              "facing": "N",
+              "radiusCm": 45,
+              "action": {
+                "type": "event",
+                "id": "ev_work_task"
+              }
+            }
+          ]
+        },
+        {
+          "assetId": "world_office_chair",
+          "x": 150,
+          "y": 255
+        },
+        {
+          "assetId": "world_office_desk",
+          "x": 180,
+          "y": 390,
+          "anchors": [
+            {
+              "id": "task",
+              "label": "Work on a task",
+              "x": 60,
+              "y": 32,
+              "facing": "N",
+              "radiusCm": 45,
+              "action": {
+                "type": "event",
+                "id": "ev_work_task"
+              }
+            }
+          ]
+        },
+        {
+          "assetId": "world_office_chair",
+          "x": 150,
+          "y": 445
+        },
+        {
+          "assetId": "world_office_desk",
+          "x": 560,
+          "y": 330,
+          "anchors": [
+            {
+              "id": "task",
+              "label": "Work on a task",
+              "x": 60,
+              "y": 32,
+              "facing": "N",
+              "radiusCm": 45,
+              "action": {
+                "type": "event",
+                "id": "ev_work_task"
+              }
+            }
+          ]
+        },
+        {
+          "assetId": "world_office_chair",
+          "x": 530,
+          "y": 385
+        },
+        {
+          "assetId": "world_filing_cabinet",
+          "x": 760,
+          "y": 260
+        },
+        {
+          "assetId": "world_filing_cabinet",
+          "x": 760,
+          "y": 330
+        },
+        {
+          "assetId": "world_plant_floor",
+          "x": 50,
+          "y": 540
+        }
+      ],
+      "npcs": [
+        {
+          "id": "npc_coworker",
+          "name": "Coworker",
+          "look": {
+            "shirt": "#B0506A",
+            "pants": "#3A3440",
+            "hair": "#2A1E18",
+            "hijab": "#5B6C8F"
+          },
+          "x": 300,
+          "y": 130,
+          "behaviour": {
+            "type": "wander",
+            "area": {
+              "x": 260,
+              "y": 110,
+              "w": 120,
+              "h": 60
+            },
+            "speed": 45,
+            "pauseMs": [
+              2000,
+              5000
+            ]
+          },
+          "schedule": {
+            "night": "away"
+          },
+          "interact": {
+            "label": "Talk to your coworker",
+            "dialogue": "dlg_work_coworker"
+          }
+        }
+      ]
+    },
+    "dimsum": {
+      "displayName": "Workplace (dimsum placeholder)",
+      "palette": {
+        "floor": "#E9E2D6",
+        "wall": "#F4ECE0",
+        "trim": "#8C2F2F"
+      },
+      "shell": {
+        "floor": "env_floor_dimsum",
+        "wall": "env_wall_dimsum"
+      },
+      "props": [
+        {
+          "assetId": "world_menu_board_dimsum",
+          "wall": {
+            "x": 220,
+            "z": 150
+          },
+          "anchors": [
+            {
+              "id": "read",
+              "label": "Read the menu board",
+              "x": 0,
+              "y": 45,
+              "facing": "N",
+              "radiusCm": 45,
+              "action": {
+                "type": "dialogue",
+                "id": "dlg_dimsum_menu"
+              }
+            }
+          ]
+        },
+        {
+          "assetId": "world_timeclock",
+          "wall": {
+            "x": 640,
+            "z": 120
+          },
+          "anchors": [
+            {
+              "id": "in",
+              "label": "Clock in",
+              "x": 0,
+              "y": 40,
+              "facing": "N",
+              "radiusCm": 35,
+              "action": {
+                "type": "event",
+                "id": "ev_dimsum_clock"
+              }
+            }
+          ]
+        },
+        {
+          "assetId": "world_timeclock",
+          "wall": {
+            "x": 730,
+            "z": 120
+          },
+          "anchors": [
+            {
+              "id": "out",
+              "label": "Clock out",
+              "x": 0,
+              "y": 40,
+              "facing": "N",
+              "radiusCm": 35,
+              "action": {
+                "type": "event",
+                "id": "ev_dimsum_clock_out"
+              }
+            }
+          ]
+        },
+        {
+          "assetId": "world_steamer_counter",
+          "x": 400,
+          "y": 150,
+          "anchors": [
+            {
+              "id": "pick",
+              "label": "Pick up a steamer basket",
+              "x": 0,
+              "y": 32,
+              "facing": "N",
+              "radiusCm": 45,
+              "action": {
+                "type": "event",
+                "id": "ev_dimsum_pick"
+              }
+            }
+          ]
+        },
+        {
+          "assetId": "world_cafe_table",
+          "x": 170,
+          "y": 320,
+          "anchors": [
+            {
+              "id": "serve",
+              "label": "Serve this table",
+              "x": 0,
+              "y": 30,
+              "facing": "N",
+              "radiusCm": 45,
+              "action": {
+                "type": "event",
+                "id": "ev_dimsum_serve"
+              }
+            }
+          ]
+        },
+        {
+          "assetId": "world_stool",
+          "x": 110,
+          "y": 330
+        },
+        {
+          "assetId": "world_stool",
+          "x": 230,
+          "y": 330
+        },
+        {
+          "assetId": "world_cafe_table",
+          "x": 630,
+          "y": 320,
+          "anchors": [
+            {
+              "id": "serve",
+              "label": "Serve this table",
+              "x": 0,
+              "y": 30,
+              "facing": "N",
+              "radiusCm": 45,
+              "action": {
+                "type": "event",
+                "id": "ev_dimsum_serve"
+              }
+            }
+          ]
+        },
+        {
+          "assetId": "world_stool",
+          "x": 570,
+          "y": 330
+        },
+        {
+          "assetId": "world_stool",
+          "x": 690,
+          "y": 330
+        },
+        {
+          "assetId": "world_cafe_table",
+          "x": 170,
+          "y": 470,
+          "anchors": [
+            {
+              "id": "serve",
+              "label": "Serve this table",
+              "x": 0,
+              "y": 30,
+              "facing": "N",
+              "radiusCm": 45,
+              "action": {
+                "type": "event",
+                "id": "ev_dimsum_serve"
+              }
+            }
+          ]
+        },
+        {
+          "assetId": "world_stool",
+          "x": 110,
+          "y": 480
+        },
+        {
+          "assetId": "world_stool",
+          "x": 230,
+          "y": 480
+        },
+        {
+          "assetId": "world_cafe_table",
+          "x": 630,
+          "y": 470
+        },
+        {
+          "assetId": "world_stool",
+          "x": 570,
+          "y": 480
+        },
+        {
+          "assetId": "world_plant_floor",
+          "x": 760,
+          "y": 120
+        }
+      ],
+      "npcs": [
+        {
+          "id": "npc_dimsum_cook",
+          "name": "Cook",
+          "look": {
+            "shirt": "#F7F7F5",
+            "pants": "#3A3440",
+            "hair": "#2A1E18"
+          },
+          "x": 560,
+          "y": 45,
+          "facing": "S",
+          "behaviour": {
+            "type": "idle"
+          },
+          "interact": {
+            "label": "Talk to the cook",
+            "dialogue": "dlg_dimsum_cook"
+          },
+          "radiusCm": 80
+        },
+        {
+          "id": "npc_dimsum_customer",
+          "name": "Customer",
+          "look": {
+            "shirt": "#81B29A",
+            "pants": "#5E6670",
+            "hair": "#2A1E18",
+            "hijab": "#E8C7A0"
+          },
+          "x": 700,
+          "y": 470,
+          "facing": "W",
+          "behaviour": {
+            "type": "idle"
+          },
+          "schedule": {
+            "night": "away"
+          },
+          "interact": {
+            "label": "Talk to the customer",
+            "dialogue": "dlg_dimsum_customer"
+          }
+        }
+      ]
+    }
+  },
+  "displayName": "Workplace (placeholder)"
 }

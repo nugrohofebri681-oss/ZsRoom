@@ -3,8 +3,12 @@ import { BootScene } from './scenes/BootScene';
 import { RoomScene } from './scenes/RoomScene';
 import { UIScene } from './scenes/UIScene';
 import { renderDpr } from './core/display';
+import { isQaBuild } from './core/qa';
+import { RenderScaleController } from './systems/renderScale';
+import { safeStorage } from './systems/save';
+import { runBenchIfRequested } from './systems/bench';
 
-const DPR = renderDpr();
+const DPR = renderDpr(location.search, isQaBuild(import.meta.env));
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -20,8 +24,14 @@ const game = new Phaser.Game({
   scene: [BootScene, RoomScene, UIScene],
 });
 
-window.addEventListener('resize', () => game.scale.resize(window.innerWidth * DPR, window.innerHeight * DPR));
+// Adaptive render resolution (see systems/renderScale.ts). Disabled in QA builds unless ?adaptive (deterministic tests).
+const QA = isQaBuild(import.meta.env);
+const renderScale = new RenderScaleController(game, DPR, safeStorage(), !QA || new URLSearchParams(location.search).has('adaptive'));
 game.registry.set('dpr', DPR);
+game.registry.set('renderScale', renderScale);
+if (renderScale.scale !== DPR) game.events.once('ready', () => renderScale.apply(renderScale.scale));
+window.addEventListener('resize', () => renderScale.resizeToWindow());
+runBenchIfRequested(game, renderScale);
 game.registry.set('safeArea', readSafeArea());
 
 /** CSS safe-area insets (notches, rounded corners, gesture bars) in CSS px. */

@@ -1,0 +1,43 @@
+{
+  "id": "world_cafe_table",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Small restaurant table (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 176,
+    "height": 286
+  },
+  "pivot": {
+    "x": 88,
+    "y": 274,
+    "meaning": "front-centre floor contact point"
+  },
+  "footprint": {
+    "widthCm": 80,
+    "depthCm": 80
+  },
+  "heightsCm": {
+    "top": 75
+  },
+  "collision": [
+    {
+      "x": -40.0,
+      "y": -80,
+      "w": 80,
+      "h": 80
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "maxSideOverhangCm": 0,
+  "temp": {
+    "shape": "table",
+    "wood": "#6B4434"
+  },
+  "$comment": "World 01 placeholder geometry (stable id, footprint, pivot, collision)."
+}

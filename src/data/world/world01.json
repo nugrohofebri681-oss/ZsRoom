@@ -85,7 +85,7 @@
       "status": "implemented",
       "provisional": true,
       "storyConfig": "workplace",
-      "note": "CONFIGURABLE PLACEHOLDER (office layout). A dimsum workplace is a possible story direction pending Creative Director confirmation"
+      "note": "STORY-CONFIGURABLE placeholder with two playable variants: office (default) and dimsum shop (clock in → carry 3 steamer baskets → clock out). Real name/layout pending Creative Director"
     },
     {
       "id": "kitchen",
@@ -132,9 +132,13 @@
   ],
   "placeholders": {
     "workplace": {
+      "variant": "office",
+      "variants": [
+        "office",
+        "dimsum"
+      ],
       "displayName": "Workplace (placeholder)",
-      "type": "office",
-      "note": "Replace name, layout and task loop once the story-relevant workplace is defined."
+      "note": "Story-configurable: set \"variant\" to \"dimsum\" (or add a new variant) once the Creative Director confirms the real workplace. No real name or floor plan is invented; both layouts are TEMP placeholders."
     }
   },
   "buildings": [

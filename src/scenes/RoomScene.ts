@@ -24,7 +24,7 @@ import { LayeredCharacter } from '../animation/character';
 import type { RigSpec } from '../animation/rig';
 import { renderToGround, type Vec2 } from '../core/projection';
 import { audio } from '../audio/audio';
-import { walkSpeedMultiplier } from '../core/qa';
+import { isQaBuild, walkSpeedMultiplier } from '../core/qa';
 import { crossedContacts } from '../audio/synth';
 import { floorAt, floorPatches, type FloorPatch } from '../audio/surface';
 
@@ -102,7 +102,9 @@ export class RoomScene extends Phaser.Scene {
     this.flags = { ...(save?.flags ?? {}) };
     this.vars = { phase: 'evening', day: 1, outfit: 'default', ...(save?.vars ?? {}) };
     this.visited = [...new Set([...(save?.visited ?? []), data.roomId])];
-    this.room = compileRoom(getRoom(data.roomId), this.flags);
+    // QA/dev builds only: `?variant=dimsum` previews a story-configurable interior variant.
+    const variantOverride = isQaBuild(import.meta.env) ? new URLSearchParams(location.search).get('variant') : null;
+    this.room = compileRoom(getRoom(data.roomId, variantOverride), this.flags);
     this.character = getCharacterSpec('char_zila');
     const spawn = data.at ?? this.room.data.spawns[data.spawn ?? 'default'] ?? this.room.data.spawns.default!;
     this.pos = { x: spawn.x, y: spawn.y };
@@ -136,6 +138,8 @@ export class RoomScene extends Phaser.Scene {
     this.fitCamera();
     this.scale.on('resize', this.fitCamera, this);
     this.events.once('shutdown', () => this.scale.off('resize', this.fitCamera, this));
+    this.game.events.on('dpr-changed', this.fitCamera, this);
+    this.events.once('shutdown', () => this.game.events.off('dpr-changed', this.fitCamera, this));
     this.cameras.main.fadeIn(220, 29, 20, 24);
 
     const params = new URLSearchParams(location.search);
@@ -795,6 +799,8 @@ export class RoomScene extends Phaser.Scene {
         flagsState: { ...this.flags },
         npcs: this.npcs.map((n) => ({ id: n.data.id, x: Math.round(n.state.x), y: Math.round(n.state.y), visible: n.view.sprite.visible, moving: n.state.moving })),
         mapKind: this.room.data.kind ?? 'interior',
+        variant: (this.room.data as { variantKey?: string }).variantKey ?? null,
+        renderScale: (() => { const r = this.registry.get('renderScale') as { scale: number; mode: string; history: unknown[] } | undefined; return r ? { scale: r.scale, mode: r.mode, changes: r.history.length } : null; })(),
         generatedTextures: { count: this.textures.getTextureKeys().filter((k) => /^(temp:|fx:|sky:|lightmap:)/.test(k)).length, bytes: this.generatedTextureBytes() },
         doorsArmed: this.doorsArmed,
         windows: this.skies.map((w) => ({ skyDepth: w.img.depth, curtainDepth: w.curtains.depth, curtainsVisible: w.curtains.visible })),

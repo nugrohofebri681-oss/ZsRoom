@@ -1,0 +1,45 @@
+{
+  "id": "world_steamer_counter",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Dimsum steamer counter (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 496,
+    "height": 312
+  },
+  "pivot": {
+    "x": 248,
+    "y": 300,
+    "meaning": "front-centre floor contact point"
+  },
+  "footprint": {
+    "widthCm": 240,
+    "depthCm": 70
+  },
+  "heightsCm": {
+    "top": 95
+  },
+  "collision": [
+    {
+      "x": -120.0,
+      "y": -70,
+      "w": 240,
+      "h": 70
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "maxSideOverhangCm": 0,
+  "temp": {
+    "shape": "block",
+    "body": "#8C2F2F",
+    "top": "#E9E2D6",
+    "steamers": 5
+  },
+  "$comment": "World 01 placeholder geometry (stable id, footprint, pivot, collision)."
+}

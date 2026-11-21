@@ -102,6 +102,9 @@ export class UIScene extends Phaser.Scene {
       this.game.events.off('toast', this.onToast, this);
     });
     this.scale.on('resize', this.layout, this);
+    const onDpr = (v: number) => { this.dpr = v; this.cameras.main.setZoom(v); this.layout(); };
+    this.game.events.on('dpr-changed', onDpr);
+    this.events.once('shutdown', () => this.game.events.off('dpr-changed', onDpr));
     this.layout();
     const room = this.scene.get('Room') as unknown as { room?: { data: RoomData } };
     if (room.room) this.onRoom(room.room.data);

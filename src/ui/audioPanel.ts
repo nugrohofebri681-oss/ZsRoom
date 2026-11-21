@@ -1,6 +1,7 @@
 import * as Phaser from 'phaser';
 import { audio } from '../audio/audio';
 import type { AudioPrefs } from '../audio/prefs';
+import type { QualityMode, RenderScaleController } from '../systems/renderScale';
 
 type SliderKey = 'master' | 'ambience' | 'sfx';
 const SLIDERS: { key: SliderKey; label: string }[] = [
@@ -22,6 +23,7 @@ export class AudioPanel {
   private muteTx: Phaser.GameObjects.Text;
   private knobs = new Map<SliderKey, { fill: Phaser.GameObjects.Graphics; knob: Phaser.GameObjects.Arc; value: Phaser.GameObjects.Text }>();
   private dragging: SliderKey | null = null;
+  private qualityTx: Phaser.GameObjects.Text;
   open = false;
 
   constructor(private scene: Phaser.Scene, dpr: number) {
@@ -44,12 +46,17 @@ export class AudioPanel {
       items.push(track, fill, knob, value);
       this.knobs.set(s.key, { fill, knob, value });
     });
+    // Display quality (adaptive render resolution): Auto / Sharp / Smooth
+    const qy = 62 + SLIDERS.length * ROW;
+    items.push(scene.add.text(16, qy, 'Display', { ...style, fontSize: '13px', color: '#f3d9e1' }).setOrigin(0, 0.5));
+    this.qualityTx = scene.add.text(TRACK_X, qy, '', { ...style, fontSize: '13px', backgroundColor: '#3a2530', padding: { x: 10, y: 6 } }).setOrigin(0, 0.5);
+    items.push(this.qualityTx);
     this.panel = scene.add.container(0, 0, items).setDepth(21).setVisible(false);
     this.bg.fillStyle(PLUM, 0.95).fillRoundedRect(0, 0, W, this.height, 14).lineStyle(1.5, PINK, 0.85).strokeRoundedRect(0, 0, W, this.height, 14);
     this.refresh();
   }
 
-  get height(): number { return 62 + SLIDERS.length * ROW - 12; }
+  get height(): number { return 62 + (SLIDERS.length + 1) * ROW - 12; }
 
   layout(buttonX: number, buttonY: number): void {
     this.button.setPosition(buttonX, buttonY);
@@ -62,6 +69,8 @@ export class AudioPanel {
     const p = audio().prefs;
     this.drawIcon(p.muted);
     this.muteTx.setText(p.muted ? 'Unmute' : 'Mute');
+    const rs = this.renderScale();
+    if (rs) this.qualityTx.setText({ auto: 'Auto', sharp: 'Sharp (HD)', smooth: 'Smooth' }[rs.mode] + (rs.mode === 'auto' ? ` · ${rs.scale}×` : ''));
     SLIDERS.forEach((s, i) => {
       const y = 62 + i * ROW, v = p[s.key], k = this.knobs.get(s.key)!;
       k.fill.clear().fillStyle(p.muted ? 0x9a8890 : PINK, 1).fillRoundedRect(TRACK_X, y - 3, Math.max(6, TRACK_W * v), 6, 3);
@@ -82,6 +91,8 @@ export class AudioPanel {
     }
   }
 
+  private renderScale(): RenderScaleController | undefined { return this.scene.registry.get('renderScale') as RenderScaleController | undefined; }
+
   // ---------------------------------------------------------------- input (CSS px)
   overButton(x: number, y: number): boolean { return this.button.visible && Math.hypot(x - this.button.x, y - this.button.y) <= BTN_R + 6; }
   overPanel(x: number, y: number): boolean {
@@ -95,6 +106,11 @@ export class AudioPanel {
     const lx = x - this.panel.x, ly = y - this.panel.y;
     if (ly < 48 && lx > W - 100) { audio().toggleMute(); this.refresh(); return true; }
     const row = Math.floor((ly - 62 + ROW / 2) / ROW);
+    if (row === SLIDERS.length) {                                    // Display quality: cycle Auto → Sharp → Smooth
+      const rs = this.renderScale();
+      if (rs) { const order: QualityMode[] = ['auto', 'sharp', 'smooth']; rs.setMode(order[(order.indexOf(rs.mode) + 1) % 3]!); this.refresh(); }
+      return true;
+    }
     const s = SLIDERS[row];
     if (s && lx > TRACK_X - 24) { this.dragging = s.key; this.setFromX(lx, false); }
     return true;
@@ -118,9 +134,9 @@ export class AudioPanel {
   }
 
   /** Test/debug geometry: screen positions of the controls (CSS px). */
-  geometry(): { button: { x: number; y: number }; open: boolean; mute: { x: number; y: number }; sliders: Record<SliderKey, { x0: number; x1: number; y: number }> } {
+  geometry(): { button: { x: number; y: number }; open: boolean; quality: { x: number; y: number }; mute: { x: number; y: number }; sliders: Record<SliderKey, { x0: number; x1: number; y: number }> } {
     const sliders = {} as Record<SliderKey, { x0: number; x1: number; y: number }>;
     SLIDERS.forEach((s, i) => { sliders[s.key] = { x0: this.panel.x + TRACK_X, x1: this.panel.x + TRACK_X + TRACK_W, y: this.panel.y + 62 + i * ROW }; });
-    return { button: { x: this.button.x, y: this.button.y }, open: this.open, mute: { x: this.panel.x + W - 16 - this.muteTx.width / 2, y: this.panel.y + 10 + this.muteTx.height / 2 }, sliders };
+    return { button: { x: this.button.x, y: this.button.y }, open: this.open, quality: { x: this.panel.x + TRACK_X + 30, y: this.panel.y + 62 + SLIDERS.length * ROW }, mute: { x: this.panel.x + W - 16 - this.muteTx.width / 2, y: this.panel.y + 10 + this.muteTx.height / 2 }, sliders };
   }
 }

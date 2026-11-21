@@ -1,0 +1,56 @@
+{
+  "assetId": "world_bench",
+  "version": "v001",
+  "specVersion": "0.1.0-art-proposal",
+  "author": "codex",
+  "createdAt": "2026-11-21T07:04:12.246622+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "not exposed",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_bench_v001.png",
+      "sha256": "6e83ed40d465b2e6e1dafdfdd55d802d8a00f828b8bce87cc99cf01027285725"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/world_bench/v001/candidate-a.png",
+        "sha256": "65533c3e0717d3a7a746e6281a329082d62014972a5b50d31f4f6816234a53b0"
+      },
+      {
+        "path": "art/source/world_bench/v001/candidate-b.png",
+        "sha256": "57527c9f5b78ba2cb09dc1b478d1fc514df33cdf8392434b99fa40476ccdec08"
+      },
+      {
+        "path": "art/source/world_bench/v001/candidate-c.png",
+        "sha256": "70e7c015ccbe5a85c1eee5a0fbef1122de1e8804227d7f706d66bded3d6cd369"
+      }
+    ]
+  },
+  "provenance": "Three original built-in generated PNGs, preserved byte-identical. Existing approved furniture provided as image-conditioning references. Selected C for review, not production approval.",
+  "postProcessing": [
+    "Official fit-to-spec.mjs from PR21 b8d6b66 in isolated worktree using production-spec.proposed.json; geometry unchanged from P4 world-temp.",
+    "Native alpha normalized <=8 to0 and >=250 to255; --despeckle40; trim, uniform width fit, Lanczos3 and pivot placement. No nonuniform deformation or repainting."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Selected C: approximate seat-front row180, rear122, base252. Front height72px vs90 target (-20%, FAIL +/-10%); plane58px vs70 (-17%, within +/-25%). Rows visual estimate +/-2px. Geometry prevents production approval.",
+      "Slight taper of top-plane edges remains; lower legs too short. Do not move gameplay seat or collision to hide discrepancy.",
+      "Official foundation loadSpecs excludes specs/world. Proposed contract has not been adopted; standard branch validator will report missing spec. Conditional isolated checks do not equal official production acceptance."
+    ]
+  },
+  "cost": "Existing subscription built-in image generation only; no additional paid APIs or services.",
+  "status": "REVIEW CANDIDATE \u2014 geometry correction and spec adoption required",
+  "selectedCandidate": "c",
+  "baseline": {
+    "foundation": "7796f60",
+    "p4": "2b81591",
+    "tooling": "b8d6b66"
+  }
+}

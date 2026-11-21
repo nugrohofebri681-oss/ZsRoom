@@ -1,0 +1,152 @@
+{
+  "scope": "Official validator code b8d6b66 against PROPOSED contract injected only into isolated worktree; not official branch acceptance or geometry approval",
+  "result": {
+    "assetId": "world_bench",
+    "version": "v001",
+    "dir": "art/submissions/world_bench/v001",
+    "spec": "specs/props/world_bench.json",
+    "errors": [],
+    "warnings": [],
+    "checks": [
+      {
+        "name": "asset id format",
+        "pass": true,
+        "detail": "world_bench"
+      },
+      {
+        "name": "version format (v###)",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "spec exists",
+        "pass": true,
+        "detail": "specs/props/world_bench.json"
+      },
+      {
+        "name": "master file present",
+        "pass": true,
+        "detail": "world_bench_v001.png"
+      },
+      {
+        "name": "metadata.json present",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "only png/webp/json/md files",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata schema",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "production submission (not a concept board)",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata.assetId matches folder",
+        "pass": true,
+        "detail": "world_bench"
+      },
+      {
+        "name": "metadata.version matches folder",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "metadata.specVersion matches spec",
+        "pass": true,
+        "detail": "0.1.0-art-proposal vs 0.1.0-art-proposal"
+      },
+      {
+        "name": "createdAt is a date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "master sha256 matches metadata",
+        "pass": true,
+        "detail": "6e83ed40d465b2e6e1dafdfdd55d802d8a00f828b8bce87cc99cf01027285725"
+      },
+      {
+        "name": "format PNG",
+        "pass": true,
+        "detail": "png"
+      },
+      {
+        "name": "canvas size",
+        "pass": true,
+        "detail": "316x264, expected 316x264"
+      },
+      {
+        "name": "RGBA (alpha channel)",
+        "pass": true,
+        "detail": "4 channels"
+      },
+      {
+        "name": "8-bit depth",
+        "pass": true,
+        "detail": "uchar"
+      },
+      {
+        "name": "sRGB colour space",
+        "pass": true,
+        "detail": "srgb"
+      },
+      {
+        "name": "file size",
+        "pass": true,
+        "detail": "85173 bytes (max 3000000)"
+      },
+      {
+        "name": "transparent edge padding",
+        "pass": true,
+        "detail": "0 non-transparent px within 8px of the edge"
+      },
+      {
+        "name": "opaque coverage \u2265 min",
+        "pass": true,
+        "detail": "0.516"
+      },
+      {
+        "name": "opaque coverage \u2264 max (no baked background)",
+        "pass": true,
+        "detail": "0.516"
+      },
+      {
+        "name": "art inside artBounds",
+        "pass": true,
+        "detail": "bbox 8,36 300x217; allowed 8,8 300x248"
+      },
+      {
+        "name": "base sits on pivot line",
+        "pass": true,
+        "detail": "lowest solid row 252, expected 252\u00b13"
+      }
+    ],
+    "analysis": {
+      "format": "png",
+      "width": 316,
+      "height": 264,
+      "channels": 4,
+      "hasAlpha": true,
+      "depth": "uchar",
+      "space": "srgb",
+      "bytes": 85173,
+      "opaqueRatio": 0.5161224587648638,
+      "bbox": {
+        "x": 8,
+        "y": 36,
+        "width": 300,
+        "height": 217
+      },
+      "baseRow": 252,
+      "edgeViolations": 0
+    }
+  }
+}

@@ -356,6 +356,159 @@
           "dialogue": "dlg_mixue_nothing"
         }
       ]
+    },
+    {
+      "id": "ev_dimsum_clock",
+      "requires": [
+        {
+          "varNe": [
+            "shift",
+            "in_progress"
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "setVar": [
+            "shift",
+            "in_progress"
+          ]
+        },
+        {
+          "setVar": [
+            "served",
+            0
+          ]
+        },
+        {
+          "setVar": [
+            "carrying",
+            ""
+          ]
+        },
+        {
+          "toast": "Clocked in · serve 3 tables"
+        }
+      ],
+      "otherwise": [
+        {
+          "toast": "Already clocked in ({served}/3 served)"
+        }
+      ]
+    },
+    {
+      "id": "ev_dimsum_pick",
+      "requires": [
+        {
+          "varEq": [
+            "shift",
+            "in_progress"
+          ]
+        },
+        {
+          "varEq": [
+            "carrying",
+            ""
+          ]
+        },
+        {
+          "varLt": [
+            "served",
+            3
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "setVar": [
+            "carrying",
+            "steamer basket"
+          ]
+        },
+        {
+          "toast": "Picked up a steamer basket"
+        }
+      ],
+      "otherwise": [
+        {
+          "dialogue": "dlg_dimsum_cant_pick"
+        }
+      ]
+    },
+    {
+      "id": "ev_dimsum_serve",
+      "requires": [
+        {
+          "varNe": [
+            "carrying",
+            ""
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "setVar": [
+            "carrying",
+            ""
+          ]
+        },
+        {
+          "incVar": [
+            "served",
+            1
+          ]
+        },
+        {
+          "toast": "Served ({served}/3)"
+        }
+      ],
+      "otherwise": [
+        {
+          "toast": "Pick up a basket at the counter first"
+        }
+      ]
+    },
+    {
+      "id": "ev_dimsum_clock_out",
+      "requires": [
+        {
+          "varEq": [
+            "shift",
+            "in_progress"
+          ]
+        },
+        {
+          "varGte": [
+            "served",
+            3
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "setVar": [
+            "shift",
+            "done"
+          ]
+        },
+        {
+          "incVar": [
+            "workDays",
+            1
+          ]
+        },
+        {
+          "setFlag": "work:first_shift"
+        },
+        {
+          "dialogue": "dlg_dimsum_done"
+        }
+      ],
+      "otherwise": [
+        {
+          "dialogue": "dlg_dimsum_unfinished"
+        }
+      ]
     }
   ]
 }

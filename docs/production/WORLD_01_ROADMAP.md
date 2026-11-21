@@ -33,7 +33,7 @@ The source of truth for the registry is [`src/data/world/world01.json`](../../sr
 | `batuphat_west` | Batuphat | exterior | ✅ provisional (new) | east → street; Mixue; west road 🔒 | homes and warung kopi (**background**), small park, **becak motor** + driver, child NPC |
 | `minimarket` (**Indomaret**) | Batuphat | interior | ✅ provisional | south → street | **enterable** · real-world reference: Indomaret (TEMP colours and text only) · ⚠ brand review |
 | `mixue` | Batuphat | interior | ✅ provisional (new) | south → west block | **enterable** · real-world reference: Mixue (TEMP colours and text only) · ⚠ brand review |
-| `workplace` | Batuphat | interior | ✅ **configurable placeholder** | south → street | story-critical · office layout is NOT final; **dimsum workplace** is a candidate pending CD confirmation |
+| `workplace` | Batuphat | interior | ✅ **story-configurable** (variants: office *(default)*, dimsum shop) | south → street | story-critical · no real name or layout; the CD chooses the variant in the registry |
 | `lhokseumawe_centre` | Lhokseumawe city | exterior | ⏳ story-pending | — | behind both locked road ends |
 | `travel_maps` | — | exterior | ⏳ story-pending | — | Febri as a companion NPC; not in this sprint |
 
@@ -42,6 +42,19 @@ The source of truth for the registry is [`src/data/world/world01.json`](../../sr
 - The TEMP art reproduces **no logos**: plain text signs and colour bands only.
 - Exact logos, wordmarks and trade dress must be **reviewed before any public release** (flagged with `brandReview` in the registry and specs).
 - The map id `minimarket` is kept unchanged for save compatibility.
+
+## P2 (this checkpoint)
+- **Story-configurable workplace:** rooms can declare data-driven **variants** that share doors, spawns and size.
+  - The workplace has two playable TEMP layouts: **office** (default) and **dimsum shop**.
+  - Dimsum loop: clock in → pick up a steamer basket at the counter → serve 3 tables, one basket at a time → clock out. Placeholder cook and customer NPCs.
+  - Switching is one line in `src/data/world/world01.json` (`placeholders.workplace.variant`). QA builds can preview with `?variant=dimsum`.
+  - **No real name or floor plan is invented.**
+- **Adaptive render resolution** (`src/systems/renderScale.ts`):
+  - **Auto:** steps the canvas render scale down 2 → 1.75 → 1.5 → 1.25 → 1 after two consecutive slow 2-second windows (median < 40 fps). It never oscillates and remembers the scale per device.
+  - **Sharp / Smooth:** player overrides in the settings panel (**Display** row).
+  - **Measured basis:** headless proxy, emulated Android, street at night, scale 2 → 1.5 → 1 = **12.3 → 20.0 → 39.7 fps**. QA builds disable Auto unless `?adaptive`, so tests stay deterministic.
+- **Device benchmark** (`?fresh&bench`): tours the bedroom, street and west block at native, 1.5× and 1× render scale, and produces a copyable JSON result. Procedure: [ANDROID_PERF_TEST.md](ANDROID_PERF_TEST.md). **A physical Galaxy A05-class run is still outstanding.**
+- **Tests:** every variant of every configurable room is checked for completeness and reachability. E2E covers the dimsum loop, the adaptive step-down (with the game still playable and the setting persisting), and the bench run.
 
 ## P1 engineering changes
 - **`?fast` is test-only:** it works only in dev and in the `--mode qa` build that Playwright serves. The production `npm run build` ignores it (unit test, plus a manual check: 145 cm/s with and without `?fast` on the production build).
@@ -134,7 +147,7 @@ All maps were measured in one run at 1280×720 (frames per second, afternoon / n
 ## Creative Director decisions needed
 1. **House topology:** bedroom and hall upstairs; living room, kitchen and yard downstairs; one gate onto the street?
 2. **Street order and proximity:** home → Indomaret → workplace, with Mixue one block west. All provisional, and none of it is real geography.
-3. **Workplace:** is it the dimsum place? Its name, layout and daily activity?
+3. **Workplace:** confirm the dimsum variant (or another type), then its name, layout and daily activity. The switch is ready in data.
 4. **Reference photos** (private, never committed): Zila's house front, the Indomaret and Mixue branches, the street, the workplace.
 5. **Brand use before public release:** Indomaret and Mixue names and colours (logos are not reproduced).
 6. **Next locations** that matter to the story (residential lane, warung, mosque or meunasah, school, Lhokseumawe city centre).

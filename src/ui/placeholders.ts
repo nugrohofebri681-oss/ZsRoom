@@ -430,6 +430,13 @@ Object.assign(SHAPES, {
     if (t.stripe2) { ctx.fillStyle = String(t.stripe2); ctx.fillRect(g.L + 2, g.zy(top) + 14 * d, g.R - g.L - 4, 5 * d); }
     if (t.text) label(ctx, String(t.text), g.px, g.zy(top * 0.45), 9 * d, String(t.textColor ?? '#FFFFFF'));
     if (t.register) { const rx = g.R - 30 * d, ry = g.zy(top) - (g.py - g.back) * 0.5; rr(ctx, rx - 12 * d, ry - 18 * d, 24 * d, 18 * d, 3 * d); paint(ctx, '#4A4566', rx - 12 * d, ry - 18 * d, rx + 12 * d, ry, 1.2, 0.85); }
+    if (t.steamers) {                                             // stacked bamboo steamer baskets along the counter top
+      const n = Number(t.steamers), span = (g.R - g.L) - 24 * d;
+      for (let i = 0; i < n; i++) {
+        const cx = g.L + 12 * d + (i + 0.5) * (span / n), cy = g.zy(top) - (g.py - g.back) * 0.5;
+        for (let k = 0; k < 2 + (i % 2); k++) cylinder(ctx, cx, cy - k * 9 * d, cy - (k + 1) * 9 * d + 1, 15 * d, '#D9B48A', '#E8CFA6');
+      }
+    }
     if (t.shoes) for (let i = 0; i < 4; i++) { const x = g.L + (10 + i * 20) * d; rr(ctx, x, g.zy(top) - 5 * d - (g.py - g.back) * 0.5, 14 * d, 6 * d, 3 * d); ctx.fillStyle = ['#9C7258', '#E8A0B4', '#4A4250', '#F6EBDD'][i]!; ctx.fill(); }
   },
   /** Store shelving or a glass-door fridge, seen from the front (south). */

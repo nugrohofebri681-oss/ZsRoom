@@ -30,6 +30,8 @@ export function doorOpen(d: RoomDoor, flags: Record<string, boolean>): boolean {
   return !d.locked || (!!d.locked.unlessFlag && !!flags[d.locked.unlessFlag]);
 }
 export type MapKind = 'interior' | 'exterior';
+export type RoomVariant = Partial<Pick<RoomData, 'displayName' | 'palette' | 'shell' | 'props' | 'npcs' | 'onEnter' | 'ambience' | 'wallHeightCm'>>;
+
 /** A ground area (cm) tiled with its own floor tile; `markings` adds cheap vector details (road kerbs, centre line). */
 export interface GroundZone { floor: string; x: number; y: number; w: number; h: number; markings?: 'road' }
 export interface RoomData {
@@ -46,6 +48,14 @@ export interface RoomData {
   npcs?: import('./npc').NpcData[];
   /** Event ids fired once when the map is entered (src/data/story/events.json). */
   onEnter?: string[];
+  /**
+   * Story-configurable interiors: alternative furnishings/loops sharing the same doors, spawns and size
+   * (e.g. the workplace: office placeholder vs dimsum-shop placeholder). The active one is chosen by the
+   * world registry (`placeholders.<variantOf>.variant`), so a story decision is a one-line data change.
+   */
+  variantOf?: string;
+  defaultVariant?: string;
+  variants?: Record<string, RoomVariant>;
   sizeCm: { w: number; h: number };
   wallHeightCm: number;
   palette: { floor: string; wall: string; trim: string };
@@ -99,12 +109,33 @@ const WALL = 40; // cm thickness of the implicit boundary walls
 export const DOOR_DEPTH = 30; // cm an actor can step into a south doorway before the transition fires
 
 const roomModules = import.meta.glob('../data/rooms/*.json', { eager: true, import: 'default' }) as Record<string, RoomData>;
-export const ROOMS: ReadonlyMap<string, RoomData> = new Map(Object.values(roomModules).map((r) => [r.id, r]));
+import worldData from '../data/world/world01.json';
+const placeholders = (worldData as { placeholders?: Record<string, { variant?: string }> }).placeholders ?? {};
 
-export function getRoom(id: string): RoomData {
-  const r = ROOMS.get(id);
+/** The variant a configurable room uses: explicit override, else the world registry, else its default. */
+export function variantFor(data: RoomData, override?: string | null): string | null {
+  if (!data.variants) return null;
+  const want = override ?? (data.variantOf ? placeholders[data.variantOf]?.variant : undefined) ?? data.defaultVariant;
+  return want && data.variants[want] ? want : (data.defaultVariant ?? Object.keys(data.variants)[0]!);
+}
+
+/** Room data with one variant's fields applied (doors, spawns and size always come from the base). */
+export function resolveRoom(data: RoomData, variant?: string | null): RoomData {
+  const key = variantFor(data, variant);
+  if (!key) return data;
+  const { variants: _v, ...base } = data;
+  return { ...base, ...data.variants![key], variantKey: key } as RoomData & { variantKey: string };
+}
+
+/** Raw map data (variants unresolved). */
+export const ROOM_DATA: ReadonlyMap<string, RoomData> = new Map(Object.values(roomModules).map((r) => [r.id, r]));
+/** Map data as played (active variants resolved). */
+export const ROOMS: ReadonlyMap<string, RoomData> = new Map([...ROOM_DATA].map(([id, r]) => [id, resolveRoom(r)]));
+
+export function getRoom(id: string, variant?: string | null): RoomData {
+  const r = ROOM_DATA.get(id);
   if (!r) throw new Error(`Unknown room: ${id}`);
-  return r;
+  return resolveRoom(r, variant);
 }
 
 export function propRenderBounds(spec: PropSpec, x: number, y: number): Rect {

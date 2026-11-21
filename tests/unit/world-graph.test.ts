@@ -152,3 +152,56 @@ describe('NPC makes way for the player (bounded)', () => {
     expect(s.yieldMs).toBeLessThanOrEqual(0);                         // yield ends (bounded)
   });
 });
+
+describe('story-configurable interiors (variants)', () => {
+  it('every variant of every configurable map is complete: spawns, doors and all interactions reachable', async () => {
+    const { ROOM_DATA, resolveRoom } = await import('../../src/world/room');
+    let checked = 0;
+    for (const raw of ROOM_DATA.values()) for (const key of Object.keys(raw.variants ?? {})) {
+      const data = resolveRoom(raw, key), room = compileRoom(data);
+      const grid = new WalkGrid(data.sizeCm.w, data.sizeCm.h, room.solids, R);
+      const start = data.spawns.default!;
+      for (const [name, sp] of Object.entries(data.spawns)) expect(grid.findPath(start, sp), `${raw.id}/${key} spawn ${name}`).not.toBeNull();
+      for (const a of room.anchors) {
+        const path = grid.findPath(start, a);
+        expect(path, `${raw.id}/${key}: ${a.key}`).not.toBeNull();
+        expect(Math.hypot(path!.at(-1)!.x - a.x, path!.at(-1)!.y - a.y), `${raw.id}/${key}: ${a.key}`).toBeLessThanOrEqual(a.radiusCm);
+        const act = (a.payload as { action?: { type: string; id?: string } } | undefined)?.action;
+        if (act?.type === 'event') expect(EVENTS.has(act.id!), `${raw.id}/${key} ${act.id}`).toBe(true);
+        if (act?.type === 'dialogue') expect(DIALOGUE[act.id!], `${raw.id}/${key} ${act.id}`).toBeDefined();
+      }
+      for (const n of data.npcs ?? []) if (n.interact?.dialogue) expect(DIALOGUE[n.interact.dialogue]).toBeDefined();
+      checked++;
+    }
+    expect(checked).toBeGreaterThanOrEqual(2);
+  });
+  it('the registry chooses the workplace variant; unknown overrides fall back to the default', async () => {
+    const { ROOM_DATA, variantFor } = await import('../../src/world/room');
+    const wp = ROOM_DATA.get('workplace')!;
+    expect(variantFor(wp)).toBe(world.placeholders.workplace.variant);
+    expect(variantFor(wp, 'dimsum')).toBe('dimsum');
+    expect(variantFor(wp, 'nonsense')).toBe('office');
+  });
+  it('dimsum shift: clock in → pick → serve ×3 (one basket at a time) → clock out', () => {
+    let s = { vars: {} as Record<string, string | number | boolean>, flags: {} as Record<string, boolean> };
+    const run = (id: string) => { const r = runEvent(EVENTS.get(id), s); s = r.state; return r; };
+    expect(run('ev_dimsum_pick').ran).toBe(false);                 // not clocked in
+    run('ev_dimsum_clock');
+    expect(run('ev_dimsum_serve').ran).toBe(false);                // nothing to serve yet
+    for (let i = 0; i < 3; i++) { expect(run('ev_dimsum_pick').ran).toBe(true); expect(run('ev_dimsum_pick').ran).toBe(false); run('ev_dimsum_serve'); }
+    expect(s.vars.served).toBe(3);
+    expect(run('ev_dimsum_pick').ran).toBe(false);                 // no 4th basket
+    expect(run('ev_dimsum_clock_out').ran).toBe(true);
+    expect(s.vars.shift).toBe('done');
+  });
+});
+
+describe('adaptive render resolution policy', () => {
+  it('steps down one notch only after two slow windows, never below 1', async () => {
+    const { nextScale } = await import('../../src/systems/renderScale');
+    expect(nextScale(2, 1)).toBe(2);
+    expect(nextScale(2, 2)).toBe(1.75);
+    expect(nextScale(1.5, 3)).toBe(1.25);
+    expect(nextScale(1, 5)).toBe(1);
+  });
+});

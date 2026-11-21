@@ -181,6 +181,42 @@
       "lines": [
         "I should order something first."
       ]
+    },
+    "dlg_dimsum_menu": {
+      "speaker": "Zila",
+      "lines": [
+        "Har gow, siu mai, bakpao… (Placeholder menu until the real workplace is confirmed.)"
+      ]
+    },
+    "dlg_dimsum_cook": {
+      "speaker": "Cook",
+      "lines": [
+        "Baskets are ready on the counter — take them while they are hot!"
+      ]
+    },
+    "dlg_dimsum_customer": {
+      "speaker": "Customer",
+      "lines": [
+        "Could we get another basket, please?"
+      ]
+    },
+    "dlg_dimsum_cant_pick": {
+      "speaker": "Zila",
+      "lines": [
+        "Clock in first — or serve the basket I am already holding."
+      ]
+    },
+    "dlg_dimsum_done": {
+      "speaker": "Zila",
+      "lines": [
+        "All tables served. Shift complete — time to head home."
+      ]
+    },
+    "dlg_dimsum_unfinished": {
+      "speaker": "Zila",
+      "lines": [
+        "Still tables to serve ({served}/3)."
+      ]
     }
   }
 }

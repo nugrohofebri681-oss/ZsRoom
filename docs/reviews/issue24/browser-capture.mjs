@@ -1,0 +1,11 @@
+import {chromium} from '/workspace/ZsRoom-art-batch-e/node_modules/@playwright/test/index.mjs';
+import fs from 'node:fs';
+const root='/workspace/ZsRoom-issue24-validation',out=root+'/review-gallery';
+const browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox']});const results=[];
+for(const device of [{name:'desktop',viewport:{width:1440,height:1000},deviceScaleFactor:1},{name:'android-portrait',viewport:{width:360,height:800},deviceScaleFactor:2,isMobile:true,hasTouch:true,userAgent:'Mozilla/5.0 (Linux; Android 13; SM-A055F) AppleWebKit/537.36 Chrome/131.0.0.0 Mobile Safari/537.36'},{name:'android-landscape',viewport:{width:800,height:360},deviceScaleFactor:2,isMobile:true,hasTouch:true}]){
+ const {name,...opts}=device,ctx=await browser.newContext(opts),p=await ctx.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('http://127.0.0.1:4197/?fresh');await p.waitForFunction(()=>window.__ZS?.state());
+ const inject=await p.evaluate(async()=>{const g=window.__ZS_GAME,keys=g.textures.getTextureKeys().filter(k=>/^temp:env_(floor_planks_honey|wall_bedroom)@/.test(k));for(const k of keys){const id=k.split(':')[1].split('@')[0],im=new Image();im.src='/art/submissions/'+id+'/v001/'+id+'_v001.png';await im.decode();const t=g.textures.get(k),c=t.getContext();c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,t.width,t.height);c.drawImage(im,0,0,t.width,t.height);t.refresh();}return keys;});
+ if(inject.length!==2)throw Error('missing tile injection');
+ for(const [label,z,phase]of [['wide',.75,'afternoon'],['normal',1,'night'],['detail',1.6,'morning']]){await p.evaluate(phase=>window.__ZS.setVars({phase}),phase);await p.evaluate(z=>{window.__ZS.zoomBy(z-window.__ZS.state().zoomMul);window.__ZS.teleport(300,230)},z);await p.waitForTimeout(400);await p.screenshot({path:out+'/'+name+'-'+label+'.png'});results.push({device:name,zoom:label,injected:inject,errors,state:await p.evaluate(()=>window.__ZS.state())});}await ctx.close();
+}
+fs.writeFileSync(out+'/browser-evidence.json',JSON.stringify(results,null,2));await browser.close();console.log('9 actual bedroom screenshots; runtime canvas injection only, no source or manifest edits.');

@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { boot, closeDialogue, dimsumShift, press, roomData, state, tapObject, until, useDoor, walkToZone, SHOTS } from './helpers';
+import { boot, closeDialogue, dimsumShift, press, roomData, state, tapObject, until, useDoor, walkToZone, SHOTS, spawnPos } from './helpers';
 
 /**
  * World 01 P0 route, walked for real: every map change goes through a door (walk to it, use it).
@@ -22,19 +22,22 @@ test.describe('World 01 P0 route', () => {
     await shot('01-living-room');
     await useDoor(page, isMobile, 'front_door', 'front_yard');
     await shot('02-front-yard');
-    await useDoor(page, isMobile, 'gate', 'batuphat_street');
+    // P5: the yard and the street are one outdoor region — walk through the gate (no door, no scene change)
+    const street = await page.evaluate(() => (window as any).__ZS.zoneSpawn('batuphat_street'));
+    await page.evaluate(([x, y]) => (window as any).__ZS.tapWorld(x, y), [street.x, street.y]);
 
     // first visit: placeholder chat from Febri (comms contract), shown once
-    await until(page, 's.modal === true');
+    await until(page, 's.modal === true', 20000);
     await shot('03-street-first-visit-chat');
     await closeDialogue(page, isMobile);
+    await walkToZone(page, 'batuphat_street');
     expect((await S(page)).flagsState['event:ev_street_first_visit']).toBe(true);
 
     // save → reload → resume on the street at a valid position
     const before = await S(page);
     await page.goto('/?fast'); await page.waitForFunction(() => (window as any).__ZS?.state?.());   // resume from save (no ?fresh)
     let s = await S(page);
-    expect(s.roomId).toBe('batuphat_street');
+    expect(s.roomId).toBe('batuphat_region'); expect(s.zone).toBe('batuphat_street');
     expect(Math.hypot(s.player.x - before.player.x, s.player.y - before.player.y)).toBeLessThan(2);
     expect(s.visited).toEqual(expect.arrayContaining(['zila_bedroom', 'upper_hall', 'living_room', 'front_yard', 'batuphat_street']));
     expect(s.modal).toBe(false);                                         // once-event does not repeat after reload
@@ -50,7 +53,7 @@ test.describe('World 01 P0 route', () => {
     s = await S(page);
     expect(s.vars.purchases).toBe(1); expect(s.vars.cart).toBe('');
     await useDoor(page, isMobile, 'exit', 'batuphat_street');
-    expect((await S(page)).player.x).toBeCloseTo(roomData('batuphat_street').spawns.from_minimarket.x, 0);   // back out of the same shop door
+    expect((await S(page)).player.x).toBeCloseTo(spawnPos('batuphat_street', 'from_minimarket').x, 0);   // back out of the same shop door
 
     // workplace (dimsum shop, cashier duty): clock in → take 3 orders → clock out
     await useDoor(page, isMobile, 'workplace_door', 'workplace');
@@ -80,10 +83,10 @@ test.describe('World 01 P0 route', () => {
     const errors = await boot(page, '?fresh&room=living_room');
     // south front door: walk south through the doorway
     await page.evaluate(() => (window as any).__ZS.teleport(660 + 450, 520));   // living room zone starts at x 660 on the ground floor
-    await page.keyboard.down('ArrowDown'); await until(page, "s.roomId === 'front_yard'", 8000); await page.keyboard.up('ArrowDown');
+    await page.keyboard.down('ArrowDown'); await until(page, "s.zone === 'front_yard'", 8000); await page.keyboard.up('ArrowDown');
     // arriving next to the house door must not bounce straight back in (doorways arm only after leaving them)
     await page.waitForTimeout(600);
-    expect((await S(page)).roomId).toBe('front_yard');
+    expect((await S(page)).zone).toBe('front_yard');
     // east-side stairs in the hall: walk east
     await page.goto('/?fresh&room=upper_hall'); await page.waitForFunction(() => (window as any).__ZS?.state?.());
     await page.evaluate(() => (window as any).__ZS.teleport(760 + 600, 135));   // hall zone starts at x 760 on the upper floor

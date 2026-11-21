@@ -84,13 +84,27 @@
       "zoneOf": "home_ground"
     },
     {
+      "id": "batuphat_region",
+      "district": "batuphat",
+      "kind": "exterior",
+      "status": "implemented",
+      "provisional": true,
+      "region": [
+        "front_yard",
+        "batuphat_street",
+        "batuphat_west"
+      ],
+      "note": "P5 outdoor region: front yard + Batuphat street + west block (park, becak, warung, Mixue front) as one continuous district; camera scrolls, no scene change between them"
+    },
+    {
       "id": "front_yard",
       "district": "zila_home",
       "building": "zila_house",
       "kind": "exterior",
       "status": "implemented",
       "provisional": true,
-      "note": "House front, yard, gate to the street"
+      "note": "House front, yard, gate to the street",
+      "zoneOf": "batuphat_region"
     },
     {
       "id": "batuphat_street",
@@ -98,7 +112,8 @@
       "kind": "exterior",
       "status": "implemented",
       "provisional": true,
-      "note": "Provisional street: home gate, minimarket, workplace; both road ends locked"
+      "note": "Provisional street: home gate, minimarket, workplace; both road ends locked",
+      "zoneOf": "batuphat_region"
     },
     {
       "id": "minimarket",
@@ -137,7 +152,8 @@
       "kind": "exterior",
       "status": "implemented",
       "provisional": true,
-      "note": "West block: homes, warung kopi, small park, becak motor, Mixue. West road end locked"
+      "note": "West block: homes, warung kopi, small park, becak motor, Mixue. West road end locked",
+      "zoneOf": "batuphat_region"
     },
     {
       "id": "mixue",

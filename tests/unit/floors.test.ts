@@ -22,7 +22,7 @@ describe('continuous floors (P4)', () => {
   });
 
   it('the partition wall is solid outside the opening (real walls, not just a removed fade)', () => {
-    const op = FLOORS.get('home_upper')!.openings[0]!, x = 740;              // inside the 40 cm partition
+    const op = FLOORS.get('home_upper')!.openings![0]!, x = 740;              // inside the 40 cm partition
     let p = { x: 700, y: op.y + op.h + 40 };                                    // below the opening → blocked
     p = moveWithCollision(p, { x: 120, y: 0 }, R, upper.solids);
     expect(p.x).toBeLessThan(720);
@@ -68,13 +68,13 @@ describe('continuous floors (P4)', () => {
     expect(stairs.x).toBe(760 + 700);                                           // hall east wall on the floor
     const front = ground.data.doors.find((d) => d.id === 'front_door')!;
     expect(front.to.room).toBe('front_yard');
-    expect(front.zone).toEqual({ x: 660, w: 900, h: 600 });
+    expect(front.zone).toEqual({ x: 660, y: 0, w: 900, h: 600 });
   });
 
   it('legacy room ids resolve to floors: doors from other maps, URLs and saved positions', () => {
     expect(resolveDestination('living_room', 'from_yard')).toEqual({ mapId: 'home_ground', spawn: 'living_room.from_yard', at: undefined });
     expect(resolveDestination('upper_hall', undefined, { x: 100, y: 50, facing: 'S' })).toEqual({ mapId: 'home_upper', spawn: 'upper_hall.default', at: { x: 860, y: 50, facing: 'S' } });
-    expect(resolveDestination('batuphat_street', 'from_home').mapId).toBe('batuphat_street');
+    expect(resolveDestination('minimarket', 'from_street').mapId).toBe('minimarket');
     for (const [room, z] of ZONE_OF) {
       const c = compileMap(z.floor);
       for (const name of Object.keys(getRoom(room).spawns)) expect(c.data.spawns[`${room}.${name}`], `${room}.${name}`).toBeDefined();

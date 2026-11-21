@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { boot, closeDialogue, roomData, state, tapObject, until, useDoor, walkToZone } from './helpers';
+import { boot, closeDialogue, roomData, state, tapObject, until, useDoor, walkToZone, spawnPos } from './helpers';
 
 /** World 01 P3: Batuphat → road → Lhokseumawe centre → Unimal → home, inspectable background, save/reload, memory. */
 const S = (p: Page): Promise<any> => state(p);
@@ -37,7 +37,7 @@ test.describe('World 01 P3 — city and Unimal', () => {
     expect((await S(page)).player).toMatchObject({ x: roomData('lhokseumawe_centre').spawns.from_unimal_campus.x, y: roomData('lhokseumawe_centre').spawns.from_unimal_campus.y });
     await go('to_lhokseumawe_road', 'lhokseumawe_road');
     await go('to_batuphat_street', 'batuphat_street');
-    expect((await S(page)).player).toMatchObject({ x: roomData('batuphat_street').spawns.from_lhokseumawe_road.x });
+    expect((await S(page)).player).toMatchObject({ x: spawnPos('batuphat_street', 'from_lhokseumawe_road').x });
     await go('home_gate', 'front_yard');
     await go('house_door', 'living_room');
     await go('stairs_up', 'upper_hall');

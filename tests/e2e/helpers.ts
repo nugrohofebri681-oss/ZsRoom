@@ -31,9 +31,24 @@ export async function hold(page: Page, key: string, ms: number): Promise<void> {
 
 export const SHOTS = 'docs/reviews/foundation';
 
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 /** Room data straight from the game's JSON, so tests follow layout changes instead of hard-coding them. */
 export function roomData(id: string): any { return JSON.parse(readFileSync(`src/data/rooms/${id}.json`, 'utf8')); }
+/** Origin of a legacy room inside the floor/region that now contains it ({0,0} if it is a map of its own). */
+export function zoneOrigin(roomId: string): { x: number; y: number } {
+  for (const dir of ['src/data/floors', 'src/data/regions']) {
+    for (const f of readdirSync(dir)) {
+      const z = JSON.parse(readFileSync(`${dir}/${f}`, 'utf8')).zones.find((q: any) => q.room === roomId);
+      if (z) return { x: z.x, y: z.y ?? 0 };
+    }
+  }
+  return { x: 0, y: 0 };
+}
+/** A legacy room's spawn in the coordinates of the map that now contains it (P4 floors, P5 outdoor regions). */
+export function spawnPos(roomId: string, spawn: string): { x: number; y: number } {
+  const sp = roomData(roomId).spawns[spawn], o = zoneOrigin(roomId);
+  return { x: sp.x + o.x, y: sp.y + o.y };
+}
 export function propEntry(roomId: string, assetId: string): any { return roomData(roomId).props.find((p: any) => p.assetId === assetId); }
 export const press = async (page: Page, isMobile: boolean) => {
   if (isMobile) await page.locator('canvas').tap({ position: { x: 800 - 64, y: 360 - 70 } });
@@ -69,7 +84,12 @@ export function doorAnchor(roomId: string, doorId: string): { x: number; y: numb
  */
 export async function useDoor(page: Page, isMobile: boolean, doorId: string, expectRoom: string): Promise<void> {
   const a = await page.evaluate((id) => (window as any).__ZS.doorSpot(id), doorId);
-  if (!a) throw new Error(`door ${doorId} not on this map`);
+  if (!a) {
+    // P5: a door between two zones of an outdoor region (yard gate, street ends) is gone — you simply walk there
+    const zoneHere = await page.evaluate((z) => !!(window as any).__ZS.zoneSpawn(z), expectRoom);
+    if (zoneHere) return walkToZone(page, expectRoom);
+    throw new Error(`door ${doorId} not on this map`);
+  }
   await page.evaluate(([x, y]) => (window as any).__ZS.tapWorld(x, y), [a.x, a.y]);
   await until(page, 's.path === 0', 20000);
   await until(page, `s.nearest === 'door:${doorId}'`);
@@ -86,16 +106,25 @@ export async function walkToZone(page: Page, zone: string): Promise<void> {
   const before = (await state(page)) as any;
   const sp = await page.evaluate((z) => (window as any).__ZS.zoneSpawn(z), zone);
   if (!sp) throw new Error(`zone ${zone} not on ${before.roomId}`);
-  await page.evaluate(([x, y]) => (window as any).__ZS.tapWorld(x, y), [sp.x, sp.y]);
+  for (let i = 0; i < 4; i++) {
+    await page.evaluate(([x, y]) => (window as any).__ZS.tapWorld(x, y), [sp.x, sp.y]);
+    await until(page, `(s.path === 0 && s.zone === '${zone}') || s.modal`, 20000);
+    if (!((await state(page)) as any).modal) break;
+    // a story popup on the way (e.g. the first street visit) pauses the walk: close it and carry on
+    await closeDialogue(page, await page.evaluate(() => matchMedia('(pointer: coarse)').matches));
+  }
   await until(page, `s.path === 0 && s.zone === '${zone}'`, 20000);
   const after = (await state(page)) as any;
   if (after.sceneStarts !== before.sceneStarts || after.roomId !== before.roomId) throw new Error(`scene restarted while walking ${before.zone} → ${zone}`);
   // The camera follows Zila: it must pan when the floor is wider than the view, and otherwise keep a stable
   // framing (the whole floor is visible — no hidden re-framing jump at the doorway).
-  const floorW = Math.max(...(after.zones ?? [{ x: 0, w: 0 }]).map((z: any) => z.x + z.w)) + 120;
-  const dx = Math.abs(after.camera.scrollX - before.camera.scrollX);
-  if (after.camera.viewW < floorW - 50 && dx < 40) throw new Error(`camera did not pan (${before.camera.scrollX} → ${after.camera.scrollX})`);
-  if (after.camera.viewW >= floorW + 50 && dx > 2) throw new Error(`framing jumped although the whole floor is visible (${dx})`);
+  // Outdoor regions (P5) are wider AND taller than the view: the camera may pan in x and/or y.
+  const box = after.bbox ?? { x: 0, w: Math.max(...(after.zones ?? [{ x: 0, w: 0 }]).map((z: any) => z.x + z.w)) };
+  const floorW = box.w + 120;
+  const dx = Math.abs(after.camera.scrollX - before.camera.scrollX), dy = Math.abs(after.camera.scrollY - before.camera.scrollY);
+  const moved = after.bbox ? Math.hypot(dx, dy) : dx;
+  if (after.camera.viewW < floorW - 50 && moved < 40) throw new Error(`camera did not pan (${before.camera.scrollX},${before.camera.scrollY} → ${after.camera.scrollX},${after.camera.scrollY})`);
+  if (!after.bbox && after.camera.viewW >= floorW + 50 && dx > 2) throw new Error(`framing jumped although the whole floor is visible (${dx})`);
 }
 
 /** Tap the visible part of an object (ground x/y + height z): Zila walks to its interaction spot and uses it. */

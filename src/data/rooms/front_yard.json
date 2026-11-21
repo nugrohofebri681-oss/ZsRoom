@@ -100,7 +100,7 @@
       "id": "gate",
       "label": "Go to the street",
       "style": "gate",
-      "x": 430,
+      "x": 380,
       "y": 700,
       "w": 140,
       "h": 10,

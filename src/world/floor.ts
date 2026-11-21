@@ -2,6 +2,8 @@ import type { Rect } from '../core/specs';
 import type { WorldAnchor } from '../interaction/anchors';
 import { compileRoom, getRoom, ROOM_DATA, type CompiledRoom, type PropInstance, type RoomData, type RoomDoor, type RoomSpawn, doorSide } from './room';
 import type { NpcData } from './npc';
+import { DEPTH_SCALE } from '../core/projection';
+import { compileRegion } from './region';
 
 /**
  * CONTINUOUS FLOORS (P4): several same-level rooms ("zones") composed into ONE walkable map, so the player
@@ -19,26 +21,48 @@ import type { NpcData } from './npc';
  * Floors are defined in src/data/floors/<id>.json. Distinct floors, buildings and districts still use scene
  * transitions (stairs, exterior doors, shop doors).
  */
-export interface FloorZoneDef { room: string; x: number }
+export interface FloorZoneDef { room: string; x: number; y?: number }
+/** Outdoor regions (P5): a low fence/hedge line with real collision, drawn as part of the region. */
+export interface FenceDef { x: number; y: number; w: number; h: number; height?: number; color?: string }
+/** Legacy save remap: a local x range of a zone whose content moved when the zone joined a region. */
+export interface LegacyShift { x0: number; x1: number; dx: number }
 export interface FloorOpeningDef { between: [string, string]; y: number; h: number }
 export interface FloorDef {
   id: string; displayName: string; world: string;
   /** Zone whose prop keys stay unprefixed (keeps established ids for tests, flags and tools). */
   primary: string;
   zones: FloorZoneDef[];
-  openings: FloorOpeningDef[];
+  openings?: FloorOpeningDef[];
   provisional?: boolean;
+  /** 'floor' (default, P4): same-level interior rooms side by side with partition walls and openings.
+   *  'region' (P5): an OUTDOOR district — zones offset in x AND y, open walkable shared boundaries, fences. */
+  kind?: 'floor' | 'region';
+  fences?: FenceDef[];
+  legacy?: Record<string, LegacyShift[]>;
 }
-export interface ZoneInfo { id: string; x: number; w: number; h: number; data: RoomData; prefix: string }
-export interface CompiledFloor extends CompiledRoom { zones: ZoneInfo[] }
+export interface ZoneInfo { id: string; x: number; y: number; w: number; h: number; data: RoomData; prefix: string; wallGaps?: [number, number][] }
+export interface CompiledFloor extends CompiledRoom {
+  zones: ZoneInfo[];
+  /** Regions: ground-space bounding box of the zones (camera/lighting bounds), and fence lines. */
+  bbox?: { x: number; y: number; w: number; h: number };
+  fences?: FenceDef[];
+}
 
-const floorModules = import.meta.glob('../data/floors/*.json', { eager: true, import: 'default' }) as Record<string, FloorDef>;
+const floorModules = import.meta.glob(['../data/floors/*.json', '../data/regions/*.json'], { eager: true, import: 'default' }) as Record<string, FloorDef>;
 export const FLOORS: ReadonlyMap<string, FloorDef> = new Map(Object.values(floorModules).map((f) => [f.id, f]));
 
-/** Legacy room id → the floor that contains it (and the zone origin). */
-export const ZONE_OF: ReadonlyMap<string, { floor: string; x: number }> = new Map(
-  [...FLOORS.values()].flatMap((f) => f.zones.map((z) => [z.room, { floor: f.id, x: z.x }] as const)),
+/** Legacy room id → the floor/region that contains it (and the zone origin). */
+export const ZONE_OF: ReadonlyMap<string, { floor: string; x: number; y: number; legacy?: LegacyShift[] }> = new Map(
+  [...FLOORS.values()].flatMap((f) => f.zones.map((z) => [z.room, { floor: f.id, x: z.x, y: z.y ?? 0, legacy: f.legacy?.[z.room] }] as const)),
 );
+
+/** Local position of a legacy zone → composite coordinates (zone offset, plus the documented content moves). */
+export function legacyToComposite(roomId: string, x: number, y: number): { x: number; y: number } {
+  const z = ZONE_OF.get(roomId);
+  if (!z) return { x, y };
+  const shift = z.legacy?.find((s) => x >= s.x0 && x <= s.x1)?.dx ?? 0;
+  return { x: x + shift + z.x, y: y + z.y };
+}
 
 /** Ids of every map the player can actually be in (floors + rooms that are not zones of a floor). */
 export function playableMapIds(): string[] {
@@ -52,25 +76,25 @@ export function playableMapIds(): string[] {
 export function resolveDestination(roomId: string, spawn?: string, at?: { x: number; y: number; facing: string }): { mapId: string; spawn?: string; at?: { x: number; y: number; facing: string } } {
   const z = ZONE_OF.get(roomId);
   if (!z) return { mapId: roomId, spawn, at };
-  return { mapId: z.floor, spawn: `${roomId}.${spawn ?? 'default'}`, at: at ? { ...at, x: at.x + z.x } : undefined };
+  return { mapId: z.floor, spawn: `${roomId}.${spawn ?? 'default'}`, at: at ? { ...at, ...legacyToComposite(roomId, at.x, at.y) } : undefined };
 }
 
-const offRect = (r: Rect, dx: number): Rect => ({ ...r, x: r.x + dx });
+export const offRect = (r: Rect, dx: number, dy = 0): Rect => ({ ...r, x: r.x + dx, y: r.y + dy });
 
-function offsetProp(p: PropInstance, dx: number, prefix: string, zone: string): PropInstance {
-  const s = p.sortable;
+/** Shift a compiled prop by a zone offset (ground dx, dy). Render x = ground x; render y shifts by dy × K. */
+export function offsetProp(p: PropInstance, dx: number, prefix: string, zone: string, dy = 0): PropInstance {
+  const s = p.sortable, ry = dy * DEPTH_SCALE;
   return {
-    ...p, key: prefix + p.key, x: p.x + dx, hostKey: p.hostKey ? prefix + p.hostKey : undefined, zone, zoneKey: p.key,
-    // render x = ground x for this projection, so render bounds shift by the same dx
-    sortable: { ...s, id: prefix + s.id, footprint: offRect(s.footprint, dx), renderBounds: offRect(s.renderBounds, dx) },
+    ...p, key: prefix + p.key, x: p.x + dx, y: p.y + dy, hostKey: p.hostKey ? prefix + p.hostKey : undefined, zone, zoneKey: p.key,
+    sortable: { ...s, id: prefix + s.id, pivotY: s.pivotY + dy, footprint: offRect(s.footprint, dx, dy), renderBounds: offRect(s.renderBounds, dx, ry) },
   };
 }
 
-function offsetNpc(n: NpcData, dx: number): NpcData {
+export function offsetNpc(n: NpcData, dx: number, dy = 0): NpcData {
   const b = n.behaviour;
-  const behaviour = b.type === 'wander' ? { ...b, area: offRect(b.area, dx) } : b.type === 'patrol' ? { ...b, points: b.points.map((p) => ({ ...p, x: p.x + dx })) } : b;
-  const schedule = n.schedule && Object.fromEntries(Object.entries(n.schedule).map(([k, v]) => [k, v === 'away' || !v ? v : { ...v, x: v.x + dx }]));
-  return { ...n, x: n.x + dx, behaviour, ...(schedule ? { schedule } : {}) };
+  const behaviour = b.type === 'wander' ? { ...b, area: offRect(b.area, dx, dy) } : b.type === 'patrol' ? { ...b, points: b.points.map((p) => ({ ...p, x: p.x + dx, y: p.y + dy })) } : b;
+  const schedule = n.schedule && Object.fromEntries(Object.entries(n.schedule).map(([k, v]) => [k, v === 'away' || !v ? v : { ...v, x: v.x + dx, y: v.y + dy }]));
+  return { ...n, x: n.x + dx, y: n.y + dy, behaviour, ...(schedule ? { schedule } : {}) };
 }
 
 /** Zone room data with internal doors replaced by openings (side walls get gaps, no stoppers/triggers). */
@@ -79,7 +103,7 @@ export function zoneRoomData(f: FloorDef, zoneId: string, variant?: string | nul
   const others = new Set(f.zones.map((z) => z.room).filter((r) => r !== zoneId));
   const idx = f.zones.findIndex((z) => z.room === zoneId);
   const openings: RoomDoor[] = [];
-  for (const o of f.openings) {
+  for (const o of f.openings ?? []) {
     const k = o.between.indexOf(zoneId);
     if (k < 0) continue;
     const other = o.between[1 - k]!, otherIdx = f.zones.findIndex((z) => z.room === other);
@@ -98,7 +122,7 @@ export function compileFloor(f: FloorDef, flags: Record<string, boolean> = {}, v
     const data = zoneRoomData(f, z.room, variant);
     const c = compileRoom(data, flags);
     const prefix = z.room === f.primary ? '' : `${z.room}/`;
-    zones.push({ id: z.room, x: z.x, w: data.sizeCm.w, h: data.sizeCm.h, data, prefix });
+    zones.push({ id: z.room, x: z.x, y: 0, w: data.sizeCm.w, h: data.sizeCm.h, data, prefix });
     W = Math.max(W, z.x + data.sizeCm.w); H = Math.max(H, data.sizeCm.h); wallH = Math.max(wallH, data.wallHeightCm);
     for (const s of c.solids) solids.push(offRect(s, z.x));
     for (const p of c.props) props.push(offsetProp(p, z.x, prefix, z.room));
@@ -109,7 +133,7 @@ export function compileFloor(f: FloorDef, flags: Record<string, boolean> = {}, v
     for (const d of data.doors) {
       if ((d as RoomDoor & { opening?: boolean }).opening) continue;
       const side = doorSide(d, data.sizeCm);
-      doors.push({ ...d, side, x: d.x + z.x, zone: { x: z.x, w: data.sizeCm.w, h: data.sizeCm.h } } as RoomDoor);
+      doors.push({ ...d, side, x: d.x + z.x, zone: { x: z.x, y: 0, w: data.sizeCm.w, h: data.sizeCm.h } } as RoomDoor);
     }
     for (const n of data.npcs ?? []) npcs.push(offsetNpc(n, z.x));
     for (const [name, sp] of Object.entries(data.spawns)) spawns[`${z.room}.${name}`] = { ...sp, x: sp.x + z.x };
@@ -128,15 +152,24 @@ export function compileFloor(f: FloorDef, flags: Record<string, boolean> = {}, v
 }
 
 /** Compile any playable map id (floor or plain room); legacy zone ids resolve to their floor. */
-export function compileMap(id: string, flags: Record<string, boolean> = {}, variant?: string | null): CompiledRoom & { zones?: ZoneInfo[] } {
+export function compileMap(id: string, flags: Record<string, boolean> = {}, variant?: string | null): CompiledRoom & { zones?: ZoneInfo[]; bbox?: CompiledFloor['bbox']; fences?: FenceDef[] } {
   const f = FLOORS.get(resolveDestination(id).mapId);
-  return f ? compileFloor(f, flags, variant) : compileRoom(getRoom(id, variant), flags);
+  if (!f) return compileRoom(getRoom(id, variant), flags);
+  return f.kind === 'region' ? compileRegion(f, flags, variant) : compileFloor(f, flags, variant);
 }
 
 /** Which zone (logical room) a global position is in. */
-export function zoneAt(zones: ZoneInfo[] | undefined, x: number): ZoneInfo | undefined {
+export function zoneAt(zones: ZoneInfo[] | undefined, x: number, y = 0): ZoneInfo | undefined {
   if (!zones?.length) return undefined;
-  // a zone owns [its x, next zone's x): the partition belongs to the zone on its left
+  if (zones.some((z) => z.y !== 0)) {
+    // regions: the zone whose rectangle contains the point, else the nearest one (a shared edge belongs to the
+    // zone listed first, e.g. the fence line belongs to the yard)
+    const inside = zones.find((z) => x >= z.x && x < z.x + z.w && y >= z.y && y < z.y + z.h);
+    if (inside) return inside;
+    const d = (z: ZoneInfo) => Math.hypot(Math.max(z.x - x, 0, x - z.x - z.w), Math.max(z.y - y, 0, y - z.y - z.h));
+    return zones.reduce((a, b) => (d(b) < d(a) ? b : a));
+  }
+  // floors: a zone owns [its x, next zone's x): the partition belongs to the zone on its left
   for (let i = zones.length - 1; i >= 0; i--) if (x >= zones[i]!.x) return zones[i];
   return zones[0];
 }

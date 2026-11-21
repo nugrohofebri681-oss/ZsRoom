@@ -29,6 +29,8 @@ const specs = loadSpecs();
 const entry = specs.get(assetId);
 if (!entry) { console.error(`unknown asset ${assetId}`); process.exit(2); }
 const dir = join(ROOT, 'art', 'submissions', assetId, version);
+// Concept boards can never become production assets (they live in art/concepts/ and declare submissionType "concept").
+try { if (/concept/i.test(String(readJson(`art/submissions/${assetId}/${version}/metadata.json`).submissionType ?? ''))) { console.error('Concept boards cannot be approved as production assets.'); process.exit(1); } } catch { /* validated below */ }
 const result = await validateSubmission({ assetId, version, dir }, specs);
 if (result.errors.length) { console.error('Submission fails technical validation:\n' + result.errors.map((e) => ` - ${e}`).join('\n')); process.exit(1); }
 

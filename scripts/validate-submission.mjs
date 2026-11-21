@@ -49,6 +49,8 @@ export async function validateSubmission({ assetId, version, dir }, specs) {
   if (meta) {
     const valid = validateMeta(meta);
     ok('metadata schema', !!valid, valid ? '' : ajv.errorsText(validateMeta.errors));
+    // Production route only: concept boards must use art/concepts/<id>/<v###>/ (scripts/validate-concept.mjs).
+    ok('production submission (not a concept board)', !/concept/i.test(String(meta.submissionType ?? '')), meta.submissionType ? `"${meta.submissionType}" → move to art/concepts/${assetId}/${version}/` : '');
     ok('metadata.assetId matches folder', meta.assetId === assetId, String(meta.assetId));
     ok('metadata.version matches folder', meta.version === version, String(meta.version));
     ok('metadata.specVersion matches spec', meta.specVersion === spec.specVersion, `${meta.specVersion} vs ${spec.specVersion}`);

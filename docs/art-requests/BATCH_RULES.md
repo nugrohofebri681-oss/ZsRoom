@@ -33,3 +33,18 @@ These rules apply to every batch request (004+). Each batch request lists only w
 - **Objects that could be separate props are separate props.** Keep furniture surfaces clean unless the request says otherwise.
 - **Alpha:** keep native transparency. Near-opaque (≥ 250) and near-invisible (≤ 8) alpha are normalised automatically at approval, so don't hand-paint over haze; just avoid detached shadows.
 - **Wall items (Batch C):** the pivot is the bottom-centre of the **front face**. The window glass must be fully transparent (the engine draws the sky). Light sources are painted **off** (the engine draws glow).
+
+## Concept boards (exploration only)
+- **Where:** concept / identity boards (character sheets, location mood boards) go in **`art/concepts/<asset_id>/<v###>/`**, never in `art/submissions/`:
+  - the board image;
+  - raw outputs in `sources/`;
+  - `metadata.json` with `submissionType: "concept"`, plus `notes.md` and `prompt.md`.
+- **Branch:** `codex/art/<asset-id-with-dashes>-concept-r<n>`, e.g. `codex/art/char-zila-concept-r2`. It may only touch its own concept folder.
+- **Validation:** `scripts/validate-concept.mjs`, run by `validate-art` and shown in the gallery as "CONCEPT ONLY". It checks:
+  - identity and provenance (generator, author, date, cost statement);
+  - SHA-256 of the board and every source;
+  - that images decode, with size limits;
+  - **privacy**: no EXIF, XMP or IPTC metadata;
+  - ownership.
+- **Not checked:** concept boards are not checked against sprite specs, because they are not sprites.
+- **Never production:** concept boards cannot be approved. `approve-asset` reads only `art/submissions/` and refuses concept metadata, and the strict production validator rejects a concept board placed in `art/submissions/`. Production art always follows the normal submission rules.

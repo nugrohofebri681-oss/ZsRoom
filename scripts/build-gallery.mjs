@@ -6,6 +6,7 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from
 import { basename, join } from 'node:path';
 import { listSubmissions, loadSpecs, PROJECTION, readJson, ROOT, walk, rel } from './lib.mjs';
 import { validateSubmission } from './validate-submission.mjs';
+import { listConcepts, validateConcept } from './validate-concept.mjs';
 
 const OUT = join(ROOT, 'review-gallery');
 mkdirSync(join(OUT, 'img'), { recursive: true });
@@ -37,10 +38,32 @@ function silhouettes(spec) {
   return fig(z.heightCm, z.headsTall, '#e8a0b4', 'Zila') + fig(f.heightCm, f.headsTall, '#9db4d6', 'Febri');
 }
 
+/**
+ * Environment tiles have no pivot/footprint: they are judged by how they REPEAT. Floor tiles repeat in X and Y,
+ * wall strips repeat in X only. Each preview is drawn at HD (spec density) and SD (1 px/cm), with an optional
+ * seam grid, plus a small room composite (wall above floor) as the engine lays them out.
+ */
+function environmentPreviews(spec, img) {
+  const W = spec.canvas.width, H = spec.canvas.height, xy = spec.tile?.repeat === 'xy';
+  const nx = xy ? 4 : 6, ny = xy ? 3 : 1;
+  const tiled = (scale, grid, cls, cap) => `<figure class="stage ${cls}"><div class="tiled${grid ? ' grid' : ''}" style="width:${W * nx * scale}px;height:${H * ny * scale}px;background-image:url(${img});background-size:${W * scale}px ${H * scale}px;--tw:${W * scale}px;--th:${H * scale}px"></div><figcaption>${cap}</figcaption></figure>`;
+  const sd = 1 / spec.density;
+  const floorTile = xy ? img : null;
+  return `<div class="row">
+      <figure class="stage checker"><img src="${img}" width="${W}" height="${H}" alt=""><figcaption>single tile ${W}×${H} (${spec.tile?.widthCm ?? '?'} cm wide)</figcaption></figure>
+      ${tiled(1, false, 'dark', `repeated ${xy ? 'X+Y' : 'X'} at HD (seams must be invisible)`)}
+      ${tiled(1, true, 'dark', 'same, tile edges marked')}
+      ${tiled(sd, false, 'dark', 'SD runtime size (1 px/cm)')}
+      ${tiled(0.5 * sd, false, 'dark', 'zoomed out ×0.5 (moiré / banding check)')}
+      ${floorTile ? '' : `<figure class="stage light"><div class="room" style="width:${W * nx * sd}px"><div class="tiled" style="height:${H * sd}px;background-image:url(${img});background-size:${W * sd}px ${H * sd}px"></div><div style="height:${H * sd * 0.6}px;background:#c99a6a"></div></div><figcaption>room composite: wall strip above a floor (SD)</figcaption></figure>`}
+    </div>`;
+}
+
 const cards = [];
 for (const s of listSubmissions()) {
   const r = await validateSubmission(s, specs);
   const spec = specs.get(s.assetId)?.spec;
+  const isEnv = spec?.category === 'environment';
   const master = join(s.dir, `${s.assetId}_${s.version}.png`);
   const img = existsSync(master) ? copy(master) : null;
   const prompt = existsSync(join(s.dir, 'prompt.md')) ? readFileSync(join(s.dir, 'prompt.md'), 'utf8') : '(no prompt.md)';
@@ -48,7 +71,7 @@ for (const s of listSubmissions()) {
   const approved = manifest.assets[s.assetId]?.status === 'approved' && manifest.assets[s.assetId]?.version === s.version;
   cards.push(`<section class="card"><h2>${esc(s.assetId)} <small>${esc(s.version)}</small></h2>
     <p>${tech} · VISUAL: <b class="${approved ? 'good' : 'warn'}">${approved ? 'APPROVED' : 'PENDING CREATIVE DIRECTOR'}</b> · PRODUCTION READY: <b class="${approved && !r.errors.length ? 'good' : 'warn'}">${approved && !r.errors.length ? 'YES' : 'NO'}</b></p>
-    ${img && spec ? `<div class="row">
+    ${img && spec && isEnv ? environmentPreviews(spec, img) : img && spec ? `<div class="row">
       <figure class="stage checker">${`<img src="${img}" width="${spec.canvas.width}" height="${spec.canvas.height}" alt="">`}${overlay(spec)}<figcaption>checker + spec overlay</figcaption></figure>
       <figure class="stage light"><img src="${img}" width="${spec.canvas.width}" height="${spec.canvas.height}" alt=""><figcaption>light floor</figcaption></figure>
       <figure class="stage dark"><img src="${img}" width="${spec.canvas.width}" height="${spec.canvas.height}" alt=""><figcaption>night floor</figcaption></figure>
@@ -66,7 +89,24 @@ for (const s of listSubmissions()) {
       <li>No cast floor shadow baked in; only contact occlusion inside the footprint.</li>
       <li>Clean alpha edges on light AND dark floors (no white halos, no checkerboard baked in).</li>
       <li>Identity: pink bedding, warm wood, cream pillows, heart cushion — matches Zila's room.</li>
-      <li>Still readable at SD size.</li></ol></details></section>`);
+      <li>Still readable at SD size.</li>${isEnv ? '<li><b>Tiles:</b> no visible seams or repeating hot-spots in the repeated previews; flat, evenly lit (the engine adds light); scale matches the furniture.</li>' : ''}</ol></details></section>`);
+}
+
+// Concept boards: exploration only. Shown for identity review; never judged as (or turned into) production assets.
+const conceptCards = [];
+for (const c of listConcepts()) {
+  const r = await validateConcept(c, specs);
+  const board = r.meta?.files?.board ?? r.meta?.files?.master;
+  const boardPath = board ? (board.path.startsWith('art/') ? join(ROOT, board.path) : join(c.dir, board.path)) : null;
+  const srcs = (r.meta?.files?.rawCandidates ?? r.meta?.files?.sources ?? []).map((x) => join(ROOT, x.path)).filter(existsSync);
+  const issues = r.meta?.selfReview?.knownIssues ?? [];
+  conceptCards.push(`<section class="card concept"><h2>${esc(c.assetId)} <small>${esc(c.version)} · CONCEPT</small></h2>
+    <p><b class="warn">CONCEPT ONLY — exploration board, not a runtime sprite. It cannot be approved or shipped; production art goes through art/submissions/ and the strict validator.</b><br>
+    Concept checks: ${r.errors.length ? '<b class="bad">FAIL</b>' : '<b class="good">PASS</b>'} (provenance · integrity · privacy · ownership)</p>
+    ${boardPath && existsSync(boardPath) ? `<figure class="stage light concept-board"><img src="${copy(boardPath)}" alt=""><figcaption>review board</figcaption></figure>` : '<p class="bad">board missing</p>'}
+    <div class="row">${srcs.map((f) => `<figure class="stage light"><img class="thumb" src="${copy(f)}" alt=""><figcaption>${esc(basename(f))}</figcaption></figure>`).join('')}</div>
+    ${issues.length ? `<details open><summary>Known issues (from the artist)</summary><ul>${issues.map((i) => `<li>${esc(i)}</li>`).join('')}</ul></details>` : ''}
+    <details><summary>Concept checks</summary><ul>${r.checks.map((x) => `<li class="${x.pass ? 'good' : 'bad'}">${x.pass ? '✔' : '✘'} ${esc(x.name)} <small>${esc(x.detail)}</small></li>`).join('')}${r.warnings.map((w) => `<li class="warn">⚠ ${esc(w)}</li>`).join('')}</ul></details></section>`);
 }
 
 const templates = walk(join(ROOT, 'art-bible', 'perspective')).filter((f) => f.endsWith('.png')).map((f) => `<figure class="stage light"><img src="${copy(f)}" alt=""><figcaption>${esc(rel(f))}</figcaption></figure>`);
@@ -89,13 +129,15 @@ figcaption{position:absolute;bottom:2px;left:6px;font-size:11px;color:var(--mute
 .light{background:#c9a27e}.dark{background:#2a1c22}.light figcaption{color:#3a2530}.dark figcaption{color:#e8c9cf}
 .good{color:#2f8f5b}.bad{color:#c0392b}.warn{color:#c07a00}
 pre{white-space:pre-wrap;background:var(--bg);padding:8px;border-radius:6px;font-size:12px}
+.tiled{background-repeat:repeat;position:relative}.tiled.grid::after{content:'';position:absolute;inset:0;background-image:linear-gradient(to right,#ff3d7f 1px,transparent 1px),linear-gradient(to bottom,#ff3d7f 1px,transparent 1px);background-size:var(--tw) var(--th);opacity:.6}.room{display:flex;flex-direction:column}.concept-board img{max-width:100%;height:auto;display:block}.thumb{height:220px;width:auto}
 .shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}.shot{margin:0}.shot img{width:100%;border-radius:8px;border:1px solid var(--line)}
 table{border-collapse:collapse}td{border-bottom:1px solid var(--line);padding:2px 12px 2px 0}
 </style></head><body>
 <h1>ZsRoom Review Gallery</h1><p class="sub">Generated ${new Date().toISOString()} · TECHNICAL PASS ≠ VISUAL PASS. Only the Creative Director grants visual approval.</p>
 ${cards.length ? cards.join('') : '<section class="card"><h2>No art submissions yet</h2><p>Waiting for Codex: see docs/art-requests/.</p></section>'}
+${conceptCards.length ? `<h2>Concept boards (exploration only)</h2>${conceptCards.join('')}` : ''}
 <section class="card"><h2>Asset manifest</h2><table><tr><th align=left>asset</th><th align=left>status</th><th align=left>version</th></tr>${status}</table></section>
 <section class="card"><h2>Perspective &amp; scale templates</h2><div class="row">${templates.join('')}</div></section>
 <section class="card"><h2>Latest gameplay evidence</h2><div class="shots">${shots.join('') || '<p>Run <code>npm run test:e2e</code> to capture screenshots.</p>'}</div></section>
 </body></html>`);
-console.log(`Gallery: review-gallery/index.html (${cards.length} submission(s), ${shots.length} screenshot(s))`);
+console.log(`Gallery: review-gallery/index.html (${cards.length} submission(s), ${conceptCards.length} concept board(s), ${shots.length} screenshot(s))`);

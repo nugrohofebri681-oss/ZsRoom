@@ -9,6 +9,7 @@ import { writeFileSync, appendFileSync } from 'node:fs';
 import { listSubmissions, loadSpecs, ownershipViolations, readJson } from './lib.mjs';
 const manifestAssets = readJson('public/assets/manifest.json').assets ?? {};
 import { validateSubmission } from './validate-submission.mjs';
+import { listConcepts, validateConcept } from './validate-concept.mjs';
 
 const args = process.argv.slice(2);
 const opt = (name) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : undefined; };
@@ -28,6 +29,10 @@ let subs = listSubmissions();
 if (changed) subs = subs.filter((s) => changed.some((f) => f.startsWith(`art/submissions/${s.assetId}/${s.version}/`)));
 const results = [];
 for (const s of subs) results.push(await validateSubmission(s, specs));
+let concepts = listConcepts();
+if (changed) concepts = concepts.filter((c) => changed.some((f) => f.startsWith(`art/concepts/${c.assetId}/${c.version}/`)));
+const conceptResults = [];
+for (const c of concepts) conceptResults.push(await validateConcept(c, specs));
 
 const lines = ['## Art validation (TECHNICAL checks only — not a visual approval)', ''];
 if (changed) lines.push(`Branch \`${branch || '(unknown)'}\`, ${changed.length} changed file(s) vs \`${base}\`.`, '');
@@ -41,9 +46,16 @@ for (const r of results) {
   for (const w of r.warnings) lines.push(`- ⚠️ ${w}`);
   lines.push('');
 }
+if (conceptResults.length) lines.push('## Concept boards (CONCEPT ONLY — exploration, never a production asset, cannot be approved)', '');
+for (const r of conceptResults) {
+  lines.push(`### ${r.assetId} ${r.version} — ${r.errors.length ? '❌ CONCEPT CHECKS FAIL' : '✅ CONCEPT CHECKS PASS'} (provenance · integrity · privacy · ownership)`, '');
+  for (const c of r.checks) lines.push(`- ${c.pass ? '✅' : '❌'} ${c.name}${c.detail ? ` — ${c.detail}` : ''}`);
+  for (const w of r.warnings) lines.push(`- ⚠️ ${w}`);
+  lines.push('');
+}
 const text = lines.join('\n');
 console.log(text);
 if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, text + '\n');
-if (reportPath) writeFileSync(reportPath, JSON.stringify({ branch, changed, ownershipErrors: errors, results: results.map(({ meta, ...r }) => r) }, null, 2));
-const failed = errors.length + results.reduce((n, r) => n + r.errors.length, 0);
+if (reportPath) writeFileSync(reportPath, JSON.stringify({ branch, changed, ownershipErrors: errors, results: results.map(({ meta, ...r }) => r), concepts: conceptResults.map(({ meta, ...r }) => r) }, null, 2));
+const failed = errors.length + [...results, ...conceptResults].reduce((n, r) => n + r.errors.length, 0);
 process.exit(failed ? 1 : 0);

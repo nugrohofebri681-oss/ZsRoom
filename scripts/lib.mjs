@@ -16,6 +16,8 @@ export const VERSION_RE = /^v\d{3}$/;
 export const CODEX_BRANCH_RE = /^codex\/art\/([a-z][a-z0-9_]+)-(v\d{3})$/;
 /** Batch branches: codex/art/batch-<letter>-r<round>, e.g. codex/art/batch-b-r1. */
 export const CODEX_BATCH_RE = /^codex\/art\/batch-([a-z])-r(\d+)$/;
+/** Concept branches: codex/art/<asset-id-with-dashes>-concept-r<n>, e.g. codex/art/char-zila-concept-r1 → char_zila. */
+export const CODEX_CONCEPT_RE = /^codex\/art\/([a-z][a-z0-9-]+)-concept-r(\d+)$/;
 
 export function walk(dir, out = []) {
   if (!existsSync(dir)) return out;
@@ -91,6 +93,14 @@ export function ownershipViolations(branchName, changed) {
   const v = [];
   const m = CODEX_BRANCH_RE.exec(branchName);
   const b = CODEX_BATCH_RE.exec(branchName);
+  const c = CODEX_CONCEPT_RE.exec(branchName);
+  if (c) {
+    // A concept branch may only add its own concept board folder — never production submissions or runtime files.
+    const id = c[1].replace(/-/g, '_');
+    const re = new RegExp(`^art/concepts/${id}/v\\d{3}/`);
+    for (const f of changed) if (!re.test(f)) v.push(`concept branch may only change art/concepts/${id}/v###/ — found ${f}`);
+    return v;
+  }
   if (b) {
     // A batch branch may touch the submission/source folders of every asset whose spec belongs to that batch.
     const letter = b[1].toUpperCase();
@@ -110,6 +120,7 @@ export function ownershipViolations(branchName, changed) {
     // branch carrying the submission of an asset that the same diff approves (manifest status 'approved').
     const manifest = JSON.parse(readFileSync(join(ROOT, 'public/assets/manifest.json'), 'utf8'));
     for (const f of changed) {
+      if (f.startsWith('art/concepts/')) { v.push(`only codex concept branches may change concept boards — found ${f}`); continue; }
       if (!f.startsWith('art/submissions/') && !f.startsWith('art/source/')) continue;
       const [, , id, ver] = f.split('/');
       const m = manifest.assets?.[id];

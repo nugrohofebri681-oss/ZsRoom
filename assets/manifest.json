@@ -1,0 +1,658 @@
+{
+  "$comment": "Runtime asset manifest. Only entries with status 'approved' may ship real artwork. Edited by scripts/approve-asset.mjs — never by hand for approved entries.",
+  "manifestVersion": 1,
+  "assets": {
+    "prop_bed_zila": {
+      "status": "approved",
+      "spec": "specs/props/prop_bed_zila.json",
+      "request": "docs/art-requests/001-prop_bed_zila.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_bed_zila_v001@hd.webp",
+          "sha256": "d46bf189210242aab6f97a7cb129b039500bb6c8f9bd8a02f57bd4972dc4bc54",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_bed_zila_v001@sd.webp",
+          "sha256": "7b9b6301fe5bfea5366c7ec2494529fb0a85419a209a8bdc2d47dc9db00042d0",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-18T08:49:56.382Z",
+        "review": "docs/reviews/prop_bed_zila-v001.md",
+        "master": {
+          "path": "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+          "sha256": "d41d329432175add32b33c6d98589d289152f3188dac408d231e5fbf1bbe6acc"
+        }
+      }
+    },
+    "char_zila": {
+      "status": "greybox",
+      "spec": "specs/characters/char_zila.json"
+    },
+    "char_febri": {
+      "status": "greybox",
+      "spec": "specs/characters/char_febri.json"
+    },
+    "prop_nightstand_zila": {
+      "status": "approved",
+      "spec": "specs/props/prop_nightstand_zila.json",
+      "request": "docs/art-requests/002-prop_nightstand_zila.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_nightstand_zila_v001@hd.webp",
+          "sha256": "2736fea7f8dfc00c0e93b33cc1d6a6186f628b19b13e1f612befe0c3c218ab3d",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_nightstand_zila_v001@sd.webp",
+          "sha256": "29cc9055956bc6b5cb63d49729fd7eed710fd25e2b50cde17b48a3a13bfe2e3a",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-18T09:59:06.182Z",
+        "review": "docs/reviews/prop_nightstand_zila-v001.md",
+        "master": {
+          "path": "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+          "sha256": "13473053a483cd4db2813cb66d9f539098ec545f56d3c4dc42e5f454cef93f79"
+        },
+        "geometryException": {
+          "frontFaceHeight": {
+            "designedCm": 55,
+            "paintedCm": 63.25,
+            "deviationPct": 15
+          },
+          "topPlaneDepth": {
+            "designedCm": 40,
+            "paintedCm": 28.9,
+            "deviationPct": -28
+          },
+          "decision": "Accepted by Creative Director on in-game evidence (PR #3); surface placement uses measured values (spec surfaces.top)."
+        }
+      }
+    },
+    "prop_lamp_zila": {
+      "status": "approved",
+      "spec": "specs/props/prop_lamp_zila.json",
+      "request": "docs/art-requests/003-prop_lamp_zila.md",
+      "version": "v002",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_lamp_zila_v002@hd.webp",
+          "sha256": "a54f72b37d4d83e78c76c37ee91c61c1d3db01d84882b0db68a6ff7d1bf9bbb2",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_lamp_zila_v002@sd.webp",
+          "sha256": "8fa3a138a596a750c51b3b8dabb4effaf4391dfcbd8b693bab19befae30419ea",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-20T02:48:02.931Z",
+        "review": "docs/reviews/batch-b-r2-lamp-v002.md",
+        "master": {
+          "path": "art/approved/prop_lamp_zila/prop_lamp_zila_v002.png",
+          "sha256": "26f3411d0b49abd4efa1b6047184799814ba3488ac75ec3822d06abdacc8dc11"
+        }
+      }
+    },
+    "prop_desk_zila": {
+      "status": "approved",
+      "spec": "specs/props/prop_desk_zila.json",
+      "request": "docs/art-requests/004-batch-b-furniture.md",
+      "version": "v002",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_desk_zila_v002@hd.webp",
+          "sha256": "f10585818e8fa1e0d38009944769c310fbdf96687329a451b51f14e79d955419",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_desk_zila_v002@sd.webp",
+          "sha256": "7728582f95e365f96f97ebe12bf6040b7056b202e050e8e6f1938d000704a3ee",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-20T02:48:03.372Z",
+        "review": "docs/reviews/batch-b-r2-lamp-v002.md",
+        "master": {
+          "path": "art/approved/prop_desk_zila/prop_desk_zila_v002.png",
+          "sha256": "8f5f980314fc9ba59731ed3c2330645806651926d7c9c7861dcafe179867ee09"
+        }
+      }
+    },
+    "prop_chair_desk": {
+      "status": "approved",
+      "spec": "specs/props/prop_chair_desk.json",
+      "request": "docs/art-requests/004-batch-b-furniture.md",
+      "version": "v002",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_chair_desk_v002@hd.webp",
+          "sha256": "b141dbe668662b44dfe8aded3a9ab60664c7628a3d3e18a73df60afec956732f",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_chair_desk_v002@sd.webp",
+          "sha256": "ad2db65bdf1f34d2cc0f5fd66d5c1704535f5bd7e4f6230164d02ac71382bfeb",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-20T02:48:03.951Z",
+        "review": "docs/reviews/batch-b-r2-lamp-v002.md",
+        "master": {
+          "path": "art/approved/prop_chair_desk/prop_chair_desk_v002.png",
+          "sha256": "edf3cf3307c705d994914f8fa6a0354d529691e3e04f68c9fb443e303521bfe6"
+        }
+      }
+    },
+    "prop_wardrobe_zila": {
+      "status": "approved",
+      "spec": "specs/props/prop_wardrobe_zila.json",
+      "request": "docs/art-requests/004-batch-b-furniture.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_wardrobe_zila_v001@hd.webp",
+          "sha256": "7eb43a46be3c7936064a166140465152b4b177e2c583e001513b3db27ad298a6",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_wardrobe_zila_v001@sd.webp",
+          "sha256": "f91389295edf4bedb9266376c33f779d024761ee10fffc61346e8e8763c75f60",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-19T06:44:45.131Z",
+        "review": "docs/reviews/prop_wardrobe_zila-v001.md",
+        "master": {
+          "path": "art/approved/prop_wardrobe_zila/prop_wardrobe_zila_v001.png",
+          "sha256": "c54e419819766daf4fe7d8edb6ca6bac0dc946236e9b5d256fd198c06dcbea00"
+        },
+        "geometryException": {
+          "frontFaceHeight": {
+            "designedCm": 210,
+            "paintedCm": 206.3,
+            "deviationPct": -1.8
+          },
+          "topPlaneDepth": {
+            "designedCm": 60,
+            "paintedCm": 40.4,
+            "deviationPct": -33
+          },
+          "topConvergence": "front of top ≈12% wider than back",
+          "decision": "Shallow tabletop explicitly accepted by the Creative Director (VISUAL PASS wardrobe v001 only)."
+        }
+      }
+    },
+    "prop_vanity_zila": {
+      "status": "approved",
+      "spec": "specs/props/prop_vanity_zila.json",
+      "request": "docs/art-requests/004-batch-b-furniture.md",
+      "version": "v002",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_vanity_zila_v002@hd.webp",
+          "sha256": "a3d5c2b05537619535c5af0f44c49a9c25d8295133e46c269a05924c6aa8897e",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_vanity_zila_v002@sd.webp",
+          "sha256": "341bec77201efe708387f3154112049ae013401e582be5df55c48f0a191cd542",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-20T02:48:04.478Z",
+        "review": "docs/reviews/batch-b-r2-lamp-v002.md",
+        "master": {
+          "path": "art/approved/prop_vanity_zila/prop_vanity_zila_v002.png",
+          "sha256": "8fd6f800d8e1f2bc69a638c6940297417535844dcccd0bfda1d314ea6cb2220e"
+        }
+      }
+    },
+    "prop_stool_vanity": {
+      "status": "approved",
+      "spec": "specs/props/prop_stool_vanity.json",
+      "request": "docs/art-requests/004-batch-b-furniture.md",
+      "version": "v002",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_stool_vanity_v002@hd.webp",
+          "sha256": "392a885bd1d56dd7a0b246739746d02592b836f7214dc8fbcb71d581e7cc1951",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_stool_vanity_v002@sd.webp",
+          "sha256": "1c391a2764e7675c6cf647bb7ee208284ab9402bb3073ea5179ea54802eeac07",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-20T02:48:04.692Z",
+        "review": "docs/reviews/batch-b-r2-lamp-v002.md",
+        "master": {
+          "path": "art/approved/prop_stool_vanity/prop_stool_vanity_v002.png",
+          "sha256": "2a43385401f8a107ed51f5e15ad433b7811753e453d8c94dcbbafcf6424599ae"
+        }
+      }
+    },
+    "decal_rug_zila": {
+      "status": "approved",
+      "spec": "specs/props/decal_rug_zila.json",
+      "request": "docs/art-requests/005-batch-c-soft-wall.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/decal_rug_zila_v001@hd.webp",
+          "sha256": "d1b9e47dde5367c59f7a648a0e149b805fa73ad6f02821b1c1a95477388ee06d",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/decal_rug_zila_v001@sd.webp",
+          "sha256": "8860a91f7b58ce64704272dac2b73e8e2c4b7c5cba50f0b6ac6554765889e67c",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (VISUAL PASS, PR #14/#15)",
+        "approvedAt": "2026-11-20T10:06:09.262Z",
+        "review": "docs/reviews/batch-cd-r1.md",
+        "master": {
+          "path": "art/approved/decal_rug_zila/decal_rug_zila_v001.png",
+          "sha256": "cf53ddfb3c1f8adf8af0c643c2dbd6cffe0423e7916e91566ce80238c03b9bb3"
+        }
+      }
+    },
+    "wall_window_bedroom": {
+      "status": "approved",
+      "spec": "specs/props/wall_window_bedroom.json",
+      "request": "docs/art-requests/005-batch-c-soft-wall.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/wall_window_bedroom_v001@hd.webp",
+          "sha256": "d22df2bde55bd699bf9bc121b16fe9e8e2c5dc11fad6cbb129659130b6a61473",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/wall_window_bedroom_v001@sd.webp",
+          "sha256": "61707073a0caa1b76573854ef0cbb7fa5484c9d769d751b24b00c48a57fee464",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (VISUAL PASS, PR #14/#15)",
+        "approvedAt": "2026-11-20T10:06:08.131Z",
+        "review": "docs/reviews/batch-cd-r1.md",
+        "master": {
+          "path": "art/approved/wall_window_bedroom/wall_window_bedroom_v001.png",
+          "sha256": "1f3f46d3f025c62dbb21f691815a38b54df5ee5be2f2462cc4f0c4c0882e65f4"
+        },
+        "geometryException": {
+          "pivot": {
+            "designed": "bottom of the frame sill",
+            "painted": "bottom of the curtain hem",
+            "offsetCm": 10
+          },
+          "frameWidth": {
+            "designedCm": 140,
+            "paintedCm": 120,
+            "deviationPct": -14
+          },
+          "glass": "enclosed panes fully transparent and inside the engine sky rect (verified in-game)",
+          "decision": "Accepted by Creative Director (VISUAL PASS PR #14): hem-vs-sill pivot and painted frame width."
+        }
+      }
+    },
+    "wall_shelf_books": {
+      "status": "approved",
+      "spec": "specs/props/wall_shelf_books.json",
+      "request": "docs/art-requests/005-batch-c-soft-wall.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/wall_shelf_books_v001@hd.webp",
+          "sha256": "f5cec30ade4ec4df340fe017d4f22d2d67aece10c1daa92700731311606ae2c9",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/wall_shelf_books_v001@sd.webp",
+          "sha256": "e6aadef81e126148abfbec8ddf1201f2cd636899915399f928bbcc3d9a2f4eb9",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (VISUAL PASS, PR #14/#15)",
+        "approvedAt": "2026-11-20T10:06:09.592Z",
+        "review": "docs/reviews/batch-cd-r1.md",
+        "master": {
+          "path": "art/approved/wall_shelf_books/wall_shelf_books_v001.png",
+          "sha256": "2a837ae56694adf1c4615a506808aa4d390c6b7ec78bd46e3125cebfb95f1372"
+        },
+        "geometryException": {
+          "topPlaneDepth": {
+            "designedCm": 24,
+            "paintedCm": 10.7,
+            "deviationPct": -55
+          },
+          "decision": "Accepted by Creative Director (VISUAL PASS PR #14): shallow top plane; no surface prop is placed on the shelf."
+        }
+      }
+    },
+    "wall_photos_string": {
+      "status": "approved",
+      "spec": "specs/props/wall_photos_string.json",
+      "request": "docs/art-requests/005-batch-c-soft-wall.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/wall_photos_string_v001@hd.webp",
+          "sha256": "99cab0eeb2b96df93317c8d2cbe71eb8e4ee9d23623eeb45bfbcbb81f4c0c064",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/wall_photos_string_v001@sd.webp",
+          "sha256": "f2d82e7f210f9ed6a9d435d074d6ec3df39c86e17c172a4a3e9786b22aa15a05",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (VISUAL PASS, PR #14/#15)",
+        "approvedAt": "2026-11-20T10:06:09.895Z",
+        "review": "docs/reviews/batch-cd-r1.md",
+        "master": {
+          "path": "art/approved/wall_photos_string/wall_photos_string_v001.png",
+          "sha256": "da852edd2d3c6442bec9465b8d8f679a138e7efedaa2fbe2c85121014bf2dd51"
+        },
+        "geometryException": {
+          "paintedHeight": {
+            "designedCm": 40,
+            "paintedCm": 26,
+            "deviationPct": -35
+          },
+          "decision": "Accepted by Creative Director (VISUAL PASS PR #14): shorter vertical painted height; readable at gameplay zoom."
+        }
+      }
+    },
+    "wall_fairy_lights": {
+      "status": "approved",
+      "spec": "specs/props/wall_fairy_lights.json",
+      "request": "docs/art-requests/005-batch-c-soft-wall.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/wall_fairy_lights_v001@hd.webp",
+          "sha256": "b6f5a083cb0d236cb0d0c56a47e0d77308f4a5cdd14bad26aca8c8ac9e858243",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/wall_fairy_lights_v001@sd.webp",
+          "sha256": "0c1f4af7e7be7ef456f818e71ff578a491677061ed87bf3a8309319dfd1d0dd6",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (VISUAL PASS, PR #14/#15)",
+        "approvedAt": "2026-11-20T10:06:10.485Z",
+        "review": "docs/reviews/batch-cd-r1.md",
+        "master": {
+          "path": "art/approved/wall_fairy_lights/wall_fairy_lights_v001.png",
+          "sha256": "d7eeef07e92b1f70f3d2d1865ee58a0745e3e4140ee1b69e4e87c71b6e2f81ff"
+        }
+      }
+    },
+    "wall_neon_goodvibes": {
+      "status": "approved",
+      "spec": "specs/props/wall_neon_goodvibes.json",
+      "request": "docs/art-requests/005-batch-c-soft-wall.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/wall_neon_goodvibes_v001@hd.webp",
+          "sha256": "43c15f1c3491cfda6db4d0fe7296c45f7eea82572e6a6c4a863326c85a27a42d",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/wall_neon_goodvibes_v001@sd.webp",
+          "sha256": "fcacc6eaa31328411e56be250c09211362d5d63e1833d9a6a43ca8b4695101f2",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (VISUAL PASS, PR #14/#15)",
+        "approvedAt": "2026-11-20T10:06:10.750Z",
+        "review": "docs/reviews/batch-cd-r1.md",
+        "master": {
+          "path": "art/approved/wall_neon_goodvibes/wall_neon_goodvibes_v001.png",
+          "sha256": "681a62d0d7e3e78878985b559ce133d19148d0d054fce6f65ed1cdc3c7df3697"
+        }
+      }
+    },
+    "prop_plant_tall_zila": {
+      "status": "approved",
+      "spec": "specs/props/prop_plant_tall_zila.json",
+      "request": "docs/art-requests/006-batch-d-living-details.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_plant_tall_zila_v001@hd.webp",
+          "sha256": "396bb6f3034aeeb7e2d7312d32fd7b099f5be20f3c63501dd4eb0374153f2f9d",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_plant_tall_zila_v001@sd.webp",
+          "sha256": "3d1b4b97ee43b5071098d59cea2df46df51aee79c4b64048a61f549bedb52822",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (VISUAL PASS, PR #14/#15)",
+        "approvedAt": "2026-11-20T10:06:11.333Z",
+        "review": "docs/reviews/batch-cd-r1.md",
+        "master": {
+          "path": "art/approved/prop_plant_tall_zila/prop_plant_tall_zila_v001.png",
+          "sha256": "fddadf16f0903af51bf9277972ac79b31503f44a2171cd0e7f45d0dd1402c4c3"
+        },
+        "geometryException": {
+          "potTopPlaneDepth": {
+            "designedCm": 40,
+            "paintedCm": 16.4,
+            "deviationPct": -59
+          },
+          "decision": "Accepted by Creative Director (VISUAL PASS PR #15): measured pot top-depth exception; foliage occlusion tested."
+        }
+      }
+    },
+    "prop_plant_small": {
+      "status": "approved",
+      "spec": "specs/props/prop_plant_small.json",
+      "request": "docs/art-requests/006-batch-d-living-details.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_plant_small_v001@hd.webp",
+          "sha256": "c573179091a9523f426c38150806620ddbe4a5e3683308a1eb1ab7adb260a4e8",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_plant_small_v001@sd.webp",
+          "sha256": "6bea362a68ccd44e3745251857efb219292c33d51922fdfc7c2fe6098c7eb956",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (VISUAL PASS, PR #14/#15)",
+        "approvedAt": "2026-11-20T10:06:12.416Z",
+        "review": "docs/reviews/batch-cd-r1.md",
+        "master": {
+          "path": "art/approved/prop_plant_small/prop_plant_small_v001.png",
+          "sha256": "f2fc74dff26480c972d05e841b213c29edf72c8a82b18a5913419babc2664741"
+        },
+        "geometryException": {
+          "potTopPlaneDepth": {
+            "designedCm": 35,
+            "paintedCm": 12.9,
+            "deviationPct": -63
+          },
+          "decision": "Accepted by Creative Director (VISUAL PASS PR #15): shallow pot top; repositioned beside the door."
+        }
+      }
+    },
+    "prop_catbed_mochi": {
+      "status": "approved",
+      "spec": "specs/props/prop_catbed_mochi.json",
+      "request": "docs/art-requests/006-batch-d-living-details.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_catbed_mochi_v001@hd.webp",
+          "sha256": "4d1e400b0b46a8d1f63ebc7725fb2298e2cbf7c42859ecbbc3abeaa704468a84",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_catbed_mochi_v001@sd.webp",
+          "sha256": "14c3b63061b6b76e2bc6290ed781bd6eeb9cca90dae168968caafc625ff4b87c",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (VISUAL PASS, PR #14/#15)",
+        "approvedAt": "2026-11-20T10:06:11.677Z",
+        "review": "docs/reviews/batch-cd-r1.md",
+        "master": {
+          "path": "art/approved/prop_catbed_mochi/prop_catbed_mochi_v001.png",
+          "sha256": "244ecc507b71b57d308f35596b0e6796a446eb134859d735a52e22e84d2d5cf3"
+        },
+        "geometryException": {
+          "frontWallHeight": {
+            "designedCm": 22,
+            "paintedCm": 13,
+            "deviationPct": -41
+          },
+          "decision": "Accepted by Creative Director (VISUAL PASS PR #15): low plush rim; Pet Mochi interaction tested."
+        }
+      }
+    },
+    "prop_pouf_floor": {
+      "status": "approved",
+      "spec": "specs/props/prop_pouf_floor.json",
+      "request": "docs/art-requests/006-batch-d-living-details.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_pouf_floor_v001@hd.webp",
+          "sha256": "5d6205d51c68dddd81f8daccec501a12d34ebc9ac5027ddf25ab531f1eacc6d5",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_pouf_floor_v001@sd.webp",
+          "sha256": "e7fd32fa8bbb26c5d2fbc526d75b31449e10a14eeb6dd80e61bee24fc9278687",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (VISUAL PASS, PR #14/#15)",
+        "approvedAt": "2026-11-20T10:06:12.043Z",
+        "review": "docs/reviews/batch-cd-r1.md",
+        "master": {
+          "path": "art/approved/prop_pouf_floor/prop_pouf_floor_v001.png",
+          "sha256": "c7b68fdb4ef6962559704e6e603bfc92c14ef4b79d628cf83034ffcd6e45a487"
+        },
+        "geometryException": {
+          "frontFaceHeight": {
+            "designedCm": 38,
+            "paintedCm": 28.5,
+            "deviationPct": -25
+          },
+          "seat": {
+            "nominalCm": 38,
+            "measuredCm": 30,
+            "spec": "heightsCm.seat and sit heightCm set to 30"
+          },
+          "decision": "Accepted by Creative Director (VISUAL PASS PR #15) with the seat at the measured 30 cm; re-test the sit pose with final HD character art."
+        }
+      }
+    },
+    "env_floor_planks_honey": {
+      "status": "requested",
+      "spec": "specs/environments/env_floor_planks_honey.json",
+      "request": "docs/art-requests/007-batch-e-room-shell.md"
+    },
+    "env_wall_bedroom": {
+      "status": "requested",
+      "spec": "specs/environments/env_wall_bedroom.json",
+      "request": "docs/art-requests/007-batch-e-room-shell.md"
+    },
+    "prop_laptop_zila": {
+      "status": "approved",
+      "spec": "specs/props/prop_laptop_zila.json",
+      "request": "docs/art-requests/004-batch-b-furniture.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_laptop_zila_v001@hd.webp",
+          "sha256": "e8cc3c664faad02c4a494c8b5d29fc8cdc307e78dd45b8ec291fc01d1f8ac923",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_laptop_zila_v001@sd.webp",
+          "sha256": "b945e7790c2ce2492937eb3c9bed33657d8218e723a017c6efe3edb7927999d7",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-20T02:48:03.538Z",
+        "review": "docs/reviews/batch-b-r2-lamp-v002.md",
+        "master": {
+          "path": "art/approved/prop_laptop_zila/prop_laptop_zila_v001.png",
+          "sha256": "57cf84f653e779e9b7cf8de4c74851be54a7dd51c31c6ac22ab1ae3d61a7d05c"
+        }
+      }
+    },
+    "prop_mug_zila": {
+      "status": "approved",
+      "spec": "specs/props/prop_mug_zila.json",
+      "request": "docs/art-requests/004-batch-b-furniture.md",
+      "version": "v001",
+      "runtime": {
+        "hd": {
+          "path": "assets/props/prop_mug_zila_v001@hd.webp",
+          "sha256": "e147df71cdf57ab55734204ff845f8425c870b8b047dffc0dbf8cf340ff699d7",
+          "density": 2
+        },
+        "sd": {
+          "path": "assets/props/prop_mug_zila_v001@sd.webp",
+          "sha256": "a2f974d415b6a105c011e7912e2c4fbae4dba5c069410dcfdbac0fb7f35e5a39",
+          "density": 1
+        }
+      },
+      "approval": {
+        "approvedBy": "Creative Director (repository owner)",
+        "approvedAt": "2026-11-20T02:48:03.670Z",
+        "review": "docs/reviews/batch-b-r2-lamp-v002.md",
+        "master": {
+          "path": "art/approved/prop_mug_zila/prop_mug_zila_v001.png",
+          "sha256": "cc28e6cdc1b884e354baa89b891e2d050d013d92e268bc9dcc14c38c43bd745e"
+        }
+      }
+    }
+  }
+}

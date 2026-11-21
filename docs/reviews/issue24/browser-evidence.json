@@ -1,0 +1,2369 @@
+[
+  {
+    "device": "desktop",
+    "zoom": "wide",
+    "injected": [
+      "temp:env_wall_bedroom@1",
+      "temp:env_floor_planks_honey@1"
+    ],
+    "errors": [],
+    "state": {
+      "roomId": "zila_bedroom",
+      "player": {
+        "x": 300,
+        "y": 230,
+        "facing": "N",
+        "depth": 230
+      },
+      "nearest": null,
+      "occluded": [],
+      "props": [
+        {
+          "key": "decal_rug_zila#0",
+          "depth": -60000,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "decal"
+        },
+        {
+          "key": "wall_fairy_lights#1",
+          "depth": 3,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_shelf_books#2",
+          "depth": 24,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_photos_string#3",
+          "depth": 2,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_window_bedroom#4",
+          "depth": 8,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "depth": 4,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "prop_bed_zila#6",
+          "depth": 212,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_nightstand_zila#7",
+          "depth": 52,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_desk_zila#9",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_chair_desk#12",
+          "depth": 118,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_vanity_zila#13",
+          "depth": 49,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_stool_vanity#14",
+          "depth": 98,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_wardrobe_zila#15",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_tall_zila#16",
+          "depth": 300,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_pouf_floor#17",
+          "depth": 360,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_catbed_mochi#18",
+          "depth": 420,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_small#19",
+          "depth": 470,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "depth": 52.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_laptop_zila#10",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_mug_zila#11",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        }
+      ],
+      "fps": 40,
+      "transitioning": false,
+      "lights": [
+        {
+          "key": "wall_fairy_lights#1",
+          "on": true,
+          "core": false,
+          "glows": 1,
+          "glowAlpha": 0.12,
+          "glowDepth": 3.02
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "on": true,
+          "core": false,
+          "glows": 2,
+          "glowAlpha": 0.09,
+          "glowDepth": 4.02
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "on": false,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        }
+      ],
+      "lighting": {
+        "fullScreenLayers": 0.31,
+        "bakes": 2
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 1,
+        "authored": "N",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 1.2012012012012012,
+      "zoomMul": 0.8,
+      "shell": {
+        "floor": {
+          "id": "env_floor_planks_honey",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_bedroom",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "afternoon",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 90,
+      "highlight": {
+        "target": null,
+        "visible": false,
+        "depth": null
+      },
+      "floor": "wood",
+      "visited": [
+        "zila_bedroom"
+      ],
+      "flagsState": {},
+      "npcs": [],
+      "mapKind": "interior",
+      "generatedTextures": {
+        "count": 7,
+        "bytes": 546928
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": 7.99,
+          "curtainDepth": 7.995,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "day",
+        "bufferBytes": 0
+      }
+    }
+  },
+  {
+    "device": "desktop",
+    "zoom": "normal",
+    "injected": [
+      "temp:env_wall_bedroom@1",
+      "temp:env_floor_planks_honey@1"
+    ],
+    "errors": [],
+    "state": {
+      "roomId": "zila_bedroom",
+      "player": {
+        "x": 300,
+        "y": 230,
+        "facing": "N",
+        "depth": 230
+      },
+      "nearest": null,
+      "occluded": [],
+      "props": [
+        {
+          "key": "decal_rug_zila#0",
+          "depth": -60000,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "decal"
+        },
+        {
+          "key": "wall_fairy_lights#1",
+          "depth": 3,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_shelf_books#2",
+          "depth": 24,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_photos_string#3",
+          "depth": 2,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_window_bedroom#4",
+          "depth": 8,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "depth": 4,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "prop_bed_zila#6",
+          "depth": 212,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_nightstand_zila#7",
+          "depth": 52,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_desk_zila#9",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_chair_desk#12",
+          "depth": 118,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_vanity_zila#13",
+          "depth": 49,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_stool_vanity#14",
+          "depth": 98,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_wardrobe_zila#15",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_tall_zila#16",
+          "depth": 300,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_pouf_floor#17",
+          "depth": 360,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_catbed_mochi#18",
+          "depth": 420,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_small#19",
+          "depth": 470,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "depth": 52.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_laptop_zila#10",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_mug_zila#11",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        }
+      ],
+      "fps": 33,
+      "transitioning": false,
+      "lights": [
+        {
+          "key": "wall_fairy_lights#1",
+          "on": true,
+          "core": false,
+          "glows": 1,
+          "glowAlpha": 1,
+          "glowDepth": 3.02
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "on": true,
+          "core": false,
+          "glows": 2,
+          "glowAlpha": 0.75,
+          "glowDepth": 4.02
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "on": false,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        }
+      ],
+      "lighting": {
+        "fullScreenLayers": 1,
+        "bakes": 3
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 1,
+        "authored": "N",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 1.5015015015015014,
+      "zoomMul": 1,
+      "shell": {
+        "floor": {
+          "id": "env_floor_planks_honey",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_bedroom",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "night",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 90,
+      "highlight": {
+        "target": null,
+        "visible": false,
+        "depth": null
+      },
+      "floor": "wood",
+      "visited": [
+        "zila_bedroom"
+      ],
+      "flagsState": {},
+      "npcs": [],
+      "mapKind": "interior",
+      "generatedTextures": {
+        "count": 8,
+        "bytes": 563312
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": 7.99,
+          "curtainDepth": 7.995,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "night",
+        "bufferBytes": 0
+      }
+    }
+  },
+  {
+    "device": "desktop",
+    "zoom": "detail",
+    "injected": [
+      "temp:env_wall_bedroom@1",
+      "temp:env_floor_planks_honey@1"
+    ],
+    "errors": [],
+    "state": {
+      "roomId": "zila_bedroom",
+      "player": {
+        "x": 300,
+        "y": 230,
+        "facing": "N",
+        "depth": 230
+      },
+      "nearest": null,
+      "occluded": [],
+      "props": [
+        {
+          "key": "decal_rug_zila#0",
+          "depth": -60000,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "decal"
+        },
+        {
+          "key": "wall_fairy_lights#1",
+          "depth": 3,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_shelf_books#2",
+          "depth": 24,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_photos_string#3",
+          "depth": 2,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_window_bedroom#4",
+          "depth": 8,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "depth": 4,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "prop_bed_zila#6",
+          "depth": 212,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_nightstand_zila#7",
+          "depth": 52,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_desk_zila#9",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_chair_desk#12",
+          "depth": 118,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_vanity_zila#13",
+          "depth": 49,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_stool_vanity#14",
+          "depth": 98,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_wardrobe_zila#15",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_tall_zila#16",
+          "depth": 300,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_pouf_floor#17",
+          "depth": 360,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_catbed_mochi#18",
+          "depth": 420,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_small#19",
+          "depth": 470,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "depth": 52.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_laptop_zila#10",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_mug_zila#11",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        }
+      ],
+      "fps": 22,
+      "transitioning": false,
+      "lights": [
+        {
+          "key": "wall_fairy_lights#1",
+          "on": true,
+          "core": false,
+          "glows": 1,
+          "glowAlpha": 0.18285714285714283,
+          "glowDepth": 3.02
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "on": true,
+          "core": false,
+          "glows": 2,
+          "glowAlpha": 0.13714285714285712,
+          "glowDepth": 4.02
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "on": false,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        }
+      ],
+      "lighting": {
+        "fullScreenLayers": 1,
+        "bakes": 4
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 3,
+        "authored": "N",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 2.4024024024024024,
+      "zoomMul": 1.6,
+      "shell": {
+        "floor": {
+          "id": "env_floor_planks_honey",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_bedroom",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "morning",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 90,
+      "highlight": {
+        "target": null,
+        "visible": false,
+        "depth": null
+      },
+      "floor": "wood",
+      "visited": [
+        "zila_bedroom"
+      ],
+      "flagsState": {},
+      "npcs": [],
+      "mapKind": "interior",
+      "generatedTextures": {
+        "count": 9,
+        "bytes": 579696
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": 7.99,
+          "curtainDepth": 7.995,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "day",
+        "bufferBytes": 0
+      }
+    }
+  },
+  {
+    "device": "android-portrait",
+    "zoom": "wide",
+    "injected": [
+      "temp:env_wall_bedroom@2",
+      "temp:env_floor_planks_honey@2"
+    ],
+    "errors": [],
+    "state": {
+      "roomId": "zila_bedroom",
+      "player": {
+        "x": 300,
+        "y": 230,
+        "facing": "N",
+        "depth": 230
+      },
+      "nearest": null,
+      "occluded": [],
+      "props": [
+        {
+          "key": "decal_rug_zila#0",
+          "depth": -60000,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "decal"
+        },
+        {
+          "key": "wall_fairy_lights#1",
+          "depth": 3,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_shelf_books#2",
+          "depth": 24,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_photos_string#3",
+          "depth": 2,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_window_bedroom#4",
+          "depth": 8,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "depth": 4,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "prop_bed_zila#6",
+          "depth": 212,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_nightstand_zila#7",
+          "depth": 52,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_desk_zila#9",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_chair_desk#12",
+          "depth": 118,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_vanity_zila#13",
+          "depth": 49,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_stool_vanity#14",
+          "depth": 98,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_wardrobe_zila#15",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_tall_zila#16",
+          "depth": 300,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_pouf_floor#17",
+          "depth": 360,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_catbed_mochi#18",
+          "depth": 420,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_small#19",
+          "depth": 470,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "depth": 52.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_laptop_zila#10",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_mug_zila#11",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        }
+      ],
+      "fps": 41,
+      "transitioning": false,
+      "lights": [
+        {
+          "key": "wall_fairy_lights#1",
+          "on": true,
+          "core": false,
+          "glows": 1,
+          "glowAlpha": 0.12,
+          "glowDepth": 3.02
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "on": true,
+          "core": false,
+          "glows": 2,
+          "glowAlpha": 0.09,
+          "glowDepth": 4.02
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "on": false,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        }
+      ],
+      "lighting": {
+        "fullScreenLayers": 0.31,
+        "bakes": 2
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 0,
+        "authored": "N",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 1.7066666666666668,
+      "zoomMul": 0.8,
+      "shell": {
+        "floor": {
+          "id": "env_floor_planks_honey",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_bedroom",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "afternoon",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 90,
+      "highlight": {
+        "target": null,
+        "visible": false,
+        "depth": null
+      },
+      "floor": "wood",
+      "visited": [
+        "zila_bedroom"
+      ],
+      "flagsState": {},
+      "npcs": [],
+      "mapKind": "interior",
+      "generatedTextures": {
+        "count": 7,
+        "bytes": 838096
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": 7.99,
+          "curtainDepth": 7.995,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "day",
+        "bufferBytes": 0
+      }
+    }
+  },
+  {
+    "device": "android-portrait",
+    "zoom": "normal",
+    "injected": [
+      "temp:env_wall_bedroom@2",
+      "temp:env_floor_planks_honey@2"
+    ],
+    "errors": [],
+    "state": {
+      "roomId": "zila_bedroom",
+      "player": {
+        "x": 300,
+        "y": 230,
+        "facing": "N",
+        "depth": 230
+      },
+      "nearest": null,
+      "occluded": [],
+      "props": [
+        {
+          "key": "decal_rug_zila#0",
+          "depth": -60000,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "decal"
+        },
+        {
+          "key": "wall_fairy_lights#1",
+          "depth": 3,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_shelf_books#2",
+          "depth": 24,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_photos_string#3",
+          "depth": 2,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_window_bedroom#4",
+          "depth": 8,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "depth": 4,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "prop_bed_zila#6",
+          "depth": 212,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_nightstand_zila#7",
+          "depth": 52,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_desk_zila#9",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_chair_desk#12",
+          "depth": 118,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_vanity_zila#13",
+          "depth": 49,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_stool_vanity#14",
+          "depth": 98,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_wardrobe_zila#15",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_tall_zila#16",
+          "depth": 300,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_pouf_floor#17",
+          "depth": 360,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_catbed_mochi#18",
+          "depth": 420,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_small#19",
+          "depth": 470,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "depth": 52.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_laptop_zila#10",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_mug_zila#11",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        }
+      ],
+      "fps": 34,
+      "transitioning": false,
+      "lights": [
+        {
+          "key": "wall_fairy_lights#1",
+          "on": true,
+          "core": false,
+          "glows": 1,
+          "glowAlpha": 1,
+          "glowDepth": 3.02
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "on": true,
+          "core": false,
+          "glows": 2,
+          "glowAlpha": 0.75,
+          "glowDepth": 4.02
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "on": false,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        }
+      ],
+      "lighting": {
+        "fullScreenLayers": 1,
+        "bakes": 3
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 1,
+        "authored": "N",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 2.1333333333333333,
+      "zoomMul": 1,
+      "shell": {
+        "floor": {
+          "id": "env_floor_planks_honey",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_bedroom",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "night",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 90,
+      "highlight": {
+        "target": null,
+        "visible": false,
+        "depth": null
+      },
+      "floor": "wood",
+      "visited": [
+        "zila_bedroom"
+      ],
+      "flagsState": {},
+      "npcs": [],
+      "mapKind": "interior",
+      "generatedTextures": {
+        "count": 8,
+        "bytes": 854480
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": 7.99,
+          "curtainDepth": 7.995,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "night",
+        "bufferBytes": 0
+      }
+    }
+  },
+  {
+    "device": "android-portrait",
+    "zoom": "detail",
+    "injected": [
+      "temp:env_wall_bedroom@2",
+      "temp:env_floor_planks_honey@2"
+    ],
+    "errors": [],
+    "state": {
+      "roomId": "zila_bedroom",
+      "player": {
+        "x": 300,
+        "y": 230,
+        "facing": "N",
+        "depth": 230
+      },
+      "nearest": null,
+      "occluded": [],
+      "props": [
+        {
+          "key": "decal_rug_zila#0",
+          "depth": -60000,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "decal"
+        },
+        {
+          "key": "wall_fairy_lights#1",
+          "depth": 3,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_shelf_books#2",
+          "depth": 24,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_photos_string#3",
+          "depth": 2,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_window_bedroom#4",
+          "depth": 8,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "depth": 4,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "prop_bed_zila#6",
+          "depth": 212,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_nightstand_zila#7",
+          "depth": 52,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_desk_zila#9",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_chair_desk#12",
+          "depth": 118,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_vanity_zila#13",
+          "depth": 49,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_stool_vanity#14",
+          "depth": 98,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_wardrobe_zila#15",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_tall_zila#16",
+          "depth": 300,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_pouf_floor#17",
+          "depth": 360,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_catbed_mochi#18",
+          "depth": 420,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_small#19",
+          "depth": 470,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "depth": 52.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_laptop_zila#10",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_mug_zila#11",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        }
+      ],
+      "fps": 24,
+      "transitioning": false,
+      "lights": [
+        {
+          "key": "wall_fairy_lights#1",
+          "on": true,
+          "core": false,
+          "glows": 1,
+          "glowAlpha": 0.18285714285714283,
+          "glowDepth": 3.02
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "on": true,
+          "core": false,
+          "glows": 2,
+          "glowAlpha": 0.13714285714285712,
+          "glowDepth": 4.02
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "on": false,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        }
+      ],
+      "lighting": {
+        "fullScreenLayers": 1,
+        "bakes": 4
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 2,
+        "authored": "N",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 3.4133333333333336,
+      "zoomMul": 1.6,
+      "shell": {
+        "floor": {
+          "id": "env_floor_planks_honey",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_bedroom",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "morning",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 90,
+      "highlight": {
+        "target": null,
+        "visible": false,
+        "depth": null
+      },
+      "floor": "wood",
+      "visited": [
+        "zila_bedroom"
+      ],
+      "flagsState": {},
+      "npcs": [],
+      "mapKind": "interior",
+      "generatedTextures": {
+        "count": 9,
+        "bytes": 870864
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": 7.99,
+          "curtainDepth": 7.995,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "day",
+        "bufferBytes": 0
+      }
+    }
+  },
+  {
+    "device": "android-landscape",
+    "zoom": "wide",
+    "injected": [
+      "temp:env_wall_bedroom@2",
+      "temp:env_floor_planks_honey@2"
+    ],
+    "errors": [],
+    "state": {
+      "roomId": "zila_bedroom",
+      "player": {
+        "x": 300,
+        "y": 230,
+        "facing": "N",
+        "depth": 230
+      },
+      "nearest": null,
+      "occluded": [],
+      "props": [
+        {
+          "key": "decal_rug_zila#0",
+          "depth": -60000,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "decal"
+        },
+        {
+          "key": "wall_fairy_lights#1",
+          "depth": 3,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_shelf_books#2",
+          "depth": 24,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_photos_string#3",
+          "depth": 2,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_window_bedroom#4",
+          "depth": 8,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "depth": 4,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "prop_bed_zila#6",
+          "depth": 212,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_nightstand_zila#7",
+          "depth": 52,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_desk_zila#9",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_chair_desk#12",
+          "depth": 118,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_vanity_zila#13",
+          "depth": 49,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_stool_vanity#14",
+          "depth": 98,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_wardrobe_zila#15",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_tall_zila#16",
+          "depth": 300,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_pouf_floor#17",
+          "depth": 360,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_catbed_mochi#18",
+          "depth": 420,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_small#19",
+          "depth": 470,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "depth": 52.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_laptop_zila#10",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_mug_zila#11",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        }
+      ],
+      "fps": 49,
+      "transitioning": false,
+      "lights": [
+        {
+          "key": "wall_fairy_lights#1",
+          "on": true,
+          "core": false,
+          "glows": 1,
+          "glowAlpha": 0.12,
+          "glowDepth": 3.02
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "on": true,
+          "core": false,
+          "glows": 2,
+          "glowAlpha": 0.09,
+          "glowDepth": 4.02
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "on": false,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        }
+      ],
+      "lighting": {
+        "fullScreenLayers": 0.31,
+        "bakes": 2
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 3,
+        "authored": "N",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 1.2567272727272727,
+      "zoomMul": 0.8,
+      "shell": {
+        "floor": {
+          "id": "env_floor_planks_honey",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_bedroom",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "afternoon",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 90,
+      "highlight": {
+        "target": null,
+        "visible": false,
+        "depth": null
+      },
+      "floor": "wood",
+      "visited": [
+        "zila_bedroom"
+      ],
+      "flagsState": {},
+      "npcs": [],
+      "mapKind": "interior",
+      "generatedTextures": {
+        "count": 7,
+        "bytes": 838096
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": 7.99,
+          "curtainDepth": 7.995,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "day",
+        "bufferBytes": 0
+      }
+    }
+  },
+  {
+    "device": "android-landscape",
+    "zoom": "normal",
+    "injected": [
+      "temp:env_wall_bedroom@2",
+      "temp:env_floor_planks_honey@2"
+    ],
+    "errors": [],
+    "state": {
+      "roomId": "zila_bedroom",
+      "player": {
+        "x": 300,
+        "y": 230,
+        "facing": "N",
+        "depth": 230
+      },
+      "nearest": null,
+      "occluded": [],
+      "props": [
+        {
+          "key": "decal_rug_zila#0",
+          "depth": -60000,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "decal"
+        },
+        {
+          "key": "wall_fairy_lights#1",
+          "depth": 3,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_shelf_books#2",
+          "depth": 24,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_photos_string#3",
+          "depth": 2,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_window_bedroom#4",
+          "depth": 8,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "depth": 4,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "prop_bed_zila#6",
+          "depth": 212,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_nightstand_zila#7",
+          "depth": 52,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_desk_zila#9",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_chair_desk#12",
+          "depth": 118,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_vanity_zila#13",
+          "depth": 49,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_stool_vanity#14",
+          "depth": 98,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_wardrobe_zila#15",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_tall_zila#16",
+          "depth": 300,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_pouf_floor#17",
+          "depth": 360,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_catbed_mochi#18",
+          "depth": 420,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_small#19",
+          "depth": 470,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "depth": 52.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_laptop_zila#10",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_mug_zila#11",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        }
+      ],
+      "fps": 34,
+      "transitioning": false,
+      "lights": [
+        {
+          "key": "wall_fairy_lights#1",
+          "on": true,
+          "core": false,
+          "glows": 1,
+          "glowAlpha": 1,
+          "glowDepth": 3.02
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "on": true,
+          "core": false,
+          "glows": 2,
+          "glowAlpha": 0.75,
+          "glowDepth": 4.02
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "on": false,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        }
+      ],
+      "lighting": {
+        "fullScreenLayers": 1,
+        "bakes": 3
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 0,
+        "authored": "N",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 1.5709090909090908,
+      "zoomMul": 1,
+      "shell": {
+        "floor": {
+          "id": "env_floor_planks_honey",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_bedroom",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "night",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 90,
+      "highlight": {
+        "target": null,
+        "visible": false,
+        "depth": null
+      },
+      "floor": "wood",
+      "visited": [
+        "zila_bedroom"
+      ],
+      "flagsState": {},
+      "npcs": [],
+      "mapKind": "interior",
+      "generatedTextures": {
+        "count": 8,
+        "bytes": 854480
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": 7.99,
+          "curtainDepth": 7.995,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "night",
+        "bufferBytes": 0
+      }
+    }
+  },
+  {
+    "device": "android-landscape",
+    "zoom": "detail",
+    "injected": [
+      "temp:env_wall_bedroom@2",
+      "temp:env_floor_planks_honey@2"
+    ],
+    "errors": [],
+    "state": {
+      "roomId": "zila_bedroom",
+      "player": {
+        "x": 300,
+        "y": 230,
+        "facing": "N",
+        "depth": 230
+      },
+      "nearest": null,
+      "occluded": [],
+      "props": [
+        {
+          "key": "decal_rug_zila#0",
+          "depth": -60000,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "decal"
+        },
+        {
+          "key": "wall_fairy_lights#1",
+          "depth": 3,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_shelf_books#2",
+          "depth": 24,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_photos_string#3",
+          "depth": 2,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_window_bedroom#4",
+          "depth": 8,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "depth": 4,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "wall"
+        },
+        {
+          "key": "prop_bed_zila#6",
+          "depth": 212,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_nightstand_zila#7",
+          "depth": 52,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_desk_zila#9",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_chair_desk#12",
+          "depth": 118,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_vanity_zila#13",
+          "depth": 49,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_stool_vanity#14",
+          "depth": 98,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_wardrobe_zila#15",
+          "depth": 64,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_tall_zila#16",
+          "depth": 300,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_pouf_floor#17",
+          "depth": 360,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_catbed_mochi#18",
+          "depth": 420,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_plant_small#19",
+          "depth": 470,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "floor"
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "depth": 52.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_laptop_zila#10",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        },
+        {
+          "key": "prop_mug_zila#11",
+          "depth": 64.25,
+          "alpha": 1,
+          "art": "approved",
+          "layer": "surface"
+        }
+      ],
+      "fps": 24,
+      "transitioning": false,
+      "lights": [
+        {
+          "key": "wall_fairy_lights#1",
+          "on": true,
+          "core": false,
+          "glows": 1,
+          "glowAlpha": 0.18285714285714283,
+          "glowDepth": 3.02
+        },
+        {
+          "key": "wall_neon_goodvibes#5",
+          "on": true,
+          "core": false,
+          "glows": 2,
+          "glowAlpha": 0.13714285714285712,
+          "glowDepth": 4.02
+        },
+        {
+          "key": "prop_lamp_zila#8",
+          "on": false,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        }
+      ],
+      "lighting": {
+        "fullScreenLayers": 1,
+        "bakes": 4
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 2,
+        "authored": "N",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 2.5134545454545454,
+      "zoomMul": 1.6,
+      "shell": {
+        "floor": {
+          "id": "env_floor_planks_honey",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_bedroom",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "morning",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 90,
+      "highlight": {
+        "target": null,
+        "visible": false,
+        "depth": null
+      },
+      "floor": "wood",
+      "visited": [
+        "zila_bedroom"
+      ],
+      "flagsState": {},
+      "npcs": [],
+      "mapKind": "interior",
+      "generatedTextures": {
+        "count": 9,
+        "bytes": 870864
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": 7.99,
+          "curtainDepth": 7.995,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "day",
+        "bufferBytes": 0
+      }
+    }
+  }
+]

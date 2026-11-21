@@ -58,6 +58,11 @@
       "x": 60,
       "y": 610,
       "facing": "E"
+    },
+    "from_lhokseumawe_road": {
+      "x": 2740,
+      "y": 610,
+      "facing": "W"
     }
   },
   "props": [
@@ -73,6 +78,10 @@
       "wall": {
         "x": 850,
         "z": 0
+      },
+      "inspect": {
+        "name": "Neighbour's house",
+        "comment": "A neighbour's house. (Background building.)"
       }
     },
     {
@@ -214,18 +223,15 @@
     },
     {
       "id": "road_east",
-      "label": "Road east",
+      "label": "Go to Road to Lhokseumawe",
       "side": "east",
       "x": 2800,
       "y": 480,
       "w": 10,
       "h": 260,
       "to": {
-        "room": "lhokseumawe_centre",
-        "spawn": "default"
-      },
-      "locked": {
-        "message": "The road continues toward Lhokseumawe city — not available yet (planned)."
+        "room": "lhokseumawe_road",
+        "spawn": "from_batuphat_street"
       }
     },
     {

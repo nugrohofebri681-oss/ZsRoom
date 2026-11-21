@@ -466,6 +466,18 @@ Object.assign(SHAPES, {
   /** Tree: trunk + layered canopy (canopy overhangs the footprint; collision is the trunk only). */
   tree(ctx: Ctx, g: Geom, t: TempArtSpec) {
     const leaf = String(t.leaf ?? '#6E9B5A'), trunk = String(t.trunk ?? '#7A5238'), top = g.h.top ?? 450, d = g.d, cx = g.px, cy = g.py - (g.py - g.back) / 2;
+    if (t.palm) {                                                                                              // coconut palm: slim curved trunk, frond crown
+      const topY = cy - top * d; ctx.strokeStyle = trunk; ctx.lineWidth = 9 * d; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.quadraticCurveTo(cx + 30 * d, (cy + topY) / 2, cx + 12 * d, topY); ctx.stroke();
+      ctx.strokeStyle = tone(trunk, 0.8); ctx.lineWidth = 1.5;
+      for (let y = cy - 20 * d; y > topY; y -= 14 * d) { ctx.beginPath(); ctx.moveTo(cx - 3 * d, y); ctx.lineTo(cx + 18 * d, y - 3 * d); ctx.stroke(); }
+      for (let i = 0; i < 9; i++) {
+        const a = (i / 9) * Math.PI * 2, len = (70 + (i % 3) * 18) * d;
+        ctx.strokeStyle = tone(leaf, 0.8 + (i % 3) * 0.15); ctx.lineWidth = 7 * d;
+        ctx.beginPath(); ctx.moveTo(cx + 12 * d, topY); ctx.quadraticCurveTo(cx + 12 * d + Math.cos(a) * len * 0.6, topY - 25 * d, cx + 12 * d + Math.cos(a) * len, topY + Math.abs(Math.sin(a)) * len * 0.45 + 10 * d); ctx.stroke();
+      }
+      return;
+    }
     const canopyR = Number(t.canopy ?? 150) * d, canopyY = cy - top * d + canopyR;
     rr(ctx, cx - 10 * d, canopyY, 20 * d, cy - canopyY, 6 * d); paint(ctx, trunk, cx - 10 * d, canopyY, cx + 10 * d, cy, 1.15, 0.75);
     let seed = 31; const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
@@ -488,7 +500,10 @@ Object.assign(SHAPES, {
     rr(ctx, g.L, y0, W, y1 - y0, 4 * d); paint(ctx, wall, g.L, y0, g.R, y1, 1.05, 0.9);
     ctx.fillStyle = tone(wall, 0.8); ctx.fillRect(g.L, y0, W, 8 * d);                                        // parapet
     const kind = String(t.kind ?? 'shop');
-    if (t.sign) { const sh = 46 * d; rr(ctx, g.L + 20 * d, y0 + 22 * d, W - 40 * d, sh, 4 * d); paint(ctx, accent, g.L, y0 + 22 * d, g.R, y0 + 22 * d + sh, 1.15, 0.85); label(ctx, String(t.sign), g.px, y0 + 22 * d + sh / 2, 26 * d); }
+    if (t.sign) {                                                         // name board: top band, or just above the door (signLow) so it stays in view
+      const sh = 46 * d, sy = t.signLow ? g.zy(270) : y0 + 22 * d, sw = t.signLow ? Math.min(W - 40 * d, 320 * d) : W - 40 * d;
+      rr(ctx, g.px - sw / 2, sy, sw, sh, 4 * d); paint(ctx, accent, g.px - sw / 2, sy, g.px + sw / 2, sy + sh, 1.15, 0.85); label(ctx, String(t.sign), g.px, sy + sh / 2, Math.min(26 * d, sw / Math.max(6, String(t.sign).length) * 1.5));
+    }
     if (kind === 'shop') {
       const ay = y0 + 80 * d; ctx.fillStyle = String(t.awning ?? '#F4A261'); ctx.beginPath(); ctx.moveTo(g.L + 10 * d, ay); ctx.lineTo(g.R - 10 * d, ay); ctx.lineTo(g.R - 4 * d, ay + 26 * d); ctx.lineTo(g.L + 4 * d, ay + 26 * d); ctx.closePath(); ctx.fill();
       for (let x = g.L + 10 * d; x < g.R - 10 * d; x += 40 * d) { ctx.fillStyle = t.awningStripe ? String(t.awningStripe) : 'rgba(255,255,255,0.35)'; ctx.fillRect(x, ay, 20 * d, 26 * d); }
@@ -499,7 +514,8 @@ Object.assign(SHAPES, {
       const rows = kind === 'office' ? 2 : 1, cols = Math.max(2, Math.floor(W / d / 140));
       for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
         if (kind === 'house' && c === Math.floor(cols / 2)) continue;
-        const ww = 70 * d, wh = 80 * d, x = g.L + (c + 0.5) * (W / cols) - ww / 2, y = y0 + (kind === 'office' ? 90 + r * 120 : 130) * d;
+        const ww = 70 * d, wh = 80 * d, x = g.L + (c + 0.5) * (W / cols) - ww / 2, y = y0 + (kind === 'office' ? (t.signLow ? 30 : 90) + r * 120 : 130) * d;
+        if (t.signLow && kind === 'office' && Math.abs(x + ww / 2 - g.px) < 200 * d && r === 1) continue;
         rr(ctx, x, y, ww, wh, 3 * d); ctx.fillStyle = '#A9C7DA'; ctx.fill(); ctx.strokeStyle = tone(wall, 0.6); ctx.lineWidth = 3 * d; ctx.stroke();
         ctx.beginPath(); ctx.moveTo(x + ww / 2, y); ctx.lineTo(x + ww / 2, y + wh); ctx.stroke();
       }
@@ -512,8 +528,40 @@ Object.assign(SHAPES, {
     const c = String(t.wall ?? '#EFE6D8'), metal = String(t.metal ?? '#4A4250'), top = g.h.top ?? 200, d = g.d, gap = Number(t.gap ?? 140) * d, wallTop = g.zy(120);
     for (const [x0, x1] of [[g.L, g.px - gap / 2], [g.px + gap / 2, g.R]] as const) { rr(ctx, x0, wallTop, x1 - x0, g.py - wallTop, 3 * d); paint(ctx, c, x0, wallTop, x1, g.py, 1.08, 0.88); }
     for (const x of [g.px - gap / 2 - 12 * d, g.px + gap / 2 - 12 * d]) { rr(ctx, x, g.zy(top), 24 * d, top * d, 3 * d); paint(ctx, tone(c, 0.95), x, g.zy(top), x + 24 * d, g.py, 1.15, 0.8); }
+    if (t.sign) {                                                                                              // arch with a name board (text only, no logo)
+      const ay = g.zy(top) + 4 * d, ah = 30 * d;
+      rr(ctx, g.px - gap / 2 - 14 * d, ay, gap + 28 * d, ah, 4 * d); paint(ctx, String(t.signColor ?? '#1F5F8B'), g.px - gap / 2, ay, g.px + gap / 2, ay + ah, 1.15, 0.85);
+      label(ctx, String(t.sign), g.px, ay + ah / 2, Math.min(13 * d, (gap + 20 * d) / String(t.sign).length * 1.6));
+    }
     ctx.strokeStyle = metal; ctx.lineWidth = 2.5 * d;                                                          // opened gate leaves, folded against the wall
     for (const s of [-1, 1]) { const x = g.px + s * (gap / 2 + 20 * d); for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.moveTo(x + s * i * 8 * d, g.zy(160)); ctx.lineTo(x + s * i * 8 * d, g.py - 4 * d); ctx.stroke(); } }
+  },
+  /** Mosque landmark facade (wall-mounted): white body, arched openings, dome and minaret. */
+  mosque(ctx: Ctx, g: Geom, t: TempArtSpec) {
+    const wall = String(t.wall ?? '#F7F4EC'), dome = String(t.dome ?? '#2E7D5B'), top = g.h.top ?? 600, d = g.d, W = g.R - g.L;
+    const bodyTop = g.zy(top * 0.45);
+    rr(ctx, g.L + W * 0.12, bodyTop, W * 0.76, g.py - bodyTop, 4 * d); paint(ctx, wall, g.L, bodyTop, g.R, g.py, 1.05, 0.9);
+    for (let i = 0; i < 5; i++) {                                                                               // arched doorways
+      const ax = g.L + W * (0.2 + i * 0.15), aw = W * 0.08, ay = g.py - 150 * d;
+      ctx.beginPath(); ctx.moveTo(ax, g.py); ctx.lineTo(ax, ay + aw / 2); ctx.arc(ax + aw / 2, ay + aw / 2, aw / 2, Math.PI, 0); ctx.lineTo(ax + aw, g.py); ctx.closePath();
+      ctx.fillStyle = tone(wall, 0.62); ctx.fill();
+    }
+    const dr = W * 0.22, dcy = bodyTop;                                                                        // main dome
+    ctx.beginPath(); ctx.arc(g.px, dcy, dr, Math.PI, 0); ctx.closePath(); paint(ctx, dome, g.px - dr, dcy - dr, g.px + dr, dcy, 1.25, 0.8);
+    ctx.fillStyle = String(t.finial ?? '#C9A227'); ctx.fillRect(g.px - 2 * d, dcy - dr - 26 * d, 4 * d, 26 * d);
+    for (const mx of [g.L + W * 0.05, g.R - W * 0.05]) {                                                       // minarets
+      const mw = 26 * d, mt = g.zy(top);
+      rr(ctx, mx - mw / 2, mt + 30 * d, mw, g.py - mt - 30 * d, 3 * d); paint(ctx, wall, mx - mw / 2, mt, mx + mw / 2, g.py, 1.1, 0.85);
+      ctx.beginPath(); ctx.moveTo(mx - mw / 2 - 4 * d, mt + 34 * d); ctx.lineTo(mx, mt); ctx.lineTo(mx + mw / 2 + 4 * d, mt + 34 * d); ctx.closePath(); ctx.fillStyle = dome; ctx.fill();
+    }
+  },
+  /** Bus stop shelter (floor prop, open front): roof on two posts, bench, sign. */
+  shelter(ctx: Ctx, g: Geom, t: TempArtSpec) {
+    const c = String(t.color ?? '#5E6670'), roof = String(t.roof ?? '#2A6F97'), top = g.h.top ?? 250, d = g.d;
+    for (const x of [g.L + 6 * d, g.R - 6 * d]) leg(ctx, x, g.zy(top), g.py, 6 * d, c);
+    box(ctx, g, g.L - 10 * d, g.R + 10 * d, top - 12, top, tone(roof, 1.1), roof, 3 * d, (g.py - g.back) * 1.1);
+    box(ctx, g, g.L + 20 * d, g.R - 20 * d, 40, 46, '#9C7258', '#7A5238', 2 * d, (g.py - g.back) * 0.5);
+    if (t.sign) { rr(ctx, g.px - 40 * d, g.zy(top) + 2 * d, 80 * d, 18 * d, 3 * d); ctx.fillStyle = '#FFFFFF'; ctx.fill(); label(ctx, String(t.sign), g.px, g.zy(top) + 11 * d, 10 * d, roof); }
   },
   /** Becak motor (Aceh motorcycle with a covered side-car), side view. */
   becak(ctx: Ctx, g: Geom, t: TempArtSpec) {

@@ -1,0 +1,44 @@
+{
+  "id": "world_bus_shelter",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Bus stop shelter (TEMP world placeholder)",
+  "density": 1,
+  "canvas": {
+    "width": 276,
+    "height": 358
+  },
+  "pivot": {
+    "x": 138,
+    "y": 346,
+    "meaning": "front-centre floor contact point"
+  },
+  "footprint": {
+    "widthCm": 260,
+    "depthCm": 120
+  },
+  "heightsCm": {
+    "top": 250
+  },
+  "collision": [
+    {
+      "x": -130,
+      "y": -40,
+      "w": 260,
+      "h": 40
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": true,
+  "interactionAnchors": [],
+  "maxSideOverhangCm": 0,
+  "temp": {
+    "shape": "shelter",
+    "sign": "HALTE",
+    "maxDensity": 1
+  },
+  "$comment": "World 01 placeholder geometry (stable id, footprint, pivot, collision)."
+}

@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { boot, closeDialogue, press, roomData, state, tapObject, until, useDoor, SHOTS } from './helpers';
+import { boot, closeDialogue, dimsumShift, press, roomData, state, tapObject, until, useDoor, SHOTS } from './helpers';
 
 /**
  * World 01 P0 route, walked for real: every map change goes through a door (walk to it, use it).
@@ -39,10 +39,7 @@ test.describe('World 01 P0 route', () => {
     expect(s.visited).toEqual(expect.arrayContaining(['zila_bedroom', 'upper_hall', 'living_room', 'front_yard', 'batuphat_street']));
     expect(s.modal).toBe(false);                                         // once-event does not repeat after reload
 
-    // locked road end
-    await page.evaluate(() => (window as any).__ZS.tapWorld(2780, 610)); await until(page, 's.path === 0', 30000);
-    await until(page, "s.nearest === 'door:road_east'"); await press(page, isMobile);
-    expect((await S(page)).roomId).toBe('batuphat_street');
+    // (locked road ends are covered in world01-p3.spec: the street's east end now leads to the city)
 
     // minimarket: pick a drink, pay the cashier
     await useDoor(page, isMobile, 'minimarket_door', 'minimarket');
@@ -55,15 +52,10 @@ test.describe('World 01 P0 route', () => {
     await useDoor(page, isMobile, 'exit', 'batuphat_street');
     expect((await S(page)).player.x).toBeCloseTo(roomData('batuphat_street').spawns.from_minimarket.x, 0);   // back out of the same shop door
 
-    // workplace: clock in → 3 tasks → clock out
+    // workplace (dimsum shop, cashier duty): clock in → take 3 orders → clock out
     await useDoor(page, isMobile, 'workplace_door', 'workplace');
     await shot('05-workplace');
-    await tapObject(page, 640, 4, 148, "s.vars.shift === 'in_progress'");                     // time clock on the wall
-    let n = 0;
-    for (const [x, y] of [[180, 180], [180, 370], [560, 310]] as const) await tapObject(page, x, y, 70, `s.vars.tasksDone === ${++n}`);
-    expect((await S(page)).vars.tasksDone).toBe(3);
-    await tapObject(page, 730, 4, 148, 's.modal === true');                                     // clock out → shift complete
-    await closeDialogue(page, isMobile);
+    await dimsumShift(page, isMobile);
     expect((await S(page)).vars.shift).toBe('done');
     await useDoor(page, isMobile, 'exit', 'batuphat_street');
 
@@ -79,7 +71,7 @@ test.describe('World 01 P0 route', () => {
     await page.goto('/?fast'); await page.waitForFunction(() => (window as any).__ZS?.state?.());   // resume from save (no ?fresh)
     s = await S(page);
     expect(s.roomId).toBe('zila_bedroom');
-    expect(s.vars).toMatchObject({ purchases: 1, shift: 'done' });
+    expect(s.vars).toMatchObject({ purchases: 1, shift: 'done', ordersDone: 3 });
     expect(errors).toEqual([]);
   });
 
@@ -101,12 +93,12 @@ test.describe('World 01 P0 route', () => {
     // west doorway (kitchen, opened in World 01 P1): walking west through it changes map
     await page.evaluate(() => (window as any).__ZS.teleport(60, 280));
     await page.keyboard.down('ArrowLeft'); await until(page, "s.roomId === 'kitchen'", 8000); await page.keyboard.up('ArrowLeft');
-    // locked road end on the street: walking into it is blocked by the wall
-    await page.goto('/?fresh&room=batuphat_street'); await page.waitForFunction(() => (window as any).__ZS?.state?.());
+    // locked (planned) east end of the city centre: walking into it is blocked by the wall
+    await page.goto('/?fresh&room=lhokseumawe_centre'); await page.waitForFunction(() => (window as any).__ZS?.state?.());
     for (let i = 0; i < 6 && (await S(page)).modal; i++) await page.keyboard.press('KeyE');
-    await page.evaluate(() => (window as any).__ZS.teleport(2760, 610));
+    await page.evaluate(() => (window as any).__ZS.teleport(2760, 690));
     await page.keyboard.down('ArrowRight'); await page.waitForTimeout(800); await page.keyboard.up('ArrowRight');
-    expect((await S(page)).roomId).toBe('batuphat_street');
+    expect((await S(page)).roomId).toBe('lhokseumawe_centre');
     expect((await S(page)).player.x).toBeLessThanOrEqual(2800 - 15);
     expect(errors).toEqual([]);
   });

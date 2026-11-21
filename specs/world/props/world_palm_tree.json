@@ -1,0 +1,46 @@
+{
+  "id": "world_palm_tree",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Coconut palm (TEMP world placeholder)",
+  "density": 1,
+  "canvas": {
+    "width": 236,
+    "height": 432
+  },
+  "pivot": {
+    "x": 118,
+    "y": 420,
+    "meaning": "front-centre floor contact point"
+  },
+  "footprint": {
+    "widthCm": 40,
+    "depthCm": 40
+  },
+  "heightsCm": {
+    "top": 380
+  },
+  "collision": [
+    {
+      "x": -12,
+      "y": -30,
+      "w": 24,
+      "h": 24
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": true,
+  "interactionAnchors": [],
+  "maxSideOverhangCm": 90,
+  "temp": {
+    "shape": "tree",
+    "palm": true,
+    "leaf": "#5E8C4A",
+    "trunk": "#8A6A48",
+    "maxDensity": 1
+  },
+  "$comment": "World 01 placeholder geometry (stable id, footprint, pivot, collision)."
+}

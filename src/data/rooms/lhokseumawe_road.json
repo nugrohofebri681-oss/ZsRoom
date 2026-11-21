@@ -1,0 +1,205 @@
+{
+  "id": "lhokseumawe_road",
+  "displayName": "Road to Lhokseumawe",
+  "world": "world01",
+  "floor": "ground",
+  "kind": "exterior",
+  "provisional": true,
+  "ambience": "street",
+  "sizeCm": {
+    "w": 2600,
+    "h": 800
+  },
+  "wallHeightCm": 420,
+  "palette": {
+    "floor": "#B9B3A9",
+    "wall": "#E6DCCB",
+    "trim": "#8A7F75"
+  },
+  "shell": {
+    "floor": "env_ground_street",
+    "wall": "env_wall_street_row",
+    "zones": [
+      {
+        "floor": "env_ground_road",
+        "x": 0,
+        "y": 460,
+        "w": 2600,
+        "h": 330,
+        "markings": "road"
+      },
+      {
+        "floor": "env_ground_paddy",
+        "x": 520,
+        "y": 0,
+        "w": 980,
+        "h": 440
+      }
+    ]
+  },
+  "spawns": {
+    "default": {
+      "x": 1300,
+      "y": 480,
+      "facing": "S"
+    },
+    "from_batuphat_street": {
+      "x": 60,
+      "y": 610,
+      "facing": "E"
+    },
+    "from_lhokseumawe_centre": {
+      "x": 2540,
+      "y": 690,
+      "facing": "W"
+    }
+  },
+  "props": [
+    {
+      "assetId": "world_facade_shop",
+      "wall": {
+        "x": 260,
+        "z": 0
+      },
+      "temp": {
+        "sign": "WARUNG NASI",
+        "accent": "#9C7258",
+        "awning": "#E9C46A"
+      },
+      "inspect": {
+        "name": "Warung nasi",
+        "comment": "A roadside rice stall. (Background — not enterable yet.)"
+      }
+    },
+    {
+      "assetId": "world_palm_tree",
+      "x": 560,
+      "y": 200
+    },
+    {
+      "assetId": "world_palm_tree",
+      "x": 1000,
+      "y": 90
+    },
+    {
+      "assetId": "world_palm_tree",
+      "x": 1460,
+      "y": 260
+    },
+    {
+      "assetId": "world_street_sign",
+      "x": 760,
+      "y": 450,
+      "temp": {
+        "sign": "SAWAH"
+      },
+      "inspect": {
+        "name": "Rice fields",
+        "comment": "Green rice paddies along the road. (Provisional scenery.)"
+      }
+    },
+    {
+      "assetId": "world_facade_shop",
+      "wall": {
+        "x": 1850,
+        "z": 0
+      },
+      "temp": {
+        "sign": "SPBU",
+        "accent": "#B23A48",
+        "awning": "#F1E9DC"
+      },
+      "inspect": {
+        "name": "Fuel station",
+        "comment": "A fuel station on the way into the city. (Background; no real brand.)"
+      }
+    },
+    {
+      "assetId": "world_bus_shelter",
+      "x": 2250,
+      "y": 440,
+      "inspect": {
+        "name": "Bus stop",
+        "comment": "A bus stop shelter. (Rides are not available yet.)"
+      }
+    },
+    {
+      "assetId": "world_street_sign",
+      "x": 2450,
+      "y": 450,
+      "temp": {
+        "sign": "LHOKSEUMAWE →"
+      },
+      "inspect": {
+        "name": "Road sign",
+        "comment": "Lhokseumawe city centre is ahead. (Distances are fictionalised.)"
+      }
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 900,
+      "y": 450
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 1700,
+      "y": 450
+    }
+  ],
+  "npcs": [
+    {
+      "id": "npc_bus_waiter",
+      "name": "Commuter",
+      "look": {
+        "shirt": "#9C7258",
+        "pants": "#3A3440",
+        "hair": "#2A1E18",
+        "hijab": "#B0506A"
+      },
+      "x": 2310,
+      "y": 450,
+      "facing": "S",
+      "behaviour": {
+        "type": "idle"
+      },
+      "schedule": {
+        "night": "away"
+      },
+      "interact": {
+        "label": "Talk to the commuter",
+        "dialogue": "dlg_road_commuter"
+      }
+    }
+  ],
+  "doors": [
+    {
+      "id": "to_batuphat_street",
+      "label": "Back to Batuphat Street",
+      "side": "west",
+      "x": 0,
+      "y": 480,
+      "w": 10,
+      "h": 260,
+      "to": {
+        "room": "batuphat_street",
+        "spawn": "from_lhokseumawe_road"
+      }
+    },
+    {
+      "id": "to_lhokseumawe_centre",
+      "label": "Go to Lhokseumawe · city centre",
+      "side": "east",
+      "x": 2600,
+      "y": 560,
+      "w": 10,
+      "h": 260,
+      "to": {
+        "room": "lhokseumawe_centre",
+        "spawn": "from_lhokseumawe_road"
+      }
+    }
+  ],
+  "onEnter": [
+    "ev_road_first_visit"
+  ]
+}

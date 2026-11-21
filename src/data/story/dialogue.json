@@ -185,37 +185,85 @@
     "dlg_dimsum_menu": {
       "speaker": "Zila",
       "lines": [
-        "Har gow, siu mai, bakpao… (Placeholder menu until the real workplace is confirmed.)"
+        "Siu mai, har gow, bakpao and tea. (Placeholder menu until the real workplace is confirmed.)"
       ]
     },
     "dlg_dimsum_cook": {
       "speaker": "Cook",
       "lines": [
-        "Baskets are ready on the counter — take them while they are hot!"
-      ]
-    },
-    "dlg_dimsum_customer": {
-      "speaker": "Customer",
-      "lines": [
-        "Could we get another basket, please?"
-      ]
-    },
-    "dlg_dimsum_cant_pick": {
-      "speaker": "Zila",
-      "lines": [
-        "Clock in first — or serve the basket I am already holding."
+        "Send the orders over — baskets come out hot!"
       ]
     },
     "dlg_dimsum_done": {
       "speaker": "Zila",
       "lines": [
-        "All tables served. Shift complete — time to head home."
+        "Three orders done. Shift complete — time to head home."
       ]
     },
     "dlg_dimsum_unfinished": {
       "speaker": "Zila",
       "lines": [
-        "Still tables to serve ({served}/3)."
+        "Still orders to finish ({ordersDone}/3)."
+      ]
+    },
+    "dlg_road_commuter": {
+      "speaker": "Commuter",
+      "lines": [
+        "Waiting for the bus into the city."
+      ]
+    },
+    "dlg_city_vendor": {
+      "speaker": "Street vendor",
+      "lines": [
+        "Fresh snacks! (Buying is not available yet.)"
+      ]
+    },
+    "dlg_city_walker": {
+      "speaker": "Passer-by",
+      "lines": [
+        "Nice day for a walk around the square."
+      ]
+    },
+    "dlg_unimal_student": {
+      "speaker": "Student",
+      "lines": [
+        "Heading to the library before class."
+      ]
+    },
+    "dlg_unimal_student_b": {
+      "speaker": "Student",
+      "lines": [
+        "Have you seen the notice board? There are new announcements."
+      ]
+    },
+    "dlg_unimal_guard": {
+      "speaker": "Campus security",
+      "lines": [
+        "Welcome to campus."
+      ]
+    },
+    "dlg_dimsum_diner": {
+      "speaker": "Diner",
+      "lines": [
+        "The siu mai here is good."
+      ]
+    },
+    "dlg_dimsum_order_busy": {
+      "speaker": "Zila",
+      "lines": [
+        "Finish the current order first — or clock in."
+      ]
+    },
+    "dlg_dimsum_pass_idle": {
+      "speaker": "Zila",
+      "lines": [
+        "No order to send right now."
+      ]
+    },
+    "dlg_dimsum_checkout_idle": {
+      "speaker": "Zila",
+      "lines": [
+        "Nothing ready to hand over yet."
       ]
     }
   }

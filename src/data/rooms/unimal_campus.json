@@ -1,0 +1,274 @@
+{
+  "id": "unimal_campus",
+  "displayName": "Universitas Malikussaleh (Unimal)",
+  "world": "world01",
+  "floor": "ground",
+  "kind": "exterior",
+  "provisional": true,
+  "ambience": "street",
+  "sizeCm": {
+    "w": 2400,
+    "h": 900
+  },
+  "wallHeightCm": 420,
+  "palette": {
+    "floor": "#B9B3A9",
+    "wall": "#E6DCCB",
+    "trim": "#8A7F75"
+  },
+  "shell": {
+    "floor": "env_ground_plaza",
+    "wall": "env_wall_street_row",
+    "zones": [
+      {
+        "floor": "env_ground_campus",
+        "x": 80,
+        "y": 520,
+        "w": 820,
+        "h": 340
+      },
+      {
+        "floor": "env_ground_campus",
+        "x": 1450,
+        "y": 520,
+        "w": 500,
+        "h": 300
+      }
+    ]
+  },
+  "spawns": {
+    "default": {
+      "x": 1200,
+      "y": 600,
+      "facing": "S"
+    },
+    "from_lhokseumawe_centre": {
+      "x": 2200,
+      "y": 840,
+      "facing": "N"
+    }
+  },
+  "props": [
+    {
+      "assetId": "world_facade_office",
+      "wall": {
+        "x": 620,
+        "z": 0
+      },
+      "temp": {
+        "sign": "REKTORAT",
+        "accent": "#1F5F8B"
+      },
+      "inspect": {
+        "name": "Rectorate",
+        "comment": "The university administration building. (Background — interiors come when the story needs them.)"
+      }
+    },
+    {
+      "assetId": "world_facade_office",
+      "wall": {
+        "x": 1280,
+        "z": 0
+      },
+      "temp": {
+        "sign": "PERPUSTAKAAN",
+        "accent": "#2E7D5B"
+      },
+      "inspect": {
+        "name": "Library",
+        "comment": "The campus library. (Not enterable yet.)"
+      }
+    },
+    {
+      "assetId": "world_facade_office",
+      "wall": {
+        "x": 1910,
+        "z": 0
+      },
+      "temp": {
+        "sign": "FAKULTAS",
+        "accent": "#8C2F2F"
+      },
+      "inspect": {
+        "name": "Faculty building",
+        "comment": "Lecture halls and classrooms. (Not enterable yet.)"
+      }
+    },
+    {
+      "assetId": "world_street_sign",
+      "x": 1080,
+      "y": 540,
+      "temp": {
+        "sign": "PAPAN INFO",
+        "signColor": "#5B6C8F"
+      },
+      "inspect": {
+        "name": "Notice board",
+        "comment": "Announcements and event posters. (Placeholder.)"
+      }
+    },
+    {
+      "assetId": "world_street_sign",
+      "x": 2050,
+      "y": 780,
+      "temp": {
+        "sign": "PETA KAMPUS",
+        "signColor": "#1F5F8B"
+      },
+      "inspect": {
+        "name": "Campus map",
+        "comment": "Universitas Malikussaleh — faculties, the library and the rectorate. (Provisional layout, not the real campus plan.)"
+      }
+    },
+    {
+      "assetId": "world_bench",
+      "x": 600,
+      "y": 650
+    },
+    {
+      "assetId": "world_bench",
+      "x": 1650,
+      "y": 650
+    },
+    {
+      "assetId": "world_tree",
+      "x": 250,
+      "y": 640
+    },
+    {
+      "assetId": "world_tree",
+      "x": 900,
+      "y": 800
+    },
+    {
+      "assetId": "world_tree",
+      "x": 1500,
+      "y": 800
+    },
+    {
+      "assetId": "world_palm_tree",
+      "x": 960,
+      "y": 450
+    },
+    {
+      "assetId": "world_palm_tree",
+      "x": 1640,
+      "y": 450
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 1150,
+      "y": 830
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 300,
+      "y": 450
+    }
+  ],
+  "npcs": [
+    {
+      "id": "npc_unimal_student_a",
+      "name": "Student",
+      "look": {
+        "shirt": "#F4F1DE",
+        "pants": "#3A3440",
+        "hair": "#2A1E18",
+        "hijab": "#3D85C6"
+      },
+      "x": 500,
+      "y": 720,
+      "behaviour": {
+        "type": "wander",
+        "area": {
+          "x": 150,
+          "y": 560,
+          "w": 700,
+          "h": 260
+        },
+        "speed": 55,
+        "pauseMs": [
+          1500,
+          4500
+        ]
+      },
+      "schedule": {
+        "night": "away"
+      },
+      "interact": {
+        "label": "Talk to the student",
+        "dialogue": "dlg_unimal_student"
+      }
+    },
+    {
+      "id": "npc_unimal_student_b",
+      "name": "Student",
+      "look": {
+        "shirt": "#5B6C8F",
+        "pants": "#2A1E18",
+        "hair": "#2A1E18"
+      },
+      "x": 1700,
+      "y": 560,
+      "behaviour": {
+        "type": "patrol",
+        "points": [
+          {
+            "x": 1500,
+            "y": 560
+          },
+          {
+            "x": 1950,
+            "y": 560
+          }
+        ],
+        "speed": 60,
+        "pauseMs": 2000
+      },
+      "schedule": {
+        "night": "away"
+      },
+      "interact": {
+        "label": "Talk to the student",
+        "dialogue": "dlg_unimal_student_b"
+      }
+    },
+    {
+      "id": "npc_unimal_guard",
+      "name": "Campus security",
+      "look": {
+        "shirt": "#3A3440",
+        "pants": "#3A3440",
+        "hair": "#2A1E18"
+      },
+      "x": 1980,
+      "y": 820,
+      "facing": "E",
+      "behaviour": {
+        "type": "idle"
+      },
+      "interact": {
+        "label": "Talk to campus security",
+        "dialogue": "dlg_unimal_guard"
+      }
+    }
+  ],
+  "doors": [
+    {
+      "id": "to_lhokseumawe_centre",
+      "label": "Back to Lhokseumawe · city centre",
+      "side": "south",
+      "x": 2120,
+      "y": 900,
+      "w": 160,
+      "h": 10,
+      "to": {
+        "room": "lhokseumawe_centre",
+        "spawn": "from_unimal_campus"
+      }
+    }
+  ],
+  "onEnter": [
+    "ev_unimal_first_visit"
+  ]
+}

@@ -33,8 +33,10 @@ The source of truth for the registry is [`src/data/world/world01.json`](../../sr
 | `batuphat_west` | Batuphat | exterior | ✅ provisional (new) | east → street; Mixue; west road 🔒 | homes and warung kopi (**background**), small park, **becak motor** + driver, child NPC |
 | `minimarket` (**Indomaret**) | Batuphat | interior | ✅ provisional | south → street | **enterable** · real-world reference: Indomaret (TEMP colours and text only) · ⚠ brand review |
 | `mixue` | Batuphat | interior | ✅ provisional (new) | south → west block | **enterable** · real-world reference: Mixue (TEMP colours and text only) · ⚠ brand review |
-| `workplace` | Batuphat | interior | ✅ **story-configurable** (variants: office *(default)*, dimsum shop) | south → street | story-critical · no real name or layout; the CD chooses the variant in the registry |
-| `lhokseumawe_centre` | Lhokseumawe city | exterior | ⏳ story-pending | — | behind both locked road ends |
+| `workplace` | Batuphat | interior | ✅ **story-configurable** (variants: **dimsum shop (active)**, office) | south → street | story-critical · no real name or layout; one registry line switches the variant |
+| `lhokseumawe_road` | Lhokseumawe city | exterior | ✅ provisional (P3) | west → Batuphat street; east → city centre | warung, rice fields, fuel station, bus stop (background/inspectable) |
+| `lhokseumawe_centre` | Lhokseumawe city | exterior | ✅ provisional (P3) | west → road; north gate → Unimal; east 🔒 planned | town square, grand mosque, bank, pharmacy, kedai kopi (background/inspectable) |
+| `unimal_campus` | Unimal | exterior | ✅ provisional (P3) | south gate → city centre | enterable campus grounds; rectorate, library, faculty (background/inspectable) |
 | `travel_maps` | — | exterior | ⏳ story-pending | — | Febri as a companion NPC; not in this sprint |
 
 **Brand notice:**
@@ -43,7 +45,59 @@ The source of truth for the registry is [`src/data/world/world01.json`](../../sr
 - Exact logos, wordmarks and trade dress must be **reviewed before any public release** (flagged with `brandReview` in the registry and specs).
 - The map id `minimarket` is kept unchanged for save compatibility.
 
-## P2 (this checkpoint)
+## P3 — Lhokseumawe city, Unimal, inspectable background (Issue #23)
+**Playable first, visual refinement later.** The topology is **fictionalised**: it is not a claim about real streets or distances.
+
+### Provisional world diagram
+```mermaid
+flowchart LR
+  subgraph Home["Zila's home (story-critical)"]
+    BR[Bedroom] --- HALL[Upstairs hall] --- LR[Living room]
+    LR --- KIT[Kitchen]
+    LR --- YARD[Front yard]
+  end
+  YARD --- ST[Batuphat street]
+  ST --- IND["Indomaret (enterable)"]
+  ST --- WP["Workplace · dimsum TEMP (story-critical)"]
+  ST --- WB[Batuphat west block] --- MIX["Mixue (enterable)"]
+  WB -. locked .-> BEY[(batuphat_beyond · planned)]
+  ST --- RD[Road to Lhokseumawe]
+  RD --- CC[Lhokseumawe city centre]
+  CC --- UNI["Universitas Malikussaleh · Unimal (enterable campus)"]
+  CC -. locked .-> MORE[(lhokseumawe_more · planned)]
+```
+
+### What P3 added
+| | |
+|---|---|
+| **New maps** | `lhokseumawe_road`, `lhokseumawe_centre`, `unimal_campus`. The street's east road end is now **open** in both directions. |
+| **World now** | **13 connected maps**, 12 two-way door links, 2 locked "planned" exits, **14 active NPCs**, 70 object interactions (19 of them inspectable landmarks) |
+| **Unimal** | A campus destination reached through a named gate arch on the city square (text only, no logo). It has rectorate, library and faculty buildings (inspectable), a notice board, a campus map, benches, students and campus security. **No campus-specific personal events.** |
+| **Dimsum workplace** | The **active** workplace variant (registry `placeholders.workplace.variant = "dimsum"`), still TEMP. Cashier loop: clock in → take the customer's order → send it to the kitchen pass → hand over & take payment ×3 → clock out. The customer is present only during an unfinished shift (NPC `showIf`). The office variant is kept (`?variant=office` in QA builds). |
+| **Location tiers** | story-critical / enterable / background. Background landmarks are **inspectable**: tap/click or E shows their name and a neutral comment. Listed in the registry (`inspectables`), checked by tests. |
+| **Reusable systems** | `inspect` shorthand on any placement; NPC `showIf` story conditions; per-placement TEMP restyling of generic facades; multi-world registry loader (`src/world/registry.ts`); **`scripts/new-map.mjs`** scaffolds a connected map (doors both ways, return spawns, registry entry) in one command. This is the base for Sabang and Jogja. |
+
+### Locations by tier (World 01)
+- **Story-critical:** Zila's house (bedroom, hall, living room, kitchen, yard); workplace (dimsum TEMP).
+- **Enterable:** Indomaret; Mixue; Unimal campus grounds; the streets and city maps themselves.
+- **Background / inspectable (18 registry entries):**
+  - **Road:** warung nasi, rice fields, fuel station, bus stop, road sign.
+  - **City:** bank, pharmacy, grand mosque, kedai kopi, town square fountain, campus sign.
+  - **Unimal:** rectorate, library, faculty building, notice board, campus map.
+  - **Batuphat:** neighbours' houses.
+
+### Assumptions (safe and reversible; documented instead of blocking)
+1. Batuphat → road → city centre → Unimal is a **provisional, compressed** layout. Rearranging means editing door data; the graph tests catch mistakes.
+2. Background buildings show neutral placeholder comments only. **Interiors are built when the story asks for them.**
+3. The grand mosque, bank and fuel station use **generic** names and no brands.
+4. The dimsum workplace stays unnamed, with a TEMP layout.
+
+### Optional review items (not blockers)
+- Which Unimal buildings deserve interiors (e.g. a faculty, the library), and which story moments happen there.
+- Whether the city centre should show a specific real landmark by name.
+- The dimsum shop's real name and layout, and the cashier dialogue lines.
+
+## P2 
 - **Story-configurable workplace:** rooms can declare data-driven **variants** that share doors, spawns and size.
   - The workplace has two playable TEMP layouts: **office** (default) and **dimsum shop**.
   - Dimsum loop: clock in → pick up a steamer basket at the counter → serve 3 tables, one basket at a time → clock out. Placeholder cook and customer NPCs.
@@ -123,6 +177,28 @@ All maps were measured in one run at 1280×720 (frames per second, afternoon / n
 - **Galaxy A05-class physical test: still outstanding.** Candidate follow-ups depend on that test:
   1. A lower render scale outdoors.
   2. Merging static exterior layers into cached chunks.
+
+### P3 exterior measurements (headless proxy — NOT device results)
+- **Desktop 1280×720, fps (afternoon / night):**
+
+  | Map | fps |
+  |---|---|
+  | Bedroom | 18.5 / 17.3 |
+  | Street | 15.3 / 14.0 |
+  | Road | 14.5 / 13.0 |
+  | **City centre** | **9.8 / 11.3** (heaviest: 351 display objects) |
+  | Unimal | 13.3 / 13.5 |
+
+- **Emulated Android, render scale 2 / 1.5 / 1, night:**
+
+  | Map | Scale 2 | Scale 1.5 | Scale 1 |
+  |---|---|---|---|
+  | City centre | 10.7 fps | 17.7 fps | 34.0 fps |
+  | Unimal | 11.0 fps | 18.0 fps | 33.3 fps |
+
+  Adaptive resolution (P2) handles this on slow devices.
+- The device benchmark (`?fresh&bench`) now includes the city centre at night.
+- Follow-up if a real device confirms the cost: cache the static exterior layers of the city centre into chunks.
 
 ## Next work packages
 1. **Real-world references:** with CD-supplied photos, refine the Indomaret front and interior, Mixue, the warung, the house front and the street proportions (TEMP data only until the art direction is confirmed).

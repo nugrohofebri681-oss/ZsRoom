@@ -63,6 +63,10 @@
       "wall": {
         "x": 290,
         "z": 0
+      },
+      "inspect": {
+        "name": "House",
+        "comment": "A house on the block. (Background building.)"
       }
     },
     {
@@ -91,6 +95,10 @@
       "wall": {
         "x": 1690,
         "z": 0
+      },
+      "inspect": {
+        "name": "House",
+        "comment": "A house on the block. (Background building.)"
       }
     },
     {
@@ -264,7 +272,7 @@
       "w": 10,
       "h": 260,
       "to": {
-        "room": "lhokseumawe_centre",
+        "room": "batuphat_beyond",
         "spawn": "default"
       },
       "locked": {

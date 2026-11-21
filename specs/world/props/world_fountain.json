@@ -1,0 +1,45 @@
+{
+  "id": "world_fountain",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Town square fountain (TEMP world placeholder)",
+  "density": 1,
+  "canvas": {
+    "width": 216,
+    "height": 254
+  },
+  "pivot": {
+    "x": 108,
+    "y": 242,
+    "meaning": "front-centre floor contact point"
+  },
+  "footprint": {
+    "widthCm": 200,
+    "depthCm": 200
+  },
+  "heightsCm": {
+    "top": 90
+  },
+  "collision": [
+    {
+      "x": -100.0,
+      "y": -200,
+      "w": 200,
+      "h": 200
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "maxSideOverhangCm": 0,
+  "temp": {
+    "shape": "round",
+    "body": "#D9D4C7",
+    "top": "#8EC6D8",
+    "maxDensity": 1
+  },
+  "$comment": "World 01 placeholder geometry (stable id, footprint, pivot, collision)."
+}

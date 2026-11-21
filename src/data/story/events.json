@@ -358,6 +358,33 @@
       ]
     },
     {
+      "id": "ev_road_first_visit",
+      "once": true,
+      "effects": [
+        {
+          "toast": "Road to Lhokseumawe (provisional)"
+        }
+      ]
+    },
+    {
+      "id": "ev_city_first_visit",
+      "once": true,
+      "effects": [
+        {
+          "toast": "Lhokseumawe · city centre (provisional)"
+        }
+      ]
+    },
+    {
+      "id": "ev_unimal_first_visit",
+      "once": true,
+      "effects": [
+        {
+          "toast": "Universitas Malikussaleh (Unimal) · provisional campus"
+        }
+      ]
+    },
+    {
       "id": "ev_dimsum_clock",
       "requires": [
         {
@@ -376,28 +403,28 @@
         },
         {
           "setVar": [
-            "served",
+            "ordersDone",
             0
           ]
         },
         {
           "setVar": [
-            "carrying",
+            "order",
             ""
           ]
         },
         {
-          "toast": "Clocked in · serve 3 tables"
+          "toast": "Clocked in · cashier duty (3 orders)"
         }
       ],
       "otherwise": [
         {
-          "toast": "Already clocked in ({served}/3 served)"
+          "toast": "Already clocked in ({ordersDone}/3 orders)"
         }
       ]
     },
     {
-      "id": "ev_dimsum_pick",
+      "id": "ev_dimsum_take_order",
       "requires": [
         {
           "varEq": [
@@ -407,13 +434,13 @@
         },
         {
           "varEq": [
-            "carrying",
+            "order",
             ""
           ]
         },
         {
           "varLt": [
-            "served",
+            "ordersDone",
             3
           ]
         }
@@ -421,50 +448,85 @@
       "effects": [
         {
           "setVar": [
-            "carrying",
-            "steamer basket"
+            "order",
+            "taken"
           ]
         },
         {
-          "toast": "Picked up a steamer basket"
+          "say": {
+            "speaker": "Customer",
+            "lines": [
+              "One basket of siu mai and a tea, please."
+            ]
+          }
+        },
+        {
+          "toast": "Order taken · send it to the kitchen"
         }
       ],
       "otherwise": [
         {
-          "dialogue": "dlg_dimsum_cant_pick"
+          "dialogue": "dlg_dimsum_order_busy"
         }
       ]
     },
     {
-      "id": "ev_dimsum_serve",
+      "id": "ev_dimsum_pass",
       "requires": [
         {
-          "varNe": [
-            "carrying",
-            ""
+          "varEq": [
+            "order",
+            "taken"
           ]
         }
       ],
       "effects": [
         {
           "setVar": [
-            "carrying",
+            "order",
+            "ready"
+          ]
+        },
+        {
+          "toast": "Kitchen: order ready — collect it and go to the cashier"
+        }
+      ],
+      "otherwise": [
+        {
+          "dialogue": "dlg_dimsum_pass_idle"
+        }
+      ]
+    },
+    {
+      "id": "ev_dimsum_checkout",
+      "requires": [
+        {
+          "varEq": [
+            "order",
+            "ready"
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "setVar": [
+            "order",
             ""
           ]
         },
         {
           "incVar": [
-            "served",
+            "ordersDone",
             1
           ]
         },
         {
-          "toast": "Served ({served}/3)"
+          "toast": "Order {ordersDone}/3 complete · payment received"
         }
       ],
       "otherwise": [
         {
-          "toast": "Pick up a basket at the counter first"
+          "dialogue": "dlg_dimsum_checkout_idle"
         }
       ]
     },
@@ -479,7 +541,7 @@
         },
         {
           "varGte": [
-            "served",
+            "ordersDone",
             3
           ]
         }

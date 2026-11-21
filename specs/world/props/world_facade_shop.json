@@ -1,0 +1,44 @@
+{
+  "id": "world_facade_shop",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Generic shop front (TEMP world placeholder)",
+  "density": 1,
+  "canvas": {
+    "width": 436,
+    "height": 384
+  },
+  "pivot": {
+    "x": 218,
+    "y": 372,
+    "meaning": "bottom-centre of the front face (wall item)"
+  },
+  "footprint": {
+    "widthCm": 420,
+    "depthCm": 4
+  },
+  "heightsCm": {
+    "top": 360
+  },
+  "collision": [],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "placement": {
+    "type": "wall",
+    "wall": "north"
+  },
+  "temp": {
+    "shape": "storefront",
+    "kind": "shop",
+    "sign": "SHOP",
+    "accent": "#6B8F71",
+    "awning": "#E9C46A",
+    "wall": "#F1E9DC",
+    "maxDensity": 1
+  },
+  "$comment": "World 01 placeholder (wall-mounted). Generic: placements may restyle it with \"temp\" (sign text, colours)."
+}

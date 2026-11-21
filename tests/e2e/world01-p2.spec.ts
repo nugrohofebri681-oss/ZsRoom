@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { boot, closeDialogue, state, tapObject, until, useDoor } from './helpers';
+import { boot, closeDialogue, dimsumShift, state, until, useDoor } from './helpers';
 
 const S = (p: Page): Promise<any> => state(p);
 const OUT = 'docs/reviews/world01';
@@ -7,24 +7,18 @@ const OUT = 'docs/reviews/world01';
 test.describe('World 01 P2', () => {
   test.setTimeout(240_000);
 
-  test('workplace dimsum variant (QA preview): clock in → carry 3 steamer baskets → clock out; same doors as the office', async ({ page, isMobile }) => {
-    const errors = await boot(page, '?fresh&fast&room=workplace&variant=dimsum');
+  test('workplace (dimsum, registry default): cashier duty — 3 orders taken, sent to the kitchen, handed over and paid', async ({ page, isMobile }) => {
+    const errors = await boot(page, '?fresh&fast&room=workplace');
     expect((await S(page)).variant).toBe('dimsum');
-    await tapObject(page, 640, 4, 148, "s.vars.shift === 'in_progress'");
-    for (const [x, y, n] of [[170, 300, 1], [630, 300, 2], [170, 450, 3]] as const) {
-      await tapObject(page, 400, 130, 80, "s.vars.carrying === 'steamer basket'");
-      await tapObject(page, x, y, 60, `s.vars.served === ${n}`);
-    }
-    if (!isMobile) await page.screenshot({ path: `${OUT}/desktop-14-workplace-dimsum-variant.png` });
-    await tapObject(page, 730, 4, 148, 's.modal === true');
-    await closeDialogue(page, isMobile);
-    expect((await S(page)).vars.shift).toBe('done');
+    expect((await S(page)).npcs.find((n: any) => n.id === 'npc_dimsum_customer').visible).toBe(false);   // no customer before the shift
+    await dimsumShift(page, isMobile, `${OUT}/desktop-14-workplace-dimsum-cashier.png`);
+    expect((await S(page)).vars).toMatchObject({ shift: 'done', ordersDone: 3 });
     await useDoor(page, isMobile, 'exit', 'batuphat_street');        // the shared door still leads to the street
     expect(errors).toEqual([]);
   });
 
-  test('the default workplace is still the office placeholder (registry choice)', async ({ page }) => {
-    await boot(page, '?fresh&room=workplace');
+  test('the office variant stays available as a switchable placeholder (QA preview)', async ({ page }) => {
+    await boot(page, '?fresh&room=workplace&variant=office');
     expect((await S(page)).variant).toBe('office');
   });
 

@@ -81,3 +81,21 @@ export async function tapObject(page: Page, x: number, y: number, z: number, use
   await page.waitForTimeout(150);
 }
 
+
+/** Dimsum workplace (cashier duty): clock in → 3× (take order from the customer → kitchen pass → hand over & pay) → clock out. */
+export async function dimsumShift(page: Page, isMobile: boolean, shot?: string): Promise<void> {
+  await tapObject(page, 640, 4, 148, "s.vars.shift === 'in_progress'");                       // time clock
+  for (let n = 1; n <= 3; n++) {
+    await page.evaluate(() => (window as any).__ZS.tapWorld(600, 410)); await until(page, 's.path === 0', 15000);
+    await until(page, "s.nearest === 'npc:npc_dimsum_customer'");
+    await press(page, isMobile);
+    await until(page, "s.vars.order === 'taken'");
+    await closeDialogue(page, isMobile);
+    await tapObject(page, 400, 130, 80, "s.vars.order === 'ready'");                           // kitchen pass
+    await tapObject(page, 600, 300, 80, `s.vars.ordersDone === ${n}`);                         // cashier counter
+    if (shot && n === 2 && !isMobile) await page.screenshot({ path: shot });
+  }
+  await until(page, 's.npcs.find((x) => x.id === "npc_dimsum_customer").visible === false');   // no customer waiting after 3 orders
+  await tapObject(page, 730, 4, 148, 's.modal === true');
+  await closeDialogue(page, isMobile);
+}

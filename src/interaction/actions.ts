@@ -47,6 +47,7 @@ export interface ActionResult {
   toggleLight?: boolean;
   dialogueId?: string;
   eventId?: string;
+  inspect?: { name: string; comment: string };
 }
 
 export function applyAction(action: ActionSpec | undefined, vars: Vars, label: string): ActionResult {
@@ -59,6 +60,8 @@ export function applyAction(action: ActionSpec | undefined, vars: Vars, label: s
       return { vars: v, dialogueId: action.id };
     case 'event':
       return { vars: v, eventId: action.id };
+    case 'inspect':
+      return { vars: v, inspect: { name: action.name, comment: action.comment } };
     case 'rest': {
       const cur: Phase = isPhase(v.phase) ? v.phase : 'evening';
       const next = nextPhase(cur);

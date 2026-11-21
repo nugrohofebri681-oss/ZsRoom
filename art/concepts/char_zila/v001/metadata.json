@@ -1,0 +1,114 @@
+{
+  "assetId": "char_zila",
+  "version": "v001",
+  "specVersion": "0.10.0",
+  "author": "codex",
+  "createdAt": "2026-11-21T02:01:18.717728+00:00",
+  "submissionType": "concept",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "Not exposed",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+    ]
+  },
+  "files": {
+    "rawCandidates": [
+      {
+        "path": "sources/concept-a.png",
+        "sha256": "e3d7c0dcf9fe35d006946eea2cbbd36f4f183a5406a221ac442e3dde73241522"
+      },
+      {
+        "path": "sources/concept-b.png",
+        "sha256": "01c2a21c6b3e151b6f5fba412c06f2cac1a5f8f1d2f8b7c769d1c5e20d23e2ff"
+      },
+      {
+        "path": "sources/concept-c.png",
+        "sha256": "19dd29ad9e1d47bf60840bbaba7abacb6b7e53dbea59fcc0b1bbe5c49db5c75f"
+      }
+    ],
+    "board": {
+      "path": "char_zila_v001.png",
+      "sha256": "2b5efbc42a6a3de9e21213be4b16916230fb3971faadc250b9de765b7481bf95"
+    }
+  },
+  "provenance": "Three original built-in imagegen concept sheets with raw outputs preserved byte-identical. Approved furniture conditions visual finish only.",
+  "postProcessing": [
+    "No repainting of generated sheets. Browser CSS crops front figures for scale comparisons; uniform display scaling to330pxHD and165pxSD, soles aligned with approved furniture pivots.",
+    "Review board is a Chromium screenshot, not a final character export. Exact review assembly script in prompt.md."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Exploration only: review board is not a runtime frame, atlas or layered master. Draft256x400 production canvas intentionally not used.",
+      "Actual front crown-to-sole/head ratios approx A6.40, B5.83, C6.46 (+/-0.2), rather than requested4.6/5.0/5.3. Measurements use hair crown to chin; not a production anatomical standard.",
+      "Views are illustrated silhouette studies, not registered flat silhouette masks. Side views vary in chin, body thickness and hair volume. Camera is closer to frontal illustration than the final game elevation.",
+      "Face language still shares generic storybook/animation conventions; identity needs deliberate refinement before final approval. A and C remain more slender than proposed.",
+      "Opaque paper backgrounds and baked local foot shadows remain in concept sheets. No separated layers, transparency cleanup, animation, rigging or gameplay integration.",
+      "At SD165px height eye/ornament microdetail diminishes. Brown hair/pink top/cream bottom remain recognisable; portrait polish must not substitute for sprite testing."
+    ]
+  },
+  "cost": "Existing subscription built-in image generation only, no paid APIs or additional paid services.",
+  "notes": {
+    "recommendation": "B as starting point for further review/refinement only, no final design selected.",
+    "baseCommit": "7e3706dde9a79ee9fd5274e3e72b0b5989f24604",
+    "febriScope": "Not playable; chat/call/VC before Travel, potential physical companion NPC in Travel. No movement sprite production. Shared head-size/visible3\u20136cm future height difference remains to be validated after Zila proportion approval.",
+    "routeMigration": "Issue24 housekeeping only; all four PNG files byte-identical to PR20. Branch r2 is routing revision, not new artwork or v002."
+  },
+  "measurements": [
+    {
+      "c": "a",
+      "name": "A \u2014 Tender Storybook",
+      "crop": [
+        12,
+        41,
+        350,
+        1148
+      ],
+      "chin": 214,
+      "ratio": 6.4
+    },
+    {
+      "c": "b",
+      "name": "B \u2014 Everyday Illustrated",
+      "crop": [
+        20,
+        124,
+        331,
+        1150
+      ],
+      "chin": 300,
+      "ratio": 5.83
+    },
+    {
+      "c": "c",
+      "name": "C \u2014 Quiet Urban Storybook",
+      "crop": [
+        30,
+        97,
+        351,
+        1098
+      ],
+      "chin": 252,
+      "ratio": 6.46
+    }
+  ],
+  "reviewBoardDimensions": [
+    1800,
+    1958
+  ],
+  "validation": {
+    "rawHashMatches": 3,
+    "visualInspection": "Actual concept sheets and comparison board inspected.",
+    "runtimeCompliance": "NOT CLAIMED: concepts intentionally differ from production sprite canvas and alpha requirements.",
+    "visualApproval": "pending",
+    "officialProductionValidator": {
+      "status": "TECHNICAL FAIL for runtime use (concept-only)",
+      "errors": [
+        "canvas1800x1958 instead of256x400",
+        "RGB review screenshot instead ofRGBA runtime frame"
+      ]
+    }
+  }
+}

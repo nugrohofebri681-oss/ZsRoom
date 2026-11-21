@@ -19,7 +19,7 @@ export interface RoomDoor {
   /** Continuous-floor opening (P4): a gap in the side wall into the neighbouring zone — no stopper, no trigger. */
   opening?: boolean;
   /** Set on doors of composite floors: the zone rectangle the door belongs to (global x, its width/height). */
-  zone?: { x: number; w: number; h: number };
+  zone?: { x: number; y?: number; w: number; h: number };
 }
 
 /** Which wall a door sits in (explicit `side`, else derived from its position). */
@@ -121,7 +121,7 @@ export interface CompiledRoom {
   anchors: WorldAnchor[];
 }
 
-const WALL = 40; // cm thickness of the implicit boundary walls
+export const WALL = 40; // cm thickness of the implicit boundary walls
 export const DOOR_DEPTH = 30; // cm an actor can step into a south doorway before the transition fires
 
 const roomModules = import.meta.glob('../data/rooms/*.json', { eager: true, import: 'default' }) as Record<string, RoomData>;

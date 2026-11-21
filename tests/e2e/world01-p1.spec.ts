@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { boot, closeDialogue, press, roomData, state, tapObject, until, useDoor, walkToZone, SHOTS } from './helpers';
+import { boot, closeDialogue, press, roomData, state, tapObject, until, useDoor, walkToZone, SHOTS, spawnPos } from './helpers';
 
 /** World 01 continuation: kitchen, west Batuphat block, Mixue, NPC yielding, memory over many transitions. */
 const S = (p: Page): Promise<any> => state(p);
@@ -49,11 +49,11 @@ test.describe('World 01 continuation', () => {
     await useDoor(page, isMobile, 'exit', 'batuphat_west');
     expect((await S(page)).player.x).toBe(roomData('batuphat_west').spawns.from_mixue.x);
     await useDoor(page, isMobile, 'to_street', 'batuphat_street');
-    expect((await S(page)).player).toMatchObject({ x: roomData('batuphat_street').spawns.from_west.x, y: roomData('batuphat_street').spawns.from_west.y });
+    expect((await S(page)).player).toMatchObject(spawnPos('batuphat_street', 'from_west'));
     // save → resume after the new maps
     await page.goto('/?fast'); await page.waitForFunction(() => (window as any).__ZS?.state?.());
     const s = await S(page);
-    expect(s.roomId).toBe('batuphat_street');
+    expect(s.roomId).toBe('batuphat_region'); expect(s.zone).toBe('batuphat_street');
     expect(s.visited).toEqual(expect.arrayContaining(['batuphat_west', 'mixue']));
     expect(errors).toEqual([]);
   });

@@ -2,7 +2,7 @@ import * as Phaser from 'phaser';
 import { groundToRender, DEPTH_SCALE } from '../core/projection';
 import { getCharacterSpec, type ActionSpec, type CharacterSpec, type PropSpec } from '../core/specs';
 import { doorOpen, doorSide, DOOR_DEPTH, type CompiledRoom, type PropInstance, type RoomData, type RoomDoor } from '../world/room';
-import { compileMap, resolveDestination, zoneAt, type ZoneInfo } from '../world/floor';
+import { compileMap, resolveDestination, zoneAt, type FenceDef, type ZoneInfo } from '../world/floor';
 import { initNpc, npcPresent, npcSolid, stepNpc, yieldTo, NPC_RADIUS, type NpcData, type NpcState } from '../world/npc';
 import { NpcView } from '../actors/npcView';
 import { EVENTS, DIALOGUE, check, runEvent, type Presentation } from '../story/events';
@@ -18,7 +18,7 @@ import { loadGame, saveGame, safeStorage } from '../systems/save';
 import { textureKey, type AssetManifest } from '../systems/manifest';
 import { drawGreyboxProp } from '../ui/greybox';
 import { ensureTempTexture } from '../ui/placeholders';
-import { buildShell, type ShellInfo } from '../ui/shell';
+import { buildShell, runsOutside, type ShellInfo } from '../ui/shell';
 import { LightingSystem } from '../systems/lighting';
 import { WalkGrid } from '../world/pathfinding';
 import { LayeredCharacter } from '../animation/character';
@@ -49,7 +49,7 @@ interface Seated { propKey: string; exit: { x: number; y: number }; depth: numbe
 let SCENE_STARTS = 0;
 
 export class RoomScene extends Phaser.Scene {
-  private room!: CompiledRoom & { zones?: ZoneInfo[] };
+  private room!: CompiledRoom & { zones?: ZoneInfo[]; bbox?: { x: number; y: number; w: number; h: number }; fences?: FenceDef[] };
   /** Current logical room (zone) on a continuous floor; the map id itself for single-room maps. */
   private zone = '';
   private character!: CharacterSpec;
@@ -130,7 +130,8 @@ export class RoomScene extends Phaser.Scene {
     this.keyboard = new KeyboardInput(this, this.input$);
 
     const { w: rw, h: rh } = this.room.data.sizeCm, wallH = this.room.data.wallHeightCm;
-    this.lighting = new LightingSystem(this, `lightmap:${this.room.data.id}`, { x: -40, y: -wallH - 40, w: rw + 80, h: wallH + rh * DEPTH_SCALE + 80 });
+    const vb = this.viewBox();
+    this.lighting = new LightingSystem(this, `lightmap:${this.room.data.id}`, { x: vb.x - 40, y: vb.top - 40, w: vb.w + 80, h: vb.bottom - vb.top + 80 });
     this.grid = new WalkGrid(rw, rh, this.room.solids, this.character.collision.radiusCm);
     // A resumed position must be standable (layouts change between builds): otherwise use the map's default spawn.
     const inside = this.pos.x >= 0 && this.pos.y >= 0 && this.pos.x <= rw && this.pos.y <= rh;
@@ -138,6 +139,7 @@ export class RoomScene extends Phaser.Scene {
     this.doorsArmed = false;
     this.drawShell();
     if (this.room.data.kind === 'exterior') this.addExteriorSky();
+    if (this.room.fences?.length) this.drawFences();
     this.drawProps();
     this.spawnNpcs();
     this.floorPatches = floorPatches(this.room.props);
@@ -184,18 +186,26 @@ export class RoomScene extends Phaser.Scene {
 
   private fitCamera(): void {
     const cam = this.cameras.main;
-    const { w, h } = this.room.data.sizeCm;
     // Exploration framing (core/framing.ts): the character is a small share of the screen; the map is never
     // squeezed to fit, the camera scrolls instead. Manual zoom multiplies on top.
     const dpr = (this.registry.get('dpr') as number | undefined) ?? 1;
     const zoom = exploreZoom(cam.height, dpr, this.character.heightCm, this.room.data.kind === 'exterior', this.zoomMul);
     cam.setZoom(zoom);
-    const top = -this.room.data.wallHeightCm - 30;
-    const contentW = w + 120;
-    const contentH = h * DEPTH_SCALE - top + 60;
+    // Camera bounds = the map's (or the whole region's) visible box: the follow clamps gently at the edges.
+    const v = this.viewBox(), top = v.top - 30;
+    const contentW = v.w + 120, cx = v.x + v.w / 2;
+    const contentH = v.bottom - top + 60;
     const bw = Math.max(contentW, cam.width / zoom);
     const bh = Math.max(contentH, cam.height / zoom);
-    cam.setBounds(w / 2 - bw / 2, top + contentH / 2 - bh / 2, bw, bh);
+    cam.setBounds(cx - bw / 2, top + contentH / 2 - bh / 2, bw, bh);
+  }
+
+  /** Render-space box of everything drawn: x range, top of the tallest back wall, bottom of the ground. */
+  private viewBox(): { x: number; w: number; top: number; bottom: number } {
+    const b = this.room.bbox, d = this.room.data;
+    if (!b) return { x: 0, w: d.sizeCm.w, top: -d.wallHeightCm, bottom: d.sizeCm.h * DEPTH_SCALE };
+    const top = Math.min(...this.room.zones!.map((z) => z.y * DEPTH_SCALE - z.data.wallHeightCm));
+    return { x: b.x, w: b.w, top, bottom: (b.y + b.h) * DEPTH_SCALE };
   }
 
   private zoomBy(d: number): void {
@@ -209,19 +219,23 @@ export class RoomScene extends Phaser.Scene {
     if (this.room.zones) {
       // Continuous floor: each zone's shell (floor, back wall, side-wall caps with the opening gaps) is built in
       // its own local coordinates, then shifted to the zone's place on the floor (render x = ground x).
+      // Outdoor regions: zones are offset in y as well, shared edges stay open (no caps, wall gaps).
+      const region = !!this.room.bbox;
       for (const z of this.room.zones) {
         const before = this.children.list.length;
-        const info = buildShell(this, z.data, manifest, density);
+        const info = buildShell(this, z.data, manifest, density, region ? { region, wallGaps: z.wallGaps } : {});
         if (!this.shellInfo) this.shellInfo = info;
-        for (const o of this.children.list.slice(before)) (o as unknown as { x: number }).x += z.x;
+        for (const o of this.children.list.slice(before)) { const t = o as unknown as { x: number; y: number }; t.x += z.x; t.y += z.y * DEPTH_SCALE; }
       }
     } else this.shellInfo = buildShell(this, this.room.data, manifest, density);
     const g = this.add.graphics().setDepth(-99989);
     for (const d of this.room.data.doors) this.drawNorthDoor(g, d);
   }
 
-  private drawNorthDoor(g: Phaser.GameObjects.Graphics, d: RoomDoor): void {
+  private drawNorthDoor(g0: Phaser.GameObjects.Graphics, d: RoomDoor): void {
     if (doorSide(d, this.room.data.sizeCm) !== 'north' || d.style === 'none') return; // other sides: part of the shell
+    // a door in a region zone sits on that zone's back wall
+    const g = d.zone?.y ? this.add.graphics().setDepth(g0.depth).setPosition(0, d.zone.y * DEPTH_SCALE) : g0;
     if (d.style === 'stairs') {                       // a stairwell going up through the back wall
       g.fillStyle(0x3a2530, 1).fillRect(d.x, -240, d.w, 240);
       for (let i = 0; i < 9; i++) { const y = -i * 26; g.fillStyle(i % 2 ? 0x8a5a3c : 0xa8754c, 1).fillRect(d.x + 4, y - 26, d.w - 8, 26); g.fillStyle(0x5b3a29, 0.6).fillRect(d.x + 4, y - 3, d.w - 8, 3); }
@@ -436,11 +450,11 @@ export class RoomScene extends Phaser.Scene {
       if (!doorOpen(d, this.flags)) continue;
       const side = doorSide(d, this.room.data.sizeCm);
       // a door on a continuous floor belongs to its zone's rectangle; plain maps use the whole map
-      const zx = d.zone?.x ?? 0, zw = d.zone?.w ?? w, zh = d.zone?.h ?? h;
+      const zx = d.zone?.x ?? 0, zy = d.zone?.y ?? 0, zw = d.zone?.w ?? w, zh = (d.zone?.h ?? h) + zy;   // zh: the zone's south edge
       const alongNS = p.x > d.x && p.x < d.x + d.w, alongEW = p.y > d.y && p.y < d.y + d.h;
       // tolerance: stopping a hair short of the threshold stopper still exits
       const exit = side === 'south' ? alongNS && p.y >= zh + DOOR_DEPTH - r - 6
-        : side === 'north' ? alongNS && p.y <= r + 0.5 && mv.y < 0
+        : side === 'north' ? alongNS && p.y <= zy + r + 0.5 && mv.y < 0
         : side === 'west' ? alongEW && p.x <= zx - DOOR_DEPTH + r + 6
         : alongEW && p.x >= zx + zw + DOOR_DEPTH - r - 6;
       const near = side === 'south' ? alongNS && p.y > zh - 4 : side === 'west' ? alongEW && p.x < zx + 4 : side === 'east' ? alongEW && p.x > zx + zw - 4 : false;
@@ -649,7 +663,7 @@ export class RoomScene extends Phaser.Scene {
 
   /** Entering a zone on a continuous floor: title, ambience, visited list and zone events — no scene change. */
   private updateZone(): void {
-    const z = zoneAt(this.room.zones, this.pos.x);
+    const z = zoneAt(this.room.zones, this.pos.x, this.pos.y);
     const id = z?.id ?? this.room.data.id;
     if (id === this.zone) return;
     this.zone = id;
@@ -734,9 +748,41 @@ export class RoomScene extends Phaser.Scene {
 
   /** Exterior maps: the time-of-day sky above the building row (same texture as window skies). */
   private addExteriorSky(): void {
+    if (this.room.bbox) {
+      // region: sky above every exposed back-wall run, reaching up to the top of the view (the void behind
+      // lower building rows is sky too, never a dark seam)
+      const v = this.viewBox();
+      for (const z of this.room.zones!) {
+        const wallTop = z.y * DEPTH_SCALE - z.data.wallHeightCm;
+        for (const [a, b] of runsOutside(0, z.w, z.wallGaps ?? [])) {
+          const x0 = z.x + a - (a === 0 ? 40 : 0), x1 = z.x + b + (b === z.w ? 40 : 0), top = Math.min(v.top - 60, wallTop - 260);
+          const img = this.add.image(x0, top, this.skyTexture()).setOrigin(0, 0).setDisplaySize(x1 - x0, wallTop - top + 2).setDepth(-100001);
+          this.skies.push({ img, curtains: this.add.graphics() });
+        }
+      }
+      return;
+    }
     const { w } = this.room.data.sizeCm, wallH = this.room.data.wallHeightCm;
     const img = this.add.image(-40, -wallH - 260, this.skyTexture()).setOrigin(0, 0).setDisplaySize(w + 80, 262).setDepth(-100001);
     this.skies.push({ img, curtains: this.add.graphics() });
+  }
+
+  /** Region fences: low stucco walls with a cap, depth-sorted by their ground line (Zila walks behind / in front). */
+  private drawFences(): void {
+    for (const f of this.room.fences ?? []) {
+      const hgt = f.height ?? 90, col = Phaser.Display.Color.HexStringToColor(f.color ?? '#EFE6D8').color;
+      const horizontal = f.w >= f.h;
+      // vertical (north–south) fences are split in short pieces so each sorts correctly against the actor
+      const pieces = horizontal ? [{ x: f.x, y: f.y, w: f.w, h: f.h }] : Array.from({ length: Math.ceil(f.h / 50) }, (_, i) => ({ x: f.x, y: f.y + i * 50, w: f.w, h: Math.min(50, f.h - i * 50) }));
+      for (const q of pieces) {
+        const g = this.add.graphics().setDepth(q.y + q.h).setName('fence');
+        const top = (q.y + q.h) * DEPTH_SCALE - hgt, back = q.y * DEPTH_SCALE - hgt;
+        g.fillStyle(col, 1).fillRect(q.x, top, q.w, hgt);                                   // front face
+        g.fillStyle(0xffffff, 0.35).fillRect(q.x, back, q.w, top - back + 4);                // cap (top surface)
+        g.fillStyle(0x8a7f75, 0.55).fillRect(q.x, top + hgt - 10, q.w, 10);                  // base band
+        if (horizontal) for (let x = q.x; x <= q.x + q.w; x += 120) g.fillStyle(0x8a7f75, 0.35).fillRect(Math.min(x, q.x + q.w - 6), top, 6, hgt);
+      }
+    }
   }
 
   // ---------------------------------------------------------------- sound + highlight
@@ -856,7 +902,8 @@ export class RoomScene extends Phaser.Scene {
         npcs: this.npcs.map((n) => ({ id: n.data.id, x: Math.round(n.state.x), y: Math.round(n.state.y), visible: n.view.sprite.visible, moving: n.state.moving })),
         mapKind: this.room.data.kind ?? 'interior',
         zone: this.zone,
-        zones: this.room.zones?.map((z) => ({ id: z.id, x: z.x, w: z.w, h: z.h })) ?? null,
+        zones: this.room.zones?.map((z) => ({ id: z.id, x: z.x, y: z.y, w: z.w, h: z.h })) ?? null,
+        bbox: this.room.bbox ?? null,
         sceneStarts: SCENE_STARTS,
         camera: { scrollX: Math.round(this.cameras.main.scrollX), scrollY: Math.round(this.cameras.main.scrollY), zoom: this.cameras.main.zoom, viewW: Math.round(this.cameras.main.worldView.width), viewH: Math.round(this.cameras.main.worldView.height) },
         inspectables: this.room.props.filter((p) => p.inspect).map((p) => ({ key: p.key, name: p.inspect!.name, inspected: this.inspected.has(p.key) })),
@@ -873,6 +920,7 @@ export class RoomScene extends Phaser.Scene {
       doorSpot: (id: string) => { const a = this.room.anchors.find((x) => x.key === `door:${id}`); return a ? { x: a.x, y: a.y } : null; },
       zoneSpawn: (zone: string) => this.room.data.spawns[`${zone}.default`] ?? (zone === this.room.data.id ? this.room.data.spawns.default : null),
       zoneOrigin: (zone: string) => this.room.zones?.find((z) => z.id === zone)?.x ?? 0,
+      zoneRect: (zone: string) => { const z = this.room.zones?.find((q) => q.id === zone); return z ? { x: z.x, y: z.y, w: z.w, h: z.h } : null; },
       /** Test hook: put an NPC somewhere (e.g. in Zila's way). */
       npcAt: (id: string, x: number, y: number) => { const n = this.npcs.find((q) => q.data.id === id); if (n) { n.state.x = x; n.state.y = y; n.state.target = null; n.state.waitMs = 3000; this.drawNpc(n, 0); } },
       setVars: (v: Vars) => { this.vars = { ...this.vars, ...v }; this.buildActor(); this.applyWorldVars(); },

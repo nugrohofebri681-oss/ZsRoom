@@ -16,7 +16,10 @@ const WALL_CAP = 0x3a2530;
 
 export interface ShellInfo { floor: { id: string; art: 'approved' | 'temp' }; wall: { id: string; art: 'approved' | 'temp' } }
 
-export function buildShell(scene: Phaser.Scene, room: RoomData, manifest: AssetManifest, density = 2): ShellInfo {
+/** Outdoor-region zones (P5): back-wall gaps where another zone continues north, and no cut-away caps (open edges). */
+export interface ShellOptions { wallGaps?: [number, number][]; region?: boolean }
+
+export function buildShell(scene: Phaser.Scene, room: RoomData, manifest: AssetManifest, density = 2, opts: ShellOptions = {}): ShellInfo {
   const { w, h } = room.sizeCm;
   const wallH = room.wallHeightCm;
   const floorH = h * K;
@@ -26,7 +29,8 @@ export function buildShell(scene: Phaser.Scene, room: RoomData, manifest: AssetM
 
   // Tiles are laid as plain quads (batched into one draw, cheapest fragment path on mobile GPUs: no
   // repeat shader). Edge tiles are cropped, so nothing spills outside the room.
-  tileQuads(scene, wallTile.key, wallTile.w, wallTile.h, 0, -wallH, w, wallH, wallH / wallTile.h);
+  const wallRuns = runsOutside(0, w, opts.wallGaps ?? []);
+  for (const [a, b] of wallRuns) tileQuads(scene, wallTile.key, wallTile.w, wallTile.h, a, -wallH, b - a, wallH, wallH / wallTile.h);
   // Ground zones (road etc.) are tiled in place of the base floor: base tiles fully inside a zone are skipped.
   const zones = (room.shell?.zones ?? []).map((z) => ({ ...z, rx: z.x, ry: z.y * K, rw: z.w, rh: z.h * K }));
   // visible vertical span of a base tile after removing zones that cover its full width (null = fully covered)
@@ -52,6 +56,17 @@ export function buildShell(scene: Phaser.Scene, room: RoomData, manifest: AssetM
   }
 
   const g = scene.add.graphics().setDepth(-99990);
+  if (opts.region) {
+    // open district: AO only under the back-wall runs, a lit edge where a wall run ends; no caps (the void
+    // outside the region is background, neighbouring zones continue seamlessly)
+    for (const [a, b] of wallRuns) {
+      g.fillGradientStyle(0x3a2530, 0x3a2530, 0x3a2530, 0x3a2530, 0.28, 0.28, 0, 0).fillRect(a, 0, b - a, 24);
+      g.fillGradientStyle(0x3a2530, 0x3a2530, 0x3a2530, 0x3a2530, 0.14, 0.14, 0, 0).fillRect(a, -wallH, b - a, 70);
+      for (const x of [a, b]) if (x > 0 && x < w) g.fillStyle(0x3a2530, 0.25).fillRect(x - 3, -wallH, 6, wallH);
+    }
+    drawSideDoors(g, room, w, floorH);
+    return { floor: { id: ids.floor, art: floorTile.art }, wall: { id: ids.wall, art: wallTile.art } };
+  }
   // ambient occlusion where the floor meets the walls
   g.fillGradientStyle(0x3a2530, 0x3a2530, 0x3a2530, 0x3a2530, 0.28, 0.28, 0, 0).fillRect(0, 0, w, 24);
   g.fillGradientStyle(0x3a2530, 0x3a2530, 0x3a2530, 0x3a2530, 0.22, 0, 0.22, 0).fillRect(0, -wallH, 18, wallH + floorH);
@@ -64,6 +79,11 @@ export function buildShell(scene: Phaser.Scene, room: RoomData, manifest: AssetM
     .fillRect(-SHELL_MARGIN, -wallH - SHELL_MARGIN, w + SHELL_MARGIN * 2, SHELL_MARGIN)
     .fillRect(-SHELL_MARGIN, floorH, w + SHELL_MARGIN * 2, SHELL_MARGIN);
   g.fillStyle(0xfff0f5, 0.18).fillRect(-3, -wallH, 3, wallH + floorH).fillRect(w, -wallH, 3, wallH + floorH).fillRect(0, floorH, w, 2.5);
+  drawSideDoors(g, room, w, floorH);
+  return { floor: { id: ids.floor, art: floorTile.art }, wall: { id: ids.wall, art: wallTile.art } };
+}
+
+function drawSideDoors(g: Phaser.GameObjects.Graphics, room: RoomData, w: number, floorH: number): void {
   for (const d of room.doors) {
     const side = doorSide(d, room.sizeCm), locked = !!d.locked;
     if (side === 'north') continue;                                       // drawn by the room scene (recess / stairs / art)
@@ -92,7 +112,15 @@ export function buildShell(scene: Phaser.Scene, room: RoomData, manifest: AssetM
       g.fillStyle(0x3a2530, 0.35).fillRect(x0, y0, SHELL_MARGIN, 4);
     }
   }
-  return { floor: { id: ids.floor, art: floorTile.art }, wall: { id: ids.wall, art: wallTile.art } };
+}
+
+/** [lo, hi] minus the gap ranges, as sorted runs. */
+export function runsOutside(lo: number, hi: number, gaps: [number, number][]): [number, number][] {
+  const out: [number, number][] = [];
+  let cur = lo;
+  for (const [a, b] of [...gaps].sort((p, q) => p[0] - q[0])) { if (a > cur) out.push([cur, Math.min(a, hi)]); cur = Math.max(cur, b); }
+  if (cur < hi) out.push([cur, hi]);
+  return out.filter(([a, b]) => b - a > 0.5);
 }
 
 /**

@@ -45,12 +45,12 @@
       "facing": "S"
     },
     "from_minimarket": {
-      "x": 1420,
+      "x": 1820,
       "y": 60,
       "facing": "S"
     },
     "from_workplace": {
-      "x": 2250,
+      "x": 2440,
       "y": 60,
       "facing": "S"
     },
@@ -76,7 +76,7 @@
     {
       "assetId": "world_facade_house",
       "wall": {
-        "x": 850,
+        "x": 1250,
         "z": 0
       },
       "inspect": {
@@ -87,14 +87,14 @@
     {
       "assetId": "world_storefront_indomaret",
       "wall": {
-        "x": 1420,
+        "x": 1820,
         "z": 0
       }
     },
     {
       "assetId": "world_facade_workplace",
       "wall": {
-        "x": 2250,
+        "x": 2440,
         "z": 0
       }
     },
@@ -199,7 +199,7 @@
       "id": "minimarket_door",
       "label": "Enter Indomaret",
       "style": "none",
-      "x": 1365,
+      "x": 1765,
       "y": 0,
       "w": 110,
       "h": 10,
@@ -212,7 +212,7 @@
       "id": "workplace_door",
       "label": "Enter the workplace",
       "style": "none",
-      "x": 2195,
+      "x": 2385,
       "y": 0,
       "w": 110,
       "h": 10,

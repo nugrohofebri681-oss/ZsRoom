@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { boot, closeDialogue, press, roomData, state, tapObject, until, useDoor, SHOTS } from './helpers';
+import { boot, closeDialogue, press, roomData, state, tapObject, until, useDoor, walkToZone, SHOTS } from './helpers';
 
 /** World 01 continuation: kitchen, west Batuphat block, Mixue, NPC yielding, memory over many transitions. */
 const S = (p: Page): Promise<any> => state(p);
@@ -16,7 +16,7 @@ test.describe('World 01 continuation', () => {
 
   test('kitchen: through the living-room door, breakfast loop (fridge → stove → table), and back', async ({ page, isMobile }) => {
     const errors = await start(page, isMobile, 'living_room');
-    await useDoor(page, isMobile, 'kitchen', 'kitchen');
+    await walkToZone(page, 'kitchen');                                 // P4: same floor, walk through the opening
     await tapObject(page, 570, 40, 120, "s.vars.ingredients === 'eggs'");
     await tapObject(page, 320, 40, 80, 's.modal === true');
     await closeDialogue(page, isMobile);
@@ -25,9 +25,7 @@ test.describe('World 01 continuation', () => {
     await tapObject(page, 260, 315, 40, 's.modal === true');
     await closeDialogue(page, isMobile);
     expect((await S(page)).vars.mealsEaten).toBe(1);
-    await useDoor(page, isMobile, 'to_living', 'living_room');
-    const sp = roomData('living_room').spawns.from_kitchen;
-    expect((await S(page)).player).toMatchObject({ x: sp.x, y: sp.y });
+    await walkToZone(page, 'living_room');
     expect(errors).toEqual([]);
   });
 

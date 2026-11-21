@@ -12,8 +12,9 @@ const implemented = world.maps.filter((m) => m.status === 'implemented').map((m)
 const gameMaps = [...ROOMS.keys()].filter((id) => id !== 'review_props');
 
 describe('World 01 graph', () => {
-  it('registry and room data agree: every implemented map has data, every map is registered', () => {
-    expect(new Set(implemented)).toEqual(new Set(gameMaps));
+  it('registry and room data agree: every implemented map has data, every map is registered', async () => {
+    const { FLOORS } = await import('../../src/world/floor');
+    expect(new Set(implemented)).toEqual(new Set([...gameMaps, ...FLOORS.keys()]));
     for (const m of world.maps) expect(world.districts.map((d) => d.id)).toContain(m.district);
   });
 

@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { boot, closeDialogue, dimsumShift, press, roomData, state, tapObject, until, useDoor, SHOTS } from './helpers';
+import { boot, closeDialogue, dimsumShift, press, roomData, state, tapObject, until, useDoor, walkToZone, SHOTS } from './helpers';
 
 /**
  * World 01 P0 route, walked for real: every map change goes through a door (walk to it, use it).
@@ -14,10 +14,10 @@ test.describe('World 01 P0 route', () => {
   test('bedroom → street → minimarket → workplace → home → bedroom, through real doors, with save/reload', async ({ page, isMobile }) => {
     const errors = await boot(page, '?fresh&fast');
     const shot = async (n: string) => { if (!isMobile) await page.screenshot({ path: `${SHOTS}/world01-${n}.png` }); };
-    expect((await S(page)).roomId).toBe('zila_bedroom');
+    expect((await S(page)).zone).toBe('zila_bedroom');
     const bedroomTextures = (await S(page)).generatedTextures.bytes;
 
-    await useDoor(page, isMobile, roomData('zila_bedroom').doors[0].id, 'upper_hall');
+    await walkToZone(page, 'upper_hall');                             // continuous floor: no door, no scene change
     await useDoor(page, isMobile, 'stairs_down', 'living_room');
     await shot('01-living-room');
     await useDoor(page, isMobile, 'front_door', 'front_yard');
@@ -63,14 +63,14 @@ test.describe('World 01 P0 route', () => {
     await useDoor(page, isMobile, 'home_gate', 'front_yard');
     await useDoor(page, isMobile, 'house_door', 'living_room');
     await useDoor(page, isMobile, 'stairs_up', 'upper_hall');
-    await useDoor(page, isMobile, 'door_to_bedroom', 'zila_bedroom');
+    await walkToZone(page, 'zila_bedroom');
     s = await S(page);
     expect(s.visited).toEqual(expect.arrayContaining(['minimarket', 'workplace']));
     // only the active map's generated textures are in memory: back home, nothing from the street/shop/office remains
     expect(s.generatedTextures.bytes).toBeLessThanOrEqual(bedroomTextures * 1.1 + 1);
     await page.goto('/?fast'); await page.waitForFunction(() => (window as any).__ZS?.state?.());   // resume from save (no ?fresh)
     s = await S(page);
-    expect(s.roomId).toBe('zila_bedroom');
+    expect(s.roomId).toBe('home_upper'); expect(s.zone).toBe('zila_bedroom');
     expect(s.vars).toMatchObject({ purchases: 1, shift: 'done', ordersDone: 3 });
     expect(errors).toEqual([]);
   });
@@ -79,20 +79,22 @@ test.describe('World 01 P0 route', () => {
     test.skip(isMobile, 'keyboard walk');
     const errors = await boot(page, '?fresh&room=living_room');
     // south front door: walk south through the doorway
-    await page.evaluate(() => (window as any).__ZS.teleport(450, 520));
+    await page.evaluate(() => (window as any).__ZS.teleport(660 + 450, 520));   // living room zone starts at x 660 on the ground floor
     await page.keyboard.down('ArrowDown'); await until(page, "s.roomId === 'front_yard'", 8000); await page.keyboard.up('ArrowDown');
     // arriving next to the house door must not bounce straight back in (doorways arm only after leaving them)
     await page.waitForTimeout(600);
     expect((await S(page)).roomId).toBe('front_yard');
     // east-side stairs in the hall: walk east
     await page.goto('/?fresh&room=upper_hall'); await page.waitForFunction(() => (window as any).__ZS?.state?.());
-    await page.evaluate(() => (window as any).__ZS.teleport(600, 135));
-    await page.keyboard.down('ArrowRight'); await until(page, "s.roomId === 'living_room'", 8000); await page.keyboard.up('ArrowRight');
+    await page.evaluate(() => (window as any).__ZS.teleport(760 + 600, 135));   // hall zone starts at x 760 on the upper floor
+    await page.keyboard.down('ArrowRight'); await until(page, "s.roomId === 'home_ground' && s.zone === 'living_room'", 8000); await page.keyboard.up('ArrowRight');
     const s = await S(page);
-    expect(s.player).toMatchObject({ x: roomData('living_room').spawns.from_stairs.x, y: roomData('living_room').spawns.from_stairs.y });
-    // west doorway (kitchen, opened in World 01 P1): walking west through it changes map
-    await page.evaluate(() => (window as any).__ZS.teleport(60, 280));
-    await page.keyboard.down('ArrowLeft'); await until(page, "s.roomId === 'kitchen'", 8000); await page.keyboard.up('ArrowLeft');
+    expect(s.player).toMatchObject({ x: 660 + roomData('living_room').spawns.from_stairs.x, y: roomData('living_room').spawns.from_stairs.y });
+    // kitchen opening (P4): walking west through it stays on the same floor — no scene change
+    const starts = (await S(page)).sceneStarts;
+    await page.evaluate(() => (window as any).__ZS.teleport(660 + 60, 260));
+    await page.keyboard.down('ArrowLeft'); await until(page, "s.zone === 'kitchen'", 8000); await page.keyboard.up('ArrowLeft');
+    expect((await S(page)).sceneStarts).toBe(starts); expect((await S(page)).roomId).toBe('home_ground');
     // locked (planned) east end of the city centre: walking into it is blocked by the wall
     await page.goto('/?fresh&room=lhokseumawe_centre'); await page.waitForFunction(() => (window as any).__ZS?.state?.());
     for (let i = 0; i < 6 && (await S(page)).modal; i++) await page.keyboard.press('KeyE');
@@ -117,6 +119,6 @@ test.describe('World 01 P0 route', () => {
     await page.addInitScript(() => { if (!sessionStorage.getItem('seeded')) { sessionStorage.setItem('seeded', '1'); localStorage.setItem('zsroom.save', JSON.stringify({ version: 2, savedAt: new Date().toISOString(), roomId: 'zila_bedroom', player: { characterId: 'char_zila', x: 330, y: 300, facing: 'S', outfit: 'default' }, flags: {}, vars: { phase: 'night', day: 3 } })); } });
     await page.goto('/'); await page.waitForFunction(() => (window as any).__ZS?.state?.());
     const s = await S(page);
-    expect(s.roomId).toBe('zila_bedroom'); expect(s.vars.day).toBe(3); expect(s.visited).toContain('zila_bedroom');
+    expect(s.roomId).toBe('home_upper'); expect(s.zone).toBe('zila_bedroom');   // legacy room id → continuous floor expect(s.vars.day).toBe(3); expect(s.visited).toContain('zila_bedroom');
   });
 });

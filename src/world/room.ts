@@ -16,6 +16,10 @@ export interface RoomDoor {
   to: { room: string; spawn: string };
   /** Locked or story-gated: the wall stays solid; using it shows the message. Opens when `unlessFlag` is set. */
   locked?: { message: string; unlessFlag?: string };
+  /** Continuous-floor opening (P4): a gap in the side wall into the neighbouring zone — no stopper, no trigger. */
+  opening?: boolean;
+  /** Set on doors of composite floors: the zone rectangle the door belongs to (global x, its width/height). */
+  zone?: { x: number; w: number; h: number };
 }
 
 /** Which wall a door sits in (explicit `side`, else derived from its position). */
@@ -102,6 +106,9 @@ export interface PropInstance {
   anchors?: InteractionAnchorSpec[];
   /** Background/inspectable landmark info (name + neutral comment). */
   inspect?: { name: string; comment: string };
+  /** Continuous floors: the zone (legacy room id) this prop belongs to, and its key inside that room. */
+  zone?: string;
+  zoneKey?: string;
   sortable: SortableProp;
 }
 
@@ -180,7 +187,7 @@ export function compileRoom(data: RoomData, flags: Record<string, boolean> = {})
     for (const d of open.filter((x) => doorSide(x, data.sizeCm) === side).sort((a, b) => along(a)[0] - along(b)[0])) {
       const [a, b] = along(d);
       if (a > cursor) solids.push(wallRect(cursor, a));
-      solids.push(stopper(a, b));
+      if (!d.opening) solids.push(stopper(a, b));     // openings continue into the neighbouring zone
       cursor = b;
     }
     solids.push(wallRect(cursor, len + WALL));
@@ -255,6 +262,7 @@ export function compileRoom(data: RoomData, flags: Record<string, boolean> = {})
     }
   }
   for (const d of data.doors) {
+    if (d.opening) continue;                           // walk-through gap, not a usable door
     const side = doorSide(d, data.sizeCm), isOpen = doorOpen(d, flags);
     const pos = side === 'north' ? { x: d.x + d.w / 2, y: 25 } : side === 'south' ? { x: d.x + d.w / 2, y: h - 15 }
       : side === 'west' ? { x: 15, y: d.y + d.h / 2 } : { x: w - 15, y: d.y + d.h / 2 };

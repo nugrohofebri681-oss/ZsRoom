@@ -30,12 +30,39 @@
   ],
   "maps": [
     {
+      "id": "home_upper",
+      "district": "zila_home",
+      "building": "zila_house",
+      "kind": "interior",
+      "status": "implemented",
+      "provisional": true,
+      "continuousFloor": [
+        "zila_bedroom",
+        "upper_hall"
+      ],
+      "note": "P4 continuous floor: bedroom + upstairs hall walk through an opening, no scene change"
+    },
+    {
+      "id": "home_ground",
+      "district": "zila_home",
+      "building": "zila_house",
+      "kind": "interior",
+      "status": "implemented",
+      "provisional": true,
+      "continuousFloor": [
+        "kitchen",
+        "living_room"
+      ],
+      "note": "P4 continuous floor: kitchen + living room, no scene change"
+    },
+    {
       "id": "zila_bedroom",
       "district": "zila_home",
       "building": "zila_house",
       "kind": "interior",
       "status": "implemented",
-      "note": "Approved HD art (10 assets) + Batch C/D under review"
+      "note": "Approved HD art (10 assets) + Batch C/D under review",
+      "zoneOf": "home_upper"
     },
     {
       "id": "upper_hall",
@@ -43,7 +70,8 @@
       "building": "zila_house",
       "kind": "interior",
       "status": "implemented",
-      "note": "TEMP; stairs down at the east end"
+      "note": "TEMP; stairs down at the east end",
+      "zoneOf": "home_upper"
     },
     {
       "id": "living_room",
@@ -52,7 +80,8 @@
       "kind": "interior",
       "status": "implemented",
       "provisional": true,
-      "note": "Downstairs shared living area. TEMP furniture"
+      "note": "Downstairs shared living area. TEMP furniture",
+      "zoneOf": "home_ground"
     },
     {
       "id": "front_yard",
@@ -99,7 +128,8 @@
       "kind": "interior",
       "status": "implemented",
       "provisional": true,
-      "note": "Breakfast loop: fridge → stove → table; tea"
+      "note": "Breakfast loop: fridge → stove → table; tea",
+      "zoneOf": "home_ground"
     },
     {
       "id": "batuphat_west",
@@ -183,11 +213,15 @@
       "id": "zila_house",
       "role": "story-critical",
       "maps": [
+        "home_upper",
+        "home_ground",
+        "front_yard"
+      ],
+      "zones": [
         "zila_bedroom",
         "upper_hall",
         "living_room",
-        "kitchen",
-        "front_yard"
+        "kitchen"
       ]
     },
     {

@@ -1,7 +1,8 @@
 import * as Phaser from 'phaser';
 import { groundToRender, DEPTH_SCALE } from '../core/projection';
 import { getCharacterSpec, type ActionSpec, type CharacterSpec, type PropSpec } from '../core/specs';
-import { compileRoom, getRoom, doorOpen, doorSide, DOOR_DEPTH, type CompiledRoom, type PropInstance, type RoomDoor } from '../world/room';
+import { doorOpen, doorSide, DOOR_DEPTH, type CompiledRoom, type PropInstance, type RoomData, type RoomDoor } from '../world/room';
+import { compileMap, resolveDestination, zoneAt, type ZoneInfo } from '../world/floor';
 import { initNpc, npcPresent, npcSolid, stepNpc, yieldTo, NPC_RADIUS, type NpcData, type NpcState } from '../world/npc';
 import { NpcView } from '../actors/npcView';
 import { EVENTS, DIALOGUE, check, runEvent, type Presentation } from '../story/events';
@@ -25,6 +26,7 @@ import type { RigSpec } from '../animation/rig';
 import { renderToGround, type Vec2 } from '../core/projection';
 import { audio } from '../audio/audio';
 import { isQaBuild, walkSpeedMultiplier } from '../core/qa';
+import { exploreZoom } from '../core/framing';
 import { crossedContacts } from '../audio/synth';
 import { floorAt, floorPatches, type FloorPatch } from '../audio/surface';
 
@@ -43,8 +45,13 @@ type PropView = Phaser.GameObjects.GameObject & Phaser.GameObjects.Components.Al
 type ArtKind = 'approved' | 'temp' | 'greybox';
 interface Seated { propKey: string; exit: { x: number; y: number }; depth: number }
 
+/** Counts real scene (re)starts: tests prove interior doorways on continuous floors never restart the scene. */
+let SCENE_STARTS = 0;
+
 export class RoomScene extends Phaser.Scene {
-  private room!: CompiledRoom;
+  private room!: CompiledRoom & { zones?: ZoneInfo[] };
+  /** Current logical room (zone) on a continuous floor; the map id itself for single-room maps. */
+  private zone = '';
   private character!: CharacterSpec;
   private pos = { x: 0, y: 0 };
   private facingDir: Direction = 'S';
@@ -104,12 +111,16 @@ export class RoomScene extends Phaser.Scene {
     this.flags = { ...(save?.flags ?? {}) };
     this.vars = { phase: 'evening', day: 1, outfit: 'default', ...(save?.vars ?? {}) };
     this.inspected = new Set();
-    this.visited = [...new Set([...(save?.visited ?? []), data.roomId])];
+    SCENE_STARTS++;
+    // Legacy room ids (doors, saves, URLs) resolve to the continuous floor that contains them, with spawns and
+    // saved positions converted to floor coordinates.
+    const dest = resolveDestination(data.roomId, data.spawn, data.at);
+    this.visited = [...new Set([...(save?.visited ?? []), dest.mapId])];
     // QA/dev builds only: `?variant=dimsum` previews a story-configurable interior variant.
     const variantOverride = isQaBuild(import.meta.env) ? new URLSearchParams(location.search).get('variant') : null;
-    this.room = compileRoom(getRoom(data.roomId, variantOverride), this.flags);
+    this.room = compileMap(dest.mapId, this.flags, variantOverride);
     this.character = getCharacterSpec('char_zila');
-    const spawn = data.at ?? this.room.data.spawns[data.spawn ?? 'default'] ?? this.room.data.spawns.default!;
+    const spawn = dest.at ?? this.room.data.spawns[dest.spawn ?? 'default'] ?? this.room.data.spawns.default!;
     this.pos = { x: spawn.x, y: spawn.y };
     this.facingDir = (spawn.facing as Direction) ?? 'S';
 
@@ -157,6 +168,8 @@ export class RoomScene extends Phaser.Scene {
     this.setTagsVisible(params.has('tags'));
     this.game.events.emit('room-entered', this.room.data);
     for (const id of this.room.data.onEnter ?? []) this.runStoryEvent(id);
+    this.zone = '';
+    this.updateZone();
     this.emitArtStatus();
     this.persist();
     this.syncActor();
@@ -172,15 +185,10 @@ export class RoomScene extends Phaser.Scene {
   private fitCamera(): void {
     const cam = this.cameras.main;
     const { w, h } = this.room.data.sizeCm;
-    const renderH = h * DEPTH_SCALE + this.room.data.wallHeightCm;
-    const fit = Math.min(cam.width / (w + 80), cam.height / (renderH + 60));
-    // Never so far out that a character is too small to read: ~22% of the screen height on desktop,
-    // ~36% on short phone-landscape screens (CSS height < 500), where whole-room framing is too small.
+    // Exploration framing (core/framing.ts): the character is a small share of the screen; the map is never
+    // squeezed to fit, the camera scrolls instead. Manual zoom multiplies on top.
     const dpr = (this.registry.get('dpr') as number | undefined) ?? 1;
-    // Exteriors frame a little wider (shop signs and building tops matter outdoors); characters stay readable.
-    const outdoor = this.room.data.kind === 'exterior' ? 0.78 : 1;
-    const share = (cam.height / dpr < 500 ? 0.36 : 0.22) * outdoor;
-    const zoom = Math.max(fit, (cam.height * share) / this.character.heightCm) * this.zoomMul;
+    const zoom = exploreZoom(cam.height, dpr, this.character.heightCm, this.room.data.kind === 'exterior', this.zoomMul);
     cam.setZoom(zoom);
     const top = -this.room.data.wallHeightCm - 30;
     const contentW = w + 120;
@@ -197,7 +205,17 @@ export class RoomScene extends Phaser.Scene {
   }
 
   private drawShell(): void {
-    this.shellInfo = buildShell(this, this.room.data, this.registry.get('manifest') as AssetManifest, this.highDensity() ? 2 : 1);
+    const manifest = this.registry.get('manifest') as AssetManifest, density = this.highDensity() ? 2 : 1;
+    if (this.room.zones) {
+      // Continuous floor: each zone's shell (floor, back wall, side-wall caps with the opening gaps) is built in
+      // its own local coordinates, then shifted to the zone's place on the floor (render x = ground x).
+      for (const z of this.room.zones) {
+        const before = this.children.list.length;
+        const info = buildShell(this, z.data, manifest, density);
+        if (!this.shellInfo) this.shellInfo = info;
+        for (const o of this.children.list.slice(before)) (o as unknown as { x: number }).x += z.x;
+      }
+    } else this.shellInfo = buildShell(this, this.room.data, manifest, density);
     const g = this.add.graphics().setDepth(-99989);
     for (const d of this.room.data.doors) this.drawNorthDoor(g, d);
   }
@@ -254,7 +272,7 @@ export class RoomScene extends Phaser.Scene {
           fontFamily: 'system-ui, sans-serif', fontSize: '8px', color: '#fff4f7', backgroundColor: '#c0607ecc', padding: { x: 3, y: 1 },
         }).setOrigin(0.5, 1).setResolution(3).setDepth(95000));
       }
-      if (p.spec.light) this.lighting.add(p.key, p.spec.light, p.x, p.y, p.z, p.layer === 'wall', this.flags[`light:${this.room.data.id}:${p.key}`], view instanceof Phaser.GameObjects.Image ? view : undefined);
+      if (p.spec.light) this.lighting.add(p.key, p.spec.light, p.x, p.y, p.z, p.layer === 'wall', this.flags[this.lightFlag(p)], view instanceof Phaser.GameObjects.Image ? view : undefined);
     }
   }
 
@@ -323,6 +341,12 @@ export class RoomScene extends Phaser.Scene {
   }
 
   // ---------------------------------------------------------------- world state
+  /** Per-zone ambience (continuous floors) or the map's. */
+  private applyAmbience(): void {
+    const phase = this.phase(), dark = phase === 'evening' || phase === 'night', amb = this.zoneData().ambience ?? this.room.data.ambience ?? 'room';
+    audio().setAmbience(amb === 'street' ? (dark ? 'night' : 'street') : amb === 'shop' ? 'shop' : dark ? 'night' : 'day');
+  }
+
   private phase(): Phase { return isPhase(this.vars.phase) ? this.vars.phase : 'evening'; }
 
   private applyWorldVars(): void {
@@ -331,8 +355,7 @@ export class RoomScene extends Phaser.Scene {
     const sky = this.skyTexture();
     for (const s of this.skies) { s.img.setTexture(sky); s.curtains.setVisible(!!this.vars.curtainsClosed); }
     const phase = this.phase();
-    const dark = phase === 'evening' || phase === 'night', amb = this.room.data.ambience ?? 'room';
-    audio().setAmbience(amb === 'street' ? (dark ? 'night' : 'street') : amb === 'shop' ? 'shop' : dark ? 'night' : 'day');
+    this.applyAmbience();
     for (const n of this.npcs) { if (n.state && (n.state as NpcState & { phase?: string }).phase !== phase) this.placeNpc(n, phase); }
     this.registry.set('world', { phase: look.label, day: Number(this.vars.day ?? 1) });
     this.game.events.emit('world', { phase: look.label, day: Number(this.vars.day ?? 1) });
@@ -377,6 +400,7 @@ export class RoomScene extends Phaser.Scene {
     this.game.events.emit('prompt', this.nearest?.label ?? null);
     if (this.input$.consumeInteract() && this.nearest) this.interact(this.nearest);
     this.checkDoorTriggers();
+    this.updateZone();
   }
 
   private syncActor(moving = false, timeMs = this.time.now): void {
@@ -411,13 +435,15 @@ export class RoomScene extends Phaser.Scene {
     for (const d of this.room.data.doors) {
       if (!doorOpen(d, this.flags)) continue;
       const side = doorSide(d, this.room.data.sizeCm);
+      // a door on a continuous floor belongs to its zone's rectangle; plain maps use the whole map
+      const zx = d.zone?.x ?? 0, zw = d.zone?.w ?? w, zh = d.zone?.h ?? h;
       const alongNS = p.x > d.x && p.x < d.x + d.w, alongEW = p.y > d.y && p.y < d.y + d.h;
       // tolerance: stopping a hair short of the threshold stopper still exits
-      const exit = side === 'south' ? alongNS && p.y >= h + DOOR_DEPTH - r - 6
+      const exit = side === 'south' ? alongNS && p.y >= zh + DOOR_DEPTH - r - 6
         : side === 'north' ? alongNS && p.y <= r + 0.5 && mv.y < 0
-        : side === 'west' ? alongEW && p.x <= -DOOR_DEPTH + r + 6
-        : alongEW && p.x >= w + DOOR_DEPTH - r - 6;
-      const near = side === 'south' ? alongNS && p.y > h - 4 : side === 'west' ? alongEW && p.x < 4 : side === 'east' ? alongEW && p.x > w - 4 : false;
+        : side === 'west' ? alongEW && p.x <= zx - DOOR_DEPTH + r + 6
+        : alongEW && p.x >= zx + zw + DOOR_DEPTH - r - 6;
+      const near = side === 'south' ? alongNS && p.y > zh - 4 : side === 'west' ? alongEW && p.x < zx + 4 : side === 'east' ? alongEW && p.x > zx + zw - 4 : false;
       if (near || exit) inAnyDoorway = true;
       if (exit && this.doorsArmed) { this.goTo(d.to.room, d.to.spawn); return; }
     }
@@ -534,7 +560,8 @@ export class RoomScene extends Phaser.Scene {
       if (this.lighting.has(a.ownerId)) {
         const on = this.lighting.toggle(a.ownerId);
         audio().play('lamp_click', { rate: on ? 1 : 0.92 });
-        this.flags[`light:${this.room.data.id}:${a.ownerId}`] = on;
+        const lp = this.room.props.find((p) => p.key === a.ownerId);
+        if (lp) this.flags[this.lightFlag(lp)] = on;
         this.game.events.emit('toast', on ? 'Lamp on' : 'Lamp off');
       }
     }
@@ -612,6 +639,24 @@ export class RoomScene extends Phaser.Scene {
       n += src.width * src.height * 4;
     }
     return n;
+  }
+
+  // ---------------------------------------------------------------- continuous floors: zones
+  /** Light state is remembered per logical room (zone) and the prop's key in it, so saves survive P4 floors. */
+  private lightFlag(p: PropInstance): string { return `light:${p.zone ?? this.room.data.id}:${p.zoneKey ?? p.key}`; }
+
+  private zoneData(): RoomData { return this.room.zones?.find((z) => z.id === this.zone)?.data ?? this.room.data; }
+
+  /** Entering a zone on a continuous floor: title, ambience, visited list and zone events — no scene change. */
+  private updateZone(): void {
+    const z = zoneAt(this.room.zones, this.pos.x);
+    const id = z?.id ?? this.room.data.id;
+    if (id === this.zone) return;
+    this.zone = id;
+    if (!this.visited.includes(id)) this.visited.push(id);
+    const data = this.zoneData();
+    this.game.events.emit('zone-entered', data);
+    if (z) { for (const ev of data.onEnter ?? []) this.runStoryEvent(ev); this.applyAmbience(); }
   }
 
   // ---------------------------------------------------------------- world: NPCs, story events, exterior sky
@@ -810,6 +855,10 @@ export class RoomScene extends Phaser.Scene {
         flagsState: { ...this.flags },
         npcs: this.npcs.map((n) => ({ id: n.data.id, x: Math.round(n.state.x), y: Math.round(n.state.y), visible: n.view.sprite.visible, moving: n.state.moving })),
         mapKind: this.room.data.kind ?? 'interior',
+        zone: this.zone,
+        zones: this.room.zones?.map((z) => ({ id: z.id, x: z.x, w: z.w, h: z.h })) ?? null,
+        sceneStarts: SCENE_STARTS,
+        camera: { scrollX: Math.round(this.cameras.main.scrollX), scrollY: Math.round(this.cameras.main.scrollY), zoom: this.cameras.main.zoom, viewW: Math.round(this.cameras.main.worldView.width), viewH: Math.round(this.cameras.main.worldView.height) },
         inspectables: this.room.props.filter((p) => p.inspect).map((p) => ({ key: p.key, name: p.inspect!.name, inspected: this.inspected.has(p.key) })),
         variant: (this.room.data as { variantKey?: string }).variantKey ?? null,
         renderScale: (() => { const r = this.registry.get('renderScale') as { scale: number; mode: string; history: unknown[] } | undefined; return r ? { scale: r.scale, mode: r.mode, changes: r.history.length } : null; })(),
@@ -820,6 +869,10 @@ export class RoomScene extends Phaser.Scene {
       }),
       teleport: (x: number, y: number) => { this.seated = null; this.path = []; this.pendingAnchor = null; this.pos = { x, y }; this.syncActor(); this.snapCamera(); },
       tapWorld: (gx: number, gy: number, z = 0) => { const r = groundToRender(gx, gy, z); this.tapAtRender(r.x, r.y); },
+      /** Test hooks for continuous floors: a door's interaction spot, a zone's default spawn and origin (floor coords). */
+      doorSpot: (id: string) => { const a = this.room.anchors.find((x) => x.key === `door:${id}`); return a ? { x: a.x, y: a.y } : null; },
+      zoneSpawn: (zone: string) => this.room.data.spawns[`${zone}.default`] ?? (zone === this.room.data.id ? this.room.data.spawns.default : null),
+      zoneOrigin: (zone: string) => this.room.zones?.find((z) => z.id === zone)?.x ?? 0,
       /** Test hook: put an NPC somewhere (e.g. in Zila's way). */
       npcAt: (id: string, x: number, y: number) => { const n = this.npcs.find((q) => q.data.id === id); if (n) { n.state.x = x; n.state.y = y; n.state.target = null; n.state.waitMs = 3000; this.drawNpc(n, 0); } },
       setVars: (v: Vars) => { this.vars = { ...this.vars, ...v }; this.buildActor(); this.applyWorldVars(); },

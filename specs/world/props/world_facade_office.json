@@ -1,0 +1,44 @@
+{
+  "id": "world_facade_office",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Generic office / institutional building (TEMP world placeholder)",
+  "density": 1,
+  "canvas": {
+    "width": 616,
+    "height": 424
+  },
+  "pivot": {
+    "x": 308,
+    "y": 412,
+    "meaning": "bottom-centre of the front face (wall item)"
+  },
+  "footprint": {
+    "widthCm": 600,
+    "depthCm": 4
+  },
+  "heightsCm": {
+    "top": 400
+  },
+  "collision": [],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "placement": {
+    "type": "wall",
+    "wall": "north"
+  },
+  "temp": {
+    "shape": "storefront",
+    "kind": "office",
+    "sign": "",
+    "accent": "#5B6C8F",
+    "wall": "#ECE8E1",
+    "maxDensity": 1,
+    "signLow": true
+  },
+  "$comment": "World 01 placeholder (wall-mounted). Generic: placements may restyle it with \"temp\" (sign text, colours)."
+}

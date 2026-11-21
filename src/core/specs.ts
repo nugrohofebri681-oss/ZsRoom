@@ -9,7 +9,8 @@ export type ActionSpec =
   | { type: 'toggleVar'; var: string; messages?: Record<string, string> }
   | { type: 'sit'; seat: { x: number; y: number }; heightCm: number; facing: string; seatBehind?: boolean }
   | { type: 'dialogue'; id: string }          // data-driven text (src/data/story/dialogue.json)
-  | { type: 'event'; id: string };            // story event (src/data/story/events.json)
+  | { type: 'event'; id: string }             // story event (src/data/story/events.json)
+  | { type: 'inspect'; name: string; comment: string };   // background landmark: name + neutral comment
 
 export interface InteractionAnchorSpec {
   id: string; label: string; x: number; y: number; facing: string; radiusCm: number;

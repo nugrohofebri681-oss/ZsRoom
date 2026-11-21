@@ -21,6 +21,11 @@
       "id": "lhokseumawe_city",
       "name": "Lhokseumawe city",
       "provisional": true
+    },
+    {
+      "id": "unimal",
+      "name": "Universitas Malikussaleh (Unimal) campus",
+      "provisional": true
     }
   ],
   "maps": [
@@ -85,7 +90,7 @@
       "status": "implemented",
       "provisional": true,
       "storyConfig": "workplace",
-      "note": "STORY-CONFIGURABLE placeholder with two playable variants: office (default) and dimsum shop (clock in → carry 3 steamer baskets → clock out). Real name/layout pending Creative Director"
+      "note": "STORY-CONFIGURABLE: dimsum shop (active, TEMP) — clock in → take order at the counter → send to kitchen → hand over & take payment ×3 → clock out. Office variant kept"
     },
     {
       "id": "kitchen",
@@ -116,29 +121,61 @@
       "brandReview": true
     },
     {
-      "id": "lhokseumawe_centre",
-      "district": "lhokseumawe_city",
-      "kind": "exterior",
-      "status": "story-pending",
-      "note": "Needs Creative Director world map and story"
-    },
-    {
       "id": "travel_maps",
       "district": "lhokseumawe_city",
       "kind": "exterior",
       "status": "story-pending",
       "note": "Future Travel chapters with Febri as companion NPC (not in this sprint)"
+    },
+    {
+      "id": "lhokseumawe_road",
+      "district": "lhokseumawe_city",
+      "kind": "exterior",
+      "status": "implemented",
+      "provisional": true,
+      "note": "Peri-urban road: warung, rice fields, fuel station, bus stop (all background/inspectable)"
+    },
+    {
+      "id": "lhokseumawe_centre",
+      "district": "lhokseumawe_city",
+      "kind": "exterior",
+      "status": "implemented",
+      "provisional": true,
+      "note": "Town square with fountain, grand mosque landmark, bank, pharmacy, kedai kopi (background/inspectable); gate to Unimal; east end locked"
+    },
+    {
+      "id": "unimal_campus",
+      "district": "unimal",
+      "kind": "exterior",
+      "status": "implemented",
+      "provisional": true,
+      "note": "Campus front: rectorate, library, faculty (background/inspectable, interiors when the story needs them), notice board, campus map, students and security NPCs",
+      "realWorldReference": "Universitas Malikussaleh"
+    },
+    {
+      "id": "batuphat_beyond",
+      "district": "batuphat",
+      "kind": "exterior",
+      "status": "planned",
+      "note": "Behind the locked west road end of the west block"
+    },
+    {
+      "id": "lhokseumawe_more",
+      "district": "lhokseumawe_city",
+      "kind": "exterior",
+      "status": "planned",
+      "note": "Behind the locked east end of the city centre"
     }
   ],
   "placeholders": {
     "workplace": {
-      "variant": "office",
+      "variant": "dimsum",
       "variants": [
         "office",
         "dimsum"
       ],
       "displayName": "Workplace (placeholder)",
-      "note": "Story-configurable: set \"variant\" to \"dimsum\" (or add a new variant) once the Creative Director confirms the real workplace. No real name or floor plan is invented; both layouts are TEMP placeholders."
+      "note": "Narrative direction: dimsum shop (Issue #23), still TEMP and modular. Cashier/order-taking loop. Switch back with \"variant\": \"office\". No real name or floor plan invented."
     }
   },
   "buildings": [
@@ -167,7 +204,7 @@
       "maps": [
         "workplace"
       ],
-      "note": "type pending (office placeholder; dimsum candidate)"
+      "note": "dimsum shop (active TEMP variant); office variant kept"
     },
     {
       "id": "mixue",
@@ -185,7 +222,109 @@
       "id": "warung_kopi",
       "role": "background",
       "note": "interactable sign only"
+    },
+    {
+      "id": "unimal",
+      "role": "enterable",
+      "realWorldReference": "Universitas Malikussaleh",
+      "maps": [
+        "unimal_campus"
+      ],
+      "note": "Campus grounds are explorable; buildings are background/inspectable until the story needs interiors"
     }
   ],
-  "brandNotice": "Indomaret and Mixue appear by name/colour as real-world location references only. ZsRoom is not affiliated with or endorsed by either brand. Exact logos, wordmarks and trade dress must be reviewed before any public release."
+  "brandNotice": "Indomaret and Mixue appear by name/colour as real-world location references only. ZsRoom is not affiliated with or endorsed by either brand. Exact logos, wordmarks and trade dress must be reviewed before any public release.",
+  "inspectables": [
+    {
+      "map": "batuphat_street",
+      "name": "Neighbour's house",
+      "role": "background"
+    },
+    {
+      "map": "batuphat_west",
+      "name": "House",
+      "role": "background"
+    },
+    {
+      "map": "lhokseumawe_centre",
+      "name": "Bank",
+      "role": "background"
+    },
+    {
+      "map": "lhokseumawe_centre",
+      "name": "Pharmacy",
+      "role": "background"
+    },
+    {
+      "map": "lhokseumawe_centre",
+      "name": "Grand mosque",
+      "role": "background"
+    },
+    {
+      "map": "lhokseumawe_centre",
+      "name": "Kedai kopi",
+      "role": "background"
+    },
+    {
+      "map": "lhokseumawe_centre",
+      "name": "Town square fountain",
+      "role": "background"
+    },
+    {
+      "map": "lhokseumawe_centre",
+      "name": "Campus sign",
+      "role": "background"
+    },
+    {
+      "map": "lhokseumawe_road",
+      "name": "Warung nasi",
+      "role": "background"
+    },
+    {
+      "map": "lhokseumawe_road",
+      "name": "Rice fields",
+      "role": "background"
+    },
+    {
+      "map": "lhokseumawe_road",
+      "name": "Fuel station",
+      "role": "background"
+    },
+    {
+      "map": "lhokseumawe_road",
+      "name": "Bus stop",
+      "role": "background"
+    },
+    {
+      "map": "lhokseumawe_road",
+      "name": "Road sign",
+      "role": "background"
+    },
+    {
+      "map": "unimal_campus",
+      "name": "Rectorate",
+      "role": "background"
+    },
+    {
+      "map": "unimal_campus",
+      "name": "Library",
+      "role": "background"
+    },
+    {
+      "map": "unimal_campus",
+      "name": "Faculty building",
+      "role": "background"
+    },
+    {
+      "map": "unimal_campus",
+      "name": "Notice board",
+      "role": "background"
+    },
+    {
+      "map": "unimal_campus",
+      "name": "Campus map",
+      "role": "background"
+    }
+  ],
+  "$tiers": "story-critical = interiors/activities/dialogue/events; enterable = can be entered and explored; background = decorative but inspectable (tap → name + neutral comment). See src/world/registry.ts."
 }

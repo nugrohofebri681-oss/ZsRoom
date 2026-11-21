@@ -1,0 +1,294 @@
+{
+  "id": "lhokseumawe_centre",
+  "displayName": "Lhokseumawe · city centre",
+  "world": "world01",
+  "floor": "ground",
+  "kind": "exterior",
+  "provisional": true,
+  "ambience": "street",
+  "sizeCm": {
+    "w": 2800,
+    "h": 900
+  },
+  "wallHeightCm": 420,
+  "palette": {
+    "floor": "#B9B3A9",
+    "wall": "#E6DCCB",
+    "trim": "#8A7F75"
+  },
+  "shell": {
+    "floor": "env_ground_street",
+    "wall": "env_wall_street_row",
+    "zones": [
+      {
+        "floor": "env_ground_road",
+        "x": 0,
+        "y": 540,
+        "w": 2800,
+        "h": 340,
+        "markings": "road"
+      },
+      {
+        "floor": "env_ground_plaza",
+        "x": 900,
+        "y": 0,
+        "w": 800,
+        "h": 520
+      }
+    ]
+  },
+  "spawns": {
+    "default": {
+      "x": 1300,
+      "y": 480,
+      "facing": "S"
+    },
+    "from_lhokseumawe_road": {
+      "x": 60,
+      "y": 690,
+      "facing": "E"
+    },
+    "from_unimal_campus": {
+      "x": 2200,
+      "y": 60,
+      "facing": "S"
+    }
+  },
+  "props": [
+    {
+      "assetId": "world_facade_shop",
+      "wall": {
+        "x": 230,
+        "z": 0
+      },
+      "temp": {
+        "sign": "BANK",
+        "accent": "#1F5F8B",
+        "awning": "#1F5F8B"
+      },
+      "inspect": {
+        "name": "Bank",
+        "comment": "A bank branch. (Background building; no real brand.)"
+      }
+    },
+    {
+      "assetId": "world_facade_shop",
+      "wall": {
+        "x": 660,
+        "z": 0
+      },
+      "temp": {
+        "sign": "APOTEK",
+        "accent": "#2E7D5B",
+        "awning": "#BFE3C0"
+      },
+      "inspect": {
+        "name": "Pharmacy",
+        "comment": "A pharmacy. (Background building.)"
+      }
+    },
+    {
+      "assetId": "world_mosque_landmark",
+      "wall": {
+        "x": 1300,
+        "z": 0
+      },
+      "inspect": {
+        "name": "Grand mosque",
+        "comment": "A large mosque at the heart of the city. (Provisional landmark; not an exact location.)"
+      }
+    },
+    {
+      "assetId": "world_campus_gate",
+      "wall": {
+        "x": 2200,
+        "z": 0
+      }
+    },
+    {
+      "assetId": "world_facade_shop",
+      "wall": {
+        "x": 2590,
+        "z": 0
+      },
+      "temp": {
+        "sign": "KEDAI KOPI",
+        "accent": "#6B4434",
+        "awning": "#9C7258"
+      },
+      "inspect": {
+        "name": "Kedai kopi",
+        "comment": "A coffee shop with Aceh coffee. (Background — not enterable yet.)"
+      }
+    },
+    {
+      "assetId": "world_fountain",
+      "x": 1300,
+      "y": 360,
+      "inspect": {
+        "name": "Town square fountain",
+        "comment": "The fountain in the town square. (Provisional.)"
+      }
+    },
+    {
+      "assetId": "world_bench",
+      "x": 1000,
+      "y": 260
+    },
+    {
+      "assetId": "world_bench",
+      "x": 1600,
+      "y": 260
+    },
+    {
+      "assetId": "world_tree",
+      "x": 960,
+      "y": 470
+    },
+    {
+      "assetId": "world_tree",
+      "x": 1640,
+      "y": 470
+    },
+    {
+      "assetId": "world_palm_tree",
+      "x": 1910,
+      "y": 300
+    },
+    {
+      "assetId": "world_street_sign",
+      "x": 2040,
+      "y": 500,
+      "temp": {
+        "sign": "UNIMAL ↑",
+        "signColor": "#1F5F8B"
+      },
+      "inspect": {
+        "name": "Campus sign",
+        "comment": "Universitas Malikussaleh is through the gate ahead."
+      }
+    },
+    {
+      "assetId": "world_becak",
+      "x": 520,
+      "y": 500
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 400,
+      "y": 530
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 1900,
+      "y": 530
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 2700,
+      "y": 530
+    }
+  ],
+  "npcs": [
+    {
+      "id": "npc_city_vendor",
+      "name": "Street vendor",
+      "look": {
+        "shirt": "#E07A5F",
+        "pants": "#3A3440",
+        "hair": "#2A1E18"
+      },
+      "x": 1480,
+      "y": 470,
+      "facing": "S",
+      "behaviour": {
+        "type": "idle"
+      },
+      "schedule": {
+        "night": "away"
+      },
+      "interact": {
+        "label": "Talk to the vendor",
+        "dialogue": "dlg_city_vendor"
+      }
+    },
+    {
+      "id": "npc_city_walker",
+      "name": "Passer-by",
+      "look": {
+        "shirt": "#81B29A",
+        "pants": "#5E6670",
+        "hair": "#2A1E18",
+        "hijab": "#F2CC8F"
+      },
+      "x": 1100,
+      "y": 180,
+      "behaviour": {
+        "type": "wander",
+        "area": {
+          "x": 950,
+          "y": 100,
+          "w": 700,
+          "h": 140
+        },
+        "speed": 55,
+        "pauseMs": [
+          1500,
+          4000
+        ]
+      },
+      "interact": {
+        "label": "Say hello",
+        "dialogue": "dlg_city_walker"
+      }
+    }
+  ],
+  "doors": [
+    {
+      "id": "to_lhokseumawe_road",
+      "label": "Back to Road to Lhokseumawe",
+      "side": "west",
+      "x": 0,
+      "y": 560,
+      "w": 10,
+      "h": 260,
+      "to": {
+        "room": "lhokseumawe_road",
+        "spawn": "from_lhokseumawe_centre"
+      }
+    },
+    {
+      "id": "to_unimal_campus",
+      "label": "Go to Unimal",
+      "side": "north",
+      "x": 2120,
+      "y": 0,
+      "w": 160,
+      "h": 10,
+      "to": {
+        "room": "unimal_campus",
+        "spawn": "from_lhokseumawe_centre"
+      },
+      "style": "none"
+    },
+    {
+      "id": "city_east",
+      "label": "Further into the city",
+      "side": "east",
+      "x": 2800,
+      "y": 560,
+      "w": 10,
+      "h": 260,
+      "to": {
+        "room": "lhokseumawe_more",
+        "spawn": "default"
+      },
+      "locked": {
+        "message": "More of the city lies this way — not available yet (planned)."
+      }
+    }
+  ],
+  "onEnter": [
+    "ev_city_first_visit"
+  ]
+}

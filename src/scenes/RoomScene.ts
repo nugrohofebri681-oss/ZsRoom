@@ -4,7 +4,7 @@ import { getCharacterSpec, type ActionSpec, type CharacterSpec, type PropSpec } 
 import { compileRoom, getRoom, doorOpen, doorSide, DOOR_DEPTH, type CompiledRoom, type PropInstance, type RoomDoor } from '../world/room';
 import { initNpc, npcPresent, npcSolid, stepNpc, yieldTo, NPC_RADIUS, type NpcData, type NpcState } from '../world/npc';
 import { NpcView } from '../actors/npcView';
-import { EVENTS, DIALOGUE, runEvent, type Presentation } from '../story/events';
+import { EVENTS, DIALOGUE, check, runEvent, type Presentation } from '../story/events';
 import { COMMS, threadAsDialogue } from '../story/comms';
 import type { Rect } from '../core/specs';
 import { moveWithCollision } from '../world/collision';
@@ -76,6 +76,8 @@ export class RoomScene extends Phaser.Scene {
   private floorPatches: FloorPatch[] = [];
   private npcs: { data: NpcData; state: NpcState; view: NpcView }[] = [];
   private visited: string[] = [];
+  /** Background landmarks inspected in this map visit (debug/tests). */
+  private inspected = new Set<string>();
   /** Door triggers stay disarmed until the player has stepped away from every doorway after arriving. */
   private doorsArmed = false;
   /** Bounded recovery when an NPC blocks a tap-to-move route: total time spent blocked on this path. */
@@ -101,6 +103,7 @@ export class RoomScene extends Phaser.Scene {
     const save = loadGame(safeStorage());
     this.flags = { ...(save?.flags ?? {}) };
     this.vars = { phase: 'evening', day: 1, outfit: 'default', ...(save?.vars ?? {}) };
+    this.inspected = new Set();
     this.visited = [...new Set([...(save?.visited ?? []), data.roomId])];
     // QA/dev builds only: `?variant=dimsum` previews a story-configurable interior variant.
     const variantOverride = isQaBuild(import.meta.env) ? new URLSearchParams(location.search).get('variant') : null;
@@ -553,6 +556,7 @@ export class RoomScene extends Phaser.Scene {
     if (res.dialogue) this.game.events.emit('dialogue', { speaker: 'Zila', lines: res.dialogue });
     if (res.dialogueId) this.showDialogue(DIALOGUE[res.dialogueId]);
     if (res.eventId) this.runStoryEvent(res.eventId);
+    if (res.inspect) { this.showDialogue({ speaker: res.inspect.name, lines: [res.inspect.comment] }); this.inspected.add(a.ownerId); }
     this.persist();
     this.game.events.emit('interacted', a.key);
   }
@@ -628,9 +632,15 @@ export class RoomScene extends Phaser.Scene {
 
   private placeNpc(n: { data: NpcData; state: NpcState; view: NpcView }, phase: string): void {
     n.state = Object.assign(initNpc(n.data, phase), { phase });
-    n.view.setVisible(npcPresent(n.data, phase));
+    n.view.setVisible(this.npcVisible(n.data, phase));
     this.drawNpc(n, 0);
   }
+
+  /** Schedule (time of day) AND story conditions (`showIf`). Re-evaluated after every story event. */
+  private npcVisible(d: NpcData, phase: string): boolean {
+    return npcPresent(d, phase) && (d.showIf ?? []).every((c) => check(c, { vars: this.vars, flags: this.flags }));
+  }
+  private refreshNpcVisibility(): void { for (const n of this.npcs) n.view.setVisible(this.npcVisible(n.data, this.phase())); }
 
   private drawNpc(n: { data: NpcData; state: NpcState; view: NpcView }, timeMs: number): void {
     const r = groundToRender(n.state.x, n.state.y);
@@ -662,6 +672,7 @@ export class RoomScene extends Phaser.Scene {
   private runStoryEvent(id: string): void {
     const res = runEvent(EVENTS.get(id), { vars: this.vars, flags: this.flags });
     this.vars = res.state.vars as Vars; this.flags = res.state.flags;
+    this.refreshNpcVisibility();
     this.present(res.out);
     this.persist();
   }
@@ -799,6 +810,7 @@ export class RoomScene extends Phaser.Scene {
         flagsState: { ...this.flags },
         npcs: this.npcs.map((n) => ({ id: n.data.id, x: Math.round(n.state.x), y: Math.round(n.state.y), visible: n.view.sprite.visible, moving: n.state.moving })),
         mapKind: this.room.data.kind ?? 'interior',
+        inspectables: this.room.props.filter((p) => p.inspect).map((p) => ({ key: p.key, name: p.inspect!.name, inspected: this.inspected.has(p.key) })),
         variant: (this.room.data as { variantKey?: string }).variantKey ?? null,
         renderScale: (() => { const r = this.registry.get('renderScale') as { scale: number; mode: string; history: unknown[] } | undefined; return r ? { scale: r.scale, mode: r.mode, changes: r.history.length } : null; })(),
         generatedTextures: { count: this.textures.getTextureKeys().filter((k) => /^(temp:|fx:|sky:|lightmap:)/.test(k)).length, bytes: this.generatedTextureBytes() },

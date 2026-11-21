@@ -21,6 +21,8 @@ export interface NpcData {
   schedule?: Partial<Record<'morning' | 'afternoon' | 'evening' | 'night', { x: number; y: number } | 'away'>>;
   /** Interaction: a dialogue id or event id. */
   interact?: { label: string; dialogue?: string; event?: string };
+  /** Present only while these story conditions hold (e.g. a customer waits only during a shift). */
+  showIf?: import('../story/events').Condition[];
   radiusCm?: number;
 }
 

@@ -319,15 +319,34 @@
           "y": 150,
           "anchors": [
             {
-              "id": "pick",
-              "label": "Pick up a steamer basket",
+              "id": "pass",
+              "label": "Kitchen pass (send / collect orders)",
               "x": 0,
               "y": 32,
               "facing": "N",
               "radiusCm": 45,
               "action": {
                 "type": "event",
-                "id": "ev_dimsum_pick"
+                "id": "ev_dimsum_pass"
+              }
+            }
+          ]
+        },
+        {
+          "assetId": "world_counter_dimsum",
+          "x": 600,
+          "y": 330,
+          "anchors": [
+            {
+              "id": "checkout",
+              "label": "Cashier: hand over & take payment",
+              "x": -115,
+              "y": -35,
+              "facing": "E",
+              "radiusCm": 45,
+              "action": {
+                "type": "event",
+                "id": "ev_dimsum_checkout"
               }
             }
           ]
@@ -335,21 +354,7 @@
         {
           "assetId": "world_cafe_table",
           "x": 170,
-          "y": 320,
-          "anchors": [
-            {
-              "id": "serve",
-              "label": "Serve this table",
-              "x": 0,
-              "y": 30,
-              "facing": "N",
-              "radiusCm": 45,
-              "action": {
-                "type": "event",
-                "id": "ev_dimsum_serve"
-              }
-            }
-          ]
+          "y": 320
         },
         {
           "assetId": "world_stool",
@@ -363,71 +368,28 @@
         },
         {
           "assetId": "world_cafe_table",
-          "x": 630,
-          "y": 320,
-          "anchors": [
-            {
-              "id": "serve",
-              "label": "Serve this table",
-              "x": 0,
-              "y": 30,
-              "facing": "N",
-              "radiusCm": 45,
-              "action": {
-                "type": "event",
-                "id": "ev_dimsum_serve"
-              }
-            }
-          ]
-        },
-        {
-          "assetId": "world_stool",
-          "x": 570,
-          "y": 330
-        },
-        {
-          "assetId": "world_stool",
-          "x": 690,
-          "y": 330
-        },
-        {
-          "assetId": "world_cafe_table",
           "x": 170,
-          "y": 470,
-          "anchors": [
-            {
-              "id": "serve",
-              "label": "Serve this table",
-              "x": 0,
-              "y": 30,
-              "facing": "N",
-              "radiusCm": 45,
-              "action": {
-                "type": "event",
-                "id": "ev_dimsum_serve"
-              }
-            }
-          ]
-        },
-        {
-          "assetId": "world_stool",
-          "x": 110,
-          "y": 480
-        },
-        {
-          "assetId": "world_stool",
-          "x": 230,
-          "y": 480
-        },
-        {
-          "assetId": "world_cafe_table",
-          "x": 630,
           "y": 470
         },
         {
           "assetId": "world_stool",
-          "x": 570,
+          "x": 110,
           "y": 480
+        },
+        {
+          "assetId": "world_stool",
+          "x": 230,
+          "y": 480
+        },
+        {
+          "assetId": "world_cafe_table",
+          "x": 650,
+          "y": 480
+        },
+        {
+          "assetId": "world_stool",
+          "x": 590,
+          "y": 490
         },
         {
           "assetId": "world_plant_floor",
@@ -465,8 +427,42 @@
             "hair": "#2A1E18",
             "hijab": "#E8C7A0"
           },
+          "x": 600,
+          "y": 375,
+          "facing": "N",
+          "behaviour": {
+            "type": "idle"
+          },
+          "showIf": [
+            {
+              "varEq": [
+                "shift",
+                "in_progress"
+              ]
+            },
+            {
+              "varLt": [
+                "ordersDone",
+                3
+              ]
+            }
+          ],
+          "interact": {
+            "label": "Take the customer's order",
+            "event": "ev_dimsum_take_order"
+          },
+          "radiusCm": 65
+        },
+        {
+          "id": "npc_dimsum_diner",
+          "name": "Diner",
+          "look": {
+            "shirt": "#E07A5F",
+            "pants": "#3A3440",
+            "hair": "#2A1E18"
+          },
           "x": 700,
-          "y": 470,
+          "y": 490,
           "facing": "W",
           "behaviour": {
             "type": "idle"
@@ -475,8 +471,8 @@
             "night": "away"
           },
           "interact": {
-            "label": "Talk to the customer",
-            "dialogue": "dlg_dimsum_customer"
+            "label": "Talk to the diner",
+            "dialogue": "dlg_dimsum_diner"
           }
         }
       ]

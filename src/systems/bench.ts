@@ -9,10 +9,11 @@ import type { RenderScaleController } from './renderScale';
  */
 interface Row { map: string; phase: string; scale: number; avgFps: number; p5Fps: number; worstMs: number; frames: number }
 
-const MAPS: { map: string; phase: string; walk: [number, number][] }[] = [
+const MAPS: { map: string; phase: string; walk: [number, number][] }[] = [   // heaviest scenes: exteriors at night
   { map: 'zila_bedroom', phase: 'night', walk: [[150, 330], [600, 330]] },
   { map: 'batuphat_street', phase: 'night', walk: [[300, 300], [1500, 300]] },
   { map: 'batuphat_west', phase: 'night', walk: [[2200, 420], [900, 420]] },
+  { map: 'lhokseumawe_centre', phase: 'night', walk: [[300, 480], [1700, 480]] },
   { map: 'batuphat_street', phase: 'afternoon', walk: [[1500, 300], [300, 300]] },
 ];
 

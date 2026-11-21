@@ -62,14 +62,13 @@ describe('World 01 graph', () => {
   });
 
   it('locked doors keep their wall solid; unlocking by flag opens the gap', () => {
-    const st = ROOMS.get('batuphat_street')!, road = st.doors.find((d) => d.id === 'road_east')!;
+    const st = ROOMS.get('batuphat_west')!, road = st.doors.find((d) => d.id === 'road_further')!;
     expect(doorOpen(road, {})).toBe(false);
-    const { w } = st.sizeCm;
-    const solidAt = (data: typeof st) => compileRoom(data).solids.some((s) => s.x >= w && s.x <= w + 1 && s.y <= 600 && s.y + s.h >= 600);
-    expect(solidAt(st)).toBe(true);                                    // wall stays closed
-    const unlocked = { ...st, doors: st.doors.map((d) => (d.id === 'road_east' ? { ...d, locked: { ...d.locked!, unlessFlag: 'test:open' } } : d)) };
-    expect(doorOpen(unlocked.doors.find((d) => d.id === 'road_east')!, { 'test:open': true })).toBe(true);
-    expect(compileRoom(unlocked, { 'test:open': true }).solids.some((s) => s.x === w && s.y <= 600 && s.y + s.h >= 600)).toBe(false);   // gap opens
+    const wallAt = (data: typeof st, flags: Record<string, boolean> = {}) => compileRoom(data, flags).solids.some((s) => s.x + s.w <= 0 && s.x + s.w >= -1 && s.y <= 600 && s.y + s.h >= 600);
+    expect(wallAt(st)).toBe(true);                                     // west wall stays closed
+    const unlocked = { ...st, doors: st.doors.map((d) => (d.id === 'road_further' ? { ...d, locked: { ...d.locked!, unlessFlag: 'test:open' } } : d)) };
+    expect(doorOpen(unlocked.doors.find((d) => d.id === 'road_further')!, { 'test:open': true })).toBe(true);
+    expect(wallAt(unlocked, { 'test:open': true })).toBe(false);       // gap opens when the story flag is set
   });
 
   it('every dialogue / event / comms reference in map data exists', () => {
@@ -182,17 +181,31 @@ describe('story-configurable interiors (variants)', () => {
     expect(variantFor(wp, 'dimsum')).toBe('dimsum');
     expect(variantFor(wp, 'nonsense')).toBe('office');
   });
-  it('dimsum shift: clock in → pick → serve ×3 (one basket at a time) → clock out', () => {
+  it('dimsum cashier shift: clock in → take order → kitchen → hand over & pay, ×3 → clock out', () => {
     let s = { vars: {} as Record<string, string | number | boolean>, flags: {} as Record<string, boolean> };
     const run = (id: string) => { const r = runEvent(EVENTS.get(id), s); s = r.state; return r; };
-    expect(run('ev_dimsum_pick').ran).toBe(false);                 // not clocked in
+    expect(run('ev_dimsum_take_order').ran).toBe(false);           // not clocked in
     run('ev_dimsum_clock');
-    expect(run('ev_dimsum_serve').ran).toBe(false);                // nothing to serve yet
-    for (let i = 0; i < 3; i++) { expect(run('ev_dimsum_pick').ran).toBe(true); expect(run('ev_dimsum_pick').ran).toBe(false); run('ev_dimsum_serve'); }
-    expect(s.vars.served).toBe(3);
-    expect(run('ev_dimsum_pick').ran).toBe(false);                 // no 4th basket
+    expect(run('ev_dimsum_checkout').ran).toBe(false);             // nothing ready
+    for (let i = 0; i < 3; i++) {
+      expect(run('ev_dimsum_take_order').ran).toBe(true);
+      expect(run('ev_dimsum_take_order').ran).toBe(false);         // one order at a time
+      expect(run('ev_dimsum_pass').ran).toBe(true);
+      expect(run('ev_dimsum_checkout').ran).toBe(true);
+    }
+    expect(s.vars.ordersDone).toBe(3);
+    expect(run('ev_dimsum_take_order').ran).toBe(false);           // no 4th order this shift
     expect(run('ev_dimsum_clock_out').ran).toBe(true);
     expect(s.vars.shift).toBe('done');
+  });
+  it('the customer only waits at the counter during an unfinished shift (NPC showIf)', async () => {
+    const { check } = await import('../../src/story/events');
+    const { ROOM_DATA, resolveRoom } = await import('../../src/world/room');
+    const cust = resolveRoom(ROOM_DATA.get('workplace')!, 'dimsum').npcs!.find((n) => n.id === 'npc_dimsum_customer')!;
+    const vis = (vars: Record<string, string | number>) => cust.showIf!.every((c) => check(c, { vars, flags: {} }));
+    expect(vis({})).toBe(false);
+    expect(vis({ shift: 'in_progress', ordersDone: 1 })).toBe(true);
+    expect(vis({ shift: 'in_progress', ordersDone: 3 })).toBe(false);
   });
 });
 
@@ -203,5 +216,26 @@ describe('adaptive render resolution policy', () => {
     expect(nextScale(2, 2)).toBe(1.75);
     expect(nextScale(1.5, 3)).toBe(1.25);
     expect(nextScale(1, 5)).toBe(1);
+  });
+});
+
+describe('location tiers (World 01 P3)', () => {
+  it('every inspectable landmark in map data is listed in the registry as background, with a non-empty neutral comment', async () => {
+    const { ROOM_DATA } = await import('../../src/world/room');
+    const listed = new Set((world as unknown as { inspectables: { map: string; name: string; role: string }[] }).inspectables.map((i) => `${i.map}/${i.name}`));
+    let n = 0;
+    for (const r of ROOM_DATA.values()) for (const p of [...(r.props ?? []), ...Object.values(r.variants ?? {}).flatMap((v) => v.props ?? [])]) if (p.inspect) {
+      n++;
+      expect(listed.has(`${r.id}/${p.inspect.name}`), `${r.id}/${p.inspect.name} missing from registry inspectables`).toBe(true);
+      expect(p.inspect.comment.length).toBeGreaterThan(10);
+    }
+    expect(n).toBeGreaterThanOrEqual(15);
+  });
+  it('Unimal is a reachable destination from the bedroom, and the city has a two-way road to Batuphat', () => {
+    const seen = new Set(['zila_bedroom']), q = ['zila_bedroom'];
+    while (q.length) for (const d of ROOMS.get(q.shift()!)!.doors) if (!d.locked && !seen.has(d.to.room)) { seen.add(d.to.room); q.push(d.to.room); }
+    for (const m of ['lhokseumawe_road', 'lhokseumawe_centre', 'unimal_campus']) expect(seen.has(m), m).toBe(true);
+    const back = ROOMS.get('lhokseumawe_road')!.doors.find((d) => d.to.room === 'batuphat_street' && !d.locked);
+    expect(back).toBeDefined();
   });
 });

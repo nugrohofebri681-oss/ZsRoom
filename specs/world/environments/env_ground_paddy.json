@@ -1,0 +1,24 @@
+{
+  "id": "env_ground_paddy",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "environment",
+  "kind": "floor-tile",
+  "displayName": "Rice field (TEMP)",
+  "density": 2,
+  "canvas": {
+    "width": 256,
+    "height": 126
+  },
+  "tile": {
+    "repeat": "xy",
+    "widthCm": 128,
+    "renderDepthCm": 63,
+    "groundDepthCm": 90
+  },
+  "temp": {
+    "shape": "grass",
+    "base": "#9DBF5E"
+  },
+  "$comment": "World 01 placeholder ground zone tile."
+}

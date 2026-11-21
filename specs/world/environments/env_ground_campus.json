@@ -1,0 +1,24 @@
+{
+  "id": "env_ground_campus",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "environment",
+  "kind": "floor-tile",
+  "displayName": "Campus lawn (TEMP)",
+  "density": 2,
+  "canvas": {
+    "width": 256,
+    "height": 126
+  },
+  "tile": {
+    "repeat": "xy",
+    "widthCm": 128,
+    "renderDepthCm": 63,
+    "groundDepthCm": 90
+  },
+  "temp": {
+    "shape": "grass",
+    "base": "#86AD63"
+  },
+  "$comment": "World 01 placeholder ground zone tile."
+}

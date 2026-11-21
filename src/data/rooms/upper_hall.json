@@ -1,7 +1,7 @@
 {
   "id": "upper_hall",
   "displayName": "Upstairs Hall",
-  "world": "dream_home",
+  "world": "world01",
   "floor": "upper",
   "sizeCm": {
     "w": 700,

@@ -78,6 +78,13 @@ export type RoomPropEntry = (
 ) & {
   /** Per-placement interactions replacing the spec's (generic world props: one counter spec, many uses). */
   anchors?: InteractionAnchorSpec[];
+  /**
+   * Background / inspectable landmark: tapping it (or pressing E nearby) shows its name and a short NEUTRAL
+   * comment. The engine builds the interaction spot (in front of the prop); no interior is implied.
+   */
+  inspect?: { name: string; comment: string };
+  /** Per-placement TEMP look (e.g. a generic shop facade's sign text / colours). TEMP art only. */
+  temp?: Record<string, unknown>;
 };
 
 /** Render layer of a prop instance. */
@@ -93,6 +100,8 @@ export interface PropInstance {
   layer: PropLayer;
   /** Interaction anchors of this placement (room override, else the spec's). */
   anchors?: InteractionAnchorSpec[];
+  /** Background/inspectable landmark info (name + neutral comment). */
+  inspect?: { name: string; comment: string };
   sortable: SortableProp;
 }
 
@@ -109,13 +118,12 @@ const WALL = 40; // cm thickness of the implicit boundary walls
 export const DOOR_DEPTH = 30; // cm an actor can step into a south doorway before the transition fires
 
 const roomModules = import.meta.glob('../data/rooms/*.json', { eager: true, import: 'default' }) as Record<string, RoomData>;
-import worldData from '../data/world/world01.json';
-const placeholders = (worldData as { placeholders?: Record<string, { variant?: string }> }).placeholders ?? {};
+import { placeholder } from './registry';
 
 /** The variant a configurable room uses: explicit override, else the world registry, else its default. */
 export function variantFor(data: RoomData, override?: string | null): string | null {
   if (!data.variants) return null;
-  const want = override ?? (data.variantOf ? placeholders[data.variantOf]?.variant : undefined) ?? data.defaultVariant;
+  const want = override ?? (data.variantOf ? placeholder(data.variantOf)?.variant : undefined) ?? data.defaultVariant;
   return want && data.variants[want] ? want : (data.defaultVariant ?? Object.keys(data.variants)[0]!);
 }
 
@@ -136,6 +144,11 @@ export function getRoom(id: string, variant?: string | null): RoomData {
   const r = ROOM_DATA.get(id);
   if (!r) throw new Error(`Unknown room: ${id}`);
   return resolveRoom(r, variant);
+}
+
+function tempHash(o: Record<string, unknown>): string {
+  let h = 2166136261; for (const c of JSON.stringify(o)) h = Math.imul(h ^ c.charCodeAt(0), 16777619);
+  return (h >>> 0).toString(36);
 }
 
 export function propRenderBounds(spec: PropSpec, x: number, y: number): Rect {
@@ -181,7 +194,9 @@ export function compileRoom(data: RoomData, flags: Record<string, boolean> = {})
   // Floor props first, then surface props (which need their host resolved).
   const order = data.props.map((p, i) => ({ p, i })).sort((a, b) => Number(!!a.p.on) - Number(!!b.p.on));
   for (const { p, i } of order) {
-    const spec = getPropSpec(p.assetId);
+    const base = getPropSpec(p.assetId);
+    // A placement can restyle a generic TEMP placeholder; it gets its own texture key (id~hash), same geometry.
+    const spec = p.temp && base.temp ? { ...base, id: `${base.id}~${tempHash(p.temp)}`, temp: { ...base.temp, ...p.temp } } : base;
     const key = `${spec.id}#${i}`;
     let inst: PropInstance;
     if (p.on) {
@@ -222,6 +237,12 @@ export function compileRoom(data: RoomData, flags: Record<string, boolean> = {})
       }
     }
     if (p.anchors) inst.anchors = p.anchors;
+    else if (p.inspect) {
+      const wallItem = inst.layer === 'wall';
+      inst.anchors = [{ id: 'inspect', label: p.inspect.name, x: 0, y: wallItem ? 60 : 30, facing: 'N', radiusCm: wallItem ? Math.min(90, spec.footprint.widthCm / 2) : 50,
+        action: { type: 'inspect', name: p.inspect.name, comment: p.inspect.comment } }];
+    }
+    if (p.inspect) inst.inspect = p.inspect;
     props.push(inst);
     if (p.id) byId.set(p.id, inst);
   }

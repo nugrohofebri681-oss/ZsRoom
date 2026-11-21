@@ -1,0 +1,44 @@
+{
+  "id": "world_campus_gate",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Campus gate with name arch (TEMP world placeholder)",
+  "density": 1,
+  "canvas": {
+    "width": 376,
+    "height": 324
+  },
+  "pivot": {
+    "x": 188,
+    "y": 312,
+    "meaning": "bottom-centre of the front face (wall item)"
+  },
+  "footprint": {
+    "widthCm": 360,
+    "depthCm": 4
+  },
+  "heightsCm": {
+    "top": 300
+  },
+  "collision": [],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "placement": {
+    "type": "wall",
+    "wall": "north"
+  },
+  "temp": {
+    "shape": "gate",
+    "wall": "#ECE8E1",
+    "metal": "#3A3440",
+    "gap": 170,
+    "sign": "UNIVERSITAS MALIKUSSALEH",
+    "signColor": "#1F5F8B",
+    "maxDensity": 1
+  },
+  "$comment": "World 01 placeholder (wall-mounted). Generic: placements may restyle it with \"temp\" (sign text, colours)."
+}

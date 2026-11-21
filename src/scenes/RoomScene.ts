@@ -81,6 +81,11 @@ export class RoomScene extends Phaser.Scene {
   private seated: Seated | null = null;
   private skies: { img: Phaser.GameObjects.Image; curtains: Phaser.GameObjects.Graphics }[] = [];
   private floorPatches: FloorPatch[] = [];
+  /** View culling (P5): static shell tiles with their render rect; hidden while outside the camera view. */
+  private cullables: { o: Phaser.GameObjects.Image; x0: number; y0: number; x1: number; y1: number }[] = [];
+  private cullAt = { x: NaN, y: NaN, w: 0 };
+  /** Shell tiles drawn in the last frame (tests / perf HUD). */
+  private tilesDrawn = 0;
   private npcs: { data: NpcData; state: NpcState; view: NpcView }[] = [];
   private visited: string[] = [];
   /** Background landmarks inspected in this map visit (debug/tests). */
@@ -141,6 +146,7 @@ export class RoomScene extends Phaser.Scene {
     if (this.room.data.kind === 'exterior') this.addExteriorSky();
     if (this.room.fences?.length) this.drawFences();
     this.drawProps();
+    this.collectCullables();
     this.spawnNpcs();
     this.floorPatches = floorPatches(this.room.props);
     this.glow = undefined; this.doorGlow = undefined; this.glowTarget = null;
@@ -376,7 +382,33 @@ export class RoomScene extends Phaser.Scene {
   }
 
   // ---------------------------------------------------------------- loop
+  /**
+   * Large outdoor regions hold hundreds of ground/wall tile quads; only the ones near the view are drawn.
+   * The rects are fixed (tiles never move), so the check is cheap and only runs when the view moved.
+   */
+  private collectCullables(): void {
+    this.cullables = [];
+    for (const o of this.children.list) {
+      if (o.name !== 'shell-tile') continue;
+      const t = o as Phaser.GameObjects.Image, crop = (t as unknown as { _crop: { width: number; height: number } })._crop;
+      const w = (t.isCropped ? crop.width : t.frame.width) * t.scaleX, h = (t.isCropped ? crop.height : t.frame.height) * t.scaleY;
+      this.cullables.push({ o: t, x0: t.x, y0: t.y, x1: t.x + w, y1: t.y + h });
+    }
+    this.cullAt = { x: NaN, y: NaN, w: 0 };
+  }
+
+  private cullView(): void {
+    const v = this.cameras.main.worldView, m = 160;
+    if (Math.abs(v.x - this.cullAt.x) < 48 && Math.abs(v.y - this.cullAt.y) < 48 && v.width === this.cullAt.w) return;
+    this.cullAt = { x: v.x, y: v.y, w: v.width };
+    const x0 = v.x - m, y0 = v.y - m, x1 = v.right + m, y1 = v.bottom + m;
+    let n = 0;
+    for (const c of this.cullables) { const on = c.x1 > x0 && c.x0 < x1 && c.y1 > y0 && c.y0 < y1; c.o.visible = on; if (on) n++; }
+    this.tilesDrawn = n;
+  }
+
   override update(_time: number, deltaMs: number): void {
+    this.cullView();
     if (this.transitioning) return;
     if (this.input$.modal) { this.game.events.emit('prompt', null); this.setHighlight(null); return; } // dialogue open: UI owns input
     // Real elapsed time, not Phaser's smoothed delta (which under-reports when frames drop and makes the
@@ -904,6 +936,7 @@ export class RoomScene extends Phaser.Scene {
         zone: this.zone,
         zones: this.room.zones?.map((z) => ({ id: z.id, x: z.x, y: z.y, w: z.w, h: z.h })) ?? null,
         bbox: this.room.bbox ?? null,
+        tiles: { total: this.cullables.length, drawn: this.tilesDrawn },
         sceneStarts: SCENE_STARTS,
         camera: { scrollX: Math.round(this.cameras.main.scrollX), scrollY: Math.round(this.cameras.main.scrollY), zoom: this.cameras.main.zoom, viewW: Math.round(this.cameras.main.worldView.width), viewH: Math.round(this.cameras.main.worldView.height) },
         inspectables: this.room.props.filter((p) => p.inspect).map((p) => ({ key: p.key, name: p.inspect!.name, inspected: this.inspected.has(p.key) })),

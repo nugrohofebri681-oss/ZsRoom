@@ -91,9 +91,10 @@
       "provisional": true,
       "region": [
         "front_yard",
-        "batuphat_street"
+        "batuphat_street",
+        "batuphat_west"
       ],
-      "note": "P5 outdoor region: front yard + Batuphat street as one continuous district, camera scrolls, no scene change between them"
+      "note": "P5 outdoor region: front yard + Batuphat street + west block (park, becak, warung, Mixue front) as one continuous district; camera scrolls, no scene change between them"
     },
     {
       "id": "front_yard",
@@ -151,7 +152,8 @@
       "kind": "exterior",
       "status": "implemented",
       "provisional": true,
-      "note": "West block: homes, warung kopi, small park, becak motor, Mixue. West road end locked"
+      "note": "West block: homes, warung kopi, small park, becak motor, Mixue. West road end locked",
+      "zoneOf": "batuphat_region"
     },
     {
       "id": "mixue",

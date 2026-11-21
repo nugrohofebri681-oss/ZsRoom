@@ -34,16 +34,20 @@ export const SHOTS = 'docs/reviews/foundation';
 import { readdirSync, readFileSync } from 'node:fs';
 /** Room data straight from the game's JSON, so tests follow layout changes instead of hard-coding them. */
 export function roomData(id: string): any { return JSON.parse(readFileSync(`src/data/rooms/${id}.json`, 'utf8')); }
-/** A legacy room's spawn in the coordinates of the map that now contains it (P4 floors, P5 outdoor regions). */
-export function spawnPos(roomId: string, spawn: string): { x: number; y: number } {
-  const sp = roomData(roomId).spawns[spawn];
+/** Origin of a legacy room inside the floor/region that now contains it ({0,0} if it is a map of its own). */
+export function zoneOrigin(roomId: string): { x: number; y: number } {
   for (const dir of ['src/data/floors', 'src/data/regions']) {
     for (const f of readdirSync(dir)) {
       const z = JSON.parse(readFileSync(`${dir}/${f}`, 'utf8')).zones.find((q: any) => q.room === roomId);
-      if (z) return { x: sp.x + z.x, y: sp.y + (z.y ?? 0) };
+      if (z) return { x: z.x, y: z.y ?? 0 };
     }
   }
-  return { x: sp.x, y: sp.y };
+  return { x: 0, y: 0 };
+}
+/** A legacy room's spawn in the coordinates of the map that now contains it (P4 floors, P5 outdoor regions). */
+export function spawnPos(roomId: string, spawn: string): { x: number; y: number } {
+  const sp = roomData(roomId).spawns[spawn], o = zoneOrigin(roomId);
+  return { x: sp.x + o.x, y: sp.y + o.y };
 }
 export function propEntry(roomId: string, assetId: string): any { return roomData(roomId).props.find((p: any) => p.assetId === assetId); }
 export const press = async (page: Page, isMobile: boolean) => {

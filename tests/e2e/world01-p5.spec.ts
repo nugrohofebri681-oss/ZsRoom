@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { boot, closeDialogue, holdUntil, roomData, state, until, useDoor } from './helpers';
+import { boot, closeDialogue, holdUntil, press, roomData, spawnPos, state, until, useDoor } from './helpers';
 
 /**
  * P5 — outdoor region. Zila's front yard and Batuphat street are ONE exterior map (`batuphat_region`): from the
@@ -21,7 +21,7 @@ async function walkTo(page: Page, isMobile: boolean, x: number, y: number): Prom
   }
 }
 
-test.describe('P5 outdoor region (Phase A: yard + Batuphat street)', () => {
+test.describe('P5 outdoor region (yard + Batuphat street + west block)', () => {
   test.setTimeout(240_000);
 
   test('house front door → just outside the facade, then doorstep → yard → gate → street → Indomaret front with zero scene restarts and a scrolling camera', async ({ page, isMobile }) => {
@@ -134,5 +134,39 @@ test.describe('P5 outdoor region (Phase A: yard + Batuphat street)', () => {
     expect(s.vars.day).toBe(3);
     expect(s.visited).toEqual(expect.arrayContaining(['front_yard', 'batuphat_street', 'minimarket', REGION]));
     expect(s.flagsState['light:zila_bedroom:prop_lamp_zila#17']).toBe(true);
+  });
+
+  test('Phase B: yard → street → park (becak) → Mixue front on the same map; Mixue interior returns to its door; the west road end stays locked', async ({ page, isMobile }) => {
+    const errors = await boot(page, '?fresh&fast&room=front_yard');
+    await page.evaluate(() => (window as any).__ZS.setVars({ phase: 'afternoon' }));
+    const s0 = await S(page);
+    const W = { x: 0, y: 700 };                                                                   // west block zone origin
+    await walkTo(page, isMobile, STREET.x + 450, STREET.y + 200);                                  // out through the gate
+    await walkTo(page, isMobile, W.x + 1250, W.y + 330);                                           // west along the street into the park
+    let s = await S(page);
+    expect(s.zone).toBe('batuphat_west');
+    await page.screenshot({ path: `${OUT}/${isMobile ? 'android' : 'desktop'}-04-park-becak.png` });
+    const mixue = await page.evaluate(() => (window as any).__ZS.doorSpot('mixue_door'));
+    await walkTo(page, isMobile, mixue.x, mixue.y);
+    s = await S(page);
+    await page.screenshot({ path: `${OUT}/${isMobile ? 'android' : 'desktop'}-05-mixue-front.png` });
+    expect(s.sceneStarts).toBe(s0.sceneStarts);
+    expect(s.nearest).toBe('door:mixue_door');
+    expect(s0.camera.scrollX - s.camera.scrollX).toBeGreaterThan(600);                            // the view travelled west with her
+    expect(s.visited).toEqual(expect.arrayContaining(['front_yard', 'batuphat_street', 'batuphat_west']));
+    await useDoor(page, isMobile, 'mixue_door', 'mixue');
+    await useDoor(page, isMobile, 'exit', REGION);
+    expect((await S(page)).player).toMatchObject(spawnPos('batuphat_west', 'from_mixue'));
+    // the west road end is a locked planned border (batuphat_beyond), not a way out
+    const end = await page.evaluate(() => (window as any).__ZS.doorSpot('road_further'));
+    await walkTo(page, isMobile, end.x, end.y);
+    await until(page, "s.nearest === 'door:road_further'");
+    const before = await S(page);
+    await press(page, isMobile);
+    await page.waitForTimeout(600);
+    const after = await S(page);
+    expect(after.sceneStarts).toBe(before.sceneStarts); expect(after.roomId).toBe(REGION);
+    expect(after.player.x).toBeGreaterThanOrEqual(0);
+    expect(errors).toEqual([]);
   });
 });

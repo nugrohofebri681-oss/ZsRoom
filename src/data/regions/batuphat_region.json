@@ -1,5 +1,5 @@
 {
-  "$comment": "P5 outdoor region: Zila's front yard + Batuphat street as ONE continuous exterior district (no scene change between them). Zones are the existing room files at (x, y) offsets; region x 0–2400 is reserved for the west block (Phase B). PROVISIONAL layout, not real geography.",
+  "$comment": "P5 outdoor region: Zila's front yard, Batuphat street and the west block (park, becak, warung, Mixue front) as ONE continuous exterior district — no scene change between them. Zones are the existing room files at (x, y) offsets. The west road end (batuphat_beyond) stays a locked planned border; the city road east is a district transition. PROVISIONAL layout, not real geography.",
   "id": "batuphat_region",
   "displayName": "Batuphat",
   "world": "world01",
@@ -15,6 +15,11 @@
     {
       "room": "batuphat_street",
       "x": 2400,
+      "y": 700
+    },
+    {
+      "room": "batuphat_west",
+      "x": 0,
       "y": 700
     }
   ],

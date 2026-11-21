@@ -14,7 +14,7 @@ const origin = (room: string) => def.zones.find((z) => z.room === room)!;
 const at = (room: string, spawn: string) => region.data.spawns[`${room}.${spawn}`]!;
 const door = (id: string) => region.anchors.find((a) => a.key === `door:${id}`)!;
 
-describe('outdoor region (P5): yard + Batuphat street', () => {
+describe('outdoor region (P5): yard + Batuphat street + west block', () => {
   it('is one exterior map with zones offset in x AND y', () => {
     expect(def.kind).toBe('region');
     expect(region.data.kind).toBe('exterior');
@@ -23,11 +23,12 @@ describe('outdoor region (P5): yard + Batuphat street', () => {
   });
 
   it('doorstep → yard → gate → street → Indomaret / workplace / city road is one walkable path, no door between zones', () => {
-    for (const goal of [door('minimarket_door'), door('workplace_door'), door('road_east'), at('batuphat_street', 'from_west')]) {
+    for (const goal of [door('minimarket_door'), door('workplace_door'), door('road_east'), door('mixue_door'), at('batuphat_west', 'default'), at('batuphat_west', 'from_mixue')]) {
       expect(grid.findPath(at('front_yard', 'from_house'), goal), `${goal.x},${goal.y}`).not.toBeNull();
     }
     const ids = region.data.doors.map((d) => d.id);
     expect(ids).not.toContain('gate'); expect(ids).not.toContain('home_gate');          // walked through, not used
+    expect(ids).not.toContain('road_west'); expect(ids).not.toContain('to_street');
     expect(ids).toEqual(expect.arrayContaining(['house_door', 'minimarket_door', 'workplace_door', 'road_east']));
     expect(region.data.doors.some((d) => region.zones.some((z) => z.id === d.to.room))).toBe(false);
   });
@@ -47,6 +48,15 @@ describe('outdoor region (P5): yard + Batuphat street', () => {
     for (let i = 0; i < 12; i++) r = moveWithCollision(r, { x: 0, y: -12 }, R, region.solids);
     expect(r.y).toBeGreaterThanOrEqual(s.y!);
     expect(grid.standable({ x: s.x + 1500, y: s.y! - 100 })).toBe(false);
+  });
+
+  it('the west road end stays a locked planned border: no doorway gap, cannot walk off the region', () => {
+    const d = region.data.doors.find((x) => x.id === 'road_further')!;
+    expect(d.locked).toBeTruthy(); expect(d.to.room).toBe('batuphat_beyond');
+    let p = { x: 40, y: d.y + d.h / 2 };
+    for (let i = 0; i < 12; i++) p = moveWithCollision(p, { x: -12, y: 0 }, R, region.solids);
+    expect(p.x).toBeGreaterThanOrEqual(R - 0.5);
+    expect(door('road_further').payload).toEqual({ locked: expect.any(String) });
   });
 
   it('back walls are drawn only where no zone continues north (the street row opens onto the yard)', () => {

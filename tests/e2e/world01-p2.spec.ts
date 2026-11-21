@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { boot, closeDialogue, dimsumShift, state, until, useDoor } from './helpers';
+import { boot, closeDialogue, dimsumShift, state, until, useDoor, zoneOrigin } from './helpers';
 
 const S = (p: Page): Promise<any> => state(p);
 const OUT = 'docs/reviews/world01';
@@ -31,9 +31,10 @@ test.describe('World 01 P2', () => {
     await until(page, 's.renderScale.scale < 2', 40_000);                // headless software rendering is slow → auto step-down
     const scaled = (await S(page)).renderScale.scale;
     // still playable after the change: tap-to-move arrives
-    await page.evaluate(() => { const z = (window as any).__ZS; z.teleport(600, 300); z.tapWorld(900, 300); });
+    const o = zoneOrigin('batuphat_street');                              // P5: the street is a zone of the outdoor region
+    await page.evaluate(([x0, y0]) => { const z = (window as any).__ZS; z.teleport(x0 + 600, y0 + 300); z.tapWorld(x0 + 900, y0 + 300); }, [o.x, o.y]);
     await until(page, 's.path === 0', 15000);
-    expect(Math.abs((await S(page)).player.x - 900)).toBeLessThan(30);
+    expect(Math.abs((await S(page)).player.x - o.x - 900)).toBeLessThan(30);
     // player picks Sharp in the settings panel → full resolution, remembered after reload
     const g0 = await page.evaluate(() => (window as any).__ZS_UI.sound());
     await page.touchscreen.tap(g0.button.x, g0.button.y);

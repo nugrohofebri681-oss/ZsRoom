@@ -28,9 +28,9 @@ The source of truth for the registry is [`src/data/world/world01.json`](../../sr
 | `upper_hall` | Zila's home | interior | ✅ | north → bedroom; east stairs → living_room | story-critical · TEMP |
 | `living_room` | Zila's home | interior | ✅ provisional | north stairs → hall; south → yard; **west → kitchen** | story-critical · TEMP |
 | `kitchen` | Zila's home | interior | ✅ provisional (new) | east → living room | story-critical · breakfast loop and tea |
-| `front_yard` | Zila's home | exterior | ✅ provisional | north → living room; south gate → street | story-critical |
-| `batuphat_street` | Batuphat | exterior | ✅ provisional | home gate, Indomaret, workplace; **west → west block**; east road 🔒 | road drawn as a ground zone (no overdraw) |
-| `batuphat_west` | Batuphat | exterior | ✅ provisional (new) | east → street; Mixue; west road 🔒 | homes and warung kopi (**background**), small park, **becak motor** + driver, child NPC |
+| `front_yard` | Zila's home | exterior | ✅ provisional · **zone of `batuphat_region` (P5)** | north → living room; south gate → street (walk, no transition) | story-critical |
+| `batuphat_street` | Batuphat | exterior | ✅ provisional · **zone of `batuphat_region` (P5)** | home gate, Indomaret, workplace; west block (walk); east road → Lhokseumawe road | road drawn as a ground zone (no overdraw) |
+| `batuphat_west` | Batuphat | exterior | ✅ provisional · **zone of `batuphat_region` (P5)** | street (walk); Mixue; west road 🔒 | homes and warung kopi (**background**), small park, **becak motor** + driver, child NPC |
 | `minimarket` (**Indomaret**) | Batuphat | interior | ✅ provisional | south → street | **enterable** · real-world reference: Indomaret (TEMP colours and text only) · ⚠ brand review |
 | `mixue` | Batuphat | interior | ✅ provisional (new) | south → west block | **enterable** · real-world reference: Mixue (TEMP colours and text only) · ⚠ brand review |
 | `workplace` | Batuphat | interior | ✅ **story-configurable** (variants: **dimsum shop (active)**, office) | south → street | story-critical · no real name or layout; one registry line switches the variant |
@@ -98,6 +98,58 @@ At the default zoom, both rooms of each house floor are visible at once. When zo
   - the Indomaret back room;
   - any multi-room shop;
   - joining the front yard with the street into one continuous outdoor area.
+
+## P5 — outdoor region: one walkable Batuphat district (Issue #32)
+**Goal:** the outside feels like one place. Zila leaves the house and walks from her doorstep through the yard, out of the gate, along the street past Indomaret and the workplace, west to the park, the becak and Mixue — **one map, no fade, no scene restart**, with the camera following her over a district larger than the screen. Interiors (house, Indomaret, Mixue, workplace) and distant districts (Lhokseumawe road → city → Unimal) keep proper transitions. Camera feel and map rules follow large farm/town maps in top-down life sims; art, code and layout are ZsRoom's own (HD 2D illustrated, OG Art Bible).
+
+![Region layout](../reviews/world01-p5/region-layout.png)
+
+### How it works (reusable, data-driven: `src/world/region.ts`, `src/data/regions/<id>.json`)
+- **Zones at (x, y) offsets.** A region lists existing room files as zones. Local coordinates + zone origin = region coordinates. Unlike P4 floors (X-only, shared north wall), zones may sit **north/south** of each other.
+- **Open boundaries.** Where two zones touch there is no wall, cap, threshold or trigger: the ground simply continues. Doors that led from one zone to another (yard gate, street ↔ west block) are dropped.
+- **Real collisions.** The **void** (inside the region's bounding box, outside every zone) is solid. **Fences** (`fences` in the region file) are low walls with collision and are depth-sorted (Zila walks behind or in front). The yard gate is a gap in the front fence.
+- **Doors to other maps** on the outer edge keep a threshold gap and a stopper, exactly like a plain room. North doors stay recesses in the zone's back wall. Locked borders (west road → `batuphat_beyond`) stay solid with their message.
+- **Rendering.** Each zone's ground and back wall are drawn at its offset. A back wall (building row, house facade) is drawn only where no zone continues north of it (`wallGaps`): the street's shop row opens onto the yard. Sky fills the space above each exposed wall run, so there are no dark seams. No double-rendered ground.
+- **Zones keep their identity:** HUD title, ambience, `onEnter` events, visited list, NPC schedules and per-zone light flags (`light:<room>:<prop>`). Prop keys of non-primary zones are prefixed (`batuphat_street/…`).
+- **Camera:** smooth follow with look-ahead, clamped gently to the region's box. The district is never auto-fitted (it is ~3× wider than the desktop view); manual zoom still works.
+- **View culling (measured):** the region has ~550 ground/wall tile quads; only those near the view are drawn (`state().tiles`).
+
+### Migration table — legacy map / spawn ids → region coordinates
+Saves need no version bump: a saved `roomId` naming a zone resolves to `batuphat_region`; the position is offset by the zone origin, and content that moved is remapped (`legacy` in the region file). Doors in interiors (`living_room.front_door`, shop exits, the city road) still name the old ids and resolve the same way.
+
+| Legacy map | Zone origin (x, y) | Legacy spawn → region position | Content moves (x range → shift) |
+|---|---|---|---|
+| `front_yard` | (2400, 0) | `from_house` (500, 60) → **(2900, 60)** just outside the house door · `default` (500, 350) → (2900, 350) · `from_street` (500, 640) → (2900, 640) | gate moved 50 cm west to line up with the street gate |
+| `batuphat_street` | (2400, 700) | `from_home` (450, 60) → (2850, 760) · `from_minimarket` **(1820, 60)** → (4220, 760) · `from_workplace` **(2440, 60)** → (4840, 760) · `from_west` (60, 610) → (2460, 1310) · `from_lhokseumawe_road` (2740, 610) → (5140, 1310) | Indomaret frontage 1100–1740 → **+400**; workplace frontage 1970–2530 → **+190** (room for the yard); neighbour house 850 → 1250 |
+| `batuphat_west` | (0, 700) | `default` (900, 420) → (900, 1120) · `from_mixue` (2160, 60) → (2160, 760) · `from_street` (2340, 610) → (2340, 1310) | none |
+| `minimarket`, `mixue`, `workplace`, `lhokseumawe_road`, … | separate maps | unchanged ids (`minimarket` kept) | — |
+
+### Phases
+- **Phase A** (commit `bc023e3`): the compositor + yard and street as one region. Tested first; legacy route tests now walk through the gate.
+- **Phase B:** the west block joined the same region (park, becak + driver, warung, Mixue front; west road end locked). The city road, city centre and Unimal remain larger **separate districts** reached through the east road (purposeful boundary); no streaming needed at this size.
+
+### Evidence (`docs/reviews/world01-p5/`)
+- `region-layout.png`: layout diagram drawn from the region data (`node scripts/region-diagram.mjs`).
+- `{desktop,android}-1N-<spot>-p4.png` vs `-p5.png`: the same character position in P4 (separate maps) and P5 (one region), same viewport, default wide zoom (`scripts/compare-p4-p5.cjs`).
+- `desktop-20-camera-follow-filmstrip.png` + `follow-walk-log.json`: one continuous walk from the yard through the gate and east along the street. `sceneStarts` stays 1 for all 82 samples, while the camera scroll moves 2210 → 3572 with Zila's world x: real follow, not a static full-district framing.
+- `{desktop,android}-0N-*.png`: E2E captures (doorstep, yard gate, Indomaret front, park and becak, Mixue front).
+
+### Performance (headless software proxy, interleaved, median of 3, afternoon — NOT device results)
+| Spot | Desktop P4 | Desktop P5 | Emulated phone P4 | Emulated phone P5 |
+|---|---|---|---|---|
+| Front yard | 28.3 fps | 13.5 fps | 8.5 fps | 6.8 fps |
+| Street | 14.3 fps | 13.8 fps | 6.3 fps | 6.0 fps |
+| West block (park) | 13.8 fps | 13.5 fps | 6.3 fps | 6.3 fps |
+
+- **The yard costs what the street costs.** In P4 the yard was a small, isolated map; in P5 the street, shops and NPCs are visible from it, so it renders like a street view.
+- **View culling added:** without it, P5 was 10–15 % below P4 on the street. The region has 546 tile quads; only those near the view are drawn.
+- **Physical Samsung Galaxy A05 benchmark still needed:** open the preview with `?fresh&bench`. Region streaming or chunking is not needed at this size (52 × 15 m); revisit only if device numbers ask for it.
+- Adaptive render resolution and the Display setting are unchanged.
+
+### Limits
+- The layout is provisional. Frontages moved east to make room for the yard; no real geography is implied.
+- The city road, city centre and Unimal remain separate maps by design (purposeful district boundary).
+- All TEMP art is unchanged; final art is Codex's track.
 
 ## P3 — Lhokseumawe city, Unimal, inspectable background (Issue #23)
 **Playable first, visual refinement later.** The topology is **fictionalised**: it is not a claim about real streets or distances.

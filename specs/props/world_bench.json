@@ -1,0 +1,102 @@
+{
+  "id": "world_bench",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "displayName": "Garden Bench",
+  "density": 2,
+  "canvas": {
+    "width": 316,
+    "height": 264
+  },
+  "pivot": {
+    "x": 158,
+    "y": 252,
+    "meaning": "front-centre floor contact point"
+  },
+  "footprint": {
+    "widthCm": 150,
+    "depthCm": 50
+  },
+  "heightsCm": {
+    "seat": 45,
+    "top": 85
+  },
+  "collision": [
+    {
+      "x": -75.0,
+      "y": -50,
+      "w": 150,
+      "h": 50
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [
+    {
+      "id": "sit",
+      "label": "Sit on the bench",
+      "x": 0,
+      "y": 30,
+      "facing": "S",
+      "radiusCm": 40,
+      "action": {
+        "type": "sit",
+        "seat": {
+          "x": 0,
+          "y": -22
+        },
+        "heightCm": 45,
+        "facing": "S"
+      }
+    }
+  ],
+  "maxSideOverhangCm": 0,
+  "temp": {
+    "shape": "sofa",
+    "body": "#9C7258",
+    "cushion": "#B88A64",
+    "legs": "#5B3A29",
+    "seats": 3,
+    "arms": 0
+  },
+  "$comment": "User commissioned production spec, submitted for technical review. Stable world-temp geometry/anchors unchanged; no artwork approved by this specification.",
+  "artBounds": {
+    "x": 8,
+    "y": 8,
+    "width": 300,
+    "height": 248
+  },
+  "baseLine": {
+    "y": 252,
+    "tolerancePx": 3
+  },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.02,
+    "maxOpaqueRatio": 0.9
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight",
+    "maxBytes": 3000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/world_bench/<version>/",
+  "artRequest": "docs/art-requests/009-reusable-props-correction.md",
+  "geometryReview": {
+    "frontEdgeY": 162,
+    "backEdgeY": 92,
+    "frontHeightTolerancePercent": 10,
+    "topDepthTolerancePercent": 25,
+    "measureAt": "highlight rim, not slab bottom"
+  }
+}

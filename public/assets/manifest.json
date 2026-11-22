@@ -1,5 +1,5 @@
 {
-  "$comment": "Runtime asset manifest. Only entries with status 'approved' may ship real artwork. Edited by scripts/approve-asset.mjs — never by hand for approved entries.",
+  "$comment": "Runtime asset manifest. Only entries with status 'approved' may ship real artwork. Edited by scripts/approve-asset.mjs \u2014 never by hand for approved entries.",
   "manifestVersion": 1,
   "assets": {
     "prop_bed_zila": {
@@ -194,7 +194,7 @@
             "paintedCm": 40.4,
             "deviationPct": -33
           },
-          "topConvergence": "front of top ≈12% wider than back",
+          "topConvergence": "front of top \u224812% wider than back",
           "decision": "Shallow tabletop explicitly accepted by the Creative Director (VISUAL PASS wardrobe v001 only)."
         }
       }
@@ -653,6 +653,26 @@
           "sha256": "cc28e6cdc1b884e354baa89b891e2d050d013d92e268bc9dcc14c38c43bd745e"
         }
       }
+    },
+    "world_bench": {
+      "status": "requested",
+      "spec": "specs/props/world_bench.json",
+      "request": "docs/art-requests/009-reusable-props-correction.md"
+    },
+    "world_cabinet_low": {
+      "status": "requested",
+      "spec": "specs/props/world_cabinet_low.json",
+      "request": "docs/art-requests/009-reusable-props-correction.md"
+    },
+    "env_ground_yard": {
+      "status": "requested",
+      "spec": "specs/environments/env_ground_yard.json",
+      "request": "docs/art-requests/010-batch-f-ground-fill.md"
+    },
+    "env_ground_path": {
+      "status": "requested",
+      "spec": "specs/environments/env_ground_path.json",
+      "request": "docs/art-requests/010-batch-f-ground-fill.md"
     }
   }
 }

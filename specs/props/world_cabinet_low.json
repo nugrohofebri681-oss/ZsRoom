@@ -1,0 +1,79 @@
+{
+  "id": "world_cabinet_low",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "prop",
+  "displayName": "Low Modular Cabinet",
+  "density": 2,
+  "canvas": {
+    "width": 216,
+    "height": 180
+  },
+  "pivot": {
+    "x": 108,
+    "y": 168,
+    "meaning": "front-centre floor contact point"
+  },
+  "footprint": {
+    "widthCm": 100,
+    "depthCm": 40
+  },
+  "heightsCm": {
+    "top": 50
+  },
+  "collision": [
+    {
+      "x": -50.0,
+      "y": -40,
+      "w": 100,
+      "h": 40
+    }
+  ],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "maxSideOverhangCm": 0,
+  "temp": {
+    "shape": "block",
+    "body": "#A8754C"
+  },
+  "$comment": "User commissioned production spec, submitted for technical review. Stable world-temp geometry/anchors unchanged; no artwork approved by this specification.",
+  "artBounds": {
+    "x": 8,
+    "y": 8,
+    "width": 200,
+    "height": 164
+  },
+  "baseLine": {
+    "y": 168,
+    "tolerancePx": 3
+  },
+  "transparency": {
+    "edgePaddingPx": 8,
+    "minOpaqueRatio": 0.02,
+    "maxOpaqueRatio": 0.9
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "straight",
+    "maxBytes": 3000000
+  },
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ],
+  "submissionPath": "art/submissions/world_cabinet_low/<version>/",
+  "artRequest": "docs/art-requests/009-reusable-props-correction.md",
+  "geometryReview": {
+    "frontEdgeY": 68,
+    "backEdgeY": 12,
+    "frontHeightTolerancePercent": 10,
+    "topDepthTolerancePercent": 25,
+    "measureAt": "highlight rim, not slab bottom"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "env_ground_path",
+  "specVersion": "1.0.0",
+  "status": "open-request",
+  "category": "environment",
+  "kind": "floor-tile",
+  "displayName": "Warm compacted earth footpath fill",
+  "density": 2,
+  "canvas": {
+    "width": 256,
+    "height": 126
+  },
+  "tile": {
+    "repeat": "xy",
+    "widthCm": 128,
+    "renderDepthCm": 63,
+    "groundDepthCm": 90
+  },
+  "temp": {
+    "shape": "plain",
+    "base": "#BE9672"
+  },
+  "$comment": "Modular fill texture only. Terrain boundaries and transition masks remain engine/layout owned; no map dimensions or road connectivity implied.",
+  "batch": "F",
+  "seamless": {
+    "maxEdgeDelta": 14
+  },
+  "transparency": {
+    "edgePaddingPx": 0,
+    "minOpaqueRatio": 0.999,
+    "maxOpaqueRatio": 1
+  },
+  "export": {
+    "format": "png",
+    "bitDepth": 8,
+    "channels": 4,
+    "colorSpace": "sRGB",
+    "alpha": "opaque",
+    "maxBytes": 600000
+  },
+  "artRequest": "docs/art-requests/010-batch-f-ground-fill.md",
+  "submissionPath": "art/submissions/env_ground_path/<version>/",
+  "styleReferences": [
+    "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+    "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+  ]
+}

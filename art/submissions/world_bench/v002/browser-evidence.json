@@ -1,0 +1,1490 @@
+[
+  {
+    "id": "world_bench",
+    "label": "desktop",
+    "errors": [],
+    "keys": [
+      "temp:world_bench@1"
+    ],
+    "state": {
+      "roomId": "batuphat_region",
+      "player": {
+        "x": 2900,
+        "y": 350,
+        "facing": "S",
+        "depth": 350
+      },
+      "nearest": null,
+      "occluded": [],
+      "props": [
+        {
+          "key": "world_window_ext#0",
+          "depth": 4,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "world_window_ext#1",
+          "depth": 4,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "world_plant_floor#2",
+          "depth": 120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_plant_floor#3",
+          "depth": 120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_motorbike#4",
+          "depth": 330,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_bench#5",
+          "depth": 220,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_tree#6",
+          "depth": 440,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_plant_floor#7",
+          "depth": 620,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_gate_home#0",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_street/world_facade_house#1",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_street/world_storefront_indomaret#2",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_street/world_facade_workplace#3",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_street/world_street_sign#4",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_streetlight#5",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_streetlight#6",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_streetlight#7",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_motorbike#8",
+          "depth": 1120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_motorbike#9",
+          "depth": 1120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_tree#10",
+          "depth": 1000,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_tree#11",
+          "depth": 1000,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_plant_floor#12",
+          "depth": 850,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_facade_house#0",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_west/world_facade_warung#1",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_west/world_facade_house#2",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_west/world_storefront_mixue#3",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_west/world_tree#4",
+          "depth": 900,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_tree#5",
+          "depth": 1000,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_bench#6",
+          "depth": 880,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_becak#7",
+          "depth": 1160,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_street_sign#8",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_streetlight#9",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_streetlight#10",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_streetlight#11",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_plant_floor#12",
+          "depth": 830,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_plant_floor#13",
+          "depth": 820,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_motorbike#14",
+          "depth": 1120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        }
+      ],
+      "fps": 38,
+      "transitioning": false,
+      "lights": [
+        {
+          "key": "batuphat_street/world_streetlight#5",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        },
+        {
+          "key": "batuphat_street/world_streetlight#6",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        },
+        {
+          "key": "batuphat_street/world_streetlight#7",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        },
+        {
+          "key": "batuphat_west/world_streetlight#9",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        },
+        {
+          "key": "batuphat_west/world_streetlight#10",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        },
+        {
+          "key": "batuphat_west/world_streetlight#11",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        }
+      ],
+      "lighting": {
+        "fullScreenLayers": 0.58,
+        "bakes": 2
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 0,
+        "authored": "S",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 0.8484848484848485,
+      "zoomMul": 1,
+      "shell": {
+        "floor": {
+          "id": "env_ground_yard",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_house_front",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "afternoon",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 704,
+      "highlight": {
+        "target": null,
+        "visible": false,
+        "depth": null
+      },
+      "floor": "wood",
+      "visited": [
+        "batuphat_region",
+        "front_yard"
+      ],
+      "flagsState": {},
+      "npcs": [
+        {
+          "id": "npc_neighbour",
+          "x": 3091,
+          "y": 1040,
+          "visible": true,
+          "moving": true
+        },
+        {
+          "id": "npc_becak_driver",
+          "x": 1400,
+          "y": 1140,
+          "visible": true,
+          "moving": false
+        },
+        {
+          "id": "npc_park_kid",
+          "x": 1284,
+          "y": 1013,
+          "visible": true,
+          "moving": true
+        }
+      ],
+      "mapKind": "exterior",
+      "zone": "front_yard",
+      "zones": [
+        {
+          "id": "front_yard",
+          "x": 2400,
+          "y": 0,
+          "w": 1000,
+          "h": 700
+        },
+        {
+          "id": "batuphat_street",
+          "x": 2400,
+          "y": 700,
+          "w": 2800,
+          "h": 800
+        },
+        {
+          "id": "batuphat_west",
+          "x": 0,
+          "y": 700,
+          "w": 2400,
+          "h": 800
+        }
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 5200,
+        "h": 1500
+      },
+      "tiles": {
+        "total": 546,
+        "drawn": 228
+      },
+      "sceneStarts": 1,
+      "camera": {
+        "scrollX": 2180,
+        "scrollY": -271,
+        "zoom": 0.8484848484848485,
+        "viewW": 1697,
+        "viewH": 1179
+      },
+      "inspectables": [
+        {
+          "key": "batuphat_street/world_facade_house#1",
+          "name": "Neighbour's house",
+          "inspected": false
+        },
+        {
+          "key": "batuphat_west/world_facade_house#0",
+          "name": "House",
+          "inspected": false
+        },
+        {
+          "key": "batuphat_west/world_facade_house#2",
+          "name": "House",
+          "inspected": false
+        }
+      ],
+      "variant": null,
+      "renderScale": {
+        "scale": 1,
+        "mode": "auto",
+        "changes": 0
+      },
+      "generatedTextures": {
+        "count": 26,
+        "bytes": 8446744
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": -100001,
+          "curtainDepth": 0,
+          "curtainsVisible": false
+        },
+        {
+          "skyDepth": -100001,
+          "curtainDepth": 0,
+          "curtainsVisible": false
+        },
+        {
+          "skyDepth": -100001,
+          "curtainDepth": 0,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "street",
+        "bufferBytes": 0
+      }
+    }
+  },
+  {
+    "id": "world_bench",
+    "label": "android-landscape",
+    "errors": [],
+    "keys": [
+      "temp:world_bench@2"
+    ],
+    "state": {
+      "roomId": "batuphat_region",
+      "player": {
+        "x": 2900,
+        "y": 350,
+        "facing": "S",
+        "depth": 350
+      },
+      "nearest": null,
+      "occluded": [],
+      "props": [
+        {
+          "key": "world_window_ext#0",
+          "depth": 4,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "world_window_ext#1",
+          "depth": 4,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "world_plant_floor#2",
+          "depth": 120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_plant_floor#3",
+          "depth": 120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_motorbike#4",
+          "depth": 330,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_bench#5",
+          "depth": 220,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_tree#6",
+          "depth": 440,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_plant_floor#7",
+          "depth": 620,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_gate_home#0",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_street/world_facade_house#1",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_street/world_storefront_indomaret#2",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_street/world_facade_workplace#3",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_street/world_street_sign#4",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_streetlight#5",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_streetlight#6",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_streetlight#7",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_motorbike#8",
+          "depth": 1120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_motorbike#9",
+          "depth": 1120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_tree#10",
+          "depth": 1000,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_tree#11",
+          "depth": 1000,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_plant_floor#12",
+          "depth": 850,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_facade_house#0",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_west/world_facade_warung#1",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_west/world_facade_house#2",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_west/world_storefront_mixue#3",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_west/world_tree#4",
+          "depth": 900,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_tree#5",
+          "depth": 1000,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_bench#6",
+          "depth": 880,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_becak#7",
+          "depth": 1160,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_street_sign#8",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_streetlight#9",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_streetlight#10",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_streetlight#11",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_plant_floor#12",
+          "depth": 830,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_plant_floor#13",
+          "depth": 820,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_motorbike#14",
+          "depth": 1120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        }
+      ],
+      "fps": 39,
+      "transitioning": false,
+      "lights": [
+        {
+          "key": "batuphat_street/world_streetlight#5",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        },
+        {
+          "key": "batuphat_street/world_streetlight#6",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        },
+        {
+          "key": "batuphat_street/world_streetlight#7",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        },
+        {
+          "key": "batuphat_west/world_streetlight#9",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        },
+        {
+          "key": "batuphat_west/world_streetlight#10",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        },
+        {
+          "key": "batuphat_west/world_streetlight#11",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        }
+      ],
+      "lighting": {
+        "fullScreenLayers": 0.58,
+        "bakes": 2
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 0,
+        "authored": "S",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 0.8290909090909092,
+      "zoomMul": 1,
+      "shell": {
+        "floor": {
+          "id": "env_ground_yard",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_house_front",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "afternoon",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 704,
+      "highlight": {
+        "target": null,
+        "visible": false,
+        "depth": null
+      },
+      "floor": "wood",
+      "visited": [
+        "batuphat_region",
+        "front_yard"
+      ],
+      "flagsState": {},
+      "npcs": [
+        {
+          "id": "npc_neighbour",
+          "x": 3091,
+          "y": 1040,
+          "visible": true,
+          "moving": true
+        },
+        {
+          "id": "npc_becak_driver",
+          "x": 1400,
+          "y": 1140,
+          "visible": true,
+          "moving": false
+        },
+        {
+          "id": "npc_park_kid",
+          "x": 1284,
+          "y": 1013,
+          "visible": true,
+          "moving": true
+        }
+      ],
+      "mapKind": "exterior",
+      "zone": "front_yard",
+      "zones": [
+        {
+          "id": "front_yard",
+          "x": 2400,
+          "y": 0,
+          "w": 1000,
+          "h": 700
+        },
+        {
+          "id": "batuphat_street",
+          "x": 2400,
+          "y": 700,
+          "w": 2800,
+          "h": 800
+        },
+        {
+          "id": "batuphat_west",
+          "x": 0,
+          "y": 700,
+          "w": 2400,
+          "h": 800
+        }
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 5200,
+        "h": 1500
+      },
+      "tiles": {
+        "total": 546,
+        "drawn": 168
+      },
+      "sceneStarts": 1,
+      "camera": {
+        "scrollX": 2100,
+        "scrollY": -255,
+        "zoom": 0.8290909090909092,
+        "viewW": 1930,
+        "viewH": 868
+      },
+      "inspectables": [
+        {
+          "key": "batuphat_street/world_facade_house#1",
+          "name": "Neighbour's house",
+          "inspected": false
+        },
+        {
+          "key": "batuphat_west/world_facade_house#0",
+          "name": "House",
+          "inspected": false
+        },
+        {
+          "key": "batuphat_west/world_facade_house#2",
+          "name": "House",
+          "inspected": false
+        }
+      ],
+      "variant": null,
+      "renderScale": {
+        "scale": 2,
+        "mode": "auto",
+        "changes": 0
+      },
+      "generatedTextures": {
+        "count": 26,
+        "bytes": 11117808
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": -100001,
+          "curtainDepth": 0,
+          "curtainsVisible": false
+        },
+        {
+          "skyDepth": -100001,
+          "curtainDepth": 0,
+          "curtainsVisible": false
+        },
+        {
+          "skyDepth": -100001,
+          "curtainDepth": 0,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "street",
+        "bufferBytes": 0
+      }
+    }
+  },
+  {
+    "id": "world_bench",
+    "label": "android-portrait",
+    "errors": [],
+    "keys": [
+      "temp:world_bench@2"
+    ],
+    "state": {
+      "roomId": "batuphat_region",
+      "player": {
+        "x": 2900,
+        "y": 350,
+        "facing": "S",
+        "depth": 350
+      },
+      "nearest": null,
+      "occluded": [],
+      "props": [
+        {
+          "key": "world_window_ext#0",
+          "depth": 4,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "world_window_ext#1",
+          "depth": 4,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "world_plant_floor#2",
+          "depth": 120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_plant_floor#3",
+          "depth": 120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_motorbike#4",
+          "depth": 330,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_bench#5",
+          "depth": 220,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_tree#6",
+          "depth": 440,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "world_plant_floor#7",
+          "depth": 620,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_gate_home#0",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_street/world_facade_house#1",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_street/world_storefront_indomaret#2",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_street/world_facade_workplace#3",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_street/world_street_sign#4",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_streetlight#5",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_streetlight#6",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_streetlight#7",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_motorbike#8",
+          "depth": 1120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_motorbike#9",
+          "depth": 1120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_tree#10",
+          "depth": 1000,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_tree#11",
+          "depth": 1000,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_street/world_plant_floor#12",
+          "depth": 850,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_facade_house#0",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_west/world_facade_warung#1",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_west/world_facade_house#2",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_west/world_storefront_mixue#3",
+          "depth": 704,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "wall"
+        },
+        {
+          "key": "batuphat_west/world_tree#4",
+          "depth": 900,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_tree#5",
+          "depth": 1000,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_bench#6",
+          "depth": 880,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_becak#7",
+          "depth": 1160,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_street_sign#8",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_streetlight#9",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_streetlight#10",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_streetlight#11",
+          "depth": 1170,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_plant_floor#12",
+          "depth": 830,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_plant_floor#13",
+          "depth": 820,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        },
+        {
+          "key": "batuphat_west/world_motorbike#14",
+          "depth": 1120,
+          "alpha": 1,
+          "art": "temp",
+          "layer": "floor"
+        }
+      ],
+      "fps": 39,
+      "transitioning": false,
+      "lights": [
+        {
+          "key": "batuphat_street/world_streetlight#5",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        },
+        {
+          "key": "batuphat_street/world_streetlight#6",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        },
+        {
+          "key": "batuphat_street/world_streetlight#7",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        },
+        {
+          "key": "batuphat_west/world_streetlight#9",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        },
+        {
+          "key": "batuphat_west/world_streetlight#10",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        },
+        {
+          "key": "batuphat_west/world_streetlight#11",
+          "on": true,
+          "core": true,
+          "glows": 0,
+          "glowAlpha": 0,
+          "glowDepth": null
+        }
+      ],
+      "lighting": {
+        "fullScreenLayers": 0.58,
+        "bakes": 2
+      },
+      "anim": {
+        "anim": "idle",
+        "frame": 0,
+        "authored": "S",
+        "mirrored": false
+      },
+      "walked": 0,
+      "path": 0,
+      "pending": null,
+      "zoom": 1.3575757575757577,
+      "zoomMul": 1,
+      "shell": {
+        "floor": {
+          "id": "env_ground_yard",
+          "art": "temp"
+        },
+        "wall": {
+          "id": "env_wall_house_front",
+          "art": "temp"
+        }
+      },
+      "vars": {
+        "phase": "afternoon",
+        "day": 1,
+        "outfit": "default"
+      },
+      "seated": null,
+      "modal": false,
+      "displayObjects": 704,
+      "highlight": {
+        "target": null,
+        "visible": false,
+        "depth": null
+      },
+      "floor": "wood",
+      "visited": [
+        "batuphat_region",
+        "front_yard"
+      ],
+      "flagsState": {},
+      "npcs": [
+        {
+          "id": "npc_neighbour",
+          "x": 3099,
+          "y": 1040,
+          "visible": true,
+          "moving": true
+        },
+        {
+          "id": "npc_becak_driver",
+          "x": 1400,
+          "y": 1140,
+          "visible": true,
+          "moving": false
+        },
+        {
+          "id": "npc_park_kid",
+          "x": 1290,
+          "y": 1010,
+          "visible": true,
+          "moving": true
+        }
+      ],
+      "mapKind": "exterior",
+      "zone": "front_yard",
+      "zones": [
+        {
+          "id": "front_yard",
+          "x": 2400,
+          "y": 0,
+          "w": 1000,
+          "h": 700
+        },
+        {
+          "id": "batuphat_street",
+          "x": 2400,
+          "y": 700,
+          "w": 2800,
+          "h": 800
+        },
+        {
+          "id": "batuphat_west",
+          "x": 0,
+          "y": 700,
+          "w": 2400,
+          "h": 800
+        }
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 5200,
+        "h": 1500
+      },
+      "tiles": {
+        "total": 546,
+        "drawn": 140
+      },
+      "sceneStarts": 1,
+      "camera": {
+        "scrollX": 2540,
+        "scrollY": -571,
+        "zoom": 1.3575757575757577,
+        "viewW": 530,
+        "viewH": 1179
+      },
+      "inspectables": [
+        {
+          "key": "batuphat_street/world_facade_house#1",
+          "name": "Neighbour's house",
+          "inspected": false
+        },
+        {
+          "key": "batuphat_west/world_facade_house#0",
+          "name": "House",
+          "inspected": false
+        },
+        {
+          "key": "batuphat_west/world_facade_house#2",
+          "name": "House",
+          "inspected": false
+        }
+      ],
+      "variant": null,
+      "renderScale": {
+        "scale": 2,
+        "mode": "auto",
+        "changes": 0
+      },
+      "generatedTextures": {
+        "count": 26,
+        "bytes": 11117808
+      },
+      "doorsArmed": true,
+      "windows": [
+        {
+          "skyDepth": -100001,
+          "curtainDepth": 0,
+          "curtainsVisible": false
+        },
+        {
+          "skyDepth": -100001,
+          "curtainDepth": 0,
+          "curtainsVisible": false
+        },
+        {
+          "skyDepth": -100001,
+          "curtainDepth": 0,
+          "curtainsVisible": false
+        }
+      ],
+      "audio": {
+        "state": "not-created",
+        "muted": false,
+        "prefs": {
+          "version": 1,
+          "muted": false,
+          "master": 0.8,
+          "ambience": 0.6,
+          "sfx": 0.9
+        },
+        "played": {},
+        "unlocks": 0,
+        "ambience": null,
+        "wantedAmbience": "street",
+        "bufferBytes": 0
+      }
+    }
+  }
+]

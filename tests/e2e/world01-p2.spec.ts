@@ -41,6 +41,16 @@ test.describe('World 01 P2', () => {
     const g = await page.evaluate(() => (window as any).__ZS_UI.sound());
     await page.touchscreen.tap(g.quality.x, g.quality.y);                 // Auto → Sharp
     await until(page, "s.renderScale.mode === 'sharp' && s.renderScale.scale === 2");
+    // Sharp → Smooth (render scale exactly 1): the canvas must still fill the screen and the HUD stay on it
+    // (regression: at scale 1 the canvas kept its old, larger CSS size and the E button went off-screen)
+    let g2 = await page.evaluate(() => (window as any).__ZS_UI.sound());
+    if (!g2.open) { await page.touchscreen.tap(g2.button.x, g2.button.y); g2 = await page.evaluate(() => (window as any).__ZS_UI.sound()); }
+    await page.touchscreen.tap(g2.quality.x, g2.quality.y);
+    await until(page, "s.renderScale.mode === 'smooth' && s.renderScale.scale === 1");
+    const fit = await page.evaluate(() => { const c = (window as any).__ZS_GAME.canvas as HTMLCanvasElement, r = c.getBoundingClientRect(); return { w: r.width, h: r.height, vw: innerWidth, vh: innerHeight }; });
+    expect(Math.abs(fit.w - fit.vw)).toBeLessThan(2); expect(Math.abs(fit.h - fit.vh)).toBeLessThan(2);
+    await page.evaluate(() => (window as any).__ZS_GAME.registry.get('renderScale').setMode('sharp'));   // back to Sharp (persisted below)
+    await until(page, "s.renderScale.mode === 'sharp'");
     await page.goto('/?fast&adaptive'); await page.waitForFunction(() => (window as any).__ZS?.state?.());
     await until(page, "s.renderScale.mode === 'sharp' && s.renderScale.scale === 2");
     expect(scaled).toBeLessThan(2);

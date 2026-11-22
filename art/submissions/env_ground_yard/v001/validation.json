@@ -1,0 +1,154 @@
+{
+  "scope": "Local integration fixture, not merged foundation CI",
+  "specificationCommit": "fbe3d46",
+  "pipelineCommit": "b8d6b66",
+  "result": {
+    "assetId": "env_ground_yard",
+    "version": "v001",
+    "dir": "art/submissions/env_ground_yard/v001",
+    "spec": "specs/environments/env_ground_yard.json",
+    "errors": [],
+    "warnings": [],
+    "checks": [
+      {
+        "name": "asset id format",
+        "pass": true,
+        "detail": "env_ground_yard"
+      },
+      {
+        "name": "version format (v###)",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "spec exists",
+        "pass": true,
+        "detail": "specs/environments/env_ground_yard.json"
+      },
+      {
+        "name": "master file present",
+        "pass": true,
+        "detail": "env_ground_yard_v001.png"
+      },
+      {
+        "name": "metadata.json present",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "only png/webp/json/md files",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata schema",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "production submission (not a concept board)",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata.assetId matches folder",
+        "pass": true,
+        "detail": "env_ground_yard"
+      },
+      {
+        "name": "metadata.version matches folder",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "metadata.specVersion matches spec",
+        "pass": true,
+        "detail": "1.0.0 vs 1.0.0"
+      },
+      {
+        "name": "createdAt is a date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "master sha256 matches metadata",
+        "pass": true,
+        "detail": "9f389cc98b388b8ebcecb921765dcba0fbdbf551c44da43a1b8fd103bb9abefa"
+      },
+      {
+        "name": "format PNG",
+        "pass": true,
+        "detail": "png"
+      },
+      {
+        "name": "canvas size",
+        "pass": true,
+        "detail": "256x126, expected 256x126"
+      },
+      {
+        "name": "RGBA (alpha channel)",
+        "pass": true,
+        "detail": "4 channels"
+      },
+      {
+        "name": "8-bit depth",
+        "pass": true,
+        "detail": "uchar"
+      },
+      {
+        "name": "sRGB colour space",
+        "pass": true,
+        "detail": "srgb"
+      },
+      {
+        "name": "file size",
+        "pass": true,
+        "detail": "48686 bytes (max 600000)"
+      },
+      {
+        "name": "transparent edge padding",
+        "pass": true,
+        "detail": "0 non-transparent px within 0px of the edge"
+      },
+      {
+        "name": "opaque coverage \u2265 min",
+        "pass": true,
+        "detail": "1.000"
+      },
+      {
+        "name": "opaque coverage \u2264 max (no baked background)",
+        "pass": true,
+        "detail": "1.000"
+      },
+      {
+        "name": "seamless horizontally (left\u2194right edge)",
+        "pass": true,
+        "detail": "mean edge delta 3.3 (max 14)"
+      },
+      {
+        "name": "seamless vertically (top\u2194bottom edge)",
+        "pass": true,
+        "detail": "mean edge delta 3.0 (max 14)"
+      }
+    ],
+    "analysis": {
+      "format": "png",
+      "width": 256,
+      "height": 126,
+      "channels": 4,
+      "hasAlpha": true,
+      "depth": "uchar",
+      "space": "srgb",
+      "bytes": 48686,
+      "opaqueRatio": 1,
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "width": 256,
+        "height": 126
+      },
+      "baseRow": 125,
+      "edgeViolations": 0
+    }
+  }
+}

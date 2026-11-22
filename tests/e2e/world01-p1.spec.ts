@@ -35,9 +35,9 @@ test.describe('World 01 continuation', () => {
     const starts = (await S(page)).sceneStarts;
     await useDoor(page, isMobile, 'road_west', 'batuphat_west');
     expect((await S(page)).sceneStarts).toBe(starts);
-    const W = zoneOrigin('batuphat_west');
     // becak driver (NPC dialogue)
-    await page.evaluate(([x, y]) => (window as any).__ZS.tapWorld(x, y), [W.x + 1400, W.y + 500]); await until(page, 's.path === 0', 20000);
+    const drv = (await S(page)).npcs.find((x: any) => x.id === 'npc_becak_driver');
+    await page.evaluate(([x, y]) => (window as any).__ZS.tapWorld(x, y), [drv.x + 40, drv.y + 10]); await until(page, 's.path === 0', 60000);
     await until(page, "s.nearest === 'npc:npc_becak_driver'"); await press(page, isMobile);
     await until(page, 's.modal === true');
     if (!isMobile) await page.screenshot({ path: `${OUT}/desktop-09-west-block-becak.png` });
@@ -55,7 +55,7 @@ test.describe('World 01 continuation', () => {
     // save → resume after the new maps
     await page.goto('/?fast'); await page.waitForFunction(() => (window as any).__ZS?.state?.());
     const s = await S(page);
-    expect(s.roomId).toBe('batuphat_region'); expect(s.zone).toBe('batuphat_street');
+    expect(s.roomId).toBe('batuphat_town'); expect(s.zone).toBe('batuphat_street');
     expect(s.visited).toEqual(expect.arrayContaining(['batuphat_west', 'mixue']));
     expect(errors).toEqual([]);
   });

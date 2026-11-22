@@ -90,8 +90,12 @@ export async function useDoor(page: Page, isMobile: boolean, doorId: string, exp
     if (zoneHere) return walkToZone(page, expectRoom);
     throw new Error(`door ${doorId} not on this map`);
   }
-  await page.evaluate(([x, y]) => (window as any).__ZS.tapWorld(x, y), [a.x, a.y]);
-  await until(page, 's.path === 0', 20000);
+  for (let i = 0; i < 4; i++) {
+    await page.evaluate(([x, y]) => (window as any).__ZS.tapWorld(x, y), [a.x, a.y]);
+    await until(page, 's.path === 0 || s.modal', 60000);
+    if (!((await state(page)) as any).modal) break;
+    await closeDialogue(page, isMobile);                     // a first-visit popup on the way (P6: long walks across town)
+  }
   await until(page, `s.nearest === 'door:${doorId}'`);
   await press(page, isMobile);
   await until(page, `(s.roomId === '${expectRoom}' || s.zone === '${expectRoom}') && !s.transitioning`, 8000);
@@ -108,12 +112,12 @@ export async function walkToZone(page: Page, zone: string): Promise<void> {
   if (!sp) throw new Error(`zone ${zone} not on ${before.roomId}`);
   for (let i = 0; i < 4; i++) {
     await page.evaluate(([x, y]) => (window as any).__ZS.tapWorld(x, y), [sp.x, sp.y]);
-    await until(page, `(s.path === 0 && s.zone === '${zone}') || s.modal`, 20000);
+    await until(page, `(s.path === 0 && s.zone === '${zone}') || s.modal`, 60000);
     if (!((await state(page)) as any).modal) break;
     // a story popup on the way (e.g. the first street visit) pauses the walk: close it and carry on
     await closeDialogue(page, await page.evaluate(() => matchMedia('(pointer: coarse)').matches));
   }
-  await until(page, `s.path === 0 && s.zone === '${zone}'`, 20000);
+  await until(page, `s.path === 0 && s.zone === '${zone}'`, 60000);
   const after = (await state(page)) as any;
   if (after.sceneStarts !== before.sceneStarts || after.roomId !== before.roomId) throw new Error(`scene restarted while walking ${before.zone} → ${zone}`);
   // The camera follows Zila: it must pan when the floor is wider than the view, and otherwise keep a stable

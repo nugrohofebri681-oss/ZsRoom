@@ -278,3 +278,51 @@ export function drawAsphalt(ctx: CanvasRenderingContext2D, spec: EnvironmentSpec
   ctx.fillStyle = base; ctx.fillRect(0, 0, W, H);
   for (let i = 0; i < 180; i++) { ctx.fillStyle = tone(base, 0.85 + r() * 0.35, 0.6); const x = r() * W, y = r() * H; ctx.fillRect(x, y, 2, 1.5); if (x + 2 > W) ctx.fillRect(x - W, y, 2, 1.5); }
 }
+
+/** Region ground layer (P6 towns); mirrors GroundLayerDef in world/floor.ts (kept structural to avoid a cycle). */
+export interface GroundLayer { floor: string; x: number; y: number; w: number; h: number; markings?: 'road' | 'lane'; base?: boolean }
+
+/**
+ * Draw a town's ground once for the whole region: each layer is tiled with a pre-composited "super tile"
+ * (~2.5 m wide) so an 80 × 57 m district needs a few hundred quads instead of thousands. Quads that a later layer
+ * fully covers are skipped (no double-rendered ground under roads and pavements). All quads are named `shell-tile` (view culling).
+ */
+export function buildGround(scene: Phaser.Scene, layers: GroundLayer[], manifest: AssetManifest, room: RoomData, density = 2): number {
+  const R = (l: GroundLayer) => ({ x: l.x, y: l.y * K, w: l.w, h: l.h * K });
+  const rects = layers.map(R);
+  const marks = scene.add.graphics().setDepth(-99994).setName('ground-marks');
+  let n = 0;
+  layers.forEach((l, i) => {
+    const t = superTile(scene, resolveTile(scene, getEnvironmentSpec(l.floor), manifest, room, density), 256);
+    const r = R(l);
+    // skip quads that a later (higher) layer fully covers: grass under the pavement band, pavement under the road
+    const later = rects.slice(i + 1);
+    const span = (x: number, y: number, w: number, h: number) => (later.some((o) => x >= o.x && x + w <= o.x + o.w && y >= o.y && y + h <= o.y + o.h) ? null : undefined);
+    const before = scene.children.list.length;
+    n += tileQuads(scene, t.key, t.w, t.h, r.x, r.y, r.w, r.h, 1 / t.density, span);
+    for (const o of scene.children.list.slice(before)) (o as Phaser.GameObjects.Image).setDepth(-100000 + i * 0.01);
+    if (l.markings === 'road') {
+      const horiz = r.w >= r.h;
+      marks.fillStyle(0xd9d4c7, 1);
+      if (horiz) { marks.fillRect(r.x, r.y, r.w, 5).fillRect(r.x, r.y + r.h - 5, r.w, 5); for (let x = r.x + 20; x < r.x + r.w - 50; x += 100) marks.fillStyle(0xf2e9c9, 1).fillRect(x, r.y + r.h / 2 - 2, 50, 4); }
+      else { marks.fillRect(r.x, r.y, 5, r.h).fillRect(r.x + r.w - 5, r.y, 5, r.h); for (let y = r.y + 14; y < r.y + r.h - 35; y += 70) marks.fillStyle(0xf2e9c9, 1).fillRect(r.x + r.w / 2 - 2, y, 4, 35); }
+    } else if (l.markings === 'lane') {
+      marks.fillStyle(0x8a7f75, 0.35);
+      if (r.w >= r.h) marks.fillRect(r.x, r.y, r.w, 3).fillRect(r.x, r.y + r.h - 3, r.w, 3); else marks.fillRect(r.x, r.y, 3, r.h).fillRect(r.x + r.w - 3, r.y, 3, r.h);
+    }
+  });
+  return n;
+}
+
+/** A texture of n × m copies of a tile (≈ `targetCm` render units wide), made once per tile and density. */
+function superTile(scene: Phaser.Scene, t: TileTex, targetCm: number): TileTex {
+  const n = Math.max(1, Math.round(targetCm / (t.w / t.density))), m = Math.max(1, Math.round(targetCm / (t.h / t.density)));
+  const key = `temp:super:${t.key}~x${n}x${m}`;
+  if (!scene.textures.exists(key)) {
+    const src = scene.textures.get(t.key).getSourceImage() as CanvasImageSource;
+    const c = scene.textures.createCanvas(key, t.w * n, t.h * m)!, ctx = c.getContext();
+    for (let j = 0; j < m; j++) for (let i = 0; i < n; i++) ctx.drawImage(src, i * t.w, j * t.h);
+    c.refresh();
+  }
+  return { ...t, key, w: t.w * n, h: t.h * m };
+}

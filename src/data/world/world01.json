@@ -84,17 +84,20 @@
       "zoneOf": "home_ground"
     },
     {
-      "id": "batuphat_region",
+      "id": "batuphat_town",
       "district": "batuphat",
       "kind": "exterior",
       "status": "implemented",
       "provisional": true,
       "region": [
         "front_yard",
+        "batuphat_lanes",
+        "batuphat_west",
         "batuphat_street",
-        "batuphat_west"
+        "batuphat_park",
+        "batuphat_south"
       ],
-      "note": "P5 outdoor region: front yard + Batuphat street + west block (park, becak, warung, Mixue front) as one continuous district; camera scrolls, no scene change between them"
+      "note": "P6 explorable Batuphat town (80 × 56 m): house & garden, residential lanes, gangs, main street with crossroads, park, south lanes; Indomaret, Mixue and the dimsum workplace as free-standing buildings. P5 'batuphat_region' saves migrate by landmark."
     },
     {
       "id": "front_yard",
@@ -104,7 +107,7 @@
       "status": "implemented",
       "provisional": true,
       "note": "House front, yard, gate to the street",
-      "zoneOf": "batuphat_region"
+      "zoneOf": "batuphat_town"
     },
     {
       "id": "batuphat_street",
@@ -113,7 +116,7 @@
       "status": "implemented",
       "provisional": true,
       "note": "Provisional street: home gate, minimarket, workplace; both road ends locked",
-      "zoneOf": "batuphat_region"
+      "zoneOf": "batuphat_town"
     },
     {
       "id": "minimarket",
@@ -153,7 +156,34 @@
       "status": "implemented",
       "provisional": true,
       "note": "West block: homes, warung kopi, small park, becak motor, Mixue. West road end locked",
-      "zoneOf": "batuphat_region"
+      "zoneOf": "batuphat_town"
+    },
+    {
+      "id": "batuphat_lanes",
+      "district": "batuphat",
+      "kind": "exterior",
+      "status": "implemented",
+      "provisional": true,
+      "zoneOf": "batuphat_town",
+      "note": "Residential lanes and gangs (houses on both sides)"
+    },
+    {
+      "id": "batuphat_park",
+      "district": "batuphat",
+      "kind": "exterior",
+      "status": "implemented",
+      "provisional": true,
+      "zoneOf": "batuphat_town",
+      "note": "Neighbourhood park with hedges, paths, fountain"
+    },
+    {
+      "id": "batuphat_south",
+      "district": "batuphat",
+      "kind": "exterior",
+      "status": "implemented",
+      "provisional": true,
+      "zoneOf": "batuphat_town",
+      "note": "South lane and back lane, small shop, houses"
     },
     {
       "id": "mixue",

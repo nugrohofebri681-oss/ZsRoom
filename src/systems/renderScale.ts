@@ -80,12 +80,26 @@ export class RenderScaleController {
     this.scale = scale;
     const g = this.game;
     g.scale.setZoom(1 / scale);
-    g.scale.resize(window.innerWidth * scale, window.innerHeight * scale);
+    this.resizeToWindow();
     g.registry.set('dpr', scale);
     g.events.emit('dpr-changed', scale);
   }
 
-  resizeToWindow(): void { this.game.scale.resize(window.innerWidth * this.scale, window.innerHeight * this.scale); }
+  /**
+   * Backing store = window CSS size × scale; the canvas is always shown at the window's CSS size. The CSS size is set
+   * explicitly: when the scale steps down to exactly 1 the scale manager kept the previous (larger) CSS size, which
+   * cropped the picture and pushed the right-hand HUD (clock, zoom, sound, E button) off-screen on slow phones,
+   * and touch input was mapped to half its position.
+   */
+  resizeToWindow(): void {
+    const g = this.game, w = window.innerWidth, h = window.innerHeight;
+    g.scale.resize(w * this.scale, h * this.scale);
+    g.canvas.style.width = `${w}px`; g.canvas.style.height = `${h}px`;
+    // input mapping (page px → game px) must follow the real CSS size; Phaser computes it only in refresh(),
+    // from the bounds it saw before this correction (at 1× it ended up 0.5 → every tap landed at half its position)
+    g.scale.updateBounds();
+    g.scale.displayScale.set(g.scale.baseSize.width / g.scale.canvasBounds.width, g.scale.baseSize.height / g.scale.canvasBounds.height);
+  }
 
   private persist(): void {
     try { this.store?.setItem(QUALITY_KEY, JSON.stringify({ mode: this.mode, autoScale: this.mode === 'auto' ? this.scale : undefined })); } catch { /* storage blocked */ }

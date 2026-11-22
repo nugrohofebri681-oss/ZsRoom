@@ -1,0 +1,90 @@
+{
+  "$comment": "P6 zone of batuphat_town at (300, 3600): Neighbourhood park: hedges with four entrances, crossing paths, fountain, benches. Buildings, ground and props live in src/data/regions/batuphat_town.json. PROVISIONAL, not real geography.",
+  "id": "batuphat_park",
+  "displayName": "Batuphat · park",
+  "world": "world01",
+  "floor": "ground",
+  "kind": "exterior",
+  "ambience": "street",
+  "provisional": true,
+  "sizeCm": {
+    "w": 2900,
+    "h": 1700
+  },
+  "wallHeightCm": 0,
+  "palette": {
+    "floor": "#B9B3A9",
+    "wall": "#E6DCCB",
+    "trim": "#8A7F75"
+  },
+  "shell": {
+    "floor": "env_ground_street",
+    "wall": "env_wall_street_row"
+  },
+  "spawns": {
+    "default": {
+      "x": 1375,
+      "y": 100,
+      "facing": "S"
+    }
+  },
+  "props": [],
+  "doors": [],
+  "npcs": [
+    {
+      "id": "npc_park_kid",
+      "name": "Child",
+      "look": {
+        "shirt": "#F2CC8F",
+        "pants": "#81B29A",
+        "hair": "#2A1E18"
+      },
+      "x": 1800,
+      "y": 1000,
+      "behaviour": {
+        "type": "wander",
+        "area": {
+          "x": 1550,
+          "y": 950,
+          "w": 500,
+          "h": 300
+        },
+        "speed": 55,
+        "pauseMs": [
+          1500,
+          4000
+        ]
+      },
+      "schedule": {
+        "evening": "away",
+        "night": "away"
+      },
+      "interact": {
+        "label": "Say hello",
+        "dialogue": "dlg_west_kid"
+      }
+    },
+    {
+      "id": "npc_park_elder",
+      "name": "Elderly neighbour",
+      "look": {
+        "shirt": "#E5E5E5",
+        "pants": "#5E6670",
+        "hair": "#BBBBBB"
+      },
+      "x": 1050,
+      "y": 580,
+      "facing": "S",
+      "behaviour": {
+        "type": "idle"
+      },
+      "schedule": {
+        "night": "away"
+      },
+      "interact": {
+        "label": "Greet the elderly neighbour",
+        "dialogue": "dlg_park_elder"
+      }
+    }
+  ]
+}

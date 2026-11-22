@@ -265,6 +265,20 @@
       "lines": [
         "Nothing ready to hand over yet."
       ]
+    },
+    "dlg_lane_neighbour": {
+      "speaker": "Neighbour",
+      "lines": [
+        "Hot today, isn't it, Zila?",
+        "The lane is quiet this time of day."
+      ]
+    },
+    "dlg_park_elder": {
+      "speaker": "Elderly neighbour",
+      "lines": [
+        "The fountain is nice and cool in the afternoon.",
+        "Mind the becak on the main street."
+      ]
     }
   }
 }

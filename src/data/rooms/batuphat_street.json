@@ -1,4 +1,5 @@
 {
+  "$comment": "P6 zone of batuphat_town at (4000, 1630): Main street, east half: crossroads with the avenue, Indomaret, the dimsum workplace; east road to Lhokseumawe. Buildings, ground and props live in src/data/regions/batuphat_town.json. PROVISIONAL, not real geography.",
   "id": "batuphat_street",
   "displayName": "Batuphat Street",
   "world": "world01",
@@ -6,11 +7,14 @@
   "kind": "exterior",
   "ambience": "street",
   "provisional": true,
+  "onEnter": [
+    "ev_street_first_visit"
+  ],
   "sizeCm": {
-    "w": 2800,
-    "h": 800
+    "w": 4000,
+    "h": 1970
   },
-  "wallHeightCm": 420,
+  "wallHeightCm": 0,
   "palette": {
     "floor": "#B9B3A9",
     "wall": "#E6DCCB",
@@ -18,131 +22,54 @@
   },
   "shell": {
     "floor": "env_ground_street",
-    "wall": "env_wall_street_row",
-    "zones": [
-      {
-        "floor": "env_ground_road",
-        "x": 0,
-        "y": 520,
-        "w": 2800,
-        "h": 260,
-        "markings": "road"
-      }
-    ]
+    "wall": "env_wall_street_row"
   },
-  "onEnter": [
-    "ev_street_first_visit"
-  ],
   "spawns": {
     "default": {
-      "x": 450,
-      "y": 300,
+      "x": 730,
+      "y": 1470,
       "facing": "S"
     },
     "from_home": {
-      "x": 450,
-      "y": 60,
+      "x": 730,
+      "y": 1070,
       "facing": "S"
     },
     "from_minimarket": {
-      "x": 1820,
-      "y": 60,
+      "x": 1300,
+      "y": 1030,
       "facing": "S"
     },
     "from_workplace": {
-      "x": 2440,
-      "y": 60,
+      "x": 3150,
+      "y": 1030,
       "facing": "S"
     },
     "from_west": {
-      "x": 60,
-      "y": 610,
+      "x": 100,
+      "y": 1470,
       "facing": "E"
     },
     "from_lhokseumawe_road": {
-      "x": 2740,
-      "y": 610,
+      "x": 3900,
+      "y": 1470,
       "facing": "W"
     }
   },
-  "props": [
+  "props": [],
+  "doors": [
     {
-      "assetId": "world_gate_home",
-      "wall": {
-        "x": 450,
-        "z": 0
+      "id": "road_east",
+      "label": "Go to Road to Lhokseumawe",
+      "side": "east",
+      "x": 4000,
+      "y": 1320,
+      "w": 10,
+      "h": 300,
+      "to": {
+        "room": "lhokseumawe_road",
+        "spawn": "from_batuphat_street"
       }
-    },
-    {
-      "assetId": "world_facade_house",
-      "wall": {
-        "x": 1250,
-        "z": 0
-      },
-      "inspect": {
-        "name": "Neighbour's house",
-        "comment": "A neighbour's house. (Background building.)"
-      }
-    },
-    {
-      "assetId": "world_storefront_indomaret",
-      "wall": {
-        "x": 1820,
-        "z": 0
-      }
-    },
-    {
-      "assetId": "world_facade_workplace",
-      "wall": {
-        "x": 2440,
-        "z": 0
-      }
-    },
-    {
-      "assetId": "world_street_sign",
-      "x": 250,
-      "y": 470
-    },
-    {
-      "assetId": "world_streetlight",
-      "x": 700,
-      "y": 470
-    },
-    {
-      "assetId": "world_streetlight",
-      "x": 1650,
-      "y": 470
-    },
-    {
-      "assetId": "world_streetlight",
-      "x": 2600,
-      "y": 470
-    },
-    {
-      "assetId": "world_motorbike",
-      "x": 1200,
-      "y": 420
-    },
-    {
-      "assetId": "world_motorbike",
-      "x": 1640,
-      "y": 420,
-      "anchors": []
-    },
-    {
-      "assetId": "world_tree",
-      "x": 1860,
-      "y": 300
-    },
-    {
-      "assetId": "world_tree",
-      "x": 120,
-      "y": 300
-    },
-    {
-      "assetId": "world_plant_floor",
-      "x": 2560,
-      "y": 150
     }
   ],
   "npcs": [
@@ -155,18 +82,18 @@
         "hair": "#3A2A20",
         "hijab": "#E8C7A0"
       },
-      "x": 650,
-      "y": 340,
+      "x": 900,
+      "y": 1130,
       "behaviour": {
         "type": "patrol",
         "points": [
           {
-            "x": 650,
-            "y": 340
+            "x": 900,
+            "y": 1130
           },
           {
-            "x": 1150,
-            "y": 340
+            "x": 2400,
+            "y": 1130
           }
         ],
         "speed": 60,
@@ -178,73 +105,6 @@
       "interact": {
         "label": "Talk to the neighbour",
         "dialogue": "dlg_neighbour"
-      }
-    }
-  ],
-  "doors": [
-    {
-      "id": "home_gate",
-      "label": "Enter home",
-      "style": "gate",
-      "x": 380,
-      "y": 0,
-      "w": 140,
-      "h": 10,
-      "to": {
-        "room": "front_yard",
-        "spawn": "from_street"
-      }
-    },
-    {
-      "id": "minimarket_door",
-      "label": "Enter Indomaret",
-      "style": "none",
-      "x": 1765,
-      "y": 0,
-      "w": 110,
-      "h": 10,
-      "to": {
-        "room": "minimarket",
-        "spawn": "from_street"
-      }
-    },
-    {
-      "id": "workplace_door",
-      "label": "Enter the workplace",
-      "style": "none",
-      "x": 2385,
-      "y": 0,
-      "w": 110,
-      "h": 10,
-      "to": {
-        "room": "workplace",
-        "spawn": "from_street"
-      }
-    },
-    {
-      "id": "road_east",
-      "label": "Go to Road to Lhokseumawe",
-      "side": "east",
-      "x": 2800,
-      "y": 480,
-      "w": 10,
-      "h": 260,
-      "to": {
-        "room": "lhokseumawe_road",
-        "spawn": "from_batuphat_street"
-      }
-    },
-    {
-      "id": "road_west",
-      "label": "Walk west",
-      "side": "west",
-      "x": 0,
-      "y": 480,
-      "w": 10,
-      "h": 260,
-      "to": {
-        "room": "batuphat_west",
-        "spawn": "from_street"
       }
     }
   ]

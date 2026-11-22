@@ -37,7 +37,7 @@ test.describe('World 01 P0 route', () => {
     const before = await S(page);
     await page.goto('/?fast'); await page.waitForFunction(() => (window as any).__ZS?.state?.());   // resume from save (no ?fresh)
     let s = await S(page);
-    expect(s.roomId).toBe('batuphat_region'); expect(s.zone).toBe('batuphat_street');
+    expect(s.roomId).toBe('batuphat_town'); expect(s.zone).toBe('batuphat_street');
     expect(Math.hypot(s.player.x - before.player.x, s.player.y - before.player.y)).toBeLessThan(2);
     expect(s.visited).toEqual(expect.arrayContaining(['zila_bedroom', 'upper_hall', 'living_room', 'front_yard', 'batuphat_street']));
     expect(s.modal).toBe(false);                                         // once-event does not repeat after reload

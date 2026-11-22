@@ -2,7 +2,7 @@ import * as Phaser from 'phaser';
 import { groundToRender, DEPTH_SCALE } from '../core/projection';
 import { getCharacterSpec, type ActionSpec, type CharacterSpec, type PropSpec } from '../core/specs';
 import { doorOpen, doorSide, DOOR_DEPTH, type CompiledRoom, type PropInstance, type RoomData, type RoomDoor } from '../world/room';
-import { compileMap, resolveDestination, zoneAt, type FenceDef, type ZoneInfo } from '../world/floor';
+import { compileMap, resolveDestination, zoneAt } from '../world/floor';
 import { initNpc, npcPresent, npcSolid, stepNpc, yieldTo, NPC_RADIUS, type NpcData, type NpcState } from '../world/npc';
 import { NpcView } from '../actors/npcView';
 import { EVENTS, DIALOGUE, check, runEvent, type Presentation } from '../story/events';
@@ -18,7 +18,7 @@ import { loadGame, saveGame, safeStorage } from '../systems/save';
 import { textureKey, type AssetManifest } from '../systems/manifest';
 import { drawGreyboxProp } from '../ui/greybox';
 import { ensureTempTexture } from '../ui/placeholders';
-import { buildShell, runsOutside, type ShellInfo } from '../ui/shell';
+import { buildGround, buildShell, runsOutside, type ShellInfo } from '../ui/shell';
 import { LightingSystem } from '../systems/lighting';
 import { WalkGrid } from '../world/pathfinding';
 import { LayeredCharacter } from '../animation/character';
@@ -49,7 +49,9 @@ interface Seated { propKey: string; exit: { x: number; y: number }; depth: numbe
 let SCENE_STARTS = 0;
 
 export class RoomScene extends Phaser.Scene {
-  private room!: CompiledRoom & { zones?: ZoneInfo[]; bbox?: { x: number; y: number; w: number; h: number }; fences?: FenceDef[] };
+  private room!: ReturnType<typeof compileMap>;
+  /** P6 towns: roof views of free-standing buildings, faded together with their facade when Zila is behind. */
+  private roofViews = new Map<string, Phaser.GameObjects.Graphics>();
   /** Current logical room (zone) on a continuous floor; the map id itself for single-room maps. */
   private zone = '';
   private character!: CharacterSpec;
@@ -82,7 +84,10 @@ export class RoomScene extends Phaser.Scene {
   private skies: { img: Phaser.GameObjects.Image; curtains: Phaser.GameObjects.Graphics }[] = [];
   private floorPatches: FloorPatch[] = [];
   /** View culling (P5): static shell tiles with their render rect; hidden while outside the camera view. */
-  private cullables: { o: Phaser.GameObjects.Image; x0: number; y0: number; x1: number; y1: number }[] = [];
+  private cullables: { o: Phaser.GameObjects.GameObject & { visible: boolean }; x0: number; y0: number; x1: number; y1: number }[] = [];
+  /** Static objects registered while drawing (roofs, shadows, fences, props) with their render rect. */
+  private cullExtra: { o: Phaser.GameObjects.GameObject & { visible: boolean }; x0: number; y0: number; x1: number; y1: number }[] = [];
+  private cullAdd(o: Phaser.GameObjects.GameObject & { visible: boolean }, x: number, y: number, w: number, h: number): void { this.cullExtra.push({ o, x0: x, y0: y, x1: x + w, y1: y + h }); }
   private cullAt = { x: NaN, y: NaN, w: 0 };
   /** Shell tiles drawn in the last frame (tests / perf HUD). */
   private tilesDrawn = 0;
@@ -137,13 +142,18 @@ export class RoomScene extends Phaser.Scene {
     const { w: rw, h: rh } = this.room.data.sizeCm, wallH = this.room.data.wallHeightCm;
     const vb = this.viewBox();
     this.lighting = new LightingSystem(this, `lightmap:${this.room.data.id}`, { x: vb.x - 40, y: vb.top - 40, w: vb.w + 80, h: vb.bottom - vb.top + 80 });
-    this.grid = new WalkGrid(rw, rh, this.room.solids, this.character.collision.radiusCm);
+    // big outdoor towns path on a 16 cm grid (A* memory and time stay small on phones); rooms keep 8 cm
+    this.grid = new WalkGrid(rw, rh, this.room.solids, this.character.collision.radiusCm, rw * rh > 12e6 ? 16 : 8);
     // A resumed position must be standable (layouts change between builds): otherwise use the map's default spawn.
     const inside = this.pos.x >= 0 && this.pos.y >= 0 && this.pos.x <= rw && this.pos.y <= rh;
-    if (data.at && !(inside && this.grid.standable(this.pos))) { const d = this.room.data.spawns.default!; this.pos = { x: d.x, y: d.y }; }
+    if (data.at && !(inside && this.grid.standable(this.pos))) {
+      // a migrated old position may land on a wall or fence: step to the nearest free spot, else the default spawn
+      const near = inside ? this.grid.nearestFree(this.pos, 250) : null;
+      const d = near ?? this.room.data.spawns.default!; this.pos = { x: d.x, y: d.y };
+    }
     this.doorsArmed = false;
     this.drawShell();
-    if (this.room.data.kind === 'exterior') this.addExteriorSky();
+    if (this.room.data.kind === 'exterior' && !this.room.ground) this.addExteriorSky();
     if (this.room.fences?.length) this.drawFences();
     this.drawProps();
     this.collectCullables();
@@ -222,7 +232,13 @@ export class RoomScene extends Phaser.Scene {
 
   private drawShell(): void {
     const manifest = this.registry.get('manifest') as AssetManifest, density = this.highDensity() ? 2 : 1;
-    if (this.room.zones) {
+    this.roofViews.clear(); this.cullExtra = [];
+    if (this.room.ground) {
+      // P6 town: the ground is drawn once for the whole region; buildings stand free with roofs
+      this.shellInfo = { floor: { id: this.room.ground[0]!.floor, art: 'temp' }, wall: { id: this.room.ground[0]!.floor, art: 'temp' } };
+      buildGround(this, this.room.ground, manifest, this.room.data, density);
+      this.drawBuildings();
+    } else if (this.room.zones) {
       // Continuous floor: each zone's shell (floor, back wall, side-wall caps with the opening gaps) is built in
       // its own local coordinates, then shifted to the zone's place on the floor (render x = ground x).
       // Outdoor regions: zones are offset in y as well, shared edges stay open (no caps, wall gaps).
@@ -344,6 +360,7 @@ export class RoomScene extends Phaser.Scene {
     const front = groundToRender(x, y).y;
     const steps = [{ grow: 10, a: 0.05 }, { grow: 6, a: 0.07 }, { grow: 2, a: 0.1 }];
     for (const s of steps) g.fillStyle(0x2a1620, s.a).fillRoundedRect(x - w / 2 - s.grow / 2 + 5, front - d - s.grow / 2 + 3, w + s.grow, d + s.grow, Math.min(12, (d + s.grow) / 2));
+    this.cullAdd(g, x - w / 2 - 10, front - d - 10, w + 25, d + 25);
   }
 
   private buildActor(): void {
@@ -388,6 +405,14 @@ export class RoomScene extends Phaser.Scene {
    */
   private collectCullables(): void {
     this.cullables = [];
+    // large maps only: props, roofs, shadows and fences with their render rect (rooms are small and always in view)
+    if (this.room.bbox && this.room.data.sizeCm.w * this.room.data.sizeCm.h > 12e6) {
+      this.cullables.push(...this.cullExtra);
+      for (const p of this.room.props) {
+        const v = this.propViews.get(p.key) as unknown as (Phaser.GameObjects.GameObject & { visible: boolean }) | undefined, r = p.sortable.renderBounds;
+        if (v && r.w > 0) this.cullables.push({ o: v, x0: r.x - 20, y0: r.y - 20, x1: r.x + r.w + 20, y1: r.y + r.h + 20 });
+      }
+    }
     for (const o of this.children.list) {
       if (o.name !== 'shell-tile') continue;
       const t = o as Phaser.GameObjects.Image, crop = (t as unknown as { _crop: { width: number; height: number } })._crop;
@@ -470,6 +495,7 @@ export class RoomScene extends Phaser.Scene {
     for (const [key, view] of this.propViews) {
       const target = this.occluded.includes(key) ? FADE_ALPHA : 1;
       view.setAlpha(Phaser.Math.Linear(view.alpha, target, 0.25));
+      this.roofViews.get(key)?.setAlpha(view.alpha);
     }
   }
 
@@ -799,6 +825,29 @@ export class RoomScene extends Phaser.Scene {
     this.skies.push({ img, curtains: this.add.graphics() });
   }
 
+  /**
+   * P6 town buildings: the facade art is the front; the engine adds the roof seen from above (the footprint's depth
+   * projected above the facade top), eaves and a contact shadow. Depth = the front line (like the facade).
+   */
+  private drawBuildings(): void {
+    const K = DEPTH_SCALE;
+    for (const b of this.room.buildings ?? []) {
+      const col = Phaser.Display.Color.HexStringToColor(b.roof), w = b.x1 - b.x0;
+      const top = (b.front - b.depth) * K - b.height, eave = b.front * K - b.height;
+      const g = this.add.graphics().setDepth(b.front - 0.02).setName('roof');
+      const dark = Phaser.Display.Color.ValueToColor(col.color).darken(18).color, light = Phaser.Display.Color.ValueToColor(col.color).lighten(10).color;
+      g.fillStyle(col.color, 1).fillRect(b.x0 - 12, top, w + 24, eave - top + 2);                     // roof plane
+      for (let y = top + 14; y < eave - 4; y += 16) g.fillStyle(dark, 0.35).fillRect(b.x0 - 12, y, w + 24, 2);   // tile courses
+      g.fillStyle(light, 0.8).fillRect(b.x0 - 12, top, w + 24, 6);                                     // ridge
+      g.fillStyle(dark, 1).fillRect(b.x0 - 14, eave - 6, w + 28, 10);                                  // eave
+      g.fillStyle(0x000000, 0.12).fillRect(b.x0 - 12, top, 10, eave - top).fillRect(b.x0 + w + 2, top, 10, eave - top);
+      this.roofViews.set(b.key, g);
+      this.cullAdd(g, b.x0 - 14, top, w + 28, eave - top + 6);
+      const sh = this.add.graphics().setDepth(-50000).fillStyle(0x3a2530, 0.18).fillRect(b.x0 - 6, b.front * K - 2, w + 12, 14);   // contact shadow
+      this.cullAdd(sh, b.x0 - 6, b.front * K - 2, w + 12, 14);
+    }
+  }
+
   /** Region fences: low stucco walls with a cap, depth-sorted by their ground line (Zila walks behind / in front). */
   private drawFences(): void {
     for (const f of this.room.fences ?? []) {
@@ -813,6 +862,7 @@ export class RoomScene extends Phaser.Scene {
         g.fillStyle(0xffffff, 0.35).fillRect(q.x, back, q.w, top - back + 4);                // cap (top surface)
         g.fillStyle(0x8a7f75, 0.55).fillRect(q.x, top + hgt - 10, q.w, 10);                  // base band
         if (horizontal) for (let x = q.x; x <= q.x + q.w; x += 120) g.fillStyle(0x8a7f75, 0.35).fillRect(Math.min(x, q.x + q.w - 6), top, 6, hgt);
+        this.cullAdd(g, q.x, back, q.w, top + hgt - back);
       }
     }
   }

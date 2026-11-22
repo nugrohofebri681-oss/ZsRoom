@@ -1,0 +1,157 @@
+{
+  "scope": "Local integration fixture, not merged foundation CI",
+  "specificationCommit": "fbe3d46",
+  "pipelineCommit": "b8d6b66",
+  "result": {
+    "assetId": "world_cabinet_low",
+    "version": "v002",
+    "dir": "art/submissions/world_cabinet_low/v002",
+    "spec": "specs/props/world_cabinet_low.json",
+    "errors": [],
+    "warnings": [
+      "style reference art/approved/prop_bed_zila/prop_bed_zila_v001.png not listed in generator.referencesUsed \u2014 consistency with approved art is unverified",
+      "style reference art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png not listed in generator.referencesUsed \u2014 consistency with approved art is unverified"
+    ],
+    "checks": [
+      {
+        "name": "asset id format",
+        "pass": true,
+        "detail": "world_cabinet_low"
+      },
+      {
+        "name": "version format (v###)",
+        "pass": true,
+        "detail": "v002"
+      },
+      {
+        "name": "spec exists",
+        "pass": true,
+        "detail": "specs/props/world_cabinet_low.json"
+      },
+      {
+        "name": "master file present",
+        "pass": true,
+        "detail": "world_cabinet_low_v002.png"
+      },
+      {
+        "name": "metadata.json present",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "only png/webp/json/md files",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata schema",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "production submission (not a concept board)",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata.assetId matches folder",
+        "pass": true,
+        "detail": "world_cabinet_low"
+      },
+      {
+        "name": "metadata.version matches folder",
+        "pass": true,
+        "detail": "v002"
+      },
+      {
+        "name": "metadata.specVersion matches spec",
+        "pass": true,
+        "detail": "1.0.0 vs 1.0.0"
+      },
+      {
+        "name": "createdAt is a date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "master sha256 matches metadata",
+        "pass": true,
+        "detail": "7d64b50292be504c891d606b2c4081eb3606a1968adf5dd53c6a5b75b794359b"
+      },
+      {
+        "name": "format PNG",
+        "pass": true,
+        "detail": "png"
+      },
+      {
+        "name": "canvas size",
+        "pass": true,
+        "detail": "216x180, expected 216x180"
+      },
+      {
+        "name": "RGBA (alpha channel)",
+        "pass": true,
+        "detail": "4 channels"
+      },
+      {
+        "name": "8-bit depth",
+        "pass": true,
+        "detail": "uchar"
+      },
+      {
+        "name": "sRGB colour space",
+        "pass": true,
+        "detail": "srgb"
+      },
+      {
+        "name": "file size",
+        "pass": true,
+        "detail": "51268 bytes (max 3000000)"
+      },
+      {
+        "name": "transparent edge padding",
+        "pass": true,
+        "detail": "0 non-transparent px within 8px of the edge"
+      },
+      {
+        "name": "opaque coverage \u2265 min",
+        "pass": true,
+        "detail": "0.675"
+      },
+      {
+        "name": "opaque coverage \u2264 max (no baked background)",
+        "pass": true,
+        "detail": "0.675"
+      },
+      {
+        "name": "art inside artBounds",
+        "pass": true,
+        "detail": "bbox 8,26 200x143; allowed 8,8 200x164"
+      },
+      {
+        "name": "base sits on pivot line",
+        "pass": true,
+        "detail": "lowest solid row 168, expected 168\u00b13"
+      }
+    ],
+    "analysis": {
+      "format": "png",
+      "width": 216,
+      "height": 180,
+      "channels": 4,
+      "hasAlpha": true,
+      "depth": "uchar",
+      "space": "srgb",
+      "bytes": 51268,
+      "opaqueRatio": 0.674537037037037,
+      "bbox": {
+        "x": 8,
+        "y": 26,
+        "width": 200,
+        "height": 143
+      },
+      "baseRow": 168,
+      "edgeViolations": 0
+    }
+  }
+}

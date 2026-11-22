@@ -33,11 +33,15 @@ export class LightingSystem {
   /** Fraction of the room the lightmap quad covers after cropping (1 = full screen). */
   coverage = 0;
 
+  /** cm per lightmap pixel: 4 normally; coarser for very large outdoor regions so the canvas stays ≤ ~1600 px. */
+  private readonly cmPerPx: number;
+
   constructor(private scene: Phaser.Scene, readonly key: string, private bounds: { x: number; y: number; w: number; h: number }) {
-    const w = Math.ceil(bounds.w / LIGHTMAP_CM_PER_PX), h = Math.ceil(bounds.h / LIGHTMAP_CM_PER_PX);
+    this.cmPerPx = Math.max(LIGHTMAP_CM_PER_PX, Math.ceil(Math.max(bounds.w, bounds.h) / 1600));
+    const w = Math.ceil(bounds.w / this.cmPerPx), h = Math.ceil(bounds.h / this.cmPerPx);
     if (scene.textures.exists(key)) scene.textures.remove(key);
     this.map = scene.textures.createCanvas(key, w, h)!;
-    this.img = scene.add.image(bounds.x, bounds.y, this.map).setOrigin(0, 0).setScale(LIGHTMAP_CM_PER_PX).setDepth(DARK_DEPTH);
+    this.img = scene.add.image(bounds.x, bounds.y, this.map).setOrigin(0, 0).setScale(this.cmPerPx).setDepth(DARK_DEPTH);
     ensureCore(scene);
   }
 
@@ -87,7 +91,7 @@ export class LightingSystem {
    */
   bake(): void {
     this.bakes++;
-    const b = this.bounds, s = 1 / LIGHTMAP_CM_PER_PX, boost = this.look.lightBoost;
+    const b = this.bounds, s = 1 / this.cmPerPx, boost = this.look.lightBoost;
     const toPx = (x: number, y: number) => ({ x: (x - b.x) * s, y: (y - b.y) * s });
     const on = [...this.lights.values()].filter((l) => l.on);
     const ctx = this.map.getContext(), W = this.map.width, H = this.map.height;

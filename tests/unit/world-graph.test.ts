@@ -10,6 +10,16 @@ import { initNpc, stepNpc } from '../../src/world/npc';
 const R = getCharacterSpec('char_zila').collision.radiusCm;
 const implemented = world.maps.filter((m) => m.status === 'implemented').map((m) => m.id);
 const gameMaps = [...ROOMS.keys()].filter((id) => id !== 'review_props');
+// Playable maps after composition (P4 floors, P5/P6 outdoor regions): doors may live on region buildings.
+import { compileMap, playableMapIds, resolveDestination } from '../../src/world/floor';
+const playable = playableMapIds();
+const compiled = new Map(playable.map((id) => [id, compileMap(id)]));
+const targetOf = (d: { to: { room: string; spawn: string } }) => resolveDestination(d.to.room, d.to.spawn);
+function reachableFrom(start: string): Set<string> {
+  const s0 = resolveDestination(start).mapId, seen = new Set([s0]), q = [s0];
+  while (q.length) for (const d of compiled.get(q.shift()!)!.data.doors) { if (d.locked) continue; const t = targetOf(d).mapId; if (!seen.has(t)) { seen.add(t); q.push(t); } }
+  return seen;
+}
 
 describe('World 01 graph', () => {
   it('registry and room data agree: every implemented map has data, every map is registered', async () => {
@@ -19,28 +29,26 @@ describe('World 01 graph', () => {
   });
 
   it('every open door leads to an existing map and spawn, and the destination has a door back', () => {
-    for (const id of gameMaps) {
-      const room = ROOMS.get(id)!;
-      for (const d of room.doors) {
+    for (const [id, room] of compiled) {
+      for (const d of room.data.doors) {
         if (d.locked) { expect(world.maps.map((m) => m.id), `${id}/${d.id} locked target registered`).toContain(d.to.room); continue; }
-        const dest = ROOMS.get(d.to.room);
+        const t = targetOf(d), dest = compiled.get(t.mapId);
         expect(dest, `${id}/${d.id} → ${d.to.room}`).toBeDefined();
-        expect(dest!.spawns[d.to.spawn], `${id}/${d.id} spawn ${d.to.spawn}`).toBeDefined();
-        const back = dest!.doors.find((b) => !b.locked && b.to.room === id);
-        expect(back, `${d.to.room} has no door back to ${id}`).toBeDefined();
+        expect(dest!.data.spawns[t.spawn ?? d.to.spawn], `${id}/${d.id} spawn ${t.spawn}`).toBeDefined();
+        const back = dest!.data.doors.find((b) => !b.locked && targetOf(b).mapId === id);
+        expect(back, `${t.mapId} has no door back to ${id}`).toBeDefined();
         // arriving via `d`, then taking the door back, lands next to `d` (correct return location)
-        const ret = room.spawns[back!.to.spawn]!;
-        const side = doorSide(d, room.sizeCm);
-        const doorCentre = side === 'north' || side === 'south' ? { x: d.x + d.w / 2, y: side === 'north' ? 0 : room.sizeCm.h } : { x: side === 'west' ? 0 : room.sizeCm.w, y: d.y + d.h / 2 };
-        expect(Math.hypot(ret.x - doorCentre.x, ret.y - doorCentre.y), `${id}: return spawn ${back!.to.spawn} is far from ${d.id}`).toBeLessThan(120);
+        const bt = targetOf(back!), ret = room.data.spawns[bt.spawn ?? back!.to.spawn]!;
+        const side = doorSide(d, room.data.sizeCm), z = d.zone ?? { x: 0, y: 0, w: room.data.sizeCm.w, h: room.data.sizeCm.h };
+        const zy = z.y ?? 0;
+        const doorCentre = side === 'north' ? { x: d.x + d.w / 2, y: d.zone ? d.y : 0 } : side === 'south' ? { x: d.x + d.w / 2, y: zy + z.h } : { x: side === 'west' ? z.x : z.x + z.w, y: d.y + d.h / 2 };
+        expect(Math.hypot(ret.x - doorCentre.x, ret.y - doorCentre.y), `${id}: return spawn is far from ${d.id}`).toBeLessThan(120);
       }
     }
   });
 
   it('every map is reachable from the bedroom through open doors', () => {
-    const seen = new Set([world.start.map]), queue = [world.start.map];
-    while (queue.length) for (const d of ROOMS.get(queue.shift()!)!.doors) if (!d.locked && !seen.has(d.to.room)) { seen.add(d.to.room); queue.push(d.to.room); }
-    expect(new Set(seen)).toEqual(new Set(gameMaps));
+    expect(reachableFrom(world.start.map)).toEqual(new Set(playable));
   });
 
   it('in every map, all spawns, open doorways and interaction spots are reachable on foot from the default spawn', () => {
@@ -65,7 +73,8 @@ describe('World 01 graph', () => {
   it('locked doors keep their wall solid; unlocking by flag opens the gap', () => {
     const st = ROOMS.get('batuphat_west')!, road = st.doors.find((d) => d.id === 'road_further')!;
     expect(doorOpen(road, {})).toBe(false);
-    const wallAt = (data: typeof st, flags: Record<string, boolean> = {}) => compileRoom(data, flags).solids.some((s) => s.x + s.w <= 0 && s.x + s.w >= -1 && s.y <= 600 && s.y + s.h >= 600);
+    const yc = road.y + road.h / 2;
+    const wallAt = (data: typeof st, flags: Record<string, boolean> = {}) => compileRoom(data, flags).solids.some((s) => s.x + s.w <= 0 && s.x + s.w >= -1 && s.y <= yc && s.y + s.h >= yc);
     expect(wallAt(st)).toBe(true);                                     // west wall stays closed
     const unlocked = { ...st, doors: st.doors.map((d) => (d.id === 'road_further' ? { ...d, locked: { ...d.locked!, unlessFlag: 'test:open' } } : d)) };
     expect(doorOpen(unlocked.doors.find((d) => d.id === 'road_further')!, { 'test:open': true })).toBe(true);
@@ -128,10 +137,11 @@ describe('story events', () => {
 describe('NPC behaviour (deterministic)', () => {
   const n = ROOMS.get('batuphat_street')!.npcs![0]!;
   it('patrols between its points, never enters blocked cells, stops to face a nearby player', () => {
-    const run = () => { const s = initNpc(n, 'morning'); const xs: number[] = []; for (let i = 0; i < 600; i++) { stepNpc(n, s, 50, { x: 9999, y: 9999 }, (x) => x > 1200); xs.push(s.x); } return xs; };
+    const limit = n.x + 500;
+    const run = () => { const s = initNpc(n, 'morning'); const xs: number[] = []; for (let i = 0; i < 600; i++) { stepNpc(n, s, 50, { x: 9999, y: 9999 }, (x) => x > limit); xs.push(s.x); } return xs; };
     const a = run(), b = run();
     expect(a).toEqual(b);                                     // deterministic
-    expect(Math.max(...a)).toBeLessThanOrEqual(1200);         // respects blocking
+    expect(Math.max(...a)).toBeLessThanOrEqual(limit);        // respects blocking
     expect(Math.max(...a) - Math.min(...a)).toBeGreaterThan(300);
     const s = initNpc(n, 'morning'); stepNpc(n, s, 50, { x: s.x + 30, y: s.y + 30 }, () => false);
     expect(s.moving).toBe(false); expect(s.facing).toBe('SE');
@@ -233,8 +243,7 @@ describe('location tiers (World 01 P3)', () => {
     expect(n).toBeGreaterThanOrEqual(15);
   });
   it('Unimal is a reachable destination from the bedroom, and the city has a two-way road to Batuphat', () => {
-    const seen = new Set(['zila_bedroom']), q = ['zila_bedroom'];
-    while (q.length) for (const d of ROOMS.get(q.shift()!)!.doors) if (!d.locked && !seen.has(d.to.room)) { seen.add(d.to.room); q.push(d.to.room); }
+    const seen = reachableFrom('zila_bedroom');
     for (const m of ['lhokseumawe_road', 'lhokseumawe_centre', 'unimal_campus']) expect(seen.has(m), m).toBe(true);
     const back = ROOMS.get('lhokseumawe_road')!.doors.find((d) => d.to.room === 'batuphat_street' && !d.locked);
     expect(back).toBeDefined();

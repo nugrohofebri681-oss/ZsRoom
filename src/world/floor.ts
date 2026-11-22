@@ -26,6 +26,23 @@ export interface FloorZoneDef { room: string; x: number; y?: number }
 export interface FenceDef { x: number; y: number; w: number; h: number; height?: number; color?: string }
 /** Legacy save remap: a local x range of a zone whose content moved when the zone joined a region. */
 export interface LegacyShift { x0: number; x1: number; dx: number }
+/** Legacy save remap by landmark (P6): a position near `from` (old map coordinates) lands near `to` (this map). */
+export interface LegacyAnchor { from: [number, number]; to: [number, number]; label?: string }
+/** Region ground layer (P6 towns): a rectangle of an environment tile — road, lane, pavement, grass, plaza. */
+export interface GroundLayerDef { floor: string; x: number; y: number; w: number; h: number; markings?: 'road' | 'lane'; base?: boolean }
+/**
+ * Free-standing building (P6 towns): footprint `depth` cm deep behind its front line `y`, centred on `x`. The
+ * facade asset paints the front; the engine adds the roof seen from above and the collision footprint. A door on
+ * the front works like a north door (walk into it / press E); `inspect` makes a background building inspectable.
+ */
+export interface BuildingDef {
+  id: string; facade: string; x: number; y: number; depth: number;
+  roof?: string;
+  door?: { id: string; label: string; to: { room: string; spawn: string }; w?: number; dx?: number; locked?: { message: string; unlessFlag?: string } };
+  inspect?: { name: string; comment: string };
+  /** A dialogue at the front (e.g. the warung owner). */
+  talk?: { label: string; dialogue: string };
+}
 export interface FloorOpeningDef { between: [string, string]; y: number; h: number }
 export interface FloorDef {
   id: string; displayName: string; world: string;
@@ -39,10 +56,20 @@ export interface FloorDef {
   kind?: 'floor' | 'region';
   fences?: FenceDef[];
   legacy?: Record<string, LegacyShift[]>;
+  /** P6 towns: ground drawn once for the whole region (zones then draw no shell), buildings, region-level props. */
+  ground?: GroundLayerDef[];
+  buildings?: BuildingDef[];
+  props?: import('./room').RoomPropEntry[];
+  /** Old save/door map ids → landmark anchors (old coordinates → this region). Keys may be zones or other ids
+   *  (e.g. the P5 region `batuphat_region`); non-zone keys become aliases of this region. */
+  legacyMaps?: Record<string, LegacyAnchor[]>;
 }
 export interface ZoneInfo { id: string; x: number; y: number; w: number; h: number; data: RoomData; prefix: string; wallGaps?: [number, number][] }
+export interface BuildingInfo { key: string; id: string; x0: number; x1: number; front: number; depth: number; height: number; roof: string; zone: string }
 export interface CompiledFloor extends CompiledRoom {
   zones: ZoneInfo[];
+  ground?: GroundLayerDef[];
+  buildings?: BuildingInfo[];
   /** Regions: ground-space bounding box of the zones (camera/lighting bounds), and fence lines. */
   bbox?: { x: number; y: number; w: number; h: number };
   fences?: FenceDef[];
@@ -52,21 +79,36 @@ const floorModules = import.meta.glob(['../data/floors/*.json', '../data/regions
 export const FLOORS: ReadonlyMap<string, FloorDef> = new Map(Object.values(floorModules).map((f) => [f.id, f]));
 
 /** Legacy room id → the floor/region that contains it (and the zone origin). */
-export const ZONE_OF: ReadonlyMap<string, { floor: string; x: number; y: number; legacy?: LegacyShift[] }> = new Map(
-  [...FLOORS.values()].flatMap((f) => f.zones.map((z) => [z.room, { floor: f.id, x: z.x, y: z.y ?? 0, legacy: f.legacy?.[z.room] }] as const)),
+export const ZONE_OF: ReadonlyMap<string, { floor: string; x: number; y: number; legacy?: LegacyShift[]; anchors?: LegacyAnchor[] }> = new Map(
+  [...FLOORS.values()].flatMap((f) => f.zones.map((z) => [z.room, { floor: f.id, x: z.x, y: z.y ?? 0, legacy: f.legacy?.[z.room], anchors: f.legacyMaps?.[z.room] }] as const)),
 );
+/** Old map ids that are not zones but now live inside a region (e.g. P5 `batuphat_region` → P6 town). */
+export const MAP_ALIAS: ReadonlyMap<string, { floor: string; anchors: LegacyAnchor[] }> = new Map(
+  [...FLOORS.values()].flatMap((f) => Object.entries(f.legacyMaps ?? {}).filter(([k]) => !f.zones.some((z) => z.room === k) && !FLOORS.has(k)).map(([k, anchors]) => [k, { floor: f.id, anchors }] as const)),
+);
+
+/** Nearest landmark anchor: keep the small offset from it (≤ 80 cm), so the player lands beside the same thing. */
+function viaAnchors(anchors: LegacyAnchor[], x: number, y: number): { x: number; y: number } {
+  let best = anchors[0]!, bd = Infinity;
+  for (const a of anchors) { const d = Math.hypot(a.from[0] - x, a.from[1] - y); if (d < bd) { bd = d; best = a; } }
+  const cl = (v: number) => Math.max(-80, Math.min(80, v));
+  return { x: best.to[0] + cl(x - best.from[0]), y: best.to[1] + cl(y - best.from[1]) };
+}
 
 /** Local position of a legacy zone → composite coordinates (zone offset, plus the documented content moves). */
 export function legacyToComposite(roomId: string, x: number, y: number): { x: number; y: number } {
   const z = ZONE_OF.get(roomId);
+  const alias = MAP_ALIAS.get(roomId);
+  if (alias) return viaAnchors(alias.anchors, x, y);
   if (!z) return { x, y };
+  if (z.anchors?.length) return viaAnchors(z.anchors, x, y);
   const shift = z.legacy?.find((s) => x >= s.x0 && x <= s.x1)?.dx ?? 0;
   return { x: x + shift + z.x, y: y + z.y };
 }
 
 /** Ids of every map the player can actually be in (floors + rooms that are not zones of a floor). */
 export function playableMapIds(): string[] {
-  return [...FLOORS.keys(), ...[...ROOM_DATA.keys()].filter((id) => !ZONE_OF.has(id) && id !== 'review_props')];
+  return [...FLOORS.keys(), ...[...ROOM_DATA.keys()].filter((id) => !ZONE_OF.has(id) && !MAP_ALIAS.has(id) && id !== 'review_props')];
 }
 
 /**
@@ -74,6 +116,8 @@ export function playableMapIds(): string[] {
  * and (for saves) a position converted to the map's coordinates.
  */
 export function resolveDestination(roomId: string, spawn?: string, at?: { x: number; y: number; facing: string }): { mapId: string; spawn?: string; at?: { x: number; y: number; facing: string } } {
+  const alias = MAP_ALIAS.get(roomId);
+  if (alias) return { mapId: alias.floor, spawn: spawn && spawn.includes('.') ? spawn : undefined, at: at ? { ...at, ...legacyToComposite(roomId, at.x, at.y) } : undefined };
   const z = ZONE_OF.get(roomId);
   if (!z) return { mapId: roomId, spawn, at };
   return { mapId: z.floor, spawn: `${roomId}.${spawn ?? 'default'}`, at: at ? { ...at, ...legacyToComposite(roomId, at.x, at.y) } : undefined };
@@ -152,7 +196,7 @@ export function compileFloor(f: FloorDef, flags: Record<string, boolean> = {}, v
 }
 
 /** Compile any playable map id (floor or plain room); legacy zone ids resolve to their floor. */
-export function compileMap(id: string, flags: Record<string, boolean> = {}, variant?: string | null): CompiledRoom & { zones?: ZoneInfo[]; bbox?: CompiledFloor['bbox']; fences?: FenceDef[] } {
+export function compileMap(id: string, flags: Record<string, boolean> = {}, variant?: string | null): CompiledRoom & Partial<Pick<CompiledFloor, 'zones' | 'bbox' | 'fences' | 'ground' | 'buildings'>> {
   const f = FLOORS.get(resolveDestination(id).mapId);
   if (!f) return compileRoom(getRoom(id, variant), flags);
   return f.kind === 'region' ? compileRegion(f, flags, variant) : compileFloor(f, flags, variant);

@@ -1,0 +1,1432 @@
+{
+  "$comment": "P6 Batuphat town: ONE explorable outdoor map (80 × 56 m) — Zila's house & garden, residential lanes, gangs, the main street with a crossroads, the park, the south lanes; Indomaret, Mixue and the dimsum workplace on the main street. Original PROVISIONAL layout (no real street geometry). Zones are logical areas (title, ambience, events, NPCs); ground, buildings and props are drawn here in region coordinates. Layout diagram: docs/reviews/world01-p6/town-layout.png.",
+  "id": "batuphat_town",
+  "displayName": "Batuphat",
+  "world": "world01",
+  "kind": "region",
+  "primary": "front_yard",
+  "provisional": true,
+  "zones": [
+    {
+      "room": "front_yard",
+      "x": 2050,
+      "y": 300
+    },
+    {
+      "room": "batuphat_park",
+      "x": 300,
+      "y": 3600
+    },
+    {
+      "room": "batuphat_west",
+      "x": 0,
+      "y": 1630
+    },
+    {
+      "room": "batuphat_street",
+      "x": 4000,
+      "y": 1630
+    },
+    {
+      "room": "batuphat_lanes",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "room": "batuphat_south",
+      "x": 0,
+      "y": 3600
+    }
+  ],
+  "ground": [
+    {
+      "floor": "env_ground_yard",
+      "x": 0,
+      "y": 0,
+      "w": 8000,
+      "h": 5600,
+      "base": true
+    },
+    {
+      "floor": "env_ground_street",
+      "x": 0,
+      "y": 2600,
+      "w": 8000,
+      "h": 1000
+    },
+    {
+      "floor": "env_ground_road",
+      "x": 0,
+      "y": 2950,
+      "w": 8000,
+      "h": 300,
+      "markings": "road"
+    },
+    {
+      "floor": "env_ground_road",
+      "x": 4600,
+      "y": 300,
+      "w": 260,
+      "h": 2300,
+      "markings": "road"
+    },
+    {
+      "floor": "env_ground_road",
+      "x": 4600,
+      "y": 3600,
+      "w": 260,
+      "h": 1700,
+      "markings": "road"
+    },
+    {
+      "floor": "env_ground_street",
+      "x": 300,
+      "y": 1450,
+      "w": 7400,
+      "h": 180,
+      "markings": "lane"
+    },
+    {
+      "floor": "env_ground_street",
+      "x": 1450,
+      "y": 1630,
+      "w": 170,
+      "h": 970,
+      "markings": "lane"
+    },
+    {
+      "floor": "env_ground_street",
+      "x": 3550,
+      "y": 1630,
+      "w": 170,
+      "h": 970,
+      "markings": "lane"
+    },
+    {
+      "floor": "env_ground_street",
+      "x": 6600,
+      "y": 1630,
+      "w": 170,
+      "h": 970,
+      "markings": "lane"
+    },
+    {
+      "floor": "env_ground_street",
+      "x": 2500,
+      "y": 900,
+      "w": 100,
+      "h": 550,
+      "markings": "lane"
+    },
+    {
+      "floor": "env_ground_street",
+      "x": 1600,
+      "y": 3600,
+      "w": 150,
+      "h": 1700,
+      "markings": "lane"
+    },
+    {
+      "floor": "env_ground_street",
+      "x": 300,
+      "y": 4350,
+      "w": 2900,
+      "h": 150,
+      "markings": "lane"
+    },
+    {
+      "floor": "env_ground_street",
+      "x": 3200,
+      "y": 4350,
+      "w": 4500,
+      "h": 170,
+      "markings": "lane"
+    },
+    {
+      "floor": "env_ground_street",
+      "x": 5750,
+      "y": 3600,
+      "w": 160,
+      "h": 750,
+      "markings": "lane"
+    },
+    {
+      "floor": "env_ground_street",
+      "x": 3200,
+      "y": 5300,
+      "w": 4500,
+      "h": 160,
+      "markings": "lane"
+    },
+    {
+      "floor": "env_ground_plaza",
+      "x": 4860,
+      "y": 3250,
+      "w": 500,
+      "h": 350
+    }
+  ],
+  "buildings": [
+    {
+      "id": "zila_house",
+      "facade": "world_facade_house",
+      "x": 2550,
+      "y": 900,
+      "depth": 420,
+      "roof": "#B5654F",
+      "door": {
+        "id": "house_door",
+        "label": "Enter the house",
+        "to": {
+          "room": "living_room",
+          "spawn": "from_yard"
+        },
+        "w": 90
+      }
+    },
+    {
+      "id": "house_n1",
+      "facade": "world_facade_house",
+      "x": 700,
+      "y": 1300,
+      "depth": 420,
+      "roof": "#8E5A4C",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_n2",
+      "facade": "world_facade_house",
+      "x": 1300,
+      "y": 1300,
+      "depth": 420,
+      "roof": "#7D6A5A",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_n3",
+      "facade": "world_facade_house",
+      "x": 3550,
+      "y": 1300,
+      "depth": 420,
+      "roof": "#9C5B4A",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_n4",
+      "facade": "world_facade_house",
+      "x": 4150,
+      "y": 1300,
+      "depth": 420,
+      "roof": "#6F6A63",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_n5",
+      "facade": "world_facade_house",
+      "x": 5350,
+      "y": 1300,
+      "depth": 420,
+      "roof": "#A0654A",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "shop_n6",
+      "facade": "world_facade_shop",
+      "x": 6000,
+      "y": 1300,
+      "depth": 440,
+      "roof": "#5E7C8A",
+      "inspect": {
+        "name": "Small shop",
+        "comment": "A small neighbourhood shop. (Background building.)"
+      }
+    },
+    {
+      "id": "house_n7",
+      "facade": "world_facade_house",
+      "x": 6850,
+      "y": 1300,
+      "depth": 420,
+      "roof": "#8E5A4C",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_n8",
+      "facade": "world_facade_house",
+      "x": 7450,
+      "y": 1300,
+      "depth": 420,
+      "roof": "#7D6A5A",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_m1",
+      "facade": "world_facade_house",
+      "x": 500,
+      "y": 2600,
+      "depth": 460,
+      "roof": "#9C5B4A",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "warung",
+      "facade": "world_facade_warung",
+      "x": 1100,
+      "y": 2600,
+      "depth": 460,
+      "roof": "#7A5640",
+      "talk": {
+        "label": "Warung kopi",
+        "dialogue": "dlg_west_warung"
+      }
+    },
+    {
+      "id": "house_m2",
+      "facade": "world_facade_house",
+      "x": 1950,
+      "y": 2600,
+      "depth": 460,
+      "roof": "#6F6A63",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "mixue",
+      "facade": "world_storefront_mixue",
+      "x": 2700,
+      "y": 2600,
+      "depth": 480,
+      "roof": "#C8323C",
+      "door": {
+        "id": "mixue_door",
+        "label": "Enter Mixue",
+        "to": {
+          "room": "mixue",
+          "spawn": "from_street"
+        }
+      }
+    },
+    {
+      "id": "house_m3",
+      "facade": "world_facade_house",
+      "x": 3250,
+      "y": 2600,
+      "depth": 460,
+      "roof": "#8E5A4C",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_m4",
+      "facade": "world_facade_house",
+      "x": 4100,
+      "y": 2600,
+      "depth": 460,
+      "roof": "#A0654A",
+      "inspect": {
+        "name": "Neighbour's house",
+        "comment": "A neighbour's house. (Background building.)"
+      }
+    },
+    {
+      "id": "indomaret",
+      "facade": "world_storefront_indomaret",
+      "x": 5300,
+      "y": 2600,
+      "depth": 500,
+      "roof": "#2D5E9C",
+      "door": {
+        "id": "minimarket_door",
+        "label": "Enter Indomaret",
+        "to": {
+          "room": "minimarket",
+          "spawn": "from_street"
+        }
+      }
+    },
+    {
+      "id": "house_m5",
+      "facade": "world_facade_house",
+      "x": 6000,
+      "y": 2600,
+      "depth": 460,
+      "roof": "#7D6A5A",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "workplace",
+      "facade": "world_facade_workplace",
+      "x": 7150,
+      "y": 2600,
+      "depth": 500,
+      "roof": "#5B6C8F",
+      "door": {
+        "id": "workplace_door",
+        "label": "Enter the workplace",
+        "to": {
+          "room": "workplace",
+          "spawn": "from_street"
+        }
+      }
+    },
+    {
+      "id": "house_m6",
+      "facade": "world_facade_house",
+      "x": 7740,
+      "y": 2600,
+      "depth": 460,
+      "roof": "#9C5B4A",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_s1",
+      "facade": "world_facade_house",
+      "x": 3650,
+      "y": 4250,
+      "depth": 420,
+      "roof": "#8E5A4C",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_s2",
+      "facade": "world_facade_house",
+      "x": 4250,
+      "y": 4250,
+      "depth": 420,
+      "roof": "#6F6A63",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "shop_s3",
+      "facade": "world_facade_shop",
+      "x": 5250,
+      "y": 4250,
+      "depth": 440,
+      "roof": "#7A8A5E",
+      "inspect": {
+        "name": "Small shop",
+        "comment": "A small shop on the south lane. (Background building.)"
+      }
+    },
+    {
+      "id": "house_s4",
+      "facade": "world_facade_house",
+      "x": 6300,
+      "y": 4250,
+      "depth": 420,
+      "roof": "#A0654A",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_s5",
+      "facade": "world_facade_house",
+      "x": 6900,
+      "y": 4250,
+      "depth": 420,
+      "roof": "#7D6A5A",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_s6",
+      "facade": "world_facade_house",
+      "x": 7500,
+      "y": 4250,
+      "depth": 420,
+      "roof": "#9C5B4A",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_t1",
+      "facade": "world_facade_house",
+      "x": 3700,
+      "y": 5250,
+      "depth": 420,
+      "roof": "#7D6A5A",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_t2",
+      "facade": "world_facade_house",
+      "x": 5300,
+      "y": 5250,
+      "depth": 420,
+      "roof": "#8E5A4C",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_t3",
+      "facade": "world_facade_house",
+      "x": 6500,
+      "y": 5250,
+      "depth": 420,
+      "roof": "#6F6A63",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    }
+  ],
+  "fences": [
+    {
+      "x": 2050,
+      "y": 1430,
+      "w": 430,
+      "h": 15,
+      "height": 95
+    },
+    {
+      "x": 2620,
+      "y": 1430,
+      "w": 430,
+      "h": 15,
+      "height": 95
+    },
+    {
+      "x": 2050,
+      "y": 300,
+      "w": 15,
+      "h": 1130,
+      "height": 95
+    },
+    {
+      "x": 3035,
+      "y": 300,
+      "w": 15,
+      "h": 1130,
+      "height": 95
+    },
+    {
+      "x": 2050,
+      "y": 300,
+      "w": 1000,
+      "h": 15,
+      "height": 95
+    },
+    {
+      "x": 300,
+      "y": 3600,
+      "w": 1300,
+      "h": 15,
+      "height": 80,
+      "color": "#5E8A4E"
+    },
+    {
+      "x": 1750,
+      "y": 3600,
+      "w": 650,
+      "h": 15,
+      "height": 80,
+      "color": "#5E8A4E"
+    },
+    {
+      "x": 2600,
+      "y": 3600,
+      "w": 600,
+      "h": 15,
+      "height": 80,
+      "color": "#5E8A4E"
+    },
+    {
+      "x": 3185,
+      "y": 3615,
+      "w": 15,
+      "h": 735,
+      "height": 80,
+      "color": "#5E8A4E"
+    },
+    {
+      "x": 3185,
+      "y": 4500,
+      "w": 15,
+      "h": 800,
+      "height": 80,
+      "color": "#5E8A4E"
+    },
+    {
+      "x": 300,
+      "y": 3615,
+      "w": 15,
+      "h": 1685,
+      "height": 80,
+      "color": "#5E8A4E"
+    },
+    {
+      "x": 300,
+      "y": 5285,
+      "w": 1300,
+      "h": 15,
+      "height": 80,
+      "color": "#5E8A4E"
+    },
+    {
+      "x": 1750,
+      "y": 5285,
+      "w": 1450,
+      "h": 15,
+      "height": 80,
+      "color": "#5E8A4E"
+    },
+    {
+      "x": 940,
+      "y": 1285,
+      "w": 120,
+      "h": 15,
+      "height": 120,
+      "color": "#E6DCCB"
+    },
+    {
+      "x": 3790,
+      "y": 1285,
+      "w": 120,
+      "h": 15,
+      "height": 120,
+      "color": "#E6DCCB"
+    },
+    {
+      "x": 5590,
+      "y": 1285,
+      "w": 200,
+      "h": 15,
+      "height": 120,
+      "color": "#E6DCCB"
+    },
+    {
+      "x": 7090,
+      "y": 1285,
+      "w": 120,
+      "h": 15,
+      "height": 120,
+      "color": "#E6DCCB"
+    },
+    {
+      "x": 740,
+      "y": 2585,
+      "w": 120,
+      "h": 15,
+      "height": 120,
+      "color": "#E6DCCB"
+    },
+    {
+      "x": 2920,
+      "y": 2585,
+      "w": 90,
+      "h": 15,
+      "height": 120,
+      "color": "#E6DCCB"
+    },
+    {
+      "x": 5620,
+      "y": 2585,
+      "w": 140,
+      "h": 15,
+      "height": 120,
+      "color": "#E6DCCB"
+    },
+    {
+      "x": 7430,
+      "y": 2585,
+      "w": 70,
+      "h": 15,
+      "height": 120,
+      "color": "#E6DCCB"
+    },
+    {
+      "x": 3890,
+      "y": 4235,
+      "w": 120,
+      "h": 15,
+      "height": 120,
+      "color": "#E6DCCB"
+    },
+    {
+      "x": 6540,
+      "y": 4235,
+      "w": 120,
+      "h": 15,
+      "height": 120,
+      "color": "#E6DCCB"
+    },
+    {
+      "x": 7140,
+      "y": 4235,
+      "w": 120,
+      "h": 15,
+      "height": 120,
+      "color": "#E6DCCB"
+    }
+  ],
+  "props": [
+    {
+      "assetId": "world_streetlight",
+      "x": 250,
+      "y": 2930
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 1250,
+      "y": 2930
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 2300,
+      "y": 2930
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 3400,
+      "y": 2930
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 4450,
+      "y": 2930
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 5650,
+      "y": 2930
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 6450,
+      "y": 2930
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 7600,
+      "y": 2930
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 800,
+      "y": 3290
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 2000,
+      "y": 3290
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 3000,
+      "y": 3290
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 5000,
+      "y": 3290
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 6200,
+      "y": 3290
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 7300,
+      "y": 3290
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 4560,
+      "y": 1700
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 4560,
+      "y": 2300
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 4900,
+      "y": 3800
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 4900,
+      "y": 4700
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 1700,
+      "y": 1430
+    },
+    {
+      "assetId": "world_streetlight",
+      "x": 6200,
+      "y": 1430
+    },
+    {
+      "assetId": "world_street_sign",
+      "x": 160,
+      "y": 2930,
+      "anchors": [
+        {
+          "id": "read",
+          "label": "Read the sign",
+          "x": 0,
+          "y": 30,
+          "facing": "N",
+          "radiusCm": 45,
+          "action": {
+            "type": "dialogue",
+            "id": "dlg_west_sign"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_street_sign",
+      "x": 4560,
+      "y": 2920
+    },
+    {
+      "assetId": "world_street_sign",
+      "x": 7850,
+      "y": 2930
+    },
+    {
+      "assetId": "world_motorbike",
+      "x": 2250,
+      "y": 1150
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 2420,
+      "y": 960
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 2680,
+      "y": 960
+    },
+    {
+      "assetId": "world_bench",
+      "x": 2880,
+      "y": 1150
+    },
+    {
+      "assetId": "world_tree",
+      "x": 2150,
+      "y": 1350
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 2950,
+      "y": 1380
+    },
+    {
+      "assetId": "world_fountain",
+      "x": 2450,
+      "y": 4050
+    },
+    {
+      "assetId": "world_bench",
+      "x": 1350,
+      "y": 4250
+    },
+    {
+      "assetId": "world_bench",
+      "x": 2050,
+      "y": 4250
+    },
+    {
+      "assetId": "world_bench",
+      "x": 900,
+      "y": 3900
+    },
+    {
+      "assetId": "world_bench",
+      "x": 2800,
+      "y": 4900
+    },
+    {
+      "assetId": "world_tree",
+      "x": 500,
+      "y": 3800
+    },
+    {
+      "assetId": "world_tree",
+      "x": 1100,
+      "y": 3750
+    },
+    {
+      "assetId": "world_tree",
+      "x": 2150,
+      "y": 3800
+    },
+    {
+      "assetId": "world_tree",
+      "x": 2950,
+      "y": 3850
+    },
+    {
+      "assetId": "world_tree",
+      "x": 650,
+      "y": 4700
+    },
+    {
+      "assetId": "world_tree",
+      "x": 1250,
+      "y": 4950
+    },
+    {
+      "assetId": "world_tree",
+      "x": 2150,
+      "y": 4800
+    },
+    {
+      "assetId": "world_tree",
+      "x": 2900,
+      "y": 5150
+    },
+    {
+      "assetId": "world_tree",
+      "x": 450,
+      "y": 5150
+    },
+    {
+      "assetId": "world_tree",
+      "x": 1950,
+      "y": 5100
+    },
+    {
+      "assetId": "world_becak",
+      "x": 1250,
+      "y": 3450
+    },
+    {
+      "assetId": "world_motorbike",
+      "x": 3600,
+      "y": 3420
+    },
+    {
+      "assetId": "world_motorbike",
+      "x": 5900,
+      "y": 2820,
+      "anchors": []
+    },
+    {
+      "assetId": "world_motorbike",
+      "x": 7000,
+      "y": 2830,
+      "anchors": []
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 2450,
+      "y": 2700
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 4950,
+      "y": 2700
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 5650,
+      "y": 2700
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 7450,
+      "y": 2700
+    },
+    {
+      "assetId": "world_tree",
+      "x": 3400,
+      "y": 3450
+    },
+    {
+      "assetId": "world_tree",
+      "x": 4000,
+      "y": 3460
+    },
+    {
+      "assetId": "world_tree",
+      "x": 6600,
+      "y": 3460
+    },
+    {
+      "assetId": "world_tree",
+      "x": 7400,
+      "y": 3460
+    },
+    {
+      "assetId": "world_tree",
+      "x": 150,
+      "y": 1550
+    },
+    {
+      "assetId": "world_tree",
+      "x": 1950,
+      "y": 1300
+    },
+    {
+      "assetId": "world_tree",
+      "x": 3150,
+      "y": 1550
+    },
+    {
+      "assetId": "world_tree",
+      "x": 4400,
+      "y": 1550
+    },
+    {
+      "assetId": "world_tree",
+      "x": 5700,
+      "y": 1300
+    },
+    {
+      "assetId": "world_tree",
+      "x": 7900,
+      "y": 1550
+    },
+    {
+      "assetId": "world_tree",
+      "x": 900,
+      "y": 2050
+    },
+    {
+      "assetId": "world_tree",
+      "x": 2600,
+      "y": 2000
+    },
+    {
+      "assetId": "world_tree",
+      "x": 5800,
+      "y": 2050
+    },
+    {
+      "assetId": "world_tree",
+      "x": 7400,
+      "y": 2050
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 600,
+      "y": 1380
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 1400,
+      "y": 1380
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 3450,
+      "y": 1380
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 5250,
+      "y": 1380
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 6950,
+      "y": 1380
+    },
+    {
+      "assetId": "world_motorbike",
+      "x": 4250,
+      "y": 1400
+    },
+    {
+      "assetId": "world_bench",
+      "x": 6450,
+      "y": 1380
+    },
+    {
+      "assetId": "world_tree",
+      "x": 3400,
+      "y": 4700
+    },
+    {
+      "assetId": "world_tree",
+      "x": 4400,
+      "y": 4900
+    },
+    {
+      "assetId": "world_tree",
+      "x": 5800,
+      "y": 4900
+    },
+    {
+      "assetId": "world_tree",
+      "x": 7300,
+      "y": 4800
+    },
+    {
+      "assetId": "world_tree",
+      "x": 7800,
+      "y": 5450
+    },
+    {
+      "assetId": "world_tree",
+      "x": 6000,
+      "y": 5500
+    },
+    {
+      "assetId": "world_motorbike",
+      "x": 5000,
+      "y": 4420
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 6100,
+      "y": 4330
+    }
+  ],
+  "legacyMaps": {
+    "front_yard": [
+      {
+        "from": [
+          500,
+          60
+        ],
+        "to": [
+          2550,
+          960
+        ],
+        "label": "house door"
+      },
+      {
+        "from": [
+          500,
+          350
+        ],
+        "to": [
+          2550,
+          1150
+        ],
+        "label": "garden"
+      },
+      {
+        "from": [
+          500,
+          640
+        ],
+        "to": [
+          2550,
+          1380
+        ],
+        "label": "gate"
+      }
+    ],
+    "batuphat_street": [
+      {
+        "from": [
+          450,
+          60
+        ],
+        "to": [
+          2550,
+          1540
+        ],
+        "label": "home gate"
+      },
+      {
+        "from": [
+          1420,
+          60
+        ],
+        "to": [
+          5300,
+          2660
+        ],
+        "label": "Indomaret"
+      },
+      {
+        "from": [
+          2250,
+          60
+        ],
+        "to": [
+          7150,
+          2660
+        ],
+        "label": "workplace"
+      },
+      {
+        "from": [
+          1300,
+          450
+        ],
+        "to": [
+          5000,
+          3100
+        ],
+        "label": "street"
+      },
+      {
+        "from": [
+          60,
+          610
+        ],
+        "to": [
+          3900,
+          3100
+        ],
+        "label": "west end"
+      },
+      {
+        "from": [
+          2740,
+          610
+        ],
+        "to": [
+          7900,
+          3100
+        ],
+        "label": "east end"
+      }
+    ],
+    "batuphat_west": [
+      {
+        "from": [
+          2160,
+          60
+        ],
+        "to": [
+          2700,
+          2660
+        ],
+        "label": "Mixue"
+      },
+      {
+        "from": [
+          790,
+          60
+        ],
+        "to": [
+          1100,
+          2660
+        ],
+        "label": "warung"
+      },
+      {
+        "from": [
+          1250,
+          400
+        ],
+        "to": [
+          1675,
+          3700
+        ],
+        "label": "park"
+      },
+      {
+        "from": [
+          60,
+          610
+        ],
+        "to": [
+          150,
+          3100
+        ],
+        "label": "west road end"
+      },
+      {
+        "from": [
+          2340,
+          610
+        ],
+        "to": [
+          3900,
+          3100
+        ],
+        "label": "toward the street"
+      }
+    ],
+    "batuphat_region": [
+      {
+        "from": [
+          2900,
+          60
+        ],
+        "to": [
+          2550,
+          960
+        ],
+        "label": "house door"
+      },
+      {
+        "from": [
+          2900,
+          350
+        ],
+        "to": [
+          2550,
+          1150
+        ],
+        "label": "garden"
+      },
+      {
+        "from": [
+          2850,
+          640
+        ],
+        "to": [
+          2550,
+          1380
+        ],
+        "label": "gate"
+      },
+      {
+        "from": [
+          2850,
+          760
+        ],
+        "to": [
+          2550,
+          1540
+        ],
+        "label": "outside the gate"
+      },
+      {
+        "from": [
+          4220,
+          760
+        ],
+        "to": [
+          5300,
+          2660
+        ],
+        "label": "Indomaret"
+      },
+      {
+        "from": [
+          4840,
+          760
+        ],
+        "to": [
+          7150,
+          2660
+        ],
+        "label": "workplace"
+      },
+      {
+        "from": [
+          3700,
+          1100
+        ],
+        "to": [
+          5000,
+          3100
+        ],
+        "label": "street"
+      },
+      {
+        "from": [
+          5140,
+          1310
+        ],
+        "to": [
+          7900,
+          3100
+        ],
+        "label": "east end"
+      },
+      {
+        "from": [
+          2160,
+          760
+        ],
+        "to": [
+          2700,
+          2660
+        ],
+        "label": "Mixue"
+      },
+      {
+        "from": [
+          790,
+          760
+        ],
+        "to": [
+          1100,
+          2660
+        ],
+        "label": "warung"
+      },
+      {
+        "from": [
+          1250,
+          1100
+        ],
+        "to": [
+          1675,
+          3700
+        ],
+        "label": "park"
+      },
+      {
+        "from": [
+          60,
+          1310
+        ],
+        "to": [
+          150,
+          3100
+        ],
+        "label": "west road end"
+      }
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$comment": "P6 zone of batuphat_town at (0, 3600): South lane and back lane with houses and a small shop; alleys back up to the main street. Buildings, ground and props live in src/data/regions/batuphat_town.json. PROVISIONAL, not real geography.",
+  "id": "batuphat_south",
+  "displayName": "Batuphat · south lane",
+  "world": "world01",
+  "floor": "ground",
+  "kind": "exterior",
+  "ambience": "street",
+  "provisional": true,
+  "sizeCm": {
+    "w": 8000,
+    "h": 2000
+  },
+  "wallHeightCm": 0,
+  "palette": {
+    "floor": "#B9B3A9",
+    "wall": "#E6DCCB",
+    "trim": "#8A7F75"
+  },
+  "shell": {
+    "floor": "env_ground_street",
+    "wall": "env_wall_street_row"
+  },
+  "spawns": {
+    "default": {
+      "x": 5000,
+      "y": 830,
+      "facing": "S"
+    }
+  },
+  "props": [],
+  "doors": []
+}

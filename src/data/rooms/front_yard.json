@@ -1,6 +1,7 @@
 {
+  "$comment": "P6 zone of batuphat_town at (2050, 300): Zila's house and fenced front garden; the gate opens onto the residential lane. Buildings, ground and props live in src/data/regions/batuphat_town.json. PROVISIONAL, not real geography.",
   "id": "front_yard",
-  "displayName": "Front Yard",
+  "displayName": "Zila's house · garden",
   "world": "world01",
   "floor": "ground",
   "kind": "exterior",
@@ -8,106 +9,35 @@
   "provisional": true,
   "sizeCm": {
     "w": 1000,
-    "h": 700
+    "h": 1150
   },
-  "wallHeightCm": 330,
+  "wallHeightCm": 0,
   "palette": {
-    "floor": "#8DB36B",
-    "wall": "#F1E2CC",
-    "trim": "#9C7258"
+    "floor": "#B9B3A9",
+    "wall": "#E6DCCB",
+    "trim": "#8A7F75"
   },
   "shell": {
-    "floor": "env_ground_yard",
-    "wall": "env_wall_house_front"
+    "floor": "env_ground_street",
+    "wall": "env_wall_street_row"
   },
   "spawns": {
     "default": {
       "x": 500,
-      "y": 350,
+      "y": 850,
       "facing": "S"
     },
     "from_house": {
       "x": 500,
-      "y": 60,
+      "y": 660,
       "facing": "S"
     },
     "from_street": {
       "x": 500,
-      "y": 640,
+      "y": 1080,
       "facing": "N"
     }
   },
-  "props": [
-    {
-      "assetId": "world_window_ext",
-      "wall": {
-        "x": 250,
-        "z": 110
-      }
-    },
-    {
-      "assetId": "world_window_ext",
-      "wall": {
-        "x": 750,
-        "z": 110
-      }
-    },
-    {
-      "assetId": "world_plant_floor",
-      "x": 380,
-      "y": 120
-    },
-    {
-      "assetId": "world_plant_floor",
-      "x": 620,
-      "y": 120
-    },
-    {
-      "assetId": "world_motorbike",
-      "x": 250,
-      "y": 330
-    },
-    {
-      "assetId": "world_bench",
-      "x": 800,
-      "y": 220
-    },
-    {
-      "assetId": "world_tree",
-      "x": 90,
-      "y": 440
-    },
-    {
-      "assetId": "world_plant_floor",
-      "x": 900,
-      "y": 620
-    }
-  ],
-  "doors": [
-    {
-      "id": "house_door",
-      "label": "Enter the house",
-      "x": 450,
-      "y": 0,
-      "w": 100,
-      "h": 10,
-      "to": {
-        "room": "living_room",
-        "spawn": "from_yard"
-      }
-    },
-    {
-      "id": "gate",
-      "label": "Go to the street",
-      "style": "gate",
-      "x": 380,
-      "y": 700,
-      "w": 140,
-      "h": 10,
-      "to": {
-        "room": "batuphat_street",
-        "spawn": "from_home"
-      }
-    }
-  ]
+  "props": [],
+  "doors": []
 }

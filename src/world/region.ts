@@ -1,8 +1,10 @@
 import type { Rect } from '../core/specs';
 import type { WorldAnchor } from '../interaction/anchors';
 import { compileRoom, doorOpen, doorSide, DOOR_DEPTH, getRoom, WALL, type PropInstance, type RoomData, type RoomDoor, type RoomSpawn } from './room';
+import { getPropSpec, propTopCm } from '../core/specs';
+import { DEPTH_SCALE } from '../core/projection';
 import type { NpcData } from './npc';
-import { offsetNpc, offsetProp, offRect, type CompiledFloor, type FloorDef, type ZoneInfo } from './floor';
+import { offsetNpc, offsetProp, offRect, zoneAt, type BuildingInfo, type CompiledFloor, type FloorDef, type ZoneInfo } from './floor';
 
 /**
  * OUTDOOR REGIONS (P5): several exterior maps ("zones") composed into ONE continuous district — the house front
@@ -53,6 +55,36 @@ export function compileRegion(f: FloorDef, flags: Record<string, boolean> = {}, 
     for (const [name, sp] of Object.entries(z.data.spawns)) spawns[`${z.id}.${name}`] = { ...sp, x: sp.x + z.x, y: sp.y + z.y };
   }
 
+  // ---- P6 towns: region-level props and free-standing buildings (authored in region coordinates)
+  const buildings: BuildingInfo[] = [];
+  const zoneOf = (x: number, y: number) => zoneAt(zones, x, y)?.id ?? f.id;
+  if (f.props?.length) {
+    const c = compileRoom({ id: `${f.id}/town`, displayName: f.displayName, world: f.world, floor: 'ground', sizeCm: { w: x1, h: y1 }, wallHeightCm: 0, palette: zones[0]!.data.palette, spawns: {}, props: f.props, doors: [] }, flags);
+    for (const s of c.solids) { const cx = s.x + s.w / 2, cy = s.y + s.h / 2; if (cx >= 0 && cx <= x1 && cy >= 0 && cy <= y1) solids.push(s); }
+    for (const p of c.props) props.push(offsetProp(p, 0, 'town/', zoneOf(p.x, p.y)));
+    for (const a of c.anchors) anchors.push({ ...a, key: 'town/' + a.key, ownerId: 'town/' + a.ownerId });
+  }
+  for (const b of f.buildings ?? []) {
+    const spec = getPropSpec(b.facade), w = spec.footprint.widthCm, H = propTopCm(spec), K = DEPTH_SCALE;
+    const key = `bld:${b.id}`, zone = zoneOf(b.x, b.y + 20), x0 = b.x - w / 2;
+    const footprint = { x: x0, y: b.y - b.depth, w, h: b.depth };
+    props.push({
+      key, spec, x: b.x, y: b.y, z: 0, layer: 'wall', zone, zoneKey: b.id, ...(b.inspect ? { inspect: b.inspect } : {}),
+      // sorts by its front line; occludes (fades) when Zila walks behind it; render bounds cover facade + roof
+      sortable: { id: key, pivotY: b.y, footprint, renderBounds: { x: x0, y: (b.y - b.depth) * K - H, w, h: H + b.depth * K }, occluder: true },
+    });
+    solids.push(footprint);
+    buildings.push({ key, id: b.id, x0, x1: x0 + w, front: b.y, depth: b.depth, height: H, roof: b.roof ?? '#9C5B4A', zone });
+    if (b.inspect) anchors.push({ key: `${key}:inspect`, ownerId: key, label: b.inspect.name, x: b.x, y: b.y + 40, radiusCm: Math.min(120, w / 2), kind: 'prop', payload: { anchorId: 'inspect', action: { type: 'inspect', name: b.inspect.name, comment: b.inspect.comment } } });
+    if (b.talk) anchors.push({ key: `${key}:talk`, ownerId: key, label: b.talk.label, x: b.x + w / 4, y: b.y + 50, radiusCm: 70, kind: 'prop', payload: { anchorId: 'talk', action: { type: 'dialogue', id: b.talk.dialogue } } });
+    if (b.door) {
+      const dw = b.door.w ?? 110, dx = b.door.dx ?? 0;
+      const d: RoomDoor = { id: b.door.id, label: b.door.label, side: 'north', style: 'none', x: b.x + dx - dw / 2, y: b.y, w: dw, h: 10, to: b.door.to, ...(b.door.locked ? { locked: b.door.locked } : {}), zone: { x: x0, y: b.y, w, h: 0 } };
+      doors.push(d);
+      anchors.push({ key: `door:${d.id}`, ownerId: d.id, label: d.label, x: b.x + dx, y: b.y + 25, radiusCm: 50, kind: 'door', payload: doorOpen(d, flags) ? d.to : { locked: d.locked!.message } });
+    }
+  }
+
   // the void and a frame around the bounding box are solid
   const boundary: Rect[] = [...voidRects(zones, x0, y0, x1, y1),
     { x: x0 - WALL, y: y0 - WALL, w: x1 - x0 + 2 * WALL, h: WALL }, { x: x0 - WALL, y: y1, w: x1 - x0 + 2 * WALL, h: WALL },
@@ -79,7 +111,7 @@ export function compileRegion(f: FloorDef, flags: Record<string, boolean> = {}, 
     sizeCm: { w: x1, h: y1 }, wallHeightCm: wallH, palette: pd.palette, shell: pd.shell,
     spawns, props: [], doors, npcs,
   };
-  return { data, solids, props, anchors, zones, bbox: { x: x0, y: y0, w: x1 - x0, h: y1 - y0 }, fences: f.fences ?? [] };
+  return { data, solids, props, anchors, zones, bbox: { x: x0, y: y0, w: x1 - x0, h: y1 - y0 }, fences: f.fences ?? [], ...(f.ground ? { ground: f.ground, buildings } : {}) };
 }
 
 /** Cells of the bounding box not covered by any zone (coordinate-compressed grid, merged along rows). */

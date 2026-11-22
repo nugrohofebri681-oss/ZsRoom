@@ -284,18 +284,20 @@ export interface GroundLayer { floor: string; x: number; y: number; w: number; h
 
 /**
  * Draw a town's ground once for the whole region: each layer is tiled with a pre-composited "super tile"
- * (~4 m wide) so a 80 × 56 m district needs a few hundred quads instead of thousands. Base layers skip quads
- * that another layer fully covers (no double-rendered ground). All quads are named `shell-tile` (view culling).
+ * (~2.5 m wide) so an 80 × 57 m district needs a few hundred quads instead of thousands. Quads that a later layer
+ * fully covers are skipped (no double-rendered ground under roads and pavements). All quads are named `shell-tile` (view culling).
  */
 export function buildGround(scene: Phaser.Scene, layers: GroundLayer[], manifest: AssetManifest, room: RoomData, density = 2): number {
   const R = (l: GroundLayer) => ({ x: l.x, y: l.y * K, w: l.w, h: l.h * K });
-  const overlays = layers.filter((l) => !l.base).map(R);
+  const rects = layers.map(R);
   const marks = scene.add.graphics().setDepth(-99994).setName('ground-marks');
   let n = 0;
   layers.forEach((l, i) => {
-    const t = superTile(scene, resolveTile(scene, getEnvironmentSpec(l.floor), manifest, room, density), 400);
+    const t = superTile(scene, resolveTile(scene, getEnvironmentSpec(l.floor), manifest, room, density), 256);
     const r = R(l);
-    const span = l.base ? (x: number, y: number, w: number, h: number) => (overlays.some((o) => x >= o.x && x + w <= o.x + o.w && y >= o.y && y + h <= o.y + o.h) ? null : undefined) : undefined;
+    // skip quads that a later (higher) layer fully covers: grass under the pavement band, pavement under the road
+    const later = rects.slice(i + 1);
+    const span = (x: number, y: number, w: number, h: number) => (later.some((o) => x >= o.x && x + w <= o.x + o.w && y >= o.y && y + h <= o.y + o.h) ? null : undefined);
     const before = scene.children.list.length;
     n += tileQuads(scene, t.key, t.w, t.h, r.x, r.y, r.w, r.h, 1 / t.density, span);
     for (const o of scene.children.list.slice(before)) (o as Phaser.GameObjects.Image).setDepth(-100000 + i * 0.01);

@@ -28,9 +28,9 @@ The source of truth for the registry is [`src/data/world/world01.json`](../../sr
 | `upper_hall` | Zila's home | interior | ✅ | north → bedroom; east stairs → living_room | story-critical · TEMP |
 | `living_room` | Zila's home | interior | ✅ provisional | north stairs → hall; south → yard; **west → kitchen** | story-critical · TEMP |
 | `kitchen` | Zila's home | interior | ✅ provisional (new) | east → living room | story-critical · breakfast loop and tea |
-| `front_yard` | Zila's home | exterior | ✅ provisional · **zone of `batuphat_region` (P5)** | north → living room; south gate → street (walk, no transition) | story-critical |
-| `batuphat_street` | Batuphat | exterior | ✅ provisional · **zone of `batuphat_region` (P5)** | home gate, Indomaret, workplace; west block (walk); east road → Lhokseumawe road | road drawn as a ground zone (no overdraw) |
-| `batuphat_west` | Batuphat | exterior | ✅ provisional · **zone of `batuphat_region` (P5)** | street (walk); Mixue; west road 🔒 | homes and warung kopi (**background**), small park, **becak motor** + driver, child NPC |
+| `front_yard` | Zila's home | exterior | ✅ provisional · **zone of `batuphat_town` (P6)** | north → living room; south gate → street (walk, no transition) | story-critical |
+| `batuphat_street` | Batuphat | exterior | ✅ provisional · **zone of `batuphat_town` (P6)** | home gate, Indomaret, workplace; west block (walk); east road → Lhokseumawe road | road drawn as a ground zone (no overdraw) |
+| `batuphat_west` | Batuphat | exterior | ✅ provisional · **zone of `batuphat_town` (P6)** | street (walk); Mixue; west road 🔒 | homes and warung kopi (**background**), small park, **becak motor** + driver, child NPC |
 | `minimarket` (**Indomaret**) | Batuphat | interior | ✅ provisional | south → street | **enterable** · real-world reference: Indomaret (TEMP colours and text only) · ⚠ brand review |
 | `mixue` | Batuphat | interior | ✅ provisional (new) | south → west block | **enterable** · real-world reference: Mixue (TEMP colours and text only) · ⚠ brand review |
 | `workplace` | Batuphat | interior | ✅ **story-configurable** (variants: **dimsum shop (active)**, office) | south → street | story-critical · no real name or layout; one registry line switches the variant |
@@ -98,6 +98,88 @@ At the default zoom, both rooms of each house floor are visible at once. When zo
   - the Indomaret back room;
   - any multi-room shop;
   - joining the front yard with the street into one continuous outdoor area.
+
+## P6 — Batuphat as an explorable 2D town (Issue #34)
+**Goal:** World 01 feels like a small town you explore in every direction, not a corridor. Camera feel, map structure and transition rules borrow from large top-down life-sim town maps (Stardew-like game feel); art, layout, code and story stay ZsRoom's own (premium HD 2D illustrated, OG Art Bible, TEMP placeholders for now).
+
+![Master layout](../reviews/world01-p6/town-layout.png)
+
+### Map design (proposal, provisional — no real street geometry)
+- **Bounding area:** 80 × 57 m (aspect 1.40, ≈ 4 560 m²) ≈ 100 × 71 logical tiles of 80 cm (half of Zila's height). Default camera at the wide P4/P5 framing shows ≈ 21 × 17 m on desktop and ≈ 19 × 12 m on a phone in landscape: the town is ≈ 4 × 3.5 screens. The camera scrolls in X and Y; it never fits the whole town.
+- **Network:**
+  - north **residential lane**, with three **gangs** and the gaps between houses leading down to the **main street**;
+  - the main street (road + pavements) runs west → east to the **Lhokseumawe road exit**; its west end is the locked `batuphat_beyond` border;
+  - a north–south **avenue** crosses it at a **crossroads**;
+  - a hedged **park** has four entrances;
+  - the **south lane**, an **alley** back to the main street, and a **back path** along the south edge.
+- **Places:**
+  - **Zila's house** in a fenced garden, gate onto the lane;
+  - on the main street: **warung kopi**, **Mixue**, **Indomaret** (map id `minimarket` unchanged), the **dimsum workplace**, the neighbour's house;
+  - the **becak** stand, park, fountain and benches;
+  - 20+ inspectable background houses and two small shops.
+- **Routes (tested):**
+  - **A:** home → lane → gang W2 → main street → Indomaret.
+  - **B:** home → lane → avenue → crossroads → Indomaret.
+  - **Loop C:** home → gang W1 → park → south lane → alley → Indomaret → gang W2 → home. It spans more than 35 m east–west and 25 m north–south (E2E-measured).
+- **Transitions only at real boundaries:** house door, Indomaret, Mixue, workplace, and the east road to the Lhokseumawe road → city → Unimal, which stay separate districts. Everything outdoors in Batuphat is one map.
+
+### Engine changes (reuse of the P5 compositor, no rewrite)
+- `src/world/region.ts`: a region may carry **ground layers**, **free-standing buildings** and **region-level props** in region coordinates; zones become logical areas (title, ambience, events, NPCs, spawns) that may overlap by priority.
+- **Buildings:** a TEMP facade asset paints the front; the engine adds the roof seen from above, the collision footprint, a contact shadow, and a front door (walk into it / E) or an inspect / talk anchor. Facade and roof sort by the front line and **fade** when Zila walks behind them.
+- **Ground** is drawn once per region with pre-composited ~4 m "super tiles" (351 quads for the whole town instead of thousands); base grass skips quads fully covered by roads (no double ground). View culling draws ≈ 40–70 of them.
+- **Pathfinding at town scale:**
+  - the walk grid rasterises solids (8 ms for the town instead of seconds);
+  - towns use a 16 cm grid;
+  - string pulling is linear on the grid;
+  - search buffers are reused.
+
+  A long tap-to-move path costs ≈ 10–20 ms (desktop proxy, down from 58–345 ms).
+- **Lightmap resolution** scales for very large maps (≤ 1 600 px).
+
+### Migration and rollback
+- `front_yard`, `batuphat_street` and `batuphat_west` stay **zones of `batuphat_town`** and keep every spawn name used by interior doors and the city road (`from_house`, `from_minimarket`, `from_workplace`, `from_mixue`, `from_lhokseumawe_road`, …).
+- **P4 saves** (those room ids, local coordinates) and **P5 saves** (`batuphat_region`, region coordinates) migrate by **landmark anchors** (`legacyMaps` in the region file): the nearest old landmark maps to the same landmark in the town, keeping up to 80 cm of offset. A spot that is not standable falls back to the nearest free spot.
+  - P4 Indomaret front (1420, 60) → P6 Indomaret front (5300, 2660).
+  - P5 Mixue front (2160, 760) → (2700, 2660).
+  - P5 doorstep (2900, 60) → (2550, 960).
+  - The full anchor list is in the region file.
+- Story flags, visited, vars, light flags and the `minimarket` id are untouched. No save version bump.
+- **Rollback:** the P5 build (PR #33 / its preview) still reads v3 saves. A P6 save names `batuphat_town`, which P5 does not know, so the scene falls back to the default spawn there. No story state is lost.
+
+### Performance (headless software proxy, interleaved P5/P6, median of 3, afternoon — NOT device FPS)
+| Same story place | Desktop P5 | Desktop P6 | Emulated phone P5 | Emulated phone P6 |
+|---|---|---|---|---|
+| Doorstep (outside the house) | 12.0 | 12.3 | 11.7 | 12.0 |
+| Indomaret front | 11.3 | 10.7 | 10.0 | 9.7 |
+| Mixue front | 10.7 | 11.7 | 10.0 | 9.7 |
+| Park | 11.7 | 12.0 | 10.0 | 11.0 |
+| Main street middle | 12.0 | 11.3 | 10.7 | 10.0 |
+
+- **On par with P5 within run-to-run noise** (−7 % … +10 %), although the town is ~2.9× the P5 area with 28 buildings.
+- **First measurement was 5–17 % slower.** Profiling (hiding one layer at a time) showed the proxy is fill-bound on images. Fixes:
+  - quads of a ground layer that a later layer fully covers are skipped (no grass under pavement, no pavement under road);
+  - smaller super tiles mean less overdraw;
+  - roofs, contact shadows, fences, prop shadows and props are view-culled.
+- **Pathfinding (desktop proxy):**
+
+  | | Before | After |
+  |---|---|---|
+  | Grid build for the town | seconds (estimated) | 8 ms |
+  | Long tap-to-move path | 58–345 ms | 10–20 ms |
+- **A physical Samsung Galaxy A05 benchmark (`?fresh&bench`) is still required.** No device FPS is claimed.
+
+### Evidence (`docs/reviews/world01-p6/`)
+- `town-layout.png`: the master layout, generated from the data (`node scripts/town-diagram.mjs`).
+- `desktop-20-camera-follow-filmstrip.png` + `follow-walk-log.json`: one continuous walk of loop C across all 6 areas. `sceneStarts` stays 1 for 141 samples; the camera scrolls x 895 → 5185 and y 471 → 2603.
+- `{desktop,android}-0N-*.png`: E2E player-eye captures along the loop (garden, gang W1, park, south lane, Indomaret front, gang W2, home gate).
+- `{desktop,android}-1N-<place>-p5.png` vs `-p6.png`: the same story places in P5 and P6 at the default wide camera (`scripts/compare-p5-p6.cjs`).
+
+### Remaining limitations
+- **Art is TEMP.** Facades are flat TEMP fronts and roofs are engine-drawn bands; final art is Codex's track. A building's roof can overlap the ground just north of it, so Zila is hidden there and the building fades.
+- **Buildings face south only.** The 3/4 view shows fronts; the backs of buildings south of a street read as rooftops. North-facing fronts would need new art.
+- **Single-floor ground.** There is no water, no height levels and no diagonal paths; paths are axis-aligned rectangles.
+- **Long walks.** Crossing the town takes ~13 s at normal speed, and there is no fast travel yet (the becak is decorative).
+- **Layout is provisional.** Names (gangs, avenue) are descriptive, not real Batuphat streets.
 
 ## P5 — outdoor region: one walkable Batuphat district (Issue #32)
 **Goal:** the outside feels like one place. Zila leaves the house and walks from her doorstep through the yard, out of the gate, along the street past Indomaret and the workplace, west to the park, the becak and Mixue — **one map, no fade, no scene restart**, with the camera following her over a district larger than the screen. Interiors (house, Indomaret, Mixue, workplace) and distant districts (Lhokseumawe road → city → Unimal) keep proper transitions. Camera feel and map rules follow large farm/town maps in top-down life sims; art, code and layout are ZsRoom's own (HD 2D illustrated, OG Art Bible).

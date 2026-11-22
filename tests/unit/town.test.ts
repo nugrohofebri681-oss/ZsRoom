@@ -24,13 +24,13 @@ const AVENUE: Rect = { x: 4340, y: 2150, w: 640, h: 200 }, GANG_E: Rect = { x: 6
 const WEST_END: Rect = { x: -50, y: 2150, w: 310, h: 200 }, MIXUE_GAP: Rect = { x: 2190, y: 2150, w: 290, h: 200 };
 
 describe('P6 Batuphat town: a broad 2D map, not a corridor', () => {
-  it('is one exterior map, about 80 × 56 m (aspect ~1.4), with six logical areas', () => {
+  it('is one exterior map, about 80 × 57 m (aspect ~1.4), with six logical areas', () => {
     expect(town.data.kind).toBe('exterior');
-    expect(town.bbox).toEqual({ x: 0, y: 0, w: 8000, h: 5600 });
+    expect(town.bbox).toEqual({ x: 0, y: 0, w: 8000, h: 5700 });
     expect(town.zones.map((z) => z.id)).toEqual(['front_yard', 'batuphat_park', 'batuphat_west', 'batuphat_street', 'batuphat_lanes', 'batuphat_south']);
     expect(town.ground!.length).toBeGreaterThan(10);
     expect(town.buildings!.length).toBeGreaterThanOrEqual(25);
-    expect(voidRects(town.zones, 0, 0, 8000, 5600)).toEqual([]);                       // every cell belongs to an area
+    expect(voidRects(town.zones, 0, 0, 8000, 5700)).toEqual([]);                       // every cell belongs to an area
   });
 
   it('story places exist as buildings with working doors; interior returns land in front of the same door', () => {

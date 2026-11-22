@@ -1,5 +1,5 @@
 {
-  "$comment": "P6 Batuphat town: ONE explorable outdoor map (80 × 56 m) — Zila's house & garden, residential lanes, gangs, the main street with a crossroads, the park, the south lanes; Indomaret, Mixue and the dimsum workplace on the main street. Original PROVISIONAL layout (no real street geometry). Zones are logical areas (title, ambience, events, NPCs); ground, buildings and props are drawn here in region coordinates. Layout diagram: docs/reviews/world01-p6/town-layout.png.",
+  "$comment": "P6 Batuphat town: ONE explorable outdoor map (80 × 57 m) — Zila's house & garden, residential lanes, gangs, the main street with a crossroads, the park, the south lanes; Indomaret, Mixue and the dimsum workplace on the main street. Original PROVISIONAL layout (no real street geometry). Zones are logical areas (title, ambience, events, NPCs); ground, buildings and props are drawn here in region coordinates. Layout diagram: docs/reviews/world01-p6/town-layout.png.",
   "id": "batuphat_town",
   "displayName": "Batuphat",
   "world": "world01",
@@ -44,7 +44,7 @@
       "x": 0,
       "y": 0,
       "w": 8000,
-      "h": 5600,
+      "h": 5700,
       "base": true
     },
     {
@@ -75,7 +75,7 @@
       "x": 4600,
       "y": 3600,
       "w": 260,
-      "h": 1700,
+      "h": 1960,
       "markings": "road"
     },
     {
@@ -285,7 +285,7 @@
       "facade": "world_facade_house",
       "x": 500,
       "y": 2600,
-      "depth": 460,
+      "depth": 420,
       "roof": "#9C5B4A",
       "inspect": {
         "name": "House",
@@ -297,7 +297,7 @@
       "facade": "world_facade_warung",
       "x": 1100,
       "y": 2600,
-      "depth": 460,
+      "depth": 420,
       "roof": "#7A5640",
       "talk": {
         "label": "Warung kopi",
@@ -309,7 +309,7 @@
       "facade": "world_facade_house",
       "x": 1950,
       "y": 2600,
-      "depth": 460,
+      "depth": 420,
       "roof": "#6F6A63",
       "inspect": {
         "name": "House",
@@ -321,7 +321,7 @@
       "facade": "world_storefront_mixue",
       "x": 2700,
       "y": 2600,
-      "depth": 480,
+      "depth": 400,
       "roof": "#C8323C",
       "door": {
         "id": "mixue_door",
@@ -337,7 +337,7 @@
       "facade": "world_facade_house",
       "x": 3250,
       "y": 2600,
-      "depth": 460,
+      "depth": 420,
       "roof": "#8E5A4C",
       "inspect": {
         "name": "House",
@@ -349,7 +349,7 @@
       "facade": "world_facade_house",
       "x": 4100,
       "y": 2600,
-      "depth": 460,
+      "depth": 420,
       "roof": "#A0654A",
       "inspect": {
         "name": "Neighbour's house",
@@ -361,7 +361,7 @@
       "facade": "world_storefront_indomaret",
       "x": 5300,
       "y": 2600,
-      "depth": 500,
+      "depth": 400,
       "roof": "#2D5E9C",
       "door": {
         "id": "minimarket_door",
@@ -377,7 +377,7 @@
       "facade": "world_facade_house",
       "x": 6000,
       "y": 2600,
-      "depth": 460,
+      "depth": 420,
       "roof": "#7D6A5A",
       "inspect": {
         "name": "House",
@@ -389,7 +389,7 @@
       "facade": "world_facade_workplace",
       "x": 7150,
       "y": 2600,
-      "depth": 500,
+      "depth": 400,
       "roof": "#5B6C8F",
       "door": {
         "id": "workplace_door",
@@ -405,7 +405,7 @@
       "facade": "world_facade_house",
       "x": 7740,
       "y": 2600,
-      "depth": 460,
+      "depth": 420,
       "roof": "#9C5B4A",
       "inspect": {
         "name": "House",
@@ -416,8 +416,8 @@
       "id": "house_s1",
       "facade": "world_facade_house",
       "x": 3650,
-      "y": 4250,
-      "depth": 420,
+      "y": 4300,
+      "depth": 360,
       "roof": "#8E5A4C",
       "inspect": {
         "name": "House",
@@ -428,8 +428,8 @@
       "id": "house_s2",
       "facade": "world_facade_house",
       "x": 4250,
-      "y": 4250,
-      "depth": 420,
+      "y": 4300,
+      "depth": 360,
       "roof": "#6F6A63",
       "inspect": {
         "name": "House",
@@ -440,8 +440,8 @@
       "id": "shop_s3",
       "facade": "world_facade_shop",
       "x": 5250,
-      "y": 4250,
-      "depth": 440,
+      "y": 4300,
+      "depth": 360,
       "roof": "#7A8A5E",
       "inspect": {
         "name": "Small shop",
@@ -452,8 +452,8 @@
       "id": "house_s4",
       "facade": "world_facade_house",
       "x": 6300,
-      "y": 4250,
-      "depth": 420,
+      "y": 4300,
+      "depth": 360,
       "roof": "#A0654A",
       "inspect": {
         "name": "House",
@@ -464,8 +464,8 @@
       "id": "house_s5",
       "facade": "world_facade_house",
       "x": 6900,
-      "y": 4250,
-      "depth": 420,
+      "y": 4300,
+      "depth": 360,
       "roof": "#7D6A5A",
       "inspect": {
         "name": "House",
@@ -476,8 +476,8 @@
       "id": "house_s6",
       "facade": "world_facade_house",
       "x": 7500,
-      "y": 4250,
-      "depth": 420,
+      "y": 4300,
+      "depth": 360,
       "roof": "#9C5B4A",
       "inspect": {
         "name": "House",
@@ -488,8 +488,8 @@
       "id": "house_t1",
       "facade": "world_facade_house",
       "x": 3700,
-      "y": 5250,
-      "depth": 420,
+      "y": 5550,
+      "depth": 400,
       "roof": "#7D6A5A",
       "inspect": {
         "name": "House",
@@ -500,8 +500,8 @@
       "id": "house_t2",
       "facade": "world_facade_house",
       "x": 5300,
-      "y": 5250,
-      "depth": 420,
+      "y": 5550,
+      "depth": 400,
       "roof": "#8E5A4C",
       "inspect": {
         "name": "House",
@@ -512,8 +512,8 @@
       "id": "house_t3",
       "facade": "world_facade_house",
       "x": 6500,
-      "y": 5250,
-      "depth": 420,
+      "y": 5550,
+      "depth": 400,
       "roof": "#6F6A63",
       "inspect": {
         "name": "House",
@@ -687,7 +687,7 @@
     },
     {
       "x": 3890,
-      "y": 4235,
+      "y": 4285,
       "w": 120,
       "h": 15,
       "height": 120,
@@ -695,7 +695,7 @@
     },
     {
       "x": 6540,
-      "y": 4235,
+      "y": 4285,
       "w": 120,
       "h": 15,
       "height": 120,
@@ -703,7 +703,7 @@
     },
     {
       "x": 7140,
-      "y": 4235,
+      "y": 4285,
       "w": 120,
       "h": 15,
       "height": 120,

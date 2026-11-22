@@ -1,0 +1,157 @@
+{
+  "scope": "Local integration fixture, not merged foundation CI",
+  "specificationCommit": "fbe3d46",
+  "pipelineCommit": "b8d6b66",
+  "result": {
+    "assetId": "world_bench",
+    "version": "v002",
+    "dir": "art/submissions/world_bench/v002",
+    "spec": "specs/props/world_bench.json",
+    "errors": [],
+    "warnings": [
+      "style reference art/approved/prop_bed_zila/prop_bed_zila_v001.png not listed in generator.referencesUsed \u2014 consistency with approved art is unverified",
+      "style reference art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png not listed in generator.referencesUsed \u2014 consistency with approved art is unverified"
+    ],
+    "checks": [
+      {
+        "name": "asset id format",
+        "pass": true,
+        "detail": "world_bench"
+      },
+      {
+        "name": "version format (v###)",
+        "pass": true,
+        "detail": "v002"
+      },
+      {
+        "name": "spec exists",
+        "pass": true,
+        "detail": "specs/props/world_bench.json"
+      },
+      {
+        "name": "master file present",
+        "pass": true,
+        "detail": "world_bench_v002.png"
+      },
+      {
+        "name": "metadata.json present",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "only png/webp/json/md files",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata schema",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "production submission (not a concept board)",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata.assetId matches folder",
+        "pass": true,
+        "detail": "world_bench"
+      },
+      {
+        "name": "metadata.version matches folder",
+        "pass": true,
+        "detail": "v002"
+      },
+      {
+        "name": "metadata.specVersion matches spec",
+        "pass": true,
+        "detail": "1.0.0 vs 1.0.0"
+      },
+      {
+        "name": "createdAt is a date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "master sha256 matches metadata",
+        "pass": true,
+        "detail": "35a245e45c24b192f54d756ae4a01f3b398e923016da8661b8fc92b008b7758a"
+      },
+      {
+        "name": "format PNG",
+        "pass": true,
+        "detail": "png"
+      },
+      {
+        "name": "canvas size",
+        "pass": true,
+        "detail": "316x264, expected 316x264"
+      },
+      {
+        "name": "RGBA (alpha channel)",
+        "pass": true,
+        "detail": "4 channels"
+      },
+      {
+        "name": "8-bit depth",
+        "pass": true,
+        "detail": "uchar"
+      },
+      {
+        "name": "sRGB colour space",
+        "pass": true,
+        "detail": "srgb"
+      },
+      {
+        "name": "file size",
+        "pass": true,
+        "detail": "91492 bytes (max 3000000)"
+      },
+      {
+        "name": "transparent edge padding",
+        "pass": true,
+        "detail": "0 non-transparent px within 8px of the edge"
+      },
+      {
+        "name": "opaque coverage \u2265 min",
+        "pass": true,
+        "detail": "0.526"
+      },
+      {
+        "name": "opaque coverage \u2264 max (no baked background)",
+        "pass": true,
+        "detail": "0.526"
+      },
+      {
+        "name": "art inside artBounds",
+        "pass": true,
+        "detail": "bbox 8,15 300x238; allowed 8,8 300x248"
+      },
+      {
+        "name": "base sits on pivot line",
+        "pass": true,
+        "detail": "lowest solid row 252, expected 252\u00b13"
+      }
+    ],
+    "analysis": {
+      "format": "png",
+      "width": 316,
+      "height": 264,
+      "channels": 4,
+      "hasAlpha": true,
+      "depth": "uchar",
+      "space": "srgb",
+      "bytes": 91492,
+      "opaqueRatio": 0.525939777522056,
+      "bbox": {
+        "x": 8,
+        "y": 15,
+        "width": 300,
+        "height": 238
+      },
+      "baseRow": 252,
+      "edgeViolations": 0
+    }
+  }
+}

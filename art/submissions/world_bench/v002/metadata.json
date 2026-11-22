@@ -1,0 +1,45 @@
+{
+  "assetId": "world_bench",
+  "version": "v002",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "createdAt": "2026-11-22T08:41:03.257982+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "not exposed",
+    "referencesUsed": [
+      "art/source/world_bench/v001/candidate-c.png",
+      "art-bible/perspective/world_bench_template.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_bench_v002.png",
+      "sha256": "35a245e45c24b192f54d756ae4a01f3b398e923016da8661b8fc92b008b7758a"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/world_bench/v002/corrected-source.png",
+        "sha256": "f95d11614953b4855f23965816e0e9fc3ad473f648dbdf15822c11f2993f1ceb"
+      }
+    ]
+  },
+  "provenance": "Targeted original imagegen correction of v001 candidate C, raw previous source SHA256 70e7c015ccbe5a85c1eee5a0fbef1122de1e8804227d7f706d66bded3d6cd369. Geometry guide provided; no new A/B/C exploration. Prior source kept on original v001 branch.",
+  "postProcessing": [
+    "Official fit-to-spec.mjs with production spec1.0.0 from fbe3d46, --despeckle40, nativealpha normalize,trim,uniformwidthfit,Lanczos3,pivot alignment. No nonuniform deformation."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Manually measured highlight rows +/-1px: front156,rear102,base252; rise96vs90(+6.7%),plane54vs70(-22.9%). Both within ArtBible numeric tolerance. Slight rear seat narrowing remains; visual approval pending."
+    ]
+  },
+  "cost": "Included built-in subscription image generation; no additional paid services or API credits.",
+  "specificationCommit": "fbe3d46",
+  "status": "review-pending; no visual approval; integration depends on production-spec PR",
+  "baseline": {
+    "foundation": "7796f60",
+    "latestAvailableGameplay": "1e5a03f",
+    "pipeline": "b8d6b66"
+  }
+}

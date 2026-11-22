@@ -112,12 +112,19 @@ export class WalkGrid {
     return out;
   }
 
-  /** Line of sight on the grid: every sample (≤ half a cell apart) lies in a free cell. */
+  /**
+   * Line of sight for path smoothing: every sample (≤ half a cell apart) lies in a free cell. A free cell only
+   * guarantees its CENTRE is clear, so next to obstacles (any blocked neighbour) the sample is checked exactly —
+   * otherwise a smoothed leg can clip a corner by a few cm and the walk stalls against it.
+   */
   gridSight(a: Vec2, b: Vec2): boolean {
     const len = Math.hypot(b.x - a.x, b.y - a.y), steps = Math.max(1, Math.ceil(len / (this.cell / 2)));
     for (let i = 1; i < steps; i++) {
-      const t = i / steps, c = Math.floor((a.x + (b.x - a.x) * t) / this.cell), r = Math.floor((a.y + (b.y - a.y) * t) / this.cell);
+      const t = i / steps, x = a.x + (b.x - a.x) * t, y = a.y + (b.y - a.y) * t, c = Math.floor(x / this.cell), r = Math.floor(y / this.cell);
       if (!this.isFree(c, r)) return false;
+      let open = true;
+      for (let dr = -1; dr <= 1 && open; dr++) for (let dc = -1; dc <= 1; dc++) if (!this.isFree(c + dc, r + dr)) { open = false; break; }
+      if (!open && !this.standable({ x, y })) return false;
     }
     return true;
   }

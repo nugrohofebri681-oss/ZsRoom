@@ -48,7 +48,7 @@ describe('P6 Batuphat town: a broad 2D map, not a corridor', () => {
 
   it('every spawn, door and interaction is reachable on foot from the garden', () => {
     const start = spawn('front_yard.default');
-    for (const [k, s] of Object.entries(town.data.spawns)) expect(grid.findPath(start, s), k).not.toBeNull();
+    for (const [k, s] of Object.entries(town.data.spawns)) { expect(grid.standable(s), `${k} standable`).toBe(true); expect(grid.findPath(start, s), k).not.toBeNull(); }
     for (const a of town.anchors) {
       const p = grid.findPath(start, a);
       expect(p, a.key).not.toBeNull();
@@ -131,6 +131,26 @@ describe('P6 Batuphat town: a broad 2D map, not a corridor', () => {
   it('geometry helpers: void cells and rectangle subtraction', () => {
     expect(voidRects([{ x: 0, y: 0, w: 10, h: 10 }, { x: 0, y: 10, w: 30, h: 10 }], 0, 0, 30, 20)).toEqual([{ x: 10, y: 0, w: 20, h: 10 }]);
     expect(subtractRect({ x: 0, y: 0, w: 10, h: 10 }, { x: 3, y: 3, w: 4, h: 4 })).toHaveLength(4);
+  });
+
+  it('smoothed paths are really walkable: following the waypoints with real collision never stalls (26 sampled routes across town)', () => {
+    const spots = [spawn('front_yard.from_street'), door('minimarket_door'), door('mixue_door'), door('workplace_door'), spawn('batuphat_park.default'), spawn('batuphat_south.default'),
+      { x: 5830, y: 4430 }, { x: 3300, y: 4425 }, { x: 1675, y: 4250 }, { x: 7900, y: 3100 }, { x: 150, y: 3100 }, { x: 6400, y: 1540 }, { x: 3635, y: 2000 }, { x: 4730, y: 1560 }];
+    let n = 0;
+    for (let i = 0; i < spots.length; i++) for (let j = 0; j < spots.length; j++) {
+      if (i === j || (i * 7 + j * 3) % 5 !== 0) continue;                      // a spread-out sample of pairs
+      const path = grid.findPath(spots[i]!, spots[j]!); expect(path, `${i}→${j}`).not.toBeNull();
+      let p = { x: spots[i]!.x, y: spots[i]!.y };
+      for (const w of path!) for (let k = 0; k < 2000; k++) {
+        const dx = w.x - p.x, dy = w.y - p.y, d = Math.hypot(dx, dy);
+        if (d < 1) break;
+        const step = Math.min(10, d), q = moveWithCollision(p, { x: (dx / d) * step, y: (dy / d) * step }, R, town.solids);
+        expect(Math.hypot(q.x - p.x, q.y - p.y), `stalled ${i}→${j} at ${Math.round(p.x)},${Math.round(p.y)}`).toBeGreaterThan(0.2);
+        p = q;
+      }
+      const end = path!.at(-1)!; expect(Math.hypot(p.x - end.x, p.y - end.y)).toBeLessThan(2); n++;
+    }
+    expect(n).toBeGreaterThanOrEqual(25);
   });
 
   it('walk grid for a district this size is built quickly (rasterised solids)', () => {

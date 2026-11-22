@@ -49,6 +49,9 @@ test.describe('World 01 P2', () => {
     await until(page, "s.renderScale.mode === 'smooth' && s.renderScale.scale === 1");
     const fit = await page.evaluate(() => { const c = (window as any).__ZS_GAME.canvas as HTMLCanvasElement, r = c.getBoundingClientRect(); return { w: r.width, h: r.height, vw: innerWidth, vh: innerHeight }; });
     expect(Math.abs(fit.w - fit.vw)).toBeLessThan(2); expect(Math.abs(fit.h - fit.vh)).toBeLessThan(2);
+    // …and touches map to the right game pixel (a tap on the E button must hit it, not the ground at half the position)
+    const map = await page.evaluate(() => { const g = (window as any).__ZS_GAME; return { ds: g.scale.displayScale.x, expected: g.scale.width / g.canvas.getBoundingClientRect().width }; });
+    expect(Math.abs(map.ds - map.expected)).toBeLessThan(0.01);
     await page.evaluate(() => (window as any).__ZS_GAME.registry.get('renderScale').setMode('sharp'));   // back to Sharp (persisted below)
     await until(page, "s.renderScale.mode === 'sharp'");
     await page.goto('/?fast&adaptive'); await page.waitForFunction(() => (window as any).__ZS?.state?.());

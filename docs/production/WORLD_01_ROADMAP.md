@@ -175,7 +175,7 @@ At the default zoom, both rooms of each house floor are visible at once. When zo
 - `{desktop,android}-1N-<place>-p5.png` vs `-p6.png`: the same story places in P5 and P6 at the default wide camera (`scripts/compare-p5-p6.cjs`).
 
 ### Bugs found while verifying the live preview (fixed in P6)
-- **Off-screen HUD on slow phones.** Adaptive render resolution is on in production builds only. When it stepped down to exactly 1×, the canvas kept its previous, larger CSS size: the picture was cropped and the clock, zoom, sound and **E button went off-screen**, so doors could not be used. The canvas CSS size is now always set to the window size. An E2E regression test checks the canvas fills the screen at 1×.
+- **Off-screen HUD on slow phones.** Adaptive render resolution is on in production builds only. When it stepped down to exactly 1×, the canvas kept its previous, larger CSS size: the picture was cropped and the clock, zoom, sound and **E button went off-screen**, so doors could not be used. In addition, touch input was mapped to half its position at 1×, so a tap on E walked Zila away. The canvas CSS size and the input scale now always follow the window. An E2E regression test checks both at 1×.
 - **Stall beside an obstacle.** Grid path smoothing could clip an obstacle corner by a few cm, so Zila stopped beside the south-lane motorbike. Smoothing now checks samples exactly next to obstacles, and the motorbike was moved off the lane (it also sat on that area's default spawn). Unit tests: every spawn is standable, and sampled routes are followed with real collision.
 
 ### Remaining limitations

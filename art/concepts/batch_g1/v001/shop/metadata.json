@@ -1,0 +1,64 @@
+{
+  "assetId": "g1_shop",
+  "version": "v001",
+  "submissionType": "architectural-showcase-concept-only",
+  "createdAt": "2026-11-23",
+  "author": "codex",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "not exposed"
+  },
+  "cost": "Included subscription only; no paid APIs or external paid service",
+  "selected": "B",
+  "proposedMeasurement": {
+    "id": "shop",
+    "selected": "B",
+    "rawDimensions": [
+      1024,
+      1536
+    ],
+    "masterDimensions": [
+      789,
+      1517
+    ],
+    "contentDimensions": [
+      757,
+      1485
+    ],
+    "nativeDensity": 1.8023809523809524,
+    "proposedWidthCm": 420,
+    "proposedDepthCm": 500,
+    "previewCanvas": [
+      436,
+      840
+    ],
+    "previewPivot": [
+      218,
+      831
+    ],
+    "productionStatus": "BLOCKED: archetype contract and visual approval missing; native density not guaranteed2px/cm",
+    "alphaCleared": 18292,
+    "alphaSnapped": 977868,
+    "sourceSHA256": "c240939adff75b2a8cae42851a9ae5b4ab250822d3da5607c42a1c0f338ca741",
+    "masterSHA256": "12b1faefc8fcb5f3e7ca163244cc936db2e05a1eb319f9aac0631a1cacb28b06"
+  },
+  "references": "See raw/A-prompt.md, B-prompt.md, C-prompt.md and root generation-record.json for exact conditioning; public photos NOT used as image inputs",
+  "sha256": {
+    "p6-android-portrait-candidate.png": "5263c32f161337625da1b444f02f29361b2f465a43b2b49e85f2d765c4318a61",
+    "p6-desktop-temp.png": "9a314782877c71e5b7e54d2724cc93ef021316caed987eb387fc0779c2b1df14",
+    "candidate-comparison.png": "65912e65599685485d7bd1129bdb57267b4d8f50233f6c3ea021d3ee992e71ee",
+    "preview-sd.png": "e1531390bd38165292c1a91139a15aa144341b5bcbf77f4707f45c154bf84c4a",
+    "master-native.png": "12b1faefc8fcb5f3e7ca163244cc936db2e05a1eb319f9aac0631a1cacb28b06",
+    "p6-android-landscape-temp.png": "454c998411caeb396694817cf28138ed4f5e68b246c2cacb3618bebaa9b29d2a",
+    "p6-desktop-candidate.png": "ffa42b852a53c9c0bff502e473bfd29913786d5c03016920bb0c42b4afe440f4",
+    "p6-android-portrait-temp.png": "64a7eb77a25b4f894e4d0c28f0802d2240f44dcebf2317debba930504c07edc8",
+    "p6-android-landscape-candidate.png": "5df9d3c86237cc00a89024ee8fb5de51c95fbada396274de548fa30c1eb218f9",
+    "previews/A-native.png": "e4f0ba3081effc8492940f698dc4d66f7141df6b1c8e98110e29a7c7c6dbf3c4",
+    "previews/B-native.png": "12b1faefc8fcb5f3e7ca163244cc936db2e05a1eb319f9aac0631a1cacb28b06",
+    "previews/C-native.png": "ad86de888df51949b2a35fc53cdc0a6252f79a58eb3062fcdcf34f738d78ba07",
+    "raw/B.png": "c240939adff75b2a8cae42851a9ae5b4ab250822d3da5607c42a1c0f338ca741",
+    "raw/C.png": "53eee2a3e88c2e894ba015fad2e8b7d5971d635e894ce9330db1b172f0d3f467",
+    "raw/A.png": "14196012416163a92e3c30191f5db1fa56402f93bd62412a6a23810607880777"
+  },
+  "status": "NOT production-ready; no visual approval; no approved archetype contract"
+}

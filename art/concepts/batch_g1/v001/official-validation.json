@@ -1,0 +1,1615 @@
+{
+  "pipelineCommit": "b8d6b66",
+  "productionStatus": "BLOCKED: no agreed archetype spec",
+  "conceptResult": {
+    "assetId": "batch_g1",
+    "version": "v001",
+    "kind": "concept",
+    "checks": [
+      {
+        "name": "route: concept only (never a production asset)",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001"
+      },
+      {
+        "name": "asset id format",
+        "pass": true,
+        "detail": "batch_g1"
+      },
+      {
+        "name": "version format (v###)",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "a spec exists for this id (concept of a planned asset)",
+        "pass": false,
+        "detail": "batch_g1"
+      },
+      {
+        "name": "only png/webp/json/md files",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata.json present",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "metadata.assetId matches folder",
+        "pass": true,
+        "detail": "batch_g1"
+      },
+      {
+        "name": "metadata.version matches folder",
+        "pass": true,
+        "detail": "v001"
+      },
+      {
+        "name": "declared as a concept (submissionType contains \"concept\")",
+        "pass": true,
+        "detail": "architectural-concept-showcase"
+      },
+      {
+        "name": "author recorded",
+        "pass": true,
+        "detail": "codex"
+      },
+      {
+        "name": "createdAt is a date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "provenance recorded",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "generator recorded",
+        "pass": true,
+        "detail": "OpenAI built-in image_gen.imagegen"
+      },
+      {
+        "name": "cost statement (no paid services)",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "board image declared",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "board inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/showcase.png"
+      },
+      {
+        "name": "board sha256 matches metadata",
+        "pass": true,
+        "detail": "showcase.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/shop/p6-android-portrait-candidate.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-portrait-candidate.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/shop/p6-desktop-temp.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-desktop-temp.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/shop/candidate-comparison.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "candidate-comparison.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/shop/preview-sd.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "preview-sd.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/shop/master-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "master-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/shop/p6-android-landscape-temp.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-landscape-temp.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/shop/p6-desktop-candidate.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-desktop-candidate.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/shop/p6-android-portrait-temp.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-portrait-temp.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/shop/p6-android-landscape-candidate.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-landscape-candidate.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/small/p6-android-portrait-candidate.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-portrait-candidate.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/small/p6-desktop-temp.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-desktop-temp.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/small/candidate-comparison.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "candidate-comparison.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/small/preview-sd.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "preview-sd.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/small/master-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "master-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/small/p6-android-landscape-temp.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-landscape-temp.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/small/p6-desktop-candidate.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-desktop-candidate.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/small/p6-android-portrait-temp.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-portrait-temp.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/small/p6-android-landscape-candidate.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-landscape-candidate.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/large/p6-android-portrait-candidate.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-portrait-candidate.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/large/p6-desktop-temp.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-desktop-temp.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/large/candidate-comparison.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "candidate-comparison.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/large/preview-sd.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "preview-sd.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/large/master-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "master-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/large/p6-android-landscape-temp.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-landscape-temp.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/large/p6-desktop-candidate.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-desktop-candidate.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/large/p6-android-portrait-temp.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-portrait-temp.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/large/p6-android-landscape-candidate.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-landscape-candidate.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/warung/p6-android-portrait-candidate.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-portrait-candidate.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/warung/p6-desktop-temp.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-desktop-temp.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/warung/candidate-comparison.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "candidate-comparison.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/warung/preview-sd.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "preview-sd.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/warung/master-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "master-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/warung/p6-android-landscape-temp.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-landscape-temp.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/warung/p6-desktop-candidate.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-desktop-candidate.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/warung/p6-android-portrait-temp.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-portrait-temp.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/warung/p6-android-landscape-candidate.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "p6-android-landscape-candidate.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/shop/previews/A-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "A-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/shop/previews/B-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "B-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/shop/previews/C-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "C-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/shop/raw/B.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "B.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/shop/raw/C.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "C.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/shop/raw/A.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "A.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/small/previews/A-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "A-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/small/previews/B-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "B-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/small/previews/C-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "C-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/small/raw/B.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "B.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/small/raw/C.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "C.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/small/raw/A.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "A.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/large/previews/A-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "A-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/large/previews/B-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "B-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/large/previews/C-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "C-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/large/raw/B.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "B.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/large/raw/C.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "C.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/large/raw/A.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "A.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/warung/previews/A-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "A-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/warung/previews/B-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "B-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/warung/previews/C-native.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "C-native.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/warung/raw/B.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "B.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/warung/raw/C.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "C.png"
+      },
+      {
+        "name": "source inside the concept folder",
+        "pass": true,
+        "detail": "art/concepts/batch_g1/v001/warung/raw/A.png"
+      },
+      {
+        "name": "source sha256 matches metadata",
+        "pass": true,
+        "detail": "A.png"
+      },
+      {
+        "name": "decodes: large/candidate-comparison.png",
+        "pass": true,
+        "detail": "1400\u00d71098"
+      },
+      {
+        "name": "size limits: large/candidate-comparison.png",
+        "pass": true,
+        "detail": "886255 bytes, 1400\u00d71098"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in large/candidate-comparison.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: large/master-native.png",
+        "pass": true,
+        "detail": "1363\u00d71049"
+      },
+      {
+        "name": "size limits: large/master-native.png",
+        "pass": true,
+        "detail": "2868298 bytes, 1363\u00d71049"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in large/master-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: large/p6-android-landscape-candidate.png",
+        "pass": true,
+        "detail": "1600\u00d7720"
+      },
+      {
+        "name": "size limits: large/p6-android-landscape-candidate.png",
+        "pass": true,
+        "detail": "629140 bytes, 1600\u00d7720"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in large/p6-android-landscape-candidate.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: large/p6-android-landscape-temp.png",
+        "pass": true,
+        "detail": "1600\u00d7720"
+      },
+      {
+        "name": "size limits: large/p6-android-landscape-temp.png",
+        "pass": true,
+        "detail": "424133 bytes, 1600\u00d7720"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in large/p6-android-landscape-temp.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: large/p6-android-portrait-candidate.png",
+        "pass": true,
+        "detail": "720\u00d71600"
+      },
+      {
+        "name": "size limits: large/p6-android-portrait-candidate.png",
+        "pass": true,
+        "detail": "674565 bytes, 720\u00d71600"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in large/p6-android-portrait-candidate.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: large/p6-android-portrait-temp.png",
+        "pass": true,
+        "detail": "720\u00d71600"
+      },
+      {
+        "name": "size limits: large/p6-android-portrait-temp.png",
+        "pass": true,
+        "detail": "263111 bytes, 720\u00d71600"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in large/p6-android-portrait-temp.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: large/p6-desktop-candidate.png",
+        "pass": true,
+        "detail": "1440\u00d71000"
+      },
+      {
+        "name": "size limits: large/p6-desktop-candidate.png",
+        "pass": true,
+        "detail": "722337 bytes, 1440\u00d71000"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in large/p6-desktop-candidate.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: large/p6-desktop-temp.png",
+        "pass": true,
+        "detail": "1440\u00d71000"
+      },
+      {
+        "name": "size limits: large/p6-desktop-temp.png",
+        "pass": true,
+        "detail": "442654 bytes, 1440\u00d71000"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in large/p6-desktop-temp.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: large/preview-sd.png",
+        "pass": true,
+        "detail": "616\u00d7474"
+      },
+      {
+        "name": "size limits: large/preview-sd.png",
+        "pass": true,
+        "detail": "598670 bytes, 616\u00d7474"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in large/preview-sd.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: large/previews/A-native.png",
+        "pass": true,
+        "detail": "1466\u00d7916"
+      },
+      {
+        "name": "size limits: large/previews/A-native.png",
+        "pass": true,
+        "detail": "2807602 bytes, 1466\u00d7916"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in large/previews/A-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: large/previews/B-native.png",
+        "pass": true,
+        "detail": "1363\u00d71049"
+      },
+      {
+        "name": "size limits: large/previews/B-native.png",
+        "pass": true,
+        "detail": "2868298 bytes, 1363\u00d71049"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in large/previews/B-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: large/previews/C-native.png",
+        "pass": true,
+        "detail": "1411\u00d7902"
+      },
+      {
+        "name": "size limits: large/previews/C-native.png",
+        "pass": true,
+        "detail": "2918785 bytes, 1411\u00d7902"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in large/previews/C-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: large/raw/A.png",
+        "pass": true,
+        "detail": "1536\u00d71024"
+      },
+      {
+        "name": "size limits: large/raw/A.png",
+        "pass": true,
+        "detail": "2188981 bytes, 1536\u00d71024"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in large/raw/A.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: large/raw/B.png",
+        "pass": true,
+        "detail": "1358\u00d71159"
+      },
+      {
+        "name": "size limits: large/raw/B.png",
+        "pass": true,
+        "detail": "2163030 bytes, 1358\u00d71159"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in large/raw/B.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: large/raw/C.png",
+        "pass": true,
+        "detail": "1536\u00d71024"
+      },
+      {
+        "name": "size limits: large/raw/C.png",
+        "pass": true,
+        "detail": "2346672 bytes, 1536\u00d71024"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in large/raw/C.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: shop/candidate-comparison.png",
+        "pass": true,
+        "detail": "1400\u00d71494"
+      },
+      {
+        "name": "size limits: shop/candidate-comparison.png",
+        "pass": true,
+        "detail": "949554 bytes, 1400\u00d71494"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in shop/candidate-comparison.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: shop/master-native.png",
+        "pass": true,
+        "detail": "789\u00d71517"
+      },
+      {
+        "name": "size limits: shop/master-native.png",
+        "pass": true,
+        "detail": "2610329 bytes, 789\u00d71517"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in shop/master-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: shop/p6-android-landscape-candidate.png",
+        "pass": true,
+        "detail": "1600\u00d7720"
+      },
+      {
+        "name": "size limits: shop/p6-android-landscape-candidate.png",
+        "pass": true,
+        "detail": "597339 bytes, 1600\u00d7720"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in shop/p6-android-landscape-candidate.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: shop/p6-android-landscape-temp.png",
+        "pass": true,
+        "detail": "1600\u00d7720"
+      },
+      {
+        "name": "size limits: shop/p6-android-landscape-temp.png",
+        "pass": true,
+        "detail": "429752 bytes, 1600\u00d7720"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in shop/p6-android-landscape-temp.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: shop/p6-android-portrait-candidate.png",
+        "pass": true,
+        "detail": "720\u00d71600"
+      },
+      {
+        "name": "size limits: shop/p6-android-portrait-candidate.png",
+        "pass": true,
+        "detail": "678179 bytes, 720\u00d71600"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in shop/p6-android-portrait-candidate.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: shop/p6-android-portrait-temp.png",
+        "pass": true,
+        "detail": "720\u00d71600"
+      },
+      {
+        "name": "size limits: shop/p6-android-portrait-temp.png",
+        "pass": true,
+        "detail": "252731 bytes, 720\u00d71600"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in shop/p6-android-portrait-temp.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: shop/p6-desktop-candidate.png",
+        "pass": true,
+        "detail": "1440\u00d71000"
+      },
+      {
+        "name": "size limits: shop/p6-desktop-candidate.png",
+        "pass": true,
+        "detail": "711265 bytes, 1440\u00d71000"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in shop/p6-desktop-candidate.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: shop/p6-desktop-temp.png",
+        "pass": true,
+        "detail": "1440\u00d71000"
+      },
+      {
+        "name": "size limits: shop/p6-desktop-temp.png",
+        "pass": true,
+        "detail": "443320 bytes, 1440\u00d71000"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in shop/p6-desktop-temp.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: shop/preview-sd.png",
+        "pass": true,
+        "detail": "436\u00d7840"
+      },
+      {
+        "name": "size limits: shop/preview-sd.png",
+        "pass": true,
+        "detail": "753040 bytes, 436\u00d7840"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in shop/preview-sd.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: shop/previews/A-native.png",
+        "pass": true,
+        "detail": "758\u00d71433"
+      },
+      {
+        "name": "size limits: shop/previews/A-native.png",
+        "pass": true,
+        "detail": "2276743 bytes, 758\u00d71433"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in shop/previews/A-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: shop/previews/B-native.png",
+        "pass": true,
+        "detail": "789\u00d71517"
+      },
+      {
+        "name": "size limits: shop/previews/B-native.png",
+        "pass": true,
+        "detail": "2610329 bytes, 789\u00d71517"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in shop/previews/B-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: shop/previews/C-native.png",
+        "pass": true,
+        "detail": "841\u00d71404"
+      },
+      {
+        "name": "size limits: shop/previews/C-native.png",
+        "pass": true,
+        "detail": "2538087 bytes, 841\u00d71404"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in shop/previews/C-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: shop/raw/A.png",
+        "pass": true,
+        "detail": "1024\u00d71536"
+      },
+      {
+        "name": "size limits: shop/raw/A.png",
+        "pass": true,
+        "detail": "2042708 bytes, 1024\u00d71536"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in shop/raw/A.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: shop/raw/B.png",
+        "pass": true,
+        "detail": "1024\u00d71536"
+      },
+      {
+        "name": "size limits: shop/raw/B.png",
+        "pass": true,
+        "detail": "2200015 bytes, 1024\u00d71536"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in shop/raw/B.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: shop/raw/C.png",
+        "pass": true,
+        "detail": "1024\u00d71536"
+      },
+      {
+        "name": "size limits: shop/raw/C.png",
+        "pass": true,
+        "detail": "2243906 bytes, 1024\u00d71536"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in shop/raw/C.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: showcase.png",
+        "pass": true,
+        "detail": "2160\u00d71150"
+      },
+      {
+        "name": "size limits: showcase.png",
+        "pass": true,
+        "detail": "1424921 bytes, 2160\u00d71150"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in showcase.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: small/candidate-comparison.png",
+        "pass": true,
+        "detail": "1400\u00d71098"
+      },
+      {
+        "name": "size limits: small/candidate-comparison.png",
+        "pass": true,
+        "detail": "948798 bytes, 1400\u00d71098"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in small/candidate-comparison.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: small/master-native.png",
+        "pass": true,
+        "detail": "1205\u00d71012"
+      },
+      {
+        "name": "size limits: small/master-native.png",
+        "pass": true,
+        "detail": "2496984 bytes, 1205\u00d71012"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in small/master-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: small/p6-android-landscape-candidate.png",
+        "pass": true,
+        "detail": "1600\u00d7720"
+      },
+      {
+        "name": "size limits: small/p6-android-landscape-candidate.png",
+        "pass": true,
+        "detail": "526846 bytes, 1600\u00d7720"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in small/p6-android-landscape-candidate.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: small/p6-android-landscape-temp.png",
+        "pass": true,
+        "detail": "1600\u00d7720"
+      },
+      {
+        "name": "size limits: small/p6-android-landscape-temp.png",
+        "pass": true,
+        "detail": "409264 bytes, 1600\u00d7720"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in small/p6-android-landscape-temp.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: small/p6-android-portrait-candidate.png",
+        "pass": true,
+        "detail": "720\u00d71600"
+      },
+      {
+        "name": "size limits: small/p6-android-portrait-candidate.png",
+        "pass": true,
+        "detail": "506697 bytes, 720\u00d71600"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in small/p6-android-portrait-candidate.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: small/p6-android-portrait-temp.png",
+        "pass": true,
+        "detail": "720\u00d71600"
+      },
+      {
+        "name": "size limits: small/p6-android-portrait-temp.png",
+        "pass": true,
+        "detail": "274567 bytes, 720\u00d71600"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in small/p6-android-portrait-temp.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: small/p6-desktop-candidate.png",
+        "pass": true,
+        "detail": "1440\u00d71000"
+      },
+      {
+        "name": "size limits: small/p6-desktop-candidate.png",
+        "pass": true,
+        "detail": "581959 bytes, 1440\u00d71000"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in small/p6-desktop-candidate.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: small/p6-desktop-temp.png",
+        "pass": true,
+        "detail": "1440\u00d71000"
+      },
+      {
+        "name": "size limits: small/p6-desktop-temp.png",
+        "pass": true,
+        "detail": "394771 bytes, 1440\u00d71000"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in small/p6-desktop-temp.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: small/preview-sd.png",
+        "pass": true,
+        "detail": "436\u00d7367"
+      },
+      {
+        "name": "size limits: small/preview-sd.png",
+        "pass": true,
+        "detail": "319353 bytes, 436\u00d7367"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in small/preview-sd.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: small/previews/A-native.png",
+        "pass": true,
+        "detail": "1205\u00d71012"
+      },
+      {
+        "name": "size limits: small/previews/A-native.png",
+        "pass": true,
+        "detail": "2496984 bytes, 1205\u00d71012"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in small/previews/A-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: small/previews/B-native.png",
+        "pass": true,
+        "detail": "1303\u00d7968"
+      },
+      {
+        "name": "size limits: small/previews/B-native.png",
+        "pass": true,
+        "detail": "2471876 bytes, 1303\u00d7968"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in small/previews/B-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: small/previews/C-native.png",
+        "pass": true,
+        "detail": "1281\u00d7975"
+      },
+      {
+        "name": "size limits: small/previews/C-native.png",
+        "pass": true,
+        "detail": "2687768 bytes, 1281\u00d7975"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in small/previews/C-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: small/raw/A.png",
+        "pass": true,
+        "detail": "1437\u00d71095"
+      },
+      {
+        "name": "size limits: small/raw/A.png",
+        "pass": true,
+        "detail": "1999482 bytes, 1437\u00d71095"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in small/raw/A.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: small/raw/B.png",
+        "pass": true,
+        "detail": "1448\u00d71086"
+      },
+      {
+        "name": "size limits: small/raw/B.png",
+        "pass": true,
+        "detail": "1895861 bytes, 1448\u00d71086"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in small/raw/B.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: small/raw/C.png",
+        "pass": true,
+        "detail": "1410\u00d71116"
+      },
+      {
+        "name": "size limits: small/raw/C.png",
+        "pass": true,
+        "detail": "2040508 bytes, 1410\u00d71116"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in small/raw/C.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: warung/candidate-comparison.png",
+        "pass": true,
+        "detail": "1400\u00d71098"
+      },
+      {
+        "name": "size limits: warung/candidate-comparison.png",
+        "pass": true,
+        "detail": "859298 bytes, 1400\u00d71098"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in warung/candidate-comparison.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: warung/master-native.png",
+        "pass": true,
+        "detail": "1254\u00d7896"
+      },
+      {
+        "name": "size limits: warung/master-native.png",
+        "pass": true,
+        "detail": "2223873 bytes, 1254\u00d7896"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in warung/master-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: warung/p6-android-landscape-candidate.png",
+        "pass": true,
+        "detail": "1600\u00d7720"
+      },
+      {
+        "name": "size limits: warung/p6-android-landscape-candidate.png",
+        "pass": true,
+        "detail": "567238 bytes, 1600\u00d7720"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in warung/p6-android-landscape-candidate.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: warung/p6-android-landscape-temp.png",
+        "pass": true,
+        "detail": "1600\u00d7720"
+      },
+      {
+        "name": "size limits: warung/p6-android-landscape-temp.png",
+        "pass": true,
+        "detail": "406416 bytes, 1600\u00d7720"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in warung/p6-android-landscape-temp.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: warung/p6-android-portrait-candidate.png",
+        "pass": true,
+        "detail": "720\u00d71600"
+      },
+      {
+        "name": "size limits: warung/p6-android-portrait-candidate.png",
+        "pass": true,
+        "detail": "636335 bytes, 720\u00d71600"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in warung/p6-android-portrait-candidate.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: warung/p6-android-portrait-temp.png",
+        "pass": true,
+        "detail": "720\u00d71600"
+      },
+      {
+        "name": "size limits: warung/p6-android-portrait-temp.png",
+        "pass": true,
+        "detail": "300175 bytes, 720\u00d71600"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in warung/p6-android-portrait-temp.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: warung/p6-desktop-candidate.png",
+        "pass": true,
+        "detail": "1440\u00d71000"
+      },
+      {
+        "name": "size limits: warung/p6-desktop-candidate.png",
+        "pass": true,
+        "detail": "671148 bytes, 1440\u00d71000"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in warung/p6-desktop-candidate.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: warung/p6-desktop-temp.png",
+        "pass": true,
+        "detail": "1440\u00d71000"
+      },
+      {
+        "name": "size limits: warung/p6-desktop-temp.png",
+        "pass": true,
+        "detail": "427952 bytes, 1440\u00d71000"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in warung/p6-desktop-temp.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: warung/preview-sd.png",
+        "pass": true,
+        "detail": "516\u00d7370"
+      },
+      {
+        "name": "size limits: warung/preview-sd.png",
+        "pass": true,
+        "detail": "386448 bytes, 516\u00d7370"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in warung/preview-sd.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: warung/previews/A-native.png",
+        "pass": true,
+        "detail": "1395\u00d7831"
+      },
+      {
+        "name": "size limits: warung/previews/A-native.png",
+        "pass": true,
+        "detail": "2526585 bytes, 1395\u00d7831"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in warung/previews/A-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: warung/previews/B-native.png",
+        "pass": true,
+        "detail": "1227\u00d7972"
+      },
+      {
+        "name": "size limits: warung/previews/B-native.png",
+        "pass": true,
+        "detail": "2408331 bytes, 1227\u00d7972"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in warung/previews/B-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: warung/previews/C-native.png",
+        "pass": true,
+        "detail": "1254\u00d7896"
+      },
+      {
+        "name": "size limits: warung/previews/C-native.png",
+        "pass": true,
+        "detail": "2223873 bytes, 1254\u00d7896"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in warung/previews/C-native.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: warung/raw/A.png",
+        "pass": true,
+        "detail": "1536\u00d71024"
+      },
+      {
+        "name": "size limits: warung/raw/A.png",
+        "pass": true,
+        "detail": "2162635 bytes, 1536\u00d71024"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in warung/raw/A.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: warung/raw/B.png",
+        "pass": true,
+        "detail": "1254\u00d71254"
+      },
+      {
+        "name": "size limits: warung/raw/B.png",
+        "pass": true,
+        "detail": "2050211 bytes, 1254\u00d71254"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in warung/raw/B.png",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "decodes: warung/raw/C.png",
+        "pass": true,
+        "detail": "1254\u00d71254"
+      },
+      {
+        "name": "size limits: warung/raw/C.png",
+        "pass": true,
+        "detail": "1840237 bytes, 1254\u00d71254"
+      },
+      {
+        "name": "privacy: no EXIF/XMP/IPTC in warung/raw/C.png",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "errors": [
+      "a spec exists for this id (concept of a planned asset): batch_g1"
+    ],
+    "warnings": []
+  }
+}

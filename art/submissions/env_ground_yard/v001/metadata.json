@@ -1,0 +1,54 @@
+{
+  "assetId": "env_ground_yard",
+  "version": "v001",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "createdAt": "2026-11-22T08:41:03.284964+00:00",
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "model": "not exposed",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "env_ground_yard_v001.png",
+      "sha256": "9f389cc98b388b8ebcecb921765dcba0fbdbf551c44da43a1b8fd103bb9abefa"
+    },
+    "rawCandidates": [
+      {
+        "path": "art/source/env_ground_yard/v001/candidate-a.png",
+        "sha256": "3a26ac6c4f227019d2d7d30dcf21188c65fcfbb5923cf48dca8584a6cd74c0ee"
+      },
+      {
+        "path": "art/source/env_ground_yard/v001/candidate-b.png",
+        "sha256": "aa52a2cb6eaea538aa858fa39d7e01a23548338d44d0f6d5057b0e0888bc9915"
+      },
+      {
+        "path": "art/source/env_ground_yard/v001/candidate-c.png",
+        "sha256": "298e7c3816919d30c09789be7ccc27265284cc2accfbd202b73806c24c044e55"
+      }
+    ]
+  },
+  "provenance": "Three original built-in imagegen sources conditioned on stated image references; selected B grass for low-noise reusable fill, not visual approval.",
+  "postProcessing": [
+    "Full source downsample to256x126 with sharpLanczos3,RGBA,sRGB. Near2:1 to exact2.0317:1 canvas; no edge painting, no artificial noise, no fit-to-spec."
+  ],
+  "selfReview": {
+    "checklistComplete": true,
+    "knownIssues": [
+      "Opaque repeated fill only. Edges meet maxmeanRGBdelta14 but are NOT byte-identical. Inspect wide-area repetition; no claim of perfect seamlessness.",
+      "No grass-dirt transitions, roadjunctions or mask system implemented. Dirt context uses isolated same-scale preview only; no P6 map layout altered."
+    ]
+  },
+  "cost": "Included built-in subscription image generation; no additional paid services or API credits.",
+  "specificationCommit": "fbe3d46",
+  "status": "review-pending; no visual approval; integration depends on production-spec PR",
+  "baseline": {
+    "foundation": "7796f60",
+    "latestAvailableGameplay": "1e5a03f",
+    "pipeline": "b8d6b66"
+  }
+}

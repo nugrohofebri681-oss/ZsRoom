@@ -1,0 +1,17 @@
+{
+  "art/source/env_ground_yard/v001/candidate-a.png": "3a26ac6c4f227019d2d7d30dcf21188c65fcfbb5923cf48dca8584a6cd74c0ee",
+  "art/source/env_ground_yard/v001/candidate-b.png": "aa52a2cb6eaea538aa858fa39d7e01a23548338d44d0f6d5057b0e0888bc9915",
+  "art/source/env_ground_yard/v001/candidate-c.png": "298e7c3816919d30c09789be7ccc27265284cc2accfbd202b73806c24c044e55",
+  "art/submissions/env_ground_yard/v001/browser-evidence.json": "43fdcc3b25ee44e0352e0ced36742e691da0bece9bf6aaa042906caf23f7db74",
+  "art/submissions/env_ground_yard/v001/candidate-repeat-comparison.png": "5fb61ea21e93905ac372c79e17b77c8c81368455c4fe238f9a6be0a2aa07e0ac",
+  "art/submissions/env_ground_yard/v001/env_ground_yard_v001.png": "9f389cc98b388b8ebcecb921765dcba0fbdbf551c44da43a1b8fd103bb9abefa",
+  "art/submissions/env_ground_yard/v001/metadata.json": "7015097c81d97fb105d7b507d29ff9c827c30a67cc8c23e5a540f40cf309c77f",
+  "art/submissions/env_ground_yard/v001/notes.md": "e5f2780a6a2158507146195de8ad8b0101055594c3a0c3d1b4508a9efa781f14",
+  "art/submissions/env_ground_yard/v001/official-gallery.png": "33d640076191986f8b42d7c9b446a321cab14239ca612e36a3fdafe7eea828d1",
+  "art/submissions/env_ground_yard/v001/p5-android-landscape.png": "fb52cd042db9920205a864359377aeb824e30fbfa77d6ff13703b5c2dd666783",
+  "art/submissions/env_ground_yard/v001/p5-android-portrait.png": "319a72a0e5d093c1023a106fa404675f03c628d503228aca2c08c764c633181c",
+  "art/submissions/env_ground_yard/v001/p5-desktop.png": "3583f663d9297ebaa0d60b937f8ac880a66ab107b20b1d36c49107543576875d",
+  "art/submissions/env_ground_yard/v001/prompt.md": "bee60d6f28ed6b62851405967185afaae7e66ac30ebe3debdf4c83a2190d5005",
+  "art/submissions/env_ground_yard/v001/review-method.md": "03c18e7fa95928019a92aff476f67076065aa516f938e5895c0ddbda2354ae3a",
+  "art/submissions/env_ground_yard/v001/validation.json": "571cca62f2e8280ec32485e62d386348149b713ae9babae7be78604f9ce183a9"
+}

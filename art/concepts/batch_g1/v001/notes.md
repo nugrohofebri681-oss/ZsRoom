@@ -1,0 +1,14 @@
+# G1 architectural showcase — REVIEW ONLY
+
+Twelve original images (three per archetype), four recommended native masters, candidate/light/dark/SD galleries, shared-scale board and24 P6 before/after screenshots. Built-in image generation worked. No external paid services. Recommendations are smallA, largeB, rukoB, warungC. Not approved or production-ready.
+
+## Status and blockers
+Foundation7796f60; P6/PR38 7546ef6; review pipeline PR21 b8d6b66. P6 currently has22/28 buildings sharing world_facade_house. No agreed four-archetype production contract or request exists in fetched P6/foundation. Therefore this package follows the concept route, NOT art/submissions. Official validator is run and its missing-spec error is reported, not bypassed with a synthetic production spec. User-facing pipeline success must not be inferred from PNG checks.
+
+## Actual visual findings
+New silhouettes clearly distinguish compact home, broader porch home, tall shop and semi-open warung. Furniture finish is carried through cream plaster, warm walnut, soft warm lighting and colored contours. They remain rather polished/ornate for everyday Batuphat and not locally distinctive enough to claim authentic reproduction. Clay-tile roof versus zinc prevalence needs verified photo research. Windows inherit excessive house-like curtains/plants from generated style conditioning. Painted frontage doors undershoot210cm at proposed widths (see each notes.md); narrow window/door details soften at wide zoom. Geometry is primarily front elevation with roof foreshortening, not yet a full accurate oblique-volume solution.
+
+P6 tests preserve default camera; twelve candidate captures + twelve matching TEMP captures across desktop1440x1000DPR1, mobile800x360DPR2 and360x800DPR2. No screenshot proves interactions or collision alignment; gameplay/collision unchanged. Broad home exceeds original480cm facade, and existing tree obscures porch. Tall ruko top is cropped on mobile landscape at player position. Original roof graphics hidden only during candidate capture. Existing ground/footprint/lightmap artifacts remain; no visual cover used to declare geometry fixed. A05 physical performance not tested. FPS in capture is host/browser evidence only.
+
+## Production gate
+Do not move these into approved/runtime. Claude must confirm footprint, roof/front-layer contract, door clearance and migration of collision/entrance offsets. Correct doorway scales without nonuniform stretching; ruko needs >=840px content at approved420cm width for2px/cm. Then split facade/roof/add-ons, measure projection, review actual local references, test approach/occlusion from both north and south. No G2/G3 production started while these integration decisions remain open. Bench/cabinetv002, BatchF,20approved assets and game sources unchanged.

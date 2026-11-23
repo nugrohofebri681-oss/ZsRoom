@@ -1,0 +1,130 @@
+[
+  {
+    "id": "large",
+    "selected": "B",
+    "rawDimensions": [
+      1358,
+      1159
+    ],
+    "masterDimensions": [
+      1363,
+      1049
+    ],
+    "contentDimensions": [
+      1331,
+      1017
+    ],
+    "nativeDensity": 2.2183333333333333,
+    "proposedWidthCm": 600,
+    "proposedDepthCm": 400,
+    "previewCanvas": [
+      616,
+      474
+    ],
+    "previewPivot": [
+      308,
+      465
+    ],
+    "productionStatus": "BLOCKED: archetype contract and visual approval missing; native density not guaranteed2px/cm",
+    "alphaCleared": 85374,
+    "alphaSnapped": 1060402,
+    "sourceSHA256": "5e0c3edaf4b9ef4c2121e029b5abf5d78f097046a256ea2e5493abe3065b840e",
+    "masterSHA256": "2b60021aa4a1dadab5f0c7b01d5bab0cd114c6de30a944efb0a69daf5308f231"
+  },
+  {
+    "id": "small",
+    "selected": "A",
+    "rawDimensions": [
+      1437,
+      1095
+    ],
+    "masterDimensions": [
+      1205,
+      1012
+    ],
+    "contentDimensions": [
+      1173,
+      980
+    ],
+    "nativeDensity": 2.7928571428571427,
+    "proposedWidthCm": 420,
+    "proposedDepthCm": 320,
+    "previewCanvas": [
+      436,
+      367
+    ],
+    "previewPivot": [
+      218,
+      358
+    ],
+    "productionStatus": "BLOCKED: archetype contract and visual approval missing; native density not guaranteed2px/cm",
+    "alphaCleared": 20304,
+    "alphaSnapped": 1004633,
+    "sourceSHA256": "4976628d1e6c99b5bfbbe7fe5a58ca3335d265ebec0bcfc45912b497f2858834",
+    "masterSHA256": "0c697c087fb4418af1ff0270afc682f02010adaa21d84c0c8eb5f51351f9c66f"
+  },
+  {
+    "id": "shop",
+    "selected": "B",
+    "rawDimensions": [
+      1024,
+      1536
+    ],
+    "masterDimensions": [
+      789,
+      1517
+    ],
+    "contentDimensions": [
+      757,
+      1485
+    ],
+    "nativeDensity": 1.8023809523809524,
+    "proposedWidthCm": 420,
+    "proposedDepthCm": 500,
+    "previewCanvas": [
+      436,
+      840
+    ],
+    "previewPivot": [
+      218,
+      831
+    ],
+    "productionStatus": "BLOCKED: archetype contract and visual approval missing; native density not guaranteed2px/cm",
+    "alphaCleared": 18292,
+    "alphaSnapped": 977868,
+    "sourceSHA256": "c240939adff75b2a8cae42851a9ae5b4ab250822d3da5607c42a1c0f338ca741",
+    "masterSHA256": "12b1faefc8fcb5f3e7ca163244cc936db2e05a1eb319f9aac0631a1cacb28b06"
+  },
+  {
+    "id": "warung",
+    "selected": "C",
+    "rawDimensions": [
+      1254,
+      1254
+    ],
+    "masterDimensions": [
+      1254,
+      896
+    ],
+    "contentDimensions": [
+      1222,
+      864
+    ],
+    "nativeDensity": 2.444,
+    "proposedWidthCm": 500,
+    "proposedDepthCm": 320,
+    "previewCanvas": [
+      516,
+      370
+    ],
+    "previewPivot": [
+      258,
+      361
+    ],
+    "productionStatus": "BLOCKED: archetype contract and visual approval missing; native density not guaranteed2px/cm",
+    "alphaCleared": 74978,
+    "alphaSnapped": 935188,
+    "sourceSHA256": "faacfe776147f707c48f1d52e5fd4d1d2664f11a5ea36ccf7801c3561b736aa6",
+    "masterSHA256": "599199d768a9a1342a5ddc2f7d97b65176e636a9de1e1fd676a093f00077a6d1"
+  }
+]

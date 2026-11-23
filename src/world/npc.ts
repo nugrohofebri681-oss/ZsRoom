@@ -5,8 +5,11 @@ import type { Rect } from '../core/specs';
  * Behaviours: idle (stand, look at the player when near), wander inside an area, patrol between points.
  * A per-phase schedule decides where (or whether) the NPC is present when the map loads.
  */
+/** P6.1 activity point: walk here, then stay `dwellMs` doing `act` (browsing, buying, sitting, chatting…) facing `face`. */
+export interface ActivityPoint { x: number; y: number; dwellMs?: number; face?: string; act?: string }
 export type NpcBehaviour =
-  | { type: 'idle' }
+  | { type: 'idle'; act?: string }
+  | { type: 'route'; points: ActivityPoint[]; speed?: number; start?: number }
   | { type: 'wander'; area: Rect; speed?: number; pauseMs?: [number, number] }
   | { type: 'patrol'; points: { x: number; y: number }[]; speed?: number; pauseMs?: number };
 
@@ -31,6 +34,10 @@ export interface NpcState {
   target: { x: number; y: number } | null; waitMs: number; leg: number; seed: number; walked: number;
   /** >0 while stepping aside for the player (ignores the "stop and look" rule until done). */
   yieldMs?: number;
+  /** P6.1: what the NPC is doing now (walking, browsing, buying, sitting, chatting…), for tests and debugging. */
+  act?: string;
+  /** Route behaviour: consecutive blocked steps toward the current point (gives up on a point after a while). */
+  stuck?: number;
 }
 
 export const NPC_RADIUS = 16;
@@ -45,7 +52,15 @@ export function initNpc(n: NpcData, phase: string): NpcState {
   const at = p && p !== 'away' ? p : { x: n.x, y: n.y };
   let seed = 0;
   for (const c of n.id) seed = (seed * 31 + c.charCodeAt(0)) >>> 0;
-  return { id: n.id, x: at.x, y: at.y, facing: n.facing ?? 'S', moving: false, target: null, waitMs: 600, leg: 0, seed: seed || 1, walked: 0 };
+  const st: NpcState = { id: n.id, x: at.x, y: at.y, facing: n.facing ?? 'S', moving: false, target: null, waitMs: 600, leg: 0, seed: seed || 1, walked: 0 };
+  const b = n.behaviour;
+  if (b.type === 'idle') st.act = b.act ?? 'standing';
+  if (b.type === 'route') {                       // start somewhere along the route (crowds spread out instead of marching in step)
+    const i = (b.start ?? 0) % b.points.length, pt = b.points[i]!;
+    if (!(p && p !== 'away')) { st.x = pt.x; st.y = pt.y; }
+    st.leg = i; st.waitMs = (pt.dwellMs ?? 0) * ((seed % 7) / 7); st.act = pt.act ?? 'walking'; st.facing = pt.face ?? st.facing;
+  }
+  return st;
 }
 
 function rand(s: NpcState): number {
@@ -74,6 +89,7 @@ export function stepNpc(n: NpcData, s: NpcState, dtMs: number, player: { x: numb
   if (near) { s.moving = false; s.facing = dirFrom(player.x - s.x, player.y - s.y); return; }
   const b = n.behaviour;
   if (b.type === 'idle') { s.moving = false; s.facing = n.facing ?? s.facing; return; }
+  if (b.type === 'route') { stepRoute(b, s, dtMs, blocked); return; }
   if (s.waitMs > 0) { s.waitMs -= dtMs; s.moving = false; return; }
   if (!s.target) {
     if (b.type === 'wander') s.target = { x: b.area.x + rand(s) * b.area.w, y: b.area.y + rand(s) * b.area.h };
@@ -108,4 +124,29 @@ export function yieldTo(s: NpcState, player: { x: number; y: number }, dir: { x:
   if (!sides.length) return false;
   s.target = sides[0]!; s.yieldMs = durationMs; s.waitMs = 0;
   return true;
+}
+
+/**
+ * Route behaviour (P6.1): walk point to point; at each point stay `dwellMs` doing the point's activity, then go on
+ * (looping). A blocked step (the player, a passer-by) waits briefly and retries; after ~3 s the point is skipped, so a
+ * crowd never freezes in a narrow aisle.
+ */
+function stepRoute(b: Extract<NpcBehaviour, { type: 'route' }>, s: NpcState, dtMs: number, blocked: (x: number, y: number) => boolean): void {
+  if (s.waitMs > 0) { s.waitMs -= dtMs; s.moving = false; return; }
+  if (!s.target) { s.leg = (s.leg + 1) % b.points.length; const pt = b.points[s.leg]!; s.target = { x: pt.x, y: pt.y }; s.act = 'walking'; s.stuck = 0; }
+  const speed = (b.speed ?? 65) * (dtMs / 1000);
+  const dx = s.target.x - s.x, dy = s.target.y - s.y, d = Math.hypot(dx, dy);
+  if (d <= speed) {
+    const pt = b.points[s.leg]!;
+    s.x = s.target.x; s.y = s.target.y; s.target = null; s.moving = false;
+    s.waitMs = (pt.dwellMs ?? 0) + rand(s) * 400; s.act = pt.act ?? 'walking'; if (pt.face) s.facing = pt.face;
+    return;
+  }
+  const nx = s.x + (dx / d) * speed, ny = s.y + (dy / d) * speed;
+  if (blocked(nx, ny)) {
+    s.moving = false; s.stuck = (s.stuck ?? 0) + 1; s.waitMs = 300;
+    if (s.stuck > 10) s.target = null;            // give up on this point; the next one is picked
+    return;
+  }
+  s.stuck = 0; s.x = nx; s.y = ny; s.moving = true; s.walked += speed; s.facing = dirFrom(dx, dy);
 }

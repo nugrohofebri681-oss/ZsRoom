@@ -99,6 +99,129 @@ At the default zoom, both rooms of each house floor are visible at once. When zo
   - any multi-room shop;
   - joining the front yard with the street into one continuous outdoor area.
 
+## P6.1 — Batuphat realism: research, geometry, architecture, life by time of day (Issue #40)
+**Goal:** Batuphat should feel like a real place in Lhokseumawe: varied buildings, clean roads, places that are busy or quiet at the right time. This is a polish sprint on the P6 engine, not a rewrite. Exploration and camera rules follow Stardew-like game feel; art stays original premium HD 2D illustrated (TEMP for now).
+
+![Master layout](../reviews/world01-p6.1/town-layout.png)
+
+### Research (`docs/research/batuphat-source-register.md`)
+Every claim carries a source, a read status, a confidence level, a game inference and a "do not assume" note. Read status is one of:
+- **READ** — page downloaded and read;
+- **SEARCH-ONLY** — only a search-engine summary was seen (RRI uses a bot wall; two Pemko pages failed upstream);
+- **NOT READ**.
+
+**Key verified facts used:**
+- Batuphat Barat and Timur are separate gampong of Muara Satu (Qanun RTRW 2024). Batuphat Barat is a sub-centre of city services.
+- Masjid Al-Ikhlas (Masjid Besar, founded 1951, on the Banda Aceh–Medan road, with a garden and parking) — Kemenag SIMAS.
+- Meunasah Gampong Batuphat Barat — BIG SINAR.
+- SPBU 14243455 on the main road, with a mushola, ATM and parking — Pertamina listing.
+- Primary schools on the main road / Sp. IV Rancong — Disdik SPMB.
+- Pasar Batuphat (Unimal study abstract): an active market with mixed goods, **narrow circulation from overflow traders**, and little signage.
+
+Search-level only: morning market busy with housewives, night food vendors, about 300 ruko in Batuphat Timur, and warkop culture. The registry points for the mosque and the meunasah are ~1.6 km apart, so real landmarks are **not** squeezed into the 80 × 57 m town.
+
+| Category | In the game |
+|---|---|
+| Verified place → represented as a type | morning market (market zone), ruko frontage on the main road, warkop |
+| Verified place → reserved for a **next district** | Masjid Al-Ikhlas (respectful exterior/courtyard), SPBU + roadside café, primary school, PAG housing |
+| Creative interpretation | layout, lane names, stall plan and goods, warkop interior, NPC numbers and schedules (design targets) |
+| Story locations (never mapped to real addresses) | Zila's house, dimsum workplace, Mixue's and Indomaret's in-game positions |
+
+### Geometry audit (`npm run audit:geometry`, `src/world/geometryAudit.ts`)
+The audit is an authoring-time check over the region data plus the compiled map. It reports:
+- ground overlaps by material and precedence (an intentional shared right-of-way vs a junction);
+- isolated paving;
+- buildings on paths;
+- building overlaps;
+- fences across paths;
+- roofs hiding paths;
+- spawn standability, interaction reachability, and doors without a path.
+
+Unit test: **no FAIL allowed**.
+
+| | Before (P6 `7546ef6`) | After |
+|---|---|---|
+| FAIL | 4: `house_t1/t2/t3` stood **on the back lane** (7.7 m² each — the P6 back-path patch had silently not applied); the park hedge blocked the park path's mouth | **0** |
+| WARN | 8: six south-row roofs covered the main street's south pavement, plus others | 6: five front-row market tarps at the pavement edge (intentional market edge) and the workplace (1.7 m²) |
+
+**Rendering fixes:**
+- Ground draws in a deterministic **material rank** (grass < plaza < pavement < lane < road), no longer in data order. Before, the north lane was drawn as a paving strip *over* the avenue.
+- Kerbs, centre lines and lane edges **stop at junctions**.
+- The avenue now meets the main road: a real crossroads.
+
+Before/after captures: `docs/reviews/world01-p6.1/*-before-*` and `*-after-*`, at the crossroads, avenue × lanes and back path, on desktop and Android.
+
+### Architecture (`src/data/archetypes.json`, TEMP facades and the engine roof renderer)
+Archetypes are a data contract: facade art id, width/height (from the facade spec), footprint depth, roof style, and an optional fenced front yard with a gate. Codex fills each facade id with HD art at the same size; no sprite is stretched.
+
+| Archetype | Size (w × h, depth) | Roof | Use |
+|---|---|---|---|
+| house_small | 380 × 300, 360 | gable | narrow home in a gang |
+| house_medium | 480 × 360, 400 | gable | ordinary home |
+| house_large | 620 × 470, 460, gated yard | hip | two-storey home |
+| ruko | 420 × 430, 360 | flat + water tank | shophouse on the main road (generic signs: toko kelontong, pakaian, ponsel & pulsa, bengkel motor) |
+| warkop_open | 600 × 320, 420 | zinc | open-front coffee shop, tables outside |
+| market_kiosk | 300 × 250, 170 | canopy (tarp) | market stall; goods vary (fruit, veg, fish, clothes) |
+| shop_small | 420 × 360, 380 | zinc | small shop |
+
+Story buildings keep their facades but get proper roofs: Zila's house gable; Indomaret, Mixue and the workplace flat. The P6 town reused one 480 cm house facade **22 times**; P6.1 uses 7 archetypes with clearly different silhouettes.
+
+### Places and life
+- **Pasar pagi** (new `batuphat_market` area, south of the main road, east of the avenue):
+  - two kiosk rows with a narrow aisle (as in the Unimal study); the alley is the main aisle;
+  - **buying works only in the morning** (fruit, vegetables, fish: a story event with counters `market_*`); the clothes stall is browse-only;
+  - in the evening the stalls are covered and a food seller stands at the corner.
+- **Warkop:** an open-front building on the main street with tables outside, and an **enterable interior** with its own warm TEMP floor and wall. Three interactions:
+  - order a sanger at the counter;
+  - sit and drink (only after ordering);
+  - chat with the regulars at their table.
+
+  You leave by the same door.
+- **Crowds** (`crowds` in the region data): a few looks plus routes of **activity points** (walk, browse, buy, sit, chat, at the gate), with a head-count per **time of day**. These are design targets per place, *not* real head-counts.
+
+| Place | Morning | Afternoon | Evening | Night |
+|---|---|---|---|---|
+| Market | 8 sellers + 8 shoppers | 4 + 3 | 0 (food seller at the corner) | 0 (food seller) |
+| Warkop tables | 2 | 3 | 6 | 4 |
+| Lanes (all) | ≤ 3 | ≤ 3 | ≤ 3 | ≤ 1 |
+| Main street passers-by | 2 | 3 | 3 | 1 |
+| Park | 2 + regulars | 2 | 3 | 0 |
+
+- Only every 2nd or 3rd ambient person can be greeted; sellers are reached through their stall.
+- **LOD:** people outside the view (+5 m) are neither simulated nor drawn (alpha 0), independent of their presence.
+
+### Tests
+- **Unit:** 143, plus the geometry audit (no FAIL). New tests:
+  - town life — every crowd route point standable and every leg walkable;
+  - density by place and phase within targets;
+  - shoppers move and stop to browse/buy without entering architecture or standing still too long (2-min simulation);
+  - market sells only in the morning; warkop order → sit.
+- **E2E P6.1 (desktop + Android):**
+  - morning market — ≥ 6 people, shoppers move, buying works;
+  - the market empty in the evening, with "come back in the morning";
+  - warkop fuller in the evening; the interior's order → sit → chat → exit at the same door;
+  - lanes never crowded; LOD active.
+- P6 routes, collisions and save migration (P4/P5) still pass.
+
+### Performance (headless software proxy, interleaved P6 vs P6.1, median of 3 — NOT device FPS)
+| Spot | Desktop P6 | Desktop P6.1 | Phone P6 | Phone P6.1 |
+|---|---|---|---|---|
+| Garden | 14.3 | 14.3 | 7.0 | 7.7 |
+| Crossroads | 12.0 | 12.3 | 6.7 | 6.7 |
+| Market, morning (17 people on screen vs 5) | 13.0 | 11.3 | 6.7 | 6.3 |
+| Warkop, evening (12 on screen vs 4) | 13.7 | 11.7 | 6.7 | 6.7 |
+| Park | 14.3 | 14.3 | 7.3 | 7.3 |
+
+Busy scenes cost more because more people are drawn; everything else is on par after NPC render LOD. **A physical Galaxy A05 run (`?fresh&bench`) is still needed.**
+
+### Limitations / next
+- **TEMP art.**
+  - Roofs and facades are engine/TEMP geometry; Codex's modular kit replaces the facades at the same sizes.
+  - NPCs have no sitting pose: they stand at the stool.
+- **Buildings face south only.** The market's front row covers the pavement edge visually (5 WARNs); the stalls fade when Zila is behind them.
+- **Next districts (reserved, not built):** mosque courtyard (respectful daily routine only), SPBU + roadside café, primary school drop-off, PAG housing.
+- No fast travel yet; real brand logos still need brand review.
+
 ## P6 — Batuphat as an explorable 2D town (Issue #34)
 **Goal:** World 01 feels like a small town you explore in every direction, not a corridor. Camera feel, map structure and transition rules borrow from large top-down life-sim town maps (Stardew-like game feel); art, layout, code and story stay ZsRoom's own (premium HD 2D illustrated, OG Art Bible, TEMP placeholders for now).
 

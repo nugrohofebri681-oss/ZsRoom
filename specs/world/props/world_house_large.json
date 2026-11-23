@@ -1,0 +1,41 @@
+{
+  "id": "world_house_large",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "Larger two-storey house (TEMP world placeholder)",
+  "density": 1,
+  "canvas": {
+    "width": 636,
+    "height": 494
+  },
+  "pivot": {
+    "x": 318,
+    "y": 482,
+    "meaning": "bottom-centre of the front face (wall item)"
+  },
+  "footprint": {
+    "widthCm": 620,
+    "depthCm": 4
+  },
+  "heightsCm": {
+    "top": 470
+  },
+  "collision": [],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "placement": {
+    "type": "wall",
+    "wall": "north"
+  },
+  "temp": {
+    "shape": "storefront",
+    "kind": "house2",
+    "wall": "#F3E9DA",
+    "maxDensity": 1
+  },
+  "$comment": "P6.1 archetype house_large: two-storey home behind a gated front yard (TEMP)."
+}

@@ -1,0 +1,12 @@
+{
+  "$comment": "P6.1 building archetypes: the data contract between town layout, engine (footprint, roof, collision, door, yard) and final art (Codex fills each facade id with HD illustrated art at the same width/height). Silhouette differences come from width, height, depth and roof style — never from tint alone. A building in a region may name an archetype and override any field.",
+  "archetypes": {
+    "house_small":  { "facade": "world_house_small",  "depth": 360, "roof": { "style": "gable", "color": "#9C5B4A" }, "use": "narrow single-storey home in a gang" },
+    "house_medium": { "facade": "world_facade_house", "depth": 400, "roof": { "style": "gable", "color": "#8E5A4C" }, "use": "ordinary single-storey home" },
+    "house_large":  { "facade": "world_house_large",  "depth": 460, "roof": { "style": "hip",   "color": "#7D6A5A" }, "yard": { "depth": 150, "gate": 130 }, "use": "two-storey home behind a gated front yard" },
+    "ruko":         { "facade": "world_ruko",         "depth": 400, "roof": { "style": "flat",  "color": "#B8B2A7" }, "use": "two-storey shophouse on the main road" },
+    "warkop_open":  { "facade": "world_warkop_open",  "depth": 420, "roof": { "style": "zinc",  "color": "#8C9AA3" }, "use": "open-front coffee shop; tables outside" },
+    "market_kiosk": { "facade": "world_market_kiosk", "depth": 170, "roof": { "style": "canopy", "color": "#2A9D8F" }, "use": "market stall with tarp" },
+    "shop_small":   { "facade": "world_facade_shop",  "depth": 380, "roof": { "style": "zinc",  "color": "#8C9AA3" }, "use": "small single-storey shop" }
+  }
+}

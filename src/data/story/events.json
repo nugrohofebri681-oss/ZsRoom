@@ -571,6 +571,195 @@
           "dialogue": "dlg_dimsum_unfinished"
         }
       ]
+    },
+    {
+      "id": "ev_market_first_visit",
+      "once": true,
+      "effects": [
+        {
+          "toast": "Batuphat · pasar pagi (provisional) — busiest in the morning"
+        }
+      ]
+    },
+    {
+      "id": "ev_market_buy_fruit",
+      "requires": [
+        {
+          "varEq": [
+            "phase",
+            "morning"
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "incVar": [
+            "market_fruit",
+            1
+          ]
+        },
+        {
+          "incVar": [
+            "marketPurchases",
+            1
+          ]
+        },
+        {
+          "setFlag": "market:first_purchase"
+        },
+        {
+          "dialogue": "dlg_market_fruit_buy"
+        },
+        {
+          "toast": "Bought fruit"
+        }
+      ],
+      "otherwise": [
+        {
+          "dialogue": "dlg_market_closed"
+        }
+      ]
+    },
+    {
+      "id": "ev_market_buy_veg",
+      "requires": [
+        {
+          "varEq": [
+            "phase",
+            "morning"
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "incVar": [
+            "market_veg",
+            1
+          ]
+        },
+        {
+          "incVar": [
+            "marketPurchases",
+            1
+          ]
+        },
+        {
+          "setFlag": "market:first_purchase"
+        },
+        {
+          "dialogue": "dlg_market_veg_buy"
+        },
+        {
+          "toast": "Bought vegetables"
+        }
+      ],
+      "otherwise": [
+        {
+          "dialogue": "dlg_market_closed"
+        }
+      ]
+    },
+    {
+      "id": "ev_market_buy_fish",
+      "requires": [
+        {
+          "varEq": [
+            "phase",
+            "morning"
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "incVar": [
+            "market_fish",
+            1
+          ]
+        },
+        {
+          "incVar": [
+            "marketPurchases",
+            1
+          ]
+        },
+        {
+          "setFlag": "market:first_purchase"
+        },
+        {
+          "dialogue": "dlg_market_fish_buy"
+        },
+        {
+          "toast": "Bought fish"
+        }
+      ],
+      "otherwise": [
+        {
+          "dialogue": "dlg_market_closed"
+        }
+      ]
+    },
+    {
+      "id": "ev_warkop_order",
+      "requires": [
+        {
+          "varEq": [
+            "warkopOrder",
+            ""
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "setVar": [
+            "warkopOrder",
+            "sanger"
+          ]
+        },
+        {
+          "dialogue": "dlg_warkop_ordered"
+        }
+      ],
+      "otherwise": [
+        {
+          "toast": "Your sanger is on its way"
+        }
+      ]
+    },
+    {
+      "id": "ev_warkop_sit",
+      "requires": [
+        {
+          "varEq": [
+            "warkopOrder",
+            "sanger"
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "setVar": [
+            "warkopOrder",
+            ""
+          ]
+        },
+        {
+          "incVar": [
+            "warkopVisits",
+            1
+          ]
+        },
+        {
+          "setFlag": "warkop:first_sanger"
+        },
+        {
+          "dialogue": "dlg_warkop_drink"
+        }
+      ],
+      "otherwise": [
+        {
+          "dialogue": "dlg_warkop_no_order"
+        }
+      ]
     }
   ]
 }

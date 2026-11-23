@@ -1,0 +1,27 @@
+{
+  "id": "env_wall_warkop",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "environment",
+  "kind": "wall-strip",
+  "displayName": "Warkop wall: warm plaster, dark wood skirting (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 120,
+    "height": 540
+  },
+  "tile": {
+    "repeat": "x",
+    "widthCm": 60,
+    "heightCm": 270
+  },
+  "temp": {
+    "shape": "plain",
+    "wall": "#E8D5B5",
+    "base": "#5B3A29",
+    "trim": "#6B3E26",
+    "baseCm": 90,
+    "joints": true
+  },
+  "$comment": "P6.1 warkop interior placeholder (Codex: final HD illustrated tile at the same size)."
+}

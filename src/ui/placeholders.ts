@@ -500,7 +500,7 @@ Object.assign(SHAPES, {
     rr(ctx, g.L, y0, W, y1 - y0, 4 * d); paint(ctx, wall, g.L, y0, g.R, y1, 1.05, 0.9);
     ctx.fillStyle = tone(wall, 0.8); ctx.fillRect(g.L, y0, W, 8 * d);                                        // parapet
     const kind = String(t.kind ?? 'shop');
-    if (t.sign) {                                                         // name board: top band, or just above the door (signLow) so it stays in view
+    if (t.sign && !['ruko', 'warkop', 'kiosk'].includes(kind)) {          // name board: top band, or just above the door (signLow) so it stays in view
       const sh = 46 * d, sy = t.signLow ? g.zy(270) : y0 + 22 * d, sw = t.signLow ? Math.min(W - 40 * d, 320 * d) : W - 40 * d;
       rr(ctx, g.px - sw / 2, sy, sw, sh, 4 * d); paint(ctx, accent, g.px - sw / 2, sy, g.px + sw / 2, sy + sh, 1.15, 0.85); label(ctx, String(t.sign), g.px, sy + sh / 2, Math.min(26 * d, sw / Math.max(6, String(t.sign).length) * 1.5));
     }
@@ -510,7 +510,7 @@ Object.assign(SHAPES, {
       const gy = ay + 34 * d; ctx.fillStyle = 'rgba(170,215,235,0.85)'; ctx.fillRect(g.L + 20 * d, gy, W - 40 * d, y1 - gy - 6 * d);
       ctx.strokeStyle = tone(wall, 0.55); ctx.lineWidth = 3 * d; for (let x = g.L + 20 * d; x <= g.R - 20 * d + 1; x += (W - 40 * d) / 6) { ctx.beginPath(); ctx.moveTo(x, gy); ctx.lineTo(x, y1 - 6 * d); ctx.stroke(); }
       for (let i = 0; i < 9; i++) { ctx.fillStyle = ['#E07A5F', '#F2CC8F', '#81B29A', '#3D85C6'][i % 4]!; ctx.fillRect(g.L + (30 + i * ((W / d - 60) / 9)) * d, y1 - 70 * d, 18 * d, 50 * d); }
-    } else {
+    } else if (kind === 'house' || kind === 'office') {
       const rows = kind === 'office' ? 2 : 1, cols = Math.max(2, Math.floor(W / d / 140));
       for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
         if (kind === 'house' && c === Math.floor(cols / 2)) continue;
@@ -521,6 +521,10 @@ Object.assign(SHAPES, {
       }
       if (kind === 'house') { const dw = 80 * d; rr(ctx, g.px - dw / 2, y1 - 200 * d, dw, 200 * d, 4 * d); paint(ctx, '#8A5A3C', g.px - dw / 2, y1 - 200 * d, g.px + dw / 2, y1, 1.1, 0.85); }
     }
+    if (kind === 'ruko') shophouse(ctx, g, t, wall, accent, y0, y1);
+    if (kind === 'house2') twoStoreyHouse(ctx, g, t, wall, y0, y1);
+    if (kind === 'warkop') openWarkop(ctx, g, t, wall, accent, y0, y1);
+    if (kind === 'kiosk') marketKiosk(ctx, g, t, y0, y1);
     if (t.door) { const dw = Number(t.door) * d; rr(ctx, g.px - dw / 2, y1 - 210 * d, dw, 210 * d, 3 * d); ctx.fillStyle = 'rgba(120,170,195,0.95)'; ctx.fill(); ctx.strokeStyle = '#5E6670'; ctx.lineWidth = 3 * d; ctx.stroke(); ctx.beginPath(); ctx.moveTo(g.px, y1 - 210 * d); ctx.lineTo(g.px, y1); ctx.stroke(); }
   },
   /** Low front wall with two pillars and an open gate in the middle (wall-mounted). */
@@ -595,3 +599,66 @@ Object.assign(SHAPES, {
 });
 
 export const TEMP_SHAPES = Object.keys(SHAPES);
+
+
+// ---------- P6.1 building archetypes (TEMP geometry for Codex's final modular kit; same contract: front face art) ----------
+type Ctx2 = CanvasRenderingContext2D;
+/** Two-storey ruko (shophouse): open shop with half-raised rolling shutter below, name band, windows with grilles above. */
+function shophouse(ctx: Ctx2, g: Geom, t: TempArtSpec, wall: string, accent: string, y0: number, y1: number): void {
+  const d = g.d, W = g.R - g.L, shopTop = g.zy(240), bandTop = g.zy(278);
+  ctx.fillStyle = tone(wall, 0.55); ctx.fillRect(g.L + 14 * d, shopTop, W - 28 * d, y1 - shopTop);                       // shop interior (shade)
+  for (let i = 0; i < 7; i++) { ctx.fillStyle = tone(wall, 0.9 - (i % 2) * 0.06); ctx.fillRect(g.L + 14 * d, shopTop + i * 9 * d, W - 28 * d, 9 * d); }   // shutter, raised
+  const goods = ['#E07A5F', '#F2CC8F', '#81B29A', '#3D85C6', '#C9A227', '#B5654F'];
+  for (let i = 0; i < 10; i++) { ctx.fillStyle = goods[(i + Number(t.seed ?? 0)) % goods.length]!; ctx.fillRect(g.L + (24 + i * ((W / d - 48) / 10)) * d, y1 - 120 * d - (i % 3) * 22 * d, 22 * d, 28 * d); }   // shelves of goods
+  ctx.fillStyle = tone(wall, 0.7); ctx.fillRect(g.L + 14 * d, y1 - 70 * d, W - 28 * d, 8 * d);                            // counter top
+  rr(ctx, g.L + 8 * d, bandTop, W - 16 * d, shopTop - bandTop - 4 * d, 3 * d); paint(ctx, accent, g.L, bandTop, g.R, shopTop, 1.12, 0.86);   // name band
+  if (t.sign) label(ctx, String(t.sign), g.px, (bandTop + shopTop) / 2 - 2 * d, Math.min(20 * d, (W - 30 * d) / String(t.sign).length * 1.5));
+  const cols = W / d > 380 ? 2 : 1;
+  for (let c = 0; c < cols; c++) {                                                                                         // upper windows with grilles
+    const ww = 110 * d, wh = 80 * d, x = g.L + (c + 0.5) * (W / cols) - ww / 2, y = y0 + 26 * d;
+    rr(ctx, x, y, ww, wh, 3 * d); ctx.fillStyle = '#A9C7DA'; ctx.fill(); ctx.strokeStyle = tone(wall, 0.55); ctx.lineWidth = 3 * d; ctx.stroke();
+    ctx.lineWidth = 1.5 * d; for (let k = 1; k < 5; k++) { ctx.beginPath(); ctx.moveTo(x + (k * ww) / 5, y); ctx.lineTo(x + (k * ww) / 5, y + wh); ctx.stroke(); }
+  }
+  ctx.fillStyle = tone(wall, 0.78); ctx.fillRect(g.L, y0, W, 10 * d); ctx.fillRect(g.L, g.zy(286), W, 6 * d);           // parapet + floor line
+}
+/** Larger two-storey house: door and windows below, three windows and a small balcony rail above. */
+function twoStoreyHouse(ctx: Ctx2, g: Geom, t: TempArtSpec, wall: string, y0: number, y1: number): void {
+  const d = g.d, W = g.R - g.L, mid = g.zy(250);
+  ctx.fillStyle = tone(wall, 0.85); ctx.fillRect(g.L, mid, W, 6 * d);
+  const win = (cx: number, y: number) => { rr(ctx, cx - 36 * d, y, 72 * d, 80 * d, 3 * d); ctx.fillStyle = '#A9C7DA'; ctx.fill(); ctx.strokeStyle = tone(wall, 0.6); ctx.lineWidth = 3 * d; ctx.stroke(); ctx.beginPath(); ctx.moveTo(cx, y); ctx.lineTo(cx, y + 80 * d); ctx.stroke(); };
+  for (const f of [0.18, 0.5, 0.82]) win(g.L + W * f, y0 + 50 * d);                                                       // upper floor
+  for (const f of [0.2, 0.8]) win(g.L + W * f, g.zy(190));                                                                 // ground floor
+  const bw = W * 0.4; ctx.strokeStyle = tone(wall, 0.45); ctx.lineWidth = 3 * d; ctx.strokeRect(g.px - bw / 2, mid - 34 * d, bw, 30 * d);   // balcony rail
+  for (let x = g.px - bw / 2 + 12 * d; x < g.px + bw / 2; x += 14 * d) { ctx.beginPath(); ctx.moveTo(x, mid - 34 * d); ctx.lineTo(x, mid - 4 * d); ctx.stroke(); }
+  const dw = 90 * d; rr(ctx, g.px - dw / 2, y1 - 210 * d, dw, 210 * d, 4 * d); paint(ctx, String(t.doorColor ?? '#7A4E34'), g.px - dw / 2, y1 - 210 * d, g.px + dw / 2, y1, 1.1, 0.85);
+  ctx.fillStyle = tone(wall, 0.78); ctx.fillRect(g.L, y0, W, 10 * d);
+}
+/** Open-front warkop: deep shaded room under the roof, counter with jars and a coffee urn, menu board, posts. */
+function openWarkop(ctx: Ctx2, g: Geom, t: TempArtSpec, wall: string, accent: string, y0: number, y1: number): void {
+  const d = g.d, W = g.R - g.L, open = g.zy(250);
+  ctx.fillStyle = tone(wall, 0.42); ctx.fillRect(g.L + 10 * d, open, W - 20 * d, y1 - open);                              // shaded interior
+  ctx.fillStyle = tone(wall, 0.35); ctx.fillRect(g.L + 10 * d, y1 - 30 * d, W - 20 * d, 30 * d);                           // floor in shade
+  const cx0 = g.L + W * 0.55, cw = W * 0.38;                                                                                // counter
+  rr(ctx, cx0, y1 - 100 * d, cw, 70 * d, 3 * d); paint(ctx, '#8A5A3C', cx0, y1 - 100 * d, cx0 + cw, y1 - 30 * d, 1.1, 0.85);
+  for (let i = 0; i < 6; i++) { rr(ctx, cx0 + (12 + i * 22) * d, y1 - 124 * d, 14 * d, 24 * d, 3 * d); ctx.fillStyle = ['#F2CC8F', '#E07A5F', '#C9A227'][i % 3]!; ctx.fill(); }   // jars of snacks
+  rr(ctx, cx0 + cw - 50 * d, y1 - 160 * d, 34 * d, 60 * d, 6 * d); paint(ctx, '#B8B8B8', cx0 + cw - 50 * d, y1 - 160 * d, cx0 + cw - 16 * d, y1 - 100 * d, 1.25, 0.8);   // coffee urn
+  rr(ctx, g.L + W * 0.12, open + 22 * d, W * 0.28, 70 * d, 3 * d); ctx.fillStyle = '#2F3A2F'; ctx.fill();                  // menu board
+  for (let i = 0; i < 4; i++) { ctx.fillStyle = 'rgba(255,255,255,0.75)'; ctx.fillRect(g.L + W * 0.12 + 10 * d, open + (34 + i * 13) * d, W * 0.2, 3 * d); }
+  ctx.fillStyle = '#FFE9B0'; ctx.beginPath(); ctx.arc(g.px, open + 14 * d, 7 * d, 0, Math.PI * 2); ctx.fill();            // hanging lamp
+  for (const x of [g.L, g.R - 16 * d, g.L + W / 2 - 8 * d]) { rr(ctx, x, y0 + 30 * d, 16 * d, y1 - y0 - 30 * d, 3 * d); paint(ctx, tone(wall, 0.95), x, y0, x + 16 * d, y1, 1.15, 0.8); }   // posts
+  rr(ctx, g.L, y0, W, open - y0, 3 * d); paint(ctx, wall, g.L, y0, g.R, open, 1.05, 0.9);                                  // fascia above the opening
+  rr(ctx, g.px - W * 0.3, y0 + 12 * d, W * 0.6, open - y0 - 24 * d, 4 * d); paint(ctx, accent, g.px - W * 0.3, y0, g.px + W * 0.3, open, 1.12, 0.86);
+  if (t.sign) label(ctx, String(t.sign), g.px, (y0 + open) / 2, Math.min(22 * d, (W * 0.55) / String(t.sign).length * 1.5));
+}
+/** Market kiosk: posts, striped tarp awning, a sloped display table of produce, cloth back wall. */
+function marketKiosk(ctx: Ctx2, g: Geom, t: TempArtSpec, y0: number, y1: number): void {
+  const d = g.d, W = g.R - g.L, cloth = String(t.cloth ?? '#6D597A'), tarp = String(t.awning ?? '#2A9D8F');
+  ctx.fillStyle = tone(cloth, 0.8); ctx.fillRect(g.L + 6 * d, y0 + 40 * d, W - 12 * d, y1 - y0 - 40 * d);                  // back cloth
+  for (const x of [g.L + 4 * d, g.R - 12 * d]) { ctx.fillStyle = '#6B5A4A'; ctx.fillRect(x, y0 + 20 * d, 8 * d, y1 - y0 - 20 * d); }   // posts
+  ctx.fillStyle = tarp; ctx.beginPath(); ctx.moveTo(g.L - 4 * d, y0 + 50 * d); ctx.lineTo(g.L + 8 * d, y0); ctx.lineTo(g.R - 8 * d, y0); ctx.lineTo(g.R + 4 * d, y0 + 50 * d); ctx.closePath(); ctx.fill();   // tarp
+  for (let x = g.L; x < g.R; x += 36 * d) { ctx.fillStyle = 'rgba(255,255,255,0.35)'; ctx.fillRect(x, y0 + 6 * d, 18 * d, 44 * d); }
+  const ty = y1 - 95 * d; rr(ctx, g.L + 10 * d, ty, W - 20 * d, 55 * d, 3 * d); paint(ctx, '#A0785A', g.L + 10 * d, ty, g.R - 10 * d, ty + 55 * d, 1.1, 0.85);   // display table
+  const palette = String(t.goods ?? 'veg') === 'fish' ? ['#9DB4C0', '#C7D3DD', '#7D98A8'] : String(t.goods) === 'fruit' ? ['#F4A261', '#E9C46A', '#E76F51', '#8AB17D'] : String(t.goods) === 'cloth' ? ['#6D597A', '#E56B6F', '#B56576', '#355070'] : ['#8AB17D', '#2A9D8F', '#E76F51', '#E9C46A'];
+  for (let i = 0; i < 12; i++) { const cx = g.L + (24 + (i % 6) * ((W / d - 48) / 6)) * d, cy = ty - 6 * d + Math.floor(i / 6) * 16 * d; ctx.fillStyle = palette[i % palette.length]!; ctx.beginPath(); ctx.ellipse(cx, cy, 12 * d, 8 * d, 0, 0, Math.PI * 2); ctx.fill(); }   // produce heaps
+  ctx.fillStyle = 'rgba(0,0,0,0.18)'; ctx.fillRect(g.L + 10 * d, y1 - 40 * d, W - 20 * d, 40 * d);                          // under the table
+}

@@ -279,6 +279,87 @@
         "The fountain is nice and cool in the afternoon.",
         "Mind the becak on the main street."
       ]
+    },
+    "dlg_market_fruit_buy": {
+      "speaker": "Fruit seller",
+      "lines": [
+        "Bananas and rambutan, picked yesterday. Take this bunch.",
+        "That's yours — come again tomorrow morning!"
+      ]
+    },
+    "dlg_market_veg_buy": {
+      "speaker": "Vegetable seller",
+      "lines": [
+        "Kangkung, chillies, tomatoes… all fresh this morning.",
+        "Here you go. Don't forget the shallots next time!"
+      ]
+    },
+    "dlg_market_fish_buy": {
+      "speaker": "Fish seller",
+      "lines": [
+        "Fish came in early today. This one's good for asam keueng.",
+        "Wrapped for you. Keep it cool!"
+      ]
+    },
+    "dlg_market_closed": {
+      "speaker": "Zila",
+      "lines": [
+        "The stall is covered up. The market is busiest in the morning — I'll come back early."
+      ]
+    },
+    "dlg_market_cloth": {
+      "speaker": "Clothes seller",
+      "lines": [
+        "Kerudung and shirts, have a look. Bargaining is fine!"
+      ]
+    },
+    "dlg_market_shopper": {
+      "speaker": "Shopper",
+      "lines": [
+        "Prices went up a little this week, didn't they?"
+      ]
+    },
+    "dlg_market_night_food": {
+      "speaker": "Food seller",
+      "lines": [
+        "Bakso and mie, hot until late. The market sleeps, but people still get hungry!"
+      ]
+    },
+    "dlg_warkop_patron": {
+      "speaker": "Customer",
+      "lines": [
+        "Sanger here is the best on this road. Sit down, sit down."
+      ]
+    },
+    "dlg_warkop_barista": {
+      "speaker": "Barista",
+      "lines": [
+        "Kopi, sanger, teh tarik? Coffee's from Gayo."
+      ]
+    },
+    "dlg_warkop_ordered": {
+      "speaker": "Barista",
+      "lines": [
+        "One sanger. Sit wherever you like — I'll bring it over."
+      ]
+    },
+    "dlg_warkop_drink": {
+      "speaker": "Zila",
+      "lines": [
+        "Sweet, strong and creamy. No wonder everyone stays here for hours."
+      ]
+    },
+    "dlg_warkop_no_order": {
+      "speaker": "Zila",
+      "lines": [
+        "I should order something first."
+      ]
+    },
+    "dlg_warkop_regulars": {
+      "speaker": "Regular",
+      "lines": [
+        "We've sat at this table every evening for years. Same coffee, same arguments about football!"
+      ]
     }
   }
 }

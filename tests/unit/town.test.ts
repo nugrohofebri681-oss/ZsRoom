@@ -19,15 +19,16 @@ const door = (id: string) => town.anchors.find((a) => a.key === `door:${id}`)!;
 const spawn = (k: string) => town.data.spawns[k]!;
 const pathLen = (p: { x: number; y: number }[], s: { x: number; y: number }) => p.reduce((acc, q, i) => acc + Math.hypot(q.x - (i ? p[i - 1]!.x : s.x), q.y - (i ? p[i - 1]!.y : s.y)), 0);
 // the passages between the residential lane and the main street (gangs, the avenue, the west end)
-const GANG_W1: Rect = { x: 1340, y: 2150, w: 370, h: 200 }, GANG_W2: Rect = { x: 3490, y: 2150, w: 360, h: 200 };
-const AVENUE: Rect = { x: 4340, y: 2150, w: 640, h: 200 }, GANG_E: Rect = { x: 6240, y: 2150, w: 630, h: 200 };
-const WEST_END: Rect = { x: -50, y: 2150, w: 310, h: 200 }, MIXUE_GAP: Rect = { x: 2190, y: 2150, w: 290, h: 200 };
+// (P6.1 layout: ruko frontage, the open warkop and story buildings on the main street's north side)
+const GANG_W1: Rect = { x: 1400, y: 2150, w: 350, h: 200 }, GANG_W2: Rect = { x: 3450, y: 2150, w: 420, h: 200 };
+const AVENUE: Rect = { x: 4330, y: 2150, w: 660, h: 200 }, GANG_E: Rect = { x: 6200, y: 2150, w: 680, h: 200 };
+const WEST_END: Rect = { x: -50, y: 2150, w: 350, h: 200 }, MIXUE_GAP: Rect = { x: 2150, y: 2150, w: 340, h: 200 }, EAST_END: Rect = { x: 7920, y: 2150, w: 130, h: 200 };
 
 describe('P6 Batuphat town: a broad 2D map, not a corridor', () => {
-  it('is one exterior map, about 80 × 57 m (aspect ~1.4), with six logical areas', () => {
+  it('is one exterior map, about 80 × 57 m (aspect ~1.4), with seven logical areas', () => {
     expect(town.data.kind).toBe('exterior');
     expect(town.bbox).toEqual({ x: 0, y: 0, w: 8000, h: 5700 });
-    expect(town.zones.map((z) => z.id)).toEqual(['front_yard', 'batuphat_park', 'batuphat_west', 'batuphat_street', 'batuphat_lanes', 'batuphat_south']);
+    expect(town.zones.map((z) => z.id)).toEqual(['front_yard', 'batuphat_park', 'batuphat_west', 'batuphat_street', 'batuphat_lanes', 'batuphat_market', 'batuphat_south']);
     expect(town.ground!.length).toBeGreaterThan(10);
     expect(town.buildings!.length).toBeGreaterThanOrEqual(25);
     expect(voidRects(town.zones, 0, 0, 8000, 5700)).toEqual([]);                       // every cell belongs to an area
@@ -70,14 +71,14 @@ describe('P6 Batuphat town: a broad 2D map, not a corridor', () => {
 
   it('house → Indomaret has at least two distinct routes (via the gangs, or via the avenue)', () => {
     const a = spawn('front_yard.from_street'), b = door('minimarket_door');
-    const viaAvenue = gridOf([GANG_W1, GANG_W2, GANG_E, WEST_END, MIXUE_GAP]).findPath(a, b);
-    const viaGangs = gridOf([AVENUE, GANG_E]).findPath(a, b);
+    const viaAvenue = gridOf([GANG_W1, GANG_W2, GANG_E, WEST_END, MIXUE_GAP, EAST_END]).findPath(a, b);
+    const viaGangs = gridOf([AVENUE, GANG_E, EAST_END]).findPath(a, b);
     expect(viaAvenue).not.toBeNull(); expect(viaGangs).not.toBeNull();
     // the two routes cross the building row at different places
     const crossX = (p: { x: number; y: number }[]) => p.find((q) => q.y > 2200 && q.y < 2400)?.x ?? p.reduce((m, q) => (Math.abs(q.y - 2300) < Math.abs(m.y - 2300) ? q : m)).x;
     expect(Math.abs(crossX(viaAvenue!) - crossX(viaGangs!))).toBeGreaterThan(600);
     // closing every passage through the row cuts the lane off from the main street (the row is a real obstacle)
-    expect(gridOf([GANG_W1, GANG_W2, AVENUE, GANG_E, WEST_END, MIXUE_GAP]).findPath(a, b)).toBeNull();
+    expect(gridOf([GANG_W1, GANG_W2, AVENUE, GANG_E, WEST_END, MIXUE_GAP, EAST_END]).findPath(a, b)).toBeNull();
   });
 
   it('a loop house → park → south lane → Indomaret → main street → house exists and moves N/S and E/W', () => {

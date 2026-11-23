@@ -1,0 +1,36 @@
+{
+  "$comment": "P6.1 zone of batuphat_town at (4880, 3600): a morning market inspired by Pasar Batuphat (docs/research/batuphat-source-register.md). Kiosks, crowds and goods live in src/data/regions/batuphat_town.json. PROVISIONAL, not the real market's plan.",
+  "id": "batuphat_market",
+  "displayName": "Batuphat · pasar pagi",
+  "world": "world01",
+  "floor": "ground",
+  "kind": "exterior",
+  "ambience": "street",
+  "provisional": true,
+  "onEnter": [
+    "ev_market_first_visit"
+  ],
+  "sizeCm": {
+    "w": 1840,
+    "h": 740
+  },
+  "wallHeightCm": 0,
+  "palette": {
+    "floor": "#B9B3A9",
+    "wall": "#E6DCCB",
+    "trim": "#8A7F75"
+  },
+  "shell": {
+    "floor": "env_ground_street",
+    "wall": "env_wall_street_row"
+  },
+  "spawns": {
+    "default": {
+      "x": 950,
+      "y": 340,
+      "facing": "S"
+    }
+  },
+  "props": [],
+  "doors": []
+}

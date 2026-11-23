@@ -33,6 +33,11 @@
       "y": 0
     },
     {
+      "room": "batuphat_market",
+      "x": 4880,
+      "y": 3600
+    },
+    {
       "room": "batuphat_south",
       "x": 0,
       "y": 3600
@@ -67,15 +72,15 @@
       "x": 4600,
       "y": 300,
       "w": 260,
-      "h": 2300,
+      "h": 2650,
       "markings": "road"
     },
     {
       "floor": "env_ground_road",
       "x": 4600,
-      "y": 3600,
+      "y": 3250,
       "w": 260,
-      "h": 1960,
+      "h": 2310,
       "markings": "road"
     },
     {
@@ -128,9 +133,9 @@
     },
     {
       "floor": "env_ground_street",
-      "x": 300,
+      "x": 315,
       "y": 4350,
-      "w": 2900,
+      "w": 2885,
       "h": 150,
       "markings": "lane"
     },
@@ -151,19 +156,27 @@
       "markings": "lane"
     },
     {
-      "floor": "env_ground_street",
-      "x": 3200,
-      "y": 5300,
-      "w": 4500,
-      "h": 160,
-      "markings": "lane"
-    },
-    {
       "floor": "env_ground_plaza",
       "x": 4860,
       "y": 3250,
       "w": 500,
       "h": 350
+    },
+    {
+      "floor": "env_ground_street",
+      "x": 300,
+      "y": 5560,
+      "w": 7400,
+      "h": 130,
+      "markings": "lane"
+    },
+    {
+      "floor": "env_ground_street",
+      "x": 1600,
+      "y": 5300,
+      "w": 150,
+      "h": 260,
+      "markings": "lane"
     }
   ],
   "buildings": [
@@ -174,6 +187,7 @@
       "y": 900,
       "depth": 420,
       "roof": "#B5654F",
+      "roofStyle": "gable",
       "door": {
         "id": "house_door",
         "label": "Enter the house",
@@ -185,144 +199,13 @@
       }
     },
     {
-      "id": "house_n1",
-      "facade": "world_facade_house",
-      "x": 700,
-      "y": 1300,
-      "depth": 420,
-      "roof": "#8E5A4C",
-      "inspect": {
-        "name": "House",
-        "comment": "A house in the neighbourhood. (Background building.)"
-      }
-    },
-    {
-      "id": "house_n2",
-      "facade": "world_facade_house",
-      "x": 1300,
-      "y": 1300,
-      "depth": 420,
-      "roof": "#7D6A5A",
-      "inspect": {
-        "name": "House",
-        "comment": "A house in the neighbourhood. (Background building.)"
-      }
-    },
-    {
-      "id": "house_n3",
-      "facade": "world_facade_house",
-      "x": 3550,
-      "y": 1300,
-      "depth": 420,
-      "roof": "#9C5B4A",
-      "inspect": {
-        "name": "House",
-        "comment": "A house in the neighbourhood. (Background building.)"
-      }
-    },
-    {
-      "id": "house_n4",
-      "facade": "world_facade_house",
-      "x": 4150,
-      "y": 1300,
-      "depth": 420,
-      "roof": "#6F6A63",
-      "inspect": {
-        "name": "House",
-        "comment": "A house in the neighbourhood. (Background building.)"
-      }
-    },
-    {
-      "id": "house_n5",
-      "facade": "world_facade_house",
-      "x": 5350,
-      "y": 1300,
-      "depth": 420,
-      "roof": "#A0654A",
-      "inspect": {
-        "name": "House",
-        "comment": "A house in the neighbourhood. (Background building.)"
-      }
-    },
-    {
-      "id": "shop_n6",
-      "facade": "world_facade_shop",
-      "x": 6000,
-      "y": 1300,
-      "depth": 440,
-      "roof": "#5E7C8A",
-      "inspect": {
-        "name": "Small shop",
-        "comment": "A small neighbourhood shop. (Background building.)"
-      }
-    },
-    {
-      "id": "house_n7",
-      "facade": "world_facade_house",
-      "x": 6850,
-      "y": 1300,
-      "depth": 420,
-      "roof": "#8E5A4C",
-      "inspect": {
-        "name": "House",
-        "comment": "A house in the neighbourhood. (Background building.)"
-      }
-    },
-    {
-      "id": "house_n8",
-      "facade": "world_facade_house",
-      "x": 7450,
-      "y": 1300,
-      "depth": 420,
-      "roof": "#7D6A5A",
-      "inspect": {
-        "name": "House",
-        "comment": "A house in the neighbourhood. (Background building.)"
-      }
-    },
-    {
-      "id": "house_m1",
-      "facade": "world_facade_house",
-      "x": 500,
-      "y": 2600,
-      "depth": 420,
-      "roof": "#9C5B4A",
-      "inspect": {
-        "name": "House",
-        "comment": "A house in the neighbourhood. (Background building.)"
-      }
-    },
-    {
-      "id": "warung",
-      "facade": "world_facade_warung",
-      "x": 1100,
-      "y": 2600,
-      "depth": 420,
-      "roof": "#7A5640",
-      "talk": {
-        "label": "Warung kopi",
-        "dialogue": "dlg_west_warung"
-      }
-    },
-    {
-      "id": "house_m2",
-      "facade": "world_facade_house",
-      "x": 1950,
-      "y": 2600,
-      "depth": 420,
-      "roof": "#6F6A63",
-      "inspect": {
-        "name": "House",
-        "comment": "A house in the neighbourhood. (Background building.)"
-      }
-    },
-    {
       "id": "mixue",
       "facade": "world_storefront_mixue",
       "x": 2700,
       "y": 2600,
       "depth": 400,
       "roof": "#C8323C",
+      "roofStyle": "flat",
       "door": {
         "id": "mixue_door",
         "label": "Enter Mixue",
@@ -333,36 +216,13 @@
       }
     },
     {
-      "id": "house_m3",
-      "facade": "world_facade_house",
-      "x": 3250,
-      "y": 2600,
-      "depth": 420,
-      "roof": "#8E5A4C",
-      "inspect": {
-        "name": "House",
-        "comment": "A house in the neighbourhood. (Background building.)"
-      }
-    },
-    {
-      "id": "house_m4",
-      "facade": "world_facade_house",
-      "x": 4100,
-      "y": 2600,
-      "depth": 420,
-      "roof": "#A0654A",
-      "inspect": {
-        "name": "Neighbour's house",
-        "comment": "A neighbour's house. (Background building.)"
-      }
-    },
-    {
       "id": "indomaret",
       "facade": "world_storefront_indomaret",
       "x": 5300,
       "y": 2600,
       "depth": 400,
-      "roof": "#2D5E9C",
+      "roof": "#C9CED3",
+      "roofStyle": "flat",
       "door": {
         "id": "minimarket_door",
         "label": "Enter Indomaret",
@@ -373,24 +233,13 @@
       }
     },
     {
-      "id": "house_m5",
-      "facade": "world_facade_house",
-      "x": 6000,
-      "y": 2600,
-      "depth": 420,
-      "roof": "#7D6A5A",
-      "inspect": {
-        "name": "House",
-        "comment": "A house in the neighbourhood. (Background building.)"
-      }
-    },
-    {
       "id": "workplace",
       "facade": "world_facade_workplace",
       "x": 7150,
       "y": 2600,
       "depth": 400,
-      "roof": "#5B6C8F",
+      "roof": "#B8B2A7",
+      "roofStyle": "flat",
       "door": {
         "id": "workplace_door",
         "label": "Enter the workplace",
@@ -401,11 +250,189 @@
       }
     },
     {
+      "id": "house_n1",
+      "archetype": "house_small",
+      "x": 700,
+      "y": 1300,
+      "roof": "#8E5A4C",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_n2",
+      "archetype": "house_large",
+      "x": 1350,
+      "y": 1300,
+      "inspect": {
+        "name": "House with a front yard",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_n3",
+      "archetype": "house_small",
+      "x": 3500,
+      "y": 1300,
+      "roof": "#9C5B4A",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_n4",
+      "archetype": "house_medium",
+      "x": 4150,
+      "y": 1300,
+      "roof": "#6F6A63",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_n5",
+      "archetype": "house_large",
+      "x": 5350,
+      "y": 1300,
+      "roof": "#8B4A3C",
+      "inspect": {
+        "name": "House with a front yard",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "shop_n6",
+      "archetype": "shop_small",
+      "x": 6050,
+      "y": 1300,
+      "inspect": {
+        "name": "Small shop",
+        "comment": "A small neighbourhood shop. (Background building.)"
+      }
+    },
+    {
+      "id": "house_n7",
+      "archetype": "house_medium",
+      "x": 6850,
+      "y": 1300,
+      "roof": "#A0654A",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "house_n8",
+      "archetype": "house_small",
+      "x": 7450,
+      "y": 1300,
+      "roof": "#7D6A5A",
+      "inspect": {
+        "name": "House",
+        "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "ruko_m1",
+      "archetype": "ruko",
+      "x": 500,
+      "y": 2600,
+      "depth": 360,
+      "temp": {
+        "sign": "TOKO KELONTONG",
+        "accent": "#3A6B8C",
+        "seed": 1
+      },
+      "inspect": {
+        "name": "Toko kelontong",
+        "comment": "A grocery shophouse: a shop below, rooms above. (Background building.)"
+      }
+    },
+    {
+      "id": "warkop",
+      "archetype": "warkop_open",
+      "x": 1110,
+      "y": 2600,
+      "door": {
+        "id": "warkop_door",
+        "label": "Enter the warung kopi",
+        "to": {
+          "room": "warkop",
+          "spawn": "from_street"
+        },
+        "w": 160
+      }
+    },
+    {
+      "id": "ruko_m2",
+      "archetype": "ruko",
+      "x": 1950,
+      "y": 2600,
+      "depth": 360,
+      "temp": {
+        "sign": "TOKO PAKAIAN",
+        "accent": "#8C3A5A",
+        "wall": "#EDE6E9",
+        "seed": 3
+      },
+      "inspect": {
+        "name": "Clothes shop",
+        "comment": "A clothes shophouse. (Background building.)"
+      }
+    },
+    {
+      "id": "ruko_m3",
+      "archetype": "ruko",
+      "x": 3250,
+      "y": 2600,
+      "depth": 360,
+      "temp": {
+        "sign": "PONSEL & PULSA",
+        "accent": "#2E7D5B",
+        "seed": 5
+      },
+      "inspect": {
+        "name": "Phone shop",
+        "comment": "Phones, credit and repairs. (Background building.)"
+      }
+    },
+    {
+      "id": "house_m4",
+      "archetype": "house_medium",
+      "x": 4100,
+      "y": 2600,
+      "depth": 380,
+      "roof": "#A0654A",
+      "inspect": {
+        "name": "Neighbour's house",
+        "comment": "A neighbour's house. (Background building.)"
+      }
+    },
+    {
+      "id": "ruko_m5",
+      "archetype": "ruko",
+      "x": 6000,
+      "y": 2600,
+      "depth": 360,
+      "temp": {
+        "sign": "BENGKEL MOTOR",
+        "accent": "#5B5B5B",
+        "wall": "#E3E0DA",
+        "seed": 2
+      },
+      "inspect": {
+        "name": "Motorbike workshop",
+        "comment": "A motorbike repair shophouse. (Background building.)"
+      }
+    },
+    {
       "id": "house_m6",
-      "facade": "world_facade_house",
+      "archetype": "house_small",
       "x": 7740,
       "y": 2600,
-      "depth": 420,
       "roof": "#9C5B4A",
       "inspect": {
         "name": "House",
@@ -414,10 +441,10 @@
     },
     {
       "id": "house_s1",
-      "facade": "world_facade_house",
+      "archetype": "house_small",
       "x": 3650,
-      "y": 4300,
-      "depth": 360,
+      "y": 4330,
+      "depth": 300,
       "roof": "#8E5A4C",
       "inspect": {
         "name": "House",
@@ -426,10 +453,10 @@
     },
     {
       "id": "house_s2",
-      "facade": "world_facade_house",
+      "archetype": "house_small",
       "x": 4250,
-      "y": 4300,
-      "depth": 360,
+      "y": 4330,
+      "depth": 300,
       "roof": "#6F6A63",
       "inspect": {
         "name": "House",
@@ -437,35 +464,11 @@
       }
     },
     {
-      "id": "shop_s3",
-      "facade": "world_facade_shop",
-      "x": 5250,
-      "y": 4300,
-      "depth": 360,
-      "roof": "#7A8A5E",
-      "inspect": {
-        "name": "Small shop",
-        "comment": "A small shop on the south lane. (Background building.)"
-      }
-    },
-    {
-      "id": "house_s4",
-      "facade": "world_facade_house",
-      "x": 6300,
-      "y": 4300,
-      "depth": 360,
-      "roof": "#A0654A",
-      "inspect": {
-        "name": "House",
-        "comment": "A house in the neighbourhood. (Background building.)"
-      }
-    },
-    {
       "id": "house_s5",
-      "facade": "world_facade_house",
-      "x": 6900,
-      "y": 4300,
-      "depth": 360,
+      "archetype": "house_small",
+      "x": 6950,
+      "y": 4330,
+      "depth": 300,
       "roof": "#7D6A5A",
       "inspect": {
         "name": "House",
@@ -474,10 +477,10 @@
     },
     {
       "id": "house_s6",
-      "facade": "world_facade_house",
+      "archetype": "house_small",
       "x": 7500,
-      "y": 4300,
-      "depth": 360,
+      "y": 4330,
+      "depth": 300,
       "roof": "#9C5B4A",
       "inspect": {
         "name": "House",
@@ -486,10 +489,9 @@
     },
     {
       "id": "house_t1",
-      "facade": "world_facade_house",
+      "archetype": "house_medium",
       "x": 3700,
       "y": 5550,
-      "depth": 400,
       "roof": "#7D6A5A",
       "inspect": {
         "name": "House",
@@ -498,10 +500,9 @@
     },
     {
       "id": "house_t2",
-      "facade": "world_facade_house",
+      "archetype": "house_small",
       "x": 5300,
       "y": 5550,
-      "depth": 400,
       "roof": "#8E5A4C",
       "inspect": {
         "name": "House",
@@ -510,14 +511,133 @@
     },
     {
       "id": "house_t3",
-      "facade": "world_facade_house",
+      "archetype": "house_medium",
       "x": 6500,
       "y": 5550,
-      "depth": 400,
       "roof": "#6F6A63",
       "inspect": {
         "name": "House",
         "comment": "A house in the neighbourhood. (Background building.)"
+      }
+    },
+    {
+      "id": "kiosk_a1",
+      "archetype": "market_kiosk",
+      "x": 5150,
+      "y": 3880,
+      "roof": "#2A9D8F",
+      "temp": {
+        "goods": "fruit",
+        "awning": "#2A9D8F"
+      },
+      "talk": {
+        "label": "Buy fruit",
+        "event": "ev_market_buy_fruit"
+      }
+    },
+    {
+      "id": "kiosk_a2",
+      "archetype": "market_kiosk",
+      "x": 5450,
+      "y": 3880,
+      "roof": "#E76F51",
+      "temp": {
+        "goods": "veg",
+        "awning": "#E76F51"
+      },
+      "talk": {
+        "label": "Buy vegetables",
+        "event": "ev_market_buy_veg"
+      }
+    },
+    {
+      "id": "kiosk_a3",
+      "archetype": "market_kiosk",
+      "x": 6060,
+      "y": 3880,
+      "roof": "#264653",
+      "temp": {
+        "goods": "fruit",
+        "awning": "#264653"
+      },
+      "talk": {
+        "label": "Buy fruit",
+        "event": "ev_market_buy_fruit"
+      }
+    },
+    {
+      "id": "kiosk_a4",
+      "archetype": "market_kiosk",
+      "x": 6360,
+      "y": 3880,
+      "roof": "#E9C46A",
+      "temp": {
+        "goods": "veg",
+        "awning": "#E9C46A"
+      },
+      "talk": {
+        "label": "Buy vegetables",
+        "event": "ev_market_buy_veg"
+      }
+    },
+    {
+      "id": "kiosk_b1",
+      "archetype": "market_kiosk",
+      "x": 5150,
+      "y": 4200,
+      "roof": "#E76F51",
+      "temp": {
+        "goods": "fish",
+        "awning": "#E76F51"
+      },
+      "talk": {
+        "label": "Buy fish",
+        "event": "ev_market_buy_fish"
+      }
+    },
+    {
+      "id": "kiosk_b2",
+      "archetype": "market_kiosk",
+      "x": 5450,
+      "y": 4200,
+      "roof": "#264653",
+      "temp": {
+        "goods": "cloth",
+        "awning": "#264653"
+      },
+      "talk": {
+        "label": "Look at the clothes",
+        "dialogue": "dlg_market_cloth"
+      }
+    },
+    {
+      "id": "kiosk_b3",
+      "archetype": "market_kiosk",
+      "x": 6060,
+      "y": 4200,
+      "roof": "#E9C46A",
+      "temp": {
+        "goods": "veg",
+        "awning": "#E9C46A"
+      },
+      "talk": {
+        "label": "Buy vegetables",
+        "event": "ev_market_buy_veg"
+      }
+    },
+    {
+      "id": "kiosk_b4",
+      "archetype": "market_kiosk",
+      "x": 6360,
+      "y": 4200,
+      "roof": "#2A9D8F",
+      "temp": {
+        "goods": "cloth",
+        "awning": "#2A9D8F"
+      },
+      "talk": {
+        "label": "Look at the clothes",
+        "dialogue": "dlg_market_cloth"
       }
     }
   ],
@@ -622,41 +742,9 @@
       "color": "#5E8A4E"
     },
     {
-      "x": 940,
-      "y": 1285,
-      "w": 120,
-      "h": 15,
-      "height": 120,
-      "color": "#E6DCCB"
-    },
-    {
-      "x": 3790,
-      "y": 1285,
-      "w": 120,
-      "h": 15,
-      "height": 120,
-      "color": "#E6DCCB"
-    },
-    {
-      "x": 5590,
-      "y": 1285,
-      "w": 200,
-      "h": 15,
-      "height": 120,
-      "color": "#E6DCCB"
-    },
-    {
-      "x": 7090,
-      "y": 1285,
-      "w": 120,
-      "h": 15,
-      "height": 120,
-      "color": "#E6DCCB"
-    },
-    {
-      "x": 740,
+      "x": 710,
       "y": 2585,
-      "w": 120,
+      "w": 100,
       "h": 15,
       "height": 120,
       "color": "#E6DCCB"
@@ -664,7 +752,7 @@
     {
       "x": 2920,
       "y": 2585,
-      "w": 90,
+      "w": 120,
       "h": 15,
       "height": 120,
       "color": "#E6DCCB"
@@ -672,7 +760,7 @@
     {
       "x": 5620,
       "y": 2585,
-      "w": 140,
+      "w": 170,
       "h": 15,
       "height": 120,
       "color": "#E6DCCB"
@@ -680,31 +768,55 @@
     {
       "x": 7430,
       "y": 2585,
-      "w": 70,
-      "h": 15,
-      "height": 120,
-      "color": "#E6DCCB"
-    },
-    {
-      "x": 3890,
-      "y": 4285,
       "w": 120,
       "h": 15,
       "height": 120,
       "color": "#E6DCCB"
     },
     {
-      "x": 6540,
-      "y": 4285,
-      "w": 120,
+      "x": 890,
+      "y": 1285,
+      "w": 150,
+      "h": 15,
+      "height": 120,
+      "color": "#E6DCCB"
+    },
+    {
+      "x": 3690,
+      "y": 1285,
+      "w": 220,
+      "h": 15,
+      "height": 120,
+      "color": "#E6DCCB"
+    },
+    {
+      "x": 5660,
+      "y": 1285,
+      "w": 180,
+      "h": 15,
+      "height": 120,
+      "color": "#E6DCCB"
+    },
+    {
+      "x": 7090,
+      "y": 1285,
+      "w": 170,
+      "h": 15,
+      "height": 120,
+      "color": "#E6DCCB"
+    },
+    {
+      "x": 3840,
+      "y": 4315,
+      "w": 220,
       "h": 15,
       "height": 120,
       "color": "#E6DCCB"
     },
     {
       "x": 7140,
-      "y": 4285,
-      "w": 120,
+      "y": 4315,
+      "w": 170,
       "h": 15,
       "height": 120,
       "color": "#E6DCCB"
@@ -1131,6 +1243,51 @@
       "assetId": "world_plant_floor",
       "x": 6100,
       "y": 4330
+    },
+    {
+      "assetId": "world_cafe_table",
+      "x": 900,
+      "y": 2760
+    },
+    {
+      "assetId": "world_stool",
+      "x": 830,
+      "y": 2745
+    },
+    {
+      "assetId": "world_stool",
+      "x": 970,
+      "y": 2745
+    },
+    {
+      "assetId": "world_cafe_table",
+      "x": 1110,
+      "y": 2760
+    },
+    {
+      "assetId": "world_stool",
+      "x": 1040,
+      "y": 2745
+    },
+    {
+      "assetId": "world_stool",
+      "x": 1180,
+      "y": 2745
+    },
+    {
+      "assetId": "world_cafe_table",
+      "x": 1320,
+      "y": 2760
+    },
+    {
+      "assetId": "world_stool",
+      "x": 1250,
+      "y": 2745
+    },
+    {
+      "assetId": "world_stool",
+      "x": 1390,
+      "y": 2745
     }
   ],
   "legacyMaps": {
@@ -1428,5 +1585,751 @@
         "label": "west road end"
       }
     ]
-  }
+  },
+  "crowds": [
+    {
+      "id": "market_seller",
+      "name": "Seller",
+      "count": {
+        "morning": 8,
+        "afternoon": 4
+      },
+      "looks": [
+        {
+          "shirt": "#7D6A5A",
+          "pants": "#3A3440",
+          "hair": "#2A1E18",
+          "hijab": "#C06C84"
+        },
+        {
+          "shirt": "#4A6FA5",
+          "pants": "#3A3440",
+          "hair": "#1F1A16"
+        },
+        {
+          "shirt": "#A0522D",
+          "pants": "#3A3440",
+          "hair": "#2A1E18",
+          "hijab": "#E9C46A"
+        },
+        {
+          "shirt": "#6D597A",
+          "pants": "#3A3440",
+          "hair": "#1F1A16"
+        }
+      ],
+      "routes": [
+        [
+          {
+            "x": 5025,
+            "y": 3902,
+            "face": "S",
+            "act": "selling"
+          }
+        ],
+        [
+          {
+            "x": 5325,
+            "y": 3902,
+            "face": "S",
+            "act": "selling"
+          }
+        ],
+        [
+          {
+            "x": 5935,
+            "y": 3902,
+            "face": "S",
+            "act": "selling"
+          }
+        ],
+        [
+          {
+            "x": 6235,
+            "y": 3902,
+            "face": "S",
+            "act": "selling"
+          }
+        ],
+        [
+          {
+            "x": 5025,
+            "y": 4222,
+            "face": "S",
+            "act": "selling"
+          }
+        ],
+        [
+          {
+            "x": 5325,
+            "y": 4222,
+            "face": "S",
+            "act": "selling"
+          }
+        ],
+        [
+          {
+            "x": 5935,
+            "y": 4222,
+            "face": "S",
+            "act": "selling"
+          }
+        ],
+        [
+          {
+            "x": 6235,
+            "y": 4222,
+            "face": "S",
+            "act": "selling"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "market_shopper",
+      "name": "Shopper",
+      "count": {
+        "morning": 8,
+        "afternoon": 3
+      },
+      "looks": [
+        {
+          "shirt": "#C06C84",
+          "pants": "#4A3F55",
+          "hair": "#2A1E18",
+          "hijab": "#F2D0A9"
+        },
+        {
+          "shirt": "#6C9A8B",
+          "pants": "#3A3440",
+          "hair": "#2A1E18",
+          "hijab": "#E8C7A0"
+        },
+        {
+          "shirt": "#E9C46A",
+          "pants": "#5E6670",
+          "hair": "#2A1E18",
+          "hijab": "#9DB4D6"
+        },
+        {
+          "shirt": "#B5838D",
+          "pants": "#3A3440",
+          "hair": "#2A1E18",
+          "hijab": "#FFFFFF"
+        },
+        {
+          "shirt": "#5B6C8F",
+          "pants": "#3A3440",
+          "hair": "#2A1E18"
+        },
+        {
+          "shirt": "#E5E5E5",
+          "pants": "#4A4A4A",
+          "hair": "#1F1A16"
+        }
+      ],
+      "speed": 55,
+      "interact": {
+        "label": "Greet",
+        "dialogue": "dlg_market_shopper"
+      },
+      "talkEvery": 3,
+      "routes": [
+        [
+          {
+            "x": 5760,
+            "y": 3540
+          },
+          {
+            "x": 5800,
+            "y": 3940
+          },
+          {
+            "x": 5450,
+            "y": 3930,
+            "dwellMs": 4000,
+            "face": "N",
+            "act": "browsing"
+          },
+          {
+            "x": 5150,
+            "y": 3930,
+            "dwellMs": 3000,
+            "face": "N",
+            "act": "buying"
+          },
+          {
+            "x": 5800,
+            "y": 3960
+          },
+          {
+            "x": 5800,
+            "y": 4260
+          },
+          {
+            "x": 6060,
+            "y": 4255,
+            "dwellMs": 3500,
+            "face": "N",
+            "act": "browsing"
+          },
+          {
+            "x": 6360,
+            "y": 4255,
+            "dwellMs": 3000,
+            "face": "N",
+            "act": "buying"
+          },
+          {
+            "x": 6600,
+            "y": 4255
+          },
+          {
+            "x": 6600,
+            "y": 3940
+          },
+          {
+            "x": 6360,
+            "y": 3930,
+            "dwellMs": 2500,
+            "face": "N",
+            "act": "browsing"
+          },
+          {
+            "x": 6060,
+            "y": 3930,
+            "dwellMs": 2000,
+            "face": "N",
+            "act": "buying"
+          },
+          {
+            "x": 5830,
+            "y": 3940
+          },
+          {
+            "x": 5760,
+            "y": 3540
+          }
+        ],
+        [
+          {
+            "x": 4930,
+            "y": 4430
+          },
+          {
+            "x": 4930,
+            "y": 4255
+          },
+          {
+            "x": 5150,
+            "y": 4255,
+            "dwellMs": 3000,
+            "face": "N",
+            "act": "browsing"
+          },
+          {
+            "x": 5450,
+            "y": 4255,
+            "dwellMs": 3500,
+            "face": "N",
+            "act": "buying"
+          },
+          {
+            "x": 5800,
+            "y": 4260
+          },
+          {
+            "x": 5800,
+            "y": 3940
+          },
+          {
+            "x": 5450,
+            "y": 3930,
+            "dwellMs": 2500,
+            "face": "N",
+            "act": "browsing"
+          },
+          {
+            "x": 5150,
+            "y": 3930,
+            "dwellMs": 3000,
+            "face": "N",
+            "act": "buying"
+          },
+          {
+            "x": 4930,
+            "y": 3940
+          },
+          {
+            "x": 4930,
+            "y": 4430
+          }
+        ],
+        [
+          {
+            "x": 6650,
+            "y": 3540
+          },
+          {
+            "x": 6600,
+            "y": 3940
+          },
+          {
+            "x": 6360,
+            "y": 3930,
+            "dwellMs": 3000,
+            "face": "N",
+            "act": "buying"
+          },
+          {
+            "x": 6060,
+            "y": 3930,
+            "dwellMs": 2500,
+            "face": "N",
+            "act": "browsing"
+          },
+          {
+            "x": 5830,
+            "y": 3940
+          },
+          {
+            "x": 5830,
+            "y": 4255
+          },
+          {
+            "x": 6060,
+            "y": 4255,
+            "dwellMs": 2500,
+            "face": "N",
+            "act": "browsing"
+          },
+          {
+            "x": 6600,
+            "y": 4255
+          },
+          {
+            "x": 6650,
+            "y": 3540
+          }
+        ]
+      ]
+    },
+    {
+      "id": "night_food",
+      "name": "Food seller",
+      "count": {
+        "evening": 1,
+        "night": 1
+      },
+      "looks": [
+        {
+          "shirt": "#E5E5E5",
+          "pants": "#4A4A4A",
+          "hair": "#1F1A16"
+        }
+      ],
+      "interact": {
+        "label": "Talk to the food seller",
+        "dialogue": "dlg_market_night_food"
+      },
+      "routes": [
+        [
+          {
+            "x": 4990,
+            "y": 3470,
+            "face": "S",
+            "act": "cooking"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "warkop_patron",
+      "name": "Customer",
+      "count": {
+        "morning": 2,
+        "afternoon": 3,
+        "evening": 6,
+        "night": 4
+      },
+      "looks": [
+        {
+          "shirt": "#5B6C8F",
+          "pants": "#3A3440",
+          "hair": "#2A1E18"
+        },
+        {
+          "shirt": "#E5E5E5",
+          "pants": "#4A4A4A",
+          "hair": "#1F1A16"
+        },
+        {
+          "shirt": "#8AB17D",
+          "pants": "#3E3E46",
+          "hair": "#2A1E18"
+        },
+        {
+          "shirt": "#D08C60",
+          "pants": "#33333B",
+          "hair": "#1F1A16"
+        }
+      ],
+      "interact": {
+        "label": "Chat",
+        "dialogue": "dlg_warkop_patron"
+      },
+      "talkEvery": 2,
+      "routes": [
+        [
+          {
+            "x": 830,
+            "y": 2765,
+            "face": "E",
+            "act": "sitting"
+          }
+        ],
+        [
+          {
+            "x": 1390,
+            "y": 2765,
+            "face": "W",
+            "act": "sitting"
+          }
+        ],
+        [
+          {
+            "x": 1040,
+            "y": 2765,
+            "face": "E",
+            "act": "chatting"
+          }
+        ],
+        [
+          {
+            "x": 1180,
+            "y": 2765,
+            "face": "W",
+            "act": "sitting"
+          }
+        ],
+        [
+          {
+            "x": 970,
+            "y": 2765,
+            "face": "W",
+            "act": "chatting"
+          }
+        ],
+        [
+          {
+            "x": 1250,
+            "y": 2765,
+            "face": "E",
+            "act": "sitting"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "passer",
+      "name": "Passer-by",
+      "count": {
+        "morning": 2,
+        "afternoon": 3,
+        "evening": 3,
+        "night": 1
+      },
+      "looks": [
+        {
+          "shirt": "#8AB17D",
+          "pants": "#3E3E46",
+          "hair": "#2A1E18"
+        },
+        {
+          "shirt": "#6C9A8B",
+          "pants": "#3A3440",
+          "hair": "#2A1E18",
+          "hijab": "#E8C7A0"
+        },
+        {
+          "shirt": "#D08C60",
+          "pants": "#33333B",
+          "hair": "#1F1A16"
+        },
+        {
+          "shirt": "#B5838D",
+          "pants": "#3A3440",
+          "hair": "#2A1E18",
+          "hijab": "#FFFFFF"
+        }
+      ],
+      "speed": 70,
+      "routes": [
+        [
+          {
+            "x": 300,
+            "y": 2860
+          },
+          {
+            "x": 4500,
+            "y": 2860
+          },
+          {
+            "x": 5300,
+            "y": 2860,
+            "dwellMs": 2500,
+            "face": "N",
+            "act": "window shopping"
+          },
+          {
+            "x": 7700,
+            "y": 2860
+          },
+          {
+            "x": 7700,
+            "y": 3540
+          },
+          {
+            "x": 300,
+            "y": 3540
+          }
+        ],
+        [
+          {
+            "x": 7700,
+            "y": 3540
+          },
+          {
+            "x": 4500,
+            "y": 3540
+          },
+          {
+            "x": 300,
+            "y": 3540
+          },
+          {
+            "x": 300,
+            "y": 2860
+          },
+          {
+            "x": 7700,
+            "y": 2860
+          }
+        ],
+        [
+          {
+            "x": 4730,
+            "y": 1580
+          },
+          {
+            "x": 4730,
+            "y": 2860
+          },
+          {
+            "x": 2700,
+            "y": 2860,
+            "dwellMs": 2000,
+            "face": "N",
+            "act": "window shopping"
+          },
+          {
+            "x": 1500,
+            "y": 2860
+          },
+          {
+            "x": 1535,
+            "y": 1580
+          }
+        ]
+      ]
+    },
+    {
+      "id": "lane_resident",
+      "name": "Neighbour",
+      "count": {
+        "morning": 1,
+        "afternoon": 1,
+        "evening": 1
+      },
+      "looks": [
+        {
+          "shirt": "#E9C46A",
+          "pants": "#5E6670",
+          "hair": "#2A1E18",
+          "hijab": "#9DB4D6"
+        },
+        {
+          "shirt": "#5B6C8F",
+          "pants": "#3A3440",
+          "hair": "#2A1E18"
+        }
+      ],
+      "speed": 50,
+      "routes": [
+        [
+          {
+            "x": 800,
+            "y": 1580
+          },
+          {
+            "x": 1350,
+            "y": 1555,
+            "dwellMs": 6000,
+            "face": "N",
+            "act": "at the gate"
+          },
+          {
+            "x": 3000,
+            "y": 1580
+          },
+          {
+            "x": 1600,
+            "y": 1580
+          }
+        ],
+        [
+          {
+            "x": 6000,
+            "y": 1580
+          },
+          {
+            "x": 5350,
+            "y": 1555,
+            "dwellMs": 6000,
+            "face": "N",
+            "act": "at the gate"
+          },
+          {
+            "x": 7300,
+            "y": 1580
+          }
+        ]
+      ]
+    },
+    {
+      "id": "park_visitor",
+      "name": "Visitor",
+      "count": {
+        "morning": 2,
+        "afternoon": 2,
+        "evening": 3
+      },
+      "looks": [
+        {
+          "shirt": "#8AB17D",
+          "pants": "#3E3E46",
+          "hair": "#2A1E18"
+        },
+        {
+          "shirt": "#C06C84",
+          "pants": "#4A3F55",
+          "hair": "#2A1E18",
+          "hijab": "#F2D0A9"
+        },
+        {
+          "shirt": "#B5838D",
+          "pants": "#3A3440",
+          "hair": "#2A1E18",
+          "hijab": "#FFFFFF"
+        }
+      ],
+      "speed": 55,
+      "routes": [
+        [
+          {
+            "x": 1675,
+            "y": 3700
+          },
+          {
+            "x": 1675,
+            "y": 4425
+          },
+          {
+            "x": 3100,
+            "y": 4425
+          },
+          {
+            "x": 1675,
+            "y": 4425
+          },
+          {
+            "x": 400,
+            "y": 4425
+          },
+          {
+            "x": 1675,
+            "y": 4425
+          },
+          {
+            "x": 1675,
+            "y": 5250
+          }
+        ],
+        [
+          {
+            "x": 1350,
+            "y": 4300,
+            "dwellMs": 9000,
+            "face": "N",
+            "act": "sitting"
+          },
+          {
+            "x": 1675,
+            "y": 4430
+          },
+          {
+            "x": 2050,
+            "y": 4300,
+            "dwellMs": 9000,
+            "face": "N",
+            "act": "sitting"
+          },
+          {
+            "x": 1675,
+            "y": 4430
+          }
+        ],
+        [
+          {
+            "x": 2800,
+            "y": 4950,
+            "dwellMs": 8000,
+            "face": "N",
+            "act": "sitting"
+          },
+          {
+            "x": 2500,
+            "y": 4950
+          },
+          {
+            "x": 2500,
+            "y": 4425
+          },
+          {
+            "x": 900,
+            "y": 4425
+          },
+          {
+            "x": 900,
+            "y": 3950,
+            "dwellMs": 8000,
+            "face": "N",
+            "act": "sitting"
+          },
+          {
+            "x": 900,
+            "y": 4425
+          },
+          {
+            "x": 2500,
+            "y": 4425
+          },
+          {
+            "x": 2500,
+            "y": 4950
+          }
+        ]
+      ]
+    }
+  ]
 }

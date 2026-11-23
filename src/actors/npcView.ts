@@ -51,4 +51,6 @@ export class NpcView {
     this.tag.setPosition(rx, ry - H - 6);
   }
   setVisible(v: boolean): void { this.sprite.setVisible(v); this.shadow.setVisible(v); this.tag.setVisible(v); }
+  /** LOD (P6.1): stop drawing an NPC far outside the view without touching its presence (`visible`). Alpha 0 skips rendering. */
+  setInView(v: boolean): void { const a = v ? 1 : 0; if (this.sprite.alpha !== a) { this.sprite.setAlpha(a); this.shadow.setAlpha(a); this.tag.setAlpha(a); } }
 }

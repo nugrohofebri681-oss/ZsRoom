@@ -35,13 +35,38 @@ export interface GroundLayerDef { floor: string; x: number; y: number; w: number
  * facade asset paints the front; the engine adds the roof seen from above and the collision footprint. A door on
  * the front works like a north door (walk into it / press E); `inspect` makes a background building inspectable.
  */
+export type RoofStyle = 'tile' | 'gable' | 'hip' | 'flat' | 'zinc' | 'canopy';
+export interface ArchetypeDef { facade: string; depth: number; roof?: { style?: RoofStyle; color?: string }; yard?: { depth: number; gate?: number }; use?: string }
 export interface BuildingDef {
-  id: string; facade: string; x: number; y: number; depth: number;
+  id: string; x: number; y: number;
+  /** P6.1: a named archetype (src/data/archetypes.json) supplies facade, depth, roof and yard; fields here override. */
+  archetype?: string;
+  facade?: string; depth?: number;
   roof?: string;
+  roofStyle?: RoofStyle;
+  /** Per-placement TEMP restyle of the facade (sign text, colours, goods), like room props' `temp`. */
+  temp?: Record<string, unknown>;
+  /** A fenced front yard: fence `depth` cm in front of the facade, with a gate gap at the door. */
+  yard?: { depth: number; gate?: number };
   door?: { id: string; label: string; to: { room: string; spawn: string }; w?: number; dx?: number; locked?: { message: string; unlessFlag?: string } };
   inspect?: { name: string; comment: string };
-  /** A dialogue at the front (e.g. the warung owner). */
-  talk?: { label: string; dialogue: string };
+  /** A dialogue or story event at the front (e.g. a market seller: buying is an event). */
+  talk?: { label: string; dialogue?: string; event?: string };
+}
+type Phase = 'morning' | 'afternoon' | 'evening' | 'night';
+/**
+ * P6.1 crowd: ambient people generated from a few looks and routes. `count` is how many are present per time of day
+ * (a design target per place, never a claim about real head-counts). Only every `talkEvery`-th person can be greeted.
+ */
+export interface CrowdDef {
+  id: string; name: string;
+  count: Partial<Record<Phase, number>>;
+  looks: import('./npc').NpcData['look'][];
+  /** Routes of activity points (region coordinates); people are spread along them. A route of one point = stays put. */
+  routes: import('./npc').ActivityPoint[][];
+  speed?: number;
+  interact?: { label: string; dialogue?: string; event?: string };
+  talkEvery?: number;
 }
 export interface FloorOpeningDef { between: [string, string]; y: number; h: number }
 export interface FloorDef {
@@ -60,12 +85,13 @@ export interface FloorDef {
   ground?: GroundLayerDef[];
   buildings?: BuildingDef[];
   props?: import('./room').RoomPropEntry[];
+  crowds?: CrowdDef[];
   /** Old save/door map ids → landmark anchors (old coordinates → this region). Keys may be zones or other ids
    *  (e.g. the P5 region `batuphat_region`); non-zone keys become aliases of this region. */
   legacyMaps?: Record<string, LegacyAnchor[]>;
 }
 export interface ZoneInfo { id: string; x: number; y: number; w: number; h: number; data: RoomData; prefix: string; wallGaps?: [number, number][] }
-export interface BuildingInfo { key: string; id: string; x0: number; x1: number; front: number; depth: number; height: number; roof: string; zone: string }
+export interface BuildingInfo { key: string; id: string; x0: number; x1: number; front: number; depth: number; height: number; roof: string; roofStyle: RoofStyle; zone: string; archetype?: string }
 export interface CompiledFloor extends CompiledRoom {
   zones: ZoneInfo[];
   ground?: GroundLayerDef[];

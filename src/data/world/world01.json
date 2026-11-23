@@ -91,10 +91,11 @@
       "provisional": true,
       "region": [
         "front_yard",
-        "batuphat_lanes",
+        "batuphat_park",
         "batuphat_west",
         "batuphat_street",
-        "batuphat_park",
+        "batuphat_lanes",
+        "batuphat_market",
         "batuphat_south"
       ],
       "note": "P6 explorable Batuphat town (80 × 56 m): house & garden, residential lanes, gangs, main street with crossroads, park, south lanes; Indomaret, Mixue and the dimsum workplace as free-standing buildings. P5 'batuphat_region' saves migrate by landmark."
@@ -177,6 +178,15 @@
       "note": "Neighbourhood park with hedges, paths, fountain"
     },
     {
+      "id": "batuphat_market",
+      "district": "batuphat",
+      "kind": "exterior",
+      "status": "implemented",
+      "provisional": true,
+      "zoneOf": "batuphat_town",
+      "note": "P6.1 morning market inspired by Pasar Batuphat (kiosks, aisles, sellers and shoppers by time of day)"
+    },
+    {
       "id": "batuphat_south",
       "district": "batuphat",
       "kind": "exterior",
@@ -195,6 +205,14 @@
       "note": "Order at the counter → enjoy at a table",
       "realWorldReference": "Mixue",
       "brandReview": true
+    },
+    {
+      "id": "warkop",
+      "district": "batuphat",
+      "kind": "interior",
+      "status": "implemented",
+      "provisional": true,
+      "note": "P6.1 warung kopi interior: order at the counter, sit and drink, regulars at their table; open front onto the main street"
     },
     {
       "id": "travel_maps",

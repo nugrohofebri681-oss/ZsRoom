@@ -92,6 +92,8 @@ export class RoomScene extends Phaser.Scene {
   /** Shell tiles drawn in the last frame (tests / perf HUD). */
   private tilesDrawn = 0;
   private npcs: { data: NpcData; state: NpcState; view: NpcView }[] = [];
+  /** NPCs simulated in the last frame (LOD). */
+  private npcActive = 0;
   private visited: string[] = [];
   /** Background landmarks inspected in this map visit (debug/tests). */
   private inspected = new Set<string>();
@@ -768,11 +770,20 @@ export class RoomScene extends Phaser.Scene {
   private updateNpcs(dtMs: number): void {
     if (!this.npcs.length) return;
     const blocked = (x: number, y: number) => !this.grid.standable({ x, y }) || Math.hypot(x - this.pos.x, y - this.pos.y) < 40;
+    // LOD (P6.1): people far outside the view are not simulated (towns have crowds; phones have a budget)
+    const v = this.cameras.main.worldView, m = 500;
+    let active = 0;
     for (const n of this.npcs) {
       if (!n.view.sprite.visible) continue;
+      const r = groundToRender(n.state.x, n.state.y);
+      const inView = !(r.x < v.x - m || r.x > v.right + m || r.y < v.y - m || r.y > v.bottom + m + 200);
+      n.view.setInView(inView);
+      if (!inView) continue;
       stepNpc(n.data, n.state, dtMs, this.pos, blocked);
       this.drawNpc(n, this.time.now);
+      active++;
     }
+    this.npcActive = active;
   }
 
   private npcAnchors(): WorldAnchor[] {
@@ -830,19 +841,59 @@ export class RoomScene extends Phaser.Scene {
    * projected above the facade top), eaves and a contact shadow. Depth = the front line (like the facade).
    */
   private drawBuildings(): void {
-    const K = DEPTH_SCALE;
+    const K = DEPTH_SCALE, C = Phaser.Display.Color;
     for (const b of this.room.buildings ?? []) {
-      const col = Phaser.Display.Color.HexStringToColor(b.roof), w = b.x1 - b.x0;
-      const top = (b.front - b.depth) * K - b.height, eave = b.front * K - b.height;
+      const base = C.HexStringToColor(b.roof).color, w = b.x1 - b.x0;
+      const dark = C.ValueToColor(base).darken(18).color, darker = C.ValueToColor(base).darken(30).color, light = C.ValueToColor(base).lighten(12).color;
+      const top = (b.front - b.depth) * K - b.height, eave = b.front * K - b.height, H = eave - top;
       const g = this.add.graphics().setDepth(b.front - 0.02).setName('roof');
-      const dark = Phaser.Display.Color.ValueToColor(col.color).darken(18).color, light = Phaser.Display.Color.ValueToColor(col.color).lighten(10).color;
-      g.fillStyle(col.color, 1).fillRect(b.x0 - 12, top, w + 24, eave - top + 2);                     // roof plane
-      for (let y = top + 14; y < eave - 4; y += 16) g.fillStyle(dark, 0.35).fillRect(b.x0 - 12, y, w + 24, 2);   // tile courses
-      g.fillStyle(light, 0.8).fillRect(b.x0 - 12, top, w + 24, 6);                                     // ridge
-      g.fillStyle(dark, 1).fillRect(b.x0 - 14, eave - 6, w + 28, 10);                                  // eave
-      g.fillStyle(0x000000, 0.12).fillRect(b.x0 - 12, top, 10, eave - top).fillRect(b.x0 + w + 2, top, 10, eave - top);
+      const L = b.x0 - 12, R = b.x1 + 12, W = R - L;
+      switch (b.roofStyle) {
+        case 'gable': {                                   // ridge parallel to the street: far slope short and lighter, near slope long with tile courses
+          const ridge = top + H * 0.35;
+          g.fillStyle(light, 1).fillRect(L, top, W, ridge - top);
+          g.fillStyle(base, 1).fillRect(L, ridge, W, eave - ridge + 2);
+          for (let y = ridge + 12; y < eave - 4; y += 14) g.fillStyle(dark, 0.4).fillRect(L, y, W, 2);
+          g.fillStyle(darker, 1).fillRect(L - 2, ridge - 3, W + 4, 6);                                  // ridge cap
+          g.fillStyle(0x000000, 0.14).fillTriangle(L, top, L, eave, L + 18, ridge).fillTriangle(R, top, R, eave, R - 18, ridge);   // gable ends
+          break;
+        }
+        case 'hip': {                                     // four slopes: the near one a trapezoid, the side hips darker
+          const inset = Math.min(W * 0.22, H * 0.9), ridgeY = top + H * 0.3;
+          g.fillStyle(dark, 1).fillRect(L, top, W, eave - top + 2);
+          g.fillStyle(light, 1).fillPoints([new Phaser.Math.Vector2(L + inset, top), new Phaser.Math.Vector2(R - inset, top), new Phaser.Math.Vector2(R - inset * 0.6, ridgeY), new Phaser.Math.Vector2(L + inset * 0.6, ridgeY)], true);
+          g.fillStyle(base, 1).fillPoints([new Phaser.Math.Vector2(L + inset * 0.6, ridgeY), new Phaser.Math.Vector2(R - inset * 0.6, ridgeY), new Phaser.Math.Vector2(R, eave + 2), new Phaser.Math.Vector2(L, eave + 2)], true);
+          for (let y = ridgeY + 12; y < eave - 4; y += 14) { const t = (y - ridgeY) / (eave - ridgeY), x0 = L + inset * 0.6 * (1 - t), x1 = R - inset * 0.6 * (1 - t); g.fillStyle(dark, 0.35).fillRect(x0, y, x1 - x0, 2); }
+          break;
+        }
+        case 'flat': {                                    // concrete slab with a parapet and a rooftop water tank (typical ruko)
+          g.fillStyle(base, 1).fillRect(L + 6, top, W - 12, H + 2);
+          g.lineStyle(8, darker, 1).strokeRect(L + 10, top + 4, W - 20, H - 6);
+          g.fillStyle(0x000000, 0.08).fillRect(L + 14, top + 8, W - 28, (H - 14) * 0.4);
+          if (w > 300) { const tx = L + W * 0.72, ty = top + H * 0.25; g.fillStyle(0x3d85c6, 1).fillRoundedRect(tx, ty, 46, 34, 6); g.fillStyle(0x2e6aa0, 1).fillRect(tx, ty + 26, 46, 8); }
+          break;
+        }
+        case 'zinc': {                                    // corrugated metal sheet: ribs run down the slope
+          g.fillStyle(base, 1).fillRect(L, top, W, H + 2);
+          for (let x = L + 4; x < R; x += 10) g.fillStyle(light, 0.5).fillRect(x, top, 3, H + 2);
+          g.fillStyle(darker, 1).fillRect(L - 4, eave - 4, W + 8, 8);
+          break;
+        }
+        case 'canopy': {                                  // market tarp: thin, striped, slightly sagging
+          g.fillStyle(base, 1).fillRect(L + 4, top, W - 8, H + 2);
+          for (let x = L + 4; x < R - 4; x += 28) g.fillStyle(0xffffff, 0.28).fillRect(x, top, 14, H + 2);
+          g.fillStyle(darker, 0.9).fillRect(L, eave - 3, W, 6);
+          break;
+        }
+        default: {                                        // 'tile' (P6 look)
+          g.fillStyle(base, 1).fillRect(L, top, W, H + 2);
+          for (let y = top + 14; y < eave - 4; y += 16) g.fillStyle(dark, 0.35).fillRect(L, y, W, 2);
+          g.fillStyle(light, 0.8).fillRect(L, top, W, 6);
+          g.fillStyle(dark, 1).fillRect(L - 2, eave - 6, W + 4, 10);
+        }
+      }
       this.roofViews.set(b.key, g);
-      this.cullAdd(g, b.x0 - 14, top, w + 28, eave - top + 6);
+      this.cullAdd(g, L - 4, top, W + 8, H + 8);
       const sh = this.add.graphics().setDepth(-50000).fillStyle(0x3a2530, 0.18).fillRect(b.x0 - 6, b.front * K - 2, w + 12, 14);   // contact shadow
       this.cullAdd(sh, b.x0 - 6, b.front * K - 2, w + 12, 14);
     }
@@ -981,7 +1032,8 @@ export class RoomScene extends Phaser.Scene {
         floor: this.lastFloor,
         visited: [...this.visited],
         flagsState: { ...this.flags },
-        npcs: this.npcs.map((n) => ({ id: n.data.id, x: Math.round(n.state.x), y: Math.round(n.state.y), visible: n.view.sprite.visible, moving: n.state.moving })),
+        npcs: this.npcs.map((n) => ({ id: n.data.id, x: Math.round(n.state.x), y: Math.round(n.state.y), visible: n.view.sprite.visible, moving: n.state.moving, act: n.state.act ?? null, zone: zoneAt(this.room.zones, n.state.x, n.state.y)?.id ?? null })),
+        npcActive: this.npcActive,
         mapKind: this.room.data.kind ?? 'interior',
         zone: this.zone,
         zones: this.room.zones?.map((z) => ({ id: z.id, x: z.x, y: z.y, w: z.w, h: z.h })) ?? null,

@@ -1,0 +1,26 @@
+{
+  "id": "env_floor_warkop",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "environment",
+  "kind": "floor-tile",
+  "displayName": "Warkop floor: grey cement tiles (TEMP world placeholder)",
+  "density": 2,
+  "canvas": {
+    "width": 256,
+    "height": 126
+  },
+  "tile": {
+    "repeat": "xy",
+    "widthCm": 128,
+    "renderDepthCm": 63,
+    "groundDepthCm": 90
+  },
+  "temp": {
+    "shape": "tiles",
+    "base": "#B9B2A6",
+    "tilesX": 3,
+    "tilesY": 2
+  },
+  "$comment": "P6.1 warkop interior placeholder (Codex: final HD illustrated tile at the same size)."
+}

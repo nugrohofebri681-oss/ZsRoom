@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import { DEPTH_SCALE as K } from '../core/projection';
+import { drawOrder, GROUND_RANK, groundClass, runsMinus } from '../world/ground';
 import { getEnvironmentSpec, type EnvironmentSpec } from '../core/specs';
 import { textureKey, type AssetManifest } from '../systems/manifest';
 import { doorSide, type RoomData } from '../world/room';
@@ -289,10 +290,11 @@ export interface GroundLayer { floor: string; x: number; y: number; w: number; h
  */
 export function buildGround(scene: Phaser.Scene, layers: GroundLayer[], manifest: AssetManifest, room: RoomData, density = 2): number {
   const R = (l: GroundLayer) => ({ x: l.x, y: l.y * K, w: l.w, h: l.h * K });
-  const rects = layers.map(R);
+  // deterministic precedence: base grass, plaza, pavement band, lanes, roads — never authoring order
+  const ordered = drawOrder(layers), rects = ordered.map(R);
   const marks = scene.add.graphics().setDepth(-99994).setName('ground-marks');
   let n = 0;
-  layers.forEach((l, i) => {
+  ordered.forEach((l, i) => {
     const t = superTile(scene, resolveTile(scene, getEnvironmentSpec(l.floor), manifest, room, density), 256);
     const r = R(l);
     // skip quads that a later (higher) layer fully covers: grass under the pavement band, pavement under the road
@@ -301,14 +303,18 @@ export function buildGround(scene: Phaser.Scene, layers: GroundLayer[], manifest
     const before = scene.children.list.length;
     n += tileQuads(scene, t.key, t.w, t.h, r.x, r.y, r.w, r.h, 1 / t.density, span);
     for (const o of scene.children.list.slice(before)) (o as Phaser.GameObjects.Image).setDepth(-100000 + i * 0.01);
+    // markings stop where a strip of the same or higher rank crosses or joins this one (junctions stay clean)
+    const rank = GROUND_RANK[groundClass(l)], horiz = r.w >= r.h;
+    const crossers = ordered.map(R).filter((o, j) => j !== i && !ordered[j]!.base && GROUND_RANK[groundClass(ordered[j]!)] >= rank && groundClass(ordered[j]!) !== 'pavement');
+    const along = (y0: number, y1: number): [number, number][] => crossers.filter((o) => o.y < y1 + 1 && o.y + o.h > y0 - 1).map((o) => [o.x - 2, o.x + o.w + 2]);
+    const across = (x0: number, x1: number): [number, number][] => crossers.filter((o) => o.x < x1 + 1 && o.x + o.w > x0 - 1).map((o) => [o.y - 2, o.y + o.h + 2]);
+    const hLine = (y: number, th: number, color: number, alpha: number, dash = 0) => { for (const [a, b] of runsMinus(r.x, r.x + r.w, along(y, y + th))) { if (!dash) marks.fillStyle(color, alpha).fillRect(a, y, b - a, th); else for (let x = a + 20; x < b - dash; x += dash * 2) marks.fillStyle(color, alpha).fillRect(x, y, dash, th); } };
+    const vLine = (x: number, th: number, color: number, alpha: number, dash = 0) => { for (const [a, b] of runsMinus(r.y, r.y + r.h, across(x, x + th))) { if (!dash) marks.fillStyle(color, alpha).fillRect(x, a, th, b - a); else for (let y = a + 14; y < b - dash; y += dash * 2) marks.fillStyle(color, alpha).fillRect(x, y, th, dash); } };
     if (l.markings === 'road') {
-      const horiz = r.w >= r.h;
-      marks.fillStyle(0xd9d4c7, 1);
-      if (horiz) { marks.fillRect(r.x, r.y, r.w, 5).fillRect(r.x, r.y + r.h - 5, r.w, 5); for (let x = r.x + 20; x < r.x + r.w - 50; x += 100) marks.fillStyle(0xf2e9c9, 1).fillRect(x, r.y + r.h / 2 - 2, 50, 4); }
-      else { marks.fillRect(r.x, r.y, 5, r.h).fillRect(r.x + r.w - 5, r.y, 5, r.h); for (let y = r.y + 14; y < r.y + r.h - 35; y += 70) marks.fillStyle(0xf2e9c9, 1).fillRect(r.x + r.w / 2 - 2, y, 4, 35); }
+      if (horiz) { hLine(r.y, 5, 0xd9d4c7, 1); hLine(r.y + r.h - 5, 5, 0xd9d4c7, 1); hLine(r.y + r.h / 2 - 2, 4, 0xf2e9c9, 1, 50); }
+      else { vLine(r.x, 5, 0xd9d4c7, 1); vLine(r.x + r.w - 5, 5, 0xd9d4c7, 1); vLine(r.x + r.w / 2 - 2, 4, 0xf2e9c9, 1, 35); }
     } else if (l.markings === 'lane') {
-      marks.fillStyle(0x8a7f75, 0.35);
-      if (r.w >= r.h) marks.fillRect(r.x, r.y, r.w, 3).fillRect(r.x, r.y + r.h - 3, r.w, 3); else marks.fillRect(r.x, r.y, 3, r.h).fillRect(r.x + r.w - 3, r.y, 3, r.h);
+      if (horiz) { hLine(r.y, 3, 0x8a7f75, 0.35); hLine(r.y + r.h - 3, 3, 0x8a7f75, 0.35); } else { vLine(r.x, 3, 0x8a7f75, 0.35); vLine(r.x + r.w - 3, 3, 0x8a7f75, 0.35); }
     }
   });
   return n;

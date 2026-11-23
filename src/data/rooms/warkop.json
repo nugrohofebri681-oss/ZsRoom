@@ -1,0 +1,267 @@
+{
+  "$comment": "P6.1 warung kopi interior (open front onto the main street). Order at the counter, sit and drink, regulars at their table. Furnishing and roles are generic Acehnese warkop culture (docs/research/batuphat-source-register.md §2), not a real business. PROVISIONAL.",
+  "id": "warkop",
+  "displayName": "Warung kopi",
+  "world": "world01",
+  "floor": "ground",
+  "kind": "interior",
+  "ambience": "shop",
+  "provisional": true,
+  "sizeCm": {
+    "w": 780,
+    "h": 560
+  },
+  "wallHeightCm": 280,
+  "palette": {
+    "floor": "#D8C9B0",
+    "wall": "#E6D3B3",
+    "trim": "#6B3E26"
+  },
+  "shell": {
+    "floor": "env_floor_warkop",
+    "wall": "env_wall_warkop"
+  },
+  "spawns": {
+    "default": {
+      "x": 380,
+      "y": 500,
+      "facing": "N"
+    },
+    "from_street": {
+      "x": 380,
+      "y": 510,
+      "facing": "N"
+    }
+  },
+  "props": [
+    {
+      "assetId": "world_menu_board",
+      "wall": {
+        "x": 540,
+        "z": 150
+      }
+    },
+    {
+      "assetId": "world_counter",
+      "x": 540,
+      "y": 170,
+      "anchors": [
+        {
+          "id": "order",
+          "label": "Order a sanger",
+          "x": 0,
+          "y": 32,
+          "facing": "N",
+          "radiusCm": 50,
+          "action": {
+            "type": "event",
+            "id": "ev_warkop_order"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_store_fridge",
+      "x": 700,
+      "y": 90,
+      "anchors": []
+    },
+    {
+      "assetId": "world_cafe_table",
+      "x": 170,
+      "y": 300,
+      "anchors": [
+        {
+          "id": "sit",
+          "label": "Sit and drink",
+          "x": 0,
+          "y": 30,
+          "facing": "N",
+          "radiusCm": 50,
+          "action": {
+            "type": "event",
+            "id": "ev_warkop_sit"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_stool",
+      "x": 100,
+      "y": 300
+    },
+    {
+      "assetId": "world_stool",
+      "x": 240,
+      "y": 300
+    },
+    {
+      "assetId": "world_stool",
+      "x": 170,
+      "y": 230
+    },
+    {
+      "assetId": "world_cafe_table",
+      "x": 400,
+      "y": 360,
+      "anchors": [
+        {
+          "id": "sit",
+          "label": "Sit and drink",
+          "x": 0,
+          "y": 30,
+          "facing": "N",
+          "radiusCm": 50,
+          "action": {
+            "type": "event",
+            "id": "ev_warkop_sit"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_stool",
+      "x": 330,
+      "y": 360
+    },
+    {
+      "assetId": "world_stool",
+      "x": 470,
+      "y": 360
+    },
+    {
+      "assetId": "world_cafe_table",
+      "x": 640,
+      "y": 420,
+      "anchors": [
+        {
+          "id": "sit",
+          "label": "Sit and drink",
+          "x": 0,
+          "y": 30,
+          "facing": "N",
+          "radiusCm": 50,
+          "action": {
+            "type": "event",
+            "id": "ev_warkop_sit"
+          }
+        }
+      ]
+    },
+    {
+      "assetId": "world_stool",
+      "x": 570,
+      "y": 420
+    },
+    {
+      "assetId": "world_stool",
+      "x": 710,
+      "y": 420
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 40,
+      "y": 90
+    },
+    {
+      "assetId": "world_plant_floor",
+      "x": 40,
+      "y": 520
+    }
+  ],
+  "npcs": [
+    {
+      "id": "npc_warkop_barista",
+      "name": "Barista",
+      "look": {
+        "shirt": "#6B3E26",
+        "pants": "#2F2A2A",
+        "hair": "#1F1A16"
+      },
+      "x": 540,
+      "y": 105,
+      "facing": "S",
+      "behaviour": {
+        "type": "idle",
+        "act": "brewing"
+      },
+      "interact": {
+        "label": "Talk to the barista",
+        "dialogue": "dlg_warkop_barista"
+      },
+      "radiusCm": 60
+    },
+    {
+      "id": "npc_warkop_regular_a",
+      "name": "Regular",
+      "look": {
+        "shirt": "#5B6C8F",
+        "pants": "#3A3440",
+        "hair": "#2A1E18"
+      },
+      "x": 100,
+      "y": 315,
+      "facing": "E",
+      "behaviour": {
+        "type": "idle",
+        "act": "chatting"
+      },
+      "schedule": {
+        "morning": "away"
+      },
+      "interact": {
+        "label": "Talk to the regulars",
+        "dialogue": "dlg_warkop_regulars"
+      }
+    },
+    {
+      "id": "npc_warkop_regular_b",
+      "name": "Regular",
+      "look": {
+        "shirt": "#E5E5E5",
+        "pants": "#4A4A4A",
+        "hair": "#BBBBBB"
+      },
+      "x": 240,
+      "y": 315,
+      "facing": "W",
+      "behaviour": {
+        "type": "idle",
+        "act": "chatting"
+      }
+    },
+    {
+      "id": "npc_warkop_reader",
+      "name": "Customer",
+      "look": {
+        "shirt": "#8AB17D",
+        "pants": "#3E3E46",
+        "hair": "#2A1E18"
+      },
+      "x": 710,
+      "y": 435,
+      "facing": "W",
+      "behaviour": {
+        "type": "idle",
+        "act": "reading"
+      },
+      "schedule": {
+        "night": "away"
+      }
+    }
+  ],
+  "doors": [
+    {
+      "id": "exit",
+      "label": "Back to the street",
+      "x": 330,
+      "y": 560,
+      "w": 100,
+      "h": 10,
+      "to": {
+        "room": "batuphat_west",
+        "spawn": "from_warkop"
+      }
+    }
+  ]
+}

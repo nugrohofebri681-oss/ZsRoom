@@ -8,10 +8,10 @@ An isolated **temporary** playable build of the P6.1 Draft PR (Issue #40). It is
 - **Source:** branch `claude/world01-p6.1`, built by `.github/workflows/p6-1-static-preview.yml` into `preview-world01-p6.1-static`.
 
 ## What to try
-1. **Morning:** walk to the **pasar pagi**, south of the main road and east of the crossroads. Sellers stand at their stalls and shoppers browse; buy fruit, vegetables or fish.
+1. **Morning** (see 4): walk to the **pasar pagi**, south of the main road and east of the crossroads. Sellers stand at their stalls and shoppers browse; buy fruit, vegetables or fish.
 2. **Evening:** the stalls are covered and a food seller stands at the corner. The **warung kopi** on the main road (west) is full; go inside, order a sanger, sit, chat with the regulars.
 3. The lanes and gangs stay quiet. The houses come in different sizes and shapes; the main road has ruko with signboards.
-4. **Time of day:** the HUD clock follows story time. In the preview, the time changes as you play through the day's events.
+4. **Time of day:** a new game starts in the **evening**. Resting (E at the bed or the sofa) advances one part of the day; resting at night sleeps until **morning**. Then walk to the market to see it at its busiest.
 
 ## Caveats
 - All buildings and people are TEMP art; the layout is a compressed fictional neighbourhood inspired by Batuphat (`docs/research/batuphat-source-register.md`).

@@ -1,0 +1,11 @@
+{
+  "HANDOFF.md": "7ab47bd3958d3207c5e9bdb8f63862f7729740080cfb6afb0b3ea97cf8c1e820",
+  "README.md": "b908a9f539ae4987bf8fc995eba2a9e8dfbd723659dce0b2d682704a95f86682",
+  "TEST_PLAN.md": "661fdd1db94456dcf4d9b62cb9a662104a1fbeff52b17dcb39b167add28bb9d9",
+  "build-results.md": "1cdb1d7f7a589b03b682bb1e3afc23eaee1dc2e3a62f948c0471a862650d35c9",
+  "geometry-baseline.md": "ea84e0863648df5f20de1a8b7a4c062ad07747d6c871efd8ac30dc87ee63e9b7",
+  "geometry-command.md": "611541538ecbd9f70a47b76dd040731dcae2006bb39e5921545d3970ddafcf08",
+  "preservation.json": "8e9f7562b553e761c9c3549cda3cc2142ace523661ce5cb2191429e3b5bf88e7",
+  "runtime-contract-audit.json": "04febf5d5d6889d998be1e3274dc231a82d3ddd9bc17ab42c8fe74df24a3824c",
+  "unit-results.md": "784cd3d6211fb86536e67035b62d171ac480e048a23023cee0f76c62259efe1b"
+}

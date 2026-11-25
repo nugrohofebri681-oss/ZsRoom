@@ -1,0 +1,10 @@
+# Post-contract integration verification — NOT executed in this checkpoint
+
+1. Validate official production spec presence and version, ownership routing, PNG density/dimensions/alpha/padding/art bounds/baseline, SHA256, references and source provenance. Keep each archetype independent. No temporary replacement spec to force green checks.
+2. Verify native content widths >=760px small,1240large,840ruko,1200warung for current runtime facade widths at2px/cm, plus contract-defined padding/overhang. Do not count upscaled pixels. Height and all layer canvases additionally must meet frozen contract.
+3. Produce native HD/SD/light/dark comparisons using selected G1 A/B/B/C and one targeted revision each; measure actual door tops/baselines and roof bands. No new exploration round.
+4. On an isolated integration checkout, capture TEMP versus revised small house in gang, large house/yard, ruko main road, warkop. Desktop and Android landscape/portrait at unchanged default zoom. Keep before/after time-of-day and player/camera position consistent.
+5. Walk to each real entrance and exit; inspect-only houses must not gain false playable doors. Verify warkop order/sit/exit inside; outside decorative bench must not imply interaction. Preserve saves and story behavior.
+6. Walk around front, sides and behind each building. Observe facade+roof occlusion and reappearance; check roof not duplicated; porch/tree collision and visual occlusion; verify actual solid footprints vs art, roads not covered mistakenly. Test south/north paths and camera culling without shrinking art to hide crop.
+7. Run existing geometry audit, unit, build and relevant P6.1 browser regressions after actual integration. Repeated transitions + representative crowds: monitor frame-time and texture allocation; compare before/after on same host. No A05 performance claim until physical device test.
+8. Creative Director reviews final visual quality, local plausibility and silhouette. Only complete specs + technical results + successful integration + explicit visual approval can permit PRODUCTION READY.

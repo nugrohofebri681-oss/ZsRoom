@@ -1,0 +1,463 @@
+{
+  "date": "2026-11-25",
+  "runtimeCommit": "fc8b954441aafd6feda4f995aab80ef67969d3eb",
+  "g1Commit": "12bf7108522ad11e50a5530c972e943d5b19bbd3",
+  "freezeStatus": "NOT FOUND; pending review alignment",
+  "archetypes": [
+    {
+      "archetype": "house_small",
+      "artId": "world_house_small",
+      "g1Selection": "A",
+      "g1FootprintProposal": [
+        420,
+        320
+      ],
+      "runtimeWidthDepthHeight": [
+        380,
+        360,
+        300
+      ],
+      "panelThicknessCm": 4,
+      "tempCanvas": {
+        "width": 396,
+        "height": 324
+      },
+      "tempPivot": {
+        "x": 198,
+        "y": 312,
+        "meaning": "bottom-centre of the front face (wall item)"
+      },
+      "roof": {
+        "style": "gable",
+        "color": "#9C5B4A"
+      },
+      "runtimeProjectedRoofDepthCm": 251.99999999999997,
+      "minimumHDContentWidthPx": 760,
+      "g1NativeContentWidthPx": 1173,
+      "approxOpeningIfUniformlyScaledToRuntimeWidthCm": 159.2,
+      "openingMeasurementStatus": "historical visual estimate, not newly verified geometry",
+      "sourceSpec": "specs/world/props/world_house_small.json",
+      "sourceSha256": "ca09fe95c61148b4d4b39d500ebce5db967f27865437f3f582e98c1a7c70c697",
+      "status": "world-temp",
+      "instances": [
+        {
+          "id": "house_n1",
+          "x": 700,
+          "frontY": 1300,
+          "solidRect": {
+            "x": 510.0,
+            "y": 940,
+            "w": 380,
+            "h": 360
+          },
+          "door": null,
+          "entranceAnchor": null,
+          "inspect": {
+            "name": "House",
+            "comment": "A house in the neighbourhood. (Background building.)"
+          },
+          "yard": null
+        },
+        {
+          "id": "house_n3",
+          "x": 3500,
+          "frontY": 1300,
+          "solidRect": {
+            "x": 3310.0,
+            "y": 940,
+            "w": 380,
+            "h": 360
+          },
+          "door": null,
+          "entranceAnchor": null,
+          "inspect": {
+            "name": "House",
+            "comment": "A house in the neighbourhood. (Background building.)"
+          },
+          "yard": null
+        },
+        {
+          "id": "house_n8",
+          "x": 7450,
+          "frontY": 1300,
+          "solidRect": {
+            "x": 7260.0,
+            "y": 940,
+            "w": 380,
+            "h": 360
+          },
+          "door": null,
+          "entranceAnchor": null,
+          "inspect": {
+            "name": "House",
+            "comment": "A house in the neighbourhood. (Background building.)"
+          },
+          "yard": null
+        },
+        {
+          "id": "house_m6",
+          "x": 7740,
+          "frontY": 2600,
+          "solidRect": {
+            "x": 7550.0,
+            "y": 2240,
+            "w": 380,
+            "h": 360
+          },
+          "door": null,
+          "entranceAnchor": null,
+          "inspect": {
+            "name": "House",
+            "comment": "A house in the neighbourhood. (Background building.)"
+          },
+          "yard": null
+        },
+        {
+          "id": "house_s1",
+          "x": 3650,
+          "frontY": 4330,
+          "solidRect": {
+            "x": 3460.0,
+            "y": 4030,
+            "w": 380,
+            "h": 300
+          },
+          "door": null,
+          "entranceAnchor": null,
+          "inspect": {
+            "name": "House",
+            "comment": "A house in the neighbourhood. (Background building.)"
+          },
+          "yard": null
+        },
+        {
+          "id": "house_s2",
+          "x": 4250,
+          "frontY": 4330,
+          "solidRect": {
+            "x": 4060.0,
+            "y": 4030,
+            "w": 380,
+            "h": 300
+          },
+          "door": null,
+          "entranceAnchor": null,
+          "inspect": {
+            "name": "House",
+            "comment": "A house in the neighbourhood. (Background building.)"
+          },
+          "yard": null
+        },
+        {
+          "id": "house_s5",
+          "x": 6950,
+          "frontY": 4330,
+          "solidRect": {
+            "x": 6760.0,
+            "y": 4030,
+            "w": 380,
+            "h": 300
+          },
+          "door": null,
+          "entranceAnchor": null,
+          "inspect": {
+            "name": "House",
+            "comment": "A house in the neighbourhood. (Background building.)"
+          },
+          "yard": null
+        },
+        {
+          "id": "house_s6",
+          "x": 7500,
+          "frontY": 4330,
+          "solidRect": {
+            "x": 7310.0,
+            "y": 4030,
+            "w": 380,
+            "h": 300
+          },
+          "door": null,
+          "entranceAnchor": null,
+          "inspect": {
+            "name": "House",
+            "comment": "A house in the neighbourhood. (Background building.)"
+          },
+          "yard": null
+        },
+        {
+          "id": "house_t2",
+          "x": 5300,
+          "frontY": 5550,
+          "solidRect": {
+            "x": 5110.0,
+            "y": 5190,
+            "w": 380,
+            "h": 360
+          },
+          "door": null,
+          "entranceAnchor": null,
+          "inspect": {
+            "name": "House",
+            "comment": "A house in the neighbourhood. (Background building.)"
+          },
+          "yard": null
+        }
+      ]
+    },
+    {
+      "archetype": "house_large",
+      "artId": "world_house_large",
+      "g1Selection": "B",
+      "g1FootprintProposal": [
+        600,
+        400
+      ],
+      "runtimeWidthDepthHeight": [
+        620,
+        460,
+        470
+      ],
+      "panelThicknessCm": 4,
+      "tempCanvas": {
+        "width": 636,
+        "height": 494
+      },
+      "tempPivot": {
+        "x": 318,
+        "y": 482,
+        "meaning": "bottom-centre of the front face (wall item)"
+      },
+      "roof": {
+        "style": "hip",
+        "color": "#7D6A5A"
+      },
+      "runtimeProjectedRoofDepthCm": 322.0,
+      "minimumHDContentWidthPx": 1240,
+      "g1NativeContentWidthPx": 1331,
+      "approxOpeningIfUniformlyScaledToRuntimeWidthCm": 170.5,
+      "openingMeasurementStatus": "historical visual estimate, not newly verified geometry",
+      "sourceSpec": "specs/world/props/world_house_large.json",
+      "sourceSha256": "2c05393641c14043e8377de8a028f9b1c98019699e33d22605415f3bbb5c1dcd",
+      "status": "world-temp",
+      "instances": [
+        {
+          "id": "house_n2",
+          "x": 1350,
+          "frontY": 1300,
+          "solidRect": {
+            "x": 1040.0,
+            "y": 840,
+            "w": 620,
+            "h": 460
+          },
+          "door": null,
+          "entranceAnchor": null,
+          "inspect": {
+            "name": "House with a front yard",
+            "comment": "A house in the neighbourhood. (Background building.)"
+          },
+          "yard": {
+            "depth": 150,
+            "gate": 130
+          }
+        },
+        {
+          "id": "house_n5",
+          "x": 5350,
+          "frontY": 1300,
+          "solidRect": {
+            "x": 5040.0,
+            "y": 840,
+            "w": 620,
+            "h": 460
+          },
+          "door": null,
+          "entranceAnchor": null,
+          "inspect": {
+            "name": "House with a front yard",
+            "comment": "A house in the neighbourhood. (Background building.)"
+          },
+          "yard": {
+            "depth": 150,
+            "gate": 130
+          }
+        }
+      ]
+    },
+    {
+      "archetype": "ruko",
+      "artId": "world_ruko",
+      "g1Selection": "B",
+      "g1FootprintProposal": [
+        420,
+        500
+      ],
+      "runtimeWidthDepthHeight": [
+        420,
+        400,
+        430
+      ],
+      "panelThicknessCm": 4,
+      "tempCanvas": {
+        "width": 436,
+        "height": 454
+      },
+      "tempPivot": {
+        "x": 218,
+        "y": 442,
+        "meaning": "bottom-centre of the front face (wall item)"
+      },
+      "roof": {
+        "style": "flat",
+        "color": "#B8B2A7"
+      },
+      "runtimeProjectedRoofDepthCm": 280.0,
+      "minimumHDContentWidthPx": 840,
+      "g1NativeContentWidthPx": 757,
+      "approxOpeningIfUniformlyScaledToRuntimeWidthCm": 189.0,
+      "openingMeasurementStatus": "historical visual estimate, not newly verified geometry",
+      "sourceSpec": "specs/world/props/world_ruko.json",
+      "sourceSha256": "bd43fe5f6fc684d57742f73e8be0a9eb703de449e51b2cd3b2f2fa80b337248f",
+      "status": "world-temp",
+      "instances": [
+        {
+          "id": "ruko_m1",
+          "x": 500,
+          "frontY": 2600,
+          "solidRect": {
+            "x": 290.0,
+            "y": 2240,
+            "w": 420,
+            "h": 360
+          },
+          "door": null,
+          "entranceAnchor": null,
+          "inspect": {
+            "name": "Toko kelontong",
+            "comment": "A grocery shophouse: a shop below, rooms above. (Background building.)"
+          },
+          "yard": null
+        },
+        {
+          "id": "ruko_m2",
+          "x": 1950,
+          "frontY": 2600,
+          "solidRect": {
+            "x": 1740.0,
+            "y": 2240,
+            "w": 420,
+            "h": 360
+          },
+          "door": null,
+          "entranceAnchor": null,
+          "inspect": {
+            "name": "Clothes shop",
+            "comment": "A clothes shophouse. (Background building.)"
+          },
+          "yard": null
+        },
+        {
+          "id": "ruko_m3",
+          "x": 3250,
+          "frontY": 2600,
+          "solidRect": {
+            "x": 3040.0,
+            "y": 2240,
+            "w": 420,
+            "h": 360
+          },
+          "door": null,
+          "entranceAnchor": null,
+          "inspect": {
+            "name": "Phone shop",
+            "comment": "Phones, credit and repairs. (Background building.)"
+          },
+          "yard": null
+        },
+        {
+          "id": "ruko_m5",
+          "x": 6000,
+          "frontY": 2600,
+          "solidRect": {
+            "x": 5790.0,
+            "y": 2240,
+            "w": 420,
+            "h": 360
+          },
+          "door": null,
+          "entranceAnchor": null,
+          "inspect": {
+            "name": "Motorbike workshop",
+            "comment": "A motorbike repair shophouse. (Background building.)"
+          },
+          "yard": null
+        }
+      ]
+    },
+    {
+      "archetype": "warkop_open",
+      "artId": "world_warkop_open",
+      "g1Selection": "C",
+      "g1FootprintProposal": [
+        500,
+        320
+      ],
+      "runtimeWidthDepthHeight": [
+        600,
+        420,
+        320
+      ],
+      "panelThicknessCm": 4,
+      "tempCanvas": {
+        "width": 616,
+        "height": 344
+      },
+      "tempPivot": {
+        "x": 308,
+        "y": 332,
+        "meaning": "bottom-centre of the front face (wall item)"
+      },
+      "roof": {
+        "style": "zinc",
+        "color": "#8C9AA3"
+      },
+      "runtimeProjectedRoofDepthCm": 294.0,
+      "minimumHDContentWidthPx": 1200,
+      "g1NativeContentWidthPx": 1222,
+      "approxOpeningIfUniformlyScaledToRuntimeWidthCm": 240.0,
+      "openingMeasurementStatus": "historical visual estimate, not newly verified geometry",
+      "sourceSpec": "specs/world/props/world_warkop_open.json",
+      "sourceSha256": "78f9ce0b0c392b6be2738ff00e1ca79103f7e1e3b8ff906ee4f48fc12a11eafc",
+      "status": "world-temp",
+      "instances": [
+        {
+          "id": "warkop",
+          "x": 1110,
+          "frontY": 2600,
+          "solidRect": {
+            "x": 810.0,
+            "y": 2180,
+            "w": 600,
+            "h": 420
+          },
+          "door": {
+            "id": "warkop_door",
+            "label": "Enter the warung kopi",
+            "to": {
+              "room": "warkop",
+              "spawn": "from_street"
+            },
+            "w": 160
+          },
+          "entranceAnchor": {
+            "x": 1110,
+            "y": 2625,
+            "radiusCm": 50
+          },
+          "inspect": null,
+          "yard": null
+        }
+      ]
+    }
+  ]
+}

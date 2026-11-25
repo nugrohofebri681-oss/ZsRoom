@@ -7,11 +7,11 @@
   "density": 1,
   "canvas": {
     "width": 616,
-    "height": 344
+    "height": 304
   },
   "pivot": {
     "x": 308,
-    "y": 332,
+    "y": 292,
     "meaning": "bottom-centre of the front face (wall item)"
   },
   "footprint": {
@@ -19,7 +19,7 @@
     "depthCm": 4
   },
   "heightsCm": {
-    "top": 320
+    "top": 280
   },
   "collision": [],
   "sort": {
@@ -39,5 +39,5 @@
     "sign": "WARUNG KOPI",
     "maxDensity": 1
   },
-  "$comment": "P6.1 archetype warkop_open: deep roof, open front, counter and urn; tables sit outside under the eaves (TEMP)."
+  "$comment": "TEMP front layer at the frozen G1 contract size (src/data/archetypes.json → contract; docs/production/ARCHITECTURE_CONTRACT_G1.md). Final art: bld_*_front + bld_*_roof layers."
 }

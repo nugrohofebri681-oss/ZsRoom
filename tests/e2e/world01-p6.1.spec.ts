@@ -91,4 +91,23 @@ test.describe('P6.1 Batuphat life', () => {
     const s = await S(page);                                                         // in the garden: the far market crowd is not simulated
     expect(s.npcActive).toBeLessThan(s.npcs.filter((n: any) => n.visible).length);
   });
+
+  test('G1 architecture contract in game: one roof per building, contract sizes, fade behind a two-storey ruko, none in front', async ({ page, isMobile }) => {
+    const tag = isMobile ? 'android' : 'desktop';
+    await boot(page, '?fresh&fast&room=batuphat_west');
+    if ((await S(page)).modal) await closeDialogue(page, isMobile);
+    await setPhase(page, 'afternoon');
+    let s = await S(page);
+    expect(s.roofs.engine + s.roofs.art).toBe(s.roofs.buildings);                  // never a double roof
+    expect(s.roofs.art).toBe(0);                                                   // no G1 art is approved yet → TEMP engine roofs
+    await tp(page, 500, 2150, isMobile);                                           // behind ruko_m1 (backyard strip)
+    await page.waitForTimeout(500);
+    s = await S(page);
+    expect(s.occluded).toContain('bld:ruko_m1');
+    await page.screenshot({ path: `${OUT}/${tag}-05-behind-ruko-fades.png` });
+    await tp(page, 500, 2700, isMobile);                                           // in front of it
+    await page.waitForTimeout(500);
+    expect((await S(page)).occluded).not.toContain('bld:ruko_m1');
+    await page.screenshot({ path: `${OUT}/${tag}-06-contract-frontage.png` });
+  });
 });

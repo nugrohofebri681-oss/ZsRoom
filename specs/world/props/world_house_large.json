@@ -3,23 +3,23 @@
   "specVersion": "0.1.0",
   "status": "world-temp",
   "category": "prop",
-  "displayName": "Larger two-storey house (TEMP world placeholder)",
+  "displayName": "Porch house, single storey (TEMP world placeholder)",
   "density": 1,
   "canvas": {
-    "width": 636,
-    "height": 494
+    "width": 616,
+    "height": 304
   },
   "pivot": {
-    "x": 318,
-    "y": 482,
+    "x": 308,
+    "y": 292,
     "meaning": "bottom-centre of the front face (wall item)"
   },
   "footprint": {
-    "widthCm": 620,
+    "widthCm": 600,
     "depthCm": 4
   },
   "heightsCm": {
-    "top": 470
+    "top": 280
   },
   "collision": [],
   "sort": {
@@ -33,9 +33,9 @@
   },
   "temp": {
     "shape": "storefront",
-    "kind": "house2",
+    "kind": "porch",
     "wall": "#F3E9DA",
     "maxDensity": 1
   },
-  "$comment": "P6.1 archetype house_large: two-storey home behind a gated front yard (TEMP)."
+  "$comment": "TEMP front layer at the frozen G1 contract size (src/data/archetypes.json → contract; docs/production/ARCHITECTURE_CONTRACT_G1.md). Final art: bld_*_front + bld_*_roof layers."
 }

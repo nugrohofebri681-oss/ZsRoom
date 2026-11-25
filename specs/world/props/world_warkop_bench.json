@@ -1,0 +1,35 @@
+{
+  "id": "world_warkop_bench",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "warkop_open bench add-on layer (G1 contract; art pending)",
+  "density": 1,
+  "canvas": {
+    "width": 200,
+    "height": 69
+  },
+  "pivot": {
+    "x": 100,
+    "y": 57,
+    "meaning": "bottom-centre on the front line"
+  },
+  "footprint": {
+    "widthCm": 184,
+    "depthCm": 4
+  },
+  "heightsCm": {
+    "top": 45
+  },
+  "collision": [],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "placement": {
+    "type": "wall",
+    "wall": "north"
+  },
+  "$comment": "Separate add-on layer of the frozen G1 contract (never baked into the front layer, so it can carry interactions)."
+}

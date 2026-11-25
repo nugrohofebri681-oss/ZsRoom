@@ -99,6 +99,19 @@ At the default zoom, both rooms of each house floor are visible at once. When zo
   - any multi-room shop;
   - joining the front yard with the street into one continuous outdoor area.
 
+## G1 architecture contract (PR #42 alignment)
+**Frozen 2026-11-25** for house_small, house_large, ruko and warkop_open. See [ARCHITECTURE_CONTRACT_G1.md](ARCHITECTURE_CONTRACT_G1.md).
+
+- **Two layers per building:** a front layer and a roof layer drawn in 3/4 projection, both sorted at the front line, with exactly one roof source (the approved art, otherwise the TEMP engine roof).
+- **Final sizes:**
+  - small house 420 × 320, eave 270;
+  - porch house 600 × 400, eave 280;
+  - ruko 420 × 360, eave 480;
+  - warkop 600 × 420, eave 280.
+- The TEMP placeholders and town data now use these sizes; gameplay is unchanged and tested.
+- No G1 artwork is integrated or approved.
+- The list of corrections Codex must make is in §5 of the contract.
+
 ## P6.1 — Batuphat realism: research, geometry, architecture, life by time of day (Issue #40)
 **Goal:** Batuphat should feel like a real place in Lhokseumawe: varied buildings, clean roads, places that are busy or quiet at the right time. This is a polish sprint on the P6 engine, not a rewrite. Exploration and camera rules follow Stardew-like game feel; art stays original premium HD 2D illustrated (TEMP for now).
 

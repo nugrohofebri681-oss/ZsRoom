@@ -7,11 +7,11 @@
   "density": 1,
   "canvas": {
     "width": 436,
-    "height": 454
+    "height": 504
   },
   "pivot": {
     "x": 218,
-    "y": 442,
+    "y": 492,
     "meaning": "bottom-centre of the front face (wall item)"
   },
   "footprint": {
@@ -19,7 +19,7 @@
     "depthCm": 4
   },
   "heightsCm": {
-    "top": 430
+    "top": 480
   },
   "collision": [],
   "sort": {
@@ -38,5 +38,5 @@
     "accent": "#3A6B8C",
     "maxDensity": 1
   },
-  "$comment": "P6.1 archetype ruko: shop below, rooms above — the typical main-road frontage (source register: ~300 ruko in Batuphat Timur, search-level). TEMP; generic signs only."
+  "$comment": "TEMP front layer at the frozen G1 contract size (src/data/archetypes.json → contract; docs/production/ARCHITECTURE_CONTRACT_G1.md). Final art: bld_*_front + bld_*_roof layers."
 }

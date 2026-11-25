@@ -87,9 +87,10 @@ export function compileRegion(f: FloorDef, flags: Record<string, boolean> = {}, 
       sortable: { id: key, pivotY: b.y, footprint, renderBounds: { x: x0, y: (b.y - b.depth) * K - H, w, h: H + b.depth * K }, occluder: true },
     });
     solids.push(footprint);
-    buildings.push({ key, id: b.id, x0, x1: x0 + w, front: b.y, depth: b.depth, height: H, roof: b.roof ?? '#9C5B4A', roofStyle: b.roofStyle as RoofStyle, zone, ...(b.archetype ? { archetype: b.archetype } : {}) });
+    buildings.push({ key, id: b.id, x0, x1: x0 + w, front: b.y, depth: b.depth, height: H, roof: b.roof ?? '#9C5B4A', roofStyle: b.roofStyle as RoofStyle, zone,
+      ...(b.archetype ? { archetype: b.archetype } : {}), ...(arch?.roofArt ? { roofArt: arch.roofArt } : {}) });
     if (b.yard) {                                       // fenced front yard with a gate gap in front of the door
-      const yd = b.yard.depth, gate = b.yard.gate ?? 120, dx = b.door?.dx ?? 0, gx0 = b.x + dx - gate / 2, gx1 = b.x + dx + gate / 2, fy = b.y + yd;
+      const yd = b.yard.depth, gate = b.yard.gate ?? 120, dx = b.door?.dx ?? arch?.entrance?.dx ?? 0, gx0 = b.x + dx - gate / 2, gx1 = b.x + dx + gate / 2, fy = b.y + yd;
       fences.push({ x: x0, y: fy - 15, w: gx0 - x0, h: 15, height: 90 }, { x: gx1, y: fy - 15, w: x0 + w - gx1, h: 15, height: 90 },
         { x: x0, y: b.y, w: 15, h: yd - 15, height: 90 }, { x: x0 + w - 15, y: b.y, w: 15, h: yd - 15, height: 90 });
     }
@@ -97,7 +98,7 @@ export function compileRegion(f: FloorDef, flags: Record<string, boolean> = {}, 
     if (b.talk) anchors.push({ key: `${key}:talk`, ownerId: key, label: b.talk.label, x: b.x, y: b.y + 45, radiusCm: Math.min(80, w / 2), kind: 'prop',
       payload: { anchorId: 'talk', action: b.talk.event ? { type: 'event', id: b.talk.event } : { type: 'dialogue', id: b.talk.dialogue } } });
     if (b.door) {
-      const dw = b.door.w ?? 110, dx = b.door.dx ?? 0;
+      const dw = b.door.w ?? 110, dx = b.door.dx ?? arch?.entrance?.dx ?? 0;
       const d: RoomDoor = { id: b.door.id, label: b.door.label, side: 'north', style: 'none', x: b.x + dx - dw / 2, y: b.y, w: dw, h: 10, to: b.door.to, ...(b.door.locked ? { locked: b.door.locked } : {}), zone: { x: x0, y: b.y, w, h: 0 } };
       doors.push(d);
       anchors.push({ key: `door:${d.id}`, ownerId: d.id, label: d.label, x: b.x + dx, y: b.y + 25, radiusCm: 50, kind: 'door', payload: doorOpen(d, flags) ? d.to : { locked: d.locked!.message } });

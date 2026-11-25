@@ -1,12 +1,464 @@
 {
-  "$comment": "P6.1 building archetypes: the data contract between town layout, engine (footprint, roof, collision, door, yard) and final art (Codex fills each facade id with HD illustrated art at the same width/height). Silhouette differences come from width, height, depth and roof style — never from tint alone. A building in a region may name an archetype and override any field.",
+  "$comment": "P6.1 building archetypes + G1 architectural contract (frozen 2026-11-25 for house_small, house_large, ruko, warkop_open). Runtime reads facade/depth/roof/yard/entrance; `contract` is the art/engine agreement (docs/production/ARCHITECTURE_CONTRACT_G1.md). Silhouette differences come from width, height, depth and roof — never tint alone.",
   "archetypes": {
-    "house_small":  { "facade": "world_house_small",  "depth": 360, "roof": { "style": "gable", "color": "#9C5B4A" }, "use": "narrow single-storey home in a gang" },
-    "house_medium": { "facade": "world_facade_house", "depth": 400, "roof": { "style": "gable", "color": "#8E5A4C" }, "use": "ordinary single-storey home" },
-    "house_large":  { "facade": "world_house_large",  "depth": 460, "roof": { "style": "hip",   "color": "#7D6A5A" }, "yard": { "depth": 150, "gate": 130 }, "use": "two-storey home behind a gated front yard" },
-    "ruko":         { "facade": "world_ruko",         "depth": 400, "roof": { "style": "flat",  "color": "#B8B2A7" }, "use": "two-storey shophouse on the main road" },
-    "warkop_open":  { "facade": "world_warkop_open",  "depth": 420, "roof": { "style": "zinc",  "color": "#8C9AA3" }, "use": "open-front coffee shop; tables outside" },
-    "market_kiosk": { "facade": "world_market_kiosk", "depth": 170, "roof": { "style": "canopy", "color": "#2A9D8F" }, "use": "market stall with tarp" },
-    "shop_small":   { "facade": "world_facade_shop",  "depth": 380, "roof": { "style": "zinc",  "color": "#8C9AA3" }, "use": "small single-storey shop" }
+    "house_small": {
+      "facade": "world_house_small",
+      "depth": 320,
+      "roof": {
+        "style": "gable",
+        "color": "#9C5B4A"
+      },
+      "use": "narrow single-storey home in a gang",
+      "entrance": {
+        "dx": 0,
+        "widthCm": 90
+      },
+      "contract": {
+        "version": "G1-contract-1",
+        "status": "frozen for G1 production (Claude, 2026-11-25)",
+        "widthCm": 420,
+        "depthCm": 320,
+        "eaveCm": 270,
+        "ridgeCm": 350,
+        "roof": {
+          "style": "gable",
+          "ridgeAxis": "x (parallel to the street)",
+          "overhangSideCm": 20,
+          "overhangFrontDropCm": 15,
+          "projectedRiseCm": 224
+        },
+        "entrance": {
+          "kind": "door",
+          "dx": 0,
+          "clearWidthCm": 90,
+          "clearHeightCm": 210,
+          "triggerWidthCm": 110
+        },
+        "openings": [
+          {
+            "kind": "window",
+            "dx": -130,
+            "widthCm": 80,
+            "sillCm": 90,
+            "headCm": 190
+          },
+          {
+            "kind": "window",
+            "dx": 130,
+            "widthCm": 80,
+            "sillCm": 90,
+            "headCm": 190
+          }
+        ],
+        "collision": {
+          "shape": "rect",
+          "x": "-W/2..+W/2 from the placement x",
+          "y": "front line − depth .. front line",
+          "includesPorch": false,
+          "note": "physical footprint = width × depth behind the front line; never the alpha bbox of the art"
+        },
+        "depthSort": {
+          "key": "front line (placement y)",
+          "frontLayer": "y",
+          "roofLayer": "y + 0.01 (drawn over the facade's top edge it overlaps)",
+          "addOns": "y + 0.02 unless they stand in front of the front line, then their own ground y",
+          "occlusion": "front + roof fade together when Zila is behind the building"
+        },
+        "layers": {
+          "front": {
+            "assetId": "world_house_small",
+            "covers": "everything from the ground up to the eave/fascia line on the front plane: walls, doors, windows, columns, signs",
+            "canvasPx@1cm": [
+              436,
+              294
+            ],
+            "pivotPx@1cm": [
+              218,
+              282
+            ],
+            "pivotMeaning": "bottom-centre of the front line (ground y = placement y)",
+            "minDensityPxPerCm": 2
+          },
+          "roof": {
+            "assetId": "world_house_small_roof",
+            "covers": "the whole roof mass as seen in ZsRoom's 3/4 projection (depth × 0.7): near slope, ridge, far slope, gable ends, overhangs; porch roof included",
+            "canvasPx@1cm": [
+              476,
+              263
+            ],
+            "pivotPx@1cm": [
+              238,
+              236
+            ],
+            "pivotMeaning": "front eave line, centre (render y = front line × 0.7 − eave)",
+            "minDensityPxPerCm": 2
+          }
+        },
+        "notes": "G1 small A, re-proportioned: 420 wide, door 90×210 (was ~176 high)."
+      },
+      "roofArt": "world_house_small_roof"
+    },
+    "house_medium": {
+      "facade": "world_facade_house",
+      "depth": 400,
+      "roof": {
+        "style": "gable",
+        "color": "#8E5A4C"
+      },
+      "use": "ordinary single-storey home"
+    },
+    "house_large": {
+      "facade": "world_house_large",
+      "depth": 400,
+      "roof": {
+        "style": "hip",
+        "color": "#7D6A5A"
+      },
+      "yard": {
+        "depth": 150,
+        "gate": 130
+      },
+      "use": "two-storey home behind a gated front yard",
+      "entrance": {
+        "dx": -80,
+        "widthCm": 100
+      },
+      "contract": {
+        "version": "G1-contract-1",
+        "status": "frozen for G1 production (Claude, 2026-11-25)",
+        "widthCm": 600,
+        "depthCm": 400,
+        "eaveCm": 280,
+        "ridgeCm": 400,
+        "roof": {
+          "style": "hip",
+          "ridgeAxis": "x (parallel to the street)",
+          "overhangSideCm": 20,
+          "overhangFrontDropCm": 15,
+          "projectedRiseCm": 280
+        },
+        "entrance": {
+          "kind": "door",
+          "dx": -80,
+          "clearWidthCm": 100,
+          "clearHeightCm": 210,
+          "triggerWidthCm": 120
+        },
+        "openings": [
+          {
+            "kind": "window",
+            "dx": -220,
+            "widthCm": 100,
+            "sillCm": 90,
+            "headCm": 200
+          },
+          {
+            "kind": "window",
+            "dx": 190,
+            "widthCm": 100,
+            "sillCm": 90,
+            "headCm": 200,
+            "note": "inside the porch, on the recessed wall"
+          }
+        ],
+        "collision": {
+          "shape": "rect",
+          "x": "-W/2..+W/2 from the placement x",
+          "y": "front line − depth .. front line",
+          "includesPorch": true,
+          "note": "physical footprint = width × depth behind the front line; never the alpha bbox of the art"
+        },
+        "depthSort": {
+          "key": "front line (placement y)",
+          "frontLayer": "y",
+          "roofLayer": "y + 0.01 (drawn over the facade's top edge it overlaps)",
+          "addOns": "y + 0.02 unless they stand in front of the front line, then their own ground y",
+          "occlusion": "front + roof fade together when Zila is behind the building"
+        },
+        "layers": {
+          "front": {
+            "assetId": "world_house_large",
+            "covers": "everything from the ground up to the eave/fascia line on the front plane: walls, doors, windows, columns, signs",
+            "canvasPx@1cm": [
+              616,
+              304
+            ],
+            "pivotPx@1cm": [
+              308,
+              292
+            ],
+            "pivotMeaning": "bottom-centre of the front line (ground y = placement y)",
+            "minDensityPxPerCm": 2
+          },
+          "roof": {
+            "assetId": "world_house_large_roof",
+            "covers": "the whole roof mass as seen in ZsRoom's 3/4 projection (depth × 0.7): near slope, ridge, far slope, gable ends, overhangs; porch roof included",
+            "canvasPx@1cm": [
+              656,
+              319
+            ],
+            "pivotPx@1cm": [
+              328,
+              292
+            ],
+            "pivotMeaning": "front eave line, centre (render y = front line × 0.7 − eave)",
+            "minDensityPxPerCm": 2
+          }
+        },
+        "porch": {
+          "dxFrom": 40,
+          "dxTo": 300,
+          "wallSetbackCm": 110,
+          "posts": [
+            60,
+            290
+          ],
+          "walkable": false,
+          "note": "porch floor, posts and porch gable are inside the footprint; the porch gable belongs to the roof layer, posts and floor to the front layer"
+        },
+        "notes": "G1 large B (single-storey porch house) replaces P6.1's TEMP two-storey; 600 × 400; door 100×210 (was ~165 high)."
+      },
+      "roofArt": "world_house_large_roof"
+    },
+    "ruko": {
+      "facade": "world_ruko",
+      "depth": 360,
+      "roof": {
+        "style": "hip",
+        "color": "#A4574A"
+      },
+      "use": "two-storey shophouse on the main road",
+      "entrance": {
+        "dx": 0,
+        "widthCm": 300
+      },
+      "contract": {
+        "version": "G1-contract-1",
+        "status": "frozen for G1 production (Claude, 2026-11-25)",
+        "widthCm": 420,
+        "depthCm": 360,
+        "eaveCm": 480,
+        "ridgeCm": 540,
+        "roof": {
+          "style": "hip",
+          "ridgeAxis": "x (parallel to the street)",
+          "overhangSideCm": 20,
+          "overhangFrontDropCm": 15,
+          "projectedRiseCm": 252
+        },
+        "entrance": {
+          "kind": "shop opening",
+          "dx": 0,
+          "clearWidthCm": 300,
+          "clearHeightCm": 240,
+          "triggerWidthCm": 0,
+          "note": "background shop: inspect only, no door trigger"
+        },
+        "openings": [
+          {
+            "kind": "sign board",
+            "dx": 0,
+            "widthCm": 300,
+            "bottomCm": 250,
+            "topCm": 290
+          },
+          {
+            "kind": "upper floor",
+            "fromCm": 300,
+            "toCm": 480,
+            "note": "shutters/balcony; ground floor 0–300"
+          }
+        ],
+        "collision": {
+          "shape": "rect",
+          "x": "-W/2..+W/2 from the placement x",
+          "y": "front line − depth .. front line",
+          "includesPorch": false,
+          "note": "physical footprint = width × depth behind the front line; never the alpha bbox of the art"
+        },
+        "depthSort": {
+          "key": "front line (placement y)",
+          "frontLayer": "y",
+          "roofLayer": "y + 0.01 (drawn over the facade's top edge it overlaps)",
+          "addOns": "y + 0.02 unless they stand in front of the front line, then their own ground y",
+          "occlusion": "front + roof fade together when Zila is behind the building"
+        },
+        "layers": {
+          "front": {
+            "assetId": "world_ruko",
+            "covers": "everything from the ground up to the eave/fascia line on the front plane: walls, doors, windows, columns, signs",
+            "canvasPx@1cm": [
+              436,
+              504
+            ],
+            "pivotPx@1cm": [
+              218,
+              492
+            ],
+            "pivotMeaning": "bottom-centre of the front line (ground y = placement y)",
+            "minDensityPxPerCm": 2
+          },
+          "roof": {
+            "assetId": "world_ruko_roof",
+            "covers": "the whole roof mass as seen in ZsRoom's 3/4 projection (depth × 0.7): near slope, ridge, far slope, gable ends, overhangs; porch roof included",
+            "canvasPx@1cm": [
+              476,
+              291
+            ],
+            "pivotPx@1cm": [
+              238,
+              264
+            ],
+            "pivotMeaning": "front eave line, centre (render y = front line × 0.7 − eave)",
+            "minDensityPxPerCm": 2
+          },
+          "addOns": {
+            "awning": {
+              "assetId": "world_ruko_awning",
+              "fromCm": 240,
+              "toCm": 270,
+              "projectionCm": 60,
+              "note": "shallow awning over the opening, front layer z-order"
+            }
+          }
+        },
+        "notes": "G1 ruko B: eave lowered 560 → 480 (two storeys 300 + 180) so the north lane stays readable and the mobile camera keeps the roof; width 420; native art ≥ 840 px wide."
+      },
+      "roofArt": "world_ruko_roof"
+    },
+    "warkop_open": {
+      "facade": "world_warkop_open",
+      "depth": 420,
+      "roof": {
+        "style": "gable",
+        "color": "#8C9AA3"
+      },
+      "use": "open-front coffee shop; tables outside",
+      "entrance": {
+        "dx": 0,
+        "widthCm": 160
+      },
+      "contract": {
+        "version": "G1-contract-1",
+        "status": "frozen for G1 production (Claude, 2026-11-25)",
+        "widthCm": 600,
+        "depthCm": 420,
+        "eaveCm": 280,
+        "ridgeCm": 330,
+        "roof": {
+          "style": "gable",
+          "ridgeAxis": "x (parallel to the street)",
+          "overhangSideCm": 20,
+          "overhangFrontDropCm": 15,
+          "projectedRiseCm": 294
+        },
+        "entrance": {
+          "kind": "open bay",
+          "dx": 0,
+          "clearWidthCm": 184,
+          "clearHeightCm": 230,
+          "triggerWidthCm": 160
+        },
+        "openings": [
+          {
+            "kind": "bay",
+            "postCentresDx": [
+              -300,
+              -100,
+              100,
+              300
+            ],
+            "postWidthCm": 16,
+            "note": "three 200 cm bays"
+          },
+          {
+            "kind": "counter bay",
+            "bay": "right",
+            "counterHeightCm": 95
+          },
+          {
+            "kind": "shelf/bench bay",
+            "bay": "left"
+          }
+        ],
+        "collision": {
+          "shape": "rect",
+          "x": "-W/2..+W/2 from the placement x",
+          "y": "front line − depth .. front line",
+          "includesPorch": false,
+          "note": "physical footprint = width × depth behind the front line; never the alpha bbox of the art"
+        },
+        "depthSort": {
+          "key": "front line (placement y)",
+          "frontLayer": "y",
+          "roofLayer": "y + 0.01 (drawn over the facade's top edge it overlaps)",
+          "addOns": "y + 0.02 unless they stand in front of the front line, then their own ground y",
+          "occlusion": "front + roof fade together when Zila is behind the building"
+        },
+        "layers": {
+          "front": {
+            "assetId": "world_warkop_open",
+            "covers": "everything from the ground up to the eave/fascia line on the front plane: walls, doors, windows, columns, signs",
+            "canvasPx@1cm": [
+              616,
+              304
+            ],
+            "pivotPx@1cm": [
+              308,
+              292
+            ],
+            "pivotMeaning": "bottom-centre of the front line (ground y = placement y)",
+            "minDensityPxPerCm": 2
+          },
+          "roof": {
+            "assetId": "world_warkop_roof",
+            "covers": "the whole roof mass as seen in ZsRoom's 3/4 projection (depth × 0.7): near slope, ridge, far slope, gable ends, overhangs; porch roof included",
+            "canvasPx@1cm": [
+              656,
+              333
+            ],
+            "pivotPx@1cm": [
+              328,
+              306
+            ],
+            "pivotMeaning": "front eave line, centre (render y = front line × 0.7 − eave)",
+            "minDensityPxPerCm": 2
+          },
+          "addOns": {
+            "counter": {
+              "assetId": "world_warkop_counter",
+              "bay": "right",
+              "heightCm": 95,
+              "note": "separate layer, not baked: it carries the order interaction later"
+            },
+            "bench": {
+              "assetId": "world_warkop_bench",
+              "bay": "left",
+              "note": "separate layer"
+            }
+          }
+        },
+        "notes": "G1 warung C re-composed for the P6.1 warkop: 600 wide (three 200 cm bays, centre bay is the entrance), depth 420 (tables and stools stay outside), zinc gable."
+      },
+      "roofArt": "world_warkop_roof"
+    },
+    "market_kiosk": {
+      "facade": "world_market_kiosk",
+      "depth": 170,
+      "roof": {
+        "style": "canopy",
+        "color": "#2A9D8F"
+      },
+      "use": "market stall with tarp"
+    },
+    "shop_small": {
+      "facade": "world_facade_shop",
+      "depth": 380,
+      "roof": {
+        "style": "zinc",
+        "color": "#8C9AA3"
+      },
+      "use": "small single-storey shop"
+    }
   }
 }

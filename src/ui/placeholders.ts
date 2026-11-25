@@ -519,10 +519,11 @@ Object.assign(SHAPES, {
         rr(ctx, x, y, ww, wh, 3 * d); ctx.fillStyle = '#A9C7DA'; ctx.fill(); ctx.strokeStyle = tone(wall, 0.6); ctx.lineWidth = 3 * d; ctx.stroke();
         ctx.beginPath(); ctx.moveTo(x + ww / 2, y); ctx.lineTo(x + ww / 2, y + wh); ctx.stroke();
       }
-      if (kind === 'house') { const dw = 80 * d; rr(ctx, g.px - dw / 2, y1 - 200 * d, dw, 200 * d, 4 * d); paint(ctx, '#8A5A3C', g.px - dw / 2, y1 - 200 * d, g.px + dw / 2, y1, 1.1, 0.85); }
+      if (kind === 'house') { const dw = 90 * d; rr(ctx, g.px - dw / 2, y1 - 210 * d, dw, 210 * d, 4 * d); paint(ctx, '#8A5A3C', g.px - dw / 2, y1 - 210 * d, g.px + dw / 2, y1, 1.1, 0.85); }
     }
     if (kind === 'ruko') shophouse(ctx, g, t, wall, accent, y0, y1);
     if (kind === 'house2') twoStoreyHouse(ctx, g, t, wall, y0, y1);
+    if (kind === 'porch') porchHouse(ctx, g, t, wall, y0, y1);
     if (kind === 'warkop') openWarkop(ctx, g, t, wall, accent, y0, y1);
     if (kind === 'kiosk') marketKiosk(ctx, g, t, y0, y1);
     if (t.door) { const dw = Number(t.door) * d; rr(ctx, g.px - dw / 2, y1 - 210 * d, dw, 210 * d, 3 * d); ctx.fillStyle = 'rgba(120,170,195,0.95)'; ctx.fill(); ctx.strokeStyle = '#5E6670'; ctx.lineWidth = 3 * d; ctx.stroke(); ctx.beginPath(); ctx.moveTo(g.px, y1 - 210 * d); ctx.lineTo(g.px, y1); ctx.stroke(); }
@@ -635,7 +636,7 @@ function twoStoreyHouse(ctx: Ctx2, g: Geom, t: TempArtSpec, wall: string, y0: nu
 }
 /** Open-front warkop: deep shaded room under the roof, counter with jars and a coffee urn, menu board, posts. */
 function openWarkop(ctx: Ctx2, g: Geom, t: TempArtSpec, wall: string, accent: string, y0: number, y1: number): void {
-  const d = g.d, W = g.R - g.L, open = g.zy(250);
+  const d = g.d, W = g.R - g.L, open = g.zy(Math.min(250, (g.h.top ?? 280) - 40));
   ctx.fillStyle = tone(wall, 0.42); ctx.fillRect(g.L + 10 * d, open, W - 20 * d, y1 - open);                              // shaded interior
   ctx.fillStyle = tone(wall, 0.35); ctx.fillRect(g.L + 10 * d, y1 - 30 * d, W - 20 * d, 30 * d);                           // floor in shade
   const cx0 = g.L + W * 0.55, cw = W * 0.38;                                                                                // counter
@@ -645,7 +646,7 @@ function openWarkop(ctx: Ctx2, g: Geom, t: TempArtSpec, wall: string, accent: st
   rr(ctx, g.L + W * 0.12, open + 22 * d, W * 0.28, 70 * d, 3 * d); ctx.fillStyle = '#2F3A2F'; ctx.fill();                  // menu board
   for (let i = 0; i < 4; i++) { ctx.fillStyle = 'rgba(255,255,255,0.75)'; ctx.fillRect(g.L + W * 0.12 + 10 * d, open + (34 + i * 13) * d, W * 0.2, 3 * d); }
   ctx.fillStyle = '#FFE9B0'; ctx.beginPath(); ctx.arc(g.px, open + 14 * d, 7 * d, 0, Math.PI * 2); ctx.fill();            // hanging lamp
-  for (const x of [g.L, g.R - 16 * d, g.L + W / 2 - 8 * d]) { rr(ctx, x, y0 + 30 * d, 16 * d, y1 - y0 - 30 * d, 3 * d); paint(ctx, tone(wall, 0.95), x, y0, x + 16 * d, y1, 1.15, 0.8); }   // posts
+  for (const f of [0, 1 / 3, 2 / 3, 1]) { const x = Math.min(g.R - 16 * d, Math.max(g.L, g.L + W * f - 8 * d)); rr(ctx, x, y0 + 20 * d, 16 * d, y1 - y0 - 20 * d, 3 * d); paint(ctx, tone(wall, 0.95), x, y0, x + 16 * d, y1, 1.15, 0.8); }   // posts: three 200 cm bays (contract)
   rr(ctx, g.L, y0, W, open - y0, 3 * d); paint(ctx, wall, g.L, y0, g.R, open, 1.05, 0.9);                                  // fascia above the opening
   rr(ctx, g.px - W * 0.3, y0 + 12 * d, W * 0.6, open - y0 - 24 * d, 4 * d); paint(ctx, accent, g.px - W * 0.3, y0, g.px + W * 0.3, open, 1.12, 0.86);
   if (t.sign) label(ctx, String(t.sign), g.px, (y0 + open) / 2, Math.min(22 * d, (W * 0.55) / String(t.sign).length * 1.5));
@@ -661,4 +662,17 @@ function marketKiosk(ctx: Ctx2, g: Geom, t: TempArtSpec, y0: number, y1: number)
   const palette = String(t.goods ?? 'veg') === 'fish' ? ['#9DB4C0', '#C7D3DD', '#7D98A8'] : String(t.goods) === 'fruit' ? ['#F4A261', '#E9C46A', '#E76F51', '#8AB17D'] : String(t.goods) === 'cloth' ? ['#6D597A', '#E56B6F', '#B56576', '#355070'] : ['#8AB17D', '#2A9D8F', '#E76F51', '#E9C46A'];
   for (let i = 0; i < 12; i++) { const cx = g.L + (24 + (i % 6) * ((W / d - 48) / 6)) * d, cy = ty - 6 * d + Math.floor(i / 6) * 16 * d; ctx.fillStyle = palette[i % palette.length]!; ctx.beginPath(); ctx.ellipse(cx, cy, 12 * d, 8 * d, 0, 0, Math.PI * 2); ctx.fill(); }   // produce heaps
   ctx.fillStyle = 'rgba(0,0,0,0.18)'; ctx.fillRect(g.L + 10 * d, y1 - 40 * d, W - 20 * d, 40 * d);                          // under the table
+}
+
+/** G1-contract porch house (TEMP): single storey; door left of centre (dx −80, 100 × 210); the right part is a porch with two posts
+ *  in front of a recessed wall (setback drawn as shade) — the porch roof itself belongs to the roof layer. */
+function porchHouse(ctx: Ctx2, g: Geom, t: TempArtSpec, wall: string, y0: number, y1: number): void {
+  const d = g.d, W = g.R - g.L, cx = g.px, pL = cx + 40 * d, pR = Math.min(g.R, cx + 300 * d);
+  ctx.fillStyle = tone(wall, 0.72); ctx.fillRect(pL, y0 + 14 * d, pR - pL, y1 - y0 - 14 * d);                               // recessed wall in shade
+  ctx.fillStyle = tone(wall, 0.6); ctx.fillRect(pL, y1 - 18 * d, pR - pL, 18 * d);                                            // porch floor edge
+  for (const dx of [60, 290]) { const x = cx + dx * d - 8 * d; rr(ctx, x, y0 + 10 * d, 16 * d, y1 - y0 - 10 * d, 3 * d); paint(ctx, '#E9E1D2', x, y0, x + 16 * d, y1, 1.15, 0.8); }   // posts
+  const win = (dx: number) => { const x = cx + dx * d - 50 * d, y = y1 - 200 * d; rr(ctx, x, y, 100 * d, 110 * d, 3 * d); ctx.fillStyle = '#A9C7DA'; ctx.fill(); ctx.strokeStyle = tone(wall, 0.55); ctx.lineWidth = 3 * d; ctx.stroke(); ctx.beginPath(); ctx.moveTo(x + 50 * d, y); ctx.lineTo(x + 50 * d, y + 110 * d); ctx.stroke(); };
+  win(-220); win(190);
+  const dw = 100 * d, dx = cx - 80 * d; rr(ctx, dx - dw / 2, y1 - 210 * d, dw, 210 * d, 4 * d); paint(ctx, String(t.doorColor ?? '#7A4E34'), dx - dw / 2, y1 - 210 * d, dx + dw / 2, y1, 1.1, 0.85);
+  ctx.fillStyle = tone(wall, 0.8); ctx.fillRect(g.L, y0, W, 10 * d);
 }

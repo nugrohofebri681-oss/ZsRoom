@@ -1,8 +1,9 @@
 import * as Phaser from 'phaser';
 import { groundToRender, DEPTH_SCALE } from '../core/projection';
-import { getCharacterSpec, type ActionSpec, type CharacterSpec, type PropSpec } from '../core/specs';
+import { getCharacterSpec, getPropSpec, type ActionSpec, type CharacterSpec, type PropSpec } from '../core/specs';
 import { doorOpen, doorSide, DOOR_DEPTH, type CompiledRoom, type PropInstance, type RoomData, type RoomDoor } from '../world/room';
 import { compileMap, resolveDestination, zoneAt } from '../world/floor';
+import { roofPivot, roofSource } from '../world/buildingLayers';
 import { initNpc, npcPresent, npcSolid, stepNpc, yieldTo, NPC_RADIUS, type NpcData, type NpcState } from '../world/npc';
 import { NpcView } from '../actors/npcView';
 import { EVENTS, DIALOGUE, check, runEvent, type Presentation } from '../story/events';
@@ -51,7 +52,7 @@ let SCENE_STARTS = 0;
 export class RoomScene extends Phaser.Scene {
   private room!: ReturnType<typeof compileMap>;
   /** P6 towns: roof views of free-standing buildings, faded together with their facade when Zila is behind. */
-  private roofViews = new Map<string, Phaser.GameObjects.Graphics>();
+  private roofViews = new Map<string, Phaser.GameObjects.Graphics | Phaser.GameObjects.Image>();
   /** Current logical room (zone) on a continuous floor; the map id itself for single-room maps. */
   private zone = '';
   private character!: CharacterSpec;
@@ -842,7 +843,16 @@ export class RoomScene extends Phaser.Scene {
    */
   private drawBuildings(): void {
     const K = DEPTH_SCALE, C = Phaser.Display.Color;
+    const manifest = this.registry.get('manifest') as AssetManifest;
+    const approved = (id: string) => manifest.assets[id]?.status === 'approved' && this.textures.exists(textureKey(id));
     for (const b of this.room.buildings ?? []) {
+      if (roofSource(b, approved) === 'art') {             // G1 contract: the approved roof layer replaces the engine roof
+        const spec = getPropSpec(b.roofArt!), pv = roofPivot(b), dens = ((this.registry.get('assetDensities') ?? {}) as Record<string, number>)[spec.id] ?? spec.density;
+        const img = this.add.image(pv.x, pv.y, textureKey(spec.id)).setOrigin(spec.pivot.x / spec.canvas.width, spec.pivot.y / spec.canvas.height).setScale(1 / dens).setDepth(b.front + 0.01).setName('roof-art');
+        this.roofViews.set(b.key, img as unknown as Phaser.GameObjects.Graphics);
+        this.cullAdd(img, img.x - img.displayWidth / 2, img.y - img.displayHeight, img.displayWidth, img.displayHeight + 40);
+        continue;
+      }
       const base = C.HexStringToColor(b.roof).color, w = b.x1 - b.x0;
       const dark = C.ValueToColor(base).darken(18).color, darker = C.ValueToColor(base).darken(30).color, light = C.ValueToColor(base).lighten(12).color;
       const top = (b.front - b.depth) * K - b.height, eave = b.front * K - b.height, H = eave - top;
@@ -1034,6 +1044,7 @@ export class RoomScene extends Phaser.Scene {
         flagsState: { ...this.flags },
         npcs: this.npcs.map((n) => ({ id: n.data.id, x: Math.round(n.state.x), y: Math.round(n.state.y), visible: n.view.sprite.visible, moving: n.state.moving, act: n.state.act ?? null, zone: zoneAt(this.room.zones, n.state.x, n.state.y)?.id ?? null })),
         npcActive: this.npcActive,
+        roofs: { engine: this.children.list.filter((o) => o.name === 'roof').length, art: this.children.list.filter((o) => o.name === 'roof-art').length, buildings: this.room.buildings?.length ?? 0 },
         mapKind: this.room.data.kind ?? 'interior',
         zone: this.zone,
         zones: this.room.zones?.map((z) => ({ id: z.id, x: z.x, y: z.y, w: z.w, h: z.h })) ?? null,

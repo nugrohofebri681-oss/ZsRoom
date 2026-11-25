@@ -1,0 +1,35 @@
+{
+  "id": "world_ruko_roof",
+  "specVersion": "0.1.0",
+  "status": "world-temp",
+  "category": "prop",
+  "displayName": "ruko roof layer (G1 contract; art pending — engine draws a TEMP roof until approved)",
+  "density": 1,
+  "canvas": {
+    "width": 476,
+    "height": 291
+  },
+  "pivot": {
+    "x": 238,
+    "y": 264,
+    "meaning": "front eave line, centre: render y = front line × 0.7 − eave"
+  },
+  "footprint": {
+    "widthCm": 460,
+    "depthCm": 360
+  },
+  "heightsCm": {
+    "top": 252
+  },
+  "collision": [],
+  "sort": {
+    "mode": "footprint"
+  },
+  "occluder": false,
+  "interactionAnchors": [],
+  "placement": {
+    "type": "wall",
+    "wall": "north"
+  },
+  "$comment": "Roof layer of the frozen G1 contract: the whole roof mass in ZsRoom's 3/4 projection. Canvas = (width + 2×overhang + 16) × (projected rise + 15 drop + 24) at 1 px/cm; pivot = front eave centre. Never drawn together with the engine roof."
+}

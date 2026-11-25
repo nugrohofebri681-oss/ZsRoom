@@ -36,7 +36,15 @@ export interface GroundLayerDef { floor: string; x: number; y: number; w: number
  * the front works like a north door (walk into it / press E); `inspect` makes a background building inspectable.
  */
 export type RoofStyle = 'tile' | 'gable' | 'hip' | 'flat' | 'zinc' | 'canopy';
-export interface ArchetypeDef { facade: string; depth: number; roof?: { style?: RoofStyle; color?: string }; yard?: { depth: number; gate?: number }; use?: string }
+export interface ArchetypeDef {
+  facade: string; depth: number; roof?: { style?: RoofStyle; color?: string }; yard?: { depth: number; gate?: number }; use?: string;
+  /** G1 contract: where the entrance sits on the facade (door trigger / yard gate / inspect spot). */
+  entrance?: { dx: number; widthCm: number };
+  /** G1 contract: asset id of the roof layer. While it has no approved art the engine draws a TEMP roof; never both. */
+  roofArt?: string;
+  /** G1 contract (frozen dimensions, layers, pivots, openings): see docs/production/ARCHITECTURE_CONTRACT_G1.md. */
+  contract?: Record<string, unknown>;
+}
 export interface BuildingDef {
   id: string; x: number; y: number;
   /** P6.1: a named archetype (src/data/archetypes.json) supplies facade, depth, roof and yard; fields here override. */
@@ -91,7 +99,7 @@ export interface FloorDef {
   legacyMaps?: Record<string, LegacyAnchor[]>;
 }
 export interface ZoneInfo { id: string; x: number; y: number; w: number; h: number; data: RoomData; prefix: string; wallGaps?: [number, number][] }
-export interface BuildingInfo { key: string; id: string; x0: number; x1: number; front: number; depth: number; height: number; roof: string; roofStyle: RoofStyle; zone: string; archetype?: string }
+export interface BuildingInfo { key: string; id: string; x0: number; x1: number; front: number; depth: number; height: number; roof: string; roofStyle: RoofStyle; zone: string; archetype?: string; roofArt?: string }
 export interface CompiledFloor extends CompiledRoom {
   zones: ZoneInfo[];
   ground?: GroundLayerDef[];

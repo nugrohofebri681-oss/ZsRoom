@@ -340,7 +340,6 @@
       "archetype": "ruko",
       "x": 500,
       "y": 2600,
-      "depth": 360,
       "temp": {
         "sign": "TOKO KELONTONG",
         "accent": "#3A6B8C",
@@ -371,7 +370,6 @@
       "archetype": "ruko",
       "x": 1950,
       "y": 2600,
-      "depth": 360,
       "temp": {
         "sign": "TOKO PAKAIAN",
         "accent": "#8C3A5A",
@@ -388,7 +386,6 @@
       "archetype": "ruko",
       "x": 3250,
       "y": 2600,
-      "depth": 360,
       "temp": {
         "sign": "PONSEL & PULSA",
         "accent": "#2E7D5B",
@@ -416,7 +413,6 @@
       "archetype": "ruko",
       "x": 6000,
       "y": 2600,
-      "depth": 360,
       "temp": {
         "sign": "BENGKEL MOTOR",
         "accent": "#5B5B5B",
@@ -444,7 +440,6 @@
       "archetype": "house_small",
       "x": 3650,
       "y": 4330,
-      "depth": 300,
       "roof": "#8E5A4C",
       "inspect": {
         "name": "House",
@@ -456,7 +451,6 @@
       "archetype": "house_small",
       "x": 4250,
       "y": 4330,
-      "depth": 300,
       "roof": "#6F6A63",
       "inspect": {
         "name": "House",
@@ -468,7 +462,6 @@
       "archetype": "house_small",
       "x": 6950,
       "y": 4330,
-      "depth": 300,
       "roof": "#7D6A5A",
       "inspect": {
         "name": "House",
@@ -480,7 +473,6 @@
       "archetype": "house_small",
       "x": 7500,
       "y": 4330,
-      "depth": 300,
       "roof": "#9C5B4A",
       "inspect": {
         "name": "House",
@@ -768,31 +760,31 @@
     {
       "x": 7430,
       "y": 2585,
-      "w": 120,
+      "w": 100,
       "h": 15,
       "height": 120,
       "color": "#E6DCCB"
     },
     {
-      "x": 890,
+      "x": 910,
       "y": 1285,
-      "w": 150,
+      "w": 140,
       "h": 15,
       "height": 120,
       "color": "#E6DCCB"
     },
     {
-      "x": 3690,
+      "x": 3710,
       "y": 1285,
-      "w": 220,
+      "w": 200,
       "h": 15,
       "height": 120,
       "color": "#E6DCCB"
     },
     {
-      "x": 5660,
+      "x": 5650,
       "y": 1285,
-      "w": 180,
+      "w": 190,
       "h": 15,
       "height": 120,
       "color": "#E6DCCB"
@@ -800,23 +792,23 @@
     {
       "x": 7090,
       "y": 1285,
-      "w": 170,
+      "w": 150,
       "h": 15,
       "height": 120,
       "color": "#E6DCCB"
     },
     {
-      "x": 3840,
+      "x": 3860,
       "y": 4315,
-      "w": 220,
+      "w": 180,
       "h": 15,
       "height": 120,
       "color": "#E6DCCB"
     },
     {
-      "x": 7140,
+      "x": 7160,
       "y": 4315,
-      "w": 170,
+      "w": 130,
       "h": 15,
       "height": 120,
       "color": "#E6DCCB"

@@ -1,0 +1,12 @@
+{
+  "g1ChecksumsVerified": 91,
+  "result": "all match",
+  "source": "PR42 G1 checksums.json",
+  "selectedMasters": {
+    "large": "2b60021aa4a1dadab5f0c7b01d5bab0cd114c6de30a944efb0a69daf5308f231",
+    "small": "0c697c087fb4418af1ff0270afc682f02010adaa21d84c0c8eb5f51351f9c66f",
+    "shop": "12b1faefc8fcb5f3e7ca163244cc936db2e05a1eb319f9aac0631a1cacb28b06",
+    "warung": "599199d768a9a1342a5ddc2f7d97b65176e636a9de1e1fd676a093f00077a6d1"
+  },
+  "scope": "No G1 images copied, altered or regenerated; original file paths retained"
+}

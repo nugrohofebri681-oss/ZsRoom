@@ -35,7 +35,9 @@ for (const [id, e] of Object.entries(manifest.assets ?? {})) {
     else if (sha256File(p) !== f.sha256) errors.push(`${id}/${variant}: CHECKSUM MISMATCH on ${p}`);
   }
 }
-for (const id of specs.keys()) if (!(id in (manifest.assets ?? {}))) errors.push(`${id}: spec exists but asset is not in the manifest`);
+// Room specs are all listed in the manifest. World specs (TEMP runtime placeholders and production layers) are listed
+// once they have approved art; until then the runtime draws their TEMP placeholder.
+for (const [id, e] of specs) if (e.scope === 'room' && !(id in (manifest.assets ?? {}))) errors.push(`${id}: spec exists but asset is not in the manifest`);
 for (const f of walk(join(ROOT, 'public', 'assets')).map(rel)) if (!referenced.has(f)) errors.push(`orphan runtime file not referenced by the manifest: ${f}`);
 
 if (errors.length) { console.error('Manifest validation FAILED:\n' + errors.map((e) => ` - ${e}`).join('\n')); process.exit(1); }

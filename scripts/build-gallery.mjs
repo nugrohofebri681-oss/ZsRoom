@@ -4,7 +4,7 @@
 // silhouettes, technical check results, plus perspective templates and latest gameplay screenshots.
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { basename, join } from 'node:path';
-import { listSubmissions, loadSpecs, PROJECTION, readJson, ROOT, walk, rel } from './lib.mjs';
+import { listSubmissions, loadSpecs, productionSpec, PROJECTION, readJson, ROOT, walk, rel } from './lib.mjs';
 import { validateSubmission } from './validate-submission.mjs';
 
 const OUT = join(ROOT, 'review-gallery');
@@ -22,7 +22,9 @@ function overlay(spec) {
   const b = spec.artBounds;
   return `<svg class="ov" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
     ${b ? `<rect x="${b.x}" y="${b.y}" width="${b.width}" height="${b.height}" fill="none" stroke="#7d8cff" stroke-dasharray="4 3"/>` : ''}
-    ${spec.footprint ? `<rect x="${px - hw}" y="${back}" width="${hw * 2}" height="${py - back}" fill="#ff3d7f1a" stroke="#ff3d7f" stroke-width="1.5"/>` : ''}
+    ${spec.footprint && !spec.world ? `<rect x="${px - hw}" y="${back}" width="${hw * 2}" height="${py - back}" fill="#ff3d7f1a" stroke="#ff3d7f" stroke-width="1.5"/>` : ''}
+    ${spec.world ? `<rect x="${spec.world.envelope.x}" y="${spec.world.envelope.y}" width="${spec.world.envelope.width}" height="${spec.world.envelope.height}" fill="none" stroke="#00a37a" stroke-width="2"/>` : ''}
+    ${spec.world?.coverage ? `<rect x="${spec.world.coverage.rect.x}" y="${spec.world.coverage.rect.y}" width="${spec.world.coverage.rect.width}" height="${spec.world.coverage.rect.height}" fill="#00a37a14" stroke="#00a37a" stroke-dasharray="6 4"/>` : ''}
     ${spec.baseLine ? `<line x1="0" x2="${W}" y1="${spec.baseLine.y}" y2="${spec.baseLine.y}" stroke="#ff3d7f" stroke-dasharray="2 3"/>` : ''}
     <path d="M${px - 9} ${py}h18M${px} ${py - 9}v18" stroke="#000" stroke-width="2"/></svg>`;
 }
@@ -40,7 +42,8 @@ function silhouettes(spec) {
 const cards = [];
 for (const s of listSubmissions()) {
   const r = await validateSubmission(s, specs);
-  const spec = specs.get(s.assetId)?.spec;
+  const entry = specs.get(s.assetId);
+  const spec = entry ? productionSpec(entry) ?? undefined : undefined;   // world layers: HD production frame
   const master = join(s.dir, `${s.assetId}_${s.version}.png`);
   const img = existsSync(master) ? copy(master) : null;
   const prompt = existsSync(join(s.dir, 'prompt.md')) ? readFileSync(join(s.dir, 'prompt.md'), 'utf8') : '(no prompt.md)';

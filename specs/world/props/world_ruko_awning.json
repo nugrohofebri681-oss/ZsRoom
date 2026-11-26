@@ -1,25 +1,25 @@
 {
   "id": "world_ruko_awning",
-  "specVersion": "0.1.0",
+  "specVersion": "1.0.0",
   "status": "world-temp",
   "category": "prop",
   "displayName": "ruko awning add-on layer (G1 contract; art pending)",
   "density": 1,
   "canvas": {
     "width": 336,
-    "height": 54
+    "height": 96
   },
   "pivot": {
     "x": 168,
-    "y": 42,
-    "meaning": "bottom-centre of the awning edge, at 240 cm"
+    "y": 84,
+    "meaning": "bottom-centre of the awning's front edge: ground (front line + 60 cm) at 240 cm"
   },
   "footprint": {
     "widthCm": 320,
-    "depthCm": 4
+    "depthCm": 60
   },
   "heightsCm": {
-    "top": 30
+    "top": 72
   },
   "collision": [],
   "sort": {
@@ -31,5 +31,61 @@
     "type": "wall",
     "wall": "north"
   },
-  "$comment": "Separate add-on layer of the frozen G1 contract (never baked into the front layer, so it can carry interactions)."
+  "$comment": "Separate add-on layer of the frozen G1 contract (never baked into the front layer, so it can carry interactions).",
+  "production": {
+    "batch": "G1",
+    "role": "addon",
+    "archetype": "ruko",
+    "contractVersion": "G1-contract-1",
+    "density": 2,
+    "canvas": {
+      "width": 672,
+      "height": 192
+    },
+    "pivot": {
+      "x": 336,
+      "y": 168,
+      "meaning": "bottom-centre of the awning's front edge: ground (front line + 60) at 240 cm"
+    },
+    "envelope": {
+      "x": 16,
+      "y": 24,
+      "width": 640,
+      "height": 144,
+      "widthCm": 320,
+      "heightCm": 72,
+      "projectionCm": 60,
+      "note": "band 30 cm + projection 60 × 0.7"
+    },
+    "tolerancePx": 8,
+    "artBounds": {
+      "x": 8,
+      "y": 8,
+      "width": 656,
+      "height": 176
+    },
+    "transparency": {
+      "edgePaddingPx": 8,
+      "minOpaqueRatio": 0.15,
+      "maxOpaqueRatio": 0.95
+    },
+    "export": {
+      "format": "png",
+      "bitDepth": 8,
+      "channels": 4,
+      "colorSpace": "sRGB",
+      "alpha": "straight (unpremultiplied)",
+      "maxBytes": 8000000
+    },
+    "assembly": [
+      "world_ruko",
+      "world_ruko_roof"
+    ],
+    "styleReferences": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+    ],
+    "submissionPath": "art/submissions/world_ruko_awning/<version>/",
+    "artRequest": "docs/production/ARCHITECTURE_CONTRACT_G1.md"
+  }
 }

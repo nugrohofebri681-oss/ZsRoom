@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZsRoom world layer submission metadata (in addition to submission-metadata.schema.json)",
+  "description": "Required for every submission whose spec lives in specs/world/ and has a production block (building fronts, roofs and add-ons). The values must match the spec's production block; measurements are re-checked from the pixels by the validator.",
+  "type": "object",
+  "required": ["worldLayer"],
+  "properties": {
+    "worldLayer": {
+      "type": "object",
+      "required": ["batch", "role", "archetype", "contractVersion", "densityPxPerCm", "measuredEnvelopePx", "fit"],
+      "additionalProperties": true,
+      "properties": {
+        "batch": { "type": "string", "pattern": "^G[0-9]+$" },
+        "role": { "type": "string", "enum": ["front", "roof", "addon"] },
+        "archetype": { "type": "string", "minLength": 2 },
+        "contractVersion": { "type": "string", "minLength": 3 },
+        "densityPxPerCm": { "type": "number", "minimum": 2 },
+        "measuredEnvelopePx": {
+          "description": "Painted opaque bounding box on the master canvas, as the author measured it (alpha > 16).",
+          "type": "object",
+          "required": ["x", "y", "width", "height"],
+          "properties": { "x": { "type": "integer" }, "y": { "type": "integer" }, "width": { "type": "integer", "minimum": 1 }, "height": { "type": "integer", "minimum": 1 } }
+        },
+        "fit": {
+          "description": "How the raw source was placed on the contract canvas. Nonuniform scaling and upscaling are not allowed.",
+          "type": "object",
+          "required": ["uniformScale", "upscaled"],
+          "properties": {
+            "uniformScale": { "type": "number", "exclusiveMinimum": 0 },
+            "upscaled": { "const": false },
+            "nonuniform": { "const": false }
+          }
+        },
+        "layerSet": { "type": "array", "items": { "type": "string" }, "description": "Sibling layers of the same archetype submitted or reviewed together." }
+      }
+    }
+  }
+}

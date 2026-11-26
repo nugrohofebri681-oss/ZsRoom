@@ -1,6 +1,6 @@
 {
   "id": "world_warkop_open",
-  "specVersion": "0.1.0",
+  "specVersion": "1.0.0",
   "status": "world-temp",
   "category": "prop",
   "displayName": "Open-front warung kopi (TEMP world placeholder)",
@@ -39,5 +39,60 @@
     "sign": "WARUNG KOPI",
     "maxDensity": 1
   },
-  "$comment": "TEMP front layer at the frozen G1 contract size (src/data/archetypes.json → contract; docs/production/ARCHITECTURE_CONTRACT_G1.md). Final art: bld_*_front + bld_*_roof layers."
+  "$comment": "TEMP front layer at the frozen G1 contract size (src/data/archetypes.json → contract; docs/production/ARCHITECTURE_CONTRACT_G1.md). Final art: bld_*_front + bld_*_roof layers.",
+  "production": {
+    "batch": "G1",
+    "role": "front",
+    "archetype": "warkop_open",
+    "contractVersion": "G1-contract-1",
+    "density": 2,
+    "canvas": {
+      "width": 1232,
+      "height": 608
+    },
+    "pivot": {
+      "x": 616,
+      "y": 584,
+      "meaning": "bottom-centre of the front line (ground y = placement y)"
+    },
+    "envelope": {
+      "x": 16,
+      "y": 24,
+      "width": 1200,
+      "height": 560,
+      "widthCm": 600,
+      "heightCm": 280
+    },
+    "tolerancePx": 8,
+    "artBounds": {
+      "x": 8,
+      "y": 8,
+      "width": 1216,
+      "height": 592
+    },
+    "transparency": {
+      "edgePaddingPx": 8,
+      "minOpaqueRatio": 0.3,
+      "maxOpaqueRatio": 0.95
+    },
+    "export": {
+      "format": "png",
+      "bitDepth": 8,
+      "channels": 4,
+      "colorSpace": "sRGB",
+      "alpha": "straight (unpremultiplied)",
+      "maxBytes": 8000000
+    },
+    "assembly": [
+      "world_warkop_roof",
+      "world_warkop_counter",
+      "world_warkop_bench"
+    ],
+    "styleReferences": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+    ],
+    "submissionPath": "art/submissions/world_warkop_open/<version>/",
+    "artRequest": "docs/production/ARCHITECTURE_CONTRACT_G1.md"
+  }
 }

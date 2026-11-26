@@ -1,6 +1,6 @@
 {
   "id": "world_ruko",
-  "specVersion": "0.1.0",
+  "specVersion": "1.0.0",
   "status": "world-temp",
   "category": "prop",
   "displayName": "Two-storey ruko (shophouse) (TEMP world placeholder)",
@@ -38,5 +38,59 @@
     "accent": "#3A6B8C",
     "maxDensity": 1
   },
-  "$comment": "TEMP front layer at the frozen G1 contract size (src/data/archetypes.json → contract; docs/production/ARCHITECTURE_CONTRACT_G1.md). Final art: bld_*_front + bld_*_roof layers."
+  "$comment": "TEMP front layer at the frozen G1 contract size (src/data/archetypes.json → contract; docs/production/ARCHITECTURE_CONTRACT_G1.md). Final art: bld_*_front + bld_*_roof layers.",
+  "production": {
+    "batch": "G1",
+    "role": "front",
+    "archetype": "ruko",
+    "contractVersion": "G1-contract-1",
+    "density": 2,
+    "canvas": {
+      "width": 872,
+      "height": 1008
+    },
+    "pivot": {
+      "x": 436,
+      "y": 984,
+      "meaning": "bottom-centre of the front line (ground y = placement y)"
+    },
+    "envelope": {
+      "x": 16,
+      "y": 24,
+      "width": 840,
+      "height": 960,
+      "widthCm": 420,
+      "heightCm": 480
+    },
+    "tolerancePx": 8,
+    "artBounds": {
+      "x": 8,
+      "y": 8,
+      "width": 856,
+      "height": 992
+    },
+    "transparency": {
+      "edgePaddingPx": 8,
+      "minOpaqueRatio": 0.3,
+      "maxOpaqueRatio": 0.95
+    },
+    "export": {
+      "format": "png",
+      "bitDepth": 8,
+      "channels": 4,
+      "colorSpace": "sRGB",
+      "alpha": "straight (unpremultiplied)",
+      "maxBytes": 8000000
+    },
+    "assembly": [
+      "world_ruko_roof",
+      "world_ruko_awning"
+    ],
+    "styleReferences": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+    ],
+    "submissionPath": "art/submissions/world_ruko/<version>/",
+    "artRequest": "docs/production/ARCHITECTURE_CONTRACT_G1.md"
+  }
 }

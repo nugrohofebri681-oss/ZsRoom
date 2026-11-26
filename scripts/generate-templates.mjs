@@ -189,8 +189,9 @@ async function projectionCube() {
   await emit('projection_cube', svg(W, H, body));
 }
 
-for (const { spec } of specs.values()) {
-  if (spec.category !== 'prop' || spec.status === 'greybox-only') continue;
+for (const { spec, scope } of specs.values()) {
+  // world layers use the architecture contract sheet (docs/production/architecture-contract-g1.png), not furniture templates
+  if (scope !== 'room' || spec.category !== 'prop' || spec.status === 'greybox-only') continue;
   if (spec.placement?.type === 'floor') await decalTemplate(spec);
   else if (spec.profile) await roundTemplate(spec);
   else await propTemplate(spec);

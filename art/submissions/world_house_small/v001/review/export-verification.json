@@ -1,0 +1,159 @@
+{
+  "scope": "Supplemental export checks, NOT official validator and NOT visual approval",
+  "results": [
+    {
+      "assetId": "world_house_small",
+      "checks": {
+        "metadataSchema": true,
+        "masterChecksum": true,
+        "rawChecksum": true,
+        "canvas": true,
+        "rgba": true,
+        "colour": true,
+        "nativeDensity": true,
+        "noUpscale": true
+      },
+      "geometryExact": false
+    },
+    {
+      "assetId": "world_house_small_roof",
+      "checks": {
+        "metadataSchema": true,
+        "masterChecksum": true,
+        "rawChecksum": true,
+        "canvas": true,
+        "rgba": true,
+        "colour": true,
+        "nativeDensity": true,
+        "noUpscale": true
+      },
+      "geometryExact": false
+    },
+    {
+      "assetId": "world_house_large",
+      "checks": {
+        "metadataSchema": true,
+        "masterChecksum": true,
+        "rawChecksum": true,
+        "canvas": true,
+        "rgba": true,
+        "colour": true,
+        "nativeDensity": true,
+        "noUpscale": true
+      },
+      "geometryExact": false
+    },
+    {
+      "assetId": "world_house_large_roof",
+      "checks": {
+        "metadataSchema": true,
+        "masterChecksum": true,
+        "rawChecksum": true,
+        "canvas": true,
+        "rgba": true,
+        "colour": true,
+        "nativeDensity": true,
+        "noUpscale": true
+      },
+      "geometryExact": false
+    },
+    {
+      "assetId": "world_ruko",
+      "checks": {
+        "metadataSchema": true,
+        "masterChecksum": true,
+        "rawChecksum": true,
+        "canvas": true,
+        "rgba": true,
+        "colour": true,
+        "nativeDensity": true,
+        "noUpscale": true
+      },
+      "geometryExact": false
+    },
+    {
+      "assetId": "world_ruko_roof",
+      "checks": {
+        "metadataSchema": true,
+        "masterChecksum": true,
+        "rawChecksum": true,
+        "canvas": true,
+        "rgba": true,
+        "colour": true,
+        "nativeDensity": true,
+        "noUpscale": true
+      },
+      "geometryExact": false
+    },
+    {
+      "assetId": "world_warkop_open",
+      "checks": {
+        "metadataSchema": true,
+        "masterChecksum": true,
+        "rawChecksum": true,
+        "canvas": true,
+        "rgba": true,
+        "colour": true,
+        "nativeDensity": true,
+        "noUpscale": true
+      },
+      "geometryExact": false
+    },
+    {
+      "assetId": "world_warkop_roof",
+      "checks": {
+        "metadataSchema": true,
+        "masterChecksum": true,
+        "rawChecksum": true,
+        "canvas": true,
+        "rgba": true,
+        "colour": true,
+        "nativeDensity": true,
+        "noUpscale": true
+      },
+      "geometryExact": false
+    },
+    {
+      "assetId": "world_ruko_awning",
+      "checks": {
+        "metadataSchema": true,
+        "masterChecksum": true,
+        "rawChecksum": true,
+        "canvas": true,
+        "rgba": true,
+        "colour": true,
+        "nativeDensity": true,
+        "noUpscale": true
+      },
+      "geometryExact": false
+    },
+    {
+      "assetId": "world_warkop_counter",
+      "checks": {
+        "metadataSchema": true,
+        "masterChecksum": true,
+        "rawChecksum": true,
+        "canvas": true,
+        "rgba": true,
+        "colour": true,
+        "nativeDensity": true,
+        "noUpscale": true
+      },
+      "geometryExact": false
+    },
+    {
+      "assetId": "world_warkop_bench",
+      "checks": {
+        "metadataSchema": true,
+        "masterChecksum": true,
+        "rawChecksum": true,
+        "canvas": true,
+        "rgba": true,
+        "colour": true,
+        "nativeDensity": true,
+        "noUpscale": true
+      },
+      "geometryExact": false
+    }
+  ]
+}

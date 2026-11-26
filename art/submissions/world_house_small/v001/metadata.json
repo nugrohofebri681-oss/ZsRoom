@@ -1,0 +1,43 @@
+{
+  "assetId": "world_house_small",
+  "version": "v001",
+  "specVersion": "0.1.0",
+  "author": "codex",
+  "createdAt": "2026-11-26T03:16:38.149Z",
+  "generator": {
+    "tool": "built-in image_gen.imagegen",
+    "model": "tool-selected; not disclosed",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "G1 selected house_small source; see prompt.md",
+      "https://github.com/nugrohofebri681-oss/ZsRoom/tree/12bf7108522ad11e50a5530c972e943d5b19bbd3/art/concepts/batch_g1/v001"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_house_small_v001.png",
+      "sha256": "62ad92b68a0ea0b00bdb7c4f5609e50fcbeb624fb05b3aad88b50b6ffadbc996"
+    },
+    "raw": {
+      "path": "art/source/world_house_small/v001/raw.png",
+      "sha256": "6712543b21f7fe405e60bf24de6a08d0936eea0987db4f454c84fb63c37d1ec3"
+    }
+  },
+  "provenance": "Original built-in image-generation edit of selected ZsRoom G1 artwork. Prior source preserved. No external assets.",
+  "cost": "included in existing ChatGPT subscription; no paid API credits",
+  "postProcessing": [
+    "Alpha<=8 cleared; alpha>=250 opaque; disconnected islands<80px removed.",
+    "Trim and uniform downsample scale 0.5773195876288659; transparent padding to contract canvas. No nonuniform scaling or artificial upscale."
+  ],
+  "selfReview": {
+    "checklistComplete": false,
+    "knownIssues": [
+      "Uniform fit content 840x494, target 840x540; width delta 0cm, height delta -23cm. No stretch or upscale.",
+      "Canvas/pivot follow contract HD2; official TEMP spec density1 and validator loader excludes world specs. Not TECHNICAL PASS.",
+      "Painted openings/roof coverage need correction if overlay misses; canvas validity does not certify geometry.",
+      "Contract padding prose32px conflicts with formula side margin16px; formula used, needs Claude clarification."
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "assetId": "world_warkop_open",
+  "version": "v001",
+  "specVersion": "0.1.0",
+  "author": "codex",
+  "createdAt": "2026-11-26T03:16:40.835Z",
+  "generator": {
+    "tool": "built-in image_gen.imagegen",
+    "model": "tool-selected; not disclosed",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "G1 selected warkop_open source; see prompt.md",
+      "https://github.com/nugrohofebri681-oss/ZsRoom/tree/12bf7108522ad11e50a5530c972e943d5b19bbd3/art/concepts/batch_g1/v001"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_warkop_open_v001.png",
+      "sha256": "4eb8ce2f11eeeaafbfb7cf1837024b11e5ef8271dfdcbfffd7c0e0a028a2f48e"
+    },
+    "raw": {
+      "path": "art/source/world_warkop_open/v001/raw.png",
+      "sha256": "3e94ce57ef91a5cf541c3789216c877b01c0ce4f6992baf008a634830dbab909"
+    }
+  },
+  "provenance": "Original built-in image-generation edit of selected ZsRoom G1 artwork. Prior source preserved. No external assets.",
+  "cost": "included in existing ChatGPT subscription; no paid API credits",
+  "postProcessing": [
+    "Alpha<=8 cleared; alpha>=250 opaque; disconnected islands<80px removed.",
+    "Trim and uniform downsample scale 0.6884681583476764; transparent padding to contract canvas. No nonuniform scaling or artificial upscale."
+  ],
+  "selfReview": {
+    "checklistComplete": false,
+    "knownIssues": [
+      "Uniform fit content 1200x505, target 1200x560; width delta 0cm, height delta -27.5cm. No stretch or upscale.",
+      "Canvas/pivot follow contract HD2; official TEMP spec density1 and validator loader excludes world specs. Not TECHNICAL PASS.",
+      "Painted openings/roof coverage need correction if overlay misses; canvas validity does not certify geometry.",
+      "Contract padding prose32px conflicts with formula side margin16px; formula used, needs Claude clarification."
+    ]
+  }
+}

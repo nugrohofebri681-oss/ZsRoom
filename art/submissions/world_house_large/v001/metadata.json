@@ -1,0 +1,43 @@
+{
+  "assetId": "world_house_large",
+  "version": "v001",
+  "specVersion": "0.1.0",
+  "author": "codex",
+  "createdAt": "2026-11-26T03:16:39.284Z",
+  "generator": {
+    "tool": "built-in image_gen.imagegen",
+    "model": "tool-selected; not disclosed",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "G1 selected house_large source; see prompt.md",
+      "https://github.com/nugrohofebri681-oss/ZsRoom/tree/12bf7108522ad11e50a5530c972e943d5b19bbd3/art/concepts/batch_g1/v001"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_house_large_v001.png",
+      "sha256": "2db08fcb2785387ce5bef9a1340f24d857c506f4386b08e9d3aba8392422064d"
+    },
+    "raw": {
+      "path": "art/source/world_house_large/v001/raw.png",
+      "sha256": "1692aba8109eb481b1522e78f0b1460f6d06769243daa087275f2567c1e318e5"
+    }
+  },
+  "provenance": "Original built-in image-generation edit of selected ZsRoom G1 artwork. Prior source preserved. No external assets.",
+  "cost": "included in existing ChatGPT subscription; no paid API credits",
+  "postProcessing": [
+    "Alpha<=8 cleared; alpha>=250 opaque; disconnected islands<80px removed.",
+    "Trim and uniform downsample scale 0.690846286701209; transparent padding to contract canvas. No nonuniform scaling or artificial upscale."
+  ],
+  "selfReview": {
+    "checklistComplete": false,
+    "knownIssues": [
+      "Uniform fit content 1200x533, target 1200x560; width delta 0cm, height delta -13.5cm. No stretch or upscale.",
+      "Canvas/pivot follow contract HD2; official TEMP spec density1 and validator loader excludes world specs. Not TECHNICAL PASS.",
+      "Painted openings/roof coverage need correction if overlay misses; canvas validity does not certify geometry.",
+      "Contract padding prose32px conflicts with formula side margin16px; formula used, needs Claude clarification."
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "assetId": "world_warkop_counter",
+  "layer": "addon",
+  "rawSize": [
+    1746,
+    901
+  ],
+  "sourceBBox": [
+    40,
+    76,
+    1666,
+    749
+  ],
+  "canvas": [
+    400,
+    238
+  ],
+  "pivot": [
+    200,
+    214
+  ],
+  "expectedContent": [
+    368,
+    190
+  ],
+  "actualContent": [
+    368,
+    165
+  ],
+  "placement": [
+    16,
+    49
+  ],
+  "uniformScale": 0.22088835534213686,
+  "sourceDensityWidth": 9.054347826086957,
+  "removedSpecklePixels": 0,
+  "widthDeltaCm": 0,
+  "heightDeltaCm": -12.5,
+  "rawSha256": "e261dadceb09ba7e563326fac50de6235c29ac7873977d249f4a2b8caa78ddc7",
+  "masterSha256": "b91d0d4bb37a1fb651aa8b0527d6913fad198f6f40e6d4add607d771173b11e5",
+  "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+  "status": "REVIEW ONLY — geometric mismatches unresolved"
+}

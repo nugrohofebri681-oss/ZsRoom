@@ -1,0 +1,43 @@
+{
+  "assetId": "world_warkop_bench",
+  "layer": "addon",
+  "rawSize": [
+    2172,
+    724
+  ],
+  "sourceBBox": [
+    34,
+    212,
+    2104,
+    400
+  ],
+  "canvas": [
+    400,
+    138
+  ],
+  "pivot": [
+    200,
+    114
+  ],
+  "expectedContent": [
+    368,
+    90
+  ],
+  "actualContent": [
+    368,
+    70
+  ],
+  "placement": [
+    16,
+    44
+  ],
+  "uniformScale": 0.17490494296577946,
+  "sourceDensityWidth": 11.434782608695652,
+  "removedSpecklePixels": 180,
+  "widthDeltaCm": 0,
+  "heightDeltaCm": -10,
+  "rawSha256": "ca3611c20dd461101bc5becb17b9aa2fd119f12084013226eead021b6ebdbb5e",
+  "masterSha256": "a04247d5847dc433f1cb1a7c86f106b0eea56c618d8b375e2f8dfcc80bb48406",
+  "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+  "status": "REVIEW ONLY — geometric mismatches unresolved"
+}

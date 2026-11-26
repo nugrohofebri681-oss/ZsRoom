@@ -1,0 +1,43 @@
+{
+  "assetId": "world_ruko_roof",
+  "layer": "roof",
+  "rawSize": [
+    1647,
+    955
+  ],
+  "sourceBBox": [
+    40,
+    43,
+    1564,
+    864
+  ],
+  "canvas": [
+    952,
+    582
+  ],
+  "pivot": [
+    476,
+    528
+  ],
+  "expectedContent": [
+    920,
+    534
+  ],
+  "actualContent": [
+    920,
+    508
+  ],
+  "placement": [
+    16,
+    50
+  ],
+  "uniformScale": 0.5882352941176471,
+  "sourceDensityWidth": 3.4,
+  "removedSpecklePixels": 0,
+  "widthDeltaCm": 0,
+  "heightDeltaCm": -13,
+  "rawSha256": "71ec4930452a96cc93be3762107679d767642ceb0f6c73ec2761018375dc4795",
+  "masterSha256": "15f2a346f87d7b8b18653d025ba0e20d5f15005437ab4e1707606be7f343401b",
+  "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+  "status": "REVIEW ONLY — geometric mismatches unresolved"
+}

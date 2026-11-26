@@ -1,0 +1,3168 @@
+{
+  "branch": "",
+  "changed": null,
+  "ownershipErrors": [],
+  "results": [
+    {
+      "assetId": "decal_rug_zila",
+      "version": "v001",
+      "dir": "art/submissions/decal_rug_zila/v001",
+      "spec": "specs/props/decal_rug_zila.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "decal_rug_zila"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/decal_rug_zila.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "decal_rug_zila_v001.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "decal_rug_zila"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "cf53ddfb3c1f8adf8af0c643c2dbd6cffe0423e7916e91566ce80238c03b9bb3"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "560x288, expected 560x288"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "205022 bytes (max 3000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.748"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.748"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 20,26 520x236; allowed 10,10 540x268"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 560,
+        "height": 288,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 205022,
+        "opaqueRatio": 0.7483816964285714,
+        "bbox": {
+          "x": 20,
+          "y": 26,
+          "width": 520,
+          "height": 236
+        },
+        "baseRow": 261,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "prop_bed_zila",
+      "version": "v001",
+      "dir": "art/submissions/prop_bed_zila/v001",
+      "spec": "specs/props/prop_bed_zila.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "prop_bed_zila"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/prop_bed_zila.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "prop_bed_zila_v001.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "prop_bed_zila"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "d41d329432175add32b33c6d98589d289152f3188dac408d231e5fbf1bbe6acc"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "384x576, expected 384x576"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "251044 bytes (max 2500000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.540"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.540"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 67,34 250x511; allowed 56,32 272x520"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 543, expected 544±10"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 384,
+        "height": 576,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 251044,
+        "opaqueRatio": 0.5402425130208334,
+        "bbox": {
+          "x": 67,
+          "y": 34,
+          "width": 250,
+          "height": 511
+        },
+        "baseRow": 543,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "prop_catbed_mochi",
+      "version": "v001",
+      "dir": "art/submissions/prop_catbed_mochi/v001",
+      "spec": "specs/props/prop_catbed_mochi.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "prop_catbed_mochi"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/prop_catbed_mochi.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "prop_catbed_mochi_v001.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "prop_catbed_mochi"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "244ecc507b71b57d308f35596b0e6796a446eb134859d735a52e22e84d2d5cf3"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "160x176, expected 160x176"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "29688 bytes (max 3000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.385"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.385"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 16,52 128x101; allowed 12,14 136x146"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 152, expected 152±8"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 160,
+        "height": 176,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 29688,
+        "opaqueRatio": 0.38501420454545454,
+        "bbox": {
+          "x": 16,
+          "y": 52,
+          "width": 128,
+          "height": 101
+        },
+        "baseRow": 152,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "prop_chair_desk",
+      "version": "v002",
+      "dir": "art/submissions/prop_chair_desk/v002",
+      "spec": "specs/props/prop_chair_desk.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "prop_chair_desk"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/prop_chair_desk.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "prop_chair_desk_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "prop_chair_desk"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "edf3cf3307c705d994914f8fa6a0354d529691e3e04f68c9fb443e303521bfe6"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "144x288, expected 144x288"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "26741 bytes (max 3000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.269"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.269"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 23,81 98x184; allowed 19,13 106x259"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 264, expected 264±8"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 144,
+        "height": 288,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 26741,
+        "opaqueRatio": 0.2687837577160494,
+        "bbox": {
+          "x": 23,
+          "y": 81,
+          "width": 98,
+          "height": 184
+        },
+        "baseRow": 264,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "prop_desk_zila",
+      "version": "v002",
+      "dir": "art/submissions/prop_desk_zila/v002",
+      "spec": "specs/props/prop_desk_zila.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "prop_desk_zila"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/prop_desk_zila.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "prop_desk_zila_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "prop_desk_zila"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "8f5f980314fc9ba59731ed3c2330645806651926d7c9c7861dcafe179867ee09"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "288x288, expected 288x288"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "92038 bytes (max 3000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.582"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.582"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 20,26 247x239; allowed 16,22 256x250"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 263, expected 264±8"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 288,
+        "height": 288,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 92038,
+        "opaqueRatio": 0.5819709683641975,
+        "bbox": {
+          "x": 20,
+          "y": 26,
+          "width": 247,
+          "height": 239
+        },
+        "baseRow": 263,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "prop_lamp_zila",
+      "version": "v002",
+      "dir": "art/submissions/prop_lamp_zila/v002",
+      "spec": "specs/props/prop_lamp_zila.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "prop_lamp_zila"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/prop_lamp_zila.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "prop_lamp_zila_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "prop_lamp_zila"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "26f3411d0b49abd4efa1b6047184799814ba3488ac75ec3822d06abdacc8dc11"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "96x152, expected 96x152"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "13431 bytes (max 600000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.330"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.330"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 17,30 63x106; allowed 16,16 64x122"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 135, expected 135±4"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 96,
+        "height": 152,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 13431,
+        "opaqueRatio": 0.33031798245614036,
+        "bbox": {
+          "x": 17,
+          "y": 30,
+          "width": 63,
+          "height": 106
+        },
+        "baseRow": 135,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "prop_laptop_zila",
+      "version": "v001",
+      "dir": "art/submissions/prop_laptop_zila/v001",
+      "spec": "specs/props/prop_laptop_zila.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "prop_laptop_zila"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/prop_laptop_zila.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "prop_laptop_zila_v001.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "prop_laptop_zila"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "57cf84f653e779e9b7cf8de4c74851be54a7dd51c31c6ac22ab1ae3d61a7d05c"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "96x112, expected 96x112"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "12670 bytes (max 400000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.483"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.483"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 13,13 70x79; allowed 12,12 72x86"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 91, expected 91±4"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 96,
+        "height": 112,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 12670,
+        "opaqueRatio": 0.48279389880952384,
+        "bbox": {
+          "x": 13,
+          "y": 13,
+          "width": 70,
+          "height": 79
+        },
+        "baseRow": 91,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "prop_mug_zila",
+      "version": "v001",
+      "dir": "art/submissions/prop_mug_zila/v001",
+      "spec": "specs/props/prop_mug_zila.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "prop_mug_zila"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/prop_mug_zila.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "prop_mug_zila_v001.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "prop_mug_zila"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "cc28e6cdc1b884e354baa89b891e2d050d013d92e268bc9dcc14c38c43bd745e"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "48x56, expected 48x56"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "2650 bytes (max 200000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.190"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.190"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 11,20 26x25; allowed 8,8 32x40"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 44, expected 44±3"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 48,
+        "height": 56,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 2650,
+        "opaqueRatio": 0.18973214285714285,
+        "bbox": {
+          "x": 11,
+          "y": 20,
+          "width": 26,
+          "height": 25
+        },
+        "baseRow": 44,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "prop_nightstand_zila",
+      "version": "v001",
+      "dir": "art/submissions/prop_nightstand_zila/v001",
+      "spec": "specs/props/prop_nightstand_zila.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "prop_nightstand_zila"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/prop_nightstand_zila.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "prop_nightstand_zila_v001.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "prop_nightstand_zila"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "13473053a483cd4db2813cb66d9f539098ec545f56d3c4dc42e5f454cef93f79"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "160x224, expected 160x224"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "34267 bytes (max 1000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.425"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.425"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 31,32 98x169; allowed 24,20 112x188"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 200, expected 200±8"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 160,
+        "height": 224,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 34267,
+        "opaqueRatio": 0.4245535714285714,
+        "bbox": {
+          "x": 31,
+          "y": 32,
+          "width": 98,
+          "height": 169
+        },
+        "baseRow": 200,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "prop_plant_small",
+      "version": "v001",
+      "dir": "art/submissions/prop_plant_small/v001",
+      "spec": "specs/props/prop_plant_small.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "prop_plant_small"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/prop_plant_small.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "prop_plant_small_v001.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "prop_plant_small"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "f2fc74dff26480c972d05e841b213c29edf72c8a82b18a5913419babc2664741"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "144x224, expected 144x224"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "29785 bytes (max 3000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.322"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.322"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 21,61 102x140; allowed 17,23 110x185"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 200, expected 200±8"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 144,
+        "height": 224,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 29785,
+        "opaqueRatio": 0.32220362103174605,
+        "bbox": {
+          "x": 21,
+          "y": 61,
+          "width": 102,
+          "height": 140
+        },
+        "baseRow": 200,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "prop_plant_tall_zila",
+      "version": "v001",
+      "dir": "art/submissions/prop_plant_tall_zila/v001",
+      "spec": "specs/props/prop_plant_tall_zila.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "prop_plant_tall_zila"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/prop_plant_tall_zila.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "prop_plant_tall_zila_v001.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "prop_plant_tall_zila"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "fddadf16f0903af51bf9277972ac79b31503f44a2171cd0e7f45d0dd1402c4c3"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "160x432, expected 160x432"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "71867 bytes (max 3000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.340"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.340"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 21,51 118x358; allowed 12,14 136x402"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 408, expected 408±8"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 160,
+        "height": 432,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 71867,
+        "opaqueRatio": 0.3401909722222222,
+        "bbox": {
+          "x": 21,
+          "y": 51,
+          "width": 118,
+          "height": 358
+        },
+        "baseRow": 408,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "prop_pouf_floor",
+      "version": "v001",
+      "dir": "art/submissions/prop_pouf_floor/v001",
+      "spec": "specs/props/prop_pouf_floor.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "prop_pouf_floor"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/prop_pouf_floor.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "prop_pouf_floor_v001.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "prop_pouf_floor"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "c7b68fdb4ef6962559704e6e603bfc92c14ef4b79d628cf83034ffcd6e45a487"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "144x192, expected 144x192"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "31552 bytes (max 3000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.436"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.436"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 18,39 108x130; allowed 14,14 116x162"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 168, expected 168±8"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 144,
+        "height": 192,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 31552,
+        "opaqueRatio": 0.43569155092592593,
+        "bbox": {
+          "x": 18,
+          "y": 39,
+          "width": 108,
+          "height": 130
+        },
+        "baseRow": 168,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "prop_stool_vanity",
+      "version": "v002",
+      "dir": "art/submissions/prop_stool_vanity/v002",
+      "spec": "specs/props/prop_stool_vanity.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "prop_stool_vanity"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/prop_stool_vanity.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "prop_stool_vanity_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "prop_stool_vanity"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "2a43385401f8a107ed51f5e15ad433b7811753e453d8c94dcbbafcf6424599ae"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "128x192, expected 128x192"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "21292 bytes (max 3000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.320"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.320"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 20,23 88x146; allowed 16,14 96x162"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 168, expected 168±8"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 128,
+        "height": 192,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 21292,
+        "opaqueRatio": 0.3203938802083333,
+        "bbox": {
+          "x": 20,
+          "y": 23,
+          "width": 88,
+          "height": 146
+        },
+        "baseRow": 168,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "prop_vanity_zila",
+      "version": "v002",
+      "dir": "art/submissions/prop_vanity_zila/v002",
+      "spec": "specs/props/prop_vanity_zila.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "prop_vanity_zila"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/prop_vanity_zila.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "prop_vanity_zila_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "prop_vanity_zila"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "8fd6f800d8e1f2bc69a638c6940297417535844dcccd0bfda1d314ea6cb2220e"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "240x448, expected 240x448"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "87791 bytes (max 3000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.407"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.407"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 17,48 207x377; allowed 12,23 216x409"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 423, expected 424±8"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 240,
+        "height": 448,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 87791,
+        "opaqueRatio": 0.40731026785714286,
+        "bbox": {
+          "x": 17,
+          "y": 48,
+          "width": 207,
+          "height": 377
+        },
+        "baseRow": 423,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "prop_wardrobe_zila",
+      "version": "v001",
+      "dir": "art/submissions/prop_wardrobe_zila/v001",
+      "spec": "specs/props/prop_wardrobe_zila.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "prop_wardrobe_zila"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/prop_wardrobe_zila.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "prop_wardrobe_zila_v001.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "prop_wardrobe_zila"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "c54e419819766daf4fe7d8edb6ca6bac0dc946236e9b5d256fd198c06dcbea00"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "272x544, expected 272x544"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "168449 bytes (max 3000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.669"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.669"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 22,49 228x472; allowed 18,8 236x520"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 519, expected 520±8"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 272,
+        "height": 544,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 168449,
+        "opaqueRatio": 0.6694825908304498,
+        "bbox": {
+          "x": 22,
+          "y": 49,
+          "width": 228,
+          "height": 472
+        },
+        "baseRow": 519,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "wall_fairy_lights",
+      "version": "v001",
+      "dir": "art/submissions/wall_fairy_lights/v001",
+      "spec": "specs/props/wall_fairy_lights.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "wall_fairy_lights"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/wall_fairy_lights.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "wall_fairy_lights_v001.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "wall_fairy_lights"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "d7eeef07e92b1f70f3d2d1865ee58a0745e3e4140ee1b69e4e87c71b6e2f81ff"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "1232x96, expected 1232x96"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "39843 bytes (max 3000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.070"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.070"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 16,39 1200x42; allowed 12,27 1208x56"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 79, expected 80±8"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 1232,
+        "height": 96,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 39843,
+        "opaqueRatio": 0.07043087121212122,
+        "bbox": {
+          "x": 16,
+          "y": 39,
+          "width": 1200,
+          "height": 42
+        },
+        "baseRow": 79,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "wall_neon_goodvibes",
+      "version": "v001",
+      "dir": "art/submissions/wall_neon_goodvibes/v001",
+      "spec": "specs/props/wall_neon_goodvibes.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "wall_neon_goodvibes"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/wall_neon_goodvibes.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "wall_neon_goodvibes_v001.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "wall_neon_goodvibes"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "681a62d0d7e3e78878985b559ce133d19148d0d054fce6f65ed1cdc3c7df3697"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "176x112, expected 176x112"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "16456 bytes (max 3000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.169"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.169"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 18,38 140x59; allowed 14,22 148x77"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 95, expected 96±8"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 176,
+        "height": 112,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 16456,
+        "opaqueRatio": 0.169237012987013,
+        "bbox": {
+          "x": 18,
+          "y": 38,
+          "width": 140,
+          "height": 59
+        },
+        "baseRow": 95,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "wall_photos_string",
+      "version": "v001",
+      "dir": "art/submissions/wall_photos_string/v001",
+      "spec": "specs/props/wall_photos_string.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "wall_photos_string"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/wall_photos_string.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "wall_photos_string_v001.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "wall_photos_string"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "da852edd2d3c6442bec9465b8d8f679a138e7efedaa2fbe2c85121014bf2dd51"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "192x128, expected 192x128"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "19752 bytes (max 3000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.197"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.197"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 16,61 160x52; allowed 12,25 168x90"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 112, expected 112±8"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 192,
+        "height": 128,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 19752,
+        "opaqueRatio": 0.1968994140625,
+        "bbox": {
+          "x": 16,
+          "y": 61,
+          "width": 160,
+          "height": 52
+        },
+        "baseRow": 112,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "wall_shelf_books",
+      "version": "v001",
+      "dir": "art/submissions/wall_shelf_books/v001",
+      "spec": "specs/props/wall_shelf_books.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "wall_shelf_books"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/wall_shelf_books.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "wall_shelf_books_v001.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "wall_shelf_books"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "2a837ae56694adf1c4615a506808aa4d390c6b7ec78bd46e3125cebfb95f1372"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "224x144, expected 224x144"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "23836 bytes (max 3000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.239"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.239"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 22,42 180x87; allowed 18,18 188x113"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 128, expected 128±8"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 224,
+        "height": 144,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 23836,
+        "opaqueRatio": 0.23896329365079366,
+        "bbox": {
+          "x": 22,
+          "y": 42,
+          "width": 180,
+          "height": 87
+        },
+        "baseRow": 128,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "wall_window_bedroom",
+      "version": "v001",
+      "dir": "art/submissions/wall_window_bedroom/v001",
+      "spec": "specs/props/wall_window_bedroom.json",
+      "errors": [],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "wall_window_bedroom"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/props/wall_window_bedroom.json"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "wall_window_bedroom_v001.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "wall_window_bedroom"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "1f3f46d3f025c62dbb21f691815a38b54df5ee5be2f2462cc4f0c4c0882e65f4"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "448x304, expected 448x304"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "128240 bytes (max 3000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage ≥ min",
+          "pass": true,
+          "detail": "0.413"
+        },
+        {
+          "name": "opaque coverage ≤ max (no baked background)",
+          "pass": true,
+          "detail": "0.413"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 29,23 390x266; allowed 16,22 416x269"
+        },
+        {
+          "name": "base sits on pivot line",
+          "pass": true,
+          "detail": "lowest solid row 288, expected 288±8"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 448,
+        "height": 304,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 128240,
+        "opaqueRatio": 0.41277754934210525,
+        "bbox": {
+          "x": 29,
+          "y": 23,
+          "width": 390,
+          "height": 266
+        },
+        "baseRow": 288,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "world_house_large",
+      "version": "v001",
+      "dir": "art/submissions/world_house_large/v001",
+      "errors": [
+        "spec exists: no spec for world_house_large"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_house_large"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_house_large"
+        }
+      ]
+    },
+    {
+      "assetId": "world_house_large_roof",
+      "version": "v001",
+      "dir": "art/submissions/world_house_large_roof/v001",
+      "errors": [
+        "spec exists: no spec for world_house_large_roof"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_house_large_roof"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_house_large_roof"
+        }
+      ]
+    },
+    {
+      "assetId": "world_house_small",
+      "version": "v001",
+      "dir": "art/submissions/world_house_small/v001",
+      "errors": [
+        "spec exists: no spec for world_house_small"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_house_small"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_house_small"
+        }
+      ]
+    },
+    {
+      "assetId": "world_house_small_roof",
+      "version": "v001",
+      "dir": "art/submissions/world_house_small_roof/v001",
+      "errors": [
+        "spec exists: no spec for world_house_small_roof"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_house_small_roof"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_house_small_roof"
+        }
+      ]
+    },
+    {
+      "assetId": "world_ruko",
+      "version": "v001",
+      "dir": "art/submissions/world_ruko/v001",
+      "errors": [
+        "spec exists: no spec for world_ruko"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_ruko"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_ruko"
+        }
+      ]
+    },
+    {
+      "assetId": "world_ruko_awning",
+      "version": "v001",
+      "dir": "art/submissions/world_ruko_awning/v001",
+      "errors": [
+        "spec exists: no spec for world_ruko_awning"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_ruko_awning"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_ruko_awning"
+        }
+      ]
+    },
+    {
+      "assetId": "world_ruko_roof",
+      "version": "v001",
+      "dir": "art/submissions/world_ruko_roof/v001",
+      "errors": [
+        "spec exists: no spec for world_ruko_roof"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_ruko_roof"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_ruko_roof"
+        }
+      ]
+    },
+    {
+      "assetId": "world_warkop_bench",
+      "version": "v001",
+      "dir": "art/submissions/world_warkop_bench/v001",
+      "errors": [
+        "spec exists: no spec for world_warkop_bench"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_warkop_bench"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_warkop_bench"
+        }
+      ]
+    },
+    {
+      "assetId": "world_warkop_counter",
+      "version": "v001",
+      "dir": "art/submissions/world_warkop_counter/v001",
+      "errors": [
+        "spec exists: no spec for world_warkop_counter"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_warkop_counter"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_warkop_counter"
+        }
+      ]
+    },
+    {
+      "assetId": "world_warkop_open",
+      "version": "v001",
+      "dir": "art/submissions/world_warkop_open/v001",
+      "errors": [
+        "spec exists: no spec for world_warkop_open"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_warkop_open"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_warkop_open"
+        }
+      ]
+    },
+    {
+      "assetId": "world_warkop_roof",
+      "version": "v001",
+      "dir": "art/submissions/world_warkop_roof/v001",
+      "errors": [
+        "spec exists: no spec for world_warkop_roof"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_warkop_roof"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_warkop_roof"
+        }
+      ]
+    }
+  ]
+}

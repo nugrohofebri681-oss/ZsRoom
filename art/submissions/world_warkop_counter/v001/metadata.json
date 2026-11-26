@@ -1,0 +1,43 @@
+{
+  "assetId": "world_warkop_counter",
+  "version": "v001",
+  "specVersion": "0.1.0",
+  "author": "codex",
+  "createdAt": "2026-11-26T03:16:41.514Z",
+  "generator": {
+    "tool": "built-in image_gen.imagegen",
+    "model": "tool-selected; not disclosed",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "G1 selected ruko/warung source; see prompt.md",
+      "https://github.com/nugrohofebri681-oss/ZsRoom/tree/12bf7108522ad11e50a5530c972e943d5b19bbd3/art/concepts/batch_g1/v001"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_warkop_counter_v001.png",
+      "sha256": "b91d0d4bb37a1fb651aa8b0527d6913fad198f6f40e6d4add607d771173b11e5"
+    },
+    "raw": {
+      "path": "art/source/world_warkop_counter/v001/raw.png",
+      "sha256": "e261dadceb09ba7e563326fac50de6235c29ac7873977d249f4a2b8caa78ddc7"
+    }
+  },
+  "provenance": "Original built-in image-generation edit of selected ZsRoom G1 artwork. Prior source preserved. No external assets.",
+  "cost": "included in existing ChatGPT subscription; no paid API credits",
+  "postProcessing": [
+    "Alpha<=8 cleared; alpha>=250 opaque; disconnected islands<80px removed.",
+    "Trim and uniform downsample scale 0.22088835534213686; transparent padding to contract canvas. No nonuniform scaling or artificial upscale."
+  ],
+  "selfReview": {
+    "checklistComplete": false,
+    "knownIssues": [
+      "Uniform fit content 368x165, target 368x190; width delta 0cm, height delta -12.5cm. No stretch or upscale.",
+      "Canvas/pivot follow contract HD2; official TEMP spec density1 and validator loader excludes world specs. Not TECHNICAL PASS.",
+      "Painted openings/roof coverage need correction if overlay misses; canvas validity does not certify geometry.",
+      "Contract padding prose32px conflicts with formula side margin16px; formula used, needs Claude clarification."
+    ]
+  }
+}

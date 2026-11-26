@@ -1,0 +1,7 @@
+{
+  "url": "https://github.com/nugrohofebri681-oss/ZsRoom/pull/43/checks",
+  "commit": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+  "observed": "success favicon and green checks-summary-conclusion in GitHub checks HTML",
+  "evidenceSha256": "16124aa67cbefe29586d45bd331f7456883b49fcb25d8cd6d0b7bbdd87ac55bf",
+  "method": "public GitHub checks page; no API-derived job details claimed"
+}

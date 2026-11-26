@@ -1,0 +1,475 @@
+[
+  {
+    "assetId": "world_house_small",
+    "layer": "front",
+    "rawSize": [
+      1564,
+      1006
+    ],
+    "sourceBBox": [
+      54,
+      84,
+      1455,
+      855
+    ],
+    "canvas": [
+      872,
+      588
+    ],
+    "pivot": [
+      436,
+      564
+    ],
+    "expectedContent": [
+      840,
+      540
+    ],
+    "actualContent": [
+      840,
+      494
+    ],
+    "placement": [
+      16,
+      70
+    ],
+    "uniformScale": 0.5773195876288659,
+    "sourceDensityWidth": 3.4642857142857144,
+    "removedSpecklePixels": 4,
+    "widthDeltaCm": 0,
+    "heightDeltaCm": -23,
+    "rawSha256": "6712543b21f7fe405e60bf24de6a08d0936eea0987db4f454c84fb63c37d1ec3",
+    "masterSha256": "62ad92b68a0ea0b00bdb7c4f5609e50fcbeb624fb05b3aad88b50b6ffadbc996",
+    "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+    "status": "REVIEW ONLY — geometric mismatches unresolved"
+  },
+  {
+    "assetId": "world_house_small_roof",
+    "layer": "roof",
+    "rawSize": [
+      1740,
+      904
+    ],
+    "sourceBBox": [
+      32,
+      33,
+      1676,
+      839
+    ],
+    "canvas": [
+      952,
+      526
+    ],
+    "pivot": [
+      476,
+      472
+    ],
+    "expectedContent": [
+      920,
+      478
+    ],
+    "actualContent": [
+      920,
+      461
+    ],
+    "placement": [
+      16,
+      41
+    ],
+    "uniformScale": 0.548926014319809,
+    "sourceDensityWidth": 3.643478260869565,
+    "removedSpecklePixels": 1,
+    "widthDeltaCm": 0,
+    "heightDeltaCm": -8.5,
+    "rawSha256": "e0fe718adebd920cd40f474d3a9b2cf27b383614f3bc72898a9a18ec530b7de1",
+    "masterSha256": "6062c45248ddd0ced456a0478096b7fd59fa910db8bd5b00c9338621939e6f54",
+    "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+    "status": "REVIEW ONLY — geometric mismatches unresolved"
+  },
+  {
+    "assetId": "world_house_large",
+    "layer": "front",
+    "rawSize": [
+      1785,
+      881
+    ],
+    "sourceBBox": [
+      24,
+      65,
+      1737,
+      772
+    ],
+    "canvas": [
+      1232,
+      608
+    ],
+    "pivot": [
+      616,
+      584
+    ],
+    "expectedContent": [
+      1200,
+      560
+    ],
+    "actualContent": [
+      1200,
+      533
+    ],
+    "placement": [
+      16,
+      51
+    ],
+    "uniformScale": 0.690846286701209,
+    "sourceDensityWidth": 2.895,
+    "removedSpecklePixels": 3,
+    "widthDeltaCm": 0,
+    "heightDeltaCm": -13.5,
+    "rawSha256": "1692aba8109eb481b1522e78f0b1460f6d06769243daa087275f2567c1e318e5",
+    "masterSha256": "2db08fcb2785387ce5bef9a1340f24d857c506f4386b08e9d3aba8392422064d",
+    "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+    "status": "REVIEW ONLY — geometric mismatches unresolved"
+  },
+  {
+    "assetId": "world_house_large_roof",
+    "layer": "roof",
+    "rawSize": [
+      1774,
+      887
+    ],
+    "sourceBBox": [
+      32,
+      84,
+      1705,
+      718
+    ],
+    "canvas": [
+      1312,
+      638
+    ],
+    "pivot": [
+      656,
+      584
+    ],
+    "expectedContent": [
+      1280,
+      590
+    ],
+    "actualContent": [
+      1280,
+      539
+    ],
+    "placement": [
+      16,
+      75
+    ],
+    "uniformScale": 0.750733137829912,
+    "sourceDensityWidth": 2.6640625,
+    "removedSpecklePixels": 4,
+    "widthDeltaCm": 0,
+    "heightDeltaCm": -25.5,
+    "rawSha256": "240f8c662d731f69df3166c8ba97b893c637b43444dbddf1d3b17ccec6e6f116",
+    "masterSha256": "22bd66900591b8159307e06e7a37982c3ec909f9cf20acb1b6c1f195514207fe",
+    "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+    "status": "REVIEW ONLY — geometric mismatches unresolved"
+  },
+  {
+    "assetId": "world_ruko",
+    "layer": "front",
+    "rawSize": [
+      1166,
+      1349
+    ],
+    "sourceBBox": [
+      52,
+      19,
+      1063,
+      1307
+    ],
+    "canvas": [
+      872,
+      1008
+    ],
+    "pivot": [
+      436,
+      984
+    ],
+    "expectedContent": [
+      840,
+      960
+    ],
+    "actualContent": [
+      781,
+      960
+    ],
+    "placement": [
+      46,
+      24
+    ],
+    "uniformScale": 0.7345065034429993,
+    "sourceDensityWidth": 2.530952380952381,
+    "removedSpecklePixels": 2,
+    "widthDeltaCm": -29.5,
+    "heightDeltaCm": 0,
+    "rawSha256": "fc840dc282ce477dec8819fcc1412f844e868afda9005f8ddc35bf80e6dca129",
+    "masterSha256": "ff7b0af247cc42a3a0c51c1fb946d779ddea9aae1e1189c2cfe7caa393aff62e",
+    "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+    "status": "REVIEW ONLY — geometric mismatches unresolved"
+  },
+  {
+    "assetId": "world_ruko_roof",
+    "layer": "roof",
+    "rawSize": [
+      1647,
+      955
+    ],
+    "sourceBBox": [
+      40,
+      43,
+      1564,
+      864
+    ],
+    "canvas": [
+      952,
+      582
+    ],
+    "pivot": [
+      476,
+      528
+    ],
+    "expectedContent": [
+      920,
+      534
+    ],
+    "actualContent": [
+      920,
+      508
+    ],
+    "placement": [
+      16,
+      50
+    ],
+    "uniformScale": 0.5882352941176471,
+    "sourceDensityWidth": 3.4,
+    "removedSpecklePixels": 0,
+    "widthDeltaCm": 0,
+    "heightDeltaCm": -13,
+    "rawSha256": "71ec4930452a96cc93be3762107679d767642ceb0f6c73ec2761018375dc4795",
+    "masterSha256": "15f2a346f87d7b8b18653d025ba0e20d5f15005437ab4e1707606be7f343401b",
+    "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+    "status": "REVIEW ONLY — geometric mismatches unresolved"
+  },
+  {
+    "assetId": "world_warkop_open",
+    "layer": "front",
+    "rawSize": [
+      1774,
+      887
+    ],
+    "sourceBBox": [
+      16,
+      93,
+      1743,
+      733
+    ],
+    "canvas": [
+      1232,
+      608
+    ],
+    "pivot": [
+      616,
+      584
+    ],
+    "expectedContent": [
+      1200,
+      560
+    ],
+    "actualContent": [
+      1200,
+      505
+    ],
+    "placement": [
+      16,
+      79
+    ],
+    "uniformScale": 0.6884681583476764,
+    "sourceDensityWidth": 2.905,
+    "removedSpecklePixels": 3,
+    "widthDeltaCm": 0,
+    "heightDeltaCm": -27.5,
+    "rawSha256": "3e94ce57ef91a5cf541c3789216c877b01c0ce4f6992baf008a634830dbab909",
+    "masterSha256": "4eb8ce2f11eeeaafbfb7cf1837024b11e5ef8271dfdcbfffd7c0e0a028a2f48e",
+    "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+    "status": "REVIEW ONLY — geometric mismatches unresolved"
+  },
+  {
+    "assetId": "world_warkop_roof",
+    "layer": "roof",
+    "rawSize": [
+      1804,
+      872
+    ],
+    "sourceBBox": [
+      50,
+      51,
+      1704,
+      768
+    ],
+    "canvas": [
+      1312,
+      666
+    ],
+    "pivot": [
+      656,
+      612
+    ],
+    "expectedContent": [
+      1280,
+      618
+    ],
+    "actualContent": [
+      1280,
+      577
+    ],
+    "placement": [
+      16,
+      65
+    ],
+    "uniformScale": 0.7511737089201878,
+    "sourceDensityWidth": 2.6625,
+    "removedSpecklePixels": 24,
+    "widthDeltaCm": 0,
+    "heightDeltaCm": -20.5,
+    "rawSha256": "80e099573268feaf69149563ceb9b574477a085136adc83934c70df30d300b1d",
+    "masterSha256": "24398815474c70ba37d4f29bb960573d172d425b1b74227e900d4e29cb172063",
+    "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+    "status": "REVIEW ONLY — geometric mismatches unresolved"
+  },
+  {
+    "assetId": "world_ruko_awning",
+    "layer": "addon",
+    "rawSize": [
+      1295,
+      1214
+    ],
+    "sourceBBox": [
+      29,
+      566,
+      1238,
+      86
+    ],
+    "canvas": [
+      672,
+      108
+    ],
+    "pivot": [
+      336,
+      84
+    ],
+    "expectedContent": [
+      640,
+      60
+    ],
+    "actualContent": [
+      640,
+      44
+    ],
+    "placement": [
+      16,
+      40
+    ],
+    "uniformScale": 0.5169628432956381,
+    "sourceDensityWidth": 3.86875,
+    "removedSpecklePixels": 0,
+    "widthDeltaCm": 0,
+    "heightDeltaCm": -8,
+    "rawSha256": "528655dd9d834a26e69ef34595cf3e787aa0b128b55cb8ed6c922b3167191898",
+    "masterSha256": "12bd88c4d6b3b9957f1bf2015f30b7b3cbb135663f4fda6aab4ba56ddfb97aa6",
+    "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+    "status": "REVIEW ONLY — geometric mismatches unresolved"
+  },
+  {
+    "assetId": "world_warkop_counter",
+    "layer": "addon",
+    "rawSize": [
+      1746,
+      901
+    ],
+    "sourceBBox": [
+      40,
+      76,
+      1666,
+      749
+    ],
+    "canvas": [
+      400,
+      238
+    ],
+    "pivot": [
+      200,
+      214
+    ],
+    "expectedContent": [
+      368,
+      190
+    ],
+    "actualContent": [
+      368,
+      165
+    ],
+    "placement": [
+      16,
+      49
+    ],
+    "uniformScale": 0.22088835534213686,
+    "sourceDensityWidth": 9.054347826086957,
+    "removedSpecklePixels": 0,
+    "widthDeltaCm": 0,
+    "heightDeltaCm": -12.5,
+    "rawSha256": "e261dadceb09ba7e563326fac50de6235c29ac7873977d249f4a2b8caa78ddc7",
+    "masterSha256": "b91d0d4bb37a1fb651aa8b0527d6913fad198f6f40e6d4add607d771173b11e5",
+    "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+    "status": "REVIEW ONLY — geometric mismatches unresolved"
+  },
+  {
+    "assetId": "world_warkop_bench",
+    "layer": "addon",
+    "rawSize": [
+      2172,
+      724
+    ],
+    "sourceBBox": [
+      34,
+      212,
+      2104,
+      400
+    ],
+    "canvas": [
+      400,
+      138
+    ],
+    "pivot": [
+      200,
+      114
+    ],
+    "expectedContent": [
+      368,
+      90
+    ],
+    "actualContent": [
+      368,
+      70
+    ],
+    "placement": [
+      16,
+      44
+    ],
+    "uniformScale": 0.17490494296577946,
+    "sourceDensityWidth": 11.434782608695652,
+    "removedSpecklePixels": 180,
+    "widthDeltaCm": 0,
+    "heightDeltaCm": -10,
+    "rawSha256": "ca3611c20dd461101bc5becb17b9aa2fd119f12084013226eead021b6ebdbb5e",
+    "masterSha256": "a04247d5847dc433f1cb1a7c86f106b0eea56c618d8b375e2f8dfcc80bb48406",
+    "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+    "status": "REVIEW ONLY — geometric mismatches unresolved"
+  }
+]

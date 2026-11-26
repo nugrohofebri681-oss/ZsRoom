@@ -1,0 +1,43 @@
+{
+  "assetId": "world_house_large",
+  "layer": "front",
+  "rawSize": [
+    1785,
+    881
+  ],
+  "sourceBBox": [
+    24,
+    65,
+    1737,
+    772
+  ],
+  "canvas": [
+    1232,
+    608
+  ],
+  "pivot": [
+    616,
+    584
+  ],
+  "expectedContent": [
+    1200,
+    560
+  ],
+  "actualContent": [
+    1200,
+    533
+  ],
+  "placement": [
+    16,
+    51
+  ],
+  "uniformScale": 0.690846286701209,
+  "sourceDensityWidth": 2.895,
+  "removedSpecklePixels": 3,
+  "widthDeltaCm": 0,
+  "heightDeltaCm": -13.5,
+  "rawSha256": "1692aba8109eb481b1522e78f0b1460f6d06769243daa087275f2567c1e318e5",
+  "masterSha256": "2db08fcb2785387ce5bef9a1340f24d857c506f4386b08e9d3aba8392422064d",
+  "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+  "status": "REVIEW ONLY — geometric mismatches unresolved"
+}

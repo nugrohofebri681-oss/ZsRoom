@@ -1,0 +1,43 @@
+{
+  "assetId": "world_ruko",
+  "layer": "front",
+  "rawSize": [
+    1166,
+    1349
+  ],
+  "sourceBBox": [
+    52,
+    19,
+    1063,
+    1307
+  ],
+  "canvas": [
+    872,
+    1008
+  ],
+  "pivot": [
+    436,
+    984
+  ],
+  "expectedContent": [
+    840,
+    960
+  ],
+  "actualContent": [
+    781,
+    960
+  ],
+  "placement": [
+    46,
+    24
+  ],
+  "uniformScale": 0.7345065034429993,
+  "sourceDensityWidth": 2.530952380952381,
+  "removedSpecklePixels": 2,
+  "widthDeltaCm": -29.5,
+  "heightDeltaCm": 0,
+  "rawSha256": "fc840dc282ce477dec8819fcc1412f844e868afda9005f8ddc35bf80e6dca129",
+  "masterSha256": "ff7b0af247cc42a3a0c51c1fb946d779ddea9aae1e1189c2cfe7caa393aff62e",
+  "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+  "status": "REVIEW ONLY — geometric mismatches unresolved"
+}

@@ -1,0 +1,43 @@
+{
+  "assetId": "world_ruko_awning",
+  "layer": "addon",
+  "rawSize": [
+    1295,
+    1214
+  ],
+  "sourceBBox": [
+    29,
+    566,
+    1238,
+    86
+  ],
+  "canvas": [
+    672,
+    108
+  ],
+  "pivot": [
+    336,
+    84
+  ],
+  "expectedContent": [
+    640,
+    60
+  ],
+  "actualContent": [
+    640,
+    44
+  ],
+  "placement": [
+    16,
+    40
+  ],
+  "uniformScale": 0.5169628432956381,
+  "sourceDensityWidth": 3.86875,
+  "removedSpecklePixels": 0,
+  "widthDeltaCm": 0,
+  "heightDeltaCm": -8,
+  "rawSha256": "528655dd9d834a26e69ef34595cf3e787aa0b128b55cb8ed6c922b3167191898",
+  "masterSha256": "12bd88c4d6b3b9957f1bf2015f30b7b3cbb135663f4fda6aab4ba56ddfb97aa6",
+  "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+  "status": "REVIEW ONLY — geometric mismatches unresolved"
+}

@@ -1,0 +1,455 @@
+{
+  "branch": "codex/art/g1-1-production-r1",
+  "changed": [
+    "art/source/world_house_large/v001/attempt-01.png",
+    "art/source/world_house_large/v001/contract-layout-guide.png",
+    "art/source/world_house_large/v001/raw.png",
+    "art/source/world_house_large_roof/v001/contract-layout-guide.png",
+    "art/source/world_house_large_roof/v001/raw.png",
+    "art/source/world_house_small/v001/contract-layout-guide.png",
+    "art/source/world_house_small/v001/raw.png",
+    "art/source/world_house_small/v001/zs-g11-browser.mjs",
+    "art/source/world_house_small/v001/zs-g11-export.mjs",
+    "art/source/world_house_small/v001/zs-g11-gallery-check.mjs",
+    "art/source/world_house_small/v001/zs-g11-guides.mjs",
+    "art/source/world_house_small/v001/zs-g11-review.mjs",
+    "art/source/world_house_small/v001/zs-g11-verify.mjs",
+    "art/source/world_house_small_roof/v001/attempt-01.png",
+    "art/source/world_house_small_roof/v001/contract-layout-guide.png",
+    "art/source/world_house_small_roof/v001/raw.png",
+    "art/source/world_ruko/v001/attempt-01.png",
+    "art/source/world_ruko/v001/contract-layout-guide.png",
+    "art/source/world_ruko/v001/raw.png",
+    "art/source/world_ruko_awning/v001/attempt-01.png",
+    "art/source/world_ruko_awning/v001/raw.png",
+    "art/source/world_ruko_roof/v001/contract-layout-guide.png",
+    "art/source/world_ruko_roof/v001/raw.png",
+    "art/source/world_warkop_bench/v001/raw.png",
+    "art/source/world_warkop_counter/v001/raw.png",
+    "art/source/world_warkop_open/v001/contract-layout-guide.png",
+    "art/source/world_warkop_open/v001/raw.png",
+    "art/source/world_warkop_roof/v001/contract-layout-guide.png",
+    "art/source/world_warkop_roof/v001/raw.png",
+    "art/submissions/world_house_large/v001/checksums.json",
+    "art/submissions/world_house_large/v001/correction-prompt.md",
+    "art/submissions/world_house_large/v001/measurements.json",
+    "art/submissions/world_house_large/v001/metadata.json",
+    "art/submissions/world_house_large/v001/notes.md",
+    "art/submissions/world_house_large/v001/preview-sd.png",
+    "art/submissions/world_house_large/v001/prompt.md",
+    "art/submissions/world_house_large/v001/world_house_large_v001.png",
+    "art/submissions/world_house_large_roof/v001/checksums.json",
+    "art/submissions/world_house_large_roof/v001/measurements.json",
+    "art/submissions/world_house_large_roof/v001/metadata.json",
+    "art/submissions/world_house_large_roof/v001/notes.md",
+    "art/submissions/world_house_large_roof/v001/preview-sd.png",
+    "art/submissions/world_house_large_roof/v001/prompt.md",
+    "art/submissions/world_house_large_roof/v001/world_house_large_roof_v001.png",
+    "art/submissions/world_house_small/v001/checksums.json",
+    "art/submissions/world_house_small/v001/measurements.json",
+    "art/submissions/world_house_small/v001/metadata.json",
+    "art/submissions/world_house_small/v001/notes.md",
+    "art/submissions/world_house_small/v001/preview-sd.png",
+    "art/submissions/world_house_small/v001/prompt.md",
+    "art/submissions/world_house_small/v001/review/README.md",
+    "art/submissions/world_house_small/v001/review/android-landscape-ruko-behind.png",
+    "art/submissions/world_house_small/v001/review/android-landscape-ruko-front.png",
+    "art/submissions/world_house_small/v001/review/android-landscape-world_house_large.png",
+    "art/submissions/world_house_small/v001/review/android-landscape-world_house_small.png",
+    "art/submissions/world_house_small/v001/review/android-landscape-world_warkop_open.png",
+    "art/submissions/world_house_small/v001/review/android-portrait-ruko-behind.png",
+    "art/submissions/world_house_small/v001/review/android-portrait-ruko-front.png",
+    "art/submissions/world_house_small/v001/review/android-portrait-world_house_large.png",
+    "art/submissions/world_house_small/v001/review/android-portrait-world_house_small.png",
+    "art/submissions/world_house_small/v001/review/android-portrait-world_warkop_open.png",
+    "art/submissions/world_house_small/v001/review/browser-fixture.json",
+    "art/submissions/world_house_small/v001/review/build.md",
+    "art/submissions/world_house_small/v001/review/comparison-1.png",
+    "art/submissions/world_house_small/v001/review/comparison-2.png",
+    "art/submissions/world_house_small/v001/review/comparison-3.png",
+    "art/submissions/world_house_small/v001/review/comparison-4.png",
+    "art/submissions/world_house_small/v001/review/contract-ci.json",
+    "art/submissions/world_house_small/v001/review/contract-tests.md",
+    "art/submissions/world_house_small/v001/review/desktop-ruko-behind.png",
+    "art/submissions/world_house_small/v001/review/desktop-ruko-front.png",
+    "art/submissions/world_house_small/v001/review/desktop-world_house_large.png",
+    "art/submissions/world_house_small/v001/review/desktop-world_house_small.png",
+    "art/submissions/world_house_small/v001/review/desktop-world_warkop_open.png",
+    "art/submissions/world_house_small/v001/review/export-verification.json",
+    "art/submissions/world_house_small/v001/review/house_large-G1-reference.png",
+    "art/submissions/world_house_small/v001/review/house_large-assembled-hd.png",
+    "art/submissions/world_house_small/v001/review/house_large-assembled-sd.png",
+    "art/submissions/world_house_small/v001/review/house_large-contract-overlay.png",
+    "art/submissions/world_house_small/v001/review/house_small-G1-reference.png",
+    "art/submissions/world_house_small/v001/review/house_small-assembled-hd.png",
+    "art/submissions/world_house_small/v001/review/house_small-assembled-sd.png",
+    "art/submissions/world_house_small/v001/review/house_small-contract-overlay.png",
+    "art/submissions/world_house_small/v001/review/index.html",
+    "art/submissions/world_house_small/v001/review/measurements-all.json",
+    "art/submissions/world_house_small/v001/review/official-fitter.md",
+    "art/submissions/world_house_small/v001/review/official-gallery.md",
+    "art/submissions/world_house_small/v001/review/official-gallery.png",
+    "art/submissions/world_house_small/v001/review/official-validation.json",
+    "art/submissions/world_house_small/v001/review/preservation.json",
+    "art/submissions/world_house_small/v001/review/privacy.md",
+    "art/submissions/world_house_small/v001/review/ruko-G1-reference.png",
+    "art/submissions/world_house_small/v001/review/ruko-assembled-hd.png",
+    "art/submissions/world_house_small/v001/review/ruko-assembled-sd.png",
+    "art/submissions/world_house_small/v001/review/ruko-contract-overlay.png",
+    "art/submissions/world_house_small/v001/review/warkop_open-G1-reference.png",
+    "art/submissions/world_house_small/v001/review/warkop_open-assembled-hd.png",
+    "art/submissions/world_house_small/v001/review/warkop_open-assembled-sd.png",
+    "art/submissions/world_house_small/v001/review/warkop_open-contract-overlay.png",
+    "art/submissions/world_house_small/v001/world_house_small_v001.png",
+    "art/submissions/world_house_small_roof/v001/checksums.json",
+    "art/submissions/world_house_small_roof/v001/correction-prompt.md",
+    "art/submissions/world_house_small_roof/v001/measurements.json",
+    "art/submissions/world_house_small_roof/v001/metadata.json",
+    "art/submissions/world_house_small_roof/v001/notes.md",
+    "art/submissions/world_house_small_roof/v001/preview-sd.png",
+    "art/submissions/world_house_small_roof/v001/prompt.md",
+    "art/submissions/world_house_small_roof/v001/world_house_small_roof_v001.png",
+    "art/submissions/world_ruko/v001/checksums.json",
+    "art/submissions/world_ruko/v001/correction-prompt.md",
+    "art/submissions/world_ruko/v001/measurements.json",
+    "art/submissions/world_ruko/v001/metadata.json",
+    "art/submissions/world_ruko/v001/notes.md",
+    "art/submissions/world_ruko/v001/preview-sd.png",
+    "art/submissions/world_ruko/v001/prompt.md",
+    "art/submissions/world_ruko/v001/world_ruko_v001.png",
+    "art/submissions/world_ruko_awning/v001/checksums.json",
+    "art/submissions/world_ruko_awning/v001/correction-prompt.md",
+    "art/submissions/world_ruko_awning/v001/measurements.json",
+    "art/submissions/world_ruko_awning/v001/metadata.json",
+    "art/submissions/world_ruko_awning/v001/notes.md",
+    "art/submissions/world_ruko_awning/v001/preview-sd.png",
+    "art/submissions/world_ruko_awning/v001/prompt.md",
+    "art/submissions/world_ruko_awning/v001/world_ruko_awning_v001.png",
+    "art/submissions/world_ruko_roof/v001/checksums.json",
+    "art/submissions/world_ruko_roof/v001/measurements.json",
+    "art/submissions/world_ruko_roof/v001/metadata.json",
+    "art/submissions/world_ruko_roof/v001/notes.md",
+    "art/submissions/world_ruko_roof/v001/preview-sd.png",
+    "art/submissions/world_ruko_roof/v001/prompt.md",
+    "art/submissions/world_ruko_roof/v001/world_ruko_roof_v001.png",
+    "art/submissions/world_warkop_bench/v001/checksums.json",
+    "art/submissions/world_warkop_bench/v001/measurements.json",
+    "art/submissions/world_warkop_bench/v001/metadata.json",
+    "art/submissions/world_warkop_bench/v001/notes.md",
+    "art/submissions/world_warkop_bench/v001/preview-sd.png",
+    "art/submissions/world_warkop_bench/v001/prompt.md",
+    "art/submissions/world_warkop_bench/v001/world_warkop_bench_v001.png",
+    "art/submissions/world_warkop_counter/v001/checksums.json",
+    "art/submissions/world_warkop_counter/v001/measurements.json",
+    "art/submissions/world_warkop_counter/v001/metadata.json",
+    "art/submissions/world_warkop_counter/v001/notes.md",
+    "art/submissions/world_warkop_counter/v001/preview-sd.png",
+    "art/submissions/world_warkop_counter/v001/prompt.md",
+    "art/submissions/world_warkop_counter/v001/world_warkop_counter_v001.png",
+    "art/submissions/world_warkop_open/v001/checksums.json",
+    "art/submissions/world_warkop_open/v001/measurements.json",
+    "art/submissions/world_warkop_open/v001/metadata.json",
+    "art/submissions/world_warkop_open/v001/notes.md",
+    "art/submissions/world_warkop_open/v001/preview-sd.png",
+    "art/submissions/world_warkop_open/v001/prompt.md",
+    "art/submissions/world_warkop_open/v001/world_warkop_open_v001.png",
+    "art/submissions/world_warkop_roof/v001/checksums.json",
+    "art/submissions/world_warkop_roof/v001/measurements.json",
+    "art/submissions/world_warkop_roof/v001/metadata.json",
+    "art/submissions/world_warkop_roof/v001/notes.md",
+    "art/submissions/world_warkop_roof/v001/preview-sd.png",
+    "art/submissions/world_warkop_roof/v001/prompt.md",
+    "art/submissions/world_warkop_roof/v001/world_warkop_roof_v001.png"
+  ],
+  "ownershipErrors": [
+    "branch \"codex/art/g1-1-production-r1\" must match codex/art/<asset_id>-v### or codex/art/batch-<letter>-r<n>"
+  ],
+  "results": [
+    {
+      "assetId": "world_house_large",
+      "version": "v001",
+      "dir": "art/submissions/world_house_large/v001",
+      "errors": [
+        "spec exists: no spec for world_house_large"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_house_large"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_house_large"
+        }
+      ]
+    },
+    {
+      "assetId": "world_house_large_roof",
+      "version": "v001",
+      "dir": "art/submissions/world_house_large_roof/v001",
+      "errors": [
+        "spec exists: no spec for world_house_large_roof"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_house_large_roof"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_house_large_roof"
+        }
+      ]
+    },
+    {
+      "assetId": "world_house_small",
+      "version": "v001",
+      "dir": "art/submissions/world_house_small/v001",
+      "errors": [
+        "spec exists: no spec for world_house_small"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_house_small"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_house_small"
+        }
+      ]
+    },
+    {
+      "assetId": "world_house_small_roof",
+      "version": "v001",
+      "dir": "art/submissions/world_house_small_roof/v001",
+      "errors": [
+        "spec exists: no spec for world_house_small_roof"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_house_small_roof"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_house_small_roof"
+        }
+      ]
+    },
+    {
+      "assetId": "world_ruko",
+      "version": "v001",
+      "dir": "art/submissions/world_ruko/v001",
+      "errors": [
+        "spec exists: no spec for world_ruko"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_ruko"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_ruko"
+        }
+      ]
+    },
+    {
+      "assetId": "world_ruko_awning",
+      "version": "v001",
+      "dir": "art/submissions/world_ruko_awning/v001",
+      "errors": [
+        "spec exists: no spec for world_ruko_awning"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_ruko_awning"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_ruko_awning"
+        }
+      ]
+    },
+    {
+      "assetId": "world_ruko_roof",
+      "version": "v001",
+      "dir": "art/submissions/world_ruko_roof/v001",
+      "errors": [
+        "spec exists: no spec for world_ruko_roof"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_ruko_roof"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_ruko_roof"
+        }
+      ]
+    },
+    {
+      "assetId": "world_warkop_bench",
+      "version": "v001",
+      "dir": "art/submissions/world_warkop_bench/v001",
+      "errors": [
+        "spec exists: no spec for world_warkop_bench"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_warkop_bench"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_warkop_bench"
+        }
+      ]
+    },
+    {
+      "assetId": "world_warkop_counter",
+      "version": "v001",
+      "dir": "art/submissions/world_warkop_counter/v001",
+      "errors": [
+        "spec exists: no spec for world_warkop_counter"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_warkop_counter"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_warkop_counter"
+        }
+      ]
+    },
+    {
+      "assetId": "world_warkop_open",
+      "version": "v001",
+      "dir": "art/submissions/world_warkop_open/v001",
+      "errors": [
+        "spec exists: no spec for world_warkop_open"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_warkop_open"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_warkop_open"
+        }
+      ]
+    },
+    {
+      "assetId": "world_warkop_roof",
+      "version": "v001",
+      "dir": "art/submissions/world_warkop_roof/v001",
+      "errors": [
+        "spec exists: no spec for world_warkop_roof"
+      ],
+      "warnings": [],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_warkop_roof"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v001"
+        },
+        {
+          "name": "spec exists",
+          "pass": false,
+          "detail": "no spec for world_warkop_roof"
+        }
+      ]
+    }
+  ]
+}

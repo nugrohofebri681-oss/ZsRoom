@@ -1,0 +1,43 @@
+{
+  "assetId": "world_house_small_roof",
+  "layer": "roof",
+  "rawSize": [
+    1740,
+    904
+  ],
+  "sourceBBox": [
+    32,
+    33,
+    1676,
+    839
+  ],
+  "canvas": [
+    952,
+    526
+  ],
+  "pivot": [
+    476,
+    472
+  ],
+  "expectedContent": [
+    920,
+    478
+  ],
+  "actualContent": [
+    920,
+    461
+  ],
+  "placement": [
+    16,
+    41
+  ],
+  "uniformScale": 0.548926014319809,
+  "sourceDensityWidth": 3.643478260869565,
+  "removedSpecklePixels": 1,
+  "widthDeltaCm": 0,
+  "heightDeltaCm": -8.5,
+  "rawSha256": "e0fe718adebd920cd40f474d3a9b2cf27b383614f3bc72898a9a18ec530b7de1",
+  "masterSha256": "6062c45248ddd0ced456a0478096b7fd59fa910db8bd5b00c9338621939e6f54",
+  "contract": "d5830d7f42529f62ec3e541fd2895c2140592cac",
+  "status": "REVIEW ONLY — geometric mismatches unresolved"
+}

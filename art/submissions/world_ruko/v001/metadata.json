@@ -1,0 +1,43 @@
+{
+  "assetId": "world_ruko",
+  "version": "v001",
+  "specVersion": "0.1.0",
+  "author": "codex",
+  "createdAt": "2026-11-26T03:16:40.130Z",
+  "generator": {
+    "tool": "built-in image_gen.imagegen",
+    "model": "tool-selected; not disclosed",
+    "referencesUsed": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "G1 selected ruko source; see prompt.md",
+      "https://github.com/nugrohofebri681-oss/ZsRoom/tree/12bf7108522ad11e50a5530c972e943d5b19bbd3/art/concepts/batch_g1/v001"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_ruko_v001.png",
+      "sha256": "ff7b0af247cc42a3a0c51c1fb946d779ddea9aae1e1189c2cfe7caa393aff62e"
+    },
+    "raw": {
+      "path": "art/source/world_ruko/v001/raw.png",
+      "sha256": "fc840dc282ce477dec8819fcc1412f844e868afda9005f8ddc35bf80e6dca129"
+    }
+  },
+  "provenance": "Original built-in image-generation edit of selected ZsRoom G1 artwork. Prior source preserved. No external assets.",
+  "cost": "included in existing ChatGPT subscription; no paid API credits",
+  "postProcessing": [
+    "Alpha<=8 cleared; alpha>=250 opaque; disconnected islands<80px removed.",
+    "Trim and uniform downsample scale 0.7345065034429993; transparent padding to contract canvas. No nonuniform scaling or artificial upscale."
+  ],
+  "selfReview": {
+    "checklistComplete": false,
+    "knownIssues": [
+      "Uniform fit content 781x960, target 840x960; width delta -29.5cm, height delta 0cm. No stretch or upscale.",
+      "Canvas/pivot follow contract HD2; official TEMP spec density1 and validator loader excludes world specs. Not TECHNICAL PASS.",
+      "Painted openings/roof coverage need correction if overlay misses; canvas validity does not certify geometry.",
+      "Contract padding prose32px conflicts with formula side margin16px; formula used, needs Claude clarification."
+    ]
+  }
+}

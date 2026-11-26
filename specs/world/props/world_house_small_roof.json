@@ -1,6 +1,6 @@
 {
   "id": "world_house_small_roof",
-  "specVersion": "0.1.0",
+  "specVersion": "1.0.0",
   "status": "world-temp",
   "category": "prop",
   "displayName": "house_small roof layer (G1 contract; art pending — engine draws a TEMP roof until approved)",
@@ -31,5 +31,72 @@
     "type": "wall",
     "wall": "north"
   },
-  "$comment": "Roof layer of the frozen G1 contract: the whole roof mass in ZsRoom's 3/4 projection. Canvas = (width + 2×overhang + 16) × (projected rise + 15 drop + 24) at 1 px/cm; pivot = front eave centre. Never drawn together with the engine roof."
+  "$comment": "Roof layer of the frozen G1 contract: the whole roof mass in ZsRoom's 3/4 projection. Canvas = (width + 2×overhang + 16) × (projected rise + 15 drop + 24) at 1 px/cm; pivot = front eave centre. Never drawn together with the engine roof.",
+  "production": {
+    "batch": "G1",
+    "role": "roof",
+    "archetype": "house_small",
+    "contractVersion": "G1-contract-1",
+    "density": 2,
+    "canvas": {
+      "width": 952,
+      "height": 526
+    },
+    "pivot": {
+      "x": 476,
+      "y": 472,
+      "meaning": "front eave line, centre (render y = front line × 0.7 − eave); the envelope extends the 15 cm eave drop below it"
+    },
+    "envelope": {
+      "x": 16,
+      "y": 24,
+      "width": 920,
+      "height": 478,
+      "widthCm": 460,
+      "heightCm": 239,
+      "projectedRiseCm": 224,
+      "frontDropCm": 15
+    },
+    "coverage": {
+      "widthCm": 420,
+      "depthCm": 320,
+      "rect": {
+        "x": 56,
+        "y": 24,
+        "width": 840,
+        "height": 448
+      },
+      "minOpaqueRatio": 0.99,
+      "meaning": "the ground footprint W x D seen from above in 3/4 projection (pivot up to D x 0.7): the roof must hide it completely"
+    },
+    "tolerancePx": 8,
+    "artBounds": {
+      "x": 8,
+      "y": 8,
+      "width": 936,
+      "height": 510
+    },
+    "transparency": {
+      "edgePaddingPx": 8,
+      "minOpaqueRatio": 0.3,
+      "maxOpaqueRatio": 0.95
+    },
+    "export": {
+      "format": "png",
+      "bitDepth": 8,
+      "channels": 4,
+      "colorSpace": "sRGB",
+      "alpha": "straight (unpremultiplied)",
+      "maxBytes": 8000000
+    },
+    "assembly": [
+      "world_house_small"
+    ],
+    "styleReferences": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+    ],
+    "submissionPath": "art/submissions/world_house_small_roof/<version>/",
+    "artRequest": "docs/production/ARCHITECTURE_CONTRACT_G1.md"
+  }
 }

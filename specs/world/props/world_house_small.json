@@ -1,6 +1,6 @@
 {
   "id": "world_house_small",
-  "specVersion": "0.1.0",
+  "specVersion": "1.0.0",
   "status": "world-temp",
   "category": "prop",
   "displayName": "Small single-storey house (TEMP world placeholder)",
@@ -37,5 +37,58 @@
     "wall": "#EBDDC6",
     "maxDensity": 1
   },
-  "$comment": "TEMP front layer at the frozen G1 contract size (src/data/archetypes.json → contract; docs/production/ARCHITECTURE_CONTRACT_G1.md). Final art: bld_*_front + bld_*_roof layers."
+  "$comment": "TEMP front layer at the frozen G1 contract size (src/data/archetypes.json → contract; docs/production/ARCHITECTURE_CONTRACT_G1.md). Final art: bld_*_front + bld_*_roof layers.",
+  "production": {
+    "batch": "G1",
+    "role": "front",
+    "archetype": "house_small",
+    "contractVersion": "G1-contract-1",
+    "density": 2,
+    "canvas": {
+      "width": 872,
+      "height": 588
+    },
+    "pivot": {
+      "x": 436,
+      "y": 564,
+      "meaning": "bottom-centre of the front line (ground y = placement y)"
+    },
+    "envelope": {
+      "x": 16,
+      "y": 24,
+      "width": 840,
+      "height": 540,
+      "widthCm": 420,
+      "heightCm": 270
+    },
+    "tolerancePx": 8,
+    "artBounds": {
+      "x": 8,
+      "y": 8,
+      "width": 856,
+      "height": 572
+    },
+    "transparency": {
+      "edgePaddingPx": 8,
+      "minOpaqueRatio": 0.3,
+      "maxOpaqueRatio": 0.95
+    },
+    "export": {
+      "format": "png",
+      "bitDepth": 8,
+      "channels": 4,
+      "colorSpace": "sRGB",
+      "alpha": "straight (unpremultiplied)",
+      "maxBytes": 8000000
+    },
+    "assembly": [
+      "world_house_small_roof"
+    ],
+    "styleReferences": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+    ],
+    "submissionPath": "art/submissions/world_house_small/<version>/",
+    "artRequest": "docs/production/ARCHITECTURE_CONTRACT_G1.md"
+  }
 }

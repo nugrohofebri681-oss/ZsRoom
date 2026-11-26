@@ -1,6 +1,6 @@
 {
   "id": "world_warkop_counter",
-  "specVersion": "0.1.0",
+  "specVersion": "1.0.0",
   "status": "world-temp",
   "category": "prop",
   "displayName": "warkop_open counter add-on layer (G1 contract; art pending)",
@@ -31,5 +31,60 @@
     "type": "wall",
     "wall": "north"
   },
-  "$comment": "Separate add-on layer of the frozen G1 contract (never baked into the front layer, so it can carry interactions)."
+  "$comment": "Separate add-on layer of the frozen G1 contract (never baked into the front layer, so it can carry interactions).",
+  "production": {
+    "batch": "G1",
+    "role": "addon",
+    "archetype": "warkop_open",
+    "contractVersion": "G1-contract-1",
+    "density": 2,
+    "canvas": {
+      "width": 400,
+      "height": 238
+    },
+    "pivot": {
+      "x": 200,
+      "y": 214,
+      "meaning": "bottom-centre on the front line"
+    },
+    "envelope": {
+      "x": 16,
+      "y": 24,
+      "width": 368,
+      "height": 190,
+      "widthCm": 184,
+      "heightCm": 95
+    },
+    "tolerancePx": 8,
+    "artBounds": {
+      "x": 8,
+      "y": 8,
+      "width": 384,
+      "height": 222
+    },
+    "transparency": {
+      "edgePaddingPx": 8,
+      "minOpaqueRatio": 0.15,
+      "maxOpaqueRatio": 0.95
+    },
+    "export": {
+      "format": "png",
+      "bitDepth": 8,
+      "channels": 4,
+      "colorSpace": "sRGB",
+      "alpha": "straight (unpremultiplied)",
+      "maxBytes": 8000000
+    },
+    "assembly": [
+      "world_warkop_open",
+      "world_warkop_roof",
+      "world_warkop_bench"
+    ],
+    "styleReferences": [
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png"
+    ],
+    "submissionPath": "art/submissions/world_warkop_counter/<version>/",
+    "artRequest": "docs/production/ARCHITECTURE_CONTRACT_G1.md"
+  }
 }

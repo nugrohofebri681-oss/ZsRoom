@@ -8,6 +8,12 @@ These rules apply to every batch request (004+). Each batch request lists only w
 - The Creative Director approves **per asset**. Approved assets are integrated. The rest get a new version (`v002`) in the next round (`r2`) without regenerating the approved ones.
 - Never merge. Don't touch specs, the manifest, `art/approved/`, `public/`, `src/`, `scripts/`, `tests/` or workflows.
 
+## World layers (buildings: fronts, roofs, add-ons)
+- World production uses its own branch form, `codex/art/world-<batch>-r<round>` (e.g. `codex/art/world-g1-r2`), and the world rules in [`docs/production/WORLD_ART_PIPELINE.md`](../production/WORLD_ART_PIPELINE.md):
+  - HD production frame at 2 px/cm;
+  - contract envelope ±4 cm; roof footprint coverage;
+  - a `worldLayer` metadata block.
+
 ## Style and consistency (Art Bible v1.5)
 - Condition **every** asset on the approved furniture references: `art/approved/prop_bed_zila/prop_bed_zila_v001.png` and `art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png`. List them in `metadata.generator.referencesUsed`.
 - Within a batch, generate the **largest asset first**. Once you are satisfied with it, also attach it as a reference for the remaining assets of the batch, so the batch shares one hand. Mention this in `notes.md`.

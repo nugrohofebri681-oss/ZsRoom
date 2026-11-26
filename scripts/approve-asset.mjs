@@ -5,7 +5,7 @@
 import { copyFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { loadSpecs, readJson, ROOT, sha256File } from './lib.mjs';
+import { loadSpecs, productionSpec, readJson, ROOT, sha256File } from './lib.mjs';
 import { validateSubmission } from './validate-submission.mjs';
 
 const ALPHA_SNAP = 250;
@@ -37,7 +37,9 @@ const manifest = readJson(manifestPath);
 const current = manifest.assets[assetId];
 if (current?.status === 'approved' && current.version === version) { console.error(`${assetId} ${version} is already approved`); process.exit(1); }
 
-const spec = entry.spec;
+// world layers are exported from their production frame (HD master); the runtime spec keeps the TEMP frame
+const spec = productionSpec(entry);
+if (!spec) { console.error(`${assetId} does not accept art (no production block / grey-box only)`); process.exit(2); }
 /** Runtime alpha clean-up: near-opaque (≥250) → 255 so floors never bleed through; near-invisible haze (≤8) → 0. Masters are untouched. */
 async function solidified(path) {
   const { data, info } = await sharp(path).ensureAlpha().raw().toBuffer({ resolveWithObject: true });

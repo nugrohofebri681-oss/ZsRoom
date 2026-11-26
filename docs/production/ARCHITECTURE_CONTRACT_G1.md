@@ -61,7 +61,7 @@ Every building is drawn from two stacked layers that share **one depth key, the 
 | **Entrance** | door dx 0, 90 × 210 | door dx −80, 100 × 210 | shop opening dx 0, 300 × 240 (inspect only) | open centre bay dx 0, 184 × 230 |
 | **Door trigger** | 110 wide | 120 wide | none (background) | 160 wide |
 | **Other openings** | 2 windows at dx ±130, 80 wide, sill 90, head 190 | 2 windows at dx −220 and +190 (inside the porch), 100 wide | sign board 300 × 40 at 250–290; upper floor 300–480 | three 200 cm bays, post centres at dx −300 / −100 / 100 / 300 (posts 16 cm); counter in the right bay (95 cm), bench/shelf in the left bay |
-| **Porch / add-ons** | — | porch dx 40 → 300, wall set back 110, posts at dx 60 and 290, **not walkable** | awning at 240–270, projecting 60 (add-on) | counter + bench are separate add-on layers |
+| **Porch / add-ons** | — | porch dx 40 → 300, wall set back 110, posts at dx 60 and 290, **not walkable** | awning at 240–270, projecting 60 (add-on). Envelope 320 × 72 cm (band 30 + 60 × 0.7); canvas 672 × 192 @2 px/cm; pivot (336, 168) at the awning's front edge | counter + bench are separate add-on layers |
 | **Front layer px @2 px/cm** (canvas; pivot) | 872 × 588; (436, 564) | 1232 × 608; (616, 584) | 872 × 1008; (436, 984) | 1232 × 608; (616, 584) |
 | **Roof layer px @2 px/cm** (canvas; pivot) | 952 × 526; (476, 472) | 1312 × 638; (656, 584) | 952 × 582; (476, 528) | 1312 × 666; (656, 612) |
 | **Anchors** | inspect at (x, y+40), r ≤ 120 | inspect (x, y+40); yard gate centred on the door | inspect (x, y+40) | door at (x, y+25), r 50 |
@@ -112,7 +112,7 @@ The overhang is 20 cm on each side for all four; the front drop is 15 cm.
 2. **Redraw the roof for ZsRoom's projection.** It must reach the projected rise (224 / 280 / 252 / 294 cm above the eave), so the roof covers the whole footprint from above, with the visible far slope above the ridge. No front-elevation-only slope.
 3. **Paint doors and openings at the contract sizes** (§3). No nonuniform scaling; redraw or recompose.
 4. The **front layer's pivot is the front-line centre**. Anything below it (steps, kerb) must stay within 12 cm (padding); porch floors belong to the front layer.
-5. **Transparent background, 16 px padding at 1 px/cm** (32 px at 2 px/cm), no baked ground shadow (the engine draws contact shadows).
+5. **Transparent background**, no baked ground shadow (the engine draws contact shadows). Margins are **8 cm per side and 12 cm top and bottom**: 16 px and 24 px at 2 px/cm, with a fully transparent 8 px rim. *(Corrected 2026-11-26: the earlier "32 px" prose contradicted the canvas formula; see `WORLD_ART_PIPELINE.md` §2.)*
 6. **Batuphat plausibility, for the CD:** less ornament, fewer house-like curtains and plants in windows, fewer clay tiles. Zinc roofs are common, but this needs verified photos, so keep the roof colour a variant, not a redesign.
 
 **Per archetype:**
@@ -126,6 +126,7 @@ The overhang is 20 cm on each side for all four; the front drop is 15 cm.
 
 **Submission:**
 - Use the spec ids above: they now exist, which resolves the G1 validator's only failing check.
+- The pipeline rules for these layers (production frame, envelope checks, `worldLayer` metadata, world branch names) are in `WORLD_ART_PIPELINE.md`.
 - Production PRs go on separate branches.
 - Claude integrates them in an isolated branch, running the art validator and the P6.1 E2E.
 - Nothing is approved until the CD signs off.

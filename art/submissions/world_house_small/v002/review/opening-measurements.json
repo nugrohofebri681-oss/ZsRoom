@@ -1,0 +1,67 @@
+{
+  "method": "Coordinates of authored components at2px/cm, corroborated by contract overlay and visual review. Not an automated semantic detector of doors. Closed door leaf rectangles indicate designed clear opening; frame is outside.",
+  "small": {
+    "rect": [
+      346,
+      144,
+      180,
+      420
+    ],
+    "cm": [
+      90,
+      210
+    ]
+  },
+  "large": {
+    "rect": [
+      356,
+      164,
+      200,
+      420
+    ],
+    "cm": [
+      100,
+      210
+    ],
+    "dxCm": -80
+  },
+  "ruko": {
+    "rect": [
+      136,
+      504,
+      600,
+      480
+    ],
+    "cm": [
+      300,
+      240
+    ],
+    "shutters": "outside x136..736"
+  },
+  "warkop": {
+    "rect": [
+      432,
+      124,
+      368,
+      460
+    ],
+    "cm": [
+      184,
+      230
+    ],
+    "postCentresCm": [
+      -300,
+      -100,
+      100,
+      300
+    ],
+    "postWidthCm": 16,
+    "blocker": "outer post limits \u00b1308cm conflict with envelope \u00b1300cm"
+  },
+  "addons": {
+    "counterHeightCm": 95,
+    "benchHeightCm": 45,
+    "awningMeasuredProjectedHeightCm": 68,
+    "awningTargetProjectedHeightCm": 72
+  }
+}

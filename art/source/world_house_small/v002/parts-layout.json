@@ -1,0 +1,50 @@
+{
+  "method": "Native source crop, uniform downsampling, translation and original-material infill only; no nonuniform scaling.",
+  "parts": [
+    {
+      "name": "old-frame-top-repair",
+      "path": "art/source/world_house_small/v002/parts/old-frame-top-repair.png",
+      "x": 326,
+      "y": 110,
+      "w": 224,
+      "h": 26,
+      "provenance": "Original blank plaster patch; covers former frame header only."
+    },
+    {
+      "name": "door-leaf",
+      "path": "art/source/world_house_small/v002/parts/door-leaf.png",
+      "x": 346,
+      "y": 144,
+      "w": 180,
+      "h": 420,
+      "provenance": "Original single-door leaf uniformly downsampled and cropped to clear90x210cm."
+    },
+    {
+      "name": "door-jamb-left",
+      "path": "art/source/world_house_small/v002/parts/door-jamb-left.png",
+      "x": 326,
+      "y": 144,
+      "w": 20,
+      "h": 420,
+      "provenance": "Original frame left strip."
+    },
+    {
+      "name": "door-jamb-right",
+      "path": "art/source/world_house_small/v002/parts/door-jamb-right.png",
+      "x": 526,
+      "y": 144,
+      "w": 20,
+      "h": 420,
+      "provenance": "Original frame right strip."
+    },
+    {
+      "name": "door-header",
+      "path": "art/source/world_house_small/v002/parts/door-header.png",
+      "x": 326,
+      "y": 124,
+      "w": 220,
+      "h": 20,
+      "provenance": "Original walnut header."
+    }
+  ]
+}

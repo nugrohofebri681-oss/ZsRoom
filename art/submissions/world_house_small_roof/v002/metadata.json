@@ -1,0 +1,68 @@
+{
+  "assetId": "world_house_small_roof",
+  "version": "v002",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "createdAt": "2026-11-28T05:03:16.909Z",
+  "generator": {
+    "tool": "built-in image_gen.imagegen + original-source pixel recomposition",
+    "model": "tool selected; not disclosed",
+    "referencesUsed": [
+      "art/source/world_house_small_roof/v001/raw.png",
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "G1 selected house_small source; see prompt.md",
+      "https://github.com/nugrohofebri681-oss/ZsRoom/tree/12bf7108522ad11e50a5530c972e943d5b19bbd3/art/concepts/batch_g1/v001"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_house_small_roof_v002.png",
+      "sha256": "0526d2f0c3e4a556c283f908ab248507a5b2f226d59fa6bf36413f14db7042d9"
+    },
+    "sources": [
+      {
+        "path": "art/source/world_house_small_roof/v002/composition.json",
+        "sha256": "3759045a6a9c2f21df3d48bead06a30e9c95ee24d2291d3c2c691881090df6d4"
+      }
+    ]
+  },
+  "provenance": "Continuation of G1.1 commit4731dea; original selected G1 artwork preserved. Targeted built-in image edits and documented native source recomposition. No external assets.",
+  "cost": "included in existing subscription; no paid API credits",
+  "postProcessing": [
+    "Source crops and uniform downsampling; translated painted components and original material infill. No nonuniform scaling or artificial upscaling.",
+    "Source JSON records superseding refinements; composition.json describes initial working stage, not final geometry.",
+    "World pipeline43926cf used in separate verification worktree."
+  ],
+  "selfReview": {
+    "checklistComplete": false,
+    "knownIssues": [
+      "Visual approval pending; screenshot fixture is not production integration.",
+      "Official validation and visual review are documented in world_house_small/v002/review; no final approval."
+    ]
+  },
+  "worldLayer": {
+    "batch": "G1",
+    "role": "roof",
+    "archetype": "house_small",
+    "contractVersion": "G1-contract-1",
+    "densityPxPerCm": 2,
+    "measuredEnvelopePx": {
+      "x": 16,
+      "y": 24,
+      "width": 920,
+      "height": 478
+    },
+    "fit": {
+      "uniformScale": 1,
+      "upscaled": false,
+      "nonuniform": false,
+      "note": "Assembled native-density working master; component crops/downsampling and paint repair logged in source JSON. This is not a claim of one common generator scale."
+    },
+    "layerSet": [
+      "world_house_small_roof",
+      "world_house_small"
+    ]
+  }
+}

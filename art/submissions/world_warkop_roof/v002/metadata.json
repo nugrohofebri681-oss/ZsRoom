@@ -1,0 +1,74 @@
+{
+  "assetId": "world_warkop_roof",
+  "version": "v002",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "createdAt": "2026-11-28T05:03:17.265Z",
+  "generator": {
+    "tool": "built-in image_gen.imagegen + original-source pixel recomposition",
+    "model": "tool selected; not disclosed",
+    "referencesUsed": [
+      "art/source/world_warkop_roof/v001/raw.png",
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "G1 selected warkop_open source; see prompt.md",
+      "https://github.com/nugrohofebri681-oss/ZsRoom/tree/12bf7108522ad11e50a5530c972e943d5b19bbd3/art/concepts/batch_g1/v001"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_warkop_roof_v002.png",
+      "sha256": "dada42acec72a76a7c9f33c5107e381d51a80909959847699f28fbecc74fe2fb"
+    },
+    "sources": [
+      {
+        "path": "art/source/world_warkop_roof/v002/composition.json",
+        "sha256": "021127e047d685189d5d67758c1a7fe0a480fac92f3e6e997fcba11e9841a2a4"
+      },
+      {
+        "path": "art/source/world_warkop_roof/v002/refinement-export.json",
+        "sha256": "6f42714b9259dd195693a035a02816a3cbd92f66a630d90ba1e7dcf242e85836"
+      }
+    ]
+  },
+  "provenance": "Continuation of G1.1 commit4731dea; original selected G1 artwork preserved. Targeted built-in image edits and documented native source recomposition. No external assets.",
+  "cost": "included in existing subscription; no paid API credits",
+  "postProcessing": [
+    "Source crops and uniform downsampling; translated painted components and original material infill. No nonuniform scaling or artificial upscaling.",
+    "Source JSON records superseding refinements; composition.json describes initial working stage, not final geometry.",
+    "World pipeline43926cf used in separate verification worktree."
+  ],
+  "selfReview": {
+    "checklistComplete": false,
+    "knownIssues": [
+      "Visual approval pending; screenshot fixture is not production integration.",
+      "Official validation and visual review are documented in world_house_small/v002/review; no final approval."
+    ]
+  },
+  "worldLayer": {
+    "batch": "G1",
+    "role": "roof",
+    "archetype": "warkop_open",
+    "contractVersion": "G1-contract-1",
+    "densityPxPerCm": 2,
+    "measuredEnvelopePx": {
+      "x": 16,
+      "y": 24,
+      "width": 1280,
+      "height": 618
+    },
+    "fit": {
+      "uniformScale": 1,
+      "upscaled": false,
+      "nonuniform": false,
+      "note": "Assembled native-density working master; component crops/downsampling and paint repair logged in source JSON. This is not a claim of one common generator scale."
+    },
+    "layerSet": [
+      "world_warkop_roof",
+      "world_warkop_open",
+      "world_warkop_counter",
+      "world_warkop_bench"
+    ]
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "method": "Native source crop, uniform downsampling, translation and original-material infill only; no nonuniform scaling.",
+  "parts": [
+    {
+      "name": "old-door-top-repair",
+      "path": "art/source/world_house_large/v002/parts/old-door-top-repair.png",
+      "x": 340,
+      "y": 130,
+      "w": 220,
+      "h": 50,
+      "provenance": "Original plaster around old doorway."
+    },
+    {
+      "name": "door-leaf",
+      "path": "art/source/world_house_large/v002/parts/door-leaf.png",
+      "x": 356,
+      "y": 164,
+      "w": 200,
+      "h": 420,
+      "provenance": "New built-in imagegen leaf, uniform cover crop only; exact100x210 clear leaf."
+    },
+    {
+      "name": "door-jamb-left",
+      "path": "art/source/world_house_large/v002/parts/door-jamb-left.png",
+      "x": 338,
+      "y": 164,
+      "w": 18,
+      "h": 420,
+      "provenance": "Original frame left."
+    },
+    {
+      "name": "door-jamb-right",
+      "path": "art/source/world_house_large/v002/parts/door-jamb-right.png",
+      "x": 556,
+      "y": 164,
+      "w": 18,
+      "h": 420,
+      "provenance": "Original frame right."
+    },
+    {
+      "name": "door-header",
+      "path": "art/source/world_house_large/v002/parts/door-header.png",
+      "x": 338,
+      "y": 144,
+      "w": 236,
+      "h": 20,
+      "provenance": "Original header crop."
+    },
+    {
+      "name": "porch-wall",
+      "path": "art/source/world_house_large/v002/parts/porch-wall.png",
+      "x": 696,
+      "y": 24,
+      "w": 520,
+      "h": 406,
+      "provenance": "Original plaster, full reconstructed recessed back wall, no procedural flat fill."
+    },
+    {
+      "name": "porch-window",
+      "path": "art/source/world_house_large/v002/parts/porch-window.png",
+      "x": 896,
+      "y": 30,
+      "w": 200,
+      "h": 220,
+      "provenance": "Original right window: centre dx190; height110; groundsetback110cm gives projected heady30."
+    },
+    {
+      "name": "porch-plinth",
+      "path": "art/source/world_house_large/v002/parts/porch-plinth.png",
+      "x": 696,
+      "y": 342,
+      "w": 520,
+      "h": 88,
+      "provenance": "Original pale stone plinth reused on recessed wall."
+    },
+    {
+      "name": "porch-floor",
+      "path": "art/source/world_house_large/v002/parts/porch-floor.png",
+      "x": 696,
+      "y": 430,
+      "w": 520,
+      "h": 154,
+      "provenance": "New imagegen painted cream floor;260x110cm projects520x154; no nonuniform resize."
+    },
+    {
+      "name": "porch-post-left",
+      "path": "art/source/world_house_large/v002/parts/porch-post-left.png",
+      "x": 710,
+      "y": 24,
+      "w": 52,
+      "h": 560,
+      "provenance": "Original painted column with27px shaft infill; centre fixed by contract."
+    },
+    {
+      "name": "porch-post-right",
+      "path": "art/source/world_house_large/v002/parts/porch-post-right.png",
+      "x": 1170,
+      "y": 24,
+      "w": 52,
+      "h": 560,
+      "provenance": "Original painted column with27px shaft infill; centre fixed by contract."
+    }
+  ]
+}

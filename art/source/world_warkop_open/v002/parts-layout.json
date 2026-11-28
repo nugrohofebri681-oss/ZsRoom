@@ -1,0 +1,95 @@
+{
+  "method": "Native source crop, uniform downsampling, translation and original-material infill only; no nonuniform scaling.",
+  "parts": [
+    {
+      "name": "bay-1",
+      "path": "art/source/world_warkop_open/v002/parts/bay-1.png",
+      "x": 32,
+      "y": 124,
+      "w": 368,
+      "h": 460,
+      "provenance": "Original bay interior, uniform cover crop. Clear184x230cm."
+    },
+    {
+      "name": "header-1",
+      "path": "art/source/world_warkop_open/v002/parts/header-1.png",
+      "x": 32,
+      "y": 24,
+      "w": 368,
+      "h": 100,
+      "provenance": "Original cream signstrip and walnut lintel, reassembled above clear opening."
+    },
+    {
+      "name": "bay-2",
+      "path": "art/source/world_warkop_open/v002/parts/bay-2.png",
+      "x": 432,
+      "y": 124,
+      "w": 368,
+      "h": 460,
+      "provenance": "Original bay interior, uniform cover crop. Clear184x230cm."
+    },
+    {
+      "name": "header-2",
+      "path": "art/source/world_warkop_open/v002/parts/header-2.png",
+      "x": 432,
+      "y": 24,
+      "w": 368,
+      "h": 100,
+      "provenance": "Original cream signstrip and walnut lintel, reassembled above clear opening."
+    },
+    {
+      "name": "bay-3",
+      "path": "art/source/world_warkop_open/v002/parts/bay-3.png",
+      "x": 832,
+      "y": 124,
+      "w": 368,
+      "h": 460,
+      "provenance": "Original bay interior, uniform cover crop. Clear184x230cm."
+    },
+    {
+      "name": "header-3",
+      "path": "art/source/world_warkop_open/v002/parts/header-3.png",
+      "x": 832,
+      "y": 24,
+      "w": 368,
+      "h": 100,
+      "provenance": "Original cream signstrip and walnut lintel, reassembled above clear opening."
+    },
+    {
+      "name": "post-1",
+      "path": "art/source/world_warkop_open/v002/parts/post-1.png",
+      "x": 0,
+      "y": 24,
+      "w": 32,
+      "h": 560,
+      "provenance": "Original walnut post at centre dx[-300,-100,100,300], width16cm. Outer posts touch canvas edges: frozen contract/padding conflict documented."
+    },
+    {
+      "name": "post-2",
+      "path": "art/source/world_warkop_open/v002/parts/post-2.png",
+      "x": 400,
+      "y": 24,
+      "w": 32,
+      "h": 560,
+      "provenance": "Original walnut post at centre dx[-300,-100,100,300], width16cm. Outer posts touch canvas edges: frozen contract/padding conflict documented."
+    },
+    {
+      "name": "post-3",
+      "path": "art/source/world_warkop_open/v002/parts/post-3.png",
+      "x": 800,
+      "y": 24,
+      "w": 32,
+      "h": 560,
+      "provenance": "Original walnut post at centre dx[-300,-100,100,300], width16cm. Outer posts touch canvas edges: frozen contract/padding conflict documented."
+    },
+    {
+      "name": "post-4",
+      "path": "art/source/world_warkop_open/v002/parts/post-4.png",
+      "x": 1200,
+      "y": 24,
+      "w": 32,
+      "h": 560,
+      "provenance": "Original walnut post at centre dx[-300,-100,100,300], width16cm. Outer posts touch canvas edges: frozen contract/padding conflict documented."
+    }
+  ]
+}

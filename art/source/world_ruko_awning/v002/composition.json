@@ -1,0 +1,31 @@
+{
+  "operation": "Source-pixel re-composition: translate original sections and insert original painted material band. No nonuniform scaling, upscaling or procedural illustration.",
+  "source": "art/submissions/world_ruko_awning/v001/world_ruko_awning_v001.png",
+  "sourceContent": [
+    640,
+    44
+  ],
+  "remove": null,
+  "insert": {
+    "at": 12,
+    "height": 16,
+    "sampledAt": 6
+  },
+  "resultContent": [
+    640,
+    60
+  ],
+  "placement": [
+    16,
+    24
+  ],
+  "canvas": [
+    672,
+    108
+  ],
+  "pivot": [
+    336,
+    84
+  ],
+  "remaining": "Opening/porch corrections and image review pending"
+}

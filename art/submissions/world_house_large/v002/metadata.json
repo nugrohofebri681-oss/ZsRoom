@@ -1,0 +1,148 @@
+{
+  "assetId": "world_house_large",
+  "version": "v002",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "createdAt": "2026-11-28T05:03:16.638Z",
+  "generator": {
+    "tool": "built-in image_gen.imagegen + original-source pixel recomposition",
+    "model": "tool selected; not disclosed",
+    "referencesUsed": [
+      "art/source/world_house_large/v001/raw.png",
+      "art/source/world_house_large/v002/door-raw.png",
+      "art/source/world_house_large/v002/plaster-raw.png",
+      "art/source/world_house_large/v002/porch-raw.png",
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "G1 selected house_large source; see prompt.md",
+      "https://github.com/nugrohofebri681-oss/ZsRoom/tree/12bf7108522ad11e50a5530c972e943d5b19bbd3/art/concepts/batch_g1/v001"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_house_large_v002.png",
+      "sha256": "56cd5e5089e928d42d2abeed867019863d5bf2f0b76de2962d08f0bf89ac883e"
+    },
+    "sources": [
+      {
+        "path": "art/source/world_house_large/v002/composition.json",
+        "sha256": "3f1382888528e37eb399779cae32c9f9586e4fa0389ebccbb6f4a0695b8ecc5c"
+      },
+      {
+        "path": "art/source/world_house_large/v002/door-prompt.md",
+        "sha256": "e90d6f5343d1198f4dccfe588e88e632faedc9cd56e41f4a4453a088f2d3d8a2"
+      },
+      {
+        "path": "art/source/world_house_large/v002/door-raw.png",
+        "sha256": "05ca9d607a10fffa2d40f1e54a07c93ca0a9b8032f109a0c91d730026434e605"
+      },
+      {
+        "path": "art/source/world_house_large/v002/paint-repair.json",
+        "sha256": "0b5d2aff9089f3922a0e70c2c10929e386773e4e25e87324a78211239fd3e943"
+      },
+      {
+        "path": "art/source/world_house_large/v002/parts/door-header.png",
+        "sha256": "fe1a721569e8f21073a603915fa67590d71a345aafb25a7ff85b25f09856f898"
+      },
+      {
+        "path": "art/source/world_house_large/v002/parts/door-jamb-left.png",
+        "sha256": "90826b42a3415698aff44c6188075ef69d04dbdb02980f6623e15fc17af95b94"
+      },
+      {
+        "path": "art/source/world_house_large/v002/parts/door-jamb-right.png",
+        "sha256": "a3f68e6afc6d313f139822679edbe8d9021a79332fc73251ed657a874f882137"
+      },
+      {
+        "path": "art/source/world_house_large/v002/parts/door-leaf.png",
+        "sha256": "6030dd604104b50de0925cf9a2192e2a2653db0b467cc6a13a492663785ceda8"
+      },
+      {
+        "path": "art/source/world_house_large/v002/parts/old-door-top-repair.png",
+        "sha256": "28ce79acef4f813fa28aa4834269c6fc2def1c13d53fc4903682133181e84e3f"
+      },
+      {
+        "path": "art/source/world_house_large/v002/parts/porch-floor.png",
+        "sha256": "787a11560fbfbd35cb8be756b4535b3195aeea8000f52a18589748ec2595210e"
+      },
+      {
+        "path": "art/source/world_house_large/v002/parts/porch-plinth.png",
+        "sha256": "43d5ebf1bb0613dda61c3582717f5bfe9d5d6de6369ab06f96046d5fb03a491b"
+      },
+      {
+        "path": "art/source/world_house_large/v002/parts/porch-post-left.png",
+        "sha256": "290d6484d5bdc382072599f3cd04303b1976b889eb8e88ffc497d34dc9dfb8ed"
+      },
+      {
+        "path": "art/source/world_house_large/v002/parts/porch-post-right.png",
+        "sha256": "5275cc90cab6f6081a0a0fef4022c2356e292a5715cba35f4ce6ec1aa19f1b48"
+      },
+      {
+        "path": "art/source/world_house_large/v002/parts/porch-wall.png",
+        "sha256": "3f09e504715644079b68cb8af16f9aa7eb905283952f1898d0ccbd4bacf16304"
+      },
+      {
+        "path": "art/source/world_house_large/v002/parts/porch-window.png",
+        "sha256": "1ec1a1b533b03321e2673ad0ae4e19cdda9afe944119ee4411520ead25e69939"
+      },
+      {
+        "path": "art/source/world_house_large/v002/parts-layout.json",
+        "sha256": "7165dd6b831875f4f895379031fe7e14c1da9a6e56997281f05e6154ecf12893"
+      },
+      {
+        "path": "art/source/world_house_large/v002/plaster-prompt.md",
+        "sha256": "0c6d672f6d2dd573818efe179ef879b90597c96b7309b3ea6e0846ae07761fba"
+      },
+      {
+        "path": "art/source/world_house_large/v002/plaster-raw.png",
+        "sha256": "2dd82bc6599c293898f305eb9613fb42ee729d96aa06bc79a660a227ba731f29"
+      },
+      {
+        "path": "art/source/world_house_large/v002/porch-prompt.md",
+        "sha256": "382947e947e5e9f810a84386ea933513f8d8b4c793d4268115c3a547f2f44c7e"
+      },
+      {
+        "path": "art/source/world_house_large/v002/porch-raw.png",
+        "sha256": "9ad292fcc65e073bca24314e47c3baf2785da97d0570988876986ac01b08ab08"
+      }
+    ]
+  },
+  "provenance": "Continuation of G1.1 commit4731dea; original selected G1 artwork preserved. Targeted built-in image edits and documented native source recomposition. No external assets.",
+  "cost": "included in existing subscription; no paid API credits",
+  "postProcessing": [
+    "Source crops and uniform downsampling; translated painted components and original material infill. No nonuniform scaling or artificial upscaling.",
+    "Source JSON records superseding refinements; composition.json describes initial working stage, not final geometry.",
+    "World pipeline43926cf used in separate verification worktree."
+  ],
+  "selfReview": {
+    "checklistComplete": false,
+    "knownIssues": [
+      "Visual approval pending; screenshot fixture is not production integration.",
+      "Porch plaster texture differs slightly from left facade, and narrow previous-post remnant remains beside left porch post. Review porch elevation and seam in assembled view.",
+      "Official validation and visual review are documented in world_house_small/v002/review; no final approval."
+    ]
+  },
+  "worldLayer": {
+    "batch": "G1",
+    "role": "front",
+    "archetype": "house_large",
+    "contractVersion": "G1-contract-1",
+    "densityPxPerCm": 2,
+    "measuredEnvelopePx": {
+      "x": 16,
+      "y": 24,
+      "width": 1206,
+      "height": 560
+    },
+    "fit": {
+      "uniformScale": 1,
+      "upscaled": false,
+      "nonuniform": false,
+      "note": "Assembled native-density working master; component crops/downsampling and paint repair logged in source JSON. This is not a claim of one common generator scale."
+    },
+    "layerSet": [
+      "world_house_large",
+      "world_house_large_roof"
+    ]
+  }
+}

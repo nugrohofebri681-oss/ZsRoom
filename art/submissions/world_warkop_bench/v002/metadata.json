@@ -1,0 +1,70 @@
+{
+  "assetId": "world_warkop_bench",
+  "version": "v002",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "createdAt": "2026-11-28T05:03:17.113Z",
+  "generator": {
+    "tool": "built-in image_gen.imagegen + original-source pixel recomposition",
+    "model": "tool selected; not disclosed",
+    "referencesUsed": [
+      "art/source/world_warkop_bench/v001/raw.png",
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "G1 selected ruko/warung source; see prompt.md",
+      "https://github.com/nugrohofebri681-oss/ZsRoom/tree/12bf7108522ad11e50a5530c972e943d5b19bbd3/art/concepts/batch_g1/v001"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_warkop_bench_v002.png",
+      "sha256": "de0fec9c30612073d6b884741ee2a27370a9ed8a4b40a20682cb67c7236087fa"
+    },
+    "sources": [
+      {
+        "path": "art/source/world_warkop_bench/v002/composition.json",
+        "sha256": "f73f985bb0786a445559ea0e3efa6b0e478c047b467352f838ab474f3824daae"
+      }
+    ]
+  },
+  "provenance": "Continuation of G1.1 commit4731dea; original selected G1 artwork preserved. Targeted built-in image edits and documented native source recomposition. No external assets.",
+  "cost": "included in existing subscription; no paid API credits",
+  "postProcessing": [
+    "Source crops and uniform downsampling; translated painted components and original material infill. No nonuniform scaling or artificial upscaling.",
+    "Source JSON records superseding refinements; composition.json describes initial working stage, not final geometry.",
+    "World pipeline43926cf used in separate verification worktree."
+  ],
+  "selfReview": {
+    "checklistComplete": false,
+    "knownIssues": [
+      "Visual approval pending; screenshot fixture is not production integration.",
+      "Official validation and visual review are documented in world_house_small/v002/review; no final approval."
+    ]
+  },
+  "worldLayer": {
+    "batch": "G1",
+    "role": "addon",
+    "archetype": "warkop_open",
+    "contractVersion": "G1-contract-1",
+    "densityPxPerCm": 2,
+    "measuredEnvelopePx": {
+      "x": 16,
+      "y": 24,
+      "width": 368,
+      "height": 90
+    },
+    "fit": {
+      "uniformScale": 1,
+      "upscaled": false,
+      "nonuniform": false,
+      "note": "Assembled native-density working master; component crops/downsampling and paint repair logged in source JSON. This is not a claim of one common generator scale."
+    },
+    "layerSet": [
+      "world_warkop_bench",
+      "world_warkop_open",
+      "world_warkop_roof",
+      "world_warkop_counter"
+    ]
+  }
+}

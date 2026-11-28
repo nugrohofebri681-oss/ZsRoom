@@ -1,0 +1,23 @@
+{
+  "source": "art/source/world_ruko_roof/v002/refinement-raw.png",
+  "sourceContent": [
+    1561,
+    908
+  ],
+  "uniformScale": 0.5893657911595132,
+  "scaledContent": [
+    920,
+    535
+  ],
+  "backEdgeCropPx": 1,
+  "frontFasciaPreserved": true,
+  "outputContent": [
+    920,
+    534
+  ],
+  "placement": [
+    16,
+    24
+  ],
+  "note": "Uniform native downsample only; minor rear rim crop, no alpha padding added to pretend coverage. Back rim crop must be visually reviewed."
+}

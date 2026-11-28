@@ -1,0 +1,13 @@
+{
+  "ownership": {
+    "branch": "codex/art/g1-2-production-r1",
+    "files": 169,
+    "errors": [],
+    "validatorCommit": "43926cf"
+  },
+  "privacy": {
+    "result": "PASS",
+    "filesChecked": 1113
+  },
+  "restrictions": "Only11 new v002 trees; no approved/source engine/spec/manifest edits"
+}

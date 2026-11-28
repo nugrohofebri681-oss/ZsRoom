@@ -1,0 +1,12 @@
+import fs from 'node:fs';import sharp from '/workspace/ZsRoom-art-batch-e/node_modules/sharp/dist/index.mjs';process.chdir('/workspace/ZsRoom-art-g12-precision');
+const crop=async(b,x,y,w,h)=>sharp(b).extract({left:x,top:y,width:w,height:h}).png().toBuffer();const blank=async(w,h)=>sharp({create:{width:w,height:h,channels:4,background:'#00000000'}}).png().toBuffer();
+for(const [id,w,h,cw,ch]of [['world_house_large_roof',1280,590,1312,638],['world_ruko_roof',920,534,952,582]]){
+const p=`art/source/${id}/v002/refinement-raw.png`,{data,info}=await sharp(p).ensureAlpha().raw().toBuffer({resolveWithObject:true});for(let i=3;i<data.length;i+=4){if(data[i]<=8)data[i]=0;else if(data[i]>=250)data[i]=255;}
+const trimmed=await sharp(data,{raw:info}).trim({threshold:10}).png().toBuffer({resolveWithObject:true});const scaled=await sharp(trimmed.data).resize({width:w}).png().toBuffer({resolveWithObject:true});if(scaled.info.height<h)throw Error('short roof');const excess=scaled.info.height-h;const b=await crop(scaled.data,0,excess,w,h);
+await sharp(await blank(cw,ch)).composite([{input:b,left:16,top:24}]).png().toFile(`art/submissions/${id}/v002/${id}_v002.png`);
+fs.writeFileSync(`art/source/${id}/v002/refinement-export.json`,JSON.stringify({source:p,sourceContent:[trimmed.info.width,trimmed.info.height],uniformScale:w/trimmed.info.width,scaledContent:[w,scaled.info.height],backEdgeCropPx:excess,frontFasciaPreserved:true,outputContent:[w,h],placement:[16,24],note:'Uniform native downsample only; minor rear rim crop, no alpha padding added to pretend coverage. Back rim crop must be visually reviewed.'},null,2));
+}
+const id='world_warkop_roof',v1=`art/submissions/${id}/v001/${id}_v001.png`;let b=await crop(v1,16,65,1280,577);
+async function ins(b,y,n,sy){const m=await sharp(b).metadata();return sharp(await blank(m.width,m.height+n)).composite([{input:await crop(b,0,0,m.width,y),left:0,top:0},{input:await crop(b,0,sy,m.width,n),left:0,top:y},{input:await crop(b,0,y,m.width,m.height-y),left:0,top:y+n}]).png().toBuffer();}
+b=await ins(b,140,18,100);b=await ins(b,350,23,350);await sharp(await blank(1312,666)).composite([{input:b,left:16,top:24}]).png().toFile(`art/submissions/${id}/v002/${id}_v002.png`);
+fs.writeFileSync(`art/source/${id}/v002/refinement-export.json`,JSON.stringify({source:v1,method:'Two original corrugated-metal bands:18px before ridge,23px on near slope; no repeated ridge cap.',outputContent:[1280,618],placement:[16,24]},null,2));

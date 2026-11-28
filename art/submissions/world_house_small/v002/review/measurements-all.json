@@ -1,0 +1,369 @@
+[
+  {
+    "assetId": "world_house_large",
+    "canvas": [
+      1232,
+      608
+    ],
+    "pivot": {
+      "x": 616,
+      "y": 584,
+      "meaning": "bottom-centre of the front line (ground y = placement y)"
+    },
+    "bbox": {
+      "x": 16,
+      "y": 24,
+      "width": 1206,
+      "height": 560
+    },
+    "target": {
+      "x": 16,
+      "y": 24,
+      "width": 1200,
+      "height": 560,
+      "widthCm": 600,
+      "heightCm": 280
+    },
+    "widthDeltaCm": 3,
+    "heightDeltaCm": 0,
+    "sha256": "56cd5e5089e928d42d2abeed867019863d5bf2f0b76de2962d08f0bf89ac883e",
+    "issues": [
+      "Visual approval pending; screenshot fixture is not production integration.",
+      "Porch plaster texture differs slightly from left facade, and narrow previous-post remnant remains beside left porch post. Review porch elevation and seam in assembled view."
+    ]
+  },
+  {
+    "assetId": "world_house_large_roof",
+    "canvas": [
+      1312,
+      638
+    ],
+    "pivot": {
+      "x": 656,
+      "y": 584,
+      "meaning": "front eave line, centre (render y = front line × 0.7 − eave); the envelope extends the 15 cm eave drop below it"
+    },
+    "bbox": {
+      "x": 16,
+      "y": 24,
+      "width": 1280,
+      "height": 590
+    },
+    "target": {
+      "x": 16,
+      "y": 24,
+      "width": 1280,
+      "height": 590,
+      "widthCm": 640,
+      "heightCm": 295,
+      "projectedRiseCm": 280,
+      "frontDropCm": 15
+    },
+    "widthDeltaCm": 0,
+    "heightDeltaCm": 0,
+    "sha256": "53cbb39fca5283109add7fb0823f5b7418c5c30ca9fb42fb6b93ab929baf676d",
+    "issues": [
+      "Visual approval pending; screenshot fixture is not production integration."
+    ]
+  },
+  {
+    "assetId": "world_house_small",
+    "canvas": [
+      872,
+      588
+    ],
+    "pivot": {
+      "x": 436,
+      "y": 564,
+      "meaning": "bottom-centre of the front line (ground y = placement y)"
+    },
+    "bbox": {
+      "x": 16,
+      "y": 25,
+      "width": 840,
+      "height": 539
+    },
+    "target": {
+      "x": 16,
+      "y": 24,
+      "width": 840,
+      "height": 540,
+      "widthCm": 420,
+      "heightCm": 270
+    },
+    "widthDeltaCm": 0,
+    "heightDeltaCm": -0.5,
+    "sha256": "7e17aefc6524786746213304e12ead96130468febaccbabe478820d2467cc31a",
+    "issues": [
+      "Visual approval pending; screenshot fixture is not production integration.",
+      "Horizontal plaster repair boundary remains visible on close inspection."
+    ]
+  },
+  {
+    "assetId": "world_house_small_roof",
+    "canvas": [
+      952,
+      526
+    ],
+    "pivot": {
+      "x": 476,
+      "y": 472,
+      "meaning": "front eave line, centre (render y = front line × 0.7 − eave); the envelope extends the 15 cm eave drop below it"
+    },
+    "bbox": {
+      "x": 16,
+      "y": 24,
+      "width": 920,
+      "height": 478
+    },
+    "target": {
+      "x": 16,
+      "y": 24,
+      "width": 920,
+      "height": 478,
+      "widthCm": 460,
+      "heightCm": 239,
+      "projectedRiseCm": 224,
+      "frontDropCm": 15
+    },
+    "widthDeltaCm": 0,
+    "heightDeltaCm": 0,
+    "sha256": "0526d2f0c3e4a556c283f908ab248507a5b2f226d59fa6bf36413f14db7042d9",
+    "issues": [
+      "Visual approval pending; screenshot fixture is not production integration."
+    ]
+  },
+  {
+    "assetId": "world_ruko",
+    "canvas": [
+      872,
+      1008
+    ],
+    "pivot": {
+      "x": 436,
+      "y": 984,
+      "meaning": "bottom-centre of the front line (ground y = placement y)"
+    },
+    "bbox": {
+      "x": 16,
+      "y": 25,
+      "width": 840,
+      "height": 959
+    },
+    "target": {
+      "x": 16,
+      "y": 24,
+      "width": 840,
+      "height": 960,
+      "widthCm": 420,
+      "heightCm": 480
+    },
+    "widthDeltaCm": 0,
+    "heightDeltaCm": -0.5,
+    "sha256": "5b76cb0f07e072e97bc45962fc4cef8c9fc52158dc2368b163ee7608742ef3a1",
+    "issues": [
+      "Visual approval pending; screenshot fixture is not production integration.",
+      "Source recomposition leaves doubled pilaster moulding and abrupt shutter/header joins; needs targeted artistic cleanup."
+    ]
+  },
+  {
+    "assetId": "world_ruko_awning",
+    "canvas": [
+      672,
+      192
+    ],
+    "pivot": {
+      "x": 336,
+      "y": 168,
+      "meaning": "bottom-centre of the awning's front edge: ground (front line + 60) at 240 cm"
+    },
+    "bbox": {
+      "x": 16,
+      "y": 32,
+      "width": 640,
+      "height": 136
+    },
+    "target": {
+      "x": 16,
+      "y": 24,
+      "width": 640,
+      "height": 144,
+      "widthCm": 320,
+      "heightCm": 72,
+      "projectionCm": 60,
+      "note": "band 30 cm + projection 60 × 0.7"
+    },
+    "widthDeltaCm": 0,
+    "heightDeltaCm": -4,
+    "sha256": "136fed3a575551d774fd61060a7ad4354028a3ed8af3bd1a143bc7089723d9be",
+    "issues": [
+      "Visual approval pending; screenshot fixture is not production integration.",
+      "Uniform fit content640x136 vs640x144 target:4cm projected-height shortfall, at tolerance boundary. Front band and top projection need visual review."
+    ]
+  },
+  {
+    "assetId": "world_ruko_roof",
+    "canvas": [
+      952,
+      582
+    ],
+    "pivot": {
+      "x": 476,
+      "y": 528,
+      "meaning": "front eave line, centre (render y = front line × 0.7 − eave); the envelope extends the 15 cm eave drop below it"
+    },
+    "bbox": {
+      "x": 16,
+      "y": 24,
+      "width": 920,
+      "height": 534
+    },
+    "target": {
+      "x": 16,
+      "y": 24,
+      "width": 920,
+      "height": 534,
+      "widthCm": 460,
+      "heightCm": 267,
+      "projectedRiseCm": 252,
+      "frontDropCm": 15
+    },
+    "widthDeltaCm": 0,
+    "heightDeltaCm": 0,
+    "sha256": "bd929cc8311e6284e7c288ad7be5edd1fcafee7202a4bdf747a3612b1a574e5d",
+    "issues": [
+      "Visual approval pending; screenshot fixture is not production integration."
+    ]
+  },
+  {
+    "assetId": "world_warkop_bench",
+    "canvas": [
+      400,
+      138
+    ],
+    "pivot": {
+      "x": 200,
+      "y": 114,
+      "meaning": "bottom-centre on the front line"
+    },
+    "bbox": {
+      "x": 16,
+      "y": 24,
+      "width": 368,
+      "height": 90
+    },
+    "target": {
+      "x": 16,
+      "y": 24,
+      "width": 368,
+      "height": 90,
+      "widthCm": 184,
+      "heightCm": 45
+    },
+    "widthDeltaCm": 0,
+    "heightDeltaCm": 0,
+    "sha256": "de0fec9c30612073d6b884741ee2a27370a9ed8a4b40a20682cb67c7236087fa",
+    "issues": [
+      "Visual approval pending; screenshot fixture is not production integration."
+    ]
+  },
+  {
+    "assetId": "world_warkop_counter",
+    "canvas": [
+      400,
+      238
+    ],
+    "pivot": {
+      "x": 200,
+      "y": 214,
+      "meaning": "bottom-centre on the front line"
+    },
+    "bbox": {
+      "x": 16,
+      "y": 24,
+      "width": 368,
+      "height": 190
+    },
+    "target": {
+      "x": 16,
+      "y": 24,
+      "width": 368,
+      "height": 190,
+      "widthCm": 184,
+      "heightCm": 95
+    },
+    "widthDeltaCm": 0,
+    "heightDeltaCm": 0,
+    "sha256": "4ab6c005fd8ea30e2a4c13ddbb87a60b5c9e790ed76ba368bbdb320d45702699",
+    "issues": [
+      "Visual approval pending; screenshot fixture is not production integration."
+    ]
+  },
+  {
+    "assetId": "world_warkop_open",
+    "canvas": [
+      1232,
+      608
+    ],
+    "pivot": {
+      "x": 616,
+      "y": 584,
+      "meaning": "bottom-centre of the front line (ground y = placement y)"
+    },
+    "bbox": {
+      "x": 0,
+      "y": 24,
+      "width": 1232,
+      "height": 560
+    },
+    "target": {
+      "x": 16,
+      "y": 24,
+      "width": 1200,
+      "height": 560,
+      "widthCm": 600,
+      "heightCm": 280
+    },
+    "widthDeltaCm": 16,
+    "heightDeltaCm": 0,
+    "sha256": "c8792f9f1f10f61e9c6d8f2f2ca3b80e4f4f4629d508781570559ac7eb15a64d",
+    "issues": [
+      "Visual approval pending; screenshot fixture is not production integration.",
+      "BLOCKER: contract outer post centres ±300cm and 16cm post width require616cm painted width, versus600cm envelope. Preserved actual post centres; outer posts reach canvas edges, violating padding. No collision/spec override."
+    ]
+  },
+  {
+    "assetId": "world_warkop_roof",
+    "canvas": [
+      1312,
+      666
+    ],
+    "pivot": {
+      "x": 656,
+      "y": 612,
+      "meaning": "front eave line, centre (render y = front line × 0.7 − eave); the envelope extends the 15 cm eave drop below it"
+    },
+    "bbox": {
+      "x": 16,
+      "y": 24,
+      "width": 1280,
+      "height": 618
+    },
+    "target": {
+      "x": 16,
+      "y": 24,
+      "width": 1280,
+      "height": 618,
+      "widthCm": 640,
+      "heightCm": 309,
+      "projectedRiseCm": 294,
+      "frontDropCm": 15
+    },
+    "widthDeltaCm": 0,
+    "heightDeltaCm": 0,
+    "sha256": "dada42acec72a76a7c9f33c5107e381d51a80909959847699f28fbecc74fe2fb",
+    "issues": [
+      "Visual approval pending; screenshot fixture is not production integration."
+    ]
+  }
+]

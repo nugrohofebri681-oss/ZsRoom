@@ -1,0 +1,41 @@
+{
+  "method": "Native source crop, uniform downsampling, translation and original-material infill only; no nonuniform scaling.",
+  "parts": [
+    {
+      "name": "clear-shop-interior",
+      "path": "art/source/world_ruko/v002/parts/clear-shop-interior.png",
+      "x": 136,
+      "y": 504,
+      "w": 600,
+      "h": 480,
+      "provenance": "Original dark shop interior; exact300x240cm rectangle, no folded shutter inside."
+    },
+    {
+      "name": "shop-left-folds",
+      "path": "art/source/world_ruko/v002/parts/shop-left-folds.png",
+      "x": 52,
+      "y": 504,
+      "w": 84,
+      "h": 480,
+      "provenance": "Original shutters moved OUTSIDE clear opening, never conceal collision."
+    },
+    {
+      "name": "shop-right-folds",
+      "path": "art/source/world_ruko/v002/parts/shop-right-folds.png",
+      "x": 736,
+      "y": 504,
+      "w": 76,
+      "h": 480,
+      "provenance": "Original shutters outside opening."
+    },
+    {
+      "name": "shop-header",
+      "path": "art/source/world_ruko/v002/parts/shop-header.png",
+      "x": 128,
+      "y": 495,
+      "w": 616,
+      "h": 9,
+      "provenance": "Original opening lintel."
+    }
+  ]
+}

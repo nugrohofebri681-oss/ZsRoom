@@ -1,0 +1,23 @@
+{
+  "source": "art/source/world_house_large_roof/v002/refinement-raw.png",
+  "sourceContent": [
+    1756,
+    817
+  ],
+  "uniformScale": 0.7289293849658315,
+  "scaledContent": [
+    1280,
+    596
+  ],
+  "backEdgeCropPx": 6,
+  "frontFasciaPreserved": true,
+  "outputContent": [
+    1280,
+    590
+  ],
+  "placement": [
+    16,
+    24
+  ],
+  "note": "Uniform native downsample only; minor rear rim crop, no alpha padding added to pretend coverage. Back rim crop must be visually reviewed."
+}

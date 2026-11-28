@@ -1,0 +1,15 @@
+import fs from 'node:fs';import sharp from '/workspace/ZsRoom-art-batch-e/node_modules/sharp/dist/index.mjs';process.chdir('/workspace/ZsRoom-art-g12-precision');
+const crop=async(p,x,y,w,h)=>sharp(p).extract({left:x,top:y,width:w,height:h}).png().toBuffer();
+const path=id=>`art/submissions/${id}/v002/${id}_v002.png`;
+const save=async(id,parts)=>fs.writeFileSync(path(id),await sharp(path(id)).composite(parts).png().toBuffer());
+let p='art/source/world_house_small/v002/refinement-raw.png';
+let band=await sharp(await crop(p,36,90,1492,85)).resize({width:836}).png().toBuffer();band=await crop(band,0,0,836,46);
+let patch=await sharp(await crop(p,600,110,400,25)).resize({width:224}).png().toBuffer();
+await save('world_house_small',[{input:band,left:18,top:44},{input:patch,left:326,top:110}]);
+const id='world_house_large',base=path(id),dir=`art/source/${id}/v002`,mat=dir+'/plaster-raw.png';
+const led=JSON.parse(fs.readFileSync(dir+'/parts-layout.json')).parts;
+const parts=[{input:await crop(base,670,24,26,560),left:684,top:24},{input:await crop(mat,300,300,520,406),left:696,top:24},{input:await crop(mat,400,200,220,14),left:340,top:130}];
+for(const q of led.filter(q=>['porch-window','porch-plinth','porch-post-left','porch-post-right'].includes(q.name)))parts.push({input:q.path,left:q.x,top:q.y});
+await save(id,parts);
+fs.writeFileSync('art/source/world_house_small/v002/paint-repair.json',JSON.stringify({method:'Built-in imagegen repaired plaster patch applied only to two faulty bands; original door geometry and all other artwork retained.',patches:[{source:p,crop:[36,90,1492,85],uniformWidth:836,target:[18,44,836,46]},{source:p,crop:[600,110,400,25],uniformWidth:224,target:[326,110,224,14]}]},null,2));
+fs.writeFileSync(dir+'/paint-repair.json',JSON.stringify({source:mat,porchWall:[696,24,520,406],doorRepair:[340,130,220,14],method:'New imagegen plaster patch; existing window/plinth/posts re-composited at unchanged recorded coordinates.'},null,2));

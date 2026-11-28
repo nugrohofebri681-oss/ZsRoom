@@ -1,0 +1,37 @@
+{
+  "method": "Built-in imagegen repaired plaster patch applied only to two faulty bands; original door geometry and all other artwork retained.",
+  "patches": [
+    {
+      "source": "art/source/world_house_small/v002/refinement-raw.png",
+      "crop": [
+        36,
+        90,
+        1492,
+        85
+      ],
+      "uniformWidth": 836,
+      "target": [
+        18,
+        44,
+        836,
+        46
+      ]
+    },
+    {
+      "source": "art/source/world_house_small/v002/refinement-raw.png",
+      "crop": [
+        600,
+        110,
+        400,
+        25
+      ],
+      "uniformWidth": 224,
+      "target": [
+        326,
+        110,
+        224,
+        14
+      ]
+    }
+  ]
+}

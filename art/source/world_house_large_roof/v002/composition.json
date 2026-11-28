@@ -1,0 +1,34 @@
+{
+  "operation": "Source-pixel re-composition: translate original sections and insert original painted material band. No nonuniform scaling, upscaling or procedural illustration.",
+  "source": "art/submissions/world_house_large_roof/v001/world_house_large_roof_v001.png",
+  "sourceContent": [
+    1280,
+    539
+  ],
+  "remove": [
+    40,
+    82
+  ],
+  "insert": {
+    "at": 170,
+    "height": 133,
+    "sampledAt": 60
+  },
+  "resultContent": [
+    1280,
+    590
+  ],
+  "placement": [
+    16,
+    24
+  ],
+  "canvas": [
+    1312,
+    638
+  ],
+  "pivot": [
+    656,
+    584
+  ],
+  "remaining": "Opening/porch corrections and image review pending"
+}

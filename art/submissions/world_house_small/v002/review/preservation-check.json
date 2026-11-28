@@ -1,0 +1,6 @@
+{
+  "baseCommit": "4731deaef32fa335ab843d90b8651c6c80364ab8",
+  "trackedDiffBeforeArtCommit": [],
+  "approvedSourceMapSpecChanges": false,
+  "notes": "Only new v002 trees are staged. No main/preview branch operations. Existing v001 remained tracked and unchanged."
+}

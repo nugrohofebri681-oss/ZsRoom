@@ -1,0 +1,2133 @@
+{
+  "branch": "",
+  "changed": null,
+  "ownershipErrors": [],
+  "results": [
+    {
+      "assetId": "world_house_large",
+      "version": "v002",
+      "dir": "art/submissions/world_house_large/v002",
+      "spec": "specs/world/props/world_house_large.json",
+      "errors": [],
+      "warnings": [
+        "self-review checklist not marked complete"
+      ],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_house_large"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/world/props/world_house_large.json"
+        },
+        {
+          "name": "world spec production block is consistent",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "spec accepts art submissions",
+          "pass": true,
+          "detail": "world front layer, batch G1, 2 px/cm"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "world_house_large_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "world_house_large"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "world layer metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "worldLayer matches spec (batch, role, archetype, contract)",
+          "pass": true,
+          "detail": "G1/front/house_large/G1-contract-1 vs G1/front/house_large/G1-contract-1"
+        },
+        {
+          "name": "worldLayer density matches production density",
+          "pass": true,
+          "detail": "2 vs 2"
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "56cd5e5089e928d42d2abeed867019863d5bf2f0b76de2962d08f0bf89ac883e"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "1232x608, expected 1232x608"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "1467157 bytes (max 8000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage \u2265 min",
+          "pass": true,
+          "detail": "0.899"
+        },
+        {
+          "name": "opaque coverage \u2264 max (no baked background)",
+          "pass": true,
+          "detail": "0.899"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 16,24 1206x560; allowed 8,8 1216x592"
+        },
+        {
+          "name": "art present on the canvas",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "envelope width (facade 600 cm)",
+          "pass": true,
+          "detail": "painted 603.0 cm; left edge +0.0 cm, right edge +3.0 cm (\u00b14 cm)"
+        },
+        {
+          "name": "envelope top (280 cm high)",
+          "pass": true,
+          "detail": "painted top +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "envelope bottom (on the pivot line)",
+          "pass": true,
+          "detail": "painted bottom +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "reported measuredEnvelopePx matches the pixels",
+          "pass": true,
+          "detail": "reported 16,24 1206x560; measured 16,24 1206x560"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 1232,
+        "height": 608,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 1467157,
+        "opaqueRatio": 0.8994721355946685,
+        "bbox": {
+          "x": 16,
+          "y": 24,
+          "width": 1206,
+          "height": 560
+        },
+        "baseRow": 583,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "world_house_large_roof",
+      "version": "v002",
+      "dir": "art/submissions/world_house_large_roof/v002",
+      "spec": "specs/world/props/world_house_large_roof.json",
+      "errors": [],
+      "warnings": [
+        "self-review checklist not marked complete"
+      ],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_house_large_roof"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/world/props/world_house_large_roof.json"
+        },
+        {
+          "name": "world spec production block is consistent",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "spec accepts art submissions",
+          "pass": true,
+          "detail": "world roof layer, batch G1, 2 px/cm"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "world_house_large_roof_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "world_house_large_roof"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "world layer metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "worldLayer matches spec (batch, role, archetype, contract)",
+          "pass": true,
+          "detail": "G1/roof/house_large/G1-contract-1 vs G1/roof/house_large/G1-contract-1"
+        },
+        {
+          "name": "worldLayer density matches production density",
+          "pass": true,
+          "detail": "2 vs 2"
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "53cbb39fca5283109add7fb0823f5b7418c5c30ca9fb42fb6b93ab929baf676d"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "1312x638, expected 1312x638"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "1960243 bytes (max 8000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage \u2265 min",
+          "pass": true,
+          "detail": "0.886"
+        },
+        {
+          "name": "opaque coverage \u2264 max (no baked background)",
+          "pass": true,
+          "detail": "0.886"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 16,24 1280x590; allowed 8,8 1296x622"
+        },
+        {
+          "name": "art present on the canvas",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "envelope width (roof 640 cm)",
+          "pass": true,
+          "detail": "painted 640.0 cm; left edge +0.0 cm, right edge +0.0 cm (\u00b14 cm)"
+        },
+        {
+          "name": "envelope top (projected rise 280 cm above the eave)",
+          "pass": true,
+          "detail": "painted top +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "envelope bottom (eave drop 15 cm below the pivot)",
+          "pass": true,
+          "detail": "painted bottom +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "roof hides the 600\u00d7400 cm footprint",
+          "pass": true,
+          "detail": "100.0% opaque (min 99%)"
+        },
+        {
+          "name": "reported measuredEnvelopePx matches the pixels",
+          "pass": true,
+          "detail": "reported 16,24 1280x590; measured 16,24 1280x590"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 1312,
+        "height": 638,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 1960243,
+        "opaqueRatio": 0.8857495794785534,
+        "bbox": {
+          "x": 16,
+          "y": 24,
+          "width": 1280,
+          "height": 590
+        },
+        "baseRow": 612,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "world_house_small",
+      "version": "v002",
+      "dir": "art/submissions/world_house_small/v002",
+      "spec": "specs/world/props/world_house_small.json",
+      "errors": [],
+      "warnings": [
+        "self-review checklist not marked complete"
+      ],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_house_small"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/world/props/world_house_small.json"
+        },
+        {
+          "name": "world spec production block is consistent",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "spec accepts art submissions",
+          "pass": true,
+          "detail": "world front layer, batch G1, 2 px/cm"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "world_house_small_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "world_house_small"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "world layer metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "worldLayer matches spec (batch, role, archetype, contract)",
+          "pass": true,
+          "detail": "G1/front/house_small/G1-contract-1 vs G1/front/house_small/G1-contract-1"
+        },
+        {
+          "name": "worldLayer density matches production density",
+          "pass": true,
+          "detail": "2 vs 2"
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "7e17aefc6524786746213304e12ead96130468febaccbabe478820d2467cc31a"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "872x588, expected 872x588"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "1002428 bytes (max 8000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage \u2265 min",
+          "pass": true,
+          "detail": "0.872"
+        },
+        {
+          "name": "opaque coverage \u2264 max (no baked background)",
+          "pass": true,
+          "detail": "0.872"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 16,25 840x539; allowed 8,8 856x572"
+        },
+        {
+          "name": "art present on the canvas",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "envelope width (facade 420 cm)",
+          "pass": true,
+          "detail": "painted 420.0 cm; left edge +0.0 cm, right edge +0.0 cm (\u00b14 cm)"
+        },
+        {
+          "name": "envelope top (270 cm high)",
+          "pass": true,
+          "detail": "painted top -0.5 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "envelope bottom (on the pivot line)",
+          "pass": true,
+          "detail": "painted bottom +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "reported measuredEnvelopePx matches the pixels",
+          "pass": true,
+          "detail": "reported 16,25 840x539; measured 16,25 840x539"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 872,
+        "height": 588,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 1002428,
+        "opaqueRatio": 0.8724645821631405,
+        "bbox": {
+          "x": 16,
+          "y": 25,
+          "width": 840,
+          "height": 539
+        },
+        "baseRow": 563,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "world_house_small_roof",
+      "version": "v002",
+      "dir": "art/submissions/world_house_small_roof/v002",
+      "spec": "specs/world/props/world_house_small_roof.json",
+      "errors": [],
+      "warnings": [
+        "self-review checklist not marked complete"
+      ],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_house_small_roof"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/world/props/world_house_small_roof.json"
+        },
+        {
+          "name": "world spec production block is consistent",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "spec accepts art submissions",
+          "pass": true,
+          "detail": "world roof layer, batch G1, 2 px/cm"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "world_house_small_roof_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "world_house_small_roof"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "world layer metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "worldLayer matches spec (batch, role, archetype, contract)",
+          "pass": true,
+          "detail": "G1/roof/house_small/G1-contract-1 vs G1/roof/house_small/G1-contract-1"
+        },
+        {
+          "name": "worldLayer density matches production density",
+          "pass": true,
+          "detail": "2 vs 2"
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "0526d2f0c3e4a556c283f908ab248507a5b2f226d59fa6bf36413f14db7042d9"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "952x526, expected 952x526"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "943169 bytes (max 8000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage \u2265 min",
+          "pass": true,
+          "detail": "0.875"
+        },
+        {
+          "name": "opaque coverage \u2264 max (no baked background)",
+          "pass": true,
+          "detail": "0.875"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 16,24 920x478; allowed 8,8 936x510"
+        },
+        {
+          "name": "art present on the canvas",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "envelope width (roof 460 cm)",
+          "pass": true,
+          "detail": "painted 460.0 cm; left edge +0.0 cm, right edge +0.0 cm (\u00b14 cm)"
+        },
+        {
+          "name": "envelope top (projected rise 224 cm above the eave)",
+          "pass": true,
+          "detail": "painted top +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "envelope bottom (eave drop 15 cm below the pivot)",
+          "pass": true,
+          "detail": "painted bottom +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "roof hides the 420\u00d7320 cm footprint",
+          "pass": true,
+          "detail": "99.5% opaque (min 99%)"
+        },
+        {
+          "name": "reported measuredEnvelopePx matches the pixels",
+          "pass": true,
+          "detail": "reported 16,24 920x478; measured 16,24 920x478"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 952,
+        "height": 526,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 943169,
+        "opaqueRatio": 0.8749860210243793,
+        "bbox": {
+          "x": 16,
+          "y": 24,
+          "width": 920,
+          "height": 478
+        },
+        "baseRow": 501,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "world_ruko",
+      "version": "v002",
+      "dir": "art/submissions/world_ruko/v002",
+      "spec": "specs/world/props/world_ruko.json",
+      "errors": [],
+      "warnings": [
+        "self-review checklist not marked complete"
+      ],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_ruko"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/world/props/world_ruko.json"
+        },
+        {
+          "name": "world spec production block is consistent",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "spec accepts art submissions",
+          "pass": true,
+          "detail": "world front layer, batch G1, 2 px/cm"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "world_ruko_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "world_ruko"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "world layer metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "worldLayer matches spec (batch, role, archetype, contract)",
+          "pass": true,
+          "detail": "G1/front/ruko/G1-contract-1 vs G1/front/ruko/G1-contract-1"
+        },
+        {
+          "name": "worldLayer density matches production density",
+          "pass": true,
+          "detail": "2 vs 2"
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "5b76cb0f07e072e97bc45962fc4cef8c9fc52158dc2368b163ee7608742ef3a1"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "872x1008, expected 872x1008"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "1629529 bytes (max 8000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage \u2265 min",
+          "pass": true,
+          "detail": "0.900"
+        },
+        {
+          "name": "opaque coverage \u2264 max (no baked background)",
+          "pass": true,
+          "detail": "0.900"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 16,25 840x959; allowed 8,8 856x992"
+        },
+        {
+          "name": "art present on the canvas",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "envelope width (facade 420 cm)",
+          "pass": true,
+          "detail": "painted 420.0 cm; left edge +0.0 cm, right edge +0.0 cm (\u00b14 cm)"
+        },
+        {
+          "name": "envelope top (480 cm high)",
+          "pass": true,
+          "detail": "painted top -0.5 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "envelope bottom (on the pivot line)",
+          "pass": true,
+          "detail": "painted bottom +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "reported measuredEnvelopePx matches the pixels",
+          "pass": true,
+          "detail": "reported 16,25 840x959; measured 16,25 840x959"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 872,
+        "height": 1008,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 1629529,
+        "opaqueRatio": 0.9001849879860201,
+        "bbox": {
+          "x": 16,
+          "y": 25,
+          "width": 840,
+          "height": 959
+        },
+        "baseRow": 983,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "world_ruko_awning",
+      "version": "v002",
+      "dir": "art/submissions/world_ruko_awning/v002",
+      "spec": "specs/world/props/world_ruko_awning.json",
+      "errors": [],
+      "warnings": [
+        "self-review checklist not marked complete"
+      ],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_ruko_awning"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/world/props/world_ruko_awning.json"
+        },
+        {
+          "name": "world spec production block is consistent",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "spec accepts art submissions",
+          "pass": true,
+          "detail": "world addon layer, batch G1, 2 px/cm"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "world_ruko_awning_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "world_ruko_awning"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "world layer metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "worldLayer matches spec (batch, role, archetype, contract)",
+          "pass": true,
+          "detail": "G1/addon/ruko/G1-contract-1 vs G1/addon/ruko/G1-contract-1"
+        },
+        {
+          "name": "worldLayer density matches production density",
+          "pass": true,
+          "detail": "2 vs 2"
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "136fed3a575551d774fd61060a7ad4354028a3ed8af3bd1a143bc7089723d9be"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "672x192, expected 672x192"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "161051 bytes (max 8000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage \u2265 min",
+          "pass": true,
+          "detail": "0.655"
+        },
+        {
+          "name": "opaque coverage \u2264 max (no baked background)",
+          "pass": true,
+          "detail": "0.655"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 16,32 640x136; allowed 8,8 656x176"
+        },
+        {
+          "name": "art present on the canvas",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "envelope width (add-on 320 cm)",
+          "pass": true,
+          "detail": "painted 320.0 cm; left edge +0.0 cm, right edge +0.0 cm (\u00b14 cm)"
+        },
+        {
+          "name": "envelope top (72 cm high)",
+          "pass": true,
+          "detail": "painted top -4.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "envelope bottom (on the pivot line)",
+          "pass": true,
+          "detail": "painted bottom +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "reported measuredEnvelopePx matches the pixels",
+          "pass": true,
+          "detail": "reported 16,32 640x136; measured 16,32 640x136"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 672,
+        "height": 192,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 161051,
+        "opaqueRatio": 0.6545293898809523,
+        "bbox": {
+          "x": 16,
+          "y": 32,
+          "width": 640,
+          "height": 136
+        },
+        "baseRow": 167,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "world_ruko_roof",
+      "version": "v002",
+      "dir": "art/submissions/world_ruko_roof/v002",
+      "spec": "specs/world/props/world_ruko_roof.json",
+      "errors": [],
+      "warnings": [
+        "self-review checklist not marked complete"
+      ],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_ruko_roof"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/world/props/world_ruko_roof.json"
+        },
+        {
+          "name": "world spec production block is consistent",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "spec accepts art submissions",
+          "pass": true,
+          "detail": "world roof layer, batch G1, 2 px/cm"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "world_ruko_roof_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "world_ruko_roof"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "world layer metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "worldLayer matches spec (batch, role, archetype, contract)",
+          "pass": true,
+          "detail": "G1/roof/ruko/G1-contract-1 vs G1/roof/ruko/G1-contract-1"
+        },
+        {
+          "name": "worldLayer density matches production density",
+          "pass": true,
+          "detail": "2 vs 2"
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "bd929cc8311e6284e7c288ad7be5edd1fcafee7202a4bdf747a3612b1a574e5d"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "952x582, expected 952x582"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "1222376 bytes (max 8000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage \u2265 min",
+          "pass": true,
+          "detail": "0.871"
+        },
+        {
+          "name": "opaque coverage \u2264 max (no baked background)",
+          "pass": true,
+          "detail": "0.871"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 16,24 920x534; allowed 8,8 936x566"
+        },
+        {
+          "name": "art present on the canvas",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "envelope width (roof 460 cm)",
+          "pass": true,
+          "detail": "painted 460.0 cm; left edge +0.0 cm, right edge +0.0 cm (\u00b14 cm)"
+        },
+        {
+          "name": "envelope top (projected rise 252 cm above the eave)",
+          "pass": true,
+          "detail": "painted top +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "envelope bottom (eave drop 15 cm below the pivot)",
+          "pass": true,
+          "detail": "painted bottom +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "roof hides the 420\u00d7360 cm footprint",
+          "pass": true,
+          "detail": "99.5% opaque (min 99%)"
+        },
+        {
+          "name": "reported measuredEnvelopePx matches the pixels",
+          "pass": true,
+          "detail": "reported 16,24 920x534; measured 16,24 920x534"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 952,
+        "height": 582,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 1222376,
+        "opaqueRatio": 0.8705835426954287,
+        "bbox": {
+          "x": 16,
+          "y": 24,
+          "width": 920,
+          "height": 534
+        },
+        "baseRow": 556,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "world_warkop_bench",
+      "version": "v002",
+      "dir": "art/submissions/world_warkop_bench/v002",
+      "spec": "specs/world/props/world_warkop_bench.json",
+      "errors": [],
+      "warnings": [
+        "self-review checklist not marked complete"
+      ],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_warkop_bench"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/world/props/world_warkop_bench.json"
+        },
+        {
+          "name": "world spec production block is consistent",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "spec accepts art submissions",
+          "pass": true,
+          "detail": "world addon layer, batch G1, 2 px/cm"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "world_warkop_bench_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "world_warkop_bench"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "world layer metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "worldLayer matches spec (batch, role, archetype, contract)",
+          "pass": true,
+          "detail": "G1/addon/warkop_open/G1-contract-1 vs G1/addon/warkop_open/G1-contract-1"
+        },
+        {
+          "name": "worldLayer density matches production density",
+          "pass": true,
+          "detail": "2 vs 2"
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "de0fec9c30612073d6b884741ee2a27370a9ed8a4b40a20682cb67c7236087fa"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "400x138, expected 400x138"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "27777 bytes (max 8000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage \u2265 min",
+          "pass": true,
+          "detail": "0.226"
+        },
+        {
+          "name": "opaque coverage \u2264 max (no baked background)",
+          "pass": true,
+          "detail": "0.226"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 16,24 368x90; allowed 8,8 384x122"
+        },
+        {
+          "name": "art present on the canvas",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "envelope width (add-on 184 cm)",
+          "pass": true,
+          "detail": "painted 184.0 cm; left edge +0.0 cm, right edge +0.0 cm (\u00b14 cm)"
+        },
+        {
+          "name": "envelope top (45 cm high)",
+          "pass": true,
+          "detail": "painted top +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "envelope bottom (on the pivot line)",
+          "pass": true,
+          "detail": "painted bottom +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "reported measuredEnvelopePx matches the pixels",
+          "pass": true,
+          "detail": "reported 16,24 368x90; measured 16,24 368x90"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 400,
+        "height": 138,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 27777,
+        "opaqueRatio": 0.22625,
+        "bbox": {
+          "x": 16,
+          "y": 24,
+          "width": 368,
+          "height": 90
+        },
+        "baseRow": 113,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "world_warkop_counter",
+      "version": "v002",
+      "dir": "art/submissions/world_warkop_counter/v002",
+      "spec": "specs/world/props/world_warkop_counter.json",
+      "errors": [],
+      "warnings": [
+        "self-review checklist not marked complete"
+      ],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_warkop_counter"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/world/props/world_warkop_counter.json"
+        },
+        {
+          "name": "world spec production block is consistent",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "spec accepts art submissions",
+          "pass": true,
+          "detail": "world addon layer, batch G1, 2 px/cm"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "world_warkop_counter_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "world_warkop_counter"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "world layer metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "worldLayer matches spec (batch, role, archetype, contract)",
+          "pass": true,
+          "detail": "G1/addon/warkop_open/G1-contract-1 vs G1/addon/warkop_open/G1-contract-1"
+        },
+        {
+          "name": "worldLayer density matches production density",
+          "pass": true,
+          "detail": "2 vs 2"
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "4ab6c005fd8ea30e2a4c13ddbb87a60b5c9e790ed76ba368bbdb320d45702699"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "400x238, expected 400x238"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "120739 bytes (max 8000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage \u2265 min",
+          "pass": true,
+          "detail": "0.714"
+        },
+        {
+          "name": "opaque coverage \u2264 max (no baked background)",
+          "pass": true,
+          "detail": "0.714"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 16,24 368x190; allowed 8,8 384x222"
+        },
+        {
+          "name": "art present on the canvas",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "envelope width (add-on 184 cm)",
+          "pass": true,
+          "detail": "painted 184.0 cm; left edge +0.0 cm, right edge +0.0 cm (\u00b14 cm)"
+        },
+        {
+          "name": "envelope top (95 cm high)",
+          "pass": true,
+          "detail": "painted top +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "envelope bottom (on the pivot line)",
+          "pass": true,
+          "detail": "painted bottom +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "reported measuredEnvelopePx matches the pixels",
+          "pass": true,
+          "detail": "reported 16,24 368x190; measured 16,24 368x190"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 400,
+        "height": 238,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 120739,
+        "opaqueRatio": 0.7144537815126051,
+        "bbox": {
+          "x": 16,
+          "y": 24,
+          "width": 368,
+          "height": 190
+        },
+        "baseRow": 213,
+        "edgeViolations": 0
+      }
+    },
+    {
+      "assetId": "world_warkop_open",
+      "version": "v002",
+      "dir": "art/submissions/world_warkop_open/v002",
+      "spec": "specs/world/props/world_warkop_open.json",
+      "errors": [
+        "transparent edge padding: 8960 non-transparent px within 8px of the edge",
+        "art inside artBounds: bbox 0,24 1232x560; allowed 8,8 1216x592",
+        "envelope width (facade 600 cm): painted 616.0 cm; left edge -8.0 cm, right edge +8.0 cm (\u00b14 cm)"
+      ],
+      "warnings": [
+        "self-review checklist not marked complete"
+      ],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_warkop_open"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/world/props/world_warkop_open.json"
+        },
+        {
+          "name": "world spec production block is consistent",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "spec accepts art submissions",
+          "pass": true,
+          "detail": "world front layer, batch G1, 2 px/cm"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "world_warkop_open_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "world_warkop_open"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "world layer metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "worldLayer matches spec (batch, role, archetype, contract)",
+          "pass": true,
+          "detail": "G1/front/warkop_open/G1-contract-1 vs G1/front/warkop_open/G1-contract-1"
+        },
+        {
+          "name": "worldLayer density matches production density",
+          "pass": true,
+          "detail": "2 vs 2"
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "c8792f9f1f10f61e9c6d8f2f2ca3b80e4f4f4629d508781570559ac7eb15a64d"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "1232x608, expected 1232x608"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "1341102 bytes (max 8000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": false,
+          "detail": "8960 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage \u2265 min",
+          "pass": true,
+          "detail": "0.921"
+        },
+        {
+          "name": "opaque coverage \u2264 max (no baked background)",
+          "pass": true,
+          "detail": "0.921"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": false,
+          "detail": "bbox 0,24 1232x560; allowed 8,8 1216x592"
+        },
+        {
+          "name": "art present on the canvas",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "envelope width (facade 600 cm)",
+          "pass": false,
+          "detail": "painted 616.0 cm; left edge -8.0 cm, right edge +8.0 cm (\u00b14 cm)"
+        },
+        {
+          "name": "envelope top (280 cm high)",
+          "pass": true,
+          "detail": "painted top +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "envelope bottom (on the pivot line)",
+          "pass": true,
+          "detail": "painted bottom +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "reported measuredEnvelopePx matches the pixels",
+          "pass": true,
+          "detail": "reported 0,24 1232x560; measured 0,24 1232x560"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 1232,
+        "height": 608,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 1341102,
+        "opaqueRatio": 0.9210526315789473,
+        "bbox": {
+          "x": 0,
+          "y": 24,
+          "width": 1232,
+          "height": 560
+        },
+        "baseRow": 583,
+        "edgeViolations": 8960
+      }
+    },
+    {
+      "assetId": "world_warkop_roof",
+      "version": "v002",
+      "dir": "art/submissions/world_warkop_roof/v002",
+      "spec": "specs/world/props/world_warkop_roof.json",
+      "errors": [],
+      "warnings": [
+        "self-review checklist not marked complete"
+      ],
+      "checks": [
+        {
+          "name": "asset id format",
+          "pass": true,
+          "detail": "world_warkop_roof"
+        },
+        {
+          "name": "version format (v###)",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "spec exists",
+          "pass": true,
+          "detail": "specs/world/props/world_warkop_roof.json"
+        },
+        {
+          "name": "world spec production block is consistent",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "spec accepts art submissions",
+          "pass": true,
+          "detail": "world roof layer, batch G1, 2 px/cm"
+        },
+        {
+          "name": "master file present",
+          "pass": true,
+          "detail": "world_warkop_roof_v002.png"
+        },
+        {
+          "name": "metadata.json present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "only png/webp/json/md files",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "metadata.assetId matches folder",
+          "pass": true,
+          "detail": "world_warkop_roof"
+        },
+        {
+          "name": "metadata.version matches folder",
+          "pass": true,
+          "detail": "v002"
+        },
+        {
+          "name": "metadata.specVersion matches spec",
+          "pass": true,
+          "detail": "1.0.0 vs 1.0.0"
+        },
+        {
+          "name": "createdAt is a date",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "world layer metadata schema",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "worldLayer matches spec (batch, role, archetype, contract)",
+          "pass": true,
+          "detail": "G1/roof/warkop_open/G1-contract-1 vs G1/roof/warkop_open/G1-contract-1"
+        },
+        {
+          "name": "worldLayer density matches production density",
+          "pass": true,
+          "detail": "2 vs 2"
+        },
+        {
+          "name": "master sha256 matches metadata",
+          "pass": true,
+          "detail": "dada42acec72a76a7c9f33c5107e381d51a80909959847699f28fbecc74fe2fb"
+        },
+        {
+          "name": "format PNG",
+          "pass": true,
+          "detail": "png"
+        },
+        {
+          "name": "canvas size",
+          "pass": true,
+          "detail": "1312x666, expected 1312x666"
+        },
+        {
+          "name": "RGBA (alpha channel)",
+          "pass": true,
+          "detail": "4 channels"
+        },
+        {
+          "name": "8-bit depth",
+          "pass": true,
+          "detail": "uchar"
+        },
+        {
+          "name": "sRGB colour space",
+          "pass": true,
+          "detail": "srgb"
+        },
+        {
+          "name": "file size",
+          "pass": true,
+          "detail": "1891482 bytes (max 8000000)"
+        },
+        {
+          "name": "transparent edge padding",
+          "pass": true,
+          "detail": "0 non-transparent px within 8px of the edge"
+        },
+        {
+          "name": "opaque coverage \u2265 min",
+          "pass": true,
+          "detail": "0.898"
+        },
+        {
+          "name": "opaque coverage \u2264 max (no baked background)",
+          "pass": true,
+          "detail": "0.898"
+        },
+        {
+          "name": "art inside artBounds",
+          "pass": true,
+          "detail": "bbox 16,24 1280x618; allowed 8,8 1296x650"
+        },
+        {
+          "name": "art present on the canvas",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "name": "envelope width (roof 640 cm)",
+          "pass": true,
+          "detail": "painted 640.0 cm; left edge +0.0 cm, right edge +0.0 cm (\u00b14 cm)"
+        },
+        {
+          "name": "envelope top (projected rise 294 cm above the eave)",
+          "pass": true,
+          "detail": "painted top +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "envelope bottom (eave drop 15 cm below the pivot)",
+          "pass": true,
+          "detail": "painted bottom +0.0 cm vs contract (\u00b14 cm)"
+        },
+        {
+          "name": "roof hides the 600\u00d7420 cm footprint",
+          "pass": true,
+          "detail": "99.8% opaque (min 99%)"
+        },
+        {
+          "name": "reported measuredEnvelopePx matches the pixels",
+          "pass": true,
+          "detail": "reported 16,24 1280x618; measured 16,24 1280x618"
+        }
+      ],
+      "analysis": {
+        "format": "png",
+        "width": 1312,
+        "height": 666,
+        "channels": 4,
+        "hasAlpha": true,
+        "depth": "uchar",
+        "space": "srgb",
+        "bytes": 1891482,
+        "opaqueRatio": 0.8975213780854024,
+        "bbox": {
+          "x": 16,
+          "y": 24,
+          "width": 1280,
+          "height": 618
+        },
+        "baseRow": 641,
+        "edgeViolations": 0
+      }
+    }
+  ],
+  "scope": "Official43926cf validator,11 G1.2 layers only; historical submissions excluded from this report."
+}

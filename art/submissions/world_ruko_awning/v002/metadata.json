@@ -1,0 +1,90 @@
+{
+  "assetId": "world_ruko_awning",
+  "version": "v002",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "createdAt": "2026-11-28T05:03:17.022Z",
+  "generator": {
+    "tool": "built-in image_gen.imagegen + original-source pixel recomposition",
+    "model": "tool selected; not disclosed",
+    "referencesUsed": [
+      "art/source/world_ruko_awning/v001/raw.png",
+      "art/source/world_ruko_awning/v002/projection-raw.png",
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "G1 selected ruko/warung source; see prompt.md",
+      "https://github.com/nugrohofebri681-oss/ZsRoom/tree/12bf7108522ad11e50a5530c972e943d5b19bbd3/art/concepts/batch_g1/v001"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_ruko_awning_v002.png",
+      "sha256": "136fed3a575551d774fd61060a7ad4354028a3ed8af3bd1a143bc7089723d9be"
+    },
+    "sources": [
+      {
+        "path": "art/source/world_ruko_awning/v002/composition.json",
+        "sha256": "57e7065d7f9807c1ec4afe64d3e21c0dfe77143e0ab8b662d0b939adfc1b11e8"
+      },
+      {
+        "path": "art/source/world_ruko_awning/v002/fit-report.md",
+        "sha256": "bb87aad8cfd8bcbba3cd692531227197e752d74bc0d9e51ad0c7041204249995"
+      },
+      {
+        "path": "art/source/world_ruko_awning/v002/projection-attempt-01.png",
+        "sha256": "54e7335fc181235aa65995b32d9ce8c79dae694ab2fa4edd02074e41e74f0c34"
+      },
+      {
+        "path": "art/source/world_ruko_awning/v002/projection-prompt-01.md",
+        "sha256": "b0da93201320e0be393fd01d6794db6118f1890136263a67121698e39e534ca1"
+      },
+      {
+        "path": "art/source/world_ruko_awning/v002/projection-prompt-02.md",
+        "sha256": "38793ec56fa6a155c23887b5ce31c46f79463bbb4ba2b9ef0508472f80520d13"
+      },
+      {
+        "path": "art/source/world_ruko_awning/v002/projection-raw.png",
+        "sha256": "be0fa8d442797c0da8b59b8f218944a07400eca7c52fe7215c1fa8e6836b7a76"
+      }
+    ]
+  },
+  "provenance": "Continuation of G1.1 commit4731dea; original selected G1 artwork preserved. Targeted built-in image edits and documented native source recomposition. No external assets.",
+  "cost": "included in existing subscription; no paid API credits",
+  "postProcessing": [
+    "Source crops and uniform downsampling; translated painted components and original material infill. No nonuniform scaling or artificial upscaling.",
+    "Source JSON records superseding refinements; composition.json describes initial working stage, not final geometry.",
+    "World pipeline43926cf used in separate verification worktree."
+  ],
+  "selfReview": {
+    "checklistComplete": false,
+    "knownIssues": [
+      "Visual approval pending; screenshot fixture is not production integration.",
+      "Uniform fit content640x136 vs640x144 target:4cm projected-height shortfall, at tolerance boundary. Front band and top projection need visual review.",
+      "Official validation and visual review are documented in world_house_small/v002/review; no final approval."
+    ]
+  },
+  "worldLayer": {
+    "batch": "G1",
+    "role": "addon",
+    "archetype": "ruko",
+    "contractVersion": "G1-contract-1",
+    "densityPxPerCm": 2,
+    "measuredEnvelopePx": {
+      "x": 16,
+      "y": 32,
+      "width": 640,
+      "height": 136
+    },
+    "fit": {
+      "uniformScale": 0.295612,
+      "upscaled": false,
+      "nonuniform": false
+    },
+    "layerSet": [
+      "world_ruko_awning",
+      "world_ruko",
+      "world_ruko_roof"
+    ]
+  }
+}

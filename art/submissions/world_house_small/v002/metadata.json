@@ -1,0 +1,134 @@
+{
+  "assetId": "world_house_small",
+  "version": "v002",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "createdAt": "2026-11-28T05:03:16.842Z",
+  "generator": {
+    "tool": "built-in image_gen.imagegen + original-source pixel recomposition",
+    "model": "tool selected; not disclosed",
+    "referencesUsed": [
+      "art/source/world_house_small/v001/raw.png",
+      "art/source/world_house_small/v002/refinement-raw.png",
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "G1 selected house_small source; see prompt.md",
+      "https://github.com/nugrohofebri681-oss/ZsRoom/tree/12bf7108522ad11e50a5530c972e943d5b19bbd3/art/concepts/batch_g1/v001"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_house_small_v002.png",
+      "sha256": "7e17aefc6524786746213304e12ead96130468febaccbabe478820d2467cc31a"
+    },
+    "sources": [
+      {
+        "path": "art/source/world_house_small/v002/01-compose.mjs",
+        "sha256": "70905fa9f01573fd0189dfee5504b657d6b707f396e615f8da0d6ddd272f464e"
+      },
+      {
+        "path": "art/source/world_house_small/v002/02-parts.mjs",
+        "sha256": "d05cd7ab055f440d4fe5fe2f36117df63112dcecad85955c7247890ea58fc42e"
+      },
+      {
+        "path": "art/source/world_house_small/v002/03-paint-patches.mjs",
+        "sha256": "50ed2e71f55f65bb247ad7be7ab13ac6bfec4ff61ad0f880cda2caf808699b0f"
+      },
+      {
+        "path": "art/source/world_house_small/v002/04-roof-export.mjs",
+        "sha256": "867d3b43af1fd7c86b195b80fcdb0e2a7e457a481f01ab69d2bf0960e4b71bce"
+      },
+      {
+        "path": "art/source/world_house_small/v002/browser-fixture.mjs",
+        "sha256": "2da72df979fa723614272a9ecfdf118678537e7c938fd3b0bbc88a45a3f64c18"
+      },
+      {
+        "path": "art/source/world_house_small/v002/composition.json",
+        "sha256": "01845144ed73238724bdf84a5a63b60d997e56443d4704ad559cc24c4adbe065"
+      },
+      {
+        "path": "art/source/world_house_small/v002/index.html",
+        "sha256": "c43db802cc73f02f36a571677ec147897d452977ee478e1f32b59cbc6b156d5a"
+      },
+      {
+        "path": "art/source/world_house_small/v002/paint-repair.json",
+        "sha256": "6839c7599aaa045984338bedf032eb31dcc81e1ce5a460293427b337a9b90933"
+      },
+      {
+        "path": "art/source/world_house_small/v002/parts/door-header.png",
+        "sha256": "2692d932df2b4e9f3ee81962bbd2860d75f88199ef96a36420f9a2078b2bb192"
+      },
+      {
+        "path": "art/source/world_house_small/v002/parts/door-jamb-left.png",
+        "sha256": "70cfc652a8b75804aa78f9bc5ec50e6b90f304c67c6532a13fb1a3a229570073"
+      },
+      {
+        "path": "art/source/world_house_small/v002/parts/door-jamb-right.png",
+        "sha256": "05998ab0e2f6eb4e840098ac3c1fc67b9fff419f17e7fa92fe2cbf31f5c44a58"
+      },
+      {
+        "path": "art/source/world_house_small/v002/parts/door-leaf.png",
+        "sha256": "66acd82a853a8726e0c92f84338d0b4bad201652d877134fd3db06e353bdd240"
+      },
+      {
+        "path": "art/source/world_house_small/v002/parts/old-frame-top-repair.png",
+        "sha256": "78ab9a897fa0ef97fd43ff3b9bb32ef230e16d7e75cc16fbbe5146d2881668cb"
+      },
+      {
+        "path": "art/source/world_house_small/v002/parts-layout.json",
+        "sha256": "6a6038dd103f97ca5b5fba94482e0256aa467b440e4787f09db7e0f2a864b549"
+      },
+      {
+        "path": "art/source/world_house_small/v002/refinement-prompt.md",
+        "sha256": "bcd85ac67d166520a7732bd5b40fc7dd994111ffe5cdaa2b48e9c8f09081c15a"
+      },
+      {
+        "path": "art/source/world_house_small/v002/refinement-raw.png",
+        "sha256": "f013fcacdd76b064be5bb28c54f06b2eb2beb94c789641bd4c084a350e9f620a"
+      },
+      {
+        "path": "art/source/world_house_small/v002/review-gallery.mjs",
+        "sha256": "4cd904f9aac97b6722834961bcf6ae7d4c3dffbc618eb0b51ff47b59531ebbbd"
+      }
+    ]
+  },
+  "provenance": "Continuation of G1.1 commit4731dea; original selected G1 artwork preserved. Targeted built-in image edits and documented native source recomposition. No external assets.",
+  "cost": "included in existing subscription; no paid API credits",
+  "postProcessing": [
+    "Source crops and uniform downsampling; translated painted components and original material infill. No nonuniform scaling or artificial upscaling.",
+    "Source JSON records superseding refinements; composition.json describes initial working stage, not final geometry.",
+    "World pipeline43926cf used in separate verification worktree."
+  ],
+  "selfReview": {
+    "checklistComplete": false,
+    "knownIssues": [
+      "Visual approval pending; screenshot fixture is not production integration.",
+      "Horizontal plaster repair boundary remains visible on close inspection.",
+      "Official validation and visual review are documented in world_house_small/v002/review; no final approval."
+    ]
+  },
+  "worldLayer": {
+    "batch": "G1",
+    "role": "front",
+    "archetype": "house_small",
+    "contractVersion": "G1-contract-1",
+    "densityPxPerCm": 2,
+    "measuredEnvelopePx": {
+      "x": 16,
+      "y": 25,
+      "width": 840,
+      "height": 539
+    },
+    "fit": {
+      "uniformScale": 1,
+      "upscaled": false,
+      "nonuniform": false,
+      "note": "Assembled native-density working master; component crops/downsampling and paint repair logged in source JSON. This is not a claim of one common generator scale."
+    },
+    "layerSet": [
+      "world_house_small",
+      "world_house_small_roof"
+    ]
+  }
+}

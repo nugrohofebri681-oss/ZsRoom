@@ -1,0 +1,16 @@
+{
+  "source": "art/source/world_house_large/v002/plaster-raw.png",
+  "porchWall": [
+    696,
+    24,
+    520,
+    406
+  ],
+  "doorRepair": [
+    340,
+    130,
+    220,
+    14
+  ],
+  "method": "New imagegen plaster patch; existing window/plinth/posts re-composited at unchanged recorded coordinates."
+}

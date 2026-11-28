@@ -1,0 +1,86 @@
+{
+  "assetId": "world_ruko",
+  "version": "v002",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "createdAt": "2026-11-28T05:03:16.985Z",
+  "generator": {
+    "tool": "built-in image_gen.imagegen + original-source pixel recomposition",
+    "model": "tool selected; not disclosed",
+    "referencesUsed": [
+      "art/source/world_ruko/v001/raw.png",
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "G1 selected ruko source; see prompt.md",
+      "https://github.com/nugrohofebri681-oss/ZsRoom/tree/12bf7108522ad11e50a5530c972e943d5b19bbd3/art/concepts/batch_g1/v001"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_ruko_v002.png",
+      "sha256": "5b76cb0f07e072e97bc45962fc4cef8c9fc52158dc2368b163ee7608742ef3a1"
+    },
+    "sources": [
+      {
+        "path": "art/source/world_ruko/v002/parts/clear-shop-interior.png",
+        "sha256": "c086419406177c2a204a444e1476bdf3bb539d46fe23d811aeb103469c6f8301"
+      },
+      {
+        "path": "art/source/world_ruko/v002/parts/shop-header.png",
+        "sha256": "7940e18e3cb467769cd8406e562a14814aea1e4927f61e9233d0b7a7344cfc8c"
+      },
+      {
+        "path": "art/source/world_ruko/v002/parts/shop-left-folds.png",
+        "sha256": "e0238489cdd98def681dfaa87a669a33e22ad6e479616c5dc9119e8164720c0d"
+      },
+      {
+        "path": "art/source/world_ruko/v002/parts/shop-right-folds.png",
+        "sha256": "98f2bc171cb25cc62efadeea685e7137db95c1abd6122b9c1b295716f1fa3a23"
+      },
+      {
+        "path": "art/source/world_ruko/v002/parts-layout.json",
+        "sha256": "905a7d525f27a6fe8f9f5ece00ca396387647023e06680c22a82478d4ebb6e47"
+      }
+    ]
+  },
+  "provenance": "Continuation of G1.1 commit4731dea; original selected G1 artwork preserved. Targeted built-in image edits and documented native source recomposition. No external assets.",
+  "cost": "included in existing subscription; no paid API credits",
+  "postProcessing": [
+    "Source crops and uniform downsampling; translated painted components and original material infill. No nonuniform scaling or artificial upscaling.",
+    "Source JSON records superseding refinements; composition.json describes initial working stage, not final geometry.",
+    "World pipeline43926cf used in separate verification worktree."
+  ],
+  "selfReview": {
+    "checklistComplete": false,
+    "knownIssues": [
+      "Visual approval pending; screenshot fixture is not production integration.",
+      "Source recomposition leaves doubled pilaster moulding and abrupt shutter/header joins; needs targeted artistic cleanup.",
+      "Official validation and visual review are documented in world_house_small/v002/review; no final approval."
+    ]
+  },
+  "worldLayer": {
+    "batch": "G1",
+    "role": "front",
+    "archetype": "ruko",
+    "contractVersion": "G1-contract-1",
+    "densityPxPerCm": 2,
+    "measuredEnvelopePx": {
+      "x": 16,
+      "y": 25,
+      "width": 840,
+      "height": 959
+    },
+    "fit": {
+      "uniformScale": 1,
+      "upscaled": false,
+      "nonuniform": false,
+      "note": "Assembled native-density working master; component crops/downsampling and paint repair logged in source JSON. This is not a claim of one common generator scale."
+    },
+    "layerSet": [
+      "world_ruko",
+      "world_ruko_roof",
+      "world_ruko_awning"
+    ]
+  }
+}

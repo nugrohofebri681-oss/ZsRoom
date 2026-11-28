@@ -1,0 +1,31 @@
+{
+  "operation": "Source-pixel re-composition: translate original sections and insert original painted material band. No nonuniform scaling, upscaling or procedural illustration.",
+  "source": "art/submissions/world_ruko_roof/v001/world_ruko_roof_v001.png",
+  "sourceContent": [
+    920,
+    508
+  ],
+  "remove": null,
+  "insert": {
+    "at": 190,
+    "height": 26,
+    "sampledAt": 180
+  },
+  "resultContent": [
+    920,
+    534
+  ],
+  "placement": [
+    16,
+    24
+  ],
+  "canvas": [
+    952,
+    582
+  ],
+  "pivot": [
+    476,
+    528
+  ],
+  "remaining": "Opening/porch corrections and image review pending"
+}

@@ -1,0 +1,31 @@
+{
+  "operation": "Source-pixel re-composition: translate original sections and insert original painted material band. No nonuniform scaling, upscaling or procedural illustration.",
+  "source": "art/submissions/world_house_small/v001/world_house_small_v001.png",
+  "sourceContent": [
+    840,
+    494
+  ],
+  "remove": null,
+  "insert": {
+    "at": 32,
+    "height": 46,
+    "sampledAt": 20
+  },
+  "resultContent": [
+    840,
+    540
+  ],
+  "placement": [
+    16,
+    24
+  ],
+  "canvas": [
+    872,
+    588
+  ],
+  "pivot": [
+    436,
+    564
+  ],
+  "remaining": "Opening/porch corrections and image review pending"
+}

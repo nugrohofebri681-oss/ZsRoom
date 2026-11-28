@@ -1,0 +1,31 @@
+{
+  "operation": "Source-pixel re-composition: translate original sections and insert original painted material band. No nonuniform scaling, upscaling or procedural illustration.",
+  "source": "art/submissions/world_warkop_bench/v001/world_warkop_bench_v001.png",
+  "sourceContent": [
+    368,
+    70
+  ],
+  "remove": null,
+  "insert": {
+    "at": 40,
+    "height": 20,
+    "sampledAt": 40
+  },
+  "resultContent": [
+    368,
+    90
+  ],
+  "placement": [
+    16,
+    24
+  ],
+  "canvas": [
+    400,
+    138
+  ],
+  "pivot": [
+    200,
+    114
+  ],
+  "remaining": "Opening/porch corrections and image review pending"
+}

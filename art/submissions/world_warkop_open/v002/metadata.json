@@ -1,0 +1,115 @@
+{
+  "assetId": "world_warkop_open",
+  "version": "v002",
+  "specVersion": "1.0.0",
+  "author": "codex",
+  "createdAt": "2026-11-28T05:03:17.182Z",
+  "generator": {
+    "tool": "built-in image_gen.imagegen + original-source pixel recomposition",
+    "model": "tool selected; not disclosed",
+    "referencesUsed": [
+      "art/source/world_warkop_open/v001/raw.png",
+      "art/approved/prop_bed_zila/prop_bed_zila_v001.png",
+      "art/approved/prop_nightstand_zila/prop_nightstand_zila_v001.png",
+      "art-bible/perspective/projection_cube.png",
+      "G1 selected warkop_open source; see prompt.md",
+      "https://github.com/nugrohofebri681-oss/ZsRoom/tree/12bf7108522ad11e50a5530c972e943d5b19bbd3/art/concepts/batch_g1/v001"
+    ]
+  },
+  "files": {
+    "master": {
+      "path": "world_warkop_open_v002.png",
+      "sha256": "c8792f9f1f10f61e9c6d8f2f2ca3b80e4f4f4629d508781570559ac7eb15a64d"
+    },
+    "sources": [
+      {
+        "path": "art/source/world_warkop_open/v002/composition.json",
+        "sha256": "8caf4af18471cf4259518d980a5d519637918b007dd2e69ff46a73c5a79b8682"
+      },
+      {
+        "path": "art/source/world_warkop_open/v002/parts/bay-1.png",
+        "sha256": "889c2ecc322aa1ee12a6e9fbd830ac2a1f7c8852758d517f1a9669ce9d2108b7"
+      },
+      {
+        "path": "art/source/world_warkop_open/v002/parts/bay-2.png",
+        "sha256": "d6f7cdb7706f2775d8275c76f257bc0c495999a70a147aef56102273c3ead71e"
+      },
+      {
+        "path": "art/source/world_warkop_open/v002/parts/bay-3.png",
+        "sha256": "c79b597fbc6a64fb5be4a14b623f7a89a6475dda65e93c6640385f3b698e97b3"
+      },
+      {
+        "path": "art/source/world_warkop_open/v002/parts/header-1.png",
+        "sha256": "ee937e8379f71b42ac8fdde8ac5df69a1cbcb776b820dc623bb8b31022221da0"
+      },
+      {
+        "path": "art/source/world_warkop_open/v002/parts/header-2.png",
+        "sha256": "eb7d9bab447c199ae69597ebabdd8e328f7760efda650a6407fd5ef3f1ddceb7"
+      },
+      {
+        "path": "art/source/world_warkop_open/v002/parts/header-3.png",
+        "sha256": "403f5653e53900501fb5d980550312387fe8142e5be2a1ce84691b7f6d2dbf90"
+      },
+      {
+        "path": "art/source/world_warkop_open/v002/parts/post-1.png",
+        "sha256": "719ba93832d8fd83852e13dc3293639cd65895037954beeb0ecb82909c6c5e9a"
+      },
+      {
+        "path": "art/source/world_warkop_open/v002/parts/post-2.png",
+        "sha256": "3d179df96818c8f6aa46fd1bb98e1e2b3beb9d4b9094f07f658ce494a4ea46fa"
+      },
+      {
+        "path": "art/source/world_warkop_open/v002/parts/post-3.png",
+        "sha256": "8950e08629f28ad89a5c2b129bc7043ee8107dfdd81e8a3cc99e5807fd96aa29"
+      },
+      {
+        "path": "art/source/world_warkop_open/v002/parts/post-4.png",
+        "sha256": "aa381a97d3e70dfbf402a7a9c4ea143182906f7f78c292b4bf1ba883d189e7a8"
+      },
+      {
+        "path": "art/source/world_warkop_open/v002/parts-layout.json",
+        "sha256": "4bbd7a27f20b277b8d5cd73c06ba3c6c7b1c4fd0f9018c45dfcd2d48ee513b2a"
+      }
+    ]
+  },
+  "provenance": "Continuation of G1.1 commit4731dea; original selected G1 artwork preserved. Targeted built-in image edits and documented native source recomposition. No external assets.",
+  "cost": "included in existing subscription; no paid API credits",
+  "postProcessing": [
+    "Source crops and uniform downsampling; translated painted components and original material infill. No nonuniform scaling or artificial upscaling.",
+    "Source JSON records superseding refinements; composition.json describes initial working stage, not final geometry.",
+    "World pipeline43926cf used in separate verification worktree."
+  ],
+  "selfReview": {
+    "checklistComplete": false,
+    "knownIssues": [
+      "Visual approval pending; screenshot fixture is not production integration.",
+      "BLOCKER: contract outer post centres \u00b1300cm and 16cm post width require616cm painted width, versus600cm envelope. Preserved actual post centres; outer posts reach canvas edges, violating padding. No collision/spec override.",
+      "Official validation and visual review are documented in world_house_small/v002/review; no final approval."
+    ]
+  },
+  "worldLayer": {
+    "batch": "G1",
+    "role": "front",
+    "archetype": "warkop_open",
+    "contractVersion": "G1-contract-1",
+    "densityPxPerCm": 2,
+    "measuredEnvelopePx": {
+      "x": 0,
+      "y": 24,
+      "width": 1232,
+      "height": 560
+    },
+    "fit": {
+      "uniformScale": 1,
+      "upscaled": false,
+      "nonuniform": false,
+      "note": "Assembled native-density working master; component crops/downsampling and paint repair logged in source JSON. This is not a claim of one common generator scale."
+    },
+    "layerSet": [
+      "world_warkop_open",
+      "world_warkop_roof",
+      "world_warkop_counter",
+      "world_warkop_bench"
+    ]
+  }
+}

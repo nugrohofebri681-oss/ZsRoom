@@ -60,7 +60,7 @@ Every building is drawn from two stacked layers that share **one depth key, the 
 | **Projected roof rise (cm)** | 224 | 280 | 252 | 294 |
 | **Entrance** | door dx 0, 90 × 210 | door dx −80, 100 × 210 | shop opening dx 0, 300 × 240 (inspect only) | open centre bay dx 0, 184 × 230 |
 | **Door trigger** | 110 wide | 120 wide | none (background) | 160 wide |
-| **Other openings** | 2 windows at dx ±130, 80 wide, sill 90, head 190 | 2 windows at dx −220 and +190 (inside the porch), 100 wide | sign board 300 × 40 at 250–290; upper floor 300–480 | three 200 cm bays, post centres at dx −300 / −100 / 100 / 300 (posts 16 cm); counter in the right bay (95 cm), bench/shelf in the left bay |
+| **Other openings** | 2 windows at dx ±130, 80 wide, sill 90, head 190 | 2 windows at dx −220 and +190 (inside the porch), 100 wide | sign board 300 × 40 at 250–290; upper floor 300–480 | three bays; posts 16 cm, centres at dx **−292 / −100 / 100 / 292** (A1); outer post faces at ±300. Bays clear **176 / 184 / 176**. Counter 176 × 95 in the right bay (dx +196); bench/shelf 176 × 45 in the left bay (dx −196) |
 | **Porch / add-ons** | — | porch dx 40 → 300, wall set back 110, posts at dx 60 and 290, **not walkable** | awning at 240–270, projecting 60 (add-on). Envelope 320 × 72 cm (band 30 + 60 × 0.7); canvas 672 × 192 @2 px/cm; pivot (336, 168) at the awning's front edge | counter + bench are separate add-on layers |
 | **Front layer px @2 px/cm** (canvas; pivot) | 872 × 588; (436, 564) | 1232 × 608; (616, 584) | 872 × 1008; (436, 984) | 1232 × 608; (616, 584) |
 | **Roof layer px @2 px/cm** (canvas; pivot) | 952 × 526; (476, 472) | 1312 × 638; (656, 584) | 952 × 582; (476, 528) | 1312 × 666; (656, 612) |
@@ -122,7 +122,7 @@ The overhang is 20 cm on each side for all four; the front drop is 15 cm.
 | house_small (G1 A) | Door 176 → **210** high, 90 wide, centred. The roof needs the full **224 cm** projected rise for the 320 cm depth. Windows 80 wide at dx ±130. |
 | house_large (G1 B) | Door 165 → **210** high, 100 wide, at **dx −80**. Proportions to **600 × 400**, eave 280, hip roof to ridge 400 (projected rise **280**). Porch from dx 40 to 300 with the wall set back 110 cm; posts at dx 60 and 290. The porch gable goes into the roof layer, floor and posts into the front layer. |
 | ruko (G1 B) | Re-compose to **eave 480**: ground floor 0–300 (opening **300 × 240**), sign board 250–290, upper floor 300–480. The hip roof's projected rise is **252**. **≥ 840 px** content width at 2 px/cm (G1 had 757 px: re-author, no upscaling). Awning as a separate layer. Check the roof stays visible at the phone landscape camera. |
-| warkop_open (G1 C) | Re-compose to **600 wide, three 200 cm bays** (posts 16 cm at dx −300 / −100 / 100 / 300); the centre bay is the entrance, clear **184 × 230**. Eave 280, zinc gable ridge 330, projected rise **294**. The counter (right bay, 95 cm) and the bench/shelf (left bay) are **separate layers**, not baked. Depth 420. |
+| warkop_open (G1 C) | Re-compose to **600 wide, three bays**: posts 16 cm at dx **−292 / −100 / 100 / 292** (amendment A1, outer faces flush at ±300); the centre bay is the entrance, clear **184 × 230**. Counter and bench are **176 cm** wide, filling the outer bays. Eave 280, zinc gable ridge 330, projected rise **294**. The counter (right bay, 95 cm) and the bench/shelf (left bay) are **separate layers**, not baked. Depth 420. |
 
 **Submission:**
 - Use the spec ids above: they now exist, which resolves the G1 validator's only failing check.
@@ -130,6 +130,28 @@ The overhang is 20 cm on each side for all four; the front drop is 15 cm.
 - Production PRs go on separate branches.
 - Claude integrates them in an isolated branch, running the art validator and the P6.1 E2E.
 - Nothing is approved until the CD signs off.
+
+## 5a. Amendment A1 — warkop posts (2026-11-28, PR #47 review gate)
+
+**The contradiction:** four 16 cm posts centred on −300 / −100 / +100 / +300 reach ±308 cm. That is a 616 cm painted front for a 600 cm facade and footprint. The validator rightly refused it.
+
+**Options considered:**
+
+| Option | Verdict |
+|---|---|
+| Widen the facade to 616 cm | Rejected: it breaks the 600 × 420 footprint, the collision, the gaps to the neighbours and the town layout. |
+| Allow the posts to stick out of the envelope | Rejected: it would weaken the validator to pass art that disagrees with the collision footprint. |
+| Narrow the inner bays | Rejected: the 184 × 230 entrance is fixed. |
+| **Move the outer post centres to ±292** | **Adopted:** outer faces at exactly ±300, inner posts and entrance unchanged. |
+
+**What A1 fixes:**
+- **Posts:** 16 cm wide at dx −292 / −100 / +100 / +292. Post edges: [−300, −284], [−108, −92], [92, 108], [284, 300].
+- **Bays (clear):** left −284 → −108 = **176**; centre −92 → 92 = **184** (the entrance, trigger 160); right 108 → 284 = **176**. Post-centre spacing is 192 / 200 / 192.
+- **Add-ons:**
+  - counter 176 × 95, centred in the right bay (dx +196);
+  - bench/shelf 176 × 45, centred in the left bay (dx −196);
+  - neither may reach past its bay (validator `sideOverhangPx: 0`).
+- **Unchanged:** footprint 600 × 420, eave 280, roof, entrance 184 × 230, door trigger 160, collision, NPC routes, interior and saves. The TEMP placeholder already drew its outer posts flush with the edges, and now reads the post positions from the contract.
 
 ## 6. Open decisions for the Creative Director
 - Roof material per archetype: clay tile vs zinc. There is no verified Batuphat photo evidence yet; see the source register.

@@ -1,6 +1,6 @@
 {
   "id": "world_warkop_open",
-  "specVersion": "1.0.0",
+  "specVersion": "1.1.0",
   "status": "world-temp",
   "category": "prop",
   "displayName": "Open-front warung kopi (TEMP world placeholder)",
@@ -39,7 +39,7 @@
     "sign": "WARUNG KOPI",
     "maxDensity": 1
   },
-  "$comment": "TEMP front layer at the frozen G1 contract size (src/data/archetypes.json → contract; docs/production/ARCHITECTURE_CONTRACT_G1.md). Final art: bld_*_front + bld_*_roof layers.",
+  "$comment": "TEMP front layer at the frozen G1 contract size (src/data/archetypes.json → contract; docs/production/ARCHITECTURE_CONTRACT_G1.md). Final art: bld_*_front + bld_*_roof layers. A1 (2026-11-28): posts 16 cm at dx −292/−100/+100/+292 so the outer post faces are the facade edges; the painted front stays exactly 600 cm wide.",
   "production": {
     "batch": "G1",
     "role": "front",

@@ -134,6 +134,12 @@ async function worldChecks(spec, a, masterPath, meta, ok, warnings) {
   const what = w.role === 'roof' ? 'roof' : w.role === 'front' ? 'facade' : 'add-on';
   ok(`envelope width (${what} ${v.widthCm} cm)`, Math.abs(L) <= t && Math.abs(R) <= t,
     `painted ${(b.width / d).toFixed(1)} cm; left edge ${cm(L)}, right edge ${cm(R)} (±${t / d} cm)`);
+  if (v.sideOverhangPx != null) {
+    // hard side limits: a layer that sits between posts (warkop counter/bench) must not reach past the post faces
+    const out = Math.max(-L, R);
+    ok(`stays between its bay posts (max ${v.sideOverhangPx / d} cm past the envelope sides)`, out <= v.sideOverhangPx,
+      `${(Math.max(0, out) / d).toFixed(1)} cm past the ${-L >= R ? 'left' : 'right'} side`);
+  }
   ok(`envelope top (${w.role === 'roof' ? `projected rise ${v.projectedRiseCm} cm above the eave` : `${v.heightCm} cm high`})`, Math.abs(T) <= t,
     `painted top ${cm(-T)} vs contract (±${t / d} cm)`);
   ok(`envelope bottom (${w.role === 'roof' ? `eave drop ${v.frontDropCm} cm below the pivot` : 'on the pivot line'})`, Math.abs(B) <= t,

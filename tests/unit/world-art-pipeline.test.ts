@@ -172,6 +172,26 @@ describe('invalid world submissions', () => {
     expect(failed(r)).toEqual(expect.arrayContaining(['envelope bottom (on the pivot line)']));
   });
 
+  it('A1: a warkop front with its outer posts centred on ±300 (painted 616 cm) still fails; posts flush at ±300 pass', async () => {
+    const p = productionSpec(specs.get('world_warkop_open')!), v = p.world.envelope, cx = p.pivot.x;
+    const post = (dx: number) => ({ x: cx + (dx - 8) * 2, y: v.y, width: 32, height: v.height });
+    const fascia = { x: v.x, y: v.y, width: v.width, height: 100 }, interior = { x: v.x + 40, y: v.y + 100, width: v.width - 80, height: v.height - 100 };
+    const old = await submit('world_warkop_open', await canvasPng(p.canvas.width, p.canvas.height, [fascia, interior, ...[-300, -100, 100, 300].map(post)]));
+    // ±308 cm reaches the canvas edge: wrong width, and through the transparent rim
+    expect(failed(old)).toEqual(expect.arrayContaining(['envelope width (facade 600 cm)', 'transparent edge padding']));
+    const a1 = await submit('world_warkop_open', await canvasPng(p.canvas.width, p.canvas.height, [fascia, interior, ...[-292, -100, 100, 292].map(post)]));
+    expect(a1.errors).toEqual([]);
+  });
+
+  it('A1: a 184 cm counter no longer fits its 176 cm bay (it would cover the posts); 176 and slightly narrower pass', async () => {
+    const p = productionSpec(specs.get('world_warkop_counter')!), v = p.world.envelope;
+    const wide = await submit('world_warkop_counter', await canvasPng(p.canvas.width, p.canvas.height, [{ ...v, x: v.x - 8, width: v.width + 16 }]));
+    expect(failed(wide)).toEqual(['stays between its bay posts (max 0 cm past the envelope sides)']);
+    expect((await submit('world_warkop_counter', await perfect('world_warkop_counter'))).errors).toEqual([]);
+    const narrow = await submit('world_warkop_counter', await canvasPng(p.canvas.width, p.canvas.height, [{ ...v, x: v.x + 6, width: v.width - 12 }]));
+    expect(narrow.errors).toEqual([]);
+  });
+
   it('art in the 1 px/cm TEMP frame is refused: HD canvas required', async () => {
     const e = specs.get('world_house_large')!;
     const r = await submit('world_house_large', await canvasPng(e.spec.canvas.width, e.spec.canvas.height, [{ x: 8, y: 12, width: 600, height: 280 }]));

@@ -49,12 +49,19 @@ This replaces the earlier "32 px" prose: the formula `(W + 16) × (E + 24)` at 1
 | world_ruko | front | 872 × 1008 | 436, 984 | 16, 24, 840 × 960 | — |
 | world_ruko_roof | roof | 952 × 582 | 476, 528 | 16, 24, 920 × 534 (rise 252 + 15) | covers 840 × 504 |
 | world_ruko_awning | add-on | **672 × 192** | **336, 168** | 16, 24, 640 × 144 (**30 cm band + 60 cm projection × 0.7 = 72 cm**) | pivot = front edge of the awning |
-| world_warkop_open | front | 1232 × 608 | 616, 584 | 16, 24, 1200 × 560 | — |
+| world_warkop_open | front | 1232 × 608 | 616, 584 | 16, 24, 1200 × 560 | A1: posts 16 cm at dx −292 / −100 / +100 / +292; the outer post faces are the envelope edges |
 | world_warkop_roof | roof | 1312 × 666 | 656, 612 | 16, 24, 1280 × 618 (rise 294 + 15) | covers 1200 × 588 |
-| world_warkop_counter | add-on | 400 × 238 | 200, 214 | 16, 24, 368 × 190 (184 × 95 cm) | — |
-| world_warkop_bench | add-on | 400 × 138 | 200, 114 | 16, 24, 368 × 90 (184 × 45 cm) | — |
+| world_warkop_counter | add-on | **384 × 238** | **192, 214** | 16, 24, **352** × 190 (**176** × 95 cm) | A1: right bay, dx +196; **no overhang past the sides** (`sideOverhangPx: 0`) |
+| world_warkop_bench | add-on | **384 × 138** | **192, 114** | 16, 24, **352** × 90 (**176** × 45 cm) | A1: left bay, dx −196; no overhang past the sides |
 
 **Awning correction:** the earlier awning canvas (336 × 54 at 1 px/cm) had no room for the 60 cm projection, so the art could only be a flat band. The awning's runtime spec now uses 336 × 96 at 1 px/cm. It is not placed in any map yet, so nothing in the game changes.
+
+**Amendment A1 (2026-11-28):**
+- **The problem:** the warkop's outer posts were centred on ±300 cm, so they reached ±308 cm. That gives a 616 cm painted front on a 600 cm facade.
+- **The fix:** the outer posts move to ±292 cm, so their outer faces are the facade edges. The inner posts (±100), the 184 × 230 cm centre entrance and its 160 cm trigger are unchanged.
+- **The consequence:** the outer bays are now 176 cm clear, so the counter and bench are 176 cm wide.
+- **New check:** add-ons that sit between posts may not reach past their envelope sides (`envelope.sideOverhangPx`). Otherwise a too-wide counter would cover the posts and still pass the ±4 cm tolerance.
+- **Spec versions:** front, counter and bench are now specVersion 1.1.0. The warkop roof is unchanged (1.0.0).
 
 **Not automated:** door and opening rectangles inside a facade cannot be measured reliably from pixels. They are checked on the contract overlay in review, not by this validator.
 

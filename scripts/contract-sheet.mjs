@@ -11,7 +11,7 @@ const html = `<canvas id=c width=2400 height=900></canvas><script>
 const data = ${JSON.stringify(data)};
 const g = document.getElementById('c').getContext('2d'), K = 0.7, s = 0.62;
 g.fillStyle = '#F7EFE4'; g.fillRect(0, 0, 2400, 900);
-g.fillStyle = '#2b2024'; g.font = 'bold 30px sans-serif'; g.fillText('ZsRoom G1 architecture contract — frozen 2026-11-25 (front layer + roof layer, 3/4 projection: depth × 0.7)', 40, 50);
+g.fillStyle = '#2b2024'; g.font = 'bold 30px sans-serif'; g.fillText('ZsRoom G1 architecture contract — frozen 2026-11-25, amendment A1 2026-11-28 (front layer + roof layer, 3/4 projection: depth × 0.7)', 40, 50);
 g.font = '17px sans-serif'; g.fillText('Blue = front layer (ground → eave, pivot ● = front-line centre). Orange = roof layer (whole roof as seen from above, pivot ◆ = front eave centre). Grey dashed = back edge of the footprint at ground level (collision = width × depth behind the front line). Zila 165 cm for scale.', 40, 80);
 g.fillText('Both layers sort at the front line (roof +0.01). One roof source only: the approved roof art OR the engine TEMP roof. Final masters ≥ 2 px/cm (sizes below in px at 2 px/cm).', 40, 104);
 let x0 = 60; const base = 640;
@@ -31,6 +31,12 @@ for (const { id, c } of data) {
   g.fillStyle = 'rgba(122,78,52,0.75)'; g.fillRect(ex, base - e.clearHeightCm * s, e.clearWidthCm * s, e.clearHeightCm * s);
   // porch
   if (c.porch) { g.fillStyle = 'rgba(0,0,0,0.12)'; g.fillRect(cx + c.porch.dxFrom * s, base - E, (c.porch.dxTo - c.porch.dxFrom) * s, E); for (const p of c.porch.posts) { g.fillStyle = '#555'; g.fillRect(cx + p * s - 3, base - E, 6, E); } }
+  // bay posts and add-ons (warkop, amendment A1): posts 16 cm, outer faces flush with the facade edges
+  const bay = (c.openings ?? []).find((o) => o.kind === 'bay');
+  if (bay) {
+    for (const dx of bay.postCentresDx) { g.fillStyle = '#4a4a4a'; g.fillRect(cx + (dx - bay.postWidthCm / 2) * s, base - E, bay.postWidthCm * s, E); }
+    for (const a of Object.values(c.layers.addOns ?? {})) if (a.widthCm) { g.fillStyle = 'rgba(46,140,90,0.55)'; g.fillRect(cx + (a.dx - a.widthCm / 2) * s, base - (a.heightCm ?? 45) * s, a.widthCm * s, (a.heightCm ?? 45) * s); }
+  }
   // pivots
   g.fillStyle = '#2e6aa0'; g.beginPath(); g.arc(cx, base, 7, 0, 7); g.fill();
   g.fillStyle = '#c45a3c'; g.save(); g.translate(cx, base - E); g.rotate(Math.PI / 4); g.fillRect(-6, -6, 12, 12); g.restore();
@@ -47,6 +53,7 @@ for (const { id, c } of data) {
     \`front layer px@2: \${(c.widthCm + 16) * 2} × \${(c.eaveCm + 24) * 2}, pivot (\${c.widthCm + 16}, \${(c.eaveCm + 12) * 2})\`,
     \`roof layer px@2: \${(c.widthCm + 2 * c.roof.overhangSideCm + 16) * 2} × \${(c.roof.projectedRiseCm + 39) * 2}, pivot (\${c.widthCm + 2 * c.roof.overhangSideCm + 16}, \${(c.roof.projectedRiseCm + 12) * 2})\`,
     \`projected roof rise \${c.roof.projectedRiseCm} (≥ depth×0.7 = \${Math.round(c.depthCm * 0.7)})\`,
+    ...(bay ? [\`posts 16 cm at dx \${bay.postCentresDx.join(' / ')} (A1: outer faces at ±\${c.widthCm / 2}); bays clear \${bay.bays.map((q) => q.clearWidthCm).join(' / ')}\`, \`green = counter/bench add-ons \${Object.values(c.layers.addOns).map((q) => q.widthCm + ' cm @ dx ' + q.dx).join(', ')}\`] : []),
   ];
   L.forEach((t, i) => g.fillText(t, x0, base + 66 + i * 22));
   x0 += W + 2 * ov + 150;

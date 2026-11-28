@@ -1,6 +1,10 @@
 import * as Phaser from 'phaser';
 import { DEPTH_SCALE as K } from '../core/projection';
 import type { PropSpec, TempArtSpec } from '../core/specs';
+import archetypeData from '../data/archetypes.json';
+
+/** Warkop bay posts straight from the frozen contract (src/data/archetypes.json, amendment A1). */
+const WARKOP_POSTS = archetypeData.archetypes.warkop_open.contract.openings.find((o) => o.kind === 'bay') as unknown as { postCentresDx: number[]; postWidthCm: number };
 
 /**
  * TEMPORARY ARTWORK — engine-drawn stand-ins for assets whose final illustration is not approved yet.
@@ -646,7 +650,7 @@ function openWarkop(ctx: Ctx2, g: Geom, t: TempArtSpec, wall: string, accent: st
   rr(ctx, g.L + W * 0.12, open + 22 * d, W * 0.28, 70 * d, 3 * d); ctx.fillStyle = '#2F3A2F'; ctx.fill();                  // menu board
   for (let i = 0; i < 4; i++) { ctx.fillStyle = 'rgba(255,255,255,0.75)'; ctx.fillRect(g.L + W * 0.12 + 10 * d, open + (34 + i * 13) * d, W * 0.2, 3 * d); }
   ctx.fillStyle = '#FFE9B0'; ctx.beginPath(); ctx.arc(g.px, open + 14 * d, 7 * d, 0, Math.PI * 2); ctx.fill();            // hanging lamp
-  for (const f of [0, 1 / 3, 2 / 3, 1]) { const x = Math.min(g.R - 16 * d, Math.max(g.L, g.L + W * f - 8 * d)); rr(ctx, x, y0 + 20 * d, 16 * d, y1 - y0 - 20 * d, 3 * d); paint(ctx, tone(wall, 0.95), x, y0, x + 16 * d, y1, 1.15, 0.8); }   // posts: three 200 cm bays (contract)
+  for (const dx of WARKOP_POSTS.postCentresDx) { const x = g.px + (dx - WARKOP_POSTS.postWidthCm / 2) * d; rr(ctx, x, y0 + 20 * d, WARKOP_POSTS.postWidthCm * d, y1 - y0 - 20 * d, 3 * d); paint(ctx, tone(wall, 0.95), x, y0, x + WARKOP_POSTS.postWidthCm * d, y1, 1.15, 0.8); }   // posts from the contract (A1: outer faces flush at ±300)
   rr(ctx, g.L, y0, W, open - y0, 3 * d); paint(ctx, wall, g.L, y0, g.R, open, 1.05, 0.9);                                  // fascia above the opening
   rr(ctx, g.px - W * 0.3, y0 + 12 * d, W * 0.6, open - y0 - 24 * d, 4 * d); paint(ctx, accent, g.px - W * 0.3, y0, g.px + W * 0.3, open, 1.12, 0.86);
   if (t.sign) label(ctx, String(t.sign), g.px, (y0 + open) / 2, Math.min(22 * d, (W * 0.55) / String(t.sign).length * 1.5));

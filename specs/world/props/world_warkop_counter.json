@@ -1,21 +1,21 @@
 {
   "id": "world_warkop_counter",
-  "specVersion": "1.0.0",
+  "specVersion": "1.1.0",
   "status": "world-temp",
   "category": "prop",
   "displayName": "warkop_open counter add-on layer (G1 contract; art pending)",
   "density": 1,
   "canvas": {
-    "width": 200,
+    "width": 192,
     "height": 119
   },
   "pivot": {
-    "x": 100,
+    "x": 96,
     "y": 107,
-    "meaning": "bottom-centre on the front line"
+    "meaning": "bottom-centre on the front line, at the right bay centre (dx +196 from the warkop centre)"
   },
   "footprint": {
-    "widthCm": 184,
+    "widthCm": 176,
     "depthCm": 4
   },
   "heightsCm": {
@@ -31,7 +31,7 @@
     "type": "wall",
     "wall": "north"
   },
-  "$comment": "Separate add-on layer of the frozen G1 contract (never baked into the front layer, so it can carry interactions).",
+  "$comment": "Separate add-on layer of the frozen G1 contract (never baked into the front layer, so it can carry interactions). A1 (2026-11-28): 176 cm wide to fit its bay between the posts (outer posts moved to ±292).",
   "production": {
     "batch": "G1",
     "role": "addon",
@@ -39,27 +39,30 @@
     "contractVersion": "G1-contract-1",
     "density": 2,
     "canvas": {
-      "width": 400,
+      "width": 384,
       "height": 238
     },
     "pivot": {
-      "x": 200,
+      "x": 192,
       "y": 214,
-      "meaning": "bottom-centre on the front line"
+      "meaning": "bottom-centre on the front line, at the right bay centre (dx +196 from the warkop centre)"
     },
     "envelope": {
       "x": 16,
       "y": 24,
-      "width": 368,
+      "width": 352,
       "height": 190,
-      "widthCm": 184,
-      "heightCm": 95
+      "widthCm": 176,
+      "heightCm": 95,
+      "bayDx": 196,
+      "note": "fills the right bay between the post faces (clear 176 cm, contract amendment A1)",
+      "sideOverhangPx": 0
     },
     "tolerancePx": 8,
     "artBounds": {
       "x": 8,
       "y": 8,
-      "width": 384,
+      "width": 368,
       "height": 222
     },
     "transparency": {

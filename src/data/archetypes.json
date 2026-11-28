@@ -363,22 +363,71 @@
           {
             "kind": "bay",
             "postCentresDx": [
-              -300,
+              -292,
               -100,
               100,
-              300
+              292
             ],
             "postWidthCm": 16,
-            "note": "three 200 cm bays"
+            "note": "three bays: post-centre spacing 192 / 200 / 192 cm; outer post faces flush with the facade edges (±300)",
+            "postEdgesCm": [
+              [
+                -300,
+                -284
+              ],
+              [
+                -108,
+                -92
+              ],
+              [
+                92,
+                108
+              ],
+              [
+                284,
+                300
+              ]
+            ],
+            "bays": [
+              {
+                "name": "left",
+                "dx": -196,
+                "clearFromCm": -284,
+                "clearToCm": -108,
+                "clearWidthCm": 176,
+                "use": "shelf/bench add-on"
+              },
+              {
+                "name": "centre",
+                "dx": 0,
+                "clearFromCm": -92,
+                "clearToCm": 92,
+                "clearWidthCm": 184,
+                "use": "entrance (door trigger 160 cm)"
+              },
+              {
+                "name": "right",
+                "dx": 196,
+                "clearFromCm": 108,
+                "clearToCm": 284,
+                "clearWidthCm": 176,
+                "use": "counter add-on"
+              }
+            ]
           },
           {
             "kind": "counter bay",
             "bay": "right",
-            "counterHeightCm": 95
+            "counterHeightCm": 95,
+            "dx": 196,
+            "widthCm": 176
           },
           {
             "kind": "shelf/bench bay",
-            "bay": "left"
+            "bay": "left",
+            "dx": -196,
+            "widthCm": 176,
+            "heightCm": 45
           }
         ],
         "collision": {
@@ -429,16 +478,30 @@
               "assetId": "world_warkop_counter",
               "bay": "right",
               "heightCm": 95,
-              "note": "separate layer, not baked: it carries the order interaction later"
+              "note": "separate layer, not baked: it carries the order interaction later",
+              "dx": 196,
+              "widthCm": 176
             },
             "bench": {
               "assetId": "world_warkop_bench",
               "bay": "left",
-              "note": "separate layer"
+              "note": "separate layer",
+              "dx": -196,
+              "widthCm": 176,
+              "heightCm": 45
             }
           }
         },
-        "notes": "G1 warung C re-composed for the P6.1 warkop: 600 wide (three 200 cm bays, centre bay is the entrance), depth 420 (tables and stools stay outside), zinc gable."
+        "notes": "G1 warung C re-composed for the P6.1 warkop: 600 wide (three bays with outer posts flush at ±300 (A1), centre bay is the entrance), depth 420 (tables and stools stay outside), zinc gable.",
+        "amendments": [
+          {
+            "id": "G1-contract-1/A1",
+            "date": "2026-11-28",
+            "by": "Claude (PR #47 review gate)",
+            "change": "outer post centres −300/+300 → −292/+292 so the 16 cm outer posts end exactly at the facade edges (±300); inner posts ±100 and the 184 × 230 centre entrance unchanged; outer bays clear 176 cm, so the counter and bench add-ons are 176 cm wide, centred in their bays at dx ±196",
+            "reason": "posts centred on ±300 reach ±308: a 616 cm painted front for a 600 cm facade and footprint"
+          }
+        ]
       },
       "roofArt": "world_warkop_roof"
     },

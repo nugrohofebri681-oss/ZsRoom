@@ -13,7 +13,13 @@ export interface ZsState {
 export async function boot(page: Page, query = '?fresh'): Promise<string[]> {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
-  page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+  // keep the source URL: Chromium's "Failed to load resource" text names no URL (browser-level loads such as
+  // /favicon.ico never reach page.on('response'), only the console message's location does)
+  page.on('console', (m) => { if (m.type() === 'error') errors.push(m.location()?.url ? `${m.text()} — ${m.location().url}` : m.text()); });
+  // Chromium's console message for a failed load ("Failed to load resource: … 404") carries no URL: record the
+  // response itself so any HTTP error names its URL, status and the page it happened on.
+  page.on('response', (r) => { if (r.status() >= 400) errors.push(`HTTP ${r.status()} ${r.request().method()} ${r.url()} (resource type ${r.request().resourceType()}, page ${page.url()})`); });
+  page.on('requestfailed', (r) => errors.push(`request failed: ${r.url()} — ${r.failure()?.errorText ?? 'unknown'} (resource type ${r.resourceType()})`));
   await page.goto(`/${query}`);
   await page.waitForFunction(() => (window as any).__ZS?.state?.());
   await page.waitForTimeout(400);
